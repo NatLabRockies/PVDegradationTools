@@ -31,13 +31,12 @@ def monkeypatch_nrel_kestrel_check():
     """String to monkeypatch pvdeg.utilities.nrel_kestrel_check to a no-op function"""
     return """
 import pvdeg.utilities
+import pvdeg.weather
 def mock_nrel_kestrel_check(*args, **kwargs):
     pass
 pvdeg.utilities.nrel_kestrel_check = mock_nrel_kestrel_check
-# # Also patch it in the weather module if it has already imported it
-# import pvdeg.weather
-# if hasattr(pvdeg.weather, 'nrel_kestrel_check'):
-#     pvdeg.weather.nrel_kestrel_check = mock_nrel_kestrel_check
+# Also patch it in the weather module since it imports the function directly
+pvdeg.weather.nrel_kestrel_check = mock_nrel_kestrel_check
 """
 
 
