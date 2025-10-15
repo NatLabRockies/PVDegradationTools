@@ -20,6 +20,7 @@ Bug Fixes
 
 Dependencies
 ------------
+- Pin h5py<=3.14.0 (:issue:`278`, :pull:`277`)
 
 
 Testing
@@ -28,5 +29,6 @@ Testing
 
 Contributors
 ------------
+- Martin Springer (:ghuser:`martin-springer`)
 - Rajiv Daxini (:ghuser:`RDaxini`)
 
