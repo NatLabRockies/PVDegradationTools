@@ -19,7 +19,7 @@ Bug Fixes
 
 Dependencies
 ------------
-- Fix h5py<=3.14.0 and netcdf4<=1.7.2
+- Pin h5py<=3.14.0 (:issue:`278`, :pull:`277`)
 
 
 Testing
