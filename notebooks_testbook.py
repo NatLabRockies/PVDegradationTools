@@ -30,10 +30,14 @@ pvdeg.GeospatialScenario.addLocation = monkeypatch_addLocation
 def monkeypatch_nrel_kestrel_check():
     """String to monkeypatch pvdeg.utilities.nrel_kestrel_check to a no-op function"""
     return """
-def nrel_kestrel_check(*args, **kwargs):
+import pvdeg.utilities
+def mock_nrel_kestrel_check(*args, **kwargs):
     pass
-import pvdeg
-pvdeg.utilities.nrel_kestrel_check = nrel_kestrel_check
+pvdeg.utilities.nrel_kestrel_check = mock_nrel_kestrel_check
+# # Also patch it in the weather module if it has already imported it
+# import pvdeg.weather
+# if hasattr(pvdeg.weather, 'nrel_kestrel_check'):
+#     pvdeg.weather.nrel_kestrel_check = mock_nrel_kestrel_check
 """
 
 
