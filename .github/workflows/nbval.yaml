@@ -224,10 +224,7 @@ jobs:
           echo "Batch $BATCH_NUM will process ${#BATCH_NOTEBOOKS[@]} notebooks: ${BATCH_NOTEBOOKS[*]}"
 
       - name: Run batch notebooks with nbval
-        env:
-        api_key: "user@mail.com"
-        email: "DEMO_KEY"
-      run: |
+        run: |
           # Read notebooks from file to handle spaces properly
           readarray -t NOTEBOOK_ARRAY < "$BATCH_NOTEBOOKS_FILE"
 
