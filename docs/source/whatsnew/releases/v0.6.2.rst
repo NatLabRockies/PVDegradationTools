@@ -15,6 +15,7 @@ Deprecations
 
 Bug Fixes
 ---------
+- Update MD5 checksum references in documentation from old hash to new hash
 
 
 Dependencies
