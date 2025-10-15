@@ -27,13 +27,19 @@ pvdeg.GeospatialScenario.addLocation = monkeypatch_addLocation
 """
 
 
+def monkeypatch_nrel_kestrel_check():
+    """String to monkeypatch pvdeg.utilities.nrel_kestrel_check to a no-op function"""
+    return """
+def nrel_kestrel_check(*args, **kwargs):
+    pass
+import pvdeg
+pvdeg.utilities.nrel_kestrel_check = nrel_kestrel_check
+"""
+
+
 def monkeypatch_cells(tb):
-    for i, cell in enumerate(tb.cells):
-        if 'import pvdeg' in str(cell.source):
-            cell.source = monkeypatch_addLocation() + cell.source
-            break
-    else:
-        tb.inject(monkeypatch_addLocation(), 1)
+    # Inject both monkeypatches as the very first cell
+    tb.inject(monkeypatch_addLocation() + monkeypatch_nrel_kestrel_check(), 0)
 
 
 def main(notebook_path):
