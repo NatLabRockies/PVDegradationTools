@@ -1,4 +1,4 @@
-v0.6.0 (2025-08-13)
+v0.6.0 (2025-10-04)
 ===================
 
 Breaking Changes
@@ -84,6 +84,7 @@ Enhancements
       of parameter values for computation.
   This change clarifies the distinction between retrieving raw material data and
   extracting parameter values for use in calculations. (:issue:`256`, :pull:`257`)
+- Update pre-commit hooks and add github workflow (:pull:`267`)
 
 
 Deprecations
@@ -108,18 +109,22 @@ Bug Fixes
   - Improve code consistency
   (:issue:`177`, :pull:`178`)
 - Clean up and fix bugs in notebooks. (:issue:`179`, :pull:`184`)
-
+- Resolves non-deterministic source ambiguity when picking NSRDB TMY files from Kestrel when using ``weather.get(..., TMY=True, geospatial=True)``.
+  - PVDeg will always use the most recent version.
+  - Added new ``kestrel_nsrdb_fnames`` attribute to returned weather dataset for traceability.
 
 Dependencies
 ------------
 - Update aiohttp from 3.10.11 to 3.12.14 for improved security and performance
   (:pull:`185`)
+- Update NREL-PySAM dependency from 5.1.0 to the newest version to leverage latest
+  features and improvements. (:issue:`254`, :pull:`255`)
 
 
 Testing
 -------
 - Added nbval-based notebook testing workflow to CI for validating tutorial and example
-  notebooks (:issue:`179`, :pull:`184`)
+  notebooks (:issue:`179`, :pull:`184`, :pull:`268`)
 - Add tests for :py:func:`pvdeg.weather.get`. (pull:`249`)
 
 
