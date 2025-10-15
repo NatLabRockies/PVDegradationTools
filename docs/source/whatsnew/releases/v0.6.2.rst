@@ -1,0 +1,34 @@
+v0.6.2 (2025-12-04)
+===================
+
+Breaking Changes
+----------------
+
+
+Enhancements
+------------
+
+
+Deprecations
+-------------
+
+
+Bug Fixes
+---------
+- Update MD5 checksum references in documentation from old hash to new hash
+
+
+Dependencies
+------------
+- Pin h5py<=3.14.0 (:issue:`278`, :pull:`277`)
+
+
+Testing
+-------
+
+
+Contributors
+------------
+- Martin Springer (:ghuser:`martin-springer`)
+- Rajiv Daxini (:ghuser:`RDaxini`)
+
