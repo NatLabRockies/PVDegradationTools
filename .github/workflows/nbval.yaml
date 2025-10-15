@@ -278,5 +278,8 @@ jobs:
         pip install testbook
         pip install global_land_mask dotenv imageio nrel-pysam
     - name: Run notebook with testbook and monkeypatching
+      env:
+        api_key: "DEMO_KEY"
+        email: "user@mail.com"
       run: |
         python notebooks_testbook.py "tutorials_and_tools/tutorials_and_tools/${{ matrix.notebook-file }}"
