@@ -1039,9 +1039,10 @@ def module(
     )
 
     Ce_back_encap = back_encapsulant_water_concentration(
+        temp_module=temp_module,
+        rh_surface=None,
         rh_ambient=weather_df["relative_humidity"],
         temp_ambient=weather_df["temp_air"],
-        temp_module=temp_module,
         Po_b=Po_b,
         Ea_p_b=Ea_p_b,
         backsheet_thickness=backsheet_thickness,
