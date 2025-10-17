@@ -190,28 +190,11 @@
         "Comments": "RH is a fraction between 0 and 1. Data from Table 5. The paper provided variability for a 95% confidence interval which was divided by 2 to get the standard deviation.",
         "EquationType": "arrhenius",
         "Equation": "t_{fail}=R_0\\cdot \\frac {e^{ \\left( \\frac{E_a}{R\\cdot T_K } \\right) }}{RH^2}",
-        "t_fail": {
-            "units": "days"
-        },
-        "R_0": {
-            "value": 1.689E+17,
-            "units": "days"
-        },
-        "ln(R_0)": {
-            "value": 39.3,
-            "stdev": 1.1,
-            "units": "ln(days)"
-        },
-        "E_a": {
-            "value": 129,
-            "stdev": 3.35,
-            "units": "kJ/mol"
-        },
-        "n": {
-            "value": 2,
-            "stdev": 0,
-            "units": "NA"
-        }
+        "t_fail": {"units": "days"},
+        "R_0": {"value": 1.689E+17,"units": "days"},
+        "ln(R_0)": {"value": 39.3,"stdev": 1.1,"units": "ln(days)"},
+        "E_a": {"value": 129,"stdev": 3.35,"units": "kJ/mol"},
+        "n": {"value": 2,"stdev": 0,"units": "NA"}
     },
     "D012": {
         "DataEntryPerson": "Jada Swailes",
