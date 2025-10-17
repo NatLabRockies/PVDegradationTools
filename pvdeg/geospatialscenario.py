@@ -746,7 +746,7 @@ class GeospatialScenario(pvdeg.Scenario):
             func=self.func,
             template=self.template,  # provided or generated via autotemplate in
             # GeospatialScenario.addJob
-            **self.func_params
+            **self.func_params,
         )
 
         self.results = analysis_result
