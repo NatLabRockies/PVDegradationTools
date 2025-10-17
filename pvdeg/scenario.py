@@ -775,7 +775,9 @@ class Scenario:
                 return dt.replace(year=1970)
 
             if isinstance(results.index, pd.DatetimeIndex):
-                new_index = pd.DatetimeIndex([set_placeholder_year(dt) for dt in results.index])
+                new_index = pd.DatetimeIndex(
+                    [set_placeholder_year(dt) for dt in results.index]
+                )
                 results.index = new_index
             else:
                 results.index = results.index.map(set_placeholder_year)
