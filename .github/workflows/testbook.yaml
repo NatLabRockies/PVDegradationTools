@@ -57,7 +57,7 @@ jobs:
         "HPC Connection Required - Scenario - Geospatial.ipynb"
         "HPC Connection Required - Scenario - Non-uniform Mountain Prefferential Downselect.ipynb"
         "HPC Connection Required - Scenario - Single Location.ipynb"
-        "HPC Connection Required - Scenario - Temperatrure.ipynb"
+        "HPC Connection Required - Scenario - Temperature.ipynb"
         "HPC Connection Required - Tools - Module Standoff for IEC TS 63126.ipynb"
         "HPC Connection Required - LETID - Outdoor Geospatial Demo.ipynb"
         "HPC Connection Required - Geospatial Templates.ipynb"
@@ -76,11 +76,14 @@ jobs:
           pip install testbook
           pip install global_land_mask dotenv imageio nrel-pysam
       - name: Run all testbook notebooks in one environment
+        env:
+          api_key: "DEMO_KEY"
+          email: "user@mail.com"
         run: |
           mapfile -t NOTEBOOKS < <(echo "$TESTBOOK_NOTEBOOK_LIST")
           for notebook in "${NOTEBOOKS[@]}"; do
             NOTEBOOK_NAME="${notebook//\"/}"
             FULL_PATH="$NOTEBOOK_DIR/$NOTEBOOK_NAME"
             echo "Testing $FULL_PATH with testbook..."
-            python notebooks_testbook.py "$FULL_PATH"
+            python scripts/notebooks_testbook.py "$FULL_PATH"
           done
