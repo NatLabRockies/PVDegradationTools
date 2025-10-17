@@ -838,7 +838,7 @@ def backsheet(
         For PET backsheet W017, Ea_p_b=55.4064573018373 [kJ/mol]
     backsheet_thickness : float
         Thickness of the backsheet [mm].
-        The suggested value for a PET backsheet is t=0.3 [mm]
+        The suggested value for a PET backsheet is 0.3 [mm]
     So_e : float
         Encapsulant solubility prefactor in [g/cm³]
         So = 1.81390702[g/cm³] is the suggested value for EVA W001.
@@ -945,7 +945,7 @@ def module(
         The suggested value for PET W17 is Po = 1319534666.90318 [g·mm/m²/day].
     Ea_p_b : float
         Backsheet permeation  activation energy [kJ/mol].
-    t : float
+    backsheet_thickness : float
         Thickness of the backsheet [mm].
         The suggested value for a PET backsheet is 0.3mm.
     So_e : float
