@@ -11,7 +11,8 @@ from random import choices
 from string import ascii_uppercase
 from collections import OrderedDict
 import xarray as xr
-from subprocess import run
+import warnings
+from subprocess import run, CalledProcessError
 import cartopy.feature as cfeature
 
 
@@ -657,11 +658,19 @@ def tilt_azimuth_scan(
             tilt_azimuth_series[count][0] = tilt
             tilt_azimuth_series[count][1] = azimuth
             tilt_azimuth_series[count][2] = func(
-                weather_df=weather_df, meta=meta, tilt=tilt, azimuth=azimuth, **kwarg
+                weather_df=weather_df,
+                meta=meta,
+                tilt=tilt,
+                azimuth=azimuth,
+                **kwarg,
             )
             count = count + 1
             print(
-                "\r", "%.1f" % (100 * count / total_count), "% complete", sep="", end=""
+                "\r",
+                "%.1f" % (100 * count / total_count),
+                "% complete",
+                sep="",
+                end="",
             )
 
     print("\r                     ", end="")
@@ -1141,26 +1150,63 @@ def fix_metadata(meta):
 # we want this to only exist for things that can be run on kestrel
 # moving away from hpc tools so this may not be useful in the future
 def nrel_kestrel_check():
-    """Check if the user is on Kestrel HPC environment.
+    """Check if the user is on Kestrel HPC environment, or skip if configured.
 
-    Passes silently or raises a
-    ConnectionError if not running on Kestrel. This will fail on AWS.
+    Passes silently or raises a ConnectionError if not running on Kestrel.
+    The check can be skipped by setting the environment variable
+    PVD_SKIP_HPC_CHECK=True.
 
     Returns
     -------
     None
+
+    Raises
+    ------
+    ConnectionError
+        If not on Kestrel and PVD_SKIP_HPC_CHECK is not set.
 
     See Also
     --------
     NREL HPC : https://www.nrel.gov/hpc/
     Kestrel Documentation : https://nrel.github.io/HPC/Documentation/
     """
+    # Check for the environment variable to bypass the check for local execution
+    if os.environ.get("PVD_SKIP_HPC_CHECK", "0").lower() in ("1", "true", "yes"):
+        warnings.warn(
+            "PVD_SKIP_HPC_CHECK is set. Bypassing NREL Kestrel HPC check.", UserWarning
+        )
+        return  # Skip the entire check
+
     kestrel_hostname = "kestrel.hpc.nrel.gov"
 
-    host = run(args=["hostname", "-f"], shell=False, capture_output=True, text=True)
+    try:
+        host = run(
+            args=["hostname", "-f"],
+            shell=False,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+    except (FileNotFoundError, CalledProcessError) as e:
+        # This block catches the CalledProcessError occurring on Windows
+        raise ConnectionError(
+            f"Could not execute 'hostname -f' command to determine host: {e}"
+        )
+
     device_domain = ".".join(host.stdout.split(".")[-4:])[:-1]
 
     if kestrel_hostname != device_domain:
+        raise ConnectionError(
+            f"""
+            connected to {device_domain} not a node of {kestrel_hostname}")
+            """
+        )
+
+    # Your original logic for extracting the domain
+    device_domain = ".".join(host.stdout.split(".")[-4:])[:-1]
+
+    if kestrel_hostname != device_domain:
+        # The ConnectionError is raised if the domain doesn't match
         raise ConnectionError(
             f"""
             connected to {device_domain} not a node of {kestrel_hostname}")
