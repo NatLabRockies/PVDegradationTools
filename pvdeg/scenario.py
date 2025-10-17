@@ -775,12 +775,15 @@ class Scenario:
                 return dt.replace(year=1970)
 
             if isinstance(results.index, pd.DatetimeIndex):
-                new_index = pd.DatetimeIndex(
+                results.index = pd.DatetimeIndex(
                     [set_placeholder_year(dt) for dt in results.index]
                 )
-                results.index = new_index
             else:
-                results.index = results.index.map(set_placeholder_year)
+                # Convert to DatetimeIndex if it isn't already
+                results.index = pd.to_datetime(results.index)
+                results.index = pd.DatetimeIndex(
+                    [set_placeholder_year(dt) for dt in results.index]
+                )
 
             if start_time and end_time:
                 results = utilities.strip_normalize_tmy(results, start_time, end_time)
