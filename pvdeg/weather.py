@@ -1019,7 +1019,7 @@ def write(data_df, metadata, savefile="WeatherFile.csv"):
     file1.close()
 
 
-def get_anywhere(database="PSM3", id=None, **kwargs):
+def get_anywhere(database="PSM4", id=None, **kwargs):
     """
     Load weather data directly from NSRDB or through any other PVLIB i/o tools.
 
@@ -1059,9 +1059,9 @@ def get_anywhere(database="PSM3", id=None, **kwargs):
     }
     weather_arg.update(kwargs)  # Will default to the kwargs passed to the function.
 
-    if database == "PSM3":
+    if database == "PSM4":
         try:
-            weather_db, meta = get(database="PSM3", id=id, **weather_arg)
+            weather_db, meta = get(database="PSM4", id=id, **weather_arg)
         except Exception:
             try:
                 weather_db, meta = get(
@@ -1077,7 +1077,7 @@ def get_anywhere(database="PSM3", id=None, **kwargs):
             weather_db, meta = get(database="PVGIS", id=id, **{"map_variables": True})
         except Exception:
             try:
-                weather_db, meta = get(database="PSM3", id=id, **weather_arg)
+                weather_db, meta = get(database="PSM4", id=id, **weather_arg)
             except Exception:
                 meta = {
                     "result": "This location was not found in either the NSRDB or PVGIS"
