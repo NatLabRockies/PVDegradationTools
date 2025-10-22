@@ -1,0 +1,14 @@
+v0.7.0 (2025-10-22)
+===================
+
+Enhancements
+------------
+- Adds pysam module to support InSPIRE Agrivoltaics geospatial simulations. Currently our pysam wrapper implementation is largely project specific. 
+We aim to generalize this module in the future to support out of the box geospatial pysam calculations for all users.
+    - Adds pvdeg.pysam.pysam to wrap NREL-PySAM for PVDeg support. Makes it quick and simple to run SAM from Python with PVDeg meteorogical data.
+    - Adds inspire_ground_irradiance for InSPIRE specific ground irradiance calculations.
+
+Contributors
+------------
+- Tobin Ford (:ghuser:`tobin-ford`)
+

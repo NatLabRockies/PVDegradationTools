@@ -238,9 +238,11 @@ def get(
             temp_air = weather_df["temp_air"]
             dew_point = weather_df.get("dew_point")
             if dew_point is None or temp_air is None:
-                raise ValueError('Cannot calculate "relative_humidity": one of'
-                                 '"dew_point" or "temp_air" column not found in'
-                                 'DataFrame.')
+                raise ValueError(
+                    'Cannot calculate "relative_humidity": one of'
+                    '"dew_point" or "temp_air" column not found in'
+                    "DataFrame."
+                )
             weather_df["relative_humidity"] = humidity.relative(temp_air, dew_point)
             print(
                 "\r",
@@ -1052,6 +1054,7 @@ def get_anywhere(database="PSM3", id=None, **kwargs):
         "attributes": [],
         "map_variables": True,
         "geospatial": False,
+        "find_meta": True,
     }
     weather_arg.update(kwargs)  # Will default to the kwargs passed to the function.
 

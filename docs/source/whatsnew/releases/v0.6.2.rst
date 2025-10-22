@@ -1,0 +1,36 @@
+v0.6.2 (2025-12-04)
+===================
+
+Breaking Changes
+----------------
+
+
+Enhancements
+------------
+- Python 3.13 support has been added. (:issue:`279`, :pull:`281`)
+
+
+Deprecations
+-------------
+- Python 3.9 support has been dropped. The minimum supported Python version is now 3.10.
+
+
+Bug Fixes
+---------
+- Update MD5 checksum references in documentation from old hash to new hash
+
+
+Dependencies
+------------
+- Pin h5py<=3.14.0 (:issue:`278`, :pull:`277`)
+
+
+Testing
+-------
+
+
+Contributors
+------------
+- Martin Springer (:ghuser:`martin-springer`)
+- Rajiv Daxini (:ghuser:`RDaxini`)
+
