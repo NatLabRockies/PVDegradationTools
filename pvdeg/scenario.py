@@ -192,7 +192,7 @@ class Scenario:
         weather_arg = {}
 
         if weather_db == "PSM4":
-            weather_arg = {"names": "tmy", "attributes": [], "map_variables": True}
+            weather_arg = {"map_variables": True}
 
         if self.email is not None and self.api_key is not None and weather_db == "PSM4":
             credentials = {
