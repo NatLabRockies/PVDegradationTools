@@ -140,7 +140,7 @@ def get(
         }
 
         weather_df, meta_dict =
-        pvdeg.weather.get(database="PSM3",id=(25.783388, -80.189029), **weather_arg)
+        pvdeg.weather.get(database="PSM4",id=(25.783388, -80.189029), **weather_arg)
 
     Collecting a single site of PVGIS TMY data
 
@@ -1038,7 +1038,7 @@ def get_anywhere(database="PSM4", id=None, **kwargs):
         is supplied.
     **kwargs :
         Additional keyword arguments to pass to the get_weather function
-        (see pvlib.iotools.get_psm4 for PVGIS, and get_NSRDB for NSRDB)
+        (see pvlib.iotools.get_pvgis_tmy for PVGIS, and get_NSRDB for NSRDB)
 
     Returns:
     --------
