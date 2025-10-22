@@ -99,7 +99,15 @@ def get_kinetics(name=None, fname="DegradationDatabase.json", encoding="utf-8"):
         return "Choose a set of kinetic parameters:", [*parameters_list]
 
     kinetic_parameters = data[name]
-    return kinetic_parameters
+
+    extracted_params = {}
+    for key, value in kinetic_parameters.items():
+        if isinstance(value, dict) and "value" in value:
+            extracted_params[key] = value["value"]
+        else:
+            extracted_params[key] = value
+
+    return extracted_params
 
 
 def write_gids(
