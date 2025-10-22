@@ -7,6 +7,7 @@ import xarray as xr
 import pandas as pd
 from pathlib import Path
 import pytest
+import logging
 
 
 TRACKING = {"01", "02", "03", "04", "05"}
@@ -27,7 +28,7 @@ WEATHER_SINGLE_LOC = GEO_WEATHER.isel(gid=0).to_dataframe()
 META_SINGLE_LOC = GEO_META.iloc[0].to_dict()
 
 
-def test_pysam_missing_nrel_pysam_deps(monkeypatch, capsys):
+def test_pysam_missing_nrel_pysam_deps(monkeypatch, caplog):
     real_import = builtins.__import__
 
     def fake_import(name, *args, **kwargs):
@@ -41,8 +42,8 @@ def test_pysam_missing_nrel_pysam_deps(monkeypatch, capsys):
         weather_df=pd.DataFrame(), meta={}, pv_model="pvwatts8", config_files={}
     )
 
-    out = capsys.readouterr().out
-    assert "pysam not found" in out.lower()
+    caplog.set_level(logging.INFO)
+    assert "pysam not found" in caplog.text.lower()
     assert res is None
 
 
@@ -126,6 +127,13 @@ def test_pysam_inspire_practical_tilt():
 
 
 def test_inspire_configs_pitches():
+    """
+    Test pitches on three different configurations
+
+    01 - SAT
+    06 - Fixed tilt, variable pitch
+    10 - Vertical
+    """
     configs = ["01", "08", "10"]
     config_paths = [
         os.path.join(pvdeg.TEST_DATA_DIR, Path(f"SAM/{conf}/{conf}_pvsamv1.json"))
