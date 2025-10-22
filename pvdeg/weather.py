@@ -1251,7 +1251,7 @@ def _weather_distributed_vec(
         )
     else:
         raise NotImplementedError(
-            f'database {database} not implemented, options: "PVGIS", "PSM3"'
+            f'database {database} not implemented, options: "PVGIS", "PSM4"'
         )
 
     # convert single location dataframe to xarray dataset
@@ -1379,14 +1379,14 @@ def weather_distributed(
     PVGIS supports up to 30 requests per second so your dask client should not
     have more than $x$ workers/threads that would put you over this limit.
 
-    NSRDB (including `database="PSM3"`) is rate limited and your key will face
+    NSRDB (including `database="PSM4"`) is rate limited and your key will face
     restrictions after making too many requests.
     See rates [here](https://developer.nrel.gov/docs/solar/nsrdb/guide/).
 
     Parameters
     ----------
     database : (str)
-        'PVGIS' or 'NSRDB' (not implemented yet)
+        'PVGIS' or 'PSM4'
     coords: list[tuple]
         list of tuples containing (latitude, longitude) coordinates
 
@@ -1400,11 +1400,11 @@ def weather_distributed(
                 (51.95, -3.5)]
 
     api_key: str
-        Only required when making NSRDB requests using "PSM3".
+        Only required when making NSRDB requests using "PSM4".
         [NSRDB developer API key](https://developer.nrel.gov/signup/)
 
     email: str
-        Only required when making NSRDB requests using "PSM3".
+        Only required when making NSRDB requests using "PSM4".
         [NSRDB developer account email associated with
         `api_key`](https://developer.nrel.gov/signup/)
 
@@ -1429,9 +1429,9 @@ def weather_distributed(
     except ValueError:
         raise RuntimeError("No Dask scheduler found. Ensure a dask client is running.")
 
-    if database != "PVGIS" and database != "PSM3":
+    if database != "PVGIS" and database != "PSM4":
         raise NotImplementedError(
-            f"Only 'PVGIS' and 'PSM3' are implemented, you entered {database}"
+            f"Only 'PVGIS' and 'PSM4' are implemented, you entered {database}"
         )
 
     delays = [
