@@ -99,7 +99,7 @@ def get(
     Parameters
     ----------
     database : (str)
-        'NSRDB' or 'PVGIS'. Use "PSM3" for tmy NSRDB data.
+        'NSRDB' or 'PVGIS'. Use "PSM4" for tmy NSRDB data.
     id : (int or tuple)
         If NSRDB, id is the gid for the desired location.
         If PVGIS, id is a tuple of (latitude, longitude) for the desired location
@@ -114,7 +114,7 @@ def get(
         geospatial analysis. The default is False.
     **kwargs :
         Additional keyword arguments to pass to the get_weather function
-        (see pvlib.iotools.get_psm3 for NSRDB)
+        (see pvlib.iotools.get_psm4 for NSRDB)
 
     Returns
     -------
@@ -200,8 +200,10 @@ def get(
             )
             inputs = meta["inputs"]
             meta = inputs["location"]
-        elif database == "PSM3":
-            weather_df, meta = iotools.get_psm3(latitude=lat, longitude=lon, **kwargs)
+        elif database == "PSM4":
+            weather_df, meta = iotools.get_nsrdb_psm4_tmy(
+                latitude=lat, longitude=lon, **kwargs
+            )
         elif database == "local":
             fp = kwargs.pop("file")
             fn, fext = os.path.splitext(fp)
@@ -213,7 +215,7 @@ def get(
             if key in META_MAP.keys():
                 meta[META_MAP[key]] = meta.pop(key)
 
-        if database == "NSRDB" or database == "PSM3":
+        if database == "NSRDB" or database == "PSM4":
             meta["wind_height"] = 2
             meta["Source"] = "NSRDB"
         elif database == "PVGIS":
@@ -1017,7 +1019,7 @@ def write(data_df, metadata, savefile="WeatherFile.csv"):
     file1.close()
 
 
-def get_anywhere(database="PSM3", id=None, **kwargs):
+def get_anywhere(database="PSM4", id=None, **kwargs):
     """
     Load weather data directly from NSRDB or through any other PVLIB i/o tools.
 
@@ -1026,7 +1028,7 @@ def get_anywhere(database="PSM3", id=None, **kwargs):
     Parameters:
     -----------
     database : (str)
-        'PSM3' or 'PVGIS'
+        'PSM4' or 'PVGIS'
         Indicates the first database to try. PSM3 is for the NSRDB
     id : (int or tuple)
         The gid or tuple with latitude and longitude for the desired location.
@@ -1036,7 +1038,7 @@ def get_anywhere(database="PSM3", id=None, **kwargs):
         is supplied.
     **kwargs :
         Additional keyword arguments to pass to the get_weather function
-        (see pvlib.iotools.get_psm3 for PVGIS, and get_NSRDB for NSRDB)
+        (see pvlib.iotools.get_psm4 for PVGIS, and get_NSRDB for NSRDB)
 
     Returns:
     --------
@@ -1057,9 +1059,9 @@ def get_anywhere(database="PSM3", id=None, **kwargs):
     }
     weather_arg.update(kwargs)  # Will default to the kwargs passed to the function.
 
-    if database == "PSM3":
+    if database == "PSM4":
         try:
-            weather_db, meta = get(database="PSM3", id=id, **weather_arg)
+            weather_db, meta = get(database="PSM4", id=id, **weather_arg)
         except Exception:
             try:
                 weather_db, meta = get(
@@ -1075,7 +1077,7 @@ def get_anywhere(database="PSM3", id=None, **kwargs):
             weather_db, meta = get(database="PVGIS", id=id, **{"map_variables": True})
         except Exception:
             try:
-                weather_db, meta = get(database="PSM3", id=id, **weather_arg)
+                weather_db, meta = get(database="PSM4", id=id, **weather_arg)
             except Exception:
                 meta = {
                     "result": "This location was not found in either the NSRDB or PVGIS"
@@ -1243,7 +1245,7 @@ def _weather_distributed_vec(
     # we want to fail loudly, quickly
     if database == "PVGIS":  # does not need api key
         weather_df, meta_dict = get(database=database, id=coord)
-    elif database == "PSM3":
+    elif database == "PSM4":
         weather_df, meta_dict = get(
             database=database, id=coord, api_key=api_key, email=email
         )

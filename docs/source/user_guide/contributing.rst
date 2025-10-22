@@ -4,8 +4,8 @@ Contributing
 ============
 
 .. note::
-        This contributing document is heavily based on pvlib-python 
-        contribution guidelines. This is still a work in progress 
+        This contributing document is heavily based on pvlib-python
+        contribution guidelines. This is still a work in progress
 
 Encouraging more people to help develop Pvdeg is essential to our
 success. Therefore, we want to make it easy and rewarding for you to
@@ -95,7 +95,7 @@ maintainers can review on a regular basis.
 A pull request can also quickly become unmanageable if it proposes
 changes to the API in order to implement another feature. Consider
 clearly and concisely documenting all proposed API changes before
-implementing any code. 
+implementing any code.
 
 Questions about related issues frequently come up in the process of
 addressing implementing code for a pull request. Please try to avoid
@@ -175,7 +175,7 @@ pvdeg generally follows the `PEP 8 -- Style Guide for Python Code
 <https://www.python.org/dev/peps/pep-0008/>`_. Maximum line length for code
 is 88 characters.
 
-Code must be compatible with Python 3.9 and above.
+Code must be compatible with Python 3.10 and above.
 
 *ALIGN WITH PROJECT VARIABLE NAMES*
 pvdeg uses a mix of full and abbreviated variable names. See
