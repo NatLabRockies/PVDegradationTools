@@ -136,7 +136,7 @@ def test_weather_distributed_client_bad_database(capsys):
 
     with pytest.raises(
         NotImplementedError,
-        match="Only 'PVGIS' and 'PSM3' are implemented, you entered fakeDB",
+        match="Only 'PVGIS' and 'PSM4' are implemented, you entered fakeDB",
     ):
         pvdeg.weather.weather_distributed(
             database="fakeDB",
