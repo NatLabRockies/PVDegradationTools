@@ -82,60 +82,68 @@ def arrhenius(
         Total degradation with units as determined by Ro.
     """
 
+    if parameters is not None:
+        if Ro is None:
+            if "R_0" in parameters:
+                if "value" in parameters["R_0"]:
+                        Ro = parameters["R_0"]["value"]
+        if Ea is None:
+            if "E_a" in parameters:
+                if "value" in parameters["E_a"]:
+                    Ea = parameters["E_a"]["value"]
+        if n is None:
+            if "n" in parameters:
+                if "value" in parameters["n"]:
+                    n = parameters["n"]["value"]
+        if p is None:
+            if "p" in parameters:
+                if "value" in parameters["p"]:
+                    p = parameters["p"]["value"]
+        if C2 is None:
+            if "C_2" in parameters:
+                if "value" in parameters["C_2"]:
+                    C2 = parameters["C_2"]["value"]
     if Ro is None:
-        if parameters is not None:
-            if "R_0.value" in parameters:
-                Ro = parameters["R_0.value"]
-            else:
-                Ro = 1
-        else:
-            Ro = 1
-    if Ea is None:
-        if parameters is not None:
-            if "Ea.value" in parameters:
-                Ea = parameters["Ea.value"]
-            else:
-                Ea = 0
-        else:
-            Ea = 0
+        Ro = 1
+        print("R_0 not provided, defaulting to 1.")
+    if Ea is None: 
+        Ea = 0
     if n is None:
-        if parameters is not None:
-            if "n.value" in parameters:
-                n = parameters["n.value"]
-            else:
-                n = 0
-        else:
-            n = 0
+        n = 0
     if p is None:
-        if parameters is not None:
-            if "p.value" in parameters:
-                p = parameters["p.value"]
-            else:
-                p = 0
-        else:
-            p = 0
-    if temperature is None:
-        temperature = weather_df["temp"]
-    if (
-        RH is None
-        and "relative_humidity" in weather_df
-        and "temp_air" in weather_df
-        and "temp_module" in weather_df
-    ):
-        RH = humidity.surface_relative(
-            weather_df["relative_humidity"],
-            weather_df["temp_air"],
-            weather_df["temp_module"],
-        )
-
+        p = 0
     if C2 is None:
-        if parameters is not None:
-            if "C_2.value" in parameters:
-                C2 = parameters["C_2.value"]
+        C2 = 0
+
+    if temperature is None and Ea != 0:
+        if weather_df is not None:
+            if "temperature" in weather_df:
+                temperature = weather_df["temperature"]
+            elif "temp_module" in weather_df:
+                temperature = weather_df["temp_module"]
+                print("Using temp_module from weather_df for temperature.")
             else:
-                C2 = 0
+                raise ValueError(
+                    "Temperature data must be provided if Ea is provided."
+                )
+    if n != 0 and RH is None:
+        print(n)
+        if "RH_surface_outside" in weather_df:
+            RH = weather_df["RH_surface_outside"]        
+        elif (
+            "relative_humidity" in weather_df
+            and "temp_air" in weather_df
+            and "temp_module" in weather_df):
+
+            RH = humidity.surface_relative(
+                weather_df["relative_humidity"],
+                weather_df["temp_air"],
+                weather_df["temp_module"])
         else:
-            C2 = 0
+            raise ValueError("Relative Humidity data must be provided if n is provided.")
+        if RH is not None:
+            print("Using RH_surface_outside from weather_df for humidity.")
+
     if irradiance is None:
         if C2 != 0 or p != 0:
             if weather_df is not None:
@@ -144,22 +152,22 @@ def arrhenius(
                         irradiance = weather_df[col].copy()
                         irradiance = pd.DataFrame(irradiance)
                         break
-                if "poa_global" in weather_df and irradiance is None:
-                    if C2 == 0:
+                if irradiance is None:
+                    if "poa_global" in weather_df:
                         irradiance = weather_df["poa_global"]
                         print("Using poa_global from weather_df for irradiance.")
+                        if C2 != 0:
+                            raise ValueError(
+                                "Irradiance data not provided. Please provide irradiance data in weather_df."  
+                            )
+                            # In the future the spectra will be created using AM1.5.
                     else:
                         raise ValueError(
-                            "Irradiance data not provided. Please provide irradiance data in weather_df."  # noqa
-                        )
-                else:
-                    if irradiance is None:
-                        raise ValueError(
-                            "POA data not provided. Please provide it in irradiance or weather_df."  # noqa
+                            "Irradiance data not provided. Please provide it in irradiance or weather_df."  
                         )
             else:
                 raise ValueError(
-                    "Irradiance data must be provided if C2 or p are provided."  # noqa
+                    "Irradiance data must be provided when C2 or p are used."  
                 )
     if elapsed_time is None:
         if weather_df is not None:
@@ -203,11 +211,11 @@ def arrhenius(
             else:
                 if n == 0:
                     degradation = (
-                        Ro * temperature / temperature
+                        Ro *  weather_df.iloc[:,0]/weather_df.iloc[:,0]
                     )  # This makes sure it sums over the corect number of time
                     # intervals.
                 else:
-                    degradation = Ro * (RH**n) * temperature / temperature
+                    degradation = Ro * (RH**n) *  weather_df.iloc[:,0]/weather_df.iloc[:,0]
         else:
             degradation = bin_widths * ((np.exp(-C2 * wavelengths) * irradiance) ** p)
             if Ea != 0:
@@ -255,7 +263,7 @@ def arrhenius(
             )
     else:
         if n == 0 and p == 0:
-            degradation = Ro * temperature / temperature
+            degradation = Ro * weather_df.iloc[:,0]/weather_df.iloc[:,0]
         elif n == 0 and p != 0:
             degradation = Ro * (irradiance**p)
         elif n != 0 and p == 0:
