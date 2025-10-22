@@ -14,7 +14,7 @@ from pvdeg import weather
 from pvdeg.utilities import (
     _load_gcr_from_config,
     practical_gcr_pitch_bifiacial_fixed_tilt,
-    add_time_columns_tmy
+    add_time_columns_tmy,
 )
 
 logger = logging.getLogger(__name__)
@@ -40,7 +40,6 @@ INSPIRE_GEOSPATIAL_TEMPLATE_SHAPES = {
     "pitch": scalar,
     "annual_poa": scalar,
     "annual_energy": scalar,
-
     "dhi": temporal,
     "ghi": temporal,
     "dni": temporal,
@@ -49,11 +48,10 @@ INSPIRE_GEOSPATIAL_TEMPLATE_SHAPES = {
     "wind_speed": temporal,
     "wind_direction": temporal,
     "relative_humidity": temporal,
-    "subarray1_poa_front" : temporal,
-    "subarray1_poa_rear" : temporal,
-    "subarray1_celltemp" : temporal,
-    "subarray1_dc_gross" : temporal,
-
+    "subarray1_poa_front": temporal,
+    "subarray1_poa_rear": temporal,
+    "subarray1_celltemp": temporal,
+    "subarray1_dc_gross": temporal,
     "ground_irradiance": spatio_temporal,
 }
 
@@ -225,8 +223,8 @@ def pysam(
     sr = solar_resource_dict(weather_df=weather_df, meta=meta)
 
     model_map = {
-        "pvwatts8"  : pv8,
-        "pvsamv1"   : pv1,
+        "pvwatts8": pv8,
+        "pvsamv1": pv1,
     }
 
     model_module = model_map[pv_model]
@@ -265,12 +263,10 @@ def pysam(
 
     if practical_pitch_tilt_considerations is True:
         _apply_practical_pitch_tilt(
-            pysam_model=pysam_model,
-            meta=meta,
-            subarrays=subarrays
+            pysam_model=pysam_model, meta=meta, subarrays=subarrays
         )
 
-    pysam_model.unassign('solar_resource_file')
+    pysam_model.unassign("solar_resource_file")
 
     # Duplicate Columns in the dataframe seem to cause this issue
     # Error (-4) converting nested tuple 0 into row in matrix.
@@ -305,9 +301,9 @@ def _apply_practical_pitch_tilt(pysam_model, meta: dict, subarrays: set[str]) ->
     # Disable latitude-equals-tilt if set anywhere
     if any(pysam_model.value(name) != 0 for name in param_latitude_tilt):
         logger.info(
-            'config defined latitude tilt defined for one of the subarrays, '
-            'disabling config latitude tilt'
-            '(will be set later using practical consideration)'
+            "config defined latitude tilt defined for one of the subarrays, "
+            "disabling config latitude tilt"
+            "(will be set later using practical consideration)"
         )
         for name in param_latitude_tilt:
             pysam_model.value(name, 0)
@@ -339,10 +335,7 @@ def _apply_practical_pitch_tilt(pysam_model, meta: dict, subarrays: set[str]) ->
 
 
 def _handle_pysam_return(
-    pysam_res_dict : dict,
-    weather_df: pd.DataFrame,
-    tilt: float,
-    pitch: float
+    pysam_res_dict: dict, weather_df: pd.DataFrame, tilt: float, pitch: float
 ) -> xr.Dataset:
     """Handle a pysam return object and transform it to an xarray"""
 
@@ -366,30 +359,28 @@ def _handle_pysam_return(
             # for some configs these are caluclated with inspire_practical_pitch
             "tilt": float(tilt),
             "pitch": float(pitch),
-
-            "annual_poa" : annual_poa,
-            "annual_energy" : annual_energy,
-
+            "annual_poa": annual_poa,
+            "annual_energy": annual_energy,
             # TIMESERIES (model outputs)
-            "subarray1_poa_front" : (("time", ), da.array(subarray1_poa_front)),
-            "subarray1_poa_rear" : (("time", ), da.array(subarray1_poa_rear)),
-            "subarray1_celltemp" : (("time", ), da.array(subarray1_celltemp)),
-            "subarray1_dc_gross" : (("time", ), da.array(subarray1_dc_gross)),
-
+            "subarray1_poa_front": (("time",), da.array(subarray1_poa_front)),
+            "subarray1_poa_rear": (("time",), da.array(subarray1_poa_rear)),
+            "subarray1_celltemp": (("time",), da.array(subarray1_celltemp)),
+            "subarray1_dc_gross": (("time",), da.array(subarray1_dc_gross)),
             # TIMESERIES (weather inputs)
-            "temp_air": (("time", ), da.array(weather_df["temp_air"].values)),
-            "wind_speed": (("time", ), da.array(weather_df["wind_speed"].values)),
-            "wind_direction": (("time", ), da.array(
-                weather_df["wind_direction"].values
-            )),
-            "dhi": (("time", ), da.array(weather_df["dhi"].values)),
-            "ghi": (("time", ), da.array(weather_df["ghi"].values)),
-            "dni": (("time", ), da.array(weather_df["dni"].values)),
-            "relative_humidity": (("time", ), da.array(
-                weather_df["relative_humidity"].values
-            )),
-            "albedo": (("time", ), da.array(weather_df["albedo"].values)),
-
+            "temp_air": (("time",), da.array(weather_df["temp_air"].values)),
+            "wind_speed": (("time",), da.array(weather_df["wind_speed"].values)),
+            "wind_direction": (
+                ("time",),
+                da.array(weather_df["wind_direction"].values),
+            ),
+            "dhi": (("time",), da.array(weather_df["dhi"].values)),
+            "ghi": (("time",), da.array(weather_df["ghi"].values)),
+            "dni": (("time",), da.array(weather_df["dni"].values)),
+            "relative_humidity": (
+                ("time",),
+                da.array(weather_df["relative_humidity"].values),
+            ),
+            "albedo": (("time",), da.array(weather_df["albedo"].values)),
             # SPATIO-TEMPORAL (model outputs)
             "ground_irradiance": (("time", "distance"), ground_irradiance_values),
         },
@@ -399,7 +390,7 @@ def _handle_pysam_return(
             # so we need to use a distance "index" that is not spatially meaningful
             # convient way to match the distances in the template
             "distance": np.arange(10),
-        }
+        },
     )
 
     return single_location_ds
@@ -433,7 +424,8 @@ def inspire_ground_irradiance(weather_df, meta, config_files):
             weather_df must be pandas DataFrame, meta must be dict.
             weather_df type : {type(weather_df)}
             meta type : {type(meta)}
-        """)
+        """
+        )
 
     # there is no pitch/gcr output from the model so we might have to do other checks
     # to see that this is being applied correctly verify that our equations are correct.
@@ -458,7 +450,7 @@ def inspire_ground_irradiance(weather_df, meta, config_files):
         )
         pratical_consideration = True
         tilt_used, pitch_used, gcr_used = practical_gcr_pitch_bifiacial_fixed_tilt(
-            latitude=meta['latitude'], cw=cw
+            latitude=meta["latitude"], cw=cw
         )
 
     # why would this be not in
@@ -481,8 +473,7 @@ def inspire_ground_irradiance(weather_df, meta, config_files):
     else:
         # this is not portable because it is custom for the calculation
         raise ValueError(
-            "Valid config not found, "
-            "config name must contain setup name from 01-10"
+            "Valid config not found, " "config name must contain setup name from 01-10"
         )
 
     outputs = pysam(

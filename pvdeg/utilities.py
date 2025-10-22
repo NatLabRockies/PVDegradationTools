@@ -1121,10 +1121,7 @@ def nrel_kestrel_check():
     host = run(args=["hostname", "-f"], shell=False, capture_output=True, text=True)
     device_domain = ".".join(host.stdout.split(".")[-4:])[:-1]
 
-    msg = (
-        f"connected to {device_domain}"
-        f"not a node of {KESTREL_HOSTNAME}"
-    )
+    msg = f"connected to {device_domain}" f"not a node of {KESTREL_HOSTNAME}"
 
     if KESTREL_HOSTNAME != device_domain:
         raise ConnectionError(msg)
@@ -1549,7 +1546,7 @@ def _load_gcr_from_config(config_files: dict):
 
     import json
 
-    with open(config_files["pv"], 'r') as fp:
+    with open(config_files["pv"], "r") as fp:
         data = json.load(fp)
 
     return data["subarray1_gcr"]
@@ -1658,7 +1655,7 @@ def practical_gcr_pitch_bifiacial_fixed_tilt(
         latitude=latitude, cw=cw
     )
 
-    pitch_ceil = min(pitch_optimal, 12)     # 12 m pitch ceiling
+    pitch_ceil = min(pitch_optimal, 12)  # 12 m pitch ceiling
     pitch_practical = max(pitch_ceil, 3.8)  # 3.8m pitch floor
 
     if not (3.8 <= pitch_practical <= 12):

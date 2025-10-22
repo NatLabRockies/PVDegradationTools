@@ -425,7 +425,7 @@ def map_meta(meta):
 
 
 def map_weather(
-    weather_df: Union[pd.DataFrame, xr.Dataset]
+    weather_df: Union[pd.DataFrame, xr.Dataset],
 ) -> Union[pd.DataFrame, xr.Dataset]:
     """
     This will update the headings for meterological data to standard forms

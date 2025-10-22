@@ -258,8 +258,7 @@ def analysis(
         return stacked
 
     coords_res = utilities.gids_dataset_to_coords_dataset(
-        ds_gids=stacked,
-        meta_df=meta_df
+        ds_gids=stacked, meta_df=meta_df
     )
 
     return coords_res
