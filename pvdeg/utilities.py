@@ -635,7 +635,7 @@ def tilt_azimuth_scan(
         Will scan from 0 to 180 degrees.
     kwarg : dict
         All the keywords in a dictionary form that are needed to run the function.
-    calc_function : string
+    func : Callable
         The name of the function that will be calculated.
     Returns
         standoff_series : 2-D array with each row consiting of tilt, azimuth, then
