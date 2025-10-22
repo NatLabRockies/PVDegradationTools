@@ -920,54 +920,6 @@ def new_id(collection):
     return id
 
 
-def restore_gids(meta_df: xr.Dataset, update_ds: xr.Dataset) -> xr.Dataset:
-    """
-    Restore gids to results dataset.
-
-    For desired behavior output data must
-    have identical ordering to input data, otherwise will fail silently by
-    misassigning gids to lat-long coordinates in returned dataset.
-
-    Parameters
-    -----------
-    meta_df : pd.DataFrame
-        Geospatial metadata dataframe, with gid index.
-        Commonly returned by geospatial ``pvdeg.weather.get``.
-    update_ds : xr.Dataset
-        Dataset with coordinates including latitude and longitude.
-        Commonly returned by ``pvdeg.geospatial.analysis``.
-        Can include the same points or a subset of points from meta_df.
-
-    Returns:
-    --------
-    expanded_ds : xr.Dataset
-        dataset like ``update_ds`` with new datavariable, ``gid``
-        holding the original gids of each result from the input metadata.
-    """
-
-    meta_df.loc[:, "gid"] = meta_df.index.values
-    gids_ds = (
-        meta_df.set_index(["latitude", "longitude"])["gid"]
-        .sort_index()
-        .to_xarray()
-        .to_dataset()
-        .reset_coords()
-        .reindex_like(update_ds, method=None)
-    )
-    meta_df = meta_df.drop(columns=["gid"])
-
-    if update_ds.chunks:
-        chunks = {
-            dim_name: chunk_size[0] for dim_name, chunk_size in update_ds.chunks.items()
-            if dim_name in gids_ds.dims
-        }
-        gids_ds = gids_ds.chunk(chunks)
-
-    expanded_ds = xr.merge([update_ds, gids_ds], compat="no_conflicts", join="override")
-
-    return expanded_ds
-
-
 def _find_bbox_corners(coord_1=None, coord_2=None, coords=None):
     """Find min/max latitude and longitude.
 
