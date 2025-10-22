@@ -259,10 +259,10 @@ def test_get_pvgis():
         assert col in weather_df.columns, f"Column {col} not found"
 
 
-def test_get_psm3():
+def test_get_psm4():
     location = (39.7555, -105.2211)  # Golden area
     weather_df, meta = pvdeg.weather.get(
-        database="PSM3", id=location, api_key="DEMO_KEY", email="user@mail.com"
+        database="PSM4", id=location, api_key="DEMO_KEY", email="user@mail.com"
     )
 
     assert isinstance(weather_df, pd.DataFrame)

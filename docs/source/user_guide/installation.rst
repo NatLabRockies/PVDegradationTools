@@ -55,10 +55,10 @@ Developer Installation
 For developer installation, use the following steps.
 
 
-1. clone the reposityory using 
+1. clone the reposityory using
 
 .. code::
-        
+
         git clone https://github.com/NREL/PVDegradationTools.git
 
 2. Navigate the the root of the repository such that you are in ``path/to/PVDegradationTools``, then run the following command.
@@ -67,4 +67,4 @@ For developer installation, use the following steps.
 
         pip install -e .
 
-Compatible with Python 3.9 and above.
+Compatible with Python 3.10 and above.
