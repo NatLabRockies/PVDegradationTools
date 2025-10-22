@@ -93,10 +93,7 @@ def eff_gap_parameters(
     elif isinstance(weather_df, pd.DataFrame):
         weather_df = weather_df[parameters]
     elif weather_df is None:
-        kwarg = weather_kwarg or {}
-        if "database" not in kwarg:
-            kwarg = {"database": "PSM4", **kwarg}
-        weather_df, meta = weather.get(**kwarg)
+        weather_df, meta = weather.get(**(weather_kwarg or {}))
 
     solar_position = spectral.solar_position(weather_df, meta)
     poa = spectral.poa_irradiance(
@@ -313,10 +310,7 @@ def standoff(
     elif isinstance(weather_df, pd.DataFrame):
         weather_df = weather_df[parameters]
     elif weather_df is None:
-        kwarg = weather_kwarg or {}
-        if "database" not in kwarg:
-            kwarg = {"database": "PSM4", **kwarg}
-        weather_df, meta = weather.get(**kwarg)
+        weather_df, meta = weather.get(**(weather_kwarg or {}))
 
     solar_position = spectral.solar_position(weather_df, meta)
 
@@ -568,10 +562,7 @@ def T98_estimate(
     elif isinstance(weather_df, pd.DataFrame):
         weather_df = weather_df[parameters]
     elif weather_df is None:
-        kwarg = weather_kwarg or {}
-        if "database" not in kwarg:
-            kwarg = {"database": "PSM4", **kwarg}
-        weather_df, meta = weather.get(**kwarg)
+        weather_df, meta = weather.get(**(weather_kwarg or {}))
 
     solar_position = spectral.solar_position(weather_df, meta)
     poa = spectral.poa_irradiance(
@@ -744,10 +735,7 @@ def x_eff_temperature_estimate(
     elif isinstance(weather_df, pd.DataFrame):
         weather_df = weather_df[parameters]
     elif weather_df is None:
-        kwarg = weather_kwarg or {}
-        if "database" not in kwarg:
-            kwarg = {"database": "PSM4", **kwarg}
-        weather_df, meta = weather.get(**kwarg)
+        weather_df, meta = weather.get(**(weather_kwarg or {}))
 
     solar_position = spectral.solar_position(weather_df, meta)
     poa = spectral.poa_irradiance(
