@@ -125,7 +125,7 @@ def get(
 
     Example
     -------
-    Collecting a single site of PSM3 NSRDB data. *Api key and email must be replaced
+    Collecting a single site of PSM4 NSRDB data. *Api key and email must be replaced
     with your personal api key and email*.
     [Request a key!](https://developer.nrel.gov/signup/)
 
@@ -939,7 +939,7 @@ def get_satellite(location):
         gid for the desired location
     """
     # this is just a placeholder till the actual code gets programmed.
-    satellite = "PSM3"
+    satellite = "PSM4"
 
     # gid = f.lat_lon_gid(lat_lon=location) # I couldn't get this to work
     gid = None
@@ -1029,7 +1029,7 @@ def get_anywhere(database="PSM4", id=None, **kwargs):
     -----------
     database : (str)
         'PSM4' or 'PVGIS'
-        Indicates the first database to try. PSM3 is for the NSRDB
+        Indicates the first database to try. PSM4 is for the NSRDB
     id : (int or tuple)
         The gid or tuple with latitude and longitude for the desired location.
         Using a gid is not recommended because it is specific to one database.
@@ -1325,13 +1325,13 @@ def empty_weather_ds(gids_size, periodicity, database) -> xr.Dataset:
 
     dims_size = {"time": TIME_PERIODICITY_MAP[periodicity], "gid": gids_size}
 
-    if database == "NSRDB" or database == "PSM3":
+    if database == "NSRDB" or database == "PSM4":
         # shapes = shapes | nsrdb_extra_shapes
         shapes = nsrdb_shapes
     elif database == "PVGIS":
         shapes = pvgis_shapes
     else:
-        raise ValueError(f"database must be PVGIS, NSRDB, PSM3 not {database}")
+        raise ValueError(f"database must be PVGIS, NSRDB, PSM4 not {database}")
 
     weather_ds = xr.Dataset(
         data_vars={
@@ -1361,7 +1361,7 @@ def empty_weather_ds(gids_size, periodicity, database) -> xr.Dataset:
 # TODO: implement rate throttling so we do not make too many requests.
 # TODO: multiple API keys to get around NSRDB key rate limit. 2 key, email pairs means
 # twice the speed ;)
-# TODO: this overwrites NSRDB GIDS when database == "PSM3"
+# TODO: this overwrites NSRDB GIDS when database == "PSM4"
 
 
 def weather_distributed(
