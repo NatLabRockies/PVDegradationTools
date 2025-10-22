@@ -281,18 +281,16 @@ def read(file_in, file_type, map_variables=True, find_meta=False, **kwargs):
         full file path to the desired weather file
     file_type : (str)
         type of weather file from list below (verified)
-        [PSM4, tmy3, epw, h5, csv]
+        [psm3, tmy3, epw, h5, csv]
     """
 
-    supported = ["psm4", "tmy3", "epw", "h5", "csv"]
+    supported = ["psm3", "tmy3", "epw", "h5", "csv"]
     file_type = file_type.upper()
 
-    if file_type in ["PSM4", "PSM"]:
-        weather_df, meta = iotools.get_nsrdb_psm4_tmy(
-            filename=file_in, map_variables=True
-        )
+    if file_type in ["PSM3", "PSM"]:
+        weather_df, meta = iotools.read_psm3(filename=file_in, map_variables=True)
     elif file_type in ["TMY3", "TMY"]:
-        weather_df, meta = iotools.get_nsrdb_psm4_tmy(
+        weather_df, meta = iotools.read_tmy3(
             filename=file_in
         )  # map variable not worki - check pvlib for map_variables
     elif file_type == "EPW":
@@ -1040,7 +1038,7 @@ def get_anywhere(database="PSM4", id=None, **kwargs):
         is supplied.
     **kwargs :
         Additional keyword arguments to pass to the get_weather function
-        (see pvlib.iotools.get_psm4 for PVGIS, and get_NSRDB for NSRDB)
+        (see pvlib.iotools.get_pvgis_tmy for PVGIS, and get_NSRDB for NSRDB)
 
     Returns:
     --------
@@ -1327,13 +1325,13 @@ def empty_weather_ds(gids_size, periodicity, database) -> xr.Dataset:
 
     dims_size = {"time": TIME_PERIODICITY_MAP[periodicity], "gid": gids_size}
 
-    if database in ["NSRDB", "PSM4"]:
+    if database == "NSRDB" or database == "PSM4":
         # shapes = shapes | nsrdb_extra_shapes
         shapes = nsrdb_shapes
     elif database == "PVGIS":
         shapes = pvgis_shapes
     else:
-        raise ValueError(f"database must be PVGIS, NSRDB, or PSM4 not {database}")
+        raise ValueError(f"database must be PVGIS, NSRDB, PSM4 not {database}")
 
     weather_ds = xr.Dataset(
         data_vars={
@@ -1363,6 +1361,7 @@ def empty_weather_ds(gids_size, periodicity, database) -> xr.Dataset:
 # TODO: implement rate throttling so we do not make too many requests.
 # TODO: multiple API keys to get around NSRDB key rate limit. 2 key, email pairs means
 # twice the speed ;)
+# TODO: this overwrites NSRDB GIDS when database == "PSM4"
 
 
 def weather_distributed(
@@ -1387,7 +1386,7 @@ def weather_distributed(
     Parameters
     ----------
     database : (str)
-        'PVGIS', 'PSM4' (NSRDB)
+        'PVGIS' or 'PSM4'
     coords: list[tuple]
         list of tuples containing (latitude, longitude) coordinates
 
@@ -1420,6 +1419,7 @@ def weather_distributed(
     gids_failed: list
         list of index failed coordinates in input `coords`
     """
+
     import dask.delayed
     import dask.distributed
 
@@ -1429,9 +1429,9 @@ def weather_distributed(
     except ValueError:
         raise RuntimeError("No Dask scheduler found. Ensure a dask client is running.")
 
-    if database not in ["PVGIS", "PSM4"]:
+    if database != "PVGIS" and database != "PSM4":
         raise NotImplementedError(
-            f"Only 'PVGIS', and 'PSM4' are implemented, you entered {database}"
+            f"Only 'PVGIS' and 'PSM4' are implemented, you entered {database}"
         )
 
     delays = [
