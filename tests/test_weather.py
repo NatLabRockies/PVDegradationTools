@@ -136,7 +136,7 @@ def test_weather_distributed_client_bad_database(capsys):
 
     with pytest.raises(
         NotImplementedError,
-        match="Only 'PVGIS' and 'PSM3' are implemented, you entered fakeDB",
+        match="Only 'PVGIS' and 'PSM4' are implemented, you entered fakeDB",
     ):
         pvdeg.weather.weather_distributed(
             database="fakeDB",
@@ -181,7 +181,7 @@ def test_empty_weather_ds_invalid_database():
     invalid_database = "INVALID_DB"
 
     with pytest.raises(
-        ValueError, match=f"database must be PVGIS, NSRDB, PSM3 not {invalid_database}"
+        ValueError, match=f"database must be PVGIS, NSRDB, PSM4 not {invalid_database}"
     ):
         pvdeg.weather.empty_weather_ds(gids_size, periodicity, invalid_database)
 
@@ -237,7 +237,7 @@ def test_get_invalid_database():
 
 def test_get_no_location():
     with pytest.raises(TypeError, match="Specify location via tuple"):
-        pvdeg.weather.get(database="PSM3")
+        pvdeg.weather.get(database="PSM4")
 
 
 def test_get_pvgis():
