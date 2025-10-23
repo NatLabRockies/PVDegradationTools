@@ -789,29 +789,29 @@
     "Ea,P": { "name": "Permeability Activation Energy","units": "kJ/mol", "value": 30.7753510716626, "stdev": 1.35395769742788}
 },
 "OX41" : {
-"name": "Ethylenepropylene ter-polymer, Japan Synthrtic Rubber Ltd., EP24 0.86 g/cm3 MI=0.4",
-"alias": "EPDM-6",
-"cotributor": "Aidan Wesley",
-"source": "Tadao, S.; Yasuaki, Y. Diffusion and solubility of oxygen in γ-ray irradiated polymer insulation materials. JAERI 1986, 1299, 68.",
-"DOI": "10.11484/jeri-1229",
-"Fickian": true,
-"comment": " All values obtained from a temperature series of diffusivity and solubility using a non-linear regression optimizing the summation of the percent error in the estimation of the summation of the logarithm of permeability, the logarithm of diffusivity, and the logarithm of the solubility. This was accomplished using the JMP software package. ",
-"Corr_lnSo_lnDo": 0.2462,
-"Corr_lnSo_Eas": 0.9973,
-"Corr_lnSo_EaD": 0.24,
-"Corr_lnDo_Eas": 0.1929,
-"Corr_lnDo_EaD": 0.9998,
-"Corr_Eas_EaD": 0.1865,
-"So": { "name": "Solubility Prefactor","units":"g/cm³/atm", "value": 0.000100522507732759},
-"lnSo": { "name": "Solubility Prefactor","units": "", "value": -9.205128898, "stdev": 0.30589092},
-"Do": { "name": "Diffusivity Prefactor","units":"cm²/s", "value": 0.0543178666636386},
-"lnDo": { "name": "Diffusivity Prefactor","units": "ln(cm²/s)", "value": -2.91290207, "stdev": 0.99875732},
-"Eas": { "name": "Solubility Activation Energy","units":"kJ/mol", "value": 0.9834146717},
-"EaD": { "name": "Diffusivity Activation Energy","units":"kJ/mol", "value": 27.903513279},
-"Po": { "name": "Permeability Prefactor","units":"g·mm/m²/day/atm", "value": 5.46016817172258E-05},
-"lnPo": { "name": "Permeability Prefactor","units": "ln(g·mm/m²/day/atm)", "value": -9.81544587500595, "stdev": 27.9208373393035},
-"Eap": { "name": "Permeability Activation Energy","units": "kJ/mol", "value": 28.8869279507, "stdev": 27.9208373393035}
-}
+    "name": "Ethylenepropylene ter-polymer, Japan Synthrtic Rubber Ltd., EP24 0.86 g/cm3 MI=0.4",
+    "alias": "EPDM-6",
+    "cotributor": "Aidan Wesley",
+    "source": "Tadao, S.; Yasuaki, Y. Diffusion and solubility of oxygen in γ-ray irradiated polymer insulation materials. JAERI 1986, 1299, 68.",
+    "DOI": "10.11484/jeri-1229",
+    "Fickian": true,
+    "comment": " All values obtained from a temperature series of diffusivity and solubility using a non-linear regression optimizing the summation of the percent error in the estimation of the summation of the logarithm of permeability, the logarithm of diffusivity, and the logarithm of the solubility. This was accomplished using the JMP software package. ",
+    "Corr_lnSo_lnDo": 0.2462,
+    "Corr_lnSo_Eas": 0.9973,
+    "Corr_lnSo_EaD": 0.24,
+    "Corr_lnDo_Eas": 0.1929,
+    "Corr_lnDo_EaD": 0.9998,
+    "Corr_Eas_EaD": 0.1865,
+    "So": { "name": "Solubility Prefactor","units":"g/cm³/atm", "value": 0.000100522507732759},
+    "lnSo": { "name": "Solubility Prefactor","units": "", "value": -9.205128898, "stdev": 0.30589092},
+    "Do": { "name": "Diffusivity Prefactor","units":"cm²/s", "value": 0.0543178666636386},
+    "lnDo": { "name": "Diffusivity Prefactor","units": "ln(cm²/s)", "value": -2.91290207, "stdev": 0.99875732},
+    "Eas": { "name": "Solubility Activation Energy","units":"kJ/mol", "value": 0.9834146717},
+    "EaD": { "name": "Diffusivity Activation Energy","units":"kJ/mol", "value": 27.903513279},
+    "Po": { "name": "Permeability Prefactor","units":"g·mm/m²/day/atm", "value": 5.46016817172258E-05},
+    "lnPo": { "name": "Permeability Prefactor","units": "ln(g·mm/m²/day/atm)", "value": -9.81544587500595, "stdev": 27.9208373393035},
+    "Eap": { "name": "Permeability Activation Energy","units": "kJ/mol", "value": 28.8869279507, "stdev": 27.9208373393035}
+    }
 
 }
 
