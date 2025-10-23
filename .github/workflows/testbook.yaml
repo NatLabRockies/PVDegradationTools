@@ -39,6 +39,9 @@ jobs:
           mapfile -t NOTEBOOKS < <(echo "$TESTBOOK_NOTEBOOK_LIST")
           for notebook in "${NOTEBOOKS[@]}"; do
             NOTEBOOK_NAME="${notebook//\"/}"
+            if [ -z "$NOTEBOOK_NAME" ]; then
+              continue
+            fi
             FULL_PATH="$NOTEBOOK_DIR/$NOTEBOOK_NAME"
             echo "Testing $FULL_PATH with testbook..."
             python scripts/notebooks_testbook.py "$FULL_PATH"
