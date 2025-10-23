@@ -114,7 +114,7 @@ def get(
         geospatial analysis. The default is False.
     **kwargs :
         Additional keyword arguments to pass to the get_weather function
-        (see pvlib.iotools.get_psm4 for NSRDB)
+        (see pvlib.iotools.get_nsrdb_psm4_tmy for NSRDB)
 
     Returns
     -------
