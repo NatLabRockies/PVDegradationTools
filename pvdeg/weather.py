@@ -99,7 +99,7 @@ def get(
     Parameters
     ----------
     database : (str)
-        'NSRDB' or 'PVGIS'. Use "PSM3" for tmy NSRDB data.
+        'NSRDB' or 'PVGIS'. Use "PSM4" for tmy NSRDB data.
     id : (int or tuple)
         If NSRDB, id is the gid for the desired location.
         If PVGIS, id is a tuple of (latitude, longitude) for the desired location
@@ -114,7 +114,7 @@ def get(
         geospatial analysis. The default is False.
     **kwargs :
         Additional keyword arguments to pass to the get_weather function
-        (see pvlib.iotools.get_psm3 for NSRDB)
+        (see pvlib.iotools.get_nsrdb_psm4_tmy for NSRDB)
 
     Returns
     -------
@@ -125,7 +125,7 @@ def get(
 
     Example
     -------
-    Collecting a single site of PSM3 NSRDB data. *Api key and email must be replaced
+    Collecting a single site of PSM4 NSRDB data. *Api key and email must be replaced
     with your personal api key and email*.
     [Request a key!](https://developer.nrel.gov/signup/)
 
@@ -140,7 +140,7 @@ def get(
         }
 
         weather_df, meta_dict =
-        pvdeg.weather.get(database="PSM3",id=(25.783388, -80.189029), **weather_arg)
+        pvdeg.weather.get(database="PSM4",id=(25.783388, -80.189029), **weather_arg)
 
     Collecting a single site of PVGIS TMY data
 
@@ -200,8 +200,10 @@ def get(
             )
             inputs = meta["inputs"]
             meta = inputs["location"]
-        elif database == "PSM3":
-            weather_df, meta = iotools.get_psm3(latitude=lat, longitude=lon, **kwargs)
+        elif database == "PSM4":
+            weather_df, meta = iotools.get_nsrdb_psm4_tmy(
+                latitude=lat, longitude=lon, **kwargs
+            )
         elif database == "local":
             fp = kwargs.pop("file")
             fn, fext = os.path.splitext(fp)
@@ -213,7 +215,7 @@ def get(
             if key in META_MAP.keys():
                 meta[META_MAP[key]] = meta.pop(key)
 
-        if database == "NSRDB" or database == "PSM3":
+        if database == "NSRDB" or database == "PSM4":
             meta["wind_height"] = 2
             meta["Source"] = "NSRDB"
         elif database == "PVGIS":
@@ -937,7 +939,7 @@ def get_satellite(location):
         gid for the desired location
     """
     # this is just a placeholder till the actual code gets programmed.
-    satellite = "PSM3"
+    satellite = "PSM4"
 
     # gid = f.lat_lon_gid(lat_lon=location) # I couldn't get this to work
     gid = None
@@ -1017,7 +1019,7 @@ def write(data_df, metadata, savefile="WeatherFile.csv"):
     file1.close()
 
 
-def get_anywhere(database="PSM3", id=None, **kwargs):
+def get_anywhere(database="PSM4", id=None, **kwargs):
     """
     Load weather data directly from NSRDB or through any other PVLIB i/o tools.
 
@@ -1026,8 +1028,8 @@ def get_anywhere(database="PSM3", id=None, **kwargs):
     Parameters:
     -----------
     database : (str)
-        'PSM3' or 'PVGIS'
-        Indicates the first database to try. PSM3 is for the NSRDB
+        'PSM4' or 'PVGIS'
+        Indicates the first database to try. PSM4 is for the NSRDB
     id : (int or tuple)
         The gid or tuple with latitude and longitude for the desired location.
         Using a gid is not recommended because it is specific to one database.
@@ -1036,7 +1038,7 @@ def get_anywhere(database="PSM3", id=None, **kwargs):
         is supplied.
     **kwargs :
         Additional keyword arguments to pass to the get_weather function
-        (see pvlib.iotools.get_psm3 for PVGIS, and get_NSRDB for NSRDB)
+        (see pvlib.iotools.get_pvgis_tmy for PVGIS, and get_NSRDB for NSRDB)
 
     Returns:
     --------
@@ -1057,9 +1059,9 @@ def get_anywhere(database="PSM3", id=None, **kwargs):
     }
     weather_arg.update(kwargs)  # Will default to the kwargs passed to the function.
 
-    if database == "PSM3":
+    if database == "PSM4":
         try:
-            weather_db, meta = get(database="PSM3", id=id, **weather_arg)
+            weather_db, meta = get(database="PSM4", id=id, **weather_arg)
         except Exception:
             try:
                 weather_db, meta = get(
@@ -1075,7 +1077,7 @@ def get_anywhere(database="PSM3", id=None, **kwargs):
             weather_db, meta = get(database="PVGIS", id=id, **{"map_variables": True})
         except Exception:
             try:
-                weather_db, meta = get(database="PSM3", id=id, **weather_arg)
+                weather_db, meta = get(database="PSM4", id=id, **weather_arg)
             except Exception:
                 meta = {
                     "result": "This location was not found in either the NSRDB or PVGIS"
@@ -1243,13 +1245,13 @@ def _weather_distributed_vec(
     # we want to fail loudly, quickly
     if database == "PVGIS":  # does not need api key
         weather_df, meta_dict = get(database=database, id=coord)
-    elif database == "PSM3":
+    elif database == "PSM4":
         weather_df, meta_dict = get(
             database=database, id=coord, api_key=api_key, email=email
         )
     else:
         raise NotImplementedError(
-            f'database {database} not implemented, options: "PVGIS", "PSM3"'
+            f'database {database} not implemented, options: "PVGIS", "PSM4"'
         )
 
     # convert single location dataframe to xarray dataset
@@ -1323,13 +1325,13 @@ def empty_weather_ds(gids_size, periodicity, database) -> xr.Dataset:
 
     dims_size = {"time": TIME_PERIODICITY_MAP[periodicity], "gid": gids_size}
 
-    if database == "NSRDB" or database == "PSM3":
+    if database == "NSRDB" or database == "PSM4":
         # shapes = shapes | nsrdb_extra_shapes
         shapes = nsrdb_shapes
     elif database == "PVGIS":
         shapes = pvgis_shapes
     else:
-        raise ValueError(f"database must be PVGIS, NSRDB, PSM3 not {database}")
+        raise ValueError(f"database must be PVGIS, NSRDB, PSM4 not {database}")
 
     weather_ds = xr.Dataset(
         data_vars={
@@ -1359,7 +1361,7 @@ def empty_weather_ds(gids_size, periodicity, database) -> xr.Dataset:
 # TODO: implement rate throttling so we do not make too many requests.
 # TODO: multiple API keys to get around NSRDB key rate limit. 2 key, email pairs means
 # twice the speed ;)
-# TODO: this overwrites NSRDB GIDS when database == "PSM3"
+# TODO: this overwrites NSRDB GIDS when database == "PSM4"
 
 
 def weather_distributed(
@@ -1377,14 +1379,14 @@ def weather_distributed(
     PVGIS supports up to 30 requests per second so your dask client should not
     have more than $x$ workers/threads that would put you over this limit.
 
-    NSRDB (including `database="PSM3"`) is rate limited and your key will face
+    NSRDB (including `database="PSM4"`) is rate limited and your key will face
     restrictions after making too many requests.
     See rates [here](https://developer.nrel.gov/docs/solar/nsrdb/guide/).
 
     Parameters
     ----------
     database : (str)
-        'PVGIS' or 'NSRDB' (not implemented yet)
+        'PVGIS' or 'PSM4'
     coords: list[tuple]
         list of tuples containing (latitude, longitude) coordinates
 
@@ -1398,11 +1400,11 @@ def weather_distributed(
                 (51.95, -3.5)]
 
     api_key: str
-        Only required when making NSRDB requests using "PSM3".
+        Only required when making NSRDB requests using "PSM4".
         [NSRDB developer API key](https://developer.nrel.gov/signup/)
 
     email: str
-        Only required when making NSRDB requests using "PSM3".
+        Only required when making NSRDB requests using "PSM4".
         [NSRDB developer account email associated with
         `api_key`](https://developer.nrel.gov/signup/)
 
@@ -1427,9 +1429,9 @@ def weather_distributed(
     except ValueError:
         raise RuntimeError("No Dask scheduler found. Ensure a dask client is running.")
 
-    if database != "PVGIS" and database != "PSM3":
+    if database != "PVGIS" and database != "PSM4":
         raise NotImplementedError(
-            f"Only 'PVGIS' and 'PSM3' are implemented, you entered {database}"
+            f"Only 'PVGIS' and 'PSM4' are implemented, you entered {database}"
         )
 
     delays = [
