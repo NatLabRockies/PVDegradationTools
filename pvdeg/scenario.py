@@ -355,27 +355,26 @@ class Scenario:
                         f"Layer '{layer}' must have either 'material_name' or "
                         "'parameters'"
                     )
-
         else:
             raise ValueError("Materials parameter must be either a string or dict")
 
-            # Check for existing module and warn user
-            old_modules = [mod["module_name"] for mod in self.modules]
-            if module_name in old_modules:
-                warnings.warn(f'WARNING - Module already found by name "{module_name}"')
-                warnings.warn("Module will be replaced with new instance.")
-                self.modules.pop(old_modules.index(module_name))
+        # Check for existing module and warn user
+        old_modules = [mod["module_name"] for mod in self.modules]
+        if module_name in old_modules:
+            warnings.warn(f'WARNING - Module already found by name "{module_name}"')
+            warnings.warn("Module will be replaced with new instance.")
+            self.modules.pop(old_modules.index(module_name))
 
-            self.modules.append(
-                {
-                    "module_name": module_name,
-                    "racking": racking,
-                    "material_params": mat_params,
-                    "temp_model": temperature_model,
-                    "model_kwarg": model_kwarg,
-                    "irradiance_kwarg": irradiance_kwarg,
-                }
-            )
+        self.modules.append(
+            {
+                "module_name": module_name,
+                "racking": racking,
+                "material_params": mat_params,
+                "temp_model": temperature_model,
+                "model_kwarg": model_kwarg,
+                "irradiance_kwarg": irradiance_kwarg,
+            }
+        )
 
     def add_material(self, materials, see_added=False):
         """
