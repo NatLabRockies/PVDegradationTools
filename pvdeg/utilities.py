@@ -1495,11 +1495,13 @@ def read_material(
     key: str = None,
     parameters: list[str] = None,
     encoding: str = "utf-8",
+    values_only: bool = True,
 ) -> dict:
-    """Read material dictionary and return parameter dictionary in normalized format.
+    """Read material dictionary and return parameter dictionary in
+    normalized format.
 
-     Read material dictionary from a `pvdeg/data` file or JSON file path and return
-     the parameter dictionary in normalized format.
+     Read material dictionary from a `pvdeg/data` file or JSON file path
+     and return the parameter dictionary in normalized format.
 
     Parameters
     ----------
@@ -1507,26 +1509,31 @@ def read_material(
         keyword for material json file in `pvdeg/data`. Options:
         >>> "AApermeation", "H2Opermeation", "O2permeation"
     fp: str
-        file path to material parameters json with same schema as material parameters
-        json files in `pvdeg/data`. `pvdeg_file` will override `fp` if both are
-        provided.
+        file path to material parameters json with same schema as material
+        parameters json files in `pvdeg/data`. `pvdeg_file` will override
+        `fp` if both are provided.
     key: str
-        key corresponding to specific material in the file. In the pvdeg files these
-        have arbitrary names. Inspect the files or use `display_json` or `search_json`
-        to identify the key for desired material.
-        parameters: list[str]
-        parameters to grab from the file at index key. If none, will grab all items
-        at index key. the elements in parameters must match the keys in the json exactly
-        or the output value for the specific key/parameter in the retunred dict will be
-        `None`.
+        key corresponding to specific material in the file. In the pvdeg
+        files these have arbitrary names. Inspect the files or use
+        `display_json` or `search_json` to identify the key for desired
+        material.
+    parameters: list[str]
+        parameters to grab from the file at index key. If none, will grab
+        all items at index key. the elements in parameters must match the
+        keys in the json exactly or the output value for the specific
+        key/parameter in the returned dict will be `None`.
     encoding : (str)
         encoding to use when reading the JSON file, default is "utf-8"
+    values_only : bool, default=True
+        If True, extract only the 'value' field from nested dicts. If
+        False, return the full nested structure with metadata (name, units,
+        value).
 
     Returns
     -------
     material: dict
-        dictionary with normalized structure containing material_file, material_name,
-        and parameters
+        dictionary with normalized structure containing material_file,
+        material_name, and parameters
     """
     if pvdeg_file:
         try:
@@ -1541,6 +1548,17 @@ def read_material(
         data = json.load(file)
 
     material_dict = data[key]
+
+    # Filter by parameters if specified
+    if parameters is not None:
+        material_dict = {k: material_dict.get(k) for k in parameters}
+
+    if values_only:
+        material_dict = {
+            k: v["value"] if isinstance(v, dict) and "value" in v else v
+            for k, v in material_dict.items()
+        }
+
     return material_dict
 
 
