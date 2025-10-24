@@ -6,7 +6,6 @@ import pandas as pd
 import pytest
 import os
 import numpy as np
-from pvdeg import utilities
 
 # problems with scenario creating directory in test directory?
 EMAIL = "user@mail.com"
@@ -116,8 +115,8 @@ def test_addModule_badkey():
         api_key=API_KEY,
     )
 
-    with pytest.warns(UserWarning, match="Material Not Found"):
-        a.addModule(module_name="test-invalid-key", material="invalid-key")
+    with pytest.raises(ValueError, match="Material 'invalid-key' not found"):
+        a.addModule(module_name="test-invalid-key", materials="invalid-key")
 
 
 def test_addModule_existingmod():
