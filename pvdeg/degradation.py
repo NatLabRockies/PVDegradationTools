@@ -123,9 +123,7 @@ def arrhenius(
                 temperature = weather_df["temp_module"]
                 print("Using temp_module from weather_df for temperature.")
             else:
-                raise ValueError(
-                    "Temperature data must be provided if Ea is provided."
-                )
+                raise ValueError("Temperature data must be provided if Ea is provided.")
     if n != 0 and RH is None:
         print(n)
         if "RH_surface_outside" in weather_df:
@@ -133,15 +131,18 @@ def arrhenius(
         elif (
             "relative_humidity" in weather_df
             and "temp_air" in weather_df
-            and "temp_module" in weather_df):
+            and "temp_module" in weather_df
+        ):
 
             RH = humidity.surface_relative(
                 weather_df["relative_humidity"],
                 weather_df["temp_air"],
-                weather_df["temp_module"])
+                weather_df["temp_module"],
+            )
         else:
             raise ValueError(
-                "Relative Humidity data must be provided if n is provided.")
+                "Relative Humidity data must be provided if n is provided."
+            )
         if RH is not None:
             print("Using RH_surface_outside from weather_df for humidity.")
 
@@ -159,12 +160,14 @@ def arrhenius(
                         print("Using poa_global from weather_df for irradiance.")
                         if C2 != 0:
                             raise ValueError(
-                                "Irradiance data not provided. Please provide irradiance data in weather_df."
+                                "Irradiance data not provided. Please provide "
+                                "irradiance data in weather_df."
                             )
                             # In the future the spectra will be created using AM1.5.
                     else:
                         raise ValueError(
-                            "Irradiance data not provided. Please provide it in irradiance or weather_df."
+                            "Irradiance data not provided. Please provide it in "
+                            "irradiance or weather_df."
                         )
             else:
                 raise ValueError(
@@ -212,11 +215,13 @@ def arrhenius(
             else:
                 if n == 0:
                     degradation = (
-                        Ro * weather_df.iloc[:, 0]/weather_df.iloc[:, 0]
+                        Ro * weather_df.iloc[:, 0] / weather_df.iloc[:, 0]
                     )  # This makes sure it sums over the corect number of time
                     # intervals.
                 else:
-                    degradation = Ro * (RH**n) * weather_df.iloc[:, 0]/weather_df.iloc[:, 0]
+                    degradation = (
+                        Ro * (RH**n) * weather_df.iloc[:, 0] / weather_df.iloc[:, 0]
+                    )
         else:
             degradation = bin_widths * ((np.exp(-C2 * wavelengths) * irradiance) ** p)
             if Ea != 0:
@@ -264,7 +269,7 @@ def arrhenius(
             )
     else:
         if n == 0 and p == 0:
-            degradation = Ro * weather_df.iloc[:, 0]/weather_df.iloc[:, 0]
+            degradation = Ro * weather_df.iloc[:, 0] / weather_df.iloc[:, 0]
         elif n == 0 and p != 0:
             degradation = Ro * (irradiance**p)
         elif n != 0 and p == 0:
