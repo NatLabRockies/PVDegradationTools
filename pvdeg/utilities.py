@@ -492,49 +492,6 @@ def convert_tmy(file_in, file_out="h5_from_tmy.h5"):
         )
 
 
-# DEPRECATE
-def _read_material(name, fname="O2permeation.json"):
-    """Read a material from materials.json and return the parameter dictionary.
-
-    Parameters
-    ----------
-    name : (str)
-        unique name of material
-
-    Returns:
-    --------
-    mat_dict : (dict)
-        dictionary of material parameters
-    """
-    # TODO: test then delete commented code
-    # root = os.path.realpath(__file__)
-    # root = root.split(r'/')[:-1]
-    # file = os.path.join('/', *root, 'data', 'materials.json')
-    fpath = os.path.join(DATA_DIR, fname)
-    with open(fpath) as f:
-        data = json.load(f)
-    f.close()
-
-    if name is None:
-        return list(data.keys())
-
-        # Mike Added
-        # broke test
-        # ===========
-        # material_list = ''
-        # print('working')
-        # for key in data:
-        #     if 'name' in data[key].keys():
-        #         material_list = material_list + key + "=" + data[key]['name'] + '\n'
-        # material_list = material_list[0:len(material_list)-1]
-        # return [*material_list]
-
-    mat_dict = data[name]
-    return mat_dict
-
-
-# previously: fname="materials.json"
-# add control over what parameters (O2, H2, AA)?
 def _add_material(
     name,
     alias,
