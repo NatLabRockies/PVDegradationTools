@@ -20,6 +20,8 @@ pvdeg_datafiles = {
     "AApermeation": os.path.join(DATA_DIR, "AApermeation.json"),
     "H2Opermeation": os.path.join(DATA_DIR, "H2Opermeation.json"),
     "O2permeation": os.path.join(DATA_DIR, "O2permeation.json"),
+    "DegradationDatabase": os.path.join(DATA_DIR, "DegradationDatabase.json"),
+    "albedo.json": os.path.join(DATA_DIR, "albedo.json"),
 }
 
 
@@ -492,8 +494,7 @@ def convert_tmy(file_in, file_out="h5_from_tmy.h5"):
 
 # DEPRECATE
 def _read_material(name, fname="O2permeation.json"):
-    """
-    read a material from materials.json and return the parameter dictionary in normalized format
+    """Read a material from materials.json and return the parameter dictionary.
 
     Parameters
     ----------
@@ -503,7 +504,7 @@ def _read_material(name, fname="O2permeation.json"):
     Returns:
     --------
     mat_dict : (dict)
-        dictionary with normalized structure containing material_file, material_name, and parameters
+        dictionary of material parameters
     """
     # TODO: test then delete commented code
     # root = os.path.realpath(__file__)
@@ -529,13 +530,7 @@ def _read_material(name, fname="O2permeation.json"):
         # return [*material_list]
 
     mat_dict = data[name]
-    
-    # Return in normalized format to match scenario.py structure
-    return {
-        "material_file": fname.replace('.json', ''),  # Remove .json extension
-        "material_name": name,
-        "parameters": mat_dict
-    }
+    return mat_dict
 
 
 # previously: fname="materials.json"
@@ -550,9 +545,10 @@ def _add_material(
     Eap=None,
     Po=None,
     fickian=True,
+    fp=DATA_DIR,
     fname="O2permeation.json",
 ):
-    """Add a new material to the materials.json database.
+    """Add a new material to the materials database.
 
     Check the parameters for
     specific units. If material already exists, parameters will be updated.
@@ -579,12 +575,13 @@ def _add_material(
         Permeability Prefactor [g*mm/m^2/day] (unused)
     fickian : (boolean)
         I have no idea what this means (unused)
+    fp : (str)
+        file path to the json materials file
+    fname : (str)
+        name of the json materials file
     """
-    # TODO: test then delete commented code
-    # root = os.path.realpath(__file__)
-    # root = root.split(r'/')[:-1]
-    # OUT_FILE = os.path.join('/', *root, 'data', 'materials.json')
-    fpath = os.path.join(DATA_DIR, fname)
+
+    fpath = os.path.join(fp, fname)
 
     material_dict = {
         "alias": alias,
@@ -954,7 +951,9 @@ def new_id(collection):
     if not isinstance(collection, (dict, OrderedDict)):
         raise TypeError(f"{collection.__name__} type {type(collection)} expected dict")
 
-    gen = lambda: "".join(choices(ascii_uppercase, k=5))
+    def gen():
+        return "".join(choices(ascii_uppercase, k=5))
+
     id = gen()
     while id in collection.keys():
         id = gen()
@@ -1205,8 +1204,7 @@ def nrel_kestrel_check():
     if kestrel_hostname != device_domain:
         raise ConnectionError(
             f"""
-            connected to {device_domain}
-            not a node of {kestrel_hostname}")
+            connected to {device_domain} not a node of {kestrel_hostname}")
             """
         )
 
@@ -1269,14 +1267,10 @@ def compare_templates(
 
     for coord in ds1.coords:
         if ds1.coords[coord].dtype.kind in {"i", "f"}:
-            if not np.allclose(
-                ds1.coords[coord], ds2.coords[coord], atol=atol
-            ):  # Use np.allclose for numeric coordinates
+            if not np.allclose(ds1.coords[coord], ds2.coords[coord], atol=atol):
                 return False
-        elif ds1.coords[coord].dtype.kind == "M":  # datetime64
-            if not np.array_equal(
-                ds1.coords[coord], ds2.coords[coord]
-            ):  # Use array equality for datetime coordinates
+        elif ds1.coords[coord].dtype.kind == "M":
+            if not np.array_equal(ds1.coords[coord], ds2.coords[coord]):
                 return False
         else:
             if not np.array_equal(ds1.coords[coord], ds2.coords[coord]):
@@ -1319,8 +1313,8 @@ def add_time_columns_tmy(weather_df, coerce_year=1979):
         raise ValueError("weather df must be in 1 hour or 30 minute intervals")
 
     date_range = pd.date_range(
-        start=f"{coerce_year}-01-01 00:00:00",
-        end=f"{coerce_year}-12-31 23:45:00",  # 15 min internval is highest resolution
+        start=f"{coerce_year}-01-01 00:00:00",  # noqa: E231
+        end=f"{coerce_year}-12-31 23:45:00",  # noqa: E231
         freq=freq,
     )
 
@@ -1400,7 +1394,7 @@ def display_json(
     ------------
     pvdeg_file: str
         keyword for material json file in `pvdeg/data`. Options:
-        >>> "AApermeation", "H2Opermeation", "O2permeation"
+        >>> "AApermeation", "H2Opermeation", "O2permeation", "DegradationDatabase"
     fp: str
         file path to material parameters json with same schema as material parameters
         json files in `pvdeg/data`.  `pvdeg_file` will override `fp` if both are
@@ -1413,8 +1407,8 @@ def display_json(
             fp = pvdeg_datafiles[pvdeg_file]
         except KeyError:
             raise KeyError(
-                f"{pvdeg_file} does not exist in pvdeg/data. Options are \
-                    {pvdeg_datafiles.keys()}"
+                f"{pvdeg_file} is not in pvdeg/data. Options are "
+                f"{pvdeg_datafiles.keys()}"
             )
 
     with open(fp, "r") as file:
@@ -1424,25 +1418,26 @@ def display_json(
         json_str = json.dumps(data, indent=2)
         for key in data.keys():
             json_str = json_str.replace(
-                f'"{key}":', f'<span style="color: plum;">"{key}":</span>'
+                f'"{key}":',  # noqa: E702,E231, E501
+                f'<span style="color: plum;">"{key}":</span>',  # noqa: E702,E231, E501
             )
-
         indented_html = "<br>".join([" " * 4 + line for line in json_str.splitlines()])
-        return f'<pre style="color: white; background-color: black; padding: 10px; border-radius: 5px;">{indented_html}</pre>'
+        return f'<pre style="color: white; background-color: black; padding: 10px; border-radius: 5px;">{indented_html}</pre>'  # noqa: E702,E231, E501
 
-    html = f'<h2 style="color: white;">JSON Output at fp: {fp}</h2><div>'
+    html = f'<h2 style="color: white;">JSON Output at fp: {fp}</h2><div>'  # noqa
     for key, value in data.items():
         html += (
             f"<div>"
-            f'<strong style="color: white;">{key}:</strong> '
-            f"<span onclick=\"this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'\" style=\"cursor: pointer; color: white;\">&#9660;</span>"
-            f'<div style="display: none;">{json_to_html(value)}</div>'
+            f'<strong style="color: white;">{key}:</strong> '  # noqa
+            f"<span onclick=\"this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'\" style=\"cursor: pointer; color: white;\">&#9660;</span>"  # noqa: E702,E231,E501,W505
+            f'<div style="display: none;">{json_to_html(value)}</div>'  # noqa
             f"</div>"
         )
     html += "</div>"
 
     # Display the HTML
     display(HTML(html))
+    print(html)
 
 
 def search_json(
@@ -1479,8 +1474,8 @@ def search_json(
             fp = pvdeg_datafiles[pvdeg_file]
         except KeyError:
             raise KeyError(
-                rf"{pvdeg_file} does not exist in pvdeg/data. Options are \
-                    {pvdeg_datafiles.keys()}"
+                rf"{pvdeg_file} is not exist in pvdeg/data. Options are: "
+                " {pvdeg_datafiles.keys()}"
             )
 
     with open(fp, "r") as file:
@@ -1491,7 +1486,7 @@ def search_json(
             if subdict["name"] == name_or_alias or subdict["alias"] == name_or_alias:
                 return key
 
-    raise ValueError(rf"name_or_alias: {name_or_alias} not in JSON at {os.path(fp)}")
+    raise ValueError(rf"name_or_alias: {name_or_alias} not in JSON at {fp}")
 
 
 def read_material(
@@ -1499,11 +1494,15 @@ def read_material(
     fp: str = None,
     key: str = None,
     parameters: list[str] = None,
+    encoding: str = "utf-8",
 ) -> dict:
-    """Read material parameters from a `pvdeg/data` file or JSON file path.
+    """Read material dictionary and return parameter dictionary in normalized format.
+
+     Read material dictionary from a `pvdeg/data` file or JSON file path and return
+     the parameter dictionary in normalized format.
 
     Parameters
-    -----------
+    ----------
     pvdeg_file: str
         keyword for material json file in `pvdeg/data`. Options:
         >>> "AApermeation", "H2Opermeation", "O2permeation"
@@ -1515,34 +1514,81 @@ def read_material(
         key corresponding to specific material in the file. In the pvdeg files these
         have arbitrary names. Inspect the files or use `display_json` or `search_json`
         to identify the key for desired material.
-    parameters: list[str]
+        parameters: list[str]
         parameters to grab from the file at index key. If none, will grab all items
         at index key. the elements in parameters must match the keys in the json exactly
         or the output value for the specific key/parameter in the retunred dict will be
         `None`.
+    encoding : (str)
+        encoding to use when reading the JSON file, default is "utf-8"
 
     Returns
-    --------
+    -------
     material: dict
-        dictionary of material parameters from the seleted file at the index key.
+        dictionary with normalized structure containing material_file, material_name,
+        and parameters
     """
-    # these live in the `pvdeg/data` folder
     if pvdeg_file:
         try:
             fp = pvdeg_datafiles[pvdeg_file]
         except KeyError:
             raise KeyError(
-                f"{pvdeg_file} does not exist in pvdeg/data. Options are\
-                {pvdeg_datafiles.keys()}"
+                f"{pvdeg_file} is not in pvdeg/data. Options are: "
+                " {pvdeg_datafiles.keys()}"
             )
 
-    with open(fp, "r") as file:
+    with open(fp, "r", encoding=encoding) as file:
         data = json.load(file)
 
-    # take subdict from file
     material_dict = data[key]
+    return material_dict
+
+
+def read_material_property(
+    pvdeg_file: str = None,
+    filepath: str = None,
+    key: str = None,
+    parameters: list[str] = None,
+) -> dict:
+    """Read material parameters from a `pvdeg/data` file or JSON file path.
+
+    Parameters
+    ----------
+    pvdeg_file: str
+        keyword for material json file in `pvdeg/data`. Options:
+        >>> "AApermeation", "H2Opermeation", "O2permeation"
+    filepath: str
+        file path to material parameters json with same schema as material parameters
+        json files in `pvdeg/data`. `pvdeg_file` will override `fp` if both are
+        provided.
+    key: str
+        key corresponding to specific material in the file. In the pvdeg files these
+        have arbitrary names. Inspect the files or use `display_json` or `search_json`
+        to identify the key for desired material.
+
+    Returns
+    -------
+    parameters: dict
+        dictionary of material parameters from the selected file at the index key.
+    """
+    material_dict = read_material(
+        pvdeg_file=pvdeg_file,
+        fp=filepath,
+        key=key,
+    )
 
     if parameters:
-        material_dict = {k: material_dict.get(k, None) for k in parameters}
-
+        material_dict = {
+            k: (
+                material_dict[k]["value"]
+                if k in material_dict and isinstance(material_dict[k], dict)
+                else material_dict[k] if k in material_dict else None
+            )
+            for k in parameters
+        }
+    else:
+        material_dict = {
+            k: v["value"] if isinstance(v, dict) else v
+            for k, v in material_dict.items()
+        }
     return material_dict

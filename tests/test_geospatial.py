@@ -82,9 +82,9 @@ def test_autotemplate():
         func=pvdeg.humidity.module, ds_gids=GEO_WEATHER
     ).compute()
 
-    assert pvdeg.utilities.compare_templates(
-        autotemplate_result, HUMIDITY_TEMPLATE
-    )  # custom function because we cant use equals or identical because of empty like values
+    assert pvdeg.utilities.compare_templates(autotemplate_result, HUMIDITY_TEMPLATE)
+    # custom function because we cant use equals or identical because of empty
+    # like values
 
 
 def test_output_template_unchunked():

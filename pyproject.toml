@@ -10,7 +10,7 @@ authors = [{name = "Pvdeg Python Developers", email = "Michael.Kempe@nrel.gov"}]
 maintainers = [{email = "Silvana.Ovaitt@nrel.gov"}]
 license = {text = "BSD-3"}
 readme = "README.md"
-requires-python = ">=3.9.0"
+requires-python = ">=3.10.0"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Operating System :: OS Independent",
@@ -37,8 +37,9 @@ dependencies = [
     "dask[dataframe]",
     "dask-jobqueue",
     "bokeh",
+    "geopy",
     "h5netcdf",
-    "h5py",
+    "h5py<=3.14.0",
     "jupyterlab",
     "matplotlib",
     "netCDF4",
@@ -73,12 +74,17 @@ docs = [
 test = [
     "pytest",
     "pytest-cov",
+    "nbval",
     "scikit-learn",
+    "NREL-PySAM",
 ]
 books = [
     "jupyter-book",
 ]
 sam = [
+    "NREL-PySAM",
+]
+inspire = [
     "NREL-PySAM==5.1.0",
 ]
 all = [
