@@ -314,7 +314,9 @@ class Scenario:
                     pvdeg_file=material_file, key=materials, parameters=parameters
                 )
             except KeyError:
-                raise ValueError(f"Material '{materials}' not found in {material_file}")
+                raise ValueError(
+                    f"Material '{materials}' not found in {material_file}"  # noqa
+                )
         elif isinstance(materials, dict):
             # Handle multiple material dictionary format
             mat_params = {}
@@ -331,7 +333,9 @@ class Scenario:
                 # returns None if no custom material specified
 
                 if not material_file_layer:
-                    raise ValueError(f"Missing 'material_file' for layer '{layer}'")
+                    raise ValueError(
+                        f"Missing 'material_file' for layer '{layer}'"  # noqa
+                    )
 
                 if material_name:
                     # Use existing material from file
@@ -344,7 +348,7 @@ class Scenario:
                         mat_params[layer] = material_parameters
                     except KeyError:
                         raise ValueError(
-                            f"Material '{material_name}' not found in "
+                            f"Material '{material_name}' not found in "  # noqa
                             f"{material_file_layer}"
                         )
                 elif custom_params is not None:
@@ -449,7 +453,7 @@ class Scenario:
                     )
                 except Exception as e:
                     raise ValueError(
-                        f"Error adding custom material for layer '{layer}': {e}"
+                        f"Error adding custom material for layer '{layer}': {e}"  # noqa
                     )
 
             elif material_file is not None:
@@ -475,11 +479,11 @@ class Scenario:
 
                 except KeyError:
                     raise ValueError(
-                        f'Material "{material_name}" not found in {material_file}'
+                        f'Material "{material_name}" not found in {material_file}'  # noqa
                     )
                 except Exception as e:
                     raise ValueError(
-                        f"Error adding existing material for layer '{layer}': {e}"
+                        f"Error adding existing material for layer '{layer}': {e}"  # noqa
                     )
 
             else:
@@ -1028,7 +1032,9 @@ class Scenario:
     def _ipython_display_(self):
         file_url = "no file provided"
         if self.path:
-            file_url = f"file:///{os.path.abspath(self.path).replace(os.sep, '/')}"
+            file_url = (
+                f"file:///{os.path.abspath(self.path).replace(os.sep, '/')}"  # noqa
+            )
         html_content = f"""
         <div style="border: 1px solid #ddd; border-radius: 5px; padding: 3px; margin-top: 5px;">  # noqa
             <h2>self.name: {self.name}</h2>
