@@ -86,7 +86,7 @@ def arrhenius(
         if Ro is None:
             if "R_0" in parameters:
                 if "value" in parameters["R_0"]:
-                        Ro = parameters["R_0"]["value"]
+                    Ro = parameters["R_0"]["value"]
         if Ea is None:
             if "E_a" in parameters:
                 if "value" in parameters["E_a"]:
@@ -106,7 +106,7 @@ def arrhenius(
     if Ro is None:
         Ro = 1
         print("R_0 not provided, defaulting to 1.")
-    if Ea is None: 
+    if Ea is None:
         Ea = 0
     if n is None:
         n = 0
@@ -129,7 +129,7 @@ def arrhenius(
     if n != 0 and RH is None:
         print(n)
         if "RH_surface_outside" in weather_df:
-            RH = weather_df["RH_surface_outside"]        
+            RH = weather_df["RH_surface_outside"]
         elif (
             "relative_humidity" in weather_df
             and "temp_air" in weather_df
