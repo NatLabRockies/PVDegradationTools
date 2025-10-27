@@ -496,6 +496,7 @@ def spectrally_resolved_irradiance(weather_df: pd.DataFrame, meta: dict, wavelen
                                    axis_azimuth=None,
                                    custom_albedo_summer: str | dict = None,
                                    custom_albedo_winter: str | dict = None,
+                                   custom_albedo_dict: dict = None,
                                    min_wavelength=280, 
                                    max_wavelength=4000,
                                    **kwargs_irradiance: dict) -> pd.DataFrame:
@@ -555,24 +556,41 @@ def spectrally_resolved_irradiance(weather_df: pd.DataFrame, meta: dict, wavelen
     #     for alb_name in custom_albedo_df.columns:
     #         if alb_name in myTMY3.columns:
     #             myTMY3[alb_name] = custom_albedo_df[alb_name]
-    custom_albedo_dict = {}
-    if isinstance(custom_albedo_summer, str):
-        custom_albedo_dict['Summer'] = read_material('Albedo', key=custom_albedo_summer)
-    elif isinstance(custom_albedo_summer, dict):
-        custom_albedo_dict['Summer'] = custom_albedo_summer
-    else:
-        custom_albedo_dict['Summer'] = None
-    if isinstance(custom_albedo_winter, str):
-        custom_albedo_dict['Winter'] = read_material('Albedo', key=custom_albedo_winter)
-    elif isinstance(custom_albedo_winter, dict):
-        custom_albedo_dict['Winter'] = custom_albedo_winter
-    else:
-        custom_albedo_dict['Winter'] = None
+    
+    if custom_albedo_dict is not None:
+        for key, value in custom_albedo_dict.items():
+            if isinstance(value, str):
+                custom_albedo_dict[key] = read_material('Albedo', key=value)
+            elif isinstance(custom_albedo_dict[key], dict):
+                custom_albedo_dict[key] = custom_albedo_dict[key]
+            else:
+                custom_albedo_dict[key] = None
+    # else:
+    #     custom_albedo_dict = {}
+    #     custom_albedo_dict['Summer'] = read_material('Albedo', key='A006')
+        # custom_albedo_dict['Winter'] = read_material('Albedo', key='A008')
+        #custom_albedo_dict['Summer']['HourOfYear'] = 150
+        # custom_albedo_dict['Snow'] = read_material('Albedo', key='A002') #defaults?
+    
+
+    # custom_albedo_dict = {}
+    # if isinstance(custom_albedo_summer, str):
+    #     custom_albedo_dict['Summer'] = read_material('Albedo', key=custom_albedo_summer)
+    # elif isinstance(custom_albedo_summer, dict):
+    #     custom_albedo_dict['Summer'] = custom_albedo_summer
+    # else:
+    #     custom_albedo_dict['Summer'] = None
+    # if isinstance(custom_albedo_winter, str):
+    #     custom_albedo_dict['Winter'] = read_material('Albedo', key=custom_albedo_winter)
+    # elif isinstance(custom_albedo_winter, dict):
+    #     custom_albedo_dict['Winter'] = custom_albedo_winter
+    # else:
+    #     custom_albedo_dict['Winter'] = None
 
     meta = meta
     print(myTMY3)
     deltastyle = 'SAM'  # 
-
+    print(module_mount)
     # Variables
     if (module_mount == 'fixed'):
         # TODO: change for handling HSAT tracking passed or requested
@@ -598,7 +616,7 @@ def spectrally_resolved_irradiance(weather_df: pd.DataFrame, meta: dict, wavelen
         tilt = tilt                 # PV tilt (deg)
         sazm = azimuth                  # PV Azimuth(deg) or tracker axis direction
         tracking = False
-    elif (module_mount == '1_axis'):
+    elif (module_mount == 'single_axis'):
         
         if axis_azimuth is None:  # Sets the default orientation to north-south.
             try:

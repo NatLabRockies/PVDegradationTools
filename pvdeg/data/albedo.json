@@ -83,6 +83,7 @@
     "comments": "Data is emperically extrapolated from 280 nm to 300 nm. Data extracted from Turner et al. Figure 1 as a reference to Diffey et al Grass. Diffey B., Green A.T., Loftus M.J., Johnson G.J., Lee P.S. A Portable Instrument for Measuring Ground Reflectance in the Ultraviolet. Photochem. Photobiol. 1995;61:68-70. doi: 10.1111/j.1751-1097.1995.tb09244.x.",
     "wavelength_minimum": 299.97562,
     "wavelength_maximum": 400.2195,
+    "DayOfYear": 1,
     "wavelength": "280, 299.97562, 308.4634, 313.87805, 319.10974, 324.34146, 329.5366, 334.84146, 340.18292, 345.41464, 349.73172, 350.60974, 353.2073, 355.84146, 358, 360.92682, 364.2927, 366.34146, 370.58536, 375.37805, 380.35367, 385.76828, 391.2195, 396.59756, 400.2195",
     "albedo": "1.5, 1.9647202, 2.1532848, 2.256691, 2.3600974, 2.4635036, 2.4939172, 2.481752, 2.4878345, 2.4695864, 2.481752, 2.4878345, 2.5364964, 2.6034064, 2.6520681, 2.6946473, 2.7858882, 2.8223844, 2.919708, 3.0048661, 3.1021898, 3.2116787, 3.3150852, 3.4124088, 3.5036497"
   },
@@ -111,6 +112,7 @@
     "comments": "Data is emperically extrapolated from 280 nm to 299.8 nm. Data extracted from Turner et al. Figure 1 as a reference to McKenzie et al Grass. McKenzie R.L., Kotkamp M., Ireland W. Upwelling UV Spectral Irradiances and Surface Albedo Measurements at Lauder, New Zealand. Geophys. Res. Lett. 1996;23:1757-1760. doi: 10.1029/96GL01668.",
     "wavelength_minimum": 299.7561,
     "wavelength_maximum": 400.2195,
+    "DayOfYear": 200,
     "wavelength": "280, 299.7561, 310.91464, 318.26828, 327.04877, 339.52438, 348.19513, 356.86584, 362.2805, 369.34146, 376.40244, 381.4878, 386.82925, 391.95123, 396.15854, 398.93903, 400.2195",
     "albedo": "1, 1.082725, 1.1435523, 1.1557177, 1.1982968, 1.283455, 1.2773722, 1.3199513, 1.3564477, 1.3868613, 1.4294404, 1.5085158, 1.6301703, 1.7457421, 1.8613138, 1.9586375, 2.013382"
   },
