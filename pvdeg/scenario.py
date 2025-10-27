@@ -156,7 +156,7 @@ class Scenario:
     def addLocation(
         self,
         lat_long: tuple = None,
-        weather_db: str = "PSM3",
+        weather_db: str = "PSM4",
     ):
         """Add a location to the scenario using a latitude-longitude pair.
 
@@ -171,7 +171,7 @@ class Scenario:
             >>> (24.7136, 46.6753) #Riyadh, Saudi Arabia
         weather_db : str
             source of data for provided location.
-            - For NSRDB data use `weather_db = 'PSM3'`
+            - For NSRDB data use `weather_db = 'PSM4'`
             - For PVGIS data use `weather_db = 'PVGIS'`
         """
         if isinstance(lat_long, list):  # is a list when reading from json
@@ -191,10 +191,10 @@ class Scenario:
 
         weather_arg = {}
 
-        if weather_db == "PSM3":
+        if weather_db == "PSM4":
             weather_arg = {"names": "tmy", "attributes": [], "map_variables": True}
 
-        if self.email is not None and self.api_key is not None and weather_db == "PSM3":
+        if self.email is not None and self.api_key is not None and weather_db == "PSM4":
             credentials = {
                 "api_key": self.api_key,
                 "email": self.email,
@@ -207,7 +207,7 @@ class Scenario:
                 f"""
                 email : {self.email} \n api-key : {self.api_key}
                 Must provide an email and api key during class initialization
-                when using NDSRDB : {weather_db} == 'PSM3'
+                when using NDSRDB : {weather_db} == 'PSM4'
                 """
             )
 
@@ -216,7 +216,7 @@ class Scenario:
                 weather_db, id=weather_id, **weather_arg
             )
 
-            if weather_db == "PSM3":
+            if weather_db == "PSM4":
                 gid = point_meta["Location ID"]
                 self.gids = [int(gid)]
 
@@ -280,7 +280,9 @@ class Scenario:
             Options : ``sol_position``, ``tilt``, ``azimuth``, ``sky_model``
         """
         try:
-            mat_params = utilities.read_material(pvdeg_file=material_file, key=material)
+            mat_params = utilities.read_material_property(
+                pvdeg_file=material_file, key=material
+            )
 
             old_modules = [mod["module_name"] for mod in self.modules]
             if module_name in old_modules:
