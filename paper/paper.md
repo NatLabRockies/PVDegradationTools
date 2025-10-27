@@ -7,7 +7,7 @@ tags:
   - renewable energy
   - degradation mechanisms
 authors:
-  - name: Rajiv Daxini 
+  - name: Rajiv Daxini
     orcid: 0000-0003-1993-9408
     affiliation: 1
   - name: Silvana Ovaitt
@@ -19,7 +19,7 @@ authors:
   - name: Tobin Ford
     orcid: 0009-0000-7428-5625
     affiliation: 1
-  - name: Michael Kempe 
+  - name: Michael Kempe
     orcid: 0000-0003-3312-0482
     affiliation: 1
 affiliations:
@@ -31,24 +31,21 @@ bibliography: paper.bib
 
 # Summary
 
-[comment]: Brief Intro
 PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation, developed at the National Renewable Energy Laboratory (NREL) and supported by the Durable Module Materials (DuraMAT) consortium. It provides modular functions and workflows for simulating degradation mechanisms (e.g., LETID, hydrolysis, UV exposure) using weather data from the National Solar Radiation Database (NSRDB) and the Photovoltaic Geographical Information System (PVGIS). By integrating Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables field-relevant predictions and uncertainty quantification of module reliability and lifetime.
 
 # Statement of Need
 
-Reliable lifetime prediction requires translating laboratory stress data to field conditions. Existing tools such as PVLib [@pvlib] and SAM [@SAM] simulate system performance but not degradation. PVDeg fills this gap by providing modular degradation models, material databases, and uncertainty quantification workflows. PVDeg supports both research and industry use by automating degradation modeling, enabling reproducible studies of module lifetime nad performance worldwide. It also supports ongoing standardization work, including contributions to IEC TS 63126 [@IEC63126]. PVDeg is an important component of a growing ecosystem of open-source tools for solar energy [@Holmgren2018]. 
+Reliable lifetime prediction requires translating laboratory stress data to field conditions. Existing tools such as PVLib [@pvlib] and SAM [@SAM] simulate system performance but not degradation. PVDeg fills this gap by providing modular degradation models, material databases, and uncertainty quantification workflows. PVDeg supports both research and industry use by automating degradation modeling, enabling reproducible studies of module lifetime nad performance worldwide. It also supports ongoing standardization work, including contributions to IEC TS 63126 [@IEC63126]. PVDeg is an important component of a growing ecosystem of open-source tools for solar energy [@Holmgren2018].
 
 ![Example of geospatial degradation modeling in PVDeg: (a) calculated standoff distances for IEC TS 63126 across the continental U.S.\label{fig:visualization}](IECTS_63126.PNG){ width=80% }
 
-[comment]: Introducing the 3 parts: classes/functions, the library, and the geospatial
-
-# Software Functionality 
+# Software Functionality
 
 ## Core Functions
-The core API provides dedicated functions for calcualting physical degraation mechanisms, accessing material properties and environmental stressors. Examples include `pvdeg.humidity.module()` for moisture ingress modeling [@picket2013hydrolysis], and `pvdeg.letid.calc_letid_outdoors()` for modeling light and elevated temperature induced degradation (LETID) [@karas2022letidstudy; @repins2023longterm].  These functions rely on standardized environmental drivers such as temperature, irradiance, and humidity, and can be chained to produce lifetime predictions under realistic field conditions. 
+The core API provides dedicated functions for calcualting physical degraation mechanisms, accessing material properties and environmental stressors. Examples include `pvdeg.humidity.module()` for moisture ingress modeling [@picket2013hydrolysis], and `pvdeg.letid.calc_letid_outdoors()` for modeling light and elevated temperature induced degradation (LETID) [@karas2022letidstudy; @repins2023longterm].  These functions rely on standardized environmental drivers such as temperature, irradiance, and humidity, and can be chained to produce lifetime predictions under realistic field conditions.
 
 ## Scenario Class
-To simplify complex workflows, PVeg wraps its core functions into a ``Scenario`` class that defines locations, module configurations, and degradation mechanisms. This enables user-friendly workflows, simplifying the setup and execution of complex multi-parameter degradation studies. This layer provides an intuitive interface for multiple analysis of different degrdation,climates, nad conigurations for comarative analysis. Tutorials in Jupyter notebooks and hosted examples on *Read the Docs* demonstrate full end-to-end analyses.  
+To simplify complex workflows, PVeg wraps its core functions into a ``Scenario`` class that defines locations, module configurations, and degradation mechanisms. This enables user-friendly workflows, simplifying the setup and execution of complex multi-parameter degradation studies. This layer provides an intuitive interface for multiple analysis of different degrdation,climates, nad conigurations for comarative analysis. Tutorials in Jupyter notebooks and hosted examples on *Read the Docs* demonstrate full end-to-end analyses.
 
 ## Geospatial Analysis
 The geospatial analysis layer enables large-scale spatial analyses by automatically distributing degradation calculations across geographic regions using parallel processing and advanced data structures. It integrates environmental data from NSRDB and PVGIS and automates sampling across latitude-longitude grids to produce degradation maps, such as standoff distance distribution used in IEC TS 63126 compliance studies [@IEC63126]. The geospatial layer includes specialized visualization functions for mapping results and supports both uniform and stochastic spatial sampling strategies to balance computational efficiency with geographic coverage.
@@ -85,7 +82,7 @@ Future work includes expanding the degradation-parameter database and adding vis
 
 We acknowledge all code, documentation, and discussion contributors to the PVDeg project.
 
-This work was authored by the National Renewable Energy Laboratory, operated by Alliance for Sustainable Energy, LLC, for the U.S. Department of Energy (DOE) under Contract No. DE-AC36-08GO28308. Funding provided as part of the Durable Modules Materials Consortium (DuraMAT), an Energy Materials Network Consortium funded by the U S Department of Energy, Office of Energy Efficiency and Renewable Energy, Solar Energy Technologies Office Agreement Number 32509. The research was performed using computational resources sponsored by the Department of Energy's Office of Energy Efficiency and Renewable Energy and located at the National Renewable Energy Laboratory. The views expressed in the article do not necessarily represent the views of the DOE or the U.S. Government. The U.S. Government retains and the publisher, by accepting the article for publication, acknowledges that the U.S. Government retains a nonexclusive, paid-up, irrevocable, worldwide license to publish or reproduce the published form of this work, or allow others to do so, for U.S. Government purposes. 
+This work was authored by the National Renewable Energy Laboratory, operated by Alliance for Sustainable Energy, LLC, for the U.S. Department of Energy (DOE) under Contract No. DE-AC36-08GO28308. Funding provided as part of the Durable Modules Materials Consortium (DuraMAT), an Energy Materials Network Consortium funded by the U S Department of Energy, Office of Energy Efficiency and Renewable Energy, Solar Energy Technologies Office Agreement Number 32509. The research was performed using computational resources sponsored by the Department of Energy's Office of Energy Efficiency and Renewable Energy and located at the National Renewable Energy Laboratory. The views expressed in the article do not necessarily represent the views of the DOE or the U.S. Government. The U.S. Government retains and the publisher, by accepting the article for publication, acknowledges that the U.S. Government retains a nonexclusive, paid-up, irrevocable, worldwide license to publish or reproduce the published form of this work, or allow others to do so, for U.S. Government purposes.
 
 
 # References
