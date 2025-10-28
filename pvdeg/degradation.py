@@ -11,7 +11,7 @@ from . import (
     decorators,
 )
 
-# TODO: Clean up all those functions and add gaps functionality
+R_GAS = 0.00831446261815324  # Gas Constant in [kJ/mol*K]
 
 
 def _extract_param(parameters, key, default=None):
@@ -187,14 +187,10 @@ def arrhenius(
         if p == 0:
             if Ea != 0:
                 if n == 0:
-                    degradation = Ro * np.exp(
-                        -(Ea / (0.00831446261815324 * (temperature + 273.15)))
-                    )
+                    degradation = Ro * np.exp(-(Ea / (R_GAS * (temperature + 273.15))))
                 else:
                     degradation = (
-                        Ro
-                        * np.exp(-(Ea / (0.00831446261815324 * (temperature + 273.15))))
-                        * (RH**n)
+                        Ro * np.exp(-(Ea / (R_GAS * (temperature + 273.15)))) * (RH**n)
                     )
             else:
                 if n == 0:
@@ -213,13 +209,13 @@ def arrhenius(
                     degradation = (
                         degradation
                         * Ro
-                        * np.exp(-(Ea / (0.00831446261815324 * (temperature + 273.15))))
+                        * np.exp(-(Ea / (R_GAS * (temperature + 273.15))))
                     )
                 else:
                     degradation = (
                         degradation
                         * Ro
-                        * np.exp(-(Ea / (0.00831446261815324 * (temperature + 273.15))))
+                        * np.exp(-(Ea / (R_GAS * (temperature + 273.15))))
                         * (RH**n)
                     )
             else:
@@ -229,25 +225,19 @@ def arrhenius(
                     degradation = degradation * Ro * (RH**n)
     elif Ea != 0:
         if n == 0 and p == 0:
-            degradation = Ro * np.exp(
-                -(Ea / (0.00831446261815324 * (temperature + 273.15)))
-            )
+            degradation = Ro * np.exp(-(Ea / (R_GAS * (temperature + 273.15))))
         elif n == 0 and p != 0:
             degradation = (
-                Ro
-                * np.exp(-(Ea / (0.00831446261815324 * (temperature + 273.15))))
-                * (irradiance**p)
+                Ro * np.exp(-(Ea / (R_GAS * (temperature + 273.15)))) * (irradiance**p)
             )
         elif n != 0 and p == 0:
             degradation = (
-                Ro
-                * np.exp(-(Ea / (0.00831446261815324 * (temperature + 273.15))))
-                * (RH**n)
+                Ro * np.exp(-(Ea / (R_GAS * (temperature + 273.15)))) * (RH**n)
             )
         else:
             degradation = (
                 Ro
-                * np.exp(-(Ea / (0.00831446261815324 * (temperature + 273.15))))
+                * np.exp(-(Ea / (R_GAS * (temperature + 273.15))))
                 * (RH**n)
                 * (irradiance**p)
             )
@@ -604,9 +594,7 @@ def arrhenius_deg(
 
     # rate of degradation of the environment
     arrheniusDenominator = (
-        (poa_global**p)
-        * (rh_outdoor**n)
-        * np.exp(-Ea / (0.00831446261815324 * (temp + 273.15)))
+        (poa_global**p) * (rh_outdoor**n) * np.exp(-Ea / (R_GAS * (temp + 273.15)))
     )
 
     AvgOfDenominator = arrheniusDenominator.mean()
@@ -615,7 +603,7 @@ def arrhenius_deg(
     arrheniusNumerator = (
         (I_chamber**p)
         * (rh_chamber**n)
-        * np.exp(-Ea / (0.00831446261815324 * (temp_chamber + 273.15)))
+        * np.exp(-Ea / (R_GAS * (temp_chamber + 273.15)))
     )
 
     accelerationFactor = arrheniusNumerator / AvgOfDenominator
@@ -643,9 +631,9 @@ def _T_eq_arrhenius(temp, Ea):
 
     """
 
-    summationFrame = np.exp(-(Ea / (0.00831446261815324 * (temp + 273.15))))
+    summationFrame = np.exp(-(Ea / (R_GAS * (temp + 273.15))))
     sumForTeq = summationFrame.sum(axis=0, skipna=True)
-    Teq = -((Ea) / (0.00831446261815324 * np.log(sumForTeq / len(temp))))
+    Teq = -((Ea) / (R_GAS * np.log(sumForTeq / len(temp))))
     # Convert to celsius
     Teq = Teq - 273.15
 
@@ -687,13 +675,10 @@ def _RH_wa_arrhenius(rh_outdoor, temp, Ea, Teq=None, n=1):
     if Teq is None:
         Teq = _T_eq_arrhenius(temp, Ea)
 
-    summationFrame = (rh_outdoor**n) * np.exp(
-        -(Ea / (0.00831446261815324 * (temp + 273.15)))
-    )
+    summationFrame = (rh_outdoor**n) * np.exp(-(Ea / (R_GAS * (temp + 273.15))))
     sumForRHwa = summationFrame.sum(axis=0, skipna=True)
     RHwa = (
-        sumForRHwa
-        / (len(summationFrame) * np.exp(-(Ea / (0.00831446261815324 * (Teq + 273.15)))))
+        sumForRHwa / (len(summationFrame) * np.exp(-(Ea / (R_GAS * (Teq + 273.15)))))
     ) ** (1 / n)
 
     return RHwa
@@ -817,14 +802,12 @@ def IwaArrhenius(
     numerator = (
         poa_global ** (p)
         * rh_outdoor ** (n)
-        * np.exp(-(Ea / (0.00831446261815324 * (temp + 273.15))))
+        * np.exp(-(Ea / (R_GAS * (temp + 273.15))))
     )
     sumOfNumerator = numerator.sum(axis=0, skipna=True)
 
     denominator = (
-        (len(numerator))
-        * ((RHwa) ** n)
-        * (np.exp(-(Ea / (0.00831446261815324 * (Teq + 273.15)))))
+        (len(numerator)) * ((RHwa) ** n) * (np.exp(-(Ea / (R_GAS * (Teq + 273.15)))))
     )
 
     IWa = (sumOfNumerator / denominator) ** (1 / p)
@@ -890,9 +873,6 @@ def degradation_spectral(
     # temp_module = df['temp_module']
     # rh_module = df['rh_module']
 
-    # Constants
-    R = 0.008314459848  # Gas Constant in [kJ/mol*K]
-
     wav_bin = list(np.diff(wavelengths))
     wav_bin.append(wav_bin[-1])  # Adding a bin for the last wavelength
 
@@ -911,7 +891,7 @@ def degradation_spectral(
     data = pd.DataFrame(index=spectra.index)
     data["G_integral"] = irr.sum(axis=1)
 
-    EApR = -Ea / R
+    EApR = -Ea / R_GAS
     C4 = np.exp(EApR / temp)
 
     RHn = rh**n
