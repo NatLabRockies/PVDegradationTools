@@ -14,17 +14,26 @@ from . import (
 # TODO: Clean up all those functions and add gaps functionality
 
 
+def _extract_param(parameters, key, default=None):
+    """Helper to extract parameter value from nested dict."""
+    if parameters is not None and key in parameters:
+        value = parameters[key].get("value", None)
+        if value is not None:
+            return value
+    return default
+
+
 def arrhenius(
     weather_df=None,
     temperature=None,
     RH=None,
     irradiance=None,
     elapsed_time=None,
-    Ro=None,
-    Ea=None,
-    p=None,
-    n=None,
-    C2=None,
+    Ro=1,
+    Ea=0,
+    p=0,
+    n=0,
+    C2=0,
     parameters=None,
 ):
     """
@@ -82,38 +91,13 @@ def arrhenius(
         Total degradation with units as determined by Ro.
     """
 
+    # override defaults with parameters if provided
     if parameters is not None:
-        if Ro is None:
-            if "R_0" in parameters:
-                if "value" in parameters["R_0"]:
-                    Ro = parameters["R_0"]["value"]
-        if Ea is None:
-            if "E_a" in parameters:
-                if "value" in parameters["E_a"]:
-                    Ea = parameters["E_a"]["value"]
-        if n is None:
-            if "n" in parameters:
-                if "value" in parameters["n"]:
-                    n = parameters["n"]["value"]
-        if p is None:
-            if "p" in parameters:
-                if "value" in parameters["p"]:
-                    p = parameters["p"]["value"]
-        if C2 is None:
-            if "C_2" in parameters:
-                if "value" in parameters["C_2"]:
-                    C2 = parameters["C_2"]["value"]
-    if Ro is None:
-        Ro = 1
-        print("R_0 not provided, defaulting to 1.")
-    if Ea is None:
-        Ea = 0
-    if n is None:
-        n = 0
-    if p is None:
-        p = 0
-    if C2 is None:
-        C2 = 0
+        Ro = _extract_param(parameters, "R_0", Ro)
+        Ea = _extract_param(parameters, "E_a", Ea)
+        n = _extract_param(parameters, "n", n)
+        p = _extract_param(parameters, "p", p)
+        C2 = _extract_param(parameters, "C_2", C2)
 
     if temperature is None and Ea != 0:
         if weather_df is not None:
@@ -852,7 +836,7 @@ def degradation_spectral(
     spectra: pd.Series,
     rh: pd.Series,
     temp: pd.Series,
-    wavelengths: Union[int, np.ndarray[float]],
+    wavelengths: Union[int, np.ndarray],
     time: pd.Series,
     Ea: float = 0.0,
     n: float = 0.0,
@@ -912,19 +896,15 @@ def degradation_spectral(
     wav_bin = list(np.diff(wavelengths))
     wav_bin.append(wav_bin[-1])  # Adding a bin for the last wavelength
 
-    # Integral over Wavelength
     try:
         irr = pd.DataFrame(spectra.tolist(), index=spectra.index)
         irr.columns = wavelengths
     except Exception:
-        # TODO: Fix this except it works on some cases, veto it by cases
         print("Removing brackets from spectral irradiance data")
-        # irr = data['spectra'].str.strip('[
-        # ]').str.split(',', expand=True).astype(float)
         irr = spectra.str.strip("[]").str.split(",", expand=True).astype(float)
         irr.columns = wavelengths
 
-    sensitivitywavelengths = np.exp(-C2 * wavelengths)
+    sensitivitywavelengths = np.exp(-C2 * np.array(wavelengths))
     irr = irr * sensitivitywavelengths
     irr *= np.array(wav_bin)
     irr = irr**p
@@ -944,37 +924,28 @@ def degradation_spectral(
     return degradation
 
 
-# change it to take pd.DataFrame? instead of np.ndarray
 def vecArrhenius(
     poa_global: np.ndarray, module_temp: np.ndarray, ea: float, x: float, lnr0: float
 ) -> float:
     """
-    Calculates degradation using :math:`R_D = R_0 * I^X * e^{\\frac{-Ea}{kT}}`
-
+    Calculates degradation using :math:`R_D = R_0 * I^X * e^{-Ea/(kT)}`
     Parameters
     ----------
     poa_global : numpy.ndarray
         Plane of array irradiance [W/m^2]
-
     module_temp : numpy.ndarray
         Cell temperature [C].
-
     ea : float
         Activation energy [kJ/mol]
-
     x : float
         Irradiance relation [unitless]
-
-    lnR0 : float
+    lnr0 : float
         prefactor [ln(%/h)]
-
     Returns
     ----------
     degradation : float
         Degradation Rate [%/h]
-
     """
-
     mask = poa_global >= 25
     poa_global = poa_global[mask]
     module_temp = module_temp[mask]
@@ -984,9 +955,7 @@ def vecArrhenius(
     poa_global_scaled = poa_global / 1000
 
     degradation = 0
-    for entry in range(
-        len(poa_global_scaled)
-    ):  # list comprehension not supported by numba
+    for entry in range(len(poa_global_scaled)):
         degradation += (
             R0
             * np.exp(-ea_scaled / (273.15 + module_temp[entry]))
