@@ -31,7 +31,7 @@ bibliography: paper.bib
 
 # Summary
 
-PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation, developed at the National Renewable Energy Laboratory (NREL) and supported by the Durable Module Materials (DuraMAT) consortium. It provides modular functions and workflows for simulating degradation mechanisms (e.g., LETID, hydrolysis, UV exposure) using weather data from the National Solar Radiation Database (NSRDB) and the Photovoltaic Geographical Information System (PVGIS). By integrating Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables field-relevant predictions and uncertainty quantification of module reliability and lifetime.
+PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation, developed at the National Renewable Energy Laboratory (NREL) and supported by the Durable Module Materials (DuraMAT) consortium. It provides modular functions and workflows for simulating degradation mechanisms (e.g., LeTID, hydrolysis, UV exposure) using weather data from the National Solar Radiation Database (NSRDB) and the Photovoltaic Geographical Information System (PVGIS). By integrating Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables field-relevant predictions and uncertainty quantification of module reliability and lifetime.
 
 # Statement of Need
 
@@ -42,7 +42,7 @@ Accurate modeling of PV degradation is essential for predicting system reliabili
 # Software Functionality
 
 ## Core Functions
-The core API provides dedicated functions for calcualting physical degraation mechanisms, accessing material properties and environmental stressors. Examples include `pvdeg.humidity.module()` for moisture ingress modeling [@picket2013hydrolysis], and `pvdeg.letid.calc_letid_outdoors()` for modeling light and elevated temperature induced degradation (LETID) [@karas2022letidstudy; @repins2023longterm].  These functions rely on standardized environmental drivers such as temperature, irradiance, and humidity, and can be chained to produce lifetime predictions under realistic field conditions.
+The core API provides dedicated functions for calcualting physical degraation mechanisms, accessing material properties and environmental stressors. Examples include `pvdeg.humidity.module()` for moisture ingress modeling [@picket2013hydrolysis], and `pvdeg.letid.calc_letid_outdoors()` for modeling light and elevated temperature induced degradation (LeTID) [@karas2022letidstudy; @repins2023longterm].  These functions rely on standardized environmental drivers such as temperature, irradiance, and humidity, and can be chained to produce lifetime predictions under realistic field conditions.
 
 ## Scenario Class
 To simplify complex workflows, PVeg wraps its core functions into a ``Scenario`` class that defines locations, module configurations, and degradation mechanisms. This enables user-friendly workflows, simplifying the setup and execution of complex multi-parameter degradation studies. This layer provides an intuitive interface for multiple analysis of different degrdation,climates, nad conigurations for comarative analysis. Tutorials in Jupyter notebooks and hosted examples on *Read the Docs* demonstrate full end-to-end analyses.
@@ -65,7 +65,7 @@ The tutorials and tools component of PVDeg consists of a comprehensive suite of 
 
 Since its first release as PV Degradation Tools [@Holsapple2020pvdegtools], PVDeg has been adopted in multiple studies across the PV reliability community:
 * Thermal Stability and IEC TS 63126 Compliance: Used to calculate effective standoff distances and generate public maps supporting the IEC TS 63126 standard [@IEC63126].
-* Light and Elevated Temperature Induced Degradation (LETID): Integrated into the international interlaboratory comparison study of LETID effects in crystalline-silicon modules [@karas2022letidstudy] and follow-up analyses of field-aged arrays [@repins2023longterm; @karas2024letid].
+* Light and Elevated Temperature Induced Degradation (LeTID): Integrated into the international interlaboratory comparison study of LeTID effects in crystalline-silicon modules [@karas2022letidstudy] and follow-up analyses of field-aged arrays [@repins2023longterm; @karas2024letid].
 * Geospatial Performance Modeling: Coupled with GeoGridFusion [@ford2025geogridfusion] to streamline weather-data storage and spatial queries for large-scale degradation simulations.
 * Agrivoltaic and System-Level Modeling: Combined with PySAM [@SAM] to assess degradation-driven yield losses and ground-irradiance patterns in dual-use agrivoltaic systems. [@OvaittPuertoRico2023]
 * Material-Property Parameterization: Leveraged in studies of UV-induced polymer degradation [@kempe2023uvstress] and moisture-related failures in encapsulants and backsheets [@coyle2011cigs].
