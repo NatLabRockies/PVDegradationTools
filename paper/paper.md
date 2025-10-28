@@ -35,7 +35,7 @@ PVDeg is an open-source Python package for modeling photovoltaic (PV) degradatio
 
 # Statement of Need
 
-Reliable lifetime prediction requires translating laboratory stress data to field conditions. Existing tools such as PVLib [@pvlib] and SAM [@SAM] simulate system performance but not degradation. PVDeg fills this gap by providing modular degradation models, material databases, and uncertainty quantification workflows. PVDeg supports both research and industry use by automating degradation modeling, enabling reproducible studies of module lifetime nad performance worldwide. It also supports ongoing standardization work, including contributions to IEC TS 63126 [@IEC63126]. PVDeg is an important component of a growing ecosystem of open-source tools for solar energy [@Holmgren2018].
+Accurate modeling of PV degradation is essential for predicting system reliability, optimizing maintenance strategies, and informing investment decisions in solar energy deployment. Existing PV modeling tools such as pvlib-python [@pvlib] and SAM [@SAM] are able to simulate system energy yield, but not degradation. PVDeg fills this gap by providing modular degradation models, material databases, and uncertainty quantification workflows. PVDeg supports both research and industry use by automating degradation modeling, enabling reproducible studies of module lifetime nad performance worldwide. It also supports ongoing standardization work, including contributions to IEC TS 63126 [@IEC63126]. PVDeg is an important component of a growing ecosystem of open-source tools for solar energy [@Holmgren2018].
 
 ![Example of geospatial degradation modeling in PVDeg: (a) calculated standoff distances for IEC TS 63126 across the continental U.S.\label{fig:visualization}](IECTS_63126.PNG){ width=80% }
 
@@ -78,7 +78,7 @@ PVDeg is hosted on *Github* and *PyPi*, licensed under the BSD 3-Clause license 
 
 Version 0.6.1 [@springer2025pvdegtools] represents the latest stable release, incorporating the geospatial and Monte Carlo frameworks.
 
-Future work includes expanding the degradation-parameter database and adding visualization dashboards for uncertainty results.
+Future work includes expanding the degradation parameter database and adding visualization dashboards for uncertainty results.
 
 
 # Acknowledgements
