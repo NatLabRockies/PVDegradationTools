@@ -9,7 +9,7 @@ import os
 import re
 from datetime import datetime as dt
 from datetime import date
-import bifacial_radiance as br
+
 import numpy as np
 import pandas as pd
 from itertools import product
@@ -494,6 +494,7 @@ def spectrally_resolved_irradiance(weather_df: pd.DataFrame, meta: dict, wavelen
                                    azimuth=None,
                                    axis_tilt=None,
                                    axis_azimuth=None,
+                                   albedo=None,
                                    custom_albedo_summer: str | dict = None,
                                    custom_albedo_winter: str | dict = None,
                                    custom_albedo_dict: dict = None,
@@ -520,7 +521,11 @@ def spectrally_resolved_irradiance(weather_df: pd.DataFrame, meta: dict, wavelen
     -------
     spectral_irradiance : pd.DataFrame
         Spectrally resolved irradiance values.
+        
     """
+
+    import bifacial_radiance as br
+
     if testfolder is not None:
         if not os.path.exists(testfolder):
             os.makedirs(testfolder)
@@ -544,12 +549,14 @@ def spectrally_resolved_irradiance(weather_df: pd.DataFrame, meta: dict, wavelen
         cwd = os.getcwd()
         alb, dni, dhi, ghi = demo.generate_spectra(ground_material='Grass', min_wavelength=min_wavelength, max_wavelength=max_wavelength)
         os.chdir(cwd)
+        spectra_folder = 'spectra'
+        print("Created new spectra folder: ", spectra_folder)
     else: 
         print("Using existing spectra folder: ", spectra_folder)
 
     location_name = meta['State']+ '_' +  meta['City']
     
-    demo.generate_spectral_tmys(wavelengths=wavelengths, source = "SAM", spectra_folder=r'spectra', location_name=location_name)
+    demo.generate_spectral_tmys(wavelengths=wavelengths, source = "SAM", spectra_folder=spectra_folder, location_name=location_name)
     #myTMY3 = weather_df
     # if custom_albedo_df is not None:
     #     # If a custom albedo DataFrame is provided, use it to set the albedo: 
@@ -641,8 +648,16 @@ def spectrally_resolved_irradiance(weather_df: pd.DataFrame, meta: dict, wavelen
             limit_angle = 50
     else:
         raise NotImplementedError(f"The input module_mount '{module_mount}' is not implemented")
+    
+    if 'Alb' in myTMY3.columns:
+        alb_input = None
+    else:
+        if albedo is not None:
+            alb_input = albedo        # ground albedo
+        else:
+            alb_input = 0.2 #Default?
 
-    albedo = 0.62               # ground albedo
+    
     clearance_height=0.4
     pitch = 1.5                   # row to row spacing in normalized panel lengths. 
     rowType = "interior"        # RowType(first interior last single)
@@ -676,7 +691,7 @@ def spectrally_resolved_irradiance(weather_df: pd.DataFrame, meta: dict, wavelen
             tilt=tilt, sazm=sazm, pitch=pitch, clearance_height=clearance_height, 
             rowType=rowType, transFactor=transFactor, sensorsy=sensorsy, 
             PVfrontSurface=PVfrontSurface, PVbackSurface=PVbackSurface, 
-            albedo=albedo, tracking=tracking, backtrack=backtrack, 
+            albedo=alb_input, tracking=tracking, backtrack=backtrack, 
             limit_angle=limit_angle, deltastyle=deltastyle)
     composite_data['RH'] = weather_df['relative_humidity']
     return composite_data
