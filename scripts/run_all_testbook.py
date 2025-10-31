@@ -1,3 +1,8 @@
+"""
+Run checks on HPC notebooks. Also contains monkey patch logic for GH actions without
+without needing to access HPC.
+"""
+
 import sys
 from testbook import testbook
 

@@ -44,5 +44,5 @@ jobs:
             fi
             FULL_PATH="$NOTEBOOK_DIR/$NOTEBOOK_NAME"
             echo "Testing $FULL_PATH with testbook..."
-            python scripts/notebooks_testbook.py "$FULL_PATH"
+            python scripts/run_all_testbook.py "$FULL_PATH"
           done
