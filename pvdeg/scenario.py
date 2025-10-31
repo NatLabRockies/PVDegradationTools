@@ -16,7 +16,6 @@ import numpy as np
 from collections import OrderedDict
 from copy import deepcopy
 from typing import List, Union, Optional, Tuple, Callable
-from functools import partial
 import pprint
 from IPython.display import display, HTML
 
@@ -192,7 +191,7 @@ class Scenario:
         weather_arg = {}
 
         if weather_db == "PSM4":
-            weather_arg = {"names": "tmy", "attributes": [], "map_variables": True}
+            weather_arg = {"map_variables": True}
 
         if self.email is not None and self.api_key is not None and weather_db == "PSM4":
             credentials = {
@@ -473,14 +472,20 @@ class Scenario:
             for id, job in self.pipeline.items():
                 func, params = job["job"], job["params"]
 
-                try:
-                    func = partial(
-                        func, weather_df=self.weather_data, meta=self.meta_data
-                    )
-                except Exception:
-                    pass
+                # Arguments to pass to the function
+                func_args = {
+                    "weather_df": self.weather_data,
+                    "meta": self.meta_data,
+                }
+                # Merge user-defined parameters, which can override weather/meta
+                if params:
+                    func_args.update(params)
 
-                result = func(**params) if params else func()
+                # Filter arguments to only those accepted by the function
+                sig_params = signature(func).parameters
+                final_args = {k: v for k, v in func_args.items() if k in sig_params}
+
+                result = func(**final_args)
 
                 results_dict[id] = result
                 pipeline_results = results_dict
@@ -494,7 +499,7 @@ class Scenario:
                         columns=[key],
                     )
 
-                self.results = results_series
+            self.results = results_series
 
     @classmethod
     def load_json(
@@ -774,7 +779,16 @@ class Scenario:
             def set_placeholder_year(dt):
                 return dt.replace(year=1970)
 
-            results.index = results.index.map(set_placeholder_year)  # placeholder year
+            if isinstance(results.index, pd.DatetimeIndex):
+                results.index = pd.DatetimeIndex(
+                    [set_placeholder_year(dt) for dt in results.index]
+                )
+            else:
+                # Convert to DatetimeIndex if it isn't already
+                results.index = pd.to_datetime(results.index)
+                results.index = pd.DatetimeIndex(
+                    [set_placeholder_year(dt) for dt in results.index]
+                )
 
             if start_time and end_time:
                 results = utilities.strip_normalize_tmy(results, start_time, end_time)
