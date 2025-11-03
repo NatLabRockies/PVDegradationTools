@@ -746,6 +746,7 @@ class GeospatialScenario(pvdeg.Scenario):
             func=self.func,
             template=self.template,  # provided or generated via autotemplate in
             # GeospatialScenario.addJob
+            **self.func_params,
         )
 
         self.results = analysis_result
@@ -970,8 +971,8 @@ class GeospatialScenario(pvdeg.Scenario):
                 f"meta_data column {col_name} expected dtype bool not {col_dtype}"
             )
 
-        near = self.meta_data[self.meta_data[col_name] is True]
-        not_near = self.meta_data[self.meta_data[col_name] is False]
+        near = self.meta_data[self.meta_data[col_name]]
+        not_near = self.meta_data[~self.meta_data[col_name]]
 
         fig = plt.figure(figsize=(15, 10))
         ax = plt.axes(projection=ccrs.PlateCarree())
