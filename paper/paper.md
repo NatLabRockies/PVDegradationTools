@@ -33,6 +33,8 @@ bibliography: paper.bib
 
 PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation, developed at the National Renewable Energy Laboratory (NREL) and supported by the Durable Module Materials (DuraMAT) consortium.  It provides modular functions and workflows for simulating degradation mechanisms (e.g., LeTID, hydrolysis, UV exposure) using weather data from the National Solar Radiation Database (NSRDB) and the Photovoltaic Geographical Information System (PVGIS).  By integrating Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables field-relevant predictions and uncertainty quantification of module reliability and lifetime.
 
+PVDeg is developed openly on GitHub and releases are distributed via the Python Package Index (PyPi). The source code is freely available under under the BSD 3-Clause license, and copyrighted by the Alliance for Sustainable Energy allowing permissive use with attribution.  PVDeg follows best practices for open-source python software, with a robust testing framework across Python 3.x environments, semantic versioning, and a full supproting documentation available at pvdegradationtools.readthedocs.io.
+
 # Statement of Need
 
 As PV deployment expands, especially into new and demanding operational environments, material degrdation poses a challenge to the lifetime of PV modules.  Modeling degradation is crucial for anticipating performance losses, guiding material selection, and enabling proactive maintenance strategies that extend the operational lifetime of PV modules in diverse environments.  Existing PV modeling tools such as pvlib-python [@pvlib] and SAM [@SAM] are able to simulate system energy yield, but not degradation.  PVDeg fills this gap by providing modular degradation models, material databases, and uncertainty quantification workflows.  PVDeg supports both research and industry use by automating degradation modeling, enabling reproducible studies of module lifetime nad performance worldwide.  It also supports ongoing standardization work, including contributions to IEC TS 63126 [@IEC63126].  PVDeg is an important component of a growing ecosystem of open-source tools for solar energy [@Holmgren2018].
@@ -48,11 +50,7 @@ The core API provides dedicated functions for calcualting physical degraation me
 To simplify complex workflows, PVeg wraps its core functions into a ``Scenario`` class that defines locations, module configurations, and degradation mechanisms.  This enables user-friendly workflows, simplifying the setup and execution of complex multi-parameter degradation studies.  This layer provides an intuitive interface for multiple analysis of different degrdation,climates, nad conigurations for comarative analysis.  Tutorials in Jupyter notebooks and hosted examples on *Read the Docs* demonstrate full end-to-end analyses.
 
 ## Geospatial Analysis
-The geospatial analysis layer enables large-scale spatial analyses by automatically distributing degradation calculations across geographic regions using parallel processing and advanced data structures.  It integrates environmental data from NSRDB and PVGIS and automates sampling across latitude-longitude grids to produce degradation maps, such as standoff distance distribution used in IEC TS 63126 compliance studies [@IEC63126].  The geospatial layer includes specialized visualization functions for mapping results and supports both uniform and stochastic spatial sampling strategies to balance computational efficiency with geographic coverage.
-
-Parallelization routines are compatible with NREL's open-source *GeoGridFusion* framework [@ford2025geogridfusion; @Tobin2025geogridfusion], allowing users to down-select meteorological datasets efficiently adn execute computations without high-performance computing access.
-
-This capability supports national- and global-scale analyses of degradation phenomena.
+The geospatial analysis layer enables large-scale spatial analyses by automatically distributing degradation calculations across geographic regions using parallel processing and advanced data structures.  It integrates environmental data from NSRDB and PVGIS and automates sampling across latitude-longitude grids to produce degradation maps, such as standoff distance distribution used in IEC TS 63126 compliance studies [@IEC63126].  The geospatial layer includes specialized visualization functions for mapping results and supports both uniform and stochastic spatial sampling strategies to balance computational efficiency with geographic coverage.  Parallelization routines are compatible with NREL's open-source *GeoGridFusion* framework [@ford2025geogridfusion; @Tobin2025geogridfusion], allowing users to down-select meteorological datasets efficiently adn execute computations without high-performance computing access.  This capability supports national— and global-scale analyses of degradation phenomena.
 
 ## Monte Carlo Framework
 
@@ -76,13 +74,9 @@ Since its first release as PV Degradation Tools [@Holsapple2020pvdegtools], PVDe
 
 These applications highlight PVDeg’s versatility as the “PV Library of degradation” — an open, community-driven platform linking materials science, environmental modeling, and field performance.
 
-# Software Availability and Development
+# Ongoing Development
 
-PVDeg is hosted on *Github* and *PyPi*, licensed under the BSD 3-Clause license and copyrighted by the Alliance for Sustainable Energy allowing permissive use with attribution.  It is continouisly tested via CI workflows across Python 3.x environments.  Documentation and contribution guidelines are available at pvdegradationtools.readthedocs.io.  Github’s issue trackers provide venues for user discussions and help.
-
-Version 0.6.1 [@springer2025pvdegtools] represents the latest stable release, incorporating the geospatial and Monte Carlo frameworks.
-
-Future work includes expanding the degradation parameter database and adding visualization dashboards for uncertainty results.
+Version 0.6.2 XX CITATION XX is the latest stable release, incorporating XXX summary line or two XXX. Future work includes expanding the degradation and material parameter databases using large language model driven literature searches, and enhancing the Scenario class to enable handling multiple materials and degradation pathways within the same workflow. This will mitigate the need for users to design and execute Scenarios for different degradation degradation pathways and materials.
 
 
 # Acknowledgements
