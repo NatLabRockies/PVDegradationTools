@@ -239,5 +239,5 @@ jobs:
           # Execute pytest with the batch of notebooks
           echo "Testing batch ${{ matrix.batch }} notebooks: ${FULL_PATHS[*]}"
           pytest --nbval \
-                 --nbval-sanitize-with "$SANITIZE_CFG" \
+                 --nbval-sanitize-with ".github/nbval_sanitization_rules.cfg" \
                  "${FULL_PATHS[@]}"
