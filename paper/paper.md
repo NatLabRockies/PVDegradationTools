@@ -61,6 +61,10 @@ Laboratory-to-field extrapolation carries significant uncertainty in kinetic par
 ## Tutorials and Tools
 The tutorials and tools component of PVDeg consists of a comprehensive suite of Jupyter notebooks that demonstrate practical workflows for modeling PV degradation. These notebooks cover core degradation mechanisms, scenario setup, geospatial analysis, and uncertainty quantification, providing step-by-step guidance for both new and advanced users. Each tutorial is designed to be interactive and reproducible, enabling users to explore real-world datasets, customize parameters, and visualize results. The notebooks supprot comparative studies and integration with external meteorological data sources such as NSRDB and PVGIS. By leveraging these notebooks, users can efficiently learn, apply, and extend PVDeg’s capabilities for research and industry applications.
 
+## Open datasets
+A growing component of PVDeg is its compilation of community-driven open datasets for PV degradation modeling. These databases include curated degradation parameters and material property data, such as kinetic coefficients for common degradation mechanisms and permeation properties for materials (e.g., H₂O, O₂, acetic acid). The datasets are continuously expanded and updated, serving as a growing resource for users to access validated values for modeling and analysis. Users are encouraged to contribute their own data, enhancing the collective knowledge base and supporting reproducible research. The core PVDeg API also provides users a means to seamlessly query these datasets and use
+them in their own modeling workflows, analysis, and investigations. The development and maintenance of these degradation databases and associated API calls also supprots reproducible, relaiable, and field-relevaent degradation modeling for the PV community.
+
 # Example Applications
 
 Since its first release as PV Degradation Tools [@Holsapple2020pvdegtools], PVDeg has been adopted in multiple studies across the PV reliability community:
