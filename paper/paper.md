@@ -5,7 +5,7 @@ tags:
   - solar energy
   - photovoltaics
   - renewable energy
-  - degradation mechanisms
+  - degradation
 authors:
   - name: Rajiv Daxini
     orcid: 0000-0003-1993-9408
