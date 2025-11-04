@@ -112,3 +112,4 @@ slurm-*.out
 # Run information
 tests\data\h5_pytest.h5
 tests/TEMP_test_addModule_materials.py
+/tutorials_and_tools/tutorials_and_tools/pvd_job_temperature and degradation/pipeline_results
