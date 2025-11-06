@@ -242,7 +242,10 @@ def pysam(
                 try:
                     pysam_model.value(k, v)
                 except AttributeError as e:
-                    logger.warning(f"failed to set pysam model key: {k} to value: {v}, skipping {k}. Original error: {e}")
+                    logger.warning(
+                        f"failed to set pysam model key: {k} to value: {v},"
+                        f"skipping {k}. Original error: {e}"
+                    )
 
                 # get all subarrays being used
                 if k.startswith("subarray"):
