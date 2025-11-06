@@ -243,7 +243,7 @@ def pysam(
                     pysam_model.value(k, v)
                 except AttributeError as e:
                     logger.warning(
-                        f"failed to set pysam model key: {k} to value: {v},"
+                        f"failed to set pysam model key: {k} to value: {v}, "
                         f"skipping {k}. Original error: {e}"
                     )
 
