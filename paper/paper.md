@@ -76,7 +76,7 @@ These applications highlight PVDeg’s versatility as the “PV Library of degra
 
 # Ongoing Development
 
-Version 0.6.2 XX CITATION XX is the latest stable release, incorporating XXX summary line or two XXX. Future work includes expanding the degradation and material parameter databases using large language model driven literature searches, and enhancing the Scenario class to enable handling multiple materials and degradation pathways within the same workflow. This will mitigate the need for users to design and execute Scenarios for different degradation pathways and materials.
+Version 0.6.2 XX CITATION XX is the latest stable release, incorporating XXX summary line or two XXX. Ongoing work through XXX project ref? XXX will expand the degradation and material parameter databases using large language model driven literature searches, and enhancing the Scenario class to enable handling multiple materials and degradation pathways within the same workflow. This will mitigate the need for users to design and execute Scenarios for different degradation pathways and materials.
 
 
 # Acknowledgements
