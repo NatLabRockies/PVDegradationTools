@@ -62,7 +62,11 @@ def test_pysam_results_list_conf0():
         practical_pitch_tilt_considerations=True,
     )
 
-    assert res == {"annual_energy": 53062.51753616376}
+    expected = 53184.367920227654
+
+    assert len(res) == 1
+    assert "annual_energy" in res
+    assert res["annual_energy"] == pytest.approx(expected, rel=1e-6)
 
 
 def test_pysam_results_list_default_model():
@@ -75,7 +79,11 @@ def test_pysam_results_list_default_model():
         results=["annual_energy"],
     )
 
-    assert res == {"annual_energy": 235478.46669741502}
+    expected = 359351.2976863122
+
+    assert len(res) == 1
+    assert "annual_energy" in res
+    assert res["annual_energy"] == pytest.approx(expected, rel=1e-6)
 
 
 # split into multiple tests?

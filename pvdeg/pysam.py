@@ -236,26 +236,13 @@ def pysam(
         with open(config_files["pv"], "r") as f:
             pv_inputs = json.load(f)
 
-        # these break the model when being loaded using InSpire doubleday configs
-        # this is NREL-PySAM version dependent, these are problematic on 5.1.0
-        bad_parameters = {
-            "adjust_constant",
-            "adjust_en_timeindex",
-            "adjust_en_periods",
-            "adjust_timeindex",
-            "adjust_periods",
-            "dc_adjust_constant",
-            "dc_adjust_en_timeindex",
-            "dc_adjust_en_periods",
-            "dc_adjust_timeindex",
-            "dc_adjust_periods",
-        }
-
         subarrays = set()
-
         for k, v in pv_inputs.items():
-            if k not in ({"number_inputs", "solar_resource_file"} | bad_parameters):
-                pysam_model.value(k, v)
+            if k not in ({"number_inputs", "solar_resource_file"}):
+                try:
+                    pysam_model.value(k, v)
+                except AttributeError as e:
+                    logger.warning(f"failed to set pysam model key: {k} to value: {v}, skipping {k}. Original error: {e}")
 
                 # get all subarrays being used
                 if k.startswith("subarray"):
