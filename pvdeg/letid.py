@@ -51,20 +51,20 @@ def k_ij(attempt_frequency, activation_energy, temperature):
     Parameters
     ----------
     attempt_frequency : numeric
-        Arrhenius pre-exponential factor (or attempt frequency) [s^-1].
+        Arrhenius pre-exponential factor (or attempt frequency) [s⁻¹].
 
     activation_energy : numeric
         Arrhenius activation energy [eV].
 
     temperature : numeric
-        Temperature [C].
+        Temperature [°C].
 
     Returns
     -------
     reaction_rate : numeric
-        Arrhenius reaction rate constant [s^-1].
+        Arrhenius reaction rate constant [s⁻¹].
     """
-    temperature = convert_temperature(temperature, "C", "K")
+    temperature = convert_temperature(temperature, "°C", "K")
     q = elementary_charge
     k = Boltzmann
 
@@ -93,14 +93,14 @@ def carrier_factor(
     Parameters
     ----------
     tau : numeric
-        Carrier lifetime [us].
+        Carrier lifetime [μs].
 
     transition : str
         Transition in the 3-state defect model (A <-> B <-> C). Must be 'ab', 'bc', or
         ba'.
 
     temperature : numeric
-        Temperature [C].
+        Temperature [°C].
 
     suns : numeric
         Applied injection level of device in terms of "suns", e.g. 1 for a device held
@@ -108,10 +108,10 @@ def carrier_factor(
         illumination.
 
     jsc : numeric
-        Short-circuit current density [mA/cm^2].
+        Short-circuit current density [mA/cm²].
 
     wafer_thickness : numeric
-        Wafer thickness [um].
+        Wafer thickness [μm].
 
     s_rear : numeric
         Rear surface recombination velocity [cm/s].
@@ -147,7 +147,7 @@ def carrier_factor(
             meas_tau = mechanism_params[f"tau_{transition}"]
             meas_temp = mechanism_params[f"temperature_{transition}"]
             meas_temp = convert_temperature(
-                meas_temp, "K", "C"
+                meas_temp, "K", "°C"
             )  # convert Kelvin to Celsius
             meas_suns = mechanism_params[f"suns_{transition}"]
             meas_jsc = 40
@@ -238,7 +238,7 @@ def carrier_factor_wafer(
     Parameters
     ----------
     tau : numeric
-        Carrier lifetime [us].
+        Carrier lifetime [μs].
 
     transition : str
         Transition in the 3-state defect model (A <-> B <-> C). Must be 'ab', 'bc', or
@@ -250,10 +250,10 @@ def carrier_factor_wafer(
         illumination.
 
     jsc : numeric
-        Short-circuit current density [mA/cm^2].
+        Short-circuit current density [mA/cm²].
 
     wafer_thickness : numeric
-        Wafer thickness [um].
+        Wafer thickness [μm].
 
     mechanism_params : dict
         Dictionary of mechanism parameters.
@@ -286,7 +286,7 @@ def carrier_factor_wafer(
             meas_tau = mechanism_params[f"tau_{transition}"]
             meas_temp = mechanism_params[f"temperature_{transition}"]
             meas_temp = convert_temperature(
-                meas_temp, "K", "C"
+                meas_temp, "K", "°C"
             )  # convert Kelvin to Celsius
             meas_suns = mechanism_params[f"suns_{transition}"]
             meas_jsc = 40
@@ -381,7 +381,7 @@ def calc_dn(
     Parameters
     ----------
     tau : numeric
-        Carrier lifetime [us].
+        Carrier lifetime [μs].
 
     temperature : numeric
         Cell temperature [K].
@@ -391,16 +391,16 @@ def calc_dn(
         e.g. 1 for a device held at 1-sun Jsc current injection.
 
     jsc : numeric
-        Short-circuit current density of the cell [mA/cm^2].
+        Short-circuit current density of the cell [mA/cm²].
 
     wafer_thickness : numeric
-        Wafer thickness [um].
+        Wafer thickness [μm].
 
     s_rear : numeric
         Rear surface recombination velocity [cm/s].
 
     na : numeric, default 7.2e21
-        Doping density [m^-3].
+        Doping density [m⁻³].
 
     xp : numeric, default 0.00000024
         width of the depletion region [m]. Treated as fixed width, as it is very small
@@ -408,13 +408,13 @@ def calc_dn(
         effects.
 
     e_mobility : numeric, default 0.15
-        electron mobility [m^2/V-s].
+        electron mobility [m²/V-s].
 
     nc : numeric, default 2.8e25
-        density of states of the conduction band [m^-3]
+        density of states of the conduction band [m⁻³]
 
     nv : numeric, default 1.6e25
-        density of states of the valence band [m^-3]
+        density of states of the valence band [m⁻³]
 
     e_g : numeric, default 1.79444e-19
         bandgap of silicon [J].
@@ -422,7 +422,7 @@ def calc_dn(
     Returns
     -------
     dn : numeric
-        excess carrier concentration [m^-3]
+        excess carrier concentration [m⁻³]
     """
     k = Boltzmann
     q = elementary_charge
@@ -430,9 +430,9 @@ def calc_dn(
     # unit conversions
     tau = tau * 1e-6  # convert microseconds to seconds
     temperature = convert_temperature(
-        temperature, "C", "K"
+        temperature, "°C", "K"
     )  # convert Celsius to Kelvin
-    jsc = jsc * 0.001 * 10000  # convert mA/cm^2 to A/m^2
+    jsc = jsc * 0.001 * 10000  # convert mA/cm² to A/m²
     wafer_thickness = wafer_thickness * 1e-6  # convert microns to meters
     s_rear = s_rear / 100  # convert cm/s to m/s
 
@@ -440,7 +440,7 @@ def calc_dn(
     v_applied = convert_i_to_v(tau, na, i_applied, wafer_thickness, s_rear, temperature)
 
     diffusivity = e_mobility * k * temperature / q
-    ni2 = nc * nv * np.exp(-e_g / (k * temperature))  # ni^2 = Nc*Nv*exp(-Eg/kT)
+    ni2 = nc * nv * np.exp(-e_g / (k * temperature))  # ni² = Nc*Nv*exp(-Eg/kT)
 
     arg = (wafer_thickness - xp) / (diffusivity * tau) ** 0.5
 
@@ -483,7 +483,7 @@ def convert_i_to_v(
         Carrier lifetime [s].
 
     na : numeric
-        Doping density [m^-3].
+        Doping density [m⁻³].
 
     current : numeric
         applied current [A].
@@ -498,7 +498,7 @@ def convert_i_to_v(
         Cell temperature [K]
 
     e_mobility : numeric, default 0.15
-        electron mobility [m^2/V-s].
+        electron mobility [m²/V-s].
 
     xp : numeric, default 0.00000024
         width of the depletion region [m]. Treated as fixed width, as it is very small
@@ -506,10 +506,10 @@ def convert_i_to_v(
         effects.
 
     nc : numeric, default 2.8e25
-        density of states of the conduction band [m^-3]
+        density of states of the conduction band [m⁻³]
 
     nv : numeric, default 1.6e25
-        density of states of the valence band [m^-3]
+        density of states of the valence band [m⁻³]
 
     e_g : numeric, default 1.79444e-19
         bandgap of silicon [J].
@@ -524,7 +524,7 @@ def convert_i_to_v(
 
     diffusivity = e_mobility * k * temperature / q
     diffusion_length = np.sqrt(diffusivity * tau)
-    ni2 = nc * nv * np.exp(-e_g / (k * temperature))  # ni^2 = Nc*Nv*exp(-Eg/kT)
+    ni2 = nc * nv * np.exp(-e_g / (k * temperature))  # ni² = Nc*Nv*exp(-Eg/kT)
     arg = (wafer_thickness - xp) / diffusion_length
 
     j0 = j0_gray(ni2, diffusivity, na, diffusion_length, arg, srv)
@@ -544,13 +544,13 @@ def j0_gray(ni2, diffusivity, na, diffusion_length, arg, srv):
     Parameters
     ----------
     ni2 : numeric
-        intrinsic carrier concentration [m^-3].
+        intrinsic carrier concentration [m⁻³].
 
     diffusivity : numeric
         carrier diffusivity [m/s].
 
     na : numeric
-        doping density [m^-3].
+        doping density [m⁻³].
 
     diffusion_length : numeric
         carrier diffusion length [m].
@@ -588,22 +588,22 @@ def calc_voc_from_tau(tau, wafer_thickness, srv_rear, jsc, temperature, na=7.2e2
     Parameters
     ----------
     tau : numeric
-        Carrier lifetime [us].
+        Carrier lifetime [μs].
 
     wafer_thickness : numeric
-        Wafer thickness [um].
+        Wafer thickness [μm].
 
     srv_rear : numeric
         Rear surface recombination velocity [cm/s].
 
     jsc : numeric
-        Short-circuit current density [mA/cm^2].
+        Short-circuit current density [mA/cm²].
 
     temperature : numeric
-        Temperature [C].
+        Temperature [°C].
 
     na : numeric, default 7.2e21
-        Doping density [m^-3]. Default value corresponds to ~2 Ω-cm boron-doped c-Si.
+        Doping density [m⁻³]. Default value corresponds to ~2 Ω-cm boron-doped c-Si.
 
     Returns
     -------
@@ -614,9 +614,9 @@ def calc_voc_from_tau(tau, wafer_thickness, srv_rear, jsc, temperature, na=7.2e2
     tau = tau * 1e-6  # convert microseconds to seconds
     wafer_thickness = wafer_thickness * 1e-6  # convert microns to meters
     srv_rear = srv_rear / 100  # convert cm/s to m/s
-    jsc = jsc * 0.001 * 10000  # convert mA/cm^2 to A/m^2
+    jsc = jsc * 0.001 * 10000  # convert mA/cm² to A/m²
     temperature = convert_temperature(
-        temperature, "C", "K"
+        temperature, "°C", "K"
     )  # convert Celsius to Kelvin
 
     return convert_i_to_v(tau, na, jsc, wafer_thickness, srv_rear, temperature)
@@ -633,7 +633,7 @@ def calc_device_params(timesteps, cell_area=239):
             - ``'Voc'``
 
     cell_area : numeric, default 239
-        Cell area [cm^2]. 239 cm^2 is roughly the area of a 156x156mm pseudosquare "M0"
+        Cell area [cm²]. 239 cm² is roughly the area of a 156x156mm pseudosquare "M0"
         wafer
 
     Returns
@@ -736,16 +736,16 @@ def calc_pmp_loss_from_tau_loss(
     Parameters
     ----------
     tau_0 : numeric
-        Initial bulk lifetime [us]
+        Initial bulk lifetime [μs]
 
     tau_deg : numeric
-        Degraded bulk lifetime [us]
+        Degraded bulk lifetime [μs]
 
     cell_area : numeric
-        Cell area [cm^2]
+        Cell area [cm²]
 
     wafer_thickness : numeric
-        Wafer thickness [um]
+        Wafer thickness [μm]
 
     s_rear : numeric
         Rear surface recombination velocity [cm/s]
@@ -760,7 +760,7 @@ def calc_pmp_loss_from_tau_loss(
 
         generation_df = pd.read_excel(path, header=0, engine="openpyxl")
         generation = generation_df["Generation (cm-3s-1)"]
-        depth = generation_df["Depth (um)"]
+        depth = generation_df["Depth (μm)"]
 
     jsc_0 = collection.calculate_jsc_from_tau_cp(
         tau_0,
@@ -803,10 +803,10 @@ def calc_ndd(tau_0, tau_deg):
     Parameters
     ----------
     tau_0 : numeric
-        Initial bulk lifetime [us]
+        Initial bulk lifetime [μs]
 
     tau_deg : numeric
-        Degraded bulk lifetime [us]
+        Degraded bulk lifetime [μs]
 
     Returns
     -------
@@ -915,13 +915,13 @@ def calc_letid_outdoors(
     Parameters
     ----------
     tau_0 : numeric
-        Initial bulk lifetime [us]
+        Initial bulk lifetime [μs]
 
     tau_deg : numeric
-        Fully degraded bulk lifetime [us]
+        Fully degraded bulk lifetime [μs]
 
     wafer_thickness : numeric
-        Wafer thickness [um]
+        Wafer thickness [μm]
 
     s_rear : numeric
         Rear surface recombination velocity [cm/s]
@@ -966,14 +966,14 @@ def calc_letid_outdoors(
     'PVL_GenProfile.xlsx'.
         If not None, column names must include:
         - ``'Generation (cm-3s-1)'``
-        - ``'Depth (um)'``
+        - ``'Depth (μm)'``
         TODO: improve this.
 
     d_base : numeric, default 27
-        Minority carrier diffusivity of the base of the solar cell [cm^2/Vs].
+        Minority carrier diffusivity of the base of the solar cell [cm²/Vs].
 
     cell_area : numeric, default 239
-        Cell area [cm^2]. 239 cm^2 is roughly the area of a 156x156mm pseudosquare "M0"
+        Cell area [cm²]. 239 cm² is roughly the area of a 156x156mm pseudosquare "M0"
         wafer
 
     tilt : numeric or None, default None
@@ -1078,15 +1078,15 @@ def calc_letid_outdoors(
         generation_df = pd.read_excel(
             os.path.join(DATA_DIR, "PVL_GenProfile.xlsx"), header=0
         )  # this is an optical generation profile generated by PVLighthouse's OPAL2
-        # default model for 1-sun, normal incident AM1.5 sunlight on a 180-um thick
+        # default model for 1-sun, normal incident AM1.5 sunlight on a 180-μm thick
         # SiNx-coated, pyramid-textured wafer.
         generation = generation_df["Generation (cm-3s-1)"]
-        depth = generation_df["Depth (um)"]
+        depth = generation_df["Depth (μm)"]
     else:
         generation = generation_df[
             "Generation (cm-3s-1)"
         ]  # TODO: fix this to accept multiple formats of generation depth profile
-        depth = generation_df["Depth (um)"]
+        depth = generation_df["Depth (μm)"]
 
     mechanism_params = utilities.get_kinetics(mechanism_params)
 
@@ -1224,13 +1224,13 @@ def calc_letid_lab(
     Parameters
     ----------
     tau_0 : numeric
-        Initial bulk lifetime [us]
+        Initial bulk lifetime [μs]
 
     tau_deg : numeric
-        Fully degraded bulk lifetime [us]
+        Fully degraded bulk lifetime [μs]
 
     wafer_thickness : numeric
-        Wafer thickness [um]
+        Wafer thickness [μm]
 
     s_rear : numeric
         Rear surface recombination velocity [cm/s]
@@ -1251,7 +1251,7 @@ def calc_letid_lab(
         TODO: accept timeseries of injection for modeling variable-condition testing.
 
     temperature : numeric
-        Test temperature of device [C]. IEC TS 63342 specifies 75C.
+        Test temperature of device [°C]. IEC TS 63342 specifies 75°C.
 
      mechanism_params : str
         Dictionary of mechanism parameters.
@@ -1276,14 +1276,14 @@ def calc_letid_lab(
     'PVL_GenProfile.xlsx'.
         If not None, column names must include:
         - ``'Generation (cm-3s-1)'``
-        - ``'Depth (um)'``
+        - ``'Depth (μm)'``
         TODO: improve this.
 
     d_base : numeric, default 27
-        Minority carrier diffusivity of the base of the solar cell [cm^2/Vs].
+        Minority carrier diffusivity of the base of the solar cell [cm²/Vs].
 
     cell_area : numeric, default 239
-        Cell area [cm^2]. 239 cm^2 is roughly the area of a 156x156mm pseudosquare
+        Cell area [cm²]. 239 cm² is roughly the area of a 156x156mm pseudosquare
         "M0" wafer
 
     Returns
@@ -1337,15 +1337,15 @@ def calc_letid_lab(
         generation_df = pd.read_excel(
             os.path.join(DATA_DIR, "PVL_GenProfile.xlsx"), header=0
         )  # this is an optical generation profile generated by PVLighthouse's OPAL2
-        # default model for 1-sun, normal incident AM1.5 sunlight on a 180-um thick
+        # default model for 1-sun, normal incident AM1.5 sunlight on a 180-μm thick
         # SiNx-coated, pyramid-textured wafer.
         generation = generation_df["Generation (cm-3s-1)"]
-        depth = generation_df["Depth (um)"]
+        depth = generation_df["Depth (μm)"]
     else:
         generation = generation_df[
             "Generation (cm-3s-1)"
         ]  # TODO: fix this to accept multiple formats of generation depth profile
-        depth = generation_df["Depth (um)"]
+        depth = generation_df["Depth (μm)"]
 
     mechanism_params = utilities.get_kinetics(mechanism_params)
 
