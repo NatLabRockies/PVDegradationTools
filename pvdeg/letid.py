@@ -64,7 +64,7 @@ def k_ij(attempt_frequency, activation_energy, temperature):
     reaction_rate : numeric
         Arrhenius reaction rate constant [s⁻¹].
     """
-    temperature = convert_temperature(temperature, "°C", "K")
+    temperature = convert_temperature(temperature, "C", "K")
     q = elementary_charge
     k = Boltzmann
 
@@ -147,7 +147,7 @@ def carrier_factor(
             meas_tau = mechanism_params[f"tau_{transition}"]
             meas_temp = mechanism_params[f"temperature_{transition}"]
             meas_temp = convert_temperature(
-                meas_temp, "K", "°C"
+                meas_temp, "K", "C"
             )  # convert Kelvin to Celsius
             meas_suns = mechanism_params[f"suns_{transition}"]
             meas_jsc = 40
@@ -286,7 +286,7 @@ def carrier_factor_wafer(
             meas_tau = mechanism_params[f"tau_{transition}"]
             meas_temp = mechanism_params[f"temperature_{transition}"]
             meas_temp = convert_temperature(
-                meas_temp, "K", "°C"
+                meas_temp, "K", "C"
             )  # convert Kelvin to Celsius
             meas_suns = mechanism_params[f"suns_{transition}"]
             meas_jsc = 40
@@ -430,7 +430,7 @@ def calc_dn(
     # unit conversions
     tau = tau * 1e-6  # convert microseconds to seconds
     temperature = convert_temperature(
-        temperature, "°C", "K"
+        temperature, "C", "K"
     )  # convert Celsius to Kelvin
     jsc = jsc * 0.001 * 10000  # convert mA/cm² to A/m²
     wafer_thickness = wafer_thickness * 1e-6  # convert microns to meters
@@ -616,7 +616,7 @@ def calc_voc_from_tau(tau, wafer_thickness, srv_rear, jsc, temperature, na=7.2e2
     srv_rear = srv_rear / 100  # convert cm/s to m/s
     jsc = jsc * 0.001 * 10000  # convert mA/cm² to A/m²
     temperature = convert_temperature(
-        temperature, "°C", "K"
+        temperature, "C", "K"
     )  # convert Celsius to Kelvin
 
     return convert_i_to_v(tau, na, jsc, wafer_thickness, srv_rear, temperature)
@@ -760,7 +760,7 @@ def calc_pmp_loss_from_tau_loss(
 
         generation_df = pd.read_excel(path, header=0, engine="openpyxl")
         generation = generation_df["Generation (cm-3s-1)"]
-        depth = generation_df["Depth (μm)"]
+        depth = generation_df["Depth (um)"]
 
     jsc_0 = collection.calculate_jsc_from_tau_cp(
         tau_0,
@@ -1081,12 +1081,12 @@ def calc_letid_outdoors(
         # default model for 1-sun, normal incident AM1.5 sunlight on a 180-μm thick
         # SiNx-coated, pyramid-textured wafer.
         generation = generation_df["Generation (cm-3s-1)"]
-        depth = generation_df["Depth (μm)"]
+        depth = generation_df["Depth (um)"]
     else:
         generation = generation_df[
             "Generation (cm-3s-1)"
         ]  # TODO: fix this to accept multiple formats of generation depth profile
-        depth = generation_df["Depth (μm)"]
+        depth = generation_df["Depth (um)"]
 
     mechanism_params = utilities.get_kinetics(mechanism_params)
 
@@ -1340,12 +1340,12 @@ def calc_letid_lab(
         # default model for 1-sun, normal incident AM1.5 sunlight on a 180-μm thick
         # SiNx-coated, pyramid-textured wafer.
         generation = generation_df["Generation (cm-3s-1)"]
-        depth = generation_df["Depth (μm)"]
+        depth = generation_df["Depth (um)"]
     else:
         generation = generation_df[
             "Generation (cm-3s-1)"
         ]  # TODO: fix this to accept multiple formats of generation depth profile
-        depth = generation_df["Depth (μm)"]
+        depth = generation_df["Depth (um)"]
 
     mechanism_params = utilities.get_kinetics(mechanism_params)
 
