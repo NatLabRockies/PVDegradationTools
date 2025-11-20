@@ -115,7 +115,7 @@ def water_saturation_pressure(temp, average=True):
 
     Water saturation pressure (psat) model created from an emperical fit of
     ln(psat) vs temperature using a 6th order polynomial fit. The fit produced
-    R^2=0.999813. Calculation created by Michael Kempe, unpublished data.
+    R²=0.999813. Calculation created by Michael Kempe, unpublished data.
     The fit used data from -40°C to 200°C.
 
     Parameters:

@@ -525,13 +525,13 @@ def _add_material(
     Eas : (float)
         Solubility Activation Energy [kJ/mol]
     So : (float)
-        Solubility Prefactor [g/cm^3]
+        Solubility Prefactor [g/cm³]
     Do : (float)
-        Diffusivity Prefactor [cm^2/s] (unused)
+        Diffusivity Prefactor [cm²/s] (unused)
     Eap : (float)
         Permeability Activation Energy [kJ/mol] (unused)
     Po : (float)
-        Permeability Prefactor [g*mm/m^2/day] (unused)
+        Permeability Prefactor [g*mm/m²/day] (unused)
     fickian : (boolean)
         I have no idea what this means (unused)
     fp : (str)
