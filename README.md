@@ -88,7 +88,14 @@ You can also run the tutorial locally in a virtual environment, i.e., `venv` or
    ```
 
 1. Use the file explorer in Jupyter lab to browse to `tutorials`
-   and start the first Tutorial.
+   and start the first Tutorial. Tutorials are organized into the following categories:
+   - `01_basics/` - Introduction to pvdeg fundamentals
+   - `02_degradation/` - Degradation mechanism modeling
+   - `03_monte_carlo/` - Monte Carlo analysis
+   - `04_geospatial/` - Geospatial and HPC scenarios
+   - `05_advanced/` - Advanced topics and API access
+   - `06_nrel_hpc/` - NREL HPC-specific workflows (requires HPC access)
+   - `07_workshop_demos/` - Workshop and demonstration notebooks
 
 
 Documentation
@@ -116,13 +123,11 @@ Running jupyter notebooks using anaconda prompt
 Note that in order to run notebooks cleanly and validate outputs, use the following
 commands to run either one notebook:
 
-    jupyter nbconvert --to notebook --execute --inplace "tutorials_and_tools/
-    tutorials_and_tools/Monte Carlo - Arrhenius.ipynb"
+    jupyter nbconvert --to notebook --execute --inplace "tutorials/01_basics/01_basics_humidity_design.ipynb"
 
-or all notebooks inside the tutorials and tools folder:
+or all notebooks inside a specific tutorial category:
 
-    jupyter nbconvert --to notebook --execute --inplace "tutorials_and_tools/
-    tutorials_and_tools/*.ipynb"
+    jupyter nbconvert --to notebook --execute --inplace "tutorials/01_basics/*.ipynb"
 
 This avoids formatting issues that may arise depending on your own local environment
 or IDE.
