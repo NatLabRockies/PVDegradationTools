@@ -57,6 +57,7 @@ dependencies = [
     "pre-commit",
     "sympy",
     "zarr",
+    "jupytext",
 ]
 dynamic = ["version"]
 

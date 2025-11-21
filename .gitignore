@@ -70,6 +70,8 @@ docs/sphinx/_build/
 
 # tutorial jupyter-book
 pvdeg_tutorials/_build/
+tutorials/_build/
+tutorials_and_tools/_build/
 
 # PyBuilder
 target/

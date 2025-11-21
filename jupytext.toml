@@ -1,0 +1,9 @@
+# Jupytext configuration
+# Sync notebooks to scripts/ subdirectories as Python files with percent format
+
+# Default formats for notebooks
+formats = "ipynb,scripts//py:percent"
+
+# Notebook metadata filter (reduce diff noise)
+notebook_metadata_filter = "-all"
+cell_metadata_filter = "-all"

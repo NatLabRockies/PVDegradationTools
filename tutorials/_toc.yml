@@ -1,0 +1,58 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+- caption: 01 - Basics
+  chapters:
+  - file: 01_basics/01_basics_humidity_design
+  - file: 01_basics/02_degradation
+  - file: 01_basics/03_spectral_degradation
+  - file: 01_basics/04_weather_database_access
+- caption: 02 - Degradation Mechanisms
+  chapters:
+  - file: 02_degradation/01_bo_lid_accelerated_test
+  - file: 02_degradation/02_letid_accelerated_test
+  - file: 02_degradation/03_letid_outdoor
+  - file: 02_degradation/04_letid_outdoor_scenario
+  - file: 02_degradation/05_letid_passivated_wafer
+  - file: 02_degradation/06_vant_hoff_degradation_model
+- caption: 03 - Monte Carlo Simulations
+  chapters:
+  - file: 03_monte_carlo/01_arrhenius
+  - file: 03_monte_carlo/02_standoff
+- caption: 04 - Geospatial & Scenarios (HPC Required)
+  chapters:
+  - file: 04_geospatial/01_local_scenario
+    title: Local Scenario (No HPC)
+  - file: 04_geospatial/02_geospatial_templates
+    title: Geospatial Templates (HPC)
+  - file: 04_geospatial/03_scenario_geographical_features
+    title: Geographical Features (HPC)
+  - file: 04_geospatial/04_scenario_geospatial
+    title: Scenario Geospatial (HPC)
+  - file: 04_geospatial/05_scenario_mountain_downselect
+    title: Mountain Downselect (HPC)
+  - file: 04_geospatial/06_scenario_single_location
+    title: Single Location (HPC)
+  - file: 04_geospatial/07_scenario_temperature
+    title: Temperature Scenario (HPC)
+- caption: 05 - Advanced Topics
+  chapters:
+  - file: 05_advanced/01_custom_functions_nopython
+  - file: 05_advanced/02_pysam_single_location
+  - file: 05_advanced/03_pysam_api
+    title: PySAM with API (API Key Required)
+  - file: 05_advanced/04_nsrdb_distributed_api
+    title: NSRDB Distributed (API Key Required)
+  - file: 05_advanced/05_pvgis_distributed
+- caption: 06 - NREL HPC
+  chapters:
+  - file: 06_nrel_hpc/01_geospatial_world_map
+  - file: 06_nrel_hpc/02_letid_outdoor_geospatial_demo
+- caption: 07 - Workshop Demos
+  chapters:
+  - file: 07_workshop_demos/01_astm_live_demo
+  - file: 07_workshop_demos/02_duramat_live_demo
+    title: DuraMAT Live Demo (HPC Required)
