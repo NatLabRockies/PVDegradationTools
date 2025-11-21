@@ -11,7 +11,16 @@ from . import (
     decorators,
 )
 
-# TODO: Clean up all those functions and add gaps functionality
+R_GAS = 0.00831446261815324  # Gas Constant in [kJ/mol*K]
+
+
+def _extract_param(parameters, key, default=None):
+    """Helper to extract parameter value from nested dict."""
+    if parameters is not None and key in parameters:
+        value = parameters[key].get("value", None)
+        if value is not None:
+            return value
+    return default
 
 
 def arrhenius(
@@ -20,11 +29,11 @@ def arrhenius(
     RH=None,
     irradiance=None,
     elapsed_time=None,
-    Ro=None,
-    Ea=None,
-    p=None,
-    n=None,
-    C2=None,
+    Ro=1,
+    Ea=0,
+    p=0,
+    n=0,
+    C2=0,
     parameters=None,
 ):
     """
@@ -82,60 +91,45 @@ def arrhenius(
         Total degradation with units as determined by Ro.
     """
 
-    if Ro is None:
-        if parameters is not None:
-            if "R_0.value" in parameters:
-                Ro = parameters["R_0.value"]
-            else:
-                Ro = 1
-        else:
-            Ro = 1
-    if Ea is None:
-        if parameters is not None:
-            if "Ea.value" in parameters:
-                Ea = parameters["Ea.value"]
-            else:
-                Ea = 0
-        else:
-            Ea = 0
-    if n is None:
-        if parameters is not None:
-            if "n.value" in parameters:
-                n = parameters["n.value"]
-            else:
-                n = 0
-        else:
-            n = 0
-    if p is None:
-        if parameters is not None:
-            if "p.value" in parameters:
-                p = parameters["p.value"]
-            else:
-                p = 0
-        else:
-            p = 0
-    if temperature is None:
-        temperature = weather_df["temp"]
-    if (
-        RH is None
-        and "relative_humidity" in weather_df
-        and "temp_air" in weather_df
-        and "temp_module" in weather_df
-    ):
-        RH = humidity.surface_relative(
-            weather_df["relative_humidity"],
-            weather_df["temp_air"],
-            weather_df["temp_module"],
-        )
+    # override defaults with parameters if provided
+    if parameters is not None:
+        Ro = _extract_param(parameters, "R_0", Ro)
+        Ea = _extract_param(parameters, "E_a", Ea)
+        n = _extract_param(parameters, "n", n)
+        p = _extract_param(parameters, "p", p)
+        C2 = _extract_param(parameters, "C_2", C2)
 
-    if C2 is None:
-        if parameters is not None:
-            if "C_2.value" in parameters:
-                C2 = parameters["C_2.value"]
+    if temperature is None and Ea != 0:
+        if weather_df is not None:
+            if "temperature" in weather_df:
+                temperature = weather_df["temperature"]
+            elif "temp_module" in weather_df:
+                temperature = weather_df["temp_module"]
+                print("Using temp_module from weather_df for temperature.")
             else:
-                C2 = 0
+                raise ValueError("Temperature data must be provided if Ea is provided.")
+    if n != 0 and RH is None:
+        print(n)
+        if "RH_surface_outside" in weather_df:
+            RH = weather_df["RH_surface_outside"]
+        elif (
+            "relative_humidity" in weather_df
+            and "temp_air" in weather_df
+            and "temp_module" in weather_df
+        ):
+
+            RH = humidity.surface_relative(
+                weather_df["relative_humidity"],
+                weather_df["temp_air"],
+                weather_df["temp_module"],
+            )
         else:
-            C2 = 0
+            raise ValueError(
+                "Relative Humidity data must be provided if n is provided."
+            )
+        if RH is not None:
+            print("Using RH_surface_outside from weather_df for humidity.")
+
     if irradiance is None:
         if C2 != 0 or p != 0:
             if weather_df is not None:
@@ -144,22 +138,24 @@ def arrhenius(
                         irradiance = weather_df[col].copy()
                         irradiance = pd.DataFrame(irradiance)
                         break
-                if "poa_global" in weather_df and irradiance is None:
-                    if C2 == 0:
+                if irradiance is None:
+                    if "poa_global" in weather_df:
                         irradiance = weather_df["poa_global"]
                         print("Using poa_global from weather_df for irradiance.")
+                        if C2 != 0:
+                            raise ValueError(
+                                "Irradiance data not provided. Please provide "
+                                "irradiance data in weather_df."
+                            )
+                            # In the future the spectra will be created using AM1.5.
                     else:
                         raise ValueError(
-                            "Irradiance data not provided. Please provide irradiance data in weather_df."  # noqa
-                        )
-                else:
-                    if irradiance is None:
-                        raise ValueError(
-                            "POA data not provided. Please provide it in irradiance or weather_df."  # noqa
+                            "Irradiance data not provided. Please provide it in "
+                            "irradiance or weather_df."
                         )
             else:
                 raise ValueError(
-                    "Irradiance data must be provided if C2 or p are provided."  # noqa
+                    "Irradiance data must be provided when C2 or p are used."
                 )
     if elapsed_time is None:
         if weather_df is not None:
@@ -191,23 +187,21 @@ def arrhenius(
         if p == 0:
             if Ea != 0:
                 if n == 0:
-                    degradation = Ro * np.exp(
-                        -(Ea / (0.00831446261815324 * (temperature + 273.15)))
-                    )
+                    degradation = Ro * np.exp(-(Ea / (R_GAS * (temperature + 273.15))))
                 else:
                     degradation = (
-                        Ro
-                        * np.exp(-(Ea / (0.00831446261815324 * (temperature + 273.15))))
-                        * (RH**n)
+                        Ro * np.exp(-(Ea / (R_GAS * (temperature + 273.15)))) * (RH**n)
                     )
             else:
                 if n == 0:
                     degradation = (
-                        Ro * temperature / temperature
+                        Ro * weather_df.iloc[:, 0] / weather_df.iloc[:, 0]
                     )  # This makes sure it sums over the corect number of time
                     # intervals.
                 else:
-                    degradation = Ro * (RH**n) * temperature / temperature
+                    degradation = (
+                        Ro * (RH**n) * weather_df.iloc[:, 0] / weather_df.iloc[:, 0]
+                    )
         else:
             degradation = bin_widths * ((np.exp(-C2 * wavelengths) * irradiance) ** p)
             if Ea != 0:
@@ -215,13 +209,13 @@ def arrhenius(
                     degradation = (
                         degradation
                         * Ro
-                        * np.exp(-(Ea / (0.00831446261815324 * (temperature + 273.15))))
+                        * np.exp(-(Ea / (R_GAS * (temperature + 273.15))))
                     )
                 else:
                     degradation = (
                         degradation
                         * Ro
-                        * np.exp(-(Ea / (0.00831446261815324 * (temperature + 273.15))))
+                        * np.exp(-(Ea / (R_GAS * (temperature + 273.15))))
                         * (RH**n)
                     )
             else:
@@ -231,31 +225,25 @@ def arrhenius(
                     degradation = degradation * Ro * (RH**n)
     elif Ea != 0:
         if n == 0 and p == 0:
-            degradation = Ro * np.exp(
-                -(Ea / (0.00831446261815324 * (temperature + 273.15)))
-            )
+            degradation = Ro * np.exp(-(Ea / (R_GAS * (temperature + 273.15))))
         elif n == 0 and p != 0:
             degradation = (
-                Ro
-                * np.exp(-(Ea / (0.00831446261815324 * (temperature + 273.15))))
-                * (irradiance**p)
+                Ro * np.exp(-(Ea / (R_GAS * (temperature + 273.15)))) * (irradiance**p)
             )
         elif n != 0 and p == 0:
             degradation = (
-                Ro
-                * np.exp(-(Ea / (0.00831446261815324 * (temperature + 273.15))))
-                * (RH**n)
+                Ro * np.exp(-(Ea / (R_GAS * (temperature + 273.15)))) * (RH**n)
             )
         else:
             degradation = (
                 Ro
-                * np.exp(-(Ea / (0.00831446261815324 * (temperature + 273.15))))
+                * np.exp(-(Ea / (R_GAS * (temperature + 273.15))))
                 * (RH**n)
                 * (irradiance**p)
             )
     else:
         if n == 0 and p == 0:
-            degradation = Ro * temperature / temperature
+            degradation = Ro * weather_df.iloc[:, 0] / weather_df.iloc[:, 0]
         elif n == 0 and p != 0:
             degradation = Ro * (irradiance**p)
         elif n != 0 and p == 0:
@@ -606,9 +594,7 @@ def arrhenius_deg(
 
     # rate of degradation of the environment
     arrheniusDenominator = (
-        (poa_global**p)
-        * (rh_outdoor**n)
-        * np.exp(-Ea / (0.00831446261815324 * (temp + 273.15)))
+        (poa_global**p) * (rh_outdoor**n) * np.exp(-Ea / (R_GAS * (temp + 273.15)))
     )
 
     AvgOfDenominator = arrheniusDenominator.mean()
@@ -617,7 +603,7 @@ def arrhenius_deg(
     arrheniusNumerator = (
         (I_chamber**p)
         * (rh_chamber**n)
-        * np.exp(-Ea / (0.00831446261815324 * (temp_chamber + 273.15)))
+        * np.exp(-Ea / (R_GAS * (temp_chamber + 273.15)))
     )
 
     accelerationFactor = arrheniusNumerator / AvgOfDenominator
@@ -645,9 +631,9 @@ def _T_eq_arrhenius(temp, Ea):
 
     """
 
-    summationFrame = np.exp(-(Ea / (0.00831446261815324 * (temp + 273.15))))
+    summationFrame = np.exp(-(Ea / (R_GAS * (temp + 273.15))))
     sumForTeq = summationFrame.sum(axis=0, skipna=True)
-    Teq = -((Ea) / (0.00831446261815324 * np.log(sumForTeq / len(temp))))
+    Teq = -((Ea) / (R_GAS * np.log(sumForTeq / len(temp))))
     # Convert to celsius
     Teq = Teq - 273.15
 
@@ -689,13 +675,10 @@ def _RH_wa_arrhenius(rh_outdoor, temp, Ea, Teq=None, n=1):
     if Teq is None:
         Teq = _T_eq_arrhenius(temp, Ea)
 
-    summationFrame = (rh_outdoor**n) * np.exp(
-        -(Ea / (0.00831446261815324 * (temp + 273.15)))
-    )
+    summationFrame = (rh_outdoor**n) * np.exp(-(Ea / (R_GAS * (temp + 273.15))))
     sumForRHwa = summationFrame.sum(axis=0, skipna=True)
     RHwa = (
-        sumForRHwa
-        / (len(summationFrame) * np.exp(-(Ea / (0.00831446261815324 * (Teq + 273.15)))))
+        sumForRHwa / (len(summationFrame) * np.exp(-(Ea / (R_GAS * (Teq + 273.15)))))
     ) ** (1 / n)
 
     return RHwa
@@ -819,14 +802,12 @@ def IwaArrhenius(
     numerator = (
         poa_global ** (p)
         * rh_outdoor ** (n)
-        * np.exp(-(Ea / (0.00831446261815324 * (temp + 273.15))))
+        * np.exp(-(Ea / (R_GAS * (temp + 273.15))))
     )
     sumOfNumerator = numerator.sum(axis=0, skipna=True)
 
     denominator = (
-        (len(numerator))
-        * ((RHwa) ** n)
-        * (np.exp(-(Ea / (0.00831446261815324 * (Teq + 273.15)))))
+        (len(numerator)) * ((RHwa) ** n) * (np.exp(-(Ea / (R_GAS * (Teq + 273.15)))))
     )
 
     IWa = (sumOfNumerator / denominator) ** (1 / p)
@@ -838,7 +819,7 @@ def degradation_spectral(
     spectra: pd.Series,
     rh: pd.Series,
     temp: pd.Series,
-    wavelengths: Union[int, np.ndarray[float]],
+    wavelengths: Union[int, np.ndarray],
     time: pd.Series,
     Ea: float = 0.0,
     n: float = 0.0,
@@ -892,32 +873,25 @@ def degradation_spectral(
     # temp_module = df['temp_module']
     # rh_module = df['rh_module']
 
-    # Constants
-    R = 0.008314459848  # Gas Constant in [kJ/mol*K]
-
     wav_bin = list(np.diff(wavelengths))
     wav_bin.append(wav_bin[-1])  # Adding a bin for the last wavelength
 
-    # Integral over Wavelength
     try:
         irr = pd.DataFrame(spectra.tolist(), index=spectra.index)
         irr.columns = wavelengths
     except Exception:
-        # TODO: Fix this except it works on some cases, veto it by cases
         print("Removing brackets from spectral irradiance data")
-        # irr = data['spectra'].str.strip('[
-        # ]').str.split(',', expand=True).astype(float)
         irr = spectra.str.strip("[]").str.split(",", expand=True).astype(float)
         irr.columns = wavelengths
 
-    sensitivitywavelengths = np.exp(-C2 * wavelengths)
+    sensitivitywavelengths = np.exp(-C2 * np.array(wavelengths))
     irr = irr * sensitivitywavelengths
     irr *= np.array(wav_bin)
     irr = irr**p
     data = pd.DataFrame(index=spectra.index)
     data["G_integral"] = irr.sum(axis=1)
 
-    EApR = -Ea / R
+    EApR = -Ea / R_GAS
     C4 = np.exp(EApR / temp)
 
     RHn = rh**n
@@ -930,13 +904,11 @@ def degradation_spectral(
     return degradation
 
 
-# change it to take pd.DataFrame? instead of np.ndarray
 def vecArrhenius(
     poa_global: np.ndarray, module_temp: np.ndarray, ea: float, x: float, lnr0: float
 ) -> float:
     """
-    Calculates degradation using :math:`R_D = R_0 * I^X * e^{\\frac{-Ea}{kT}}`
-
+    Calculates degradation using :math:`R_D = R_0 * I^X * e^{-Ea/(kT)}`
     Parameters
     ----------
     poa_global : numpy.ndarray
@@ -947,20 +919,15 @@ def vecArrhenius(
 
     ea : float
         Activation energy [kJ/mol]
-
     x : float
         Irradiance relation [unitless]
-
-    lnR0 : float
+    lnr0 : float
         prefactor [ln(%/h)]
-
     Returns
     ----------
     degradation : float
         Degradation Rate [%/h]
-
     """
-
     mask = poa_global >= 25
     poa_global = poa_global[mask]
     module_temp = module_temp[mask]
@@ -970,9 +937,7 @@ def vecArrhenius(
     poa_global_scaled = poa_global / 1000
 
     degradation = 0
-    for entry in range(
-        len(poa_global_scaled)
-    ):  # list comprehension not supported by numba
+    for entry in range(len(poa_global_scaled)):
         degradation += (
             R0
             * np.exp(-ea_scaled / (273.15 + module_temp[entry]))
