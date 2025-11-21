@@ -1,0 +1,86 @@
+version: 1
+project:
+  title: PVDEG Tutorials
+  authors:
+    - name: Martin Springer
+    - name: Matthew Brown
+    - name: Silvana Ovaitt
+    - name: Tobin Ford
+    - name: Joseph Karas
+    - name: Michael Kempe
+  exclude:
+    - _build
+    - .ipynb_checkpoints
+    - '*/scripts'
+    - '*/scripts/*'
+  github: NREL/PVDegradationTools
+  thebe:
+    binder:
+      repo: NREL/PVDegradationTools
+      provider: github
+      ref: main
+  bibliography:
+    - references.bib
+  exports:
+    - format: pdf
+      template: plain_latex_book
+      output: exports/book.pdf
+  toc:
+    - file: intro.md
+    - title: 01 - Basics
+      children:
+        - file: 01_basics\01_basics_humidity_design.ipynb
+        - file: 01_basics\02_degradation.ipynb
+        - file: 01_basics\03_spectral_degradation.ipynb
+        - file: 01_basics\04_weather_database_access.ipynb
+    - title: 02 - Degradation Mechanisms
+      children:
+        - file: 02_degradation\01_bo_lid_accelerated_test.ipynb
+        - file: 02_degradation\02_letid_accelerated_test.ipynb
+        - file: 02_degradation\03_letid_outdoor.ipynb
+        - file: 02_degradation\04_letid_outdoor_scenario.ipynb
+        - file: 02_degradation\05_letid_passivated_wafer.ipynb
+        - file: 02_degradation\06_vant_hoff_degradation_model.ipynb
+    - title: 03 - Monte Carlo Simulations
+      children:
+        - file: 03_monte_carlo\01_arrhenius.ipynb
+        - file: 03_monte_carlo\02_standoff.ipynb
+    - title: 04 - Geospatial & Scenarios (HPC Required)
+      children:
+        - file: 04_geospatial\01_local_scenario.ipynb
+          title: Local Scenario (No HPC)
+        - file: 04_geospatial\02_geospatial_templates.ipynb
+          title: Geospatial Templates (HPC)
+        - file: 04_geospatial\03_scenario_geographical_features.ipynb
+          title: Geographical Features (HPC)
+        - file: 04_geospatial\04_scenario_geospatial.ipynb
+          title: Scenario Geospatial (HPC)
+        - file: 04_geospatial\05_scenario_mountain_downselect.ipynb
+          title: Mountain Downselect (HPC)
+        - file: 04_geospatial\06_scenario_single_location.ipynb
+          title: Single Location (HPC)
+        - file: 04_geospatial\07_scenario_temperature.ipynb
+          title: Temperature Scenario (HPC)
+    - title: 05 - Advanced Topics
+      children:
+        - file: 05_advanced\01_custom_functions_nopython.ipynb
+        - file: 05_advanced\02_pysam_single_location.ipynb
+        - file: 05_advanced\03_pysam_api.ipynb
+          title: PySAM with API (API Key Required)
+        - file: 05_advanced\04_nsrdb_distributed_api.ipynb
+          title: NSRDB Distributed (API Key Required)
+        - file: 05_advanced\05_pvgis_distributed.ipynb
+    - title: 06 - NREL HPC
+      children:
+        - file: 06_nrel_hpc\01_geospatial_world_map.ipynb
+        - file: 06_nrel_hpc\02_letid_outdoor_geospatial_demo.ipynb
+    - title: 07 - Workshop Demos
+      children:
+        - file: 07_workshop_demos\01_astm_live_demo.ipynb
+        - file: 07_workshop_demos\02_duramat_live_demo.ipynb
+          title: DuraMAT Live Demo (HPC Required)
+site:
+  options:
+    logo: ../docs/source/_static/logo-vectors/PVdeg-Logo-Horiz-Color.svg
+    folders: true
+  template: book-theme

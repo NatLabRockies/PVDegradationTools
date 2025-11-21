@@ -49,14 +49,14 @@ jobs:
     # Build the book
     - name: Build the book
       run: |
-        jupyter-book build tutorials
+        jupyter-book build --site tutorials
 
     # Upload the book's HTML as an artifact
     - name: Upload artifact
       if: github.ref == 'refs/heads/main'
       uses: actions/upload-pages-artifact@v3
       with:
-        path: "tutorials/_build/html"
+        path: "tutorials/_build/site/public"
 
     # Deploy the book's HTML to GitHub Pages
     - name: Deploy to GitHub Pages
