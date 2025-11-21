@@ -8,6 +8,11 @@ logo: ../docs/source/_static/logo-vectors/PVdeg-Logo-Horiz-Color.svg
 # Auto-exclude files not in the toc
 only_build_toc_files        : true
 
+# Exclude patterns for files that shouldn't be built
+exclude_patterns:
+  - "**/scripts/**"
+  - "**/.ipynb_checkpoints/**"
+
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
