@@ -148,12 +148,7 @@ else:
 from pathlib import Path
 
 parent_dir = Path(pvdeg.PVDEG_DIR).parent
-new_path = (
-    parent_dir
-    / "tutorials_and_tools"
-    / "tutorials_and_tools"
-    / "temperature_and_degradation.json"
-)
+new_path = parent_dir / "tutorials" / "data" / "temperature_and_degradation.json"
 
 copy = pvdeg.scenario.Scenario.load_json(
     file_path=str(new_path),
