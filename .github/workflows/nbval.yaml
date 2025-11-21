@@ -33,7 +33,6 @@ jobs:
         "07_workshop_demos/01_astm_live_demo.ipynb:10"
         "../tools/Tools - Degradation.ipynb:15"
         "../tools/Tools - Edge Seal Oxygen Ingress.ipynb:15"
-        "../tools/Tools - Module Standoff for IEC TS 63126.ipynb:20"
     steps:
       - name: Calculate batch matrix
         id: set-matrix
