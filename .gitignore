@@ -69,6 +69,7 @@ instance/
 docs/sphinx/_build/
 
 # tutorial jupyter-book
+_build/
 pvdeg_tutorials/_build/
 tutorials/_build/
 tutorials_and_tools/_build/
