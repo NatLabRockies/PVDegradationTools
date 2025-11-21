@@ -286,7 +286,7 @@ def test_read_material_normal():
     }
 
     template_material = pvdeg.utilities.read_material(
-        pvdeg_file="O2permeation", key="OX002"
+        pvdeg_file="O2permeation", key="OX002", values_only=False
     )
 
     assert template_material == res
@@ -363,6 +363,7 @@ def test_read_material_fp_override():
         pvdeg_file="O2permeation",
         fp=os.path.join(DATA_DIR, "AApermeation.json"),
         key="OX002",
+        values_only=False,
     )
 
     assert template_material == res
