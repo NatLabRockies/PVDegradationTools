@@ -153,16 +153,19 @@ def test_convert_tmy(tmp_path):
 
 
 def test_get_kinetics():
-    """
-    Test pvdeg.utilities.get_kinetics
+    """Test pvdeg.utilities.get_kinetics for a known kinetics set."""
+    result = pvdeg.utilities.get_kinetics("D037")
 
-    Requires:
-    --------
-    data : dict, from kinetic_parameters.json
-    """
-    data = load_json("kinetic_parameters.json")
-    result = pvdeg.utilities.get_kinetics("repins")
-    assert data["repins"] == result
+    # get_kinetics should extract numeric values from the nested dict structure
+    # Check that values are extracted correctly
+    assert isinstance(result, dict)
+    assert result["v_ab"] == 46700000.0
+    assert result["ea_ab"] == 0.827
+    assert result["DataEntryPerson"] == "Rajiv (Dax) Daxini"
+
+    # Check that nested dicts are properly extracted
+    assert isinstance(result["v_ab"], (int, float))  # should be numeric, not dict
+    assert isinstance(result["ea_ab"], (int, float))  # should be numeric, not dict
 
 
 def test_gid_downsampling():
@@ -179,7 +182,7 @@ def test_gid_downsampling():
 
 def test_get_kinetics_bad():
     # no name provided case
-    data = load_json("kinetic_parameters.json")
+    data = load_json("DegradationDatabase.json")
     parameters_list = data.keys()
 
     desired_output = ("Choose a set of kinetic parameters:", [*parameters_list])
@@ -283,7 +286,7 @@ def test_read_material_normal():
     }
 
     template_material = pvdeg.utilities.read_material(
-        pvdeg_file="O2permeation", key="OX002"
+        pvdeg_file="O2permeation", key="OX002", values_only=False
     )
 
     assert template_material == res
@@ -360,6 +363,7 @@ def test_read_material_fp_override():
         pvdeg_file="O2permeation",
         fp=os.path.join(DATA_DIR, "AApermeation.json"),
         key="OX002",
+        values_only=False,
     )
 
     assert template_material == res

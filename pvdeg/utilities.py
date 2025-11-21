@@ -74,23 +74,23 @@ def meta_as_dict(rec):
     return {name: rec[name].item() for name in rec.dtype.names}
 
 
-def get_kinetics(name=None, fname="kinetic_parameters.json"):
-    """Return a list of LETID/B-O LID kinetic parameters from kinetic_parameters.json.
+def get_kinetics(name=None, fname="DegradationDatabase.json", encoding="utf-8"):
+    """Return a list of LETID/B-O LID kinetic parameters from DegradationDatabase.json.
 
     Parameters
     ----------
     name : str
         unique name of kinetic parameter set. If None, returns a list of the possible
         options.
-
+    encoding : str
+        file encoding format, default is 'utf-8'
     Returns
     -------
     parameter_dict : (dict)
         dictionary of kinetic parameters
     """
     fpath = os.path.join(DATA_DIR, fname)
-
-    with open(fpath) as f:
+    with open(fpath, encoding="utf-8") as f:
         data = json.load(f)
 
     # TODO: rewrite to use exception handling
@@ -99,7 +99,15 @@ def get_kinetics(name=None, fname="kinetic_parameters.json"):
         return "Choose a set of kinetic parameters:", [*parameters_list]
 
     kinetic_parameters = data[name]
-    return kinetic_parameters
+
+    extracted_params = {}
+    for key, value in kinetic_parameters.items():
+        if isinstance(value, dict) and "value" in value:
+            extracted_params[key] = value["value"]
+        else:
+            extracted_params[key] = value
+
+    return extracted_params
 
 
 def write_gids(
@@ -492,8 +500,6 @@ def convert_tmy(file_in, file_out="h5_from_tmy.h5"):
         )
 
 
-# currently this is only designed for Oxygen Permeation. It could easily be adapted for
-# all permeation data.
 def _add_material(
     name,
     alias,
@@ -525,13 +531,13 @@ def _add_material(
     Eas : (float)
         Solubility Activation Energy [kJ/mol]
     So : (float)
-        Solubility Prefactor [g/cm^3]
+        Solubility Prefactor [g/cm³]
     Do : (float)
-        Diffusivity Prefactor [cm^2/s] (unused)
+        Diffusivity Prefactor [cm²/s] (unused)
     Eap : (float)
         Permeability Activation Energy [kJ/mol] (unused)
     Po : (float)
-        Permeability Prefactor [g*mm/m^2/day] (unused)
+        Permeability Prefactor [g*mm/m²/day] (unused)
     fickian : (boolean)
         I have no idea what this means (unused)
     fp : (str)
@@ -1452,9 +1458,15 @@ def read_material(
     pvdeg_file: str = None,
     fp: str = None,
     key: str = None,
+    parameters: list[str] = None,
     encoding: str = "utf-8",
+    values_only: bool = True,
 ) -> dict:
-    """Read material dictionary from a `pvdeg/data` file or JSON file path.
+    """Read material dictionary and return parameter dictionary in
+    normalized format.
+
+     Read material dictionary from a `pvdeg/data` file or JSON file path
+     and return the parameter dictionary in normalized format.
 
     Parameters
     ----------
@@ -1462,20 +1474,31 @@ def read_material(
         keyword for material json file in `pvdeg/data`. Options:
         >>> "AApermeation", "H2Opermeation", "O2permeation"
     fp: str
-        file path to material parameters json with same schema as material parameters
-        json files in `pvdeg/data`. `pvdeg_file` will override `fp` if both are
-        provided.
+        file path to material parameters json with same schema as material
+        parameters json files in `pvdeg/data`. `pvdeg_file` will override
+        `fp` if both are provided.
     key: str
-        key corresponding to specific material in the file. In the pvdeg files these
-        have arbitrary names. Inspect the files or use `display_json` or `search_json`
-        to identify the key for desired material.
+        key corresponding to specific material in the file. In the pvdeg
+        files these have arbitrary names. Inspect the files or use
+        `display_json` or `search_json` to identify the key for desired
+        material.
+    parameters: list[str]
+        parameters to grab from the file at index key. If none, will grab
+        all items at index key. the elements in parameters must match the
+        keys in the json exactly or the output value for the specific
+        key/parameter in the returned dict will be `None`.
     encoding : (str)
         encoding to use when reading the JSON file, default is "utf-8"
+    values_only : bool, default=True
+        If True, extract only the 'value' field from nested dicts. If
+        False, return the full nested structure with metadata (name, units,
+        value).
 
     Returns
     -------
     material: dict
-        dictionary of material parameters from the selected file at the index key.
+        dictionary with normalized structure containing material_file,
+        material_name, and parameters
     """
     if pvdeg_file:
         try:
@@ -1490,6 +1513,17 @@ def read_material(
         data = json.load(file)
 
     material_dict = data[key]
+
+    # Filter by parameters if specified
+    if parameters is not None:
+        material_dict = {k: material_dict.get(k) for k in parameters}
+
+    if values_only:
+        material_dict = {
+            k: v["value"] if isinstance(v, dict) and "value" in v else v
+            for k, v in material_dict.items()
+        }
+
     return material_dict
 
 

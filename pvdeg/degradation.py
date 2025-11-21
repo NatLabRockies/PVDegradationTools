@@ -835,7 +835,7 @@ def degradation_spectral(
     Parameters
     ----------
     spectra : pd.Series type=Float
-        front or rear irradiance at each wavelength in "wavelengths" [W/m^2 nm]
+        front or rear irradiance at each wavelength in "wavelengths" [W/m² nm]
     rh : pd.Series type=Float
         RH, time indexed [%]
     temp : pd.Series type=Float
@@ -912,9 +912,11 @@ def vecArrhenius(
     Parameters
     ----------
     poa_global : numpy.ndarray
-        Plane of array irradiance [W/m^2]
+        Plane of array irradiance [W/m²]
+
     module_temp : numpy.ndarray
-        Cell temperature [C].
+        Cell temperature [°C].
+
     ea : float
         Activation energy [kJ/mol]
     x : float
