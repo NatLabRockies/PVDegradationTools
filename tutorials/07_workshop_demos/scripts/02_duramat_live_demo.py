@@ -1,7 +1,7 @@
 # %% [markdown]
 # # DuraMAT Workshop Live Demo - Geospatial analysis
 #
-# ![PVDeg Logo](../PVD_logo.png)
+# ![PVDeg Logo](../images/pvdeg_logo.svg)
 #
 #
 # **Steps:**
@@ -11,7 +11,7 @@
 #
 # **Xarray: multi-dimensional data frame**
 #
-# ![Xarray](./images/xarray.webp)
+# ![Xarray](../images/xarray.webp)
 
 # %%
 import pandas as pd
@@ -154,9 +154,9 @@ RH_module
 
 # import imageio
 # ims = [imageio.imread(f'./images/RH_animation_{n}.png') for n in range(1, 13)]
-# imageio.mimwrite(f'./images/RH_animation.gif', ims, format='GIF', duration=1000, loop=10)
+# imageio.mimwrite(f'../images/RH_animation.gif', ims, format='GIF', duration=1000, loop=10)
 
 # %% [markdown]
-# ![PVDeg Logo](./images/RH_animation.gif)
+# <!-- ![Animation](../images/RH_animation.gif) - Animation not available, see code above to generate -->
 
 # %%

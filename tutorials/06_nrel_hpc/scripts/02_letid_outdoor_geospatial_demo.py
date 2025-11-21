@@ -1,7 +1,7 @@
 # %% [markdown]
 # # LETID - Outdoor Geospatioal Demo
 #
-# ![PVDeg Logo](../PVD_logo.png)
+# ![PVDeg Logo](../images/pvdeg_logo.svg)
 #
 
 # %%

@@ -1,7 +1,7 @@
 # %% [markdown]
 # # ASTM Demonstration
 #
-# ![PVDeg Logo](../PVD_logo.png)
+# ![PVDeg Logo](../images/pvdeg_logo.svg)
 #
 #
 # **Steps:**
@@ -75,7 +75,7 @@ print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
 #
-# ![NSRDB Example](images/tutorial_1_NSRDB_example.PNG)
+# ![NSRDB Example](../images/tutorial_1_NSRDB_example.PNG)
 #
 
 # %% [markdown]
