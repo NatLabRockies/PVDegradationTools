@@ -10,12 +10,14 @@ Breaking Changes
 
 Enhancements
 ------------
-- Python 3.13 support has been added. (:issue:`279`, :pull:`281`)
+- Add Python 3.13 support. (:issue:`279`, :pull:`281`)
+- Remove `kinetic_parameters.json` and merged parameters into
+  'DegradationDatabase.json`. (:issue:`176`, :pull:`248`)
 
 
 Deprecations
 -------------
-- Python 3.9 support has been dropped. The minimum supported Python version is now 3.10.
+- Drop Python 3.9 support. The minimum supported Python version is now 3.10.
 
 
 Bug Fixes
