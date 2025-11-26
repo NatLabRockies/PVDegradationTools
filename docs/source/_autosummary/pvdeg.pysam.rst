@@ -6,7 +6,6 @@ pvdeg.pysam
 
 .. automodule:: pvdeg.pysam
 
-   .. this is crazy  
 
    
    
