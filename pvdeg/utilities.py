@@ -1600,7 +1600,9 @@ def optimal_gcr_pitch_bifacial_fixed_tilt(
 
         GCR = \frac{P}{1 + e^{-k(\alpha - \alpha_0)}} + GCR_0
 
-    Inter-row energy yield loss 5% Bifacial Parameters:
+
+    Inter-row energy-yield loss 5% bifacial fixed-tilt parameters,
+    as reported in Table 1 of Tonita et al. (2023):
 
     +-----------+--------+-----------+
     | Parameter | Value  | Units     |
