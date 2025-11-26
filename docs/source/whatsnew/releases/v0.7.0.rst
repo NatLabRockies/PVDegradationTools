@@ -1,0 +1,56 @@
+v0.7.0 (2025-10-22)
+===================
+
+Breaking Changes
+----------------
+- Update NSRDB weather data retrieval to use PSM v4 instead of
+  PSM v3. Instances of ``pvlib.iotools.get_psm3()`` replaced with
+  ``pvlib.iotools.get_nsrdb_psm4_tmy()``. (:issue:`286`, :pull:`287`)
+
+
+Enhancements
+------------
+- Add Python 3.13 support. (:issue:`279`, :pull:`281`)
+- Remove `kinetic_parameters.json` and merged parameters into
+  'DegradationDatabase.json`. (:issue:`176`, :pull:`248`)
+- Add pysam module to support InSPIRE Agrivoltaics geospatial simulations. Currently our
+  pysam wrapper implementation is largely project specific. We aim to generalize this
+  module in the future to support out of the box geospatial pysam calculations for all
+  users. (:pull:`252`)
+    - Expert options added to `pvdeg.geospatial.analysis`. Details are as follows:
+    - `preserve_gid_dim` optional boolean flag. Keeps model outputs in ``gid`` dimension
+      rather than converting to ``latitude``, ``longitude`` domain.
+    - `compute` optional boolean flag. Prevents eager computation inside of anlysis
+      function.
+      ``analysis(..., compute=False)`` will return a ``dask.Delayed`` object which can
+      be used to build a task graph.
+- Add new (public) module :py:mod:`pvdeg.pysam` to wrap NREL-PySAM for easy SAM
+  simulations.
+  - Add new (public) functions as follows:
+    - :py:mod:`pvdeg.pysam.pysam()` to run SAM simulations.
+    - :py:mod:`optimal_gcr_pitch()` to calculate optimal gcr and pitch for fixed tilt bifacial systems according to latitude and optimal GCR parameters.
+    - :py:mod:`inspire_practical_pitch()` to calcuate tilt, pitch, and gcr for practically constrained systems according to :py:mod:`optimal_gcr_pitch()`
+    - :py:mod:`inspire_ground_irradiance()` to calculate inter-row ground irradiance for the InSPIRE agrivoltaics irradiance dataset.
+    - :py:mod:`solar_resource_dict()` to create solar_resource collections for SAM input from PVDeg weather and metadata.
+
+
+Deprecations
+-------------
+- Drop Python 3.9 support. The minimum supported Python version is now 3.10.
+
+
+Bug Fixes
+---------
+- Update MD5 checksum references in documentation from old hash to new hash
+
+
+Dependencies
+------------
+- Pin h5py<=3.14.0 (:issue:`278`, :pull:`277`)
+
+
+Contributors
+------------
+- Rajiv Daxini (:ghuser:`RDaxini`)
+- Martin Springer (:ghuser:`martin-springer`)
+- Tobin Ford (:ghuser:`tobin-ford`)
