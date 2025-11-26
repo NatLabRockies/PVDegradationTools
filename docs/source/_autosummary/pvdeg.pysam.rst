@@ -27,7 +27,6 @@ pvdeg.pysam
    
    
    
-   .. this is crazy  
 
    
    
