@@ -27,7 +27,7 @@ weather_pvgis, meta_pvgis = pvdeg.weather.get(
 results = pvdeg.pysam.pysam(
     weather_df=weather_pvgis,
     meta=meta_pvgis,
-    pv_model="pysamv1",
+    pv_model="pvsamv1",
     pv_model_default="FlatPlatePVCommercial",
 )
 
