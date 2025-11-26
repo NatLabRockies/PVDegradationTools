@@ -1590,8 +1590,11 @@ def optimal_gcr_pitch_bifacial_fixed_tilt(
     latitude: float, cw: float = 2
 ) -> tuple[float, float]:
     """
-    Determine optimal gcr and pitch for fixed tilt systems according
-    to latitude and optimal GCR parameters for fixed tilt bifacial systems.
+    Compute the optimal ground coverage ratio (GCR) and row pitch for
+    fixed-tilt bifacial PV systems as a function of latitude.
+
+    This implements Eq. (4) from Tonita et al. (2023) for the 5% inter-row
+    energy-yield loss criterion for bifacial fixed-tilt systems:
 
     .. math::
 
