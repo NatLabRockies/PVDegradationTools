@@ -28,14 +28,14 @@ pvdeg_datafiles = {
 def gid_downsampling(meta, n):
     """Downsample the NSRDB GID grid by a factor of n.
 
-    Parameters:
+    Parameters
     -----------
     meta : (pd.DataFrame)
         DataFrame of NSRDB meta data
     n : (int)
         Downsample factor
 
-    Returns:
+    Returns
     --------
     meta_sub : (pd.DataFrame)
         DataFrame of NSRDB meta data
@@ -926,45 +926,6 @@ def new_id(collection):
     return id
 
 
-def restore_gids(
-    original_meta_df: pd.DataFrame, analysis_result_ds: xr.Dataset
-) -> xr.Dataset:
-    """Restore gids to results dataset.
-
-    For desired behavior output data must have
-    identical ordering to input data, otherwise will fail silently by misassigning gids
-    to lat-long coordinates in returned dataset.
-
-    Parameters
-    ----------
-    original_meta_df : pd.DataFrame
-        Metadata dataframe as returned by geospatial ``pvdeg.weather.get``
-    analysis_result_ds : xr.Dataset
-        geospatial result data as returned by ``pvdeg.geospatial.analysis``
-
-    Returns
-    -------
-    restored_gids_ds : xr.Dataset
-        dataset like ``analysis_result_ds`` with new datavariable, ``gid``
-        holding the original gids of each result from the input metadata.
-        Warning: if meta order is different than result ordering gids will
-        be assigned incorrectly.
-    """
-    flattened = analysis_result_ds.stack(points=("latitude", "longitude"))
-
-    gids = original_meta_df.index.values
-
-    # Create a DataArray with the gids and assign it to the Dataset
-    gids_da = xr.DataArray(gids, coords=[flattened["points"]], name="gid")
-
-    # Unstack the DataArray to match the original dimensions of the Dataset
-    gids_da = gids_da.unstack("points")
-
-    restored_gids_ds = analysis_result_ds.assign(gid=gids_da)
-
-    return restored_gids_ds
-
-
 def _find_bbox_corners(coord_1=None, coord_2=None, coords=None):
     """Find min/max latitude and longitude.
 
@@ -1145,7 +1106,6 @@ def fix_metadata(meta):
 
 
 # we want this to only exist for things that can be run on kestrel
-# moving away from hpc tools so this may not be useful in the future
 def nrel_kestrel_check():
     """Check if the user is on Kestrel HPC environment.
 
@@ -1161,17 +1121,16 @@ def nrel_kestrel_check():
     NREL HPC : https://www.nrel.gov/hpc/
     Kestrel Documentation : https://nrel.github.io/HPC/Documentation/
     """
-    kestrel_hostname = "kestrel.hpc.nrel.gov"
+
+    KESTREL_HOSTNAME = "kestrel.hpc.nrel.gov"
 
     host = run(args=["hostname", "-f"], shell=False, capture_output=True, text=True)
     device_domain = ".".join(host.stdout.split(".")[-4:])[:-1]
 
-    if kestrel_hostname != device_domain:
-        raise ConnectionError(
-            f"""
-            connected to {device_domain} not a node of {kestrel_hostname}")
-            """
-        )
+    msg = f"connected to {device_domain}" f"not a node of {KESTREL_HOSTNAME}"
+
+    if KESTREL_HOSTNAME != device_domain:
+        raise ConnectionError(msg)
 
 
 def remove_scenario_filetrees(fp, pattern="pvd_job_*"):
@@ -1297,11 +1256,10 @@ def add_time_columns_tmy(weather_df, coerce_year=1979):
     return weather_df
 
 
-def merge_sparse(files: list[str]) -> xr.Dataset:
-    """Merge an arbitrary number of geospatial analysis results.
-
-    Creates monotonically
-    increasing indicies.
+def merge_sparse(files: list[str], engine: str = "h5netcdf") -> xr.Dataset:
+    """
+    Merge an arbitrary number of geospatial analysis results.
+    Creates monotonically increasing indicies.
 
     Uses `engine='h5netcdf'` for reliability, use h5netcdf to save your results to
     netcdf files.
@@ -1319,7 +1277,8 @@ def merge_sparse(files: list[str]) -> xr.Dataset:
         Dataset (in memory) with `coordinates = ['latitude','longitude']` and
         datavariables matching files in filepaths list.
     """
-    datasets = [xr.open_dataset(fp, engine="h5netcdf").compute() for fp in files]
+
+    datasets = [xr.open_dataset(fp, engine=engine).compute() for fp in files]
 
     latitudes = np.concatenate([ds.latitude.values for ds in datasets])
     longitudes = np.concatenate([ds.longitude.values for ds in datasets])
@@ -1575,3 +1534,174 @@ def read_material_property(
             for k, v in material_dict.items()
         }
     return material_dict
+
+
+def gids_dataset_to_coords_dataset(ds_gids: xr.Dataset, meta_df: pd.DataFrame):
+    """
+    Convert dataset gids to gridded latitude, longitude dataset.
+    Maintains all other coordiantes.
+
+    Aims to support advanced workflows where pvdeg.geospatial.analysis is applied twice.
+
+    Parameters
+    ----------
+    ds_gids : xr.Dataset
+        dataset with "gid" dimension/coords
+    meta_df : pd.DataFrame
+        metadata pandas dataframe containing gid index, and latitude
+        and longitude columns
+
+    Returns
+    -------
+    coords_ds: xr.Dataset
+        dataset with "latitude", "longitude" dimensions/coords in
+        addition to original coords not including "gids"
+    """
+
+    meta_df = meta_df.loc[ds_gids.gid]
+
+    stacked = ds_gids.drop(["gid"])
+
+    mindex_obj = pd.MultiIndex.from_arrays(
+        [meta_df["latitude"], meta_df["longitude"]], names=["latitude", "longitude"]
+    )
+    mindex_coords = xr.Coordinates.from_pandas_multiindex(mindex_obj, "gid")
+    stacked = stacked.assign_coords(mindex_coords)
+
+    stacked = stacked.drop_duplicates("gid")
+    res = stacked.unstack("gid")
+    return res
+
+
+def _load_gcr_from_config(config_files: dict):
+    """
+    dictionary containg 'pv' key
+    """
+
+    import json
+
+    with open(config_files["pv"], "r") as fp:
+        data = json.load(fp)
+
+    return data["subarray1_gcr"]
+
+
+def optimal_gcr_pitch_bifacial_fixed_tilt(
+    latitude: float, cw: float = 2
+) -> tuple[float, float]:
+    """
+    Compute the optimal ground coverage ratio (GCR) and row pitch for
+    fixed-tilt bifacial PV systems as a function of latitude.
+
+    This implements Eq. (4) from Tonita et al. (2023) for the 5% inter-row
+    energy-yield loss criterion for bifacial fixed-tilt systems:
+
+    .. math::
+
+        GCR = \frac{P}{1 + e^{-k(\alpha - \alpha_0)}} + GCR_0
+
+
+    Inter-row energy-yield loss 5% bifacial fixed-tilt parameters,
+    as reported in Table 1 of Tonita et al. (2023):
+
+    +-----------+--------+-----------+
+    | Parameter | Value  | Units     |
+    +===========+========+===========+
+    | P         | -0.560  | unitless  |
+    | K         | 0.133  | 1/°       |
+    | α₀        | 40.2   | °         |
+    | GCR₀      | 0.70   | unitless  |
+    +-----------+--------+-----------+
+
+    Parameters
+    ------------
+    latitude: float
+        latitude [°]
+    cw: float
+        collector width [m]
+
+    Returns
+    --------
+    gcr: float
+        optimal ground coverage ratio [unitless]
+    pitch: float
+        optimal pitch [m]
+
+    References
+    -----------
+    Erin M. Tonita, Annie C.J. Russell, Christopher E. Valdivia, Karin Hinzer,
+    Optimal ground coverage ratios for tracked, fixed-tilt, and vertical photovoltaic
+    systems for latitudes up to 75°N,
+    Solar Energy,
+    Volume 258,
+    2023,
+    Pages 8-15,
+    ISSN 0038-092X,
+    https://doi.org/10.1016/j.solener.2023.04.038.
+
+    Optimal GCR from Equation 4
+    Parameters from Table 1
+    """
+
+    p = -0.560
+    k = 0.133
+    alpha_0 = 40.2
+    gcr_0 = 0.70
+
+    # optimal gcr
+    gcr = ((p) / (1 + np.exp(-k * (latitude - alpha_0)))) + gcr_0
+
+    pitch = cw / gcr
+    return gcr, pitch
+
+
+def practical_gcr_pitch_bifiacial_fixed_tilt(
+    latitude: float, cw: float
+) -> tuple[float, float, float]:
+    """
+    Calculate pitch for fixed tilt systems for InSPIRE Agrivoltaics Irradiance Dataset.
+
+    We cannot use the optimal pitch due to certain real world restrictions
+    so we will apply some constraints.
+
+    We are using latitude tilt but we cannot use tilts > 40°,
+    due to racking constraints, cap at 40° for latitudes above 40°.
+
+    pitch minimum: 3.8 m
+    pitch maximum:  12 m
+
+    tilt max: 40° (latitude tilt)
+
+    Parameters
+    ----------
+    latitude: float
+        latitude [°]
+    cw: float
+        collector width [m]
+
+    Returns
+    -------
+    tilt: float
+        tilt for a fixed tilt system with practical considerations [°]
+    pitch: float
+        pitch for a fixed tilt system with practical consideration [m]
+    gcr: float
+        gcr for a fixed tilt system with practical considerations [unitless]
+    """
+
+    gcr_optimal, pitch_optimal = optimal_gcr_pitch_bifacial_fixed_tilt(
+        latitude=latitude, cw=cw
+    )
+
+    pitch_ceil = min(pitch_optimal, 12)  # 12 m pitch ceiling
+    pitch_practical = max(pitch_ceil, 3.8)  # 3.8m pitch floor
+
+    if not (3.8 <= pitch_practical <= 12):
+        raise ValueError("calculated practical pitch is outside range [3.8m, 12m]")
+
+    tilt_practical = min(latitude, 40)
+
+    # practical gcr from practical pitch
+    gcr_practical = cw / pitch_practical
+
+    return float(tilt_practical), float(pitch_practical), float(gcr_practical)

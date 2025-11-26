@@ -84,9 +84,6 @@ books = [
 sam = [
     "NREL-PySAM",
 ]
-inspire = [
-    "NREL-PySAM==5.1.0",
-]
 all = [
     "pvdeg[docs,test,books,sam]",
 ]

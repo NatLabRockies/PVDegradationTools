@@ -18,6 +18,10 @@ Enhancements
 - Add Python 3.13 support. (:issue:`279`, :pull:`281`)
 - Remove `kinetic_parameters.json` and merged parameters into
   'DegradationDatabase.json`. (:issue:`176`, :pull:`248`)
+
+
+Enhancements
+------------
 - Add pysam module to support InSPIRE Agrivoltaics geospatial simulations. Currently our
   pysam wrapper implementation is largely project specific. We aim to generalize this
   module in the future to support out of the box geospatial pysam calculations for all
