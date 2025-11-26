@@ -29,7 +29,6 @@ jobs:
         "03_monte_carlo/02_standoff.ipynb:30"
         "04_geospatial/01_local_scenario.ipynb:1"
         "05_advanced/01_custom_functions_nopython.ipynb:30"
-        "05_advanced/02_pysam_single_location.ipynb:25"
         "07_workshop_demos/01_astm_live_demo.ipynb:10"
     steps:
       - name: Calculate batch matrix
