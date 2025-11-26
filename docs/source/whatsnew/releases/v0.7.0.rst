@@ -41,12 +41,12 @@ Enhancements
 
 Deprecations
 -------------
-- Drop Python 3.9 support. The minimum supported Python version is now 3.10.
+- Drop Python 3.9 support. The minimum supported Python version is now 3.10. (:issue:`279`, :pull:`281`)
 
 
 Bug Fixes
 ---------
-- Update MD5 checksum references in documentation from old hash to new hash
+- Update MD5 checksum references in documentation from old hash to new hash (:pull:`276`)
 
 
 Dependencies
