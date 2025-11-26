@@ -1602,7 +1602,7 @@ def optimal_gcr_pitch_bifacial_fixed_tilt(
     +-----------+--------+-----------+
     | Parameter | Value  | Units     |
     +===========+========+===========+
-    | P         | 0.560  | unitless  |
+    | P         | -0.560  | unitless  |
     | K         | 0.133  | 1/°       |
     | α₀        | 40.2   | °         |
     | GCR₀      | 0.70   | unitless  |
