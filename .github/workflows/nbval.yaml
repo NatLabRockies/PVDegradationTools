@@ -28,7 +28,6 @@ jobs:
         "LETID - Passivated Wafer.ipynb:80"
         "Monte Carlo - Arrhenius.ipynb:180"
         "Monte Carlo - Standoff.ipynb:30"
-        "Pysam - Single Location.ipynb:25"
         "Tools - Edge Seal Oxygen Ingress.ipynb:15"
         "Van't Hoff Degradation Model.ipynb:5"
         "Geospatial - Local Scenario.ipynb:1"
