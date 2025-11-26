@@ -1633,7 +1633,6 @@ def optimal_gcr_pitch_bifacial_fixed_tilt(
     Pages 8-15,
     ISSN 0038-092X,
     https://doi.org/10.1016/j.solener.2023.04.038.
-    (https://www.sciencedirect.com/science/article/pii/S0038092X23002682)
 
     Optimal GCR from Equation 4
     Parameters from Table 1
