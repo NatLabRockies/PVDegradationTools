@@ -59,11 +59,11 @@ If you use this calculator in a published work, please cite:
 
 
 Please also cite the DOI corresponding to the specific version that you used.
-DOIs are listed at Zenodo.org. `linked here <https://zenodo.org/records/13760911>`_
+DOIs are listed at Zenodo.org. `linked here <https://zenodo.org/records/17266145>`_
 
 .. code-block::
 
-   Martin Springer, Tobin Ford, Matt, MDKempe, Silvana Ovaitt, AidanWesley, joe karas, Mark Campanelli, Derek M Holsapple, and Kevin Anderson. “NREL/PVDegradationTools: 0.4.2.” Zenodo, 2024. doi:10.5281/zenodo.13760911.
+   RDaxini, Martin Springer, Tobin Ford, Matt, MDKempe, Silvana Ovaitt, AidanWesley, joe karas, Mark Campanelli, Derek M Holsapple, maxx-mill, & Kevin Anderson. (2025). NREL/PVDegradationTools: 0.6.1 (0.6.1). Zenodo. https://doi.org/10.5281/zenodo.17266145
 
 
 .. toctree::
