@@ -53,7 +53,7 @@ GEO_WEATHER = xr.open_dataset(os.path.join(TEST_DATA_DIR, "summit-weather.nc"))
 # %%
 # this is just a wrapper to grab the result we want
 def pysam_annual_energy(
-    weather_df, meta, pv_model="pysamv1", pv_model_default="FlatPlatePVCommercial"
+    weather_df, meta, pv_model="pvsamv1", pv_model_default="FlatPlatePVCommercial"
 ):
     # Drop the gid column if present (added by geospatial conversion)
     weather_df = weather_df.drop(columns=["gid"])
