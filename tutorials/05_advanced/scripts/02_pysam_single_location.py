@@ -13,7 +13,7 @@ weather, meta = pvdeg.weather.get(
 out_dict = pvdeg.pysam.pysam(
     weather_df=weather,
     meta=meta,
-    pv_model="pysamv1",
+    pv_model="pvsamv1",
     pv_model_default="FlatPlatePVCommercial",
 )
 for key in sorted(out_dict.keys()):
