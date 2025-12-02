@@ -8,7 +8,7 @@ As per the instructions in each notebook, you should uncomment the first line
 that reads `pip install ...` to install the environment if you follow this mode.
 
 You can also clone the repository and run them locally, following the
-instructions on the [PVDegTools Github page](https://github.com/NREL/PVDegradationTools)
+instructions on the [PVDeg Github page](https://github.com/NREL/PVDegradationTools)
 
 For standalone analysis tools, see the Tools section in the navigation menu or visit the [tools directory](../tools/).
 

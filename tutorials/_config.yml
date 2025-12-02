@@ -41,11 +41,14 @@ html:
   use_issues_button: true
   use_repository_button: true
 
-# Configure the sidebar to show only top-level entries
+# Configure Sphinx to limit TOC depth
 sphinx:
   config:
     html_theme_options:
-      show_toc_level: 1
+      navigation_depth: 1
+      show_nav_level: 1
+    # Limit the depth of the in-page table of contents
+    globaltoc_maxdepth: 1
 
 launch_buttons:
   thebe: true
