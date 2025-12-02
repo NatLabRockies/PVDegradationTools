@@ -4,8 +4,8 @@ Tutorials on using Monte Carlo methods for uncertainty analysis and probabilisti
 
 ## Tutorials
 
-- **arrhenius.ipynb** - Monte Carlo simulations with Arrhenius degradation models
-- **standoff.ipynb** - Monte Carlo analysis for module standoff parameters
+1. **01_arrhenius.ipynb** - Monte Carlo simulations with Arrhenius degradation models
+2. **02_standoff.ipynb** - Monte Carlo analysis for module standoff parameters
 
 ## Overview
 

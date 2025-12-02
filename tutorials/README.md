@@ -1,12 +1,10 @@
-<img src="PVD_logo.png" width="100">
-
-# PV Degradation Tools - TUTORIALS and Tools (pvdeg)
+# PVDeg - Tutorials and Tools
 
 ### Jupyter Book
 
 For learning to use PVDeg through our tutorials, or running the available tools online, see our [jupyter-book](https://nrel.github.io/PVDegradationTools/intro.html)
-Clicking on the rocket-icon on the top allows you to launch the journals on [Google Colaboratory](https://colab.research.google.com/) for interactive mode.
-Just uncomment the first line `pip install ...`  to install the environment on each journal if you follow this mode.
+Clicking on the rocket-icon on the top allows you to launch the notebooks on [Google Colaboratory](https://colab.research.google.com/) for interactive mode.
+Just uncomment the first line `pip install ...` to install the environment on each notebook if you follow this mode.
 
 ### Binder
 
@@ -48,4 +46,4 @@ You can also run the tutorials and tools locally in a virtual environment, i.e.,
 Documentation
 =============
 
-We also have documentation in [ReadTheDocs](https://PVDegradationTools.readthedocs.io) where you can find more details on the API functions.
+We also have documentation in [ReadTheDocs](https://pvdeg.readthedocs.io) where you can find more details on the API functions.

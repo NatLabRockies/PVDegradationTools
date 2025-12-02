@@ -1,6 +1,6 @@
 # Welcome to the PVDEG Tutorials
 
-Here is a collection of Jupyter Notebooks that provide tutorials for using PVDegradationTools.
+Here is a collection of Jupyter Notebooks that provide tutorials for using PVDeg.
 These are ready to read, install and use, or run in your browser through Google Colab.
 Clicking on the rocket-icon on the top allows you to launch the notebooks on
 [Google Colaboratory](https://colab.research.google.com/) for interactive mode.

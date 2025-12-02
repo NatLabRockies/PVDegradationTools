@@ -1,6 +1,6 @@
 # Basics Tutorials
 
-Introduction to PVDegradationTools covering fundamental concepts and workflows.
+Introduction to PVDeg covering fundamental concepts and workflows.
 
 ## Tutorials
 
