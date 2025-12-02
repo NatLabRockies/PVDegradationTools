@@ -12,6 +12,8 @@ PVDeg is an open-source Python package for modeling photovoltaic (PV) degradatio
 - `06_nrel_hpc/` - NREL HPC-specific workflows (requires HPC access)
 - `07_workshop_demos/` - Workshop and demonstration notebooks
 
+For standalone analysis tools, see the [Tools](../tools/) directory.
+
 ## Running the Tutorials
 
 ### Jupyter Book
@@ -60,4 +62,4 @@ You can also run the tutorials and tools locally in a virtual environment, i.e.,
 Documentation
 =============
 
-We also have documentation in [ReadTheDocs](https://pvdeg.readthedocs.io) where you can find more details on the API functions.
+Full API documentation is available at [ReadTheDocs](https://PVDegradationTools.readthedocs.io) where you can find detailed information on all functions, classes, and modules.

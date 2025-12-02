@@ -1,6 +1,8 @@
 # PVDeg Tools
 
-This folder contains standalone computational tools for specific PV degradation calculations.
+This folder contains standalone computational tools for specific PV degradation calculations. These tools are included in the [Jupyter Book](https://nrel.github.io/PVDegradationTools/intro.html) under the Tools section.
+
+For tutorials and guided examples, see the [tutorials](../tutorials/) directory.
 
 ## Tools Overview
 

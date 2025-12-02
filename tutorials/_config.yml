@@ -41,6 +41,12 @@ html:
   use_issues_button: true
   use_repository_button: true
 
+# Configure the sidebar to show only top-level entries
+sphinx:
+  config:
+    html_theme_options:
+      show_toc_level: 1
+
 launch_buttons:
   thebe: true
   colab_url: "https://colab.research.google.com"
