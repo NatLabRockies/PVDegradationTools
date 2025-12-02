@@ -43,7 +43,7 @@ print("pvlib version ", pvlib.__version__)
 print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
-# ## 1. Import Weather Data
+# # 1. Import Weather Data
 #
 # The function has two minimum requirements:
 # - Weather data containing (at least) DNI, DHI, GHI, Temperature, RH, Wind-Speed
@@ -51,7 +51,7 @@ print("pvdeg version ", pvdeg.__version__)
 #
 
 # %% [markdown]
-# ### Where to get _Free_ Solar Irradiance Data?
+# # Where to get _Free_ Solar Irradiance Data?
 #
 # There are many different sources of solar irradiance data. For your projects, these are some of the most common:
 #
@@ -63,7 +63,7 @@ print("pvdeg version ", pvdeg.__version__)
 #
 # - Perhaps another useful link: https://sam.nrel.gov/weather-data.html
 #
-# ### Where else can you get historical irradiance data?
+# ## Where else can you get historical irradiance data?
 #
 # There are several commercial providers of solar irradiance data. Data is available at different spatial and time resolutions. Each provider offers data under subscription that will provide access to irradiance (and other weather variables) via API to leverage in python.
 #
@@ -79,12 +79,12 @@ print("pvdeg version ", pvdeg.__version__)
 #
 
 # %% [markdown]
-# ### NREL API Key
+# # NREL API Key
 # At the [NREL Developer Network](https://developer.nrel.gov/), there are [APIs](https://en.wikipedia.org/wiki/API) to a lot of valuable [solar resources](https://developer.nrel.gov/docs/solar/) like [weather data from the NSRDB](https://developer.nrel.gov/docs/solar/nsrdb/), [operational data from PVDAQ](https://developer.nrel.gov/docs/solar/pvdaq-v3/), or indicative calculations using [PVWatts](https://developer.nrel.gov/docs/solar/pvwatts/). In order to use these resources from NREL, you need to [register for a free API key](https://developer.nrel.gov/signup/). You can test out the APIs using the `DEMO_KEY` but it has limited bandwidth compared to the [usage limit for registered users](https://developer.nrel.gov/docs/rate-limits/). NREL has some [API usage instructions](https://developer.nrel.gov/docs/api-key/), but pvlib has a few builtin functions, like [`pvlib.iotools.get_psm3()`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.iotools.get_psm3.html), that wrap the NREL API, and call them for you to make it much easier to use. Skip ahead to the next section to learn more. But before you do...
 #
 # **Please pause now to visit https://developer.nrel.gov/signup/ and get an API key.**
 #
-# ### Application Programming Interface (API)
+# ## Application Programming Interface (API)
 # What exactly is an API? Nowadays, the phrase is used interchangeably with a "web API" but in general an API is just a recipe for how to interface with a application programmatically, _IE_: in code. An API could be as simple as a function signature or its published documentation, _EG_: the API for the `solarposition` function is you give it an ISO8601 formatted date with a timezone, the latitude, longitude, and elevation as numbers, and it returns the zenith and azimuth as numbers.
 #
 # A web API is the same, except the application is a web service, that you access at its URL using web methods. We won't go into too much more detail here, but the most common web method is `GET` which is pretty self explanatory. Look over the [NREL web usage instructions](https://developer.nrel.gov/docs/api-key/) for some examples, but interacting with a web API can be as easy as entering a URL into a browser. Try the URL below to _get_ the PVWatts energy output for a fixed tilt site in [Broomfield, CO](https://goo.gl/maps/awkEcNGzSur9Has18).
@@ -111,7 +111,7 @@ if NREL_API_KEY is None:
         NREL_API_KEY = "DEMO_KEY"  # OK for this demo, but better to get your own key
 
 # %% [markdown]
-# ## Fetching TMYs from the NSRDB
+# # Fetching TMYs from the NSRDB
 #
 # The NSRDB, one of many sources of weather data intended for PV modeling, is free and easy to access using pvlib. As an example, we'll fetch a TMY dataset for Phoenix, AZ at coordinates [(33.4484, -112.0740)](https://goo.gl/maps/hGV92QHCm5FHJKbf9).
 #
@@ -177,7 +177,7 @@ print(weather_df.index.min(), weather_df.index.max())
 print(weather_df.head())
 
 # %% [markdown]
-# ## 2. Calculate Installation Standoff - Level 1
+# # 2. Calculate Installation Standoff - Level 1
 #
 # We use [`pvlib.standards.calc_standoff()`](https://pvdegradationtools.readthedocs.io/en/latest/_autosummary/pvdeg.standards.html#pvdeg.standards.calc_standoff) which takes at minimum the weather data and metadata, and returns the minimum installation distance in centimeters.
 #
@@ -190,7 +190,7 @@ standoff = pvdeg.standards.standoff(weather_df=weather_df, meta=meta)
 print("Minimum installation distance:", standoff["x"])
 
 # %% [markdown]
-# ## 3. Calculate Installation Standoff - Level 2
+# # 3. Calculate Installation Standoff - Level 2
 #
 # Let's take a closer look at the function and some optional parameters.
 #

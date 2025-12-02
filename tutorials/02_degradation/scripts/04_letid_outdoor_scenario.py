@@ -177,7 +177,7 @@ weather = weather[
 weather
 
 # %% [markdown]
-# ### Set up PVlib model
+# # Set up PVlib model
 # Note that the module we select here is NOT the same "Type S" module that was tested for LETID. I'm simply trying to find a module in the CEC database with I-V characteristics that are reasonably close to the tested module, so the pvlib calculated DC results are close to how our Type S module might behave in the field.
 
 # %%
@@ -232,7 +232,7 @@ mc = ModelChain(system, location, aoi_model="physical")
 mc.run_model(weather)
 
 # %% [markdown]
-# ## Set up timeseries
+# # Set up timeseries
 # In this example, injection is a function of both the operating point of the module (which we will assume is maximum power point) and irradiance. Maximum power point injection is equivalent to $(I_{sc}-I_{mp})/I_{sc}\times Ee$, where $Ee$ is effective irradiance, the irradiance absorbed by the module's cells. We normalize it to 1-sun irradiance, 1000 $W/m^2$.
 #
 # We will use the irradiance, DC operating point, and cell temperature from the pvlib modelchain results.
@@ -253,7 +253,7 @@ timesteps.rename(columns={"index": "Datetime"}, inplace=True)
 
 # %% [markdown]
 #
-# ##### Remaining degradation parameters:
+# # Remaining degradation parameters:
 # We've already set our important device parameters: ```tau_0```, ```tau_deg```, ```wafer_thickness```, ```srv_rear```, ```cell_area```, etc, but we need a few more: generation profile and carrier diffusivity. These are necessary for calculating current collection, and the "default" values provided here should be sufficient for most use cases.
 #
 # The rest of the quantities to define are: the initial percentage of defects in each state (A, B, and C), and the dictionary of mechanism parameters.
@@ -294,7 +294,7 @@ timesteps.loc[0, "tau"] = letid.tau_now(
 timesteps
 
 # %% [markdown]
-# ## Run through timesteps
+# # Run through timesteps
 # Since each timestep depends on the preceding timestep, we need to calculate in a loop. This will take a few minutes depending on the length of the timeseries.
 
 # %%
@@ -413,7 +413,7 @@ timesteps = timesteps.merge(mc.results.weather, left_on="Datetime", right_index=
 timesteps
 
 # %% [markdown]
-# ### Plot the results
+# # Plot the results
 
 # %%
 from cycler import cycler
@@ -605,7 +605,7 @@ ax1.set_title("Module power, cumulative energy, and loss due to LETID")
 plt.show()
 
 # %% [markdown]
-# ##### The function `calc_letid_outdoors` wraps all of the steps above into a single function:
+# # The function `calc_letid_outdoors` wraps all of the steps above into a single function:
 
 # %%
 mechanism_params = "D037"

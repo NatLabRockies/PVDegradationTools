@@ -3,7 +3,7 @@ import pvdeg
 import numpy as np
 
 # %% [markdown]
-# ## Create Scenario and Populate Location
+# # Create Scenario and Populate Location
 # The default geospatial datapoints for addLocation are from the Americas satellite. This is the only data we are interested in for this case so don't specify any location arguments.
 # To speed up calculations we will downsample to get coarser data. The downsampling function is not linear. A downsample factor of 10 takes us from 2018267 entries to only 5109.
 
@@ -13,7 +13,7 @@ features = pvdeg.GeospatialScenario(name="finding-features")
 features.addLocation(downsample_factor=10)
 
 # %% [markdown]
-# ## Intro to KDTrees
+# # Intro to KDTrees
 #
 # A K dimensional tree is a datastructure for organizing n points in a k dimensional space. They are often used for nearest neighbors searches and many ML algorithms. Letting k = 2, our dimensions will be latitude and longitude. This is much faster than iterating over tabular data structures to find neighbors. The function to create a kdtree below requires scikit learn (also known as sklearn), a python machine learning library which is not included in the pvdeg dependency list so you will have to install it independently. Scipy also has a kdtree class but it is much slower. Depending on the number of datapoints the tree build time could be quite long but for our purposes, the cell below will be quick.
 
@@ -21,7 +21,7 @@ features.addLocation(downsample_factor=10)
 tree = pvdeg.geospatial.meta_KDtree(meta_df=features.meta_data)
 
 # %% [markdown]
-# ## Remaining Points After Downsampling
+# # Remaining Points After Downsampling
 #
 # Use `plot_coords` to see all latitude longitude coordinate pairs included in a scenario's metadata. You can provide corners of a bounding box to change the extent of the matplotlib plot.
 
@@ -50,7 +50,7 @@ features.classify_mountains_weights(kdtree=tree)
 features.classify_mountains_weights()
 
 # %% [markdown]
-# ## Convenience Plotting for Binary Classifications
+# # Convenience Plotting for Binary Classifications
 #
 # the `plot_meta_classification` method allows you to plot your data with respect to a boolean classifier present in the `scenario.meta_data` dataframe columns.
 
@@ -58,7 +58,7 @@ features.classify_mountains_weights()
 features.plot_meta_classification(col_name="mountain")
 
 # %% [markdown]
-# ## Identifying mountains within a bounding box.
+# # Identifying mountains within a bounding box.
 #
 # Sometimes we only want information from one area. To allow for more control over the selection process. To pick only one area from an existing superset of data we can use a bounding box.
 # Either provide the top left and bottom right (latitude-longitude) pairs or a 2d numpy array of these pairs which will use the most extreme entries to form the bounding box.
@@ -83,7 +83,7 @@ features.classify_mountains_radii(
 features.plot_meta_classification(col_name="mountain")
 
 # %% [markdown]
-# ## Identifying Coastlines from Geospatial Data
+# # Identifying Coastlines from Geospatial Data
 #
 # To identify points within a search radius of any [natural earth features](https://www.naturalearthdata.com/features/). The following examples show the process of identifying coastline datapoints.
 
@@ -99,7 +99,7 @@ features.classify_feature(
 features.plot_meta_classification(col_name="coastline")
 
 # %% [markdown]
-# ## Finding Rivers
+# # Finding Rivers
 #
 # Above we saw how to find points near coastlines, now lets do points near rivers. It is very similar
 

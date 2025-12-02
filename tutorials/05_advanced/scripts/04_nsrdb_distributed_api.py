@@ -5,7 +5,7 @@ import pvdeg
 import os
 
 # %% [markdown]
-# ### Setting Up
+# # Setting Up
 #
 # As in [load_pvgis_distributed.ipynb](./load_pvgis_distributed.ipynb) we need to get ready to make our parallelized API calls. The notebook linked here goes through the process in more detail but we need to import our API key and email. This cell will not work for you unless you replace the `api_key` and `email` with your personal NSRDB api keys. [REQUEST A KEY](https://developer.nrel.gov/signup/).
 #
@@ -40,7 +40,7 @@ print(client.dashboard_link)
 # Replace `YOUR_NREL_API_KEY` and `YOUR_EMAIL_ADDRESS` with your actual NREL developer credentials.
 
 # %% [markdown]
-# ## Requesting Weather
+# # Requesting Weather
 #
 # As with the other script [load_pvgis_distributed.ipynb](./load_pvgis_distributed.ipynb). We will create a list of tuple (latitude, longitude) pairs and call the function on all of them at once. failed will represent a list of failed gids, unique location ID's that correspond to points in space on the NSRDB. These are different than on PVGIS where they are arbitrary indexes that do NOT correspond to a spatial location on earth.
 #
@@ -57,7 +57,7 @@ geo_weather, geo_meta, failed = pvdeg.weather.weather_distributed(
 )
 
 # %% [markdown]
-# ### Viewing Results
+# # Viewing Results
 #
 # Same as in the other tutorial, our results are stored in an xarray dataset with a dask backend so you will have to use `.compute()` on the dataset to inspect the individual values of the dask arrays.
 #
@@ -70,7 +70,7 @@ geo_weather
 geo_weather.compute()
 
 # %% [markdown]
-# ### Spot Check
+# # Spot Check
 #
 # We can plot the entire TMY air_temperature to check that our data has loaded correctly.
 #
@@ -86,6 +86,6 @@ import matplotlib.pyplot as plt
 plt.plot(geo_weather.isel(gid=0).temp_air)
 
 # %% [markdown]
-# ### Next Steps
+# # Next Steps
 #
 # Now we have data ready to use for geospatial calculations. This is shown in the other distributed script [load_pvgis_distributed.ipynb](./load_pvgis_distributed.ipynb). You can also see how to do this in [Geospatial Templates.ipynb](../tutorials_and_tools/tutorials_and_tools/Geospatial%20Templates.ipynb)

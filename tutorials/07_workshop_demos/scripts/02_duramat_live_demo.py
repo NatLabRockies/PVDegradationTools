@@ -28,7 +28,7 @@ print("Pandas version ", pd.__version__)
 print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
-# ## 1 Start distributed compute cluster - DASK
+# # 1 Start distributed compute cluster - DASK
 
 # %%
 pvdeg.geospatial.start_dask()

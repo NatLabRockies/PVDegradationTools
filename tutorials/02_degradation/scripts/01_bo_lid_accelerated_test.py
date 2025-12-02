@@ -44,7 +44,7 @@ print("pvlib version ", pvlib.__version__)
 print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
-# ## Device parameters
+# # Device parameters
 # To define a device, we need to define several important quantities about the device: wafer thickness (in $\mu m$), rear surface recombination velocity (in cm/s), and cell area (in cm<sup>2</sup>).
 
 # %%
@@ -67,7 +67,7 @@ depth = generation_df["Depth (um)"]
 d_base = 27  # cm^2/s electron diffusivity. See https://www2.pvlighthouse.com.au/calculators/mobility%20calculator/mobility%20calculator.aspx for details
 
 # %% [markdown]
-# ## Degradation parameters
+# # Degradation parameters
 # To model the device's degradation, we need to define several more important quantities about the degradation the device will experience. These include undegraded and degraded lifetime (in $\mu s$).
 
 # %%
@@ -110,7 +110,7 @@ mechanism_params = {
 
 
 # %% [markdown]
-# ## Set up timeseries
+# # Set up timeseries
 # In this example, we are going to model test with constant temperature and injection. IEC 61215 MQT 19.1 prescribes 10 $kWh/m^2$ of 1-sun illumination (i.e., 10 hours of 1-sun) with maximum power point tracking at $50\degree C$. For most typical c-Si modules, MPP injection is roughly $I_{sc}-I_{mp}$, or roughly equal to  $0.05\times I_{sc}$. So we will set injection equal to 0.05 "suns" of injection.
 #
 # We will create a pandas datetime series and calculate the changes in defect states for each timestep. As B-O LID can initially proceed quickly, we will create a timeseries with 1-second intervals for the first 10 minutes, then proceed with 1-minute intervals
@@ -233,7 +233,7 @@ for index, timestep in timesteps.iterrows():
         timesteps.at[index, "NC"] = n_C + dN_Cdt * t_step
 
 # %% [markdown]
-# ## Finish calculating degraded device parameters.
+# # Finish calculating degraded device parameters.
 # Now that we have calculated defect states, we can calculate all the quantities that depend on defect states.
 
 # %%
@@ -259,7 +259,7 @@ timesteps["time (days)"] = (
 timesteps
 
 # %% [markdown]
-# ## Plot the results
+# # Plot the results
 #
 #
 

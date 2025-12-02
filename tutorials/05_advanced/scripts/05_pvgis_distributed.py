@@ -6,7 +6,7 @@ import numpy as np
 from dask.distributed import LocalCluster, Client
 
 # %% [markdown]
-# ### Creating Coordinates List
+# # Creating Coordinates List
 #
 # Lets Generate a Grid of Latitude and Longitude Coordinates over the UK.
 
@@ -34,7 +34,7 @@ coords = list(
 )  # easiest way to make a list of the right shape
 
 # %% [markdown]
-# ### Dask
+# # Dask
 #
 # We are using dask to parallelize the weather API calls. We need to start a dask client as shown below. This can also be done with `pvdeg.geospatial.start_dask`.
 #
@@ -53,7 +53,7 @@ client = Client(cluster)
 print(client.dashboard_link)
 
 # %% [markdown]
-# ## Requesting Weather
+# # Requesting Weather
 #
 # Now that we have our coordinates, and dask client initialized we can make our parallel api calls using `pvdeg.weather.weather_distributed`.
 #
@@ -69,7 +69,7 @@ weather_ds, meta_df, failed_gids = pvdeg.weather.weather_distributed(
 )
 
 # %% [markdown]
-# ### Viewing Result
+# # Viewing Result
 #
 # The result is stored in an xarray dataset with a dask array backend. This allows us to parallelize the computation/api requests but makes it a little harder to view the data. We can inspect the dataset using the following but we will not be able to inspect any values.
 #
@@ -84,7 +84,7 @@ weather_ds, meta_df, failed_gids = pvdeg.weather.weather_distributed(
 weather_ds.compute()
 
 # %% [markdown]
-# ### Saving Geospatial Data Locally
+# # Saving Geospatial Data Locally
 #
 # The goal of `pvdeg.store` is to create a living local database of meteoroligical data that grows overtime as your geospatial data needs grow. To do this `PVDeg` will save to a folder called `PVDeg-Meteorological` your user home directory. For me this is located at `C:\Users\tford\PVDeg-Meteorological`. This directory will contain a `zarr` store, this is a popular format for storing multi-dimensional array data, not dissimilar to `h5` files. It was chosen over `h5` because `zarr` stores arrays in chunked compressed files that make access very easy without opening an entire file like `h5`. This is an oversimplification of the design process but we felt `zarr` was a better fit.
 #
@@ -101,7 +101,7 @@ weather_ds.compute()
 pvdeg.store.store(weather_ds, meta_df)
 
 # %% [markdown]
-# ## Load
+# # Load
 #
 # `PVDeg` makes use of `dask` to handle larger than memory datasets. Trandionally, this was only useful in our HPC environment but as your local database grows overtime, it will eventually surpass the limits of your computer's volatile memory. Additionally, `dask` allows us to parallelize geospatial calculations via `pvdeg.geospatial.analysis`. This ability can be utilized on local machines or HPC clusters alike.
 #
@@ -111,7 +111,7 @@ pvdeg.store.store(weather_ds, meta_df)
 #     - 15 minute PVGIS will be saved to a group called "PVGIS-15min"
 
 # %% [markdown]
-# ### Load PVGIS-1hr Data
+# # Load PVGIS-1hr Data
 #
 # The example below shows us loading the hourly tmy data from PVGIS that we gathered and saved to our zarr store in the above cells. This gets us the form of a weather xarray.Dataset (`geo_weather` in this example) and a metadata dataframe (`geo_meta` in this example).
 #
@@ -121,7 +121,7 @@ pvdeg.store.store(weather_ds, meta_df)
 geo_weather, geo_meta = pvdeg.store.get(group="PVGIS-1hr")
 
 # %% [markdown]
-# ### Inspecting the Results
+# # Inspecting the Results
 #
 # explain *.compute() and dask here*
 
@@ -132,7 +132,7 @@ plt.plot(geo_weather.sel(gid=0).dni)
 geo_meta
 
 # %% [markdown]
-# ## Geospatial Calculations from Locally Stored Data
+# # Geospatial Calculations from Locally Stored Data
 #
 # As shown above we can load from our `zarr` store and treat it like any other geospatial data in `pvdeg`.
 #
@@ -161,7 +161,7 @@ pvdeg.geospatial.plot_sparse_analysis_land(
 )
 
 # %% [markdown]
-# ### Growing Our Living Store
+# # Growing Our Living Store
 #
 # What if we want to download more points from Europe? We can keep our old download in the store and shelve it to look at northern Europe.
 #
