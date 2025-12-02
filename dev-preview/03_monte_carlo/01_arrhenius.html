@@ -1,0 +1,1064 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Monte Carlo - Arrhenius Degradation &#8212; PVDEG Tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_monte_carlo/01_arrhenius';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Monte Carlo - Standoff Calculation" href="02_standoff.html" />
+    <link rel="prev" title="A - Van’t Hoff Degradation" href="../02_degradation/06_vant_hoff_degradation_model.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-light" alt="PVDEG Tutorials - Home"/>
+    <script>document.write(`<img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-dark" alt="PVDEG Tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to the PVDEG Tutorials
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">01 - Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/01_basics_humidity_design.html">1 - Basics, Humidity, Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/02_degradation.html">2 - Degradation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/03_spectral_degradation.html">3 - Spectral Degradation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/04_weather_database_access.html">4 - Weather Database Access</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 - Degradation Mechanisms</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/01_bo_lid_accelerated_test.html">B-O LID - Accelerated Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/02_letid_accelerated_test.html">LETID - Accelerated Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/03_letid_outdoor.html">LETID - Outdoor Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/04_letid_outdoor_scenario.html">LETID - Outdoor Scenario Based on Accelerated Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/05_letid_passivated_wafer.html">LETID - Passivated Wafer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/06_vant_hoff_degradation_model.html">A - Van’t Hoff Degradation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 - Monte Carlo Simulations</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Monte Carlo - Arrhenius Degradation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_standoff.html">Monte Carlo - Standoff Calculation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 - Geospatial &amp; Scenarios (HPC Required)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_geospatial/01_local_scenario.html">Local Scenario (No HPC)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_geospatial/02_geospatial_templates.html">Geospatial Templates</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../04_geospatial/03_scenario_geographical_features.html">Create Scenario and Populate Location</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../04_geospatial/04_scenario_geospatial.html">Define Geospatial Scenario Object</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../04_geospatial/05_scenario_mountain_downselect.html">Adding Points</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../04_geospatial/06_scenario_single_location.html">Single Location (HPC)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_geospatial/07_scenario_temperature.html">Adding Modules and Pipeline Jobs (Run Functions on Scenario Object)</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 - Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_advanced/01_custom_functions_nopython.html">Grabbing Weather Data from PVGIS</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../05_advanced/03_pysam_api.html">Pysam</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../05_advanced/04_nsrdb_distributed_api.html">Setting Up</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../05_advanced/05_pvgis_distributed.html">Creating Coordinates List</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">06 - NREL HPC</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_nrel_hpc/01_geospatial_world_map.html">Note: This notebook is in development</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../06_nrel_hpc/02_letid_outdoor_geospatial_demo.html">LETID - Outdoor Geospatioal Demo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">07 - Workshop Demos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_workshop_demos/01_astm_live_demo.html">ASTM Demonstration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_workshop_demos/02_duramat_live_demo.html">DuraMAT Workshop Live Demo - Geospatial analysis</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/NREL/PVDegradationTools/blob/main/tutorials/03_monte_carlo/01_arrhenius.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/NREL/PVDegradationTools" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/NREL/PVDegradationTools/issues/new?title=Issue%20on%20page%20%2F03_monte_carlo/01_arrhenius.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/03_monte_carlo/01_arrhenius.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Monte Carlo - Arrhenius Degradation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlated-monte-carlo-simulation-parameters">Correlated Monte Carlo Simulation (parameters)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-inputs">Required inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-correlation-coefficients">Defining Correlation Coefficients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-mean-and-standard-deviation">Defining Mean and Standard Deviation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-monte-carlo-input-data">Generating Monte Carlo Input Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sanity-check">Sanity Check</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-function-requirements">Other Function Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-monte-carlo-simulation">Running the Monte Carlo Simulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-our-data">Viewing Our Data</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="monte-carlo-arrhenius-degradation">
+<h1>Monte Carlo - Arrhenius Degradation<a class="headerlink" href="#monte-carlo-arrhenius-degradation" title="Link to this heading">#</a></h1>
+<p>A monte carlo simulation can be used to predict results of an event with a certain amount of uncertainty. This will be introduced to our use case via mean and standard deviation for each modeling constant. Correlated multivariate monte carlo simulations expand on this by linking the behavior of multiple input variables together with correlation data, in our case we will use correlation coefficients but</p>
+<p><strong>Objectives</strong></p>
+<ol class="arabic simple">
+<li><p>Define necessary monte carlo simulation parameters : correlation coefficients, mean and standard standard deviation, number of trials, function to apply, requried function input</p></li>
+<li><p>Define process for creating and utilizing modeling constant correlation data</p></li>
+<li><p>Preform simple monte carlo simulation using arrhenius equation to calculate degredation and plot</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
+<span class="c1"># !pip install pvdeg==0.3.3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pvlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This information helps with debugging and getting support :)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas version &quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pvlib version &quot;</span><span class="p">,</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.11.0-1018-azure
+Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
+Pandas version  2.3.3
+Pvlib version  0.13.1
+pvdeg version  0.1.dev1+g7cb88f5ca
+</pre></div>
+</div>
+</div>
+</div>
+<section id="correlated-monte-carlo-simulation-parameters">
+<h2>Correlated Monte Carlo Simulation (parameters)<a class="headerlink" href="#correlated-monte-carlo-simulation-parameters" title="Link to this heading">#</a></h2>
+<p>For this simulation we will be using an arrhenius equation to calculate degredation rate given by <span class="math notranslate nohighlight">\(R_D = R_0 * I ^ X * e ^ {\frac{-Ea}{kT}}\)</span>, where R0 is prefactor degredation, I is irradiance, X is the irridiance relation, Ea is activation energy and T is degrees K</p>
+<p>We will use R0, X and Ea to preform a 3 variable monte carlo simulation to calculate degredation.</p>
+<section id="required-inputs">
+<h3>Required inputs<a class="headerlink" href="#required-inputs" title="Link to this heading">#</a></h3>
+<p>To run a monte carlo simulation with pvdeg.montecarlo the following inputs will be required</p>
+<ul class="simple">
+<li><p>function (currently only works with pvdeg.montecarlo.vecArrhenius() but will eventually work with most pvdeg calculation functions)</p></li>
+<li><p>function arguments (ex: metadata, weather, cell temperature, solar position, etc.)</p></li>
+<li><p>mean and standard deviation (Required for all correlation constants)</p></li>
+<li><p>correlation constants (if not entered, default = 0)</p></li>
+<li><p>number of trials to run</p></li>
+</ul>
+</section>
+<section id="defining-correlation-coefficients">
+<h3>Defining Correlation Coefficients<a class="headerlink" href="#defining-correlation-coefficients" title="Link to this heading">#</a></h3>
+<p>pvdeg.montecarlo stores correlation coefficients in a <code class="docutils literal notranslate"><span class="pre">Corr</span></code> object. To represent a given correlation coefficient follow the given syntax below, replacing the values in the brackets with your correlation coefficients</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{my_correlation_object} = Corr(&#39;{variable1}&#39;, &#39;{variable2}&#39;, {correlation coefficient})
+</pre></div>
+</div>
+<p>note: ordering of <code class="docutils literal notranslate"><span class="pre">variable1</span></code> and <code class="docutils literal notranslate"><span class="pre">variable2</span></code> does not matter</p>
+<p>After defining the all known correlations add them to a list which we will feed into our simulation later</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_Ea_X</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="s2">&quot;Ea&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="mf">0.0269</span><span class="p">)</span>
+<span class="n">corr_Ea_LnR0</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="s2">&quot;Ea&quot;</span><span class="p">,</span> <span class="s2">&quot;LnR0&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9995</span><span class="p">)</span>
+<span class="n">corr_X_LnR0</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;LnR0&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0400</span><span class="p">)</span>
+
+<span class="n">corr_coeff</span> <span class="o">=</span> <span class="p">[</span><span class="n">corr_Ea_X</span><span class="p">,</span> <span class="n">corr_Ea_LnR0</span><span class="p">,</span> <span class="n">corr_X_LnR0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">corr_Ea_X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pvdeg.montecarlo.Corr
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="defining-mean-and-standard-deviation">
+<h3>Defining Mean and Standard Deviation<a class="headerlink" href="#defining-mean-and-standard-deviation" title="Link to this heading">#</a></h3>
+<p>We will store the mean and correlation for each variable, expressed when we defined the correlation cefficients. If a variable is left out at this stage, the monte carlo simulation will throw errors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stats_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Ea&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="mf">62.08</span><span class="p">,</span> <span class="s2">&quot;stdev&quot;</span><span class="p">:</span> <span class="mf">7.3858</span><span class="p">},</span>
+    <span class="s2">&quot;LnR0&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="mf">13.7223084</span><span class="p">,</span> <span class="s2">&quot;stdev&quot;</span><span class="p">:</span> <span class="mf">2.47334772</span><span class="p">},</span>
+    <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="mf">0.0341</span><span class="p">,</span> <span class="s2">&quot;stdev&quot;</span><span class="p">:</span> <span class="mf">0.0992757</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="c1"># and number of monte carlo trials to run</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">20000</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="generating-monte-carlo-input-data">
+<h3>Generating Monte Carlo Input Data<a class="headerlink" href="#generating-monte-carlo-input-data" title="Link to this heading">#</a></h3>
+<p>Next we will use the information collected above to generate correlated data from our modeling constant correlations, means and standard deviations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># for reproducibility</span>
+<span class="n">mc_inputs</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">generateCorrelatedSamples</span><span class="p">(</span>
+    <span class="n">corr</span><span class="o">=</span><span class="n">corr_coeff</span><span class="p">,</span> <span class="n">stats</span><span class="o">=</span><span class="n">stats_dict</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mc_inputs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              Ea       LnR0         X
+0      65.748631  12.521613 -0.021520
+1      61.058808  14.086270  0.113508
+2      66.863698  12.047910  0.056494
+3      73.328794  10.002535  0.022482
+4      60.350590  14.184631  0.159603
+...          ...        ...       ...
+19995  64.944415  12.851118 -0.074338
+19996  72.252954  10.338032 -0.072373
+19997  64.874447  12.835188  0.022460
+19998  74.735788   9.549980 -0.191887
+19999  50.115596  17.754769  0.014540
+
+[20000 rows x 3 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="sanity-check">
+<h4>Sanity Check<a class="headerlink" href="#sanity-check" title="Link to this heading">#</a></h4>
+<p>We can observe the mean and standard deviation of our newly correlated samples before using them for calculations to ensure that we have not incorrectly altered the data. The mean and standard deviation should be the similar (within a range) to your original input (the error comes from the standard distribution of generated random numbers)</p>
+<p>This also applies to the correlation coefficients originally inputted, they should be witin the same range as those orginally supplied.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mean and standard deviation match inputs</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">mc_inputs</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> : mean </span><span class="si">{</span><span class="n">mc_inputs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">, stdev </span><span class="si">{</span><span class="n">mc_inputs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ea_X&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">mc_inputs</span><span class="p">[</span><span class="s2">&quot;Ea&quot;</span><span class="p">],</span> <span class="n">mc_inputs</span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ea_lnR0&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">mc_inputs</span><span class="p">[</span><span class="s2">&quot;Ea&quot;</span><span class="p">],</span> <span class="n">mc_inputs</span><span class="p">[</span><span class="s2">&quot;LnR0&quot;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X_lnR0&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">mc_inputs</span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">],</span> <span class="n">mc_inputs</span><span class="p">[</span><span class="s2">&quot;LnR0&quot;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ea : mean 62.1220919316, stdev 7.4023636577
+LnR0 : mean 13.7074363705, stdev 2.4773224845
+X : mean 0.0349013839, stdev 0.0996405123
+
+Ea_X 0.013
+Ea_lnR0 -1.0
+X_lnR0 -0.026
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="other-function-requirements">
+<h3>Other Function Requirements<a class="headerlink" href="#other-function-requirements" title="Link to this heading">#</a></h3>
+<p>Based on the function chosen to run in the monte carlo simulation, various other data will be required. In this case we will need cell temperature and total plane of array irradiance.</p>
+<div class="alert alert-block alert-info">
+<b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data and then calculate cell temperature and global poa irradiance. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a> so register now.)
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;PSM4&quot;</span>
+<span class="n">weather_id</span> <span class="o">=</span> <span class="p">(</span><span class="mf">25.783388</span><span class="p">,</span> <span class="o">-</span><span class="mf">80.189029</span><span class="p">)</span>
+<span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;api_key&quot;</span><span class="p">:</span> <span class="s2">&quot;DEMO_KEY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;user@mail.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;map_variables&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">weather_db</span><span class="p">,</span> <span class="n">weather_id</span><span class="p">,</span> <span class="o">**</span><span class="n">weather_arg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Column &quot;relative_humidity&quot; not found in DataFrame. Calculating...
+                                                                     
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calculate the sun position, poa irradiance, and module temperature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sol_pos</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">spectral</span><span class="o">.</span><span class="n">solar_position</span><span class="p">(</span><span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span><span class="p">)</span>
+<span class="n">poa_irradiance</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">spectral</span><span class="o">.</span><span class="n">poa_irradiance</span><span class="p">(</span><span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span><span class="p">)</span>
+<span class="n">temp_mod</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">module</span><span class="p">(</span>
+    <span class="n">weather_df</span><span class="o">=</span><span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span> <span class="n">poa</span><span class="o">=</span><span class="n">poa_irradiance</span><span class="p">,</span> <span class="n">conf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># the function being used in the monte carlo simulation takes numpy arrays so we need to convert from pd.DataFrame to np.ndarray with .tonumpy()</span>
+<span class="n">poa_global</span> <span class="o">=</span> <span class="n">poa_irradiance</span><span class="p">[</span><span class="s2">&quot;poa_global&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">cell_temperature</span> <span class="o">=</span> <span class="n">temp_mod</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  25.8 was used.
+The array azimuth was not provided, therefore an azimuth of  180.0 was used.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># must already be numpy arrays</span>
+<span class="n">function_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;poa_global&quot;</span><span class="p">:</span> <span class="n">poa_global</span><span class="p">,</span> <span class="s2">&quot;module_temp&quot;</span><span class="p">:</span> <span class="n">cell_temperature</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Runs monte carlo simulation for the example <code class="docutils literal notranslate"><span class="pre">pvdeg.montecarlo.vecArrhenius</span></code> function, using the correlated data dataframe created above and the required function arguments.</p>
+<p>We can see the necessary inputs by using the help command:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL_SKIP</span>
+<span class="n">help</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">simulate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on function simulate in module pvdeg.montecarlo:
+
+simulate(func: Callable, correlated_samples: pandas.core.frame.DataFrame, **function_kwargs) -&gt; pandas.core.series.Series
+    Apply a target function to data to preform a monte carlo simulation.
+    
+    If you get
+    a key error and the target function has default parameters, try adding them to your
+    ``func_kwargs`` dictionary instead of using the default value from the target
+    function.
+    
+    Parameters
+    ----------
+    func : function
+        Function to apply for monte carlo simulation
+    correlated_samples : pd.DataFrame
+        Dataframe of correlated samples with named columns for each appropriate modeling
+        constant, can be generated using generateCorrelatedSamples()
+    function_kwargs : dict
+        Keyword arguments to pass to func, only include arguments not named in your
+        correlated_samples columns
+    
+    Returns
+    -------
+    res : pandas.Series
+        Series with monte carlo results from target function
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="running-the-monte-carlo-simulation">
+<h3>Running the Monte Carlo Simulation<a class="headerlink" href="#running-the-monte-carlo-simulation" title="Link to this heading">#</a></h3>
+<p>We will pass the target function, <code class="docutils literal notranslate"><span class="pre">pvdeg.degredation.vecArrhenius()</span></code>, its required arguments via the correlated_samples and func_kwargs. Our fixed arguments will be passed in the form of a dictionary while the randomized monte carlo input data will be contained in a DataFrame.</p>
+<p>All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,</p>
+<p>(You can use any data you want here as long as the DataFrame’s column names match the required target function’s parameter names NOT included in the kwargs)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">degradation</span><span class="o">.</span><span class="n">vecArrhenius</span><span class="p">,</span> <span class="n">correlated_samples</span><span class="o">=</span><span class="n">mc_inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">function_kwargs</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">results</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">degradation</span><span class="o">.</span><span class="n">vecArrhenius</span><span class="p">,</span> <span class="n">correlated_samples</span><span class="o">=</span><span class="n">mc_inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">function_kwargs</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/montecarlo.py:328,</span> in <span class="ni">simulate</span><span class="nt">(func, correlated_samples, **function_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">324</span>     <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">row_args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">326</span> <span class="c1"># this line is often flagged when target function is not given required arguments</span>
+<span class="g g-Whitespace">    </span><span class="mi">327</span> <span class="c1"># problems also arise when target function parameter names are not lowercase</span>
+<span class="ne">--&gt; </span><span class="mi">328</span> <span class="n">result</span> <span class="o">=</span> <span class="n">correlated_samples</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">apply_func</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">330</span> <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pandas/core/frame.py:10401,</span> in <span class="ni">DataFrame.apply</span><span class="nt">(self, func, axis, raw, result_type, args, by_row, engine, engine_kwargs, **kwargs)</span>
+<span class="g g-Whitespace">  </span><span class="mi">10387</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas.core.apply</span><span class="w"> </span><span class="kn">import</span> <span class="n">frame_apply</span>
+<span class="g g-Whitespace">  </span><span class="mi">10389</span> <span class="n">op</span> <span class="o">=</span> <span class="n">frame_apply</span><span class="p">(</span>
+<span class="g g-Whitespace">  </span><span class="mi">10390</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">10391</span>     <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>  <span class="mi">10399</span>     <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">10400</span> <span class="p">)</span>
+<span class="ne">&gt; </span><span class="mi">10401</span> <span class="k">return</span> <span class="n">op</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span><span class="o">.</span><span class="n">__finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;apply&quot;</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pandas/core/apply.py:916,</span> in <span class="ni">FrameApply.apply</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">913</span> <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">914</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_raw</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">,</span> <span class="n">engine_kwargs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">engine_kwargs</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">916</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_standard</span><span class="p">()</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pandas/core/apply.py:1063,</span> in <span class="ni">FrameApply.apply_standard</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1061</span> <span class="k">def</span><span class="w"> </span><span class="nf">apply_standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1062</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;python&quot;</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1063</span>         <span class="n">results</span><span class="p">,</span> <span class="n">res_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_series_generator</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1064</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1065</span>         <span class="n">results</span><span class="p">,</span> <span class="n">res_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_series_numba</span><span class="p">()</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pandas/core/apply.py:1081,</span> in <span class="ni">FrameApply.apply_series_generator</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1078</span> <span class="k">with</span> <span class="n">option_context</span><span class="p">(</span><span class="s2">&quot;mode.chained_assignment&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1079</span>     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">series_gen</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1080</span>         <span class="c1"># ignore SettingWithCopy here in case the user mutates</span>
+<span class="ne">-&gt; </span><span class="mi">1081</span>         <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1082</span>         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ABCSeries</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1083</span>             <span class="c1"># If we have a view on v, we need to make a copy because</span>
+<span class="g g-Whitespace">   </span><span class="mi">1084</span>             <span class="c1">#  series_generator will swap out the underlying data</span>
+<span class="g g-Whitespace">   </span><span class="mi">1085</span>             <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/montecarlo.py:324,</span> in <span class="ni">simulate.&lt;locals&gt;.apply_func</span><span class="nt">(row)</span>
+<span class="g g-Whitespace">    </span><span class="mi">321</span> <span class="k">def</span><span class="w"> </span><span class="nf">apply_func</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">322</span>     <span class="n">row_args</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">row</span><span class="o">.</span><span class="n">items</span><span class="p">()}}</span>
+<span class="ne">--&gt; </span><span class="mi">324</span>     <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">row_args</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/degradation.py:944,</span> in <span class="ni">vecArrhenius</span><span class="nt">(poa_global, module_temp, ea, x, lnr0)</span>
+<span class="g g-Whitespace">    </span><span class="mi">939</span> <span class="n">degradation</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">    </span><span class="mi">940</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">poa_global_scaled</span><span class="p">)):</span>
+<span class="g g-Whitespace">    </span><span class="mi">941</span>     <span class="n">degradation</span> <span class="o">+=</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">942</span>         <span class="n">R0</span>
+<span class="g g-Whitespace">    </span><span class="mi">943</span>         <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">ea_scaled</span> <span class="o">/</span> <span class="p">(</span><span class="mf">273.15</span> <span class="o">+</span> <span class="n">module_temp</span><span class="p">[</span><span class="n">entry</span><span class="p">]))</span>
+<span class="ne">--&gt; </span><span class="mi">944</span>         <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">poa_global_scaled</span><span class="p">[</span><span class="n">entry</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">945</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">947</span> <span class="k">return</span> <span class="n">degradation</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">poa_global</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="viewing-our-data">
+<h3>Viewing Our Data<a class="headerlink" href="#viewing-our-data" title="Link to this heading">#</a></h3>
+<p>Let’s plot the results using a histogram</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lnDeg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">percentile_2p5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">lnDeg</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+<span class="n">percentile_97p5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">lnDeg</span><span class="p">,</span> <span class="mf">97.5</span><span class="p">)</span>
+<span class="n">bin_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lnDeg</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">lnDeg</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+    <span class="n">lnDeg</span><span class="p">,</span>
+    <span class="n">bins</span><span class="o">=</span><span class="n">bin_edges</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+    <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Degradation in Miami&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">percentile_2p5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;2.5th percentile&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">percentile_97p5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;purple&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;97.5th percentile&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">lnDeg</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">lnDeg</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;log(Degredation) [log(%/h)]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Counts (out of </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4c8f6dbe1f58912fcdeaf9433a90c00175fa79e0a45822bc3bf56cf86ab73d75.png" src="../_images/4c8f6dbe1f58912fcdeaf9433a90c00175fa79e0a45822bc3bf56cf86ab73d75.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "NREL/PVDegradationTools",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./03_monte_carlo"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../02_degradation/06_vant_hoff_degradation_model.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">A - Van’t Hoff Degradation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_standoff.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Monte Carlo - Standoff Calculation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlated-monte-carlo-simulation-parameters">Correlated Monte Carlo Simulation (parameters)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-inputs">Required inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-correlation-coefficients">Defining Correlation Coefficients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-mean-and-standard-deviation">Defining Mean and Standard Deviation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-monte-carlo-input-data">Generating Monte Carlo Input Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sanity-check">Sanity Check</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-function-requirements">Other Function Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-monte-carlo-simulation">Running the Monte Carlo Simulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-our-data">Viewing Our Data</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin Springer, Matthew Brown, Silvana Ovaitt, Tobin Ford, Joseph Karas, Michael Kempe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,865 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Adding Points &#8212; PVDEG Tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '04_geospatial/05_scenario_mountain_downselect';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Scenario Objects - OOP Approach to PVDEG" href="06_scenario_single_location.html" />
+    <link rel="prev" title="Define Geospatial Scenario Object" href="04_scenario_geospatial.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-light" alt="PVDEG Tutorials - Home"/>
+    <script>document.write(`<img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-dark" alt="PVDEG Tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to the PVDEG Tutorials
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">01 - Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/01_basics_humidity_design.html">1 - Basics, Humidity, Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/02_degradation.html">2 - Degradation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/03_spectral_degradation.html">3 - Spectral Degradation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/04_weather_database_access.html">4 - Weather Database Access</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 - Degradation Mechanisms</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/01_bo_lid_accelerated_test.html">B-O LID - Accelerated Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/02_letid_accelerated_test.html">LETID - Accelerated Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/03_letid_outdoor.html">LETID - Outdoor Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/04_letid_outdoor_scenario.html">LETID - Outdoor Scenario Based on Accelerated Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/05_letid_passivated_wafer.html">LETID - Passivated Wafer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/06_vant_hoff_degradation_model.html">A - Van’t Hoff Degradation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 - Monte Carlo Simulations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_monte_carlo/01_arrhenius.html">Monte Carlo - Arrhenius Degradation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_monte_carlo/02_standoff.html">Monte Carlo - Standoff Calculation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 - Geospatial &amp; Scenarios (HPC Required)</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_local_scenario.html">Local Scenario (No HPC)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_geospatial_templates.html">Geospatial Templates</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="03_scenario_geographical_features.html">Create Scenario and Populate Location</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="04_scenario_geospatial.html">Define Geospatial Scenario Object</a></li>
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Adding Points</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="06_scenario_single_location.html">Single Location (HPC)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_scenario_temperature.html">Adding Modules and Pipeline Jobs (Run Functions on Scenario Object)</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 - Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_advanced/01_custom_functions_nopython.html">Grabbing Weather Data from PVGIS</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../05_advanced/03_pysam_api.html">Pysam</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../05_advanced/04_nsrdb_distributed_api.html">Setting Up</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../05_advanced/05_pvgis_distributed.html">Creating Coordinates List</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">06 - NREL HPC</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_nrel_hpc/01_geospatial_world_map.html">Note: This notebook is in development</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../06_nrel_hpc/02_letid_outdoor_geospatial_demo.html">LETID - Outdoor Geospatioal Demo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">07 - Workshop Demos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_workshop_demos/01_astm_live_demo.html">ASTM Demonstration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_workshop_demos/02_duramat_live_demo.html">DuraMAT Workshop Live Demo - Geospatial analysis</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/NREL/PVDegradationTools/blob/main/tutorials/04_geospatial/05_scenario_mountain_downselect.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/NREL/PVDegradationTools" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/NREL/PVDegradationTools/issues/new?title=Issue%20on%20page%20%2F04_geospatial/05_scenario_mountain_downselect.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/04_geospatial/05_scenario_mountain_downselect.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Adding Points</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Adding Points</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preview-the-scenario-s-points">Preview The Scenario’s Points</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#downselecting">Downselecting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization">Normalization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#providing-a-kdtree">Providing a KdTree</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-from-scenario">Extracting from Scenario</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geospatial-calculation">Geospatial Calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-results">Viewing Results</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-sparse-data-i">Plotting Sparse Data I</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="adding-points">
+<h1>Adding Points<a class="headerlink" href="#adding-points" title="Link to this heading">#</a></h1>
+<p>We are going to add all of the points in the American West to the scenario and downsample by a factor of 1. This will include only half of the points in the latitude axis and half in the longitude axis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dynamic_points</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">GeospatialScenario</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;dynamic-selection&quot;</span><span class="p">)</span>
+
+<span class="n">dynamic_points</span><span class="o">.</span><span class="n">addLocation</span><span class="p">(</span>
+    <span class="n">state</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;CO&quot;</span><span class="p">,</span> <span class="s2">&quot;UT&quot;</span><span class="p">],</span>  <span class="c1"># , &#39;NM&#39;, &#39;NV&#39;, &#39;ID&#39;, &#39;WY&#39;, &#39;AZ&#39;, &#39;CA&#39;, &#39;OR&#39;, &#39;WA&#39;],</span>
+    <span class="n">downsample_factor</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ConnectionError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">dynamic_points</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">GeospatialScenario</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;dynamic-selection&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">dynamic_points</span><span class="o">.</span><span class="n">addLocation</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">state</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;CO&quot;</span><span class="p">,</span> <span class="s2">&quot;UT&quot;</span><span class="p">],</span>  <span class="c1"># , &#39;NM&#39;, &#39;NV&#39;, &#39;ID&#39;, &#39;WY&#39;, &#39;AZ&#39;, &#39;CA&#39;, &#39;OR&#39;, &#39;WA&#39;],</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">downsample_factor</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/geospatialscenario.py:188,</span> in <span class="ni">GeospatialScenario.addLocation</span><span class="nt">(self, country, state, county, satellite, year, nsrdb_attributes, downsample_factor, gids, bbox_kwarg, see_added)</span>
+<span class="g g-Whitespace">    </span><span class="mi">180</span> <span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;NSRDB&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">181</span> <span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
+<span class="g g-Whitespace">    </span><span class="mi">182</span>     <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="n">satellite</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">183</span>     <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="n">year</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">184</span>     <span class="s2">&quot;NREL_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="n">nsrdb_attributes</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span> <span class="p">}</span>
+<span class="ne">--&gt; </span><span class="mi">188</span> <span class="n">geo_weather</span><span class="p">,</span> <span class="n">geo_meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">189</span>     <span class="n">weather_db</span><span class="p">,</span> <span class="n">geospatial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">weather_arg</span>
+<span class="g g-Whitespace">    </span><span class="mi">190</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">192</span> <span class="k">if</span> <span class="n">gids</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">193</span>     <span class="n">geo_meta</span> <span class="o">=</span> <span class="n">geo_meta</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">gids</span><span class="p">]</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/weather.py:260,</span> in <span class="ni">get</span><span class="nt">(database, id, geospatial, find_meta, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">258</span> <span class="k">elif</span> <span class="n">geospatial</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">259</span>     <span class="k">if</span> <span class="n">database</span> <span class="o">==</span> <span class="s2">&quot;NSRDB&quot;</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">260</span>         <span class="n">nrel_kestrel_check</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">262</span>         <span class="n">weather_ds</span><span class="p">,</span> <span class="n">meta_df</span> <span class="o">=</span> <span class="n">get_NSRDB</span><span class="p">(</span><span class="n">geospatial</span><span class="o">=</span><span class="n">geospatial</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">263</span>         <span class="n">meta_df</span><span class="p">[</span><span class="s2">&quot;wind_height&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/utilities.py:1133,</span> in <span class="ni">nrel_kestrel_check</span><span class="nt">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1130</span> <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;connected to </span><span class="si">{</span><span class="n">device_domain</span><span class="si">}</span><span class="s2">&quot;</span> <span class="sa">f</span><span class="s2">&quot;not a node of </span><span class="si">{</span><span class="n">KESTREL_HOSTNAME</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1132</span> <span class="k">if</span> <span class="n">KESTREL_HOSTNAME</span> <span class="o">!=</span> <span class="n">device_domain</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1133</span>     <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+<span class="ne">ConnectionError</span>: connected to gx.internal.cloudapp.netnot a node of kestrel.hpc.nrel.gov
+</pre></div>
+</div>
+</div>
+</div>
+<section id="preview-the-scenario-s-points">
+<h2>Preview The Scenario’s Points<a class="headerlink" href="#preview-the-scenario-s-points" title="Link to this heading">#</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">plot_cords</span></code> to get a quick snapshot of all coordinates included in the scenario’s metadata.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dynamic_points</span><span class="o">.</span><span class="n">plot_coords</span><span class="p">(</span>
+    <span class="n">coord_1</span><span class="o">=</span><span class="p">[</span><span class="mf">48.574790</span><span class="p">,</span> <span class="o">-</span><span class="mf">130.253906</span><span class="p">],</span>  <span class="c1"># uncomment to see Larger scale view</span>
+    <span class="n">coord_2</span><span class="o">=</span><span class="p">[</span><span class="mf">25.482951</span><span class="p">,</span> <span class="o">-</span><span class="mf">68.027344</span><span class="p">],</span>
+    <span class="n">size</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dynamic_points</span><span class="o">.</span><span class="n">meta_data</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="downselecting">
+<h1>Downselecting<a class="headerlink" href="#downselecting" title="Link to this heading">#</a></h1>
+<p>Using weighted random choices based on elevation we will create a sparse grid from the full metadata for fast calculations. This requires sklearn to be installed but this is not in the <code class="docutils literal notranslate"><span class="pre">pvdeg</span></code> dependency list to you will have to install it seperately.</p>
+<section id="normalization">
+<h2>Normalization<a class="headerlink" href="#normalization" title="Link to this heading">#</a></h2>
+<p>At each metadata point in our dataset we will calculate a weight based on its changes in elevation compared to its neighbors. The higher the weight, the greater the change in elevation from a point’s immediate neighbors. The downselection methods and functions use these weights to randomly select a subset of the datapoints, prefferentially selecting those with higher weights.</p>
+<p>We have some control over which points get selected because all points’ weights must be normalized (mapped from 0 to 1) before downselecting. We can apply a function such as <span class="math notranslate nohighlight">\(e^x\)</span> or <span class="math notranslate nohighlight">\(\log x\)</span> to the weights during normalization. This could help change the distribution of weights that are chosen. This could remove points from the mountains and add them to areas with fewer changes in elevation, or vice versa.</p>
+<p><em>Note: <code class="docutils literal notranslate"><span class="pre">pvdeg</span></code>’s downselection functions use <code class="docutils literal notranslate"><span class="pre">numpy.random</span></code>, the random seed is not fixed so the result will change between runs.</em></p>
+</section>
+<section id="providing-a-kdtree">
+<h2>Providing a KdTree<a class="headerlink" href="#providing-a-kdtree" title="Link to this heading">#</a></h2>
+<p>As shown below the lines to create a kdtree are commented out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set random seed for reproducible results</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># west_tree = pvdeg.geospatial.meta_KDtree(meta_df=dynamic_points.meta_data)</span>
+
+<span class="n">dynamic_points</span><span class="o">.</span><span class="n">downselect_elevation_stochastic</span><span class="p">(</span>
+    <span class="c1"># kdtree=west_tree,</span>
+    <span class="n">downselect_prop</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">normalization</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dynamic_points</span><span class="o">.</span><span class="n">plot_coords</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="extracting-from-scenario">
+<h1>Extracting from Scenario<a class="headerlink" href="#extracting-from-scenario" title="Link to this heading">#</a></h1>
+<p>Scenarios provide an easy way to select and downsample geospatial data but we can easily pull out the data to use other <code class="docutils literal notranslate"><span class="pre">pvdeg</span></code> functions on it. In the cell below, we extract the weather data and meta data from the scenario and take only the matching entries from the weather. Then we load the xarray dataset into memory. Previously, it was stored lazily out of memory but we want to do operations on it. (Chunking causes issues when calculating so this eliminates any chunks)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather</span> <span class="o">=</span> <span class="n">dynamic_points</span><span class="o">.</span><span class="n">weather_data</span>
+
+<span class="n">sub_weather</span> <span class="o">=</span> <span class="n">weather</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
+    <span class="n">gid</span><span class="o">=</span><span class="n">dynamic_points</span><span class="o">.</span><span class="n">meta_data</span><span class="o">.</span><span class="n">index</span>
+<span class="p">)</span>  <span class="c1"># downselect weather using restricted metadata set</span>
+
+<span class="n">sub_weather</span> <span class="o">=</span> <span class="n">sub_weather</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>  <span class="c1"># load into memory</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="geospatial-calculation">
+<h2>Geospatial Calculation<a class="headerlink" href="#geospatial-calculation" title="Link to this heading">#</a></h2>
+<p>Run a standoff calculation on the extracted scenario weather data and scenario meta data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># geospatial analysis now</span>
+
+<span class="n">geo</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span>
+    <span class="s2">&quot;weather_ds&quot;</span><span class="p">:</span> <span class="n">sub_weather</span><span class="p">,</span>
+    <span class="s2">&quot;meta_df&quot;</span><span class="p">:</span> <span class="n">dynamic_points</span><span class="o">.</span><span class="n">meta_data</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">analysis_result</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">analysis</span><span class="p">(</span><span class="o">**</span><span class="n">geo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="viewing-results">
+<h2>Viewing Results<a class="headerlink" href="#viewing-results" title="Link to this heading">#</a></h2>
+<p>Inspecting the xarray dataset below shows us that we have many Not a Number (NaN) entries. These occur because we did not provide weather data at every point in the grid of possile latitude-longitude pairs. Expanding the <code class="docutils literal notranslate"><span class="pre">x</span></code> datavariable shows that there are some valid results but these are uncommon.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analysis_result</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="plotting-sparse-data-i">
+<h1>Plotting Sparse Data I<a class="headerlink" href="#plotting-sparse-data-i" title="Link to this heading">#</a></h1>
+<p>If we try to plot existing data with the current plotting methods exposed by <code class="docutils literal notranslate"><span class="pre">pvdeg</span></code> we will encounter issues. This will produce weak plotting results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This cell demonstrates the issue with plotting sparse data directly</span>
+<span class="c1"># It will raise a TypeError because there&#39;s no numeric data to plot</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">plot_USA</span><span class="p">(</span><span class="n">analysis_result</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">])</span>
+<span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected error when plotting sparse data: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is why we need to use plot_sparse_analysis() instead (see next cell)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">plot_sparse_analysis</span><span class="p">(</span><span class="n">analysis_result</span><span class="p">,</span> <span class="n">data_var</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "NREL/PVDegradationTools",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./04_geospatial"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_scenario_geospatial.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Define Geospatial Scenario Object</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="06_scenario_single_location.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Scenario Objects - OOP Approach to PVDEG</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Adding Points</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preview-the-scenario-s-points">Preview The Scenario’s Points</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#downselecting">Downselecting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization">Normalization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#providing-a-kdtree">Providing a KdTree</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-from-scenario">Extracting from Scenario</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geospatial-calculation">Geospatial Calculation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-results">Viewing Results</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-sparse-data-i">Plotting Sparse Data I</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin Springer, Matthew Brown, Silvana Ovaitt, Tobin Ford, Joseph Karas, Michael Kempe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
