@@ -75,7 +75,9 @@ These applications highlight PVDeg’s versatility as the “PV Library of degra
 
 # Ongoing Development
 
-Version 0.6.2 XX CITATION XX is the latest stable release, incorporating XXX summary line or two XXX. DuraMAT-funded projects will expand the degradation and material parameter databases using large language model driven literature searches, and enhancing the Scenario class to enable handling multiple materials and degradation pathways within the same workflow. This will mitigate the need for users to design and execute Scenarios for different degradation pathways and materials.
+Version 0.7.0 is the latest stable release, incorporating support for NSRDB PSM v4 weather data, multi-material handling in the Scenario class, and compatibility with Python 3.13. The Jupyter notebook tools and tutorials have also undergone major restructuring for improved usability and clarity.
+
+DuraMAT-funded projects will expand the degradation and material parameter databases using large language model driven literature searches, and enhancing the Scenario class to enable handling multiple materials and degradation pathways within the same workflow. This will mitigate the need for users to design and execute Scenarios for different degradation pathways and materials.
 
 
 # Acknowledgements
