@@ -36,7 +36,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install "jupyter-book>=2.0"
+        pip install "jupyter-book>=2.0" jupyterlab
 
     # (optional) Cache your executed notebooks between runs
     # if you have config:
@@ -48,12 +48,15 @@ jobs:
         path: _build/.jupyter_cache
         key: jupyter-book-cache-${{ hashFiles('requirements.txt') }}
 
-    # Build the book
+    # Build the book with Jupyter Book v2
     - name: Build the book
       run: |
         cd tutorials
-        jupyter-book init --kernel python3 || true
-        jupyter-book build .
+        jupyter-book build --all . || exit 1
+        if [ ! -d "_build/html" ]; then
+          echo "Error: Build directory not found"
+          exit 1
+        fi
 
     # Deploy to gh-pages using peaceiris action for all branches
     - name: Deploy to GitHub Pages
