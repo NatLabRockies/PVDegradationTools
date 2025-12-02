@@ -10,7 +10,7 @@ that reads `pip install ...` to install the environment if you follow this mode.
 You can also clone the repository and run them locally, following the
 instructions on the [PVDegTools Github page](https://github.com/NREL/PVDegradationTools)
 
-For analysis tools, see the separate [Tools](../tools/) section.
+For standalone analysis tools, see the Tools section in the navigation menu or visit the [tools directory](../tools/).
 
 ```{tableofcontents}
 ```

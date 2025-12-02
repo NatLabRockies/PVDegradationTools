@@ -1,0 +1,2672 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tools - Module Standoff for IEC TS 63126 &#8212; PVDEG Tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '04_geospatial/08_module_standoff_iec63126';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Grabbing Weather Data from PVGIS" href="../05_advanced/01_custom_functions_nopython.html" />
+    <link rel="prev" title="Adding Modules and Pipeline Jobs (Run Functions on Scenario Object)" href="07_scenario_temperature.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-light" alt="PVDEG Tutorials - Home"/>
+    <script>document.write(`<img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-dark" alt="PVDEG Tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">01 - Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/01_basics_humidity_design.html">Humidity Design Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/02_degradation.html">Degradation Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/03_spectral_degradation.html">Spectral Degradation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/04_weather_database_access.html">Weather Database Access</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 - Degradation Mechanisms</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/01_bo_lid_accelerated_test.html">B-O LID Accelerated Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/02_letid_accelerated_test.html">LeTID Accelerated Test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/03_letid_outdoor.html">LeTID Outdoor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/04_letid_outdoor_scenario.html">LeTID Outdoor Scenario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/05_letid_passivated_wafer.html">LeTID Passivated Wafer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/06_vant_hoff_degradation_model.html">Van't Hoff Degradation Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 - Monte Carlo Simulations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_monte_carlo/01_arrhenius.html">Arrhenius Monte Carlo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_monte_carlo/02_standoff.html">Standoff Monte Carlo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 - Geospatial &amp; Scenarios</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_local_scenario.html">Local Scenario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_geospatial_templates.html">Geospatial Templates</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="03_scenario_geographical_features.html">Create Scenario and Populate Location</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="04_scenario_geospatial.html">Define Geospatial Scenario Object</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="05_scenario_mountain_downselect.html">Adding Points</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="06_scenario_single_location.html">Single Location (HPC)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_scenario_temperature.html">Adding Modules and Pipeline Jobs (Run Functions on Scenario Object)</a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Module Standoff IEC TS 63126 (HPC)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 - Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_advanced/01_custom_functions_nopython.html">Grabbing Weather Data from PVGIS</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../05_advanced/03_pysam_api.html">Pysam</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../05_advanced/04_nsrdb_distributed_api.html">Setting Up</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../05_advanced/05_pvgis_distributed.html">Creating Coordinates List</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">06 - NREL HPC</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_nrel_hpc/01_geospatial_world_map.html">Note: This notebook is in development</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../06_nrel_hpc/02_letid_outdoor_geospatial_demo.html">LeTID Outdoor Geospatial Demo (HPC)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">07 - Workshop Demos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_workshop_demos/01_astm_live_demo.html">ASTM Live Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_workshop_demos/02_duramat_live_demo.html">DuraMAT Workshop Live Demo - Geospatial analysis</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/04_geospatial/08_module_standoff_iec63126.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tools - Module Standoff for IEC TS 63126</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculation-of-module-standoff-distance-according-to-iec-ts-63126">Calculation of module standoff distance according to IEC TS 63126</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-weather-data">1. Import Weather Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-installation-standoff-minimum-level-1-and-level-2">2. Calculate Installation Standoff Minimum - Level 1 and Level 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-x-eff-from-provided-module-temperature-data">3. Calculate <span class="math notranslate nohighlight">\(X_{eff}\)</span> from provided module temperature data.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-t-98-for-a-given-azimuth-tilt-and-x-eff">4. Calculate <span class="math notranslate nohighlight">\(T_{98}\)</span> for a given azimuth, tilt, and <span class="math notranslate nohighlight">\(X_{eff}\)</span>.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-x-min-for-all-azimuth-and-tilt-for-a-given-t-98">5. Plot <span class="math notranslate nohighlight">\(X_{min}\)</span> for all azimuth and tilt for a given <span class="math notranslate nohighlight">\(T_{98}\)</span>.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-t-98-for-all-azimuth-and-tilt-for-a-given-x-eff">6. Plot <span class="math notranslate nohighlight">\(T_{98}\)</span>  for all azimuth and tilt for a given <span class="math notranslate nohighlight">\(X_{eff}\)</span>.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-x-min-for-a-t-98-and-plot-t-98-for-a-given-region">7. Plot <span class="math notranslate nohighlight">\(X_{min}\)</span> for a <span class="math notranslate nohighlight">\(T_{98}\)</span>, and plot <span class="math notranslate nohighlight">\(T_{98}\)</span> for a given region.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-data-outputs">8. Save data outputs.</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tools-module-standoff-for-iec-ts-63126">
+<h1>Tools - Module Standoff for IEC TS 63126<a class="headerlink" href="#tools-module-standoff-for-iec-ts-63126" title="Link to this heading">#</a></h1>
+<section id="calculation-of-module-standoff-distance-according-to-iec-ts-63126">
+<h2>Calculation of module standoff distance according to IEC TS 63126<a class="headerlink" href="#calculation-of-module-standoff-distance-according-to-iec-ts-63126" title="Link to this heading">#</a></h2>
+<p><strong>Requirements:</strong></p>
+<ul class="simple">
+<li><p>Local weather data file or site longitude and latittude</p></li>
+</ul>
+<p><strong>Objectives:</strong></p>
+<ol class="arabic simple">
+<li><p>Import weather data.</p></li>
+<li><p>Calculate installation standoff - Level 1 and Level 2.</p></li>
+<li><p>Calculate <span class="math notranslate nohighlight">\(X_{eff}\)</span> from provided module temperature data.</p></li>
+<li><p>Calculate <span class="math notranslate nohighlight">\(T_{98}\)</span> for a given azimuth, tilt, and <span class="math notranslate nohighlight">\(X_{eff}\)</span>.</p></li>
+<li><p>Plot <span class="math notranslate nohighlight">\(X_{min}\)</span> for all azimuth and tilt for a given <span class="math notranslate nohighlight">\(T_{98}\)</span>.</p></li>
+<li><p>Plot <span class="math notranslate nohighlight">\(X_{min}\)</span> for Level 1, Level 2, or a <span class="math notranslate nohighlight">\(T_{98}\)</span> for a given region.</p></li>
+</ol>
+<p><strong>Background:</strong></p>
+<p>This notebook calculates the a minimum effective standoff distance (<span class="math notranslate nohighlight">\(X_{eff}\)</span>) necessary for roof-mounted PV modules to ensure that the <span class="math notranslate nohighlight">\(98^{th}\)</span> percentile operating temperature, <span class="math notranslate nohighlight">\(T_{98}\)</span>, remains under 70°C for compliance to IEC 61730 and IEC 61215. For higher <span class="math notranslate nohighlight">\(T_{98}\)</span> values above 70°C or 80°C testing must be done to the specifications for Level 1 and Level 2 of IEC TS 63126. This method is outlined in the appendix of IEC TS 63126 and is based on the model from *[King 2004] and data from **[Fuentes, 1987] to model the approximate exponential decay in temperature, <span class="math notranslate nohighlight">\(T(X)\)</span>, with increasing standoff distance, <span class="math notranslate nohighlight">\(X\)</span>, as,</p>
+<div class="math notranslate nohighlight">
+\[ X = -X_0 \ln\left(1-\frac{T_0-T}{\Delta T}\right), Equation 1 \]</div>
+<p>where <span class="math notranslate nohighlight">\(T_0\)</span> is the temperature for <span class="math notranslate nohighlight">\(X=0\)</span> (insulated-back) and <span class="math notranslate nohighlight">\(\Delta T\)</span> is the temperature difference between an insulated-back (<span class="math notranslate nohighlight">\(X=0\)</span>) and open-rack mounting configuration (<span class="math notranslate nohighlight">\(X=\infty)\)</span>.</p>
+<p>We used pvlib and data from the National Solar Radiation Database (NSRDB) to calculate the module temperatures for the insulated-back and open-rack mounting configurations and apply our model to obtain the minimum standoff distance for roof-mounted PV systems to achieve a temperature lower than a specified <span class="math notranslate nohighlight">\(T_{98}\)</span>. The following figure showcases this calulation for the entire world for an <span class="math notranslate nohighlight">\(X_{eff}\)</span> that results in <span class="math notranslate nohighlight">\(T_{98}\)</span>=70°C. Values of <span class="math notranslate nohighlight">\(X_{eff}\)</span> higher than this will require Level 1 or Level 2 certification.</p>
+<p><span class="math notranslate nohighlight">\(*\)</span> D. L. King, W. E. Boyson, and J. A. Kratochvil, “Photovoltaic array performance model,” SAND2004-3535, Sandia National Laboratories, Albuquerque, NM, 2004. ‘<br />
+<span class="math notranslate nohighlight">\(**\)</span> M. K. Fuentes, “A simplified thermal model for Flat-Plate photovoltaic arrays,” United States, 1987-05-01 1987. <a class="reference external" href="https://www.osti.gov/biblio/6802914">https://www.osti.gov/biblio/6802914</a></p>
+<p><img alt="alt text" src="04_geospatial/images/T98_70C_standoff_Map.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies</span>
+<span class="c1"># and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
+<span class="c1">#!pip install pvdeg==0.4.2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pvdeg</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATA_DIR</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dask</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This information helps with debugging and getting support :)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas version &quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dask version&quot;</span><span class="p">,</span> <span class="n">dask</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.11.0-1018-azure
+Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
+Pandas version  2.3.3
+pvdeg version  0.1.dev1+gf6f0e126e
+dask version 2025.11.0
+/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/data
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="import-weather-data">
+<h2>1. Import Weather Data<a class="headerlink" href="#import-weather-data" title="Link to this heading">#</a></h2>
+<p>The function has these minimum requirements when using a weather data file:</p>
+<ul class="simple">
+<li><p>Weather data containing (at least) DNI, DHI, GHI, Temperature, RH, and Wind-Speed data at module level.</p></li>
+<li><p>Site meta-data containing (at least) latitude, longitude, and time zone</p></li>
+</ul>
+<p>Alternatively one may can get meterological data from the NSRDB or PVGIS with just the longitude and latitude. This function for the NSRDB (via NSRDB ‘PSM3’) works primarily for most of North America and South America. PVGIS works for most of the rest of the world (via SARAH ‘PVGIS’). See the tutorial “Weather Database Access.ipynb” tutorial on PVdeg or Jensen et al. <a class="reference external" href="https://doi.org/10.1016/j.solener.2023.112092">https://doi.org/10.1016/j.solener.2023.112092</a> for satellite coverage information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get data from a supplied data file (Do not use the next box of code if using your own file)</span>
+<span class="n">weather_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;psm3_demo.csv&quot;</span><span class="p">)</span>
+<span class="n">WEATHER_df</span><span class="p">,</span> <span class="n">META</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">weather_file</span><span class="p">,</span> <span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">META</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Source&#39;: &#39;NSRDB&#39;, &#39;Location ID&#39;: 145809.0, &#39;City&#39;: &#39;-&#39;, &#39;State&#39;: &#39;-&#39;, &#39;Country&#39;: &#39;-&#39;, &#39;Clearsky DHI Units&#39;: &#39;w/m2&#39;, &#39;Clearsky DNI Units&#39;: &#39;w/m2&#39;, &#39;Clearsky GHI Units&#39;: &#39;w/m2&#39;, &#39;Dew Point Units&#39;: &#39;c&#39;, &#39;DHI Units&#39;: &#39;w/m2&#39;, &#39;DNI Units&#39;: &#39;w/m2&#39;, &#39;GHI Units&#39;: &#39;w/m2&#39;, &#39;Solar Zenith Angle Units&#39;: &#39;Degree&#39;, &#39;Temperature Units&#39;: &#39;c&#39;, &#39;Pressure Units&#39;: &#39;mbar&#39;, &#39;Relative Humidity Units&#39;: &#39;%&#39;, &#39;Precipitable Water Units&#39;: &#39;cm&#39;, &#39;Wind Direction Units&#39;: &#39;Degrees&#39;, &#39;Wind Speed Units&#39;: &#39;m/s&#39;, &#39;Cloud Type -15&#39;: &#39;N/A&#39;, &#39;Cloud Type 0&#39;: &#39;Clear&#39;, &#39;Cloud Type 1&#39;: &#39;Probably Clear&#39;, &#39;Cloud Type 2&#39;: &#39;Fog&#39;, &#39;Cloud Type 3&#39;: &#39;Water&#39;, &#39;Cloud Type 4&#39;: &#39;Super-Cooled Water&#39;, &#39;Cloud Type 5&#39;: &#39;Mixed&#39;, &#39;Cloud Type 6&#39;: &#39;Opaque Ice&#39;, &#39;Cloud Type 7&#39;: &#39;Cirrus&#39;, &#39;Cloud Type 8&#39;: &#39;Overlapping&#39;, &#39;Cloud Type 9&#39;: &#39;Overshooting&#39;, &#39;Cloud Type 10&#39;: &#39;Unknown&#39;, &#39;Cloud Type 11&#39;: &#39;Dust&#39;, &#39;Cloud Type 12&#39;: &#39;Smoke&#39;, &#39;Fill Flag 0&#39;: &#39;N/A&#39;, &#39;Fill Flag 1&#39;: &#39;Missing Image&#39;, &#39;Fill Flag 2&#39;: &#39;Low Irradiance&#39;, &#39;Fill Flag 3&#39;: &#39;Exceeds Clearsky&#39;, &#39;Fill Flag 4&#39;: &#39;Missing CLoud Properties&#39;, &#39;Fill Flag 5&#39;: &#39;Rayleigh Violation&#39;, &#39;Surface Albedo Units&#39;: &#39;N/A&#39;, &#39;Version&#39;: &#39;3.0.6&#39;, &#39;latitude&#39;: 39.73, &#39;longitude&#39;: -105.18, &#39;tz&#39;: -7.0, &#39;altitude&#39;: 1820.0}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This routine will get a meteorological dataset from anywhere in the world where it is available</span>
+<span class="c1"># weather_id = (24.7136, 46.6753) #Riyadh, Saudi Arabia</span>
+<span class="c1"># weather_id = (35.6754, 139.65) #Tokyo, Japan</span>
+<span class="c1"># weather_id = (-43.52646, 172.62165) #Christchurch, New Zealand</span>
+<span class="c1"># weather_id = (64.84031, -147.73836) #Fairbanks, Alaska</span>
+<span class="c1"># weather_id = (65.14037, -21.91633) #Reykjavik, Iceland</span>
+<span class="c1"># weather_id = (33.4152, -111.8315) #Mesa, Arizona</span>
+<span class="c1"># WEATHER_df, META = pvdeg.weather.get_anywhere(id=weather_id)</span>
+<span class="c1"># print(META)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-installation-standoff-minimum-level-1-and-level-2">
+<h2>2. Calculate Installation Standoff Minimum - Level 1 and Level 2<a class="headerlink" href="#calculate-installation-standoff-minimum-level-1-and-level-2" title="Link to this heading">#</a></h2>
+<p>According to IEC TS 63126, Level 0, Level 1 and Level 2 certification is limited to T₉₈&lt;70°C, &lt;80°C and &lt;90°C, respectively. Level 0 certification is essentially compliance to IEC 61730 and IEC 61215. The default value of T₉₈&lt;70°C represents the minimium gap to avoid higher temperature certification according to IEC TS 63126. This minimum standoff (<span class="math notranslate nohighlight">\(x_{min}\)</span>) is the distance between the bottom of the module frame and the roof and can be extimated for a given environment as,</p>
+<div class="math notranslate nohighlight">
+\[ X_{min} = -X_0 \ln\left(1-\frac{T_{98,0}-T}{ T_{98,0}- T_{98,inf}}\right), Equation 2 \]</div>
+<p>where <span class="math notranslate nohighlight">\(T_{98,0}\)</span> is the <span class="math notranslate nohighlight">\(98^{th}\)</span> percentile temperature for an insulated back module and <span class="math notranslate nohighlight">\(T_{98,inf}\)</span> is the <span class="math notranslate nohighlight">\(98^{th}\)</span> percentile temperature for an open rack mounted module.</p>
+<p>Once the meterological data has been obtained, the input parameter possibilities are:</p>
+<ul class="simple">
+<li><p>T₉₈ : Does not necessarily need to be set at 70°C or 80°C for IEC TS 63216, you might want to use a different number to compensate for a thermal aspect of the particular system you are considering. The default is 70°C.</p></li>
+<li><p>tilt : tilt from horizontal of PV module. The default is 0°.</p></li>
+<li><p>azimuth : azimuth in degrees from North. The default is 180° for south facing.</p></li>
+<li><p>sky_model : pvlib compatible model for generating sky characteristics (Options: ‘isotropic’, ‘klucher’, ‘haydavies’, ‘reindl’, ‘king’, ‘perez’). The default is ‘isotropic’.</p></li>
+<li><p>temp_model : pvlib compatible module temperature model. (Options: ‘sapm’, ‘pvsyst’, ‘faiman’, ‘sandia’). The default is ‘sapm’.</p></li>
+<li><p>conf_0 : Temperature model for hotest mounting configuration. Default is “insulated_back_glass_polymer”.</p></li>
+<li><p>conf_inf : Temperature model for open rack mounting. Default is “open_rack_glass_polymer”.</p></li>
+<li><p>x_0 : thermal decay constant [cm] (see documentation). The default is 6.5 cm.</p></li>
+<li><p>wind_factor : Wind speed power law correction factor to account for different wind speed measurement heights between weather database (e.g. NSRDB) and the tempeature model (e.g. SAPM). The default is 0.33.</p></li>
+</ul>
+<p>The following is the minimum function call. It defaults to horizontal tilt and T₉₈=70°C.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">standoff</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">(</span><span class="n">weather_df</span><span class="o">=</span><span class="n">WEATHER_df</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">interpret_standoff</span><span class="p">(</span><span class="n">standoff</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  39.7 was used.
+The array azimuth was not provided, therefore an azimuth of  180.0 was used.
+The estimated T₉₈ of an insulated-back module is 77.0°C. 
+The estimated T₉₈ of an open-rack module is 50.6°C. 
+Level 0 certification is valid for a standoff greather than 2.0 cm. 
+Level 1 certification is required for a standoff less than 2.0 cm. 
+Level 2 certification is never required for this temperature                            profile.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following is a full function call for both T₉₈=70°C and 80°C separately even though the second standoff distance can be calculated using only T98_0 and T98_inf. With this function, one may also want to change the tilt, azimuth, or T98.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">standoff_1</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">(</span>
+    <span class="n">weather_df</span><span class="o">=</span><span class="n">WEATHER_df</span><span class="p">,</span>
+    <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">,</span>
+    <span class="n">T98</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span>
+    <span class="n">tilt</span><span class="o">=</span><span class="n">META</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span>
+    <span class="n">azimuth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
+    <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First calculation standoff = &quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">standoff_1</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot; cm.&quot;</span><span class="p">)</span>
+<span class="n">standoff_2</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">(</span>
+    <span class="n">weather_df</span><span class="o">=</span><span class="n">WEATHER_df</span><span class="p">,</span>
+    <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">,</span>
+    <span class="n">T98</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
+    <span class="n">tilt</span><span class="o">=</span><span class="n">META</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span>
+    <span class="n">azimuth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
+    <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Second calculation standoff = &quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">standoff_2</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot; cm.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">interpret_standoff</span><span class="p">(</span><span class="n">standoff_1</span><span class="o">=</span><span class="n">standoff_1</span><span class="p">,</span> <span class="n">standoff_2</span><span class="o">=</span><span class="n">standoff_2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array azimuth was not provided, therefore an azimuth of  180.0 was used.
+First calculation standoff =  2.0  cm.
+The array azimuth was not provided, therefore an azimuth of  180.0 was used.
+Second calculation standoff =  0.0  cm.
+The estimated T₉₈ of an insulated-back module is 77.0°C. 
+The estimated T₉₈ of an open-rack module is 50.6°C. 
+Level 0 certification is valid for a standoff greather than 2.0 cm. 
+Level 1 certification is required for a standoff less than 2.0 cm. 
+Level 2 certification is never required for this temperature                            profile.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-x-eff-from-provided-module-temperature-data">
+<h2>3. Calculate <span class="math notranslate nohighlight">\(X_{eff}\)</span> from provided module temperature data.<a class="headerlink" href="#calculate-x-eff-from-provided-module-temperature-data" title="Link to this heading">#</a></h2>
+<p>To do this calculation, one must use a set of data with:</p>
+<ul class="simple">
+<li><p>meterological irradiance data sufficient to calculate the POA irradiance (DHI, GHI, and DNI),</p></li>
+<li><p>ambient temperature data,</p></li>
+<li><p>wind speed at module height, (wind_factor=0.33 will be used unless otherwise specified)</p></li>
+<li><p>temperature measurements of the module in the test system. Ideally this would be measured under a worst case scenario that maximizes the module temperature for a given site,</p></li>
+<li><p>geographic meta data including longitude and latitude,</p></li>
+</ul>
+<p>To create a weather file of your own, copy the format of the example file ‘xeff_demo.csv’. This is formatted with the first row containing meta data variable names, the second row containing the corresponding values, the third row containing meteorological data headers, and all the remaining rows containing the meteorological data.</p>
+<p>To do this calculation, one should also filter the data to remove times when the sun is not shining or when snow is likely to be on the module. The recommendations and programmed defaults are to use poa_min=100 W/m² and data when the minimum ambient temperature t_amb_min=0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the weather file</span>
+<span class="n">weather_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;xeff_demo.csv&quot;</span><span class="p">)</span>
+<span class="n">xeff_weather</span><span class="p">,</span> <span class="n">xeff_meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">weather_file</span><span class="p">,</span> <span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+<span class="c1"># Pull measured temperature and calculate theoretical insulated back module temperature and open rack module temperature</span>
+<span class="n">T_0</span><span class="p">,</span> <span class="n">T_inf</span><span class="p">,</span> <span class="n">xeff_poa</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">eff_gap_parameters</span><span class="p">(</span>
+    <span class="n">weather_df</span><span class="o">=</span><span class="n">xeff_weather</span><span class="p">,</span>
+    <span class="n">meta</span><span class="o">=</span><span class="n">xeff_meta</span><span class="p">,</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># Now calculate X_eff.</span>
+<span class="n">x_eff</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">eff_gap</span><span class="p">(</span>
+    <span class="n">T_0</span><span class="p">,</span>
+    <span class="n">T_inf</span><span class="p">,</span>
+    <span class="n">xeff_weather</span><span class="p">[</span><span class="s2">&quot;module_temperature&quot;</span><span class="p">],</span>
+    <span class="n">xeff_weather</span><span class="p">[</span><span class="s2">&quot;temp_air&quot;</span><span class="p">],</span>
+    <span class="n">xeff_poa</span><span class="p">[</span><span class="s2">&quot;poa_global&quot;</span><span class="p">],</span>
+    <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
+    <span class="n">poa_min</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">t_amb_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The effective standoff for this system is&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">x_eff</span><span class="p">,</span> <span class="s2">&quot;cm.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The effective standoff for this system is 2.0 cm.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-t-98-for-a-given-azimuth-tilt-and-x-eff">
+<h2>4. Calculate <span class="math notranslate nohighlight">\(T_{98}\)</span> for a given azimuth, tilt, and <span class="math notranslate nohighlight">\(X_{eff}\)</span>.<a class="headerlink" href="#calculate-t-98-for-a-given-azimuth-tilt-and-x-eff" title="Link to this heading">#</a></h2>
+<p>Equation 2 can be reorganized as,</p>
+<div class="math notranslate nohighlight">
+\[ T_{98} = T_{98,0}  -( T_{98,0}- T_{98,inf}) \left(1-e^{-\frac{x_{eff}}{x_{0}}}\right), Equation 3 \]</div>
+<p>and used to calculate the <span class="math notranslate nohighlight">\(98^{th}\)</span> percential temperature, <span class="math notranslate nohighlight">\(T_{98}\)</span>, for a PV system having a given effective standoff height, <span class="math notranslate nohighlight">\(X_{eff}\)</span>,  for an arbitrarily oriented module. Here, <span class="math notranslate nohighlight">\(T_{98,0}\)</span> is the <span class="math notranslate nohighlight">\(98^{th}\)</span> percentile for an insulated-back module and <span class="math notranslate nohighlight">\(T_{98,inf}\)</span> is the <span class="math notranslate nohighlight">\(98^{th}\)</span> percentile for a rack-mounted module. The input parameter possibilities are the same as shown in Objective #2 above, but the example below uses the default parameters. The actual tilt [degrees], azimuth [degrees] and <span class="math notranslate nohighlight">\(X_{eff}\)</span> [cm] can be modifed as desired.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is the minimal function call using the common default settings to estimate T₉₈.</span>
+<span class="n">T_98</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">T98_estimate</span><span class="p">(</span>
+    <span class="n">weather_df</span><span class="o">=</span><span class="n">WEATHER_df</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">,</span> <span class="n">tilt</span><span class="o">=-</span><span class="n">META</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span> <span class="n">azimuth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_eff</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The 98ᵗʰ percential temperature is estimated to be&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">T_98</span><span class="p">,</span> <span class="s2">&quot;°C.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array azimuth was not provided, therefore an azimuth of  180.0 was used.
+The 98ᵗʰ percential temperature is estimated to be 45.7 °C.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This code will calculate the temperature for an arbitrary x_eff distance. Either set of kwargs can be modified and use.</span>
+<span class="c1"># irradiance_kwarg ={</span>
+<span class="c1">#    &quot;axis_tilt&quot;: None,</span>
+<span class="c1">#    &quot;axis_azimuth&quot;: None,</span>
+<span class="c1">#    &quot;x_eff&quot;: 10,</span>
+<span class="c1">#    &quot;module_mount&quot;: &#39;1_axis&#39;}</span>
+<span class="n">irradiance_kwarg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;tilt&quot;</span><span class="p">:</span> <span class="n">META</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;azimuth&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">&quot;x_eff&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;module_mount&quot;</span><span class="p">:</span> <span class="s2">&quot;fixed&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">T_xeff</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">x_eff_temperature_estimate</span><span class="p">(</span>
+    <span class="n">weather_df</span><span class="o">=</span><span class="n">WEATHER_df</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">,</span> <span class="o">**</span><span class="n">irradiance_kwarg</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;The 98ᵗʰ percential temperature is estimated to be&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">T_xeff</span><span class="p">,</span> <span class="mi">98</span><span class="p">),</span>
+    <span class="s2">&quot;°C.&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array azimuth was not provided, therefore an azimuth of  180.0 was used.
+The 98ᵗʰ percential temperature is estimated to be 56.0 °C.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-x-min-for-all-azimuth-and-tilt-for-a-given-t-98">
+<h2>5. Plot <span class="math notranslate nohighlight">\(X_{min}\)</span> for all azimuth and tilt for a given <span class="math notranslate nohighlight">\(T_{98}\)</span>.<a class="headerlink" href="#plot-x-min-for-all-azimuth-and-tilt-for-a-given-t-98" title="Link to this heading">#</a></h2>
+<p>The temperature of a system is affected by the orientation. This section will scan all possible tilts and azimuths calculating the minimum standoff distance for a given <span class="math notranslate nohighlight">\(T_{98}\)</span>. Similar additional factors as above can also be modified but are not included here for simplicity. The tilt_step and azimuth_step are the number of degrees for each step for the 90° and 180° tilt and azimuth spans, respectively. The default for this calculation is for <span class="math notranslate nohighlight">\(T_{98}\)</span>=70°C, the boundary between Level 0 and Level 1 requirements. The temperature model information given below is unnecessary as these are default values that would get populated automatically. However, they were included here for clarity into a standard practice as per IEC TS 63126.</p>
+<div class="math notranslate nohighlight">
+\[ X_{min} = -X_0 \ln\left(1-\frac{T_{98,0}-T}{ T_{98,0}- T_{98,inf}}\right), Equation 2 \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scans through all the azimuth and tilt running the minimum standoff calculation</span>
+<span class="c1"># Set up keyword parameters for the calculation</span>
+
+<span class="n">kwarg_x</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">T98</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span>
+    <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
+    <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># Run the calculation</span>
+<span class="n">x_azimuth_step</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">x_tilt_step</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">standoff_series</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">tilt_azimuth_scan</span><span class="p">(</span>
+    <span class="n">weather_df</span><span class="o">=</span><span class="n">WEATHER_df</span><span class="p">,</span>
+    <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">,</span>
+    <span class="n">tilt_step</span><span class="o">=</span><span class="n">x_tilt_step</span><span class="p">,</span>
+    <span class="n">azimuth_step</span><span class="o">=</span><span class="n">x_azimuth_step</span><span class="p">,</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff_x</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwarg_x</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1% complete
+1.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.4% complete
+2.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.8% complete
+4.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.1% complete
+5.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.5% complete
+6.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.8% complete
+8.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.2% complete
+9.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.5% complete
+10.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11.9% complete
+12.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13.2% complete
+13.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.6% complete
+14.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.9% complete
+16.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17.3% complete
+17.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18.6% complete
+18.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20.0% complete
+20.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.4% complete
+21.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22.7% complete
+23.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24.1% complete
+24.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.4% complete
+25.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26.8% complete
+27.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28.1% complete
+28.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29.5% complete
+29.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.8% complete
+31.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32.2% complete
+32.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33.5% complete
+33.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34.9% complete
+35.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36.2% complete
+36.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37.6% complete
+37.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38.9% complete
+39.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40.3% complete
+40.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42.7% complete
+43.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44.1% complete
+44.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45.4% complete
+45.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46.8% complete
+47.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48.1% complete
+48.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49.5% complete
+49.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.8% complete
+51.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52.2% complete
+52.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53.5% complete
+53.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54.9% complete
+55.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56.2% complete
+56.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57.6% complete
+57.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58.9% complete
+59.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>59.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>59.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60.3% complete
+60.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61.6% complete
+61.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63.0% complete
+63.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64.3% complete
+64.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65.7% complete
+65.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67.0% complete
+67.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68.4% complete
+68.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69.7% complete
+70.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71.1% complete
+71.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72.4% complete
+72.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73.8% complete
+74.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75.1% complete
+75.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76.5% complete
+76.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77.8% complete
+78.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79.2% complete
+79.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80.5% complete
+80.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81.9% complete
+82.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82.7% complete
+83.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83.2% complete
+83.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84.1% complete
+84.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84.6% complete
+84.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85.4% complete
+85.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85.9% complete
+86.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86.8% complete
+87.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87.3% complete
+87.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88.1% complete
+88.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88.6% complete
+88.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>89.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>89.5% complete
+89.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>90.0% complete
+90.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>90.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>90.8% complete
+91.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>91.4% complete
+91.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>91.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>92.2% complete
+92.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>92.7% complete
+93.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>93.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>93.5% complete
+93.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>94.1% complete
+94.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>94.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>94.9% complete
+95.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>95.4% complete
+95.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>95.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>96.2% complete
+96.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>96.8% complete
+97.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>97.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>97.6% complete
+97.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>98.1% complete
+98.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>98.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>98.9% complete
+99.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>99.5% complete
+99.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100.0% complete
+                     
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next cell creates a plot of the calculated data. Some of the things you may want to change are:</p>
+<ul class="simple">
+<li><p>cmap=”Spectral_r”: Change to have different colors</p></li>
+<li><p>plt.title : This will change the plot title.</p></li>
+<li><p>figsize=(16,4) : Change the plot dimensions and/or aspect ratio.</p></li>
+<li><p>vmax=None : This can be set to a numeric value to control the depth scale maximum</p></li>
+<li><p>vmin=0 : This controls the minimum of the depth scale.</p></li>
+<li><p>v_ticks=37 : This changes the number of vertical tick marks</p></li>
+<li><p>h_ticks=10 : This changes the number of horizontal tick marks</p></li>
+<li><p>Unblock the last two lines to ouput the plot as an *.png image file</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">standoff_series_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;Tilt&quot;</span><span class="p">:</span> <span class="n">standoff_series</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="s2">&quot;Azimuth&quot;</span><span class="p">:</span> <span class="n">standoff_series</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="s2">&quot;Xₘᵢₙ&quot;</span><span class="p">:</span> <span class="n">standoff_series</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">x_fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">&quot;Plot of $\it</span><span class="si">{Xₘᵢₙ}</span><span class="s2">$ for all orientations for $\it</span><span class="si">{T₉₈}</span><span class="s2">$=&quot;</span>
+    <span class="o">+</span> <span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">kwarg_x</span><span class="p">[</span><span class="s2">&quot;T98&quot;</span><span class="p">]</span>
+    <span class="o">+</span> <span class="s2">&quot;°C.&quot;</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mf">1.08</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">x_fig</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">standoff_series_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;Tilt&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;Azimuth&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;Xₘᵢₙ&quot;</span><span class="p">),</span>
+    <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Xₘᵢₙ&quot;</span><span class="p">,</span> <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;pad&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">},</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Spectral_r&quot;</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">h_ticks</span> <span class="o">=</span> <span class="mi">37</span>
+<span class="n">x_number</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mi">360</span> <span class="o">/</span> <span class="n">x_azimuth_step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">x_ticks</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">360</span> <span class="o">/</span> <span class="p">(</span><span class="n">h_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">x_azimuth_step</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">x_labels</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">360</span> <span class="o">/</span> <span class="p">(</span><span class="n">h_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h_ticks</span><span class="p">)]</span>
+<span class="n">x_ticks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_number</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">x_fig</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x_ticks</span><span class="p">)</span>
+<span class="n">x_fig</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">x_labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+
+<span class="n">v_ticks</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">y_number</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mi">90</span> <span class="o">/</span> <span class="n">x_tilt_step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">y_ticks</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">90</span> <span class="o">/</span> <span class="p">(</span><span class="n">v_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">x_tilt_step</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">v_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">y_labels</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">90</span> <span class="o">/</span> <span class="p">(</span><span class="n">v_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">v_ticks</span><span class="p">)]</span>
+<span class="n">y_ticks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_number</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">x_fig</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">y_ticks</span><span class="p">)</span>
+<span class="n">x_fig</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">y_labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">x_fig</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Azimuth [°]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">x_fig</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Tilt [°]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">x_fig</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\it</span><span class="si">{Xₘᵢₙ}</span><span class="s2">$ [cm]&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">x_fig</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+<span class="n">output_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())),</span> <span class="s2">&quot;TEMP&quot;</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span>
+<span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_folder</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;Standoff_Scan.png&quot;</span><span class="p">),</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span>
+<span class="p">)</span>  <span class="c1"># Creates an image file of the standoff plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8092079e1f4f6c388488b747f618d9d12a40633d97a6be2a2895215540d62de0.png" src="../_images/8092079e1f4f6c388488b747f618d9d12a40633d97a6be2a2895215540d62de0.png" />
+</div>
+</div>
+</section>
+<section id="plot-t-98-for-all-azimuth-and-tilt-for-a-given-x-eff">
+<h2>6. Plot <span class="math notranslate nohighlight">\(T_{98}\)</span>  for all azimuth and tilt for a given <span class="math notranslate nohighlight">\(X_{eff}\)</span>.<a class="headerlink" href="#plot-t-98-for-all-azimuth-and-tilt-for-a-given-x-eff" title="Link to this heading">#</a></h2>
+<p>The temperature of a system is affected by the orientation and the effective standoff, <span class="math notranslate nohighlight">\(X_{eff}\)</span>, of the system. This section will scan all possible tilts and azimuths calculating the <span class="math notranslate nohighlight">\(T_{98}\)</span> for a given <span class="math notranslate nohighlight">\(X_{eff}\)</span>. As above, additional factors can be modified but are not included here for simplicity. The tilt_step and azimuth_step are the number of degrees for each step for the 90° and 180° tilt and azimuth spans, respectively. The default for this calculation is for <span class="math notranslate nohighlight">\(X_{eff}\)</span>=10 cm, a common effective standoff distance on a rooftop system. A value of <span class="math notranslate nohighlight">\(X_{eff}\)</span>=None will run the calculations for an open rack system and <span class="math notranslate nohighlight">\(X_{eff}\)</span>=0 for an insulated-back system.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scans through all the azimuth and tilt running the 98ᵗʰ percentile temperature calculation.</span>
+<span class="c1"># Set up keyword parameters for the calculation</span>
+<span class="n">kwarg_T</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">x_eff</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
+    <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># Run the calculation</span>
+<span class="n">T_azimuth_step</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">T_tilt_step</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">T98_series</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">tilt_azimuth_scan</span><span class="p">(</span>
+    <span class="n">weather_df</span><span class="o">=</span><span class="n">WEATHER_df</span><span class="p">,</span>
+    <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">,</span>
+    <span class="n">tilt_step</span><span class="o">=</span><span class="n">T_tilt_step</span><span class="p">,</span>
+    <span class="n">azimuth_step</span><span class="o">=</span><span class="n">T_azimuth_step</span><span class="p">,</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">T98_estimate</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwarg_T</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3% complete
+0.5% complete
+0.8% complete
+1.1% complete
+1.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6% complete
+1.9% complete
+2.2% complete
+2.4% complete
+2.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.0% complete
+3.2% complete
+3.5% complete
+3.8% complete
+4.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.3% complete
+4.6% complete
+4.9% complete
+5.1% complete
+5.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.7% complete
+5.9% complete
+6.2% complete
+6.5% complete
+6.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.0% complete
+7.3% complete
+7.6% complete
+7.8% complete
+8.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.4% complete
+8.6% complete
+8.9% complete
+9.2% complete
+9.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.7% complete
+10.0% complete
+10.3% complete
+10.5% complete
+10.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11.1% complete
+11.4% complete
+11.6% complete
+11.9% complete
+12.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.4% complete
+12.7% complete
+13.0% complete
+13.2% complete
+13.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13.8% complete
+14.1% complete
+14.3% complete
+14.6% complete
+14.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.1% complete
+15.4% complete
+15.7% complete
+15.9% complete
+16.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16.5% complete
+16.8% complete
+17.0% complete
+17.3% complete
+17.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17.8% complete
+18.1% complete
+18.4% complete
+18.6% complete
+18.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19.2% complete
+19.5% complete
+19.7% complete
+20.0% complete
+20.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20.5% complete
+20.8% complete
+21.1% complete
+21.4% complete
+21.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.9% complete
+22.2% complete
+22.4% complete
+22.7% complete
+23.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.2% complete
+23.5% complete
+23.8% complete
+24.1% complete
+24.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24.6% complete
+24.9% complete
+25.1% complete
+25.4% complete
+25.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.9% complete
+26.2% complete
+26.5% complete
+26.8% complete
+27.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27.3% complete
+27.6% complete
+27.8% complete
+28.1% complete
+28.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28.6% complete
+28.9% complete
+29.2% complete
+29.5% complete
+29.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.0% complete
+30.3% complete
+30.5% complete
+30.8% complete
+31.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31.4% complete
+31.6% complete
+31.9% complete
+32.2% complete
+32.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32.7% complete
+33.0% complete
+33.2% complete
+33.5% complete
+33.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34.1% complete
+34.3% complete
+34.6% complete
+34.9% complete
+35.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35.4% complete
+35.7% complete
+35.9% complete
+36.2% complete
+36.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36.8% complete
+37.0% complete
+37.3% complete
+37.6% complete
+37.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38.1% complete
+38.4% complete
+38.6% complete
+38.9% complete
+39.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39.5% complete
+39.7% complete
+40.0% complete
+40.3% complete
+40.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40.8% complete
+41.1% complete
+41.4% complete
+41.6% complete
+41.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42.2% complete
+42.4% complete
+42.7% complete
+43.0% complete
+43.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43.5% complete
+43.8% complete
+44.1% complete
+44.3% complete
+44.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44.9% complete
+45.1% complete
+45.4% complete
+45.7% complete
+45.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46.2% complete
+46.5% complete
+46.8% complete
+47.0% complete
+47.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47.6% complete
+47.8% complete
+48.1% complete
+48.4% complete
+48.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48.9% complete
+49.2% complete
+49.5% complete
+49.7% complete
+50.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.3% complete
+50.5% complete
+50.8% complete
+51.1% complete
+51.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51.6% complete
+51.9% complete
+52.2% complete
+52.4% complete
+52.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53.0% complete
+53.2% complete
+53.5% complete
+53.8% complete
+54.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54.3% complete
+54.6% complete
+54.9% complete
+55.1% complete
+55.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55.7% complete
+55.9% complete
+56.2% complete
+56.5% complete
+56.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57.0% complete
+57.3% complete
+57.6% complete
+57.8% complete
+58.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58.4% complete
+58.6% complete
+58.9% complete
+59.2% complete
+59.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>59.7% complete
+60.0% complete
+60.3% complete
+60.5% complete
+60.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61.1% complete
+61.4% complete
+61.6% complete
+61.9% complete
+62.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62.4% complete
+62.7% complete
+63.0% complete
+63.2% complete
+63.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63.8% complete
+64.1% complete
+64.3% complete
+64.6% complete
+64.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65.1% complete
+65.4% complete
+65.7% complete
+65.9% complete
+66.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66.5% complete
+66.8% complete
+67.0% complete
+67.3% complete
+67.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67.8% complete
+68.1% complete
+68.4% complete
+68.6% complete
+68.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69.2% complete
+69.5% complete
+69.7% complete
+70.0% complete
+70.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70.5% complete
+70.8% complete
+71.1% complete
+71.4% complete
+71.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71.9% complete
+72.2% complete
+72.4% complete
+72.7% complete
+73.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73.2% complete
+73.5% complete
+73.8% complete
+74.1% complete
+74.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74.6% complete
+74.9% complete
+75.1% complete
+75.4% complete
+75.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75.9% complete
+76.2% complete
+76.5% complete
+76.8% complete
+77.0% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77.3% complete
+77.6% complete
+77.8% complete
+78.1% complete
+78.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78.6% complete
+78.9% complete
+79.2% complete
+79.5% complete
+79.7% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80.0% complete
+80.3% complete
+80.5% complete
+80.8% complete
+81.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81.4% complete
+81.6% complete
+81.9% complete
+82.2% complete
+82.4% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82.7% complete
+83.0% complete
+83.2% complete
+83.5% complete
+83.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84.1% complete
+84.3% complete
+84.6% complete
+84.9% complete
+85.1% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85.4% complete
+85.7% complete
+85.9% complete
+86.2% complete
+86.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86.8% complete
+87.0% complete
+87.3% complete
+87.6% complete
+87.8% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88.1% complete
+88.4% complete
+88.6% complete
+88.9% complete
+89.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>89.5% complete
+89.7% complete
+90.0% complete
+90.3% complete
+90.5% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>90.8% complete
+91.1% complete
+91.4% complete
+91.6% complete
+91.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>92.2% complete
+92.4% complete
+92.7% complete
+93.0% complete
+93.2% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>93.5% complete
+93.8% complete
+94.1% complete
+94.3% complete
+94.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>94.9% complete
+95.1% complete
+95.4% complete
+95.7% complete
+95.9% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>96.2% complete
+96.5% complete
+96.8% complete
+97.0% complete
+97.3% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>97.6% complete
+97.8% complete
+98.1% complete
+98.4% complete
+98.6% complete
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>98.9% complete
+99.2% complete
+99.5% complete
+99.7% complete
+100.0% complete
+                     
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next cell creates a plot of the calculated data. Some of the things you may want to change are:</p>
+<ul class="simple">
+<li><p>cmap=”Spectral_r”: Change to have different colors</p></li>
+<li><p>plt.title : This will change the plot title.</p></li>
+<li><p>figsize=(16,4) : Change the plot dimensions and/or aspect ratio.</p></li>
+<li><p>vmax=None : This can be set to a numeric value to control the depth scale maximum</p></li>
+<li><p>vmin=None : This controls the minimum of the depth scale.</p></li>
+<li><p>v_ticks=37 : This changes the number of vertical tick marks</p></li>
+<li><p>h_ticks=10 : This changes the number of horizontal tick marks</p></li>
+<li><p>Unblock the last two lines to ouput the plot as an *.png image file</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This produces the plot of the data</span>
+<span class="n">T98_series_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;Tilt&quot;</span><span class="p">:</span> <span class="n">T98_series</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Azimuth&quot;</span><span class="p">:</span> <span class="n">T98_series</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;T₉₈&quot;</span><span class="p">:</span> <span class="n">T98_series</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]}</span>
+<span class="p">)</span>
+<span class="n">T98_fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">kwarg_T</span><span class="p">[</span><span class="s2">&quot;x_eff&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s2">&quot;Plot of $\it</span><span class="si">{T₉₈}</span><span class="s2">$ for all orientations for an open-rack mounting.&quot;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="mf">1.08</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s2">&quot;Plot of $\it</span><span class="si">{T₉₈}</span><span class="s2">$ for all orientations for $X_</span><span class="si">{eff}</span><span class="s2">$=&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">kwarg_T</span><span class="p">[</span><span class="s2">&quot;x_eff&quot;</span><span class="p">]</span>
+        <span class="o">+</span> <span class="s2">&quot; cm.&quot;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="mf">1.08</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="n">T98_fig</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">T98_series_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;Tilt&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;Azimuth&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;T₉₈&quot;</span><span class="p">),</span>
+    <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Xₘᵢₙ&quot;</span><span class="p">,</span> <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;pad&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">},</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Spectral_r&quot;</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">h_ticks</span> <span class="o">=</span> <span class="mi">37</span>
+<span class="n">x_number</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mi">360</span> <span class="o">/</span> <span class="n">T_azimuth_step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">x_ticks</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">360</span> <span class="o">/</span> <span class="p">(</span><span class="n">h_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">T_azimuth_step</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">x_labels</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">360</span> <span class="o">/</span> <span class="p">(</span><span class="n">h_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h_ticks</span><span class="p">)]</span>
+<span class="n">x_ticks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_number</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">T98_fig</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x_ticks</span><span class="p">)</span>
+<span class="n">T98_fig</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">x_labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+
+<span class="n">v_ticks</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">y_number</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mi">90</span> <span class="o">/</span> <span class="n">T_tilt_step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">y_ticks</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">90</span> <span class="o">/</span> <span class="p">(</span><span class="n">v_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">T_tilt_step</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">v_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">y_labels</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">90</span> <span class="o">/</span> <span class="p">(</span><span class="n">v_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">v_ticks</span><span class="p">)]</span>
+<span class="n">y_ticks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_number</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">T98_fig</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">y_ticks</span><span class="p">)</span>
+<span class="n">T98_fig</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">y_labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">T98_fig</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Azimuth [°]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">T98_fig</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Tilt [°]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">T98_fig</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\it</span><span class="si">{T₉₈}</span><span class="s2">$ [°C]&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">T98_fig</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;T98_Scan.png&quot;</span><span class="p">),</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span>
+<span class="p">)</span>  <span class="c1"># Creates an image file of the standoff plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">T98_fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a4bd5ca623ba23d118f2f4e56352d8dbeeb9a648e30af9a0507d286f5de6b585.png" src="../_images/a4bd5ca623ba23d118f2f4e56352d8dbeeb9a648e30af9a0507d286f5de6b585.png" />
+</div>
+</div>
+</section>
+<section id="plot-x-min-for-a-t-98-and-plot-t-98-for-a-given-region">
+<h2>7. Plot <span class="math notranslate nohighlight">\(X_{min}\)</span> for a <span class="math notranslate nohighlight">\(T_{98}\)</span>, and plot <span class="math notranslate nohighlight">\(T_{98}\)</span> for a given region.<a class="headerlink" href="#plot-x-min-for-a-t-98-and-plot-t-98-for-a-given-region" title="Link to this heading">#</a></h2>
+<p>This last Objective is much more complicated and is set up to utilize acess to a lot of computational power to run many sites simultaneously to create a regional map of standoff distance.
+For more in-depth instructions on doing this, look at the tutorial “Scenario - Geospatial.ipynb” here in PVDeg.</p>
+<p>Step #1: Create an object, “geospatial_standoff_scenario” to be used to run the computations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">GeospatialScenario</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;standoff geospatial&quot;</span><span class="p">,</span>
+    <span class="n">geospatial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Step #2: Identifies a subset of locations from the database to run the computations.
+Specifically all are from the NSRDB.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">addLocation</span><span class="p">(</span>
+    <span class="n">state</span><span class="o">=</span><span class="s2">&quot;Colorado&quot;</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="s2">&quot;Summit&quot;</span>
+<span class="p">)</span>  <span class="c1"># Identifies a subset of locations from the database to run the computations. Specifically all are from the NSRDB.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ConnectionError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">addLocation</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">state</span><span class="o">=</span><span class="s2">&quot;Colorado&quot;</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="s2">&quot;Summit&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="p">)</span>  <span class="c1"># Identifies a subset of locations from the database to run the computations. Specifically all are from the NSRDB.</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/geospatialscenario.py:188,</span> in <span class="ni">GeospatialScenario.addLocation</span><span class="nt">(self, country, state, county, satellite, year, nsrdb_attributes, downsample_factor, gids, bbox_kwarg, see_added)</span>
+<span class="g g-Whitespace">    </span><span class="mi">180</span> <span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;NSRDB&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">181</span> <span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
+<span class="g g-Whitespace">    </span><span class="mi">182</span>     <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="n">satellite</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">183</span>     <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="n">year</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">184</span>     <span class="s2">&quot;NREL_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="n">nsrdb_attributes</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span> <span class="p">}</span>
+<span class="ne">--&gt; </span><span class="mi">188</span> <span class="n">geo_weather</span><span class="p">,</span> <span class="n">geo_meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">189</span>     <span class="n">weather_db</span><span class="p">,</span> <span class="n">geospatial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">weather_arg</span>
+<span class="g g-Whitespace">    </span><span class="mi">190</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">192</span> <span class="k">if</span> <span class="n">gids</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">193</span>     <span class="n">geo_meta</span> <span class="o">=</span> <span class="n">geo_meta</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">gids</span><span class="p">]</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/weather.py:260,</span> in <span class="ni">get</span><span class="nt">(database, id, geospatial, find_meta, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">258</span> <span class="k">elif</span> <span class="n">geospatial</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">259</span>     <span class="k">if</span> <span class="n">database</span> <span class="o">==</span> <span class="s2">&quot;NSRDB&quot;</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">260</span>         <span class="n">nrel_kestrel_check</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">262</span>         <span class="n">weather_ds</span><span class="p">,</span> <span class="n">meta_df</span> <span class="o">=</span> <span class="n">get_NSRDB</span><span class="p">(</span><span class="n">geospatial</span><span class="o">=</span><span class="n">geospatial</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">263</span>         <span class="n">meta_df</span><span class="p">[</span><span class="s2">&quot;wind_height&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/utilities.py:1133,</span> in <span class="ni">nrel_kestrel_check</span><span class="nt">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1130</span> <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;connected to </span><span class="si">{</span><span class="n">device_domain</span><span class="si">}</span><span class="s2">&quot;</span> <span class="sa">f</span><span class="s2">&quot;not a node of </span><span class="si">{</span><span class="n">KESTREL_HOSTNAME</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1132</span> <span class="k">if</span> <span class="n">KESTREL_HOSTNAME</span> <span class="o">!=</span> <span class="n">device_domain</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1133</span>     <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+<span class="ne">ConnectionError</span>: connected to dx.internal.cloudapp.netnot a node of kestrel.hpc.nrel.gov
+</pre></div>
+</div>
+</div>
+</div>
+<p>Step #3: indicate which function will be run. Here the default is the standoff calculation, but it could be any other function with a key word argument dictionary.
+Here the 98th percential temperature is defined as 70C, but any arbitrary value can be specified.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span> <span class="n">func_params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;T98&quot;</span><span class="p">:</span> <span class="mi">70</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Step #4: Run the scenario</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Step #5: Create a plot of the standoff calculation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">plot_world</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">plot_world</span><span class="p">(</span><span class="s2">&quot;T98_inf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-data-outputs">
+<h2>8. Save data outputs.<a class="headerlink" href="#save-data-outputs" title="Link to this heading">#</a></h2>
+<p>This cell contains a number of pre-scripted commands for exporting and saving data. The code to save plots is located after the plot creation and is blocked by default. First check that the output folder exists, then unblock the code for data you would like to save.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your results will be stored in </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">output_folder</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The folder must already exist or the file will not be created&quot;</span><span class="p">)</span>
+
+<span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+    <span class="n">data_df</span><span class="o">=</span><span class="n">WEATHER_df</span><span class="p">,</span>
+    <span class="n">metadata</span><span class="o">=</span><span class="n">META</span><span class="p">,</span>
+    <span class="n">savefile</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;WeatherFile.csv&quot;</span><span class="p">),</span>
+<span class="p">)</span>  <span class="c1"># Writes the meterological data to an *.csv file.</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">standoff_series_df</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;Standoff_Scan.csv&quot;</span><span class="p">)</span>
+<span class="p">)</span>  <span class="c1"># Writes a file with the Tilt and Azimuth scan calculations of standoff.</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">T98_series_df</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;T98_Scan.csv&quot;</span><span class="p">)</span>
+<span class="p">)</span>  <span class="c1"># Writes a file with the Tilt and Azimuth scan calculations of T98.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./04_geospatial"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="07_scenario_temperature.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Adding Modules and Pipeline Jobs (Run Functions on Scenario Object)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../05_advanced/01_custom_functions_nopython.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Grabbing Weather Data from PVGIS</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculation-of-module-standoff-distance-according-to-iec-ts-63126">Calculation of module standoff distance according to IEC TS 63126</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-weather-data">1. Import Weather Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-installation-standoff-minimum-level-1-and-level-2">2. Calculate Installation Standoff Minimum - Level 1 and Level 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-x-eff-from-provided-module-temperature-data">3. Calculate <span class="math notranslate nohighlight">\(X_{eff}\)</span> from provided module temperature data.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-t-98-for-a-given-azimuth-tilt-and-x-eff">4. Calculate <span class="math notranslate nohighlight">\(T_{98}\)</span> for a given azimuth, tilt, and <span class="math notranslate nohighlight">\(X_{eff}\)</span>.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-x-min-for-all-azimuth-and-tilt-for-a-given-t-98">5. Plot <span class="math notranslate nohighlight">\(X_{min}\)</span> for all azimuth and tilt for a given <span class="math notranslate nohighlight">\(T_{98}\)</span>.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-t-98-for-all-azimuth-and-tilt-for-a-given-x-eff">6. Plot <span class="math notranslate nohighlight">\(T_{98}\)</span>  for all azimuth and tilt for a given <span class="math notranslate nohighlight">\(X_{eff}\)</span>.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-x-min-for-a-t-98-and-plot-t-98-for-a-given-region">7. Plot <span class="math notranslate nohighlight">\(X_{min}\)</span> for a <span class="math notranslate nohighlight">\(T_{98}\)</span>, and plot <span class="math notranslate nohighlight">\(T_{98}\)</span> for a given region.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-data-outputs">8. Save data outputs.</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin Springer, Matthew Brown, Silvana Ovaitt, Tobin Ford, Joseph Karas, Michael Kempe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
