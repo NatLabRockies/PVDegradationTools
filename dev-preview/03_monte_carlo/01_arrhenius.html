@@ -577,7 +577,7 @@ document.write(`
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
 Pandas version  2.3.3
 Pvlib version  0.13.1
-pvdeg version  0.1.dev1+g7cb88f5ca
+pvdeg version  0.1.dev1+gf450452f5
 </pre></div>
 </div>
 </div>
@@ -873,13 +873,13 @@ simulate(func: Callable, correlated_samples: pandas.core.frame.DataFrame, **func
 <span class="g g-Whitespace">    </span><span class="mi">322</span>     <span class="n">row_args</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">row</span><span class="o">.</span><span class="n">items</span><span class="p">()}}</span>
 <span class="ne">--&gt; </span><span class="mi">324</span>     <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">row_args</span><span class="p">)</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/degradation.py:944,</span> in <span class="ni">vecArrhenius</span><span class="nt">(poa_global, module_temp, ea, x, lnr0)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/degradation.py:943,</span> in <span class="ni">vecArrhenius</span><span class="nt">(poa_global, module_temp, ea, x, lnr0)</span>
 <span class="g g-Whitespace">    </span><span class="mi">939</span> <span class="n">degradation</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="g g-Whitespace">    </span><span class="mi">940</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">poa_global_scaled</span><span class="p">)):</span>
 <span class="g g-Whitespace">    </span><span class="mi">941</span>     <span class="n">degradation</span> <span class="o">+=</span> <span class="p">(</span>
 <span class="g g-Whitespace">    </span><span class="mi">942</span>         <span class="n">R0</span>
-<span class="g g-Whitespace">    </span><span class="mi">943</span>         <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">ea_scaled</span> <span class="o">/</span> <span class="p">(</span><span class="mf">273.15</span> <span class="o">+</span> <span class="n">module_temp</span><span class="p">[</span><span class="n">entry</span><span class="p">]))</span>
-<span class="ne">--&gt; </span><span class="mi">944</span>         <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">poa_global_scaled</span><span class="p">[</span><span class="n">entry</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">943</span>         <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">ea_scaled</span> <span class="o">/</span> <span class="p">(</span><span class="mf">273.15</span> <span class="o">+</span> <span class="n">module_temp</span><span class="p">[</span><span class="n">entry</span><span class="p">]))</span>
+<span class="g g-Whitespace">    </span><span class="mi">944</span>         <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">poa_global_scaled</span><span class="p">[</span><span class="n">entry</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">945</span>     <span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">947</span> <span class="k">return</span> <span class="n">degradation</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">poa_global</span><span class="p">)</span>
 
