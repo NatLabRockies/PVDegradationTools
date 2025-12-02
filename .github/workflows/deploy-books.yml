@@ -36,7 +36,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install .[books]
+        pip install "jupyter-book>=2.0"
 
     # (optional) Cache your executed notebooks between runs
     # if you have config:
@@ -51,7 +51,9 @@ jobs:
     # Build the book
     - name: Build the book
       run: |
-        jupyter-book build tutorials
+        cd tutorials
+        jupyter-book init --kernel python3 || true
+        jupyter-book build .
 
     # Deploy to gh-pages using peaceiris action for all branches
     - name: Deploy to GitHub Pages
