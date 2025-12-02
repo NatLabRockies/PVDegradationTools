@@ -51,7 +51,8 @@ jobs:
     # Build the book
     - name: Build the book
       run: |
-        jupyter-book build tutorials
+        cd tutorials
+        jupyter-book build --site .
 
     # Deploy to gh-pages using peaceiris action for all branches
     - name: Deploy to GitHub Pages
