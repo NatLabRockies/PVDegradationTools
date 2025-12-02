@@ -9,6 +9,7 @@ on:
   pull_request:
     branches:
     - development
+    - main
     # If your git repository has the Jupyter Book within some-subfolder next to
     # unrelated files, you can make this run only if a file within that specific
     # folder has been modified.
@@ -54,7 +55,7 @@ jobs:
 
     # Deploy to gh-pages-dev branch for development
     - name: Deploy to gh-pages-dev
-      if: github.ref == 'refs/heads/development'
+      if: github.event_name == 'pull_request' || github.ref == 'refs/heads/development'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
