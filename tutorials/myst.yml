@@ -25,6 +25,8 @@ project:
     - format: pdf
       template: plain_latex_book
       output: exports/book.pdf
+  defaults:
+    titlesonly: true
   toc:
     - file: intro.md
     - title: 01 - Basics
