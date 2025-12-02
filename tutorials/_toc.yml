@@ -5,6 +5,7 @@ format: jb-book
 root: intro
 parts:
 - caption: 01 - Basics
+  titlesonly: true
   chapters:
   - file: 01_basics/01_basics_humidity_design
     title: Humidity Design Basics
@@ -15,6 +16,7 @@ parts:
   - file: 01_basics/04_weather_database_access
     title: Weather Database Access
 - caption: 02 - Degradation Mechanisms
+  titlesonly: true
   chapters:
   - file: 02_degradation/01_bo_lid_accelerated_test
     title: B-O LID Accelerated Test
@@ -29,12 +31,14 @@ parts:
   - file: 02_degradation/06_vant_hoff_degradation_model
     title: Van't Hoff Degradation Model
 - caption: 03 - Monte Carlo Simulations
+  titlesonly: true
   chapters:
   - file: 03_monte_carlo/01_arrhenius
     title: Arrhenius Monte Carlo
   - file: 03_monte_carlo/02_standoff
     title: Standoff Monte Carlo
 - caption: 04 - Geospatial & Scenarios
+  titlesonly: true
   chapters:
   - file: 04_geospatial/01_local_scenario
     title: Local Scenario
@@ -53,6 +57,7 @@ parts:
   - file: 04_geospatial/08_module_standoff_iec63126
     title: Module Standoff IEC TS 63126 (HPC)
 - caption: 05 - Advanced Topics
+  titlesonly: true
   chapters:
   - file: 05_advanced/01_custom_functions_nopython
     title: Custom Functions with Numba
@@ -63,12 +68,14 @@ parts:
   - file: 05_advanced/05_pvgis_distributed
     title: PVGIS Distributed
 - caption: 06 - NREL HPC
+  titlesonly: true
   chapters:
   - file: 06_nrel_hpc/01_geospatial_world_map
     title: Geospatial World Map (HPC)
   - file: 06_nrel_hpc/02_letid_outdoor_geospatial_demo
     title: LeTID Outdoor Geospatial Demo (HPC)
 - caption: 07 - Workshop Demos
+  titlesonly: true
   chapters:
   - file: 07_workshop_demos/01_astm_live_demo
     title: ASTM Live Demo
