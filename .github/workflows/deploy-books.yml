@@ -50,7 +50,7 @@ jobs:
     # Build the book
     - name: Build the book
       run: |
-        jupyter-book build --site tutorials
+        jupyter-book build tutorials
 
     # Deploy to gh-pages-dev branch for development
     - name: Deploy to gh-pages-dev
@@ -58,7 +58,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: tutorials/_build/site/public
+        publish_dir: tutorials/_build/html
         publish_branch: gh-pages-dev
         force_orphan: true
 
@@ -67,7 +67,7 @@ jobs:
       if: github.ref == 'refs/heads/main'
       uses: actions/upload-pages-artifact@v3
       with:
-        path: "tutorials/_build/site/public"
+        path: "tutorials/_build/html"
 
     # Deploy the book's HTML to GitHub Pages (main only)
     - name: Deploy to GitHub Pages
