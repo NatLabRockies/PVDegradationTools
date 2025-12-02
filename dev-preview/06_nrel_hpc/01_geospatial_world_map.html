@@ -482,11 +482,11 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Starting Dask client...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dashboard: http://10.1.0.24:8787/status
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dashboard: http://10.1.0.36:8787/status
 Cluster ready!
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ERROR:tornado.application:Exception in callback functools.partial(&lt;bound method IOLoop._discard_future_result of &lt;tornado.platform.asyncio.AsyncIOMainLoop object at 0x7f64eaa43a90&gt;&gt;, &lt;Task finished name=&#39;Task-29&#39; coro=&lt;SpecCluster._correct_state_internal() done, defined at /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/distributed/deploy/spec.py:352&gt; exception=FileNotFoundError(2, &#39;No such file or directory&#39;)&gt;)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ERROR:tornado.application:Exception in callback functools.partial(&lt;bound method IOLoop._discard_future_result of &lt;tornado.platform.asyncio.AsyncIOMainLoop object at 0x7f2a552b4550&gt;&gt;, &lt;Task finished name=&#39;Task-29&#39; coro=&lt;SpecCluster._correct_state_internal() done, defined at /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/distributed/deploy/spec.py:352&gt; exception=FileNotFoundError(2, &#39;No such file or directory&#39;)&gt;)
 Traceback (most recent call last):
   File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/tornado/ioloop.py&quot;, line 758, in _run_callback
     ret = callback()
@@ -587,7 +587,7 @@ FileNotFoundError: [Errno 2] No such file or directory: &#39;sbatch&#39;
 <span class="g g-Whitespace">   </span><span class="mi">1132</span> <span class="k">if</span> <span class="n">KESTREL_HOSTNAME</span> <span class="o">!=</span> <span class="n">device_domain</span><span class="p">:</span>
 <span class="ne">-&gt; </span><span class="mi">1133</span>     <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
-<span class="ne">ConnectionError</span>: connected to cx.internal.cloudapp.netnot a node of kestrel.hpc.nrel.gov
+<span class="ne">ConnectionError</span>: connected to dx.internal.cloudapp.netnot a node of kestrel.hpc.nrel.gov
 </pre></div>
 </div>
 </div>
