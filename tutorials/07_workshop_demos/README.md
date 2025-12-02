@@ -1,6 +1,6 @@
 # Workshop Demonstrations
 
-Live demonstration materials from PVDegradationTools workshops and conferences.
+Live demonstration materials from PVDeg workshops and conferences.
 
 ## Tutorials
 
@@ -25,7 +25,7 @@ These notebooks were created for live demonstrations at workshops and conference
 - **ASTM**: American Society for Testing and Materials workshops
 - **DuraMAT**: DuraMAT Consortium meetings and workshops
 
-The demos showcase practical applications of PVDegradationTools and provide hands-on examples for workshop participants.
+The demos showcase practical applications of PVDeg and provide hands-on examples for workshop participants.
 
 ## Running the Demos
 

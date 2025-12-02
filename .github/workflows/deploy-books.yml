@@ -9,6 +9,7 @@ on:
   pull_request:
     branches:
     - development
+    - main
     # If your git repository has the Jupyter Book within some-subfolder next to
     # unrelated files, you can make this run only if a file within that specific
     # folder has been modified.
@@ -21,6 +22,7 @@ jobs:
   deploy-book:
     runs-on: ubuntu-latest
     permissions:
+      contents: write
       pages: write
       id-token: write
     steps:
@@ -49,17 +51,14 @@ jobs:
     # Build the book
     - name: Build the book
       run: |
-        jupyter-book build --site tutorials
+        jupyter-book build tutorials
 
-    # Upload the book's HTML as an artifact
-    - name: Upload artifact
-      if: github.ref == 'refs/heads/main'
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: "tutorials/_build/site/public"
-
-    # Deploy the book's HTML to GitHub Pages
+    # Deploy to gh-pages using peaceiris action for all branches
     - name: Deploy to GitHub Pages
-      if: github.ref == 'refs/heads/main'
-      id: deployment
-      uses: actions/deploy-pages@v4
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: tutorials/_build/html
+        publish_branch: gh-pages
+        destination_dir: ${{ github.ref == 'refs/heads/main' && '.' || 'dev-preview' }}
+        keep_files: ${{ github.ref != 'refs/heads/main' }}

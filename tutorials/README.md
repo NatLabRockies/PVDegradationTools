@@ -1,12 +1,26 @@
-<img src="PVD_logo.png" width="100">
+# PVDeg - Tutorials and Tools
 
-# PV Degradation Tools - TUTORIALS and Tools (pvdeg)
+PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation. These tutorials demonstrate how to use PVDeg's modular functions, materials databases, and workflows for simulating degradation mechanisms (e.g., LeTID, hydrolysis, UV exposure) using weather data from NSRDB and PVGIS.
+
+## Tutorial Categories
+
+- `01_basics/` - Introduction to PVDeg fundamentals
+- `02_degradation/` - Degradation mechanism modeling (LID, LeTID, Van't Hoff)
+- `03_monte_carlo/` - Monte Carlo uncertainty analysis
+- `04_geospatial/` - Geospatial and HPC scenarios
+- `05_advanced/` - Advanced topics and API access
+- `06_nrel_hpc/` - NREL HPC-specific workflows (requires HPC access)
+- `07_workshop_demos/` - Workshop and demonstration notebooks
+
+For standalone analysis tools, see the [Tools](../tools/) directory.
+
+## Running the Tutorials
 
 ### Jupyter Book
 
 For learning to use PVDeg through our tutorials, or running the available tools online, see our [jupyter-book](https://nrel.github.io/PVDegradationTools/intro.html)
-Clicking on the rocket-icon on the top allows you to launch the journals on [Google Colaboratory](https://colab.research.google.com/) for interactive mode.
-Just uncomment the first line `pip install ...`  to install the environment on each journal if you follow this mode.
+Clicking on the rocket-icon on the top allows you to launch the notebooks on [Google Colaboratory](https://colab.research.google.com/) for interactive mode.
+Just uncomment the first line `pip install ...` to install the environment on each notebook if you follow this mode.
 
 ### Binder
 
@@ -48,4 +62,4 @@ You can also run the tutorials and tools locally in a virtual environment, i.e.,
 Documentation
 =============
 
-We also have documentation in [ReadTheDocs](https://PVDegradationTools.readthedocs.io) where you can find more details on the API functions.
+Full API documentation is available at [ReadTheDocs](https://PVDegradationTools.readthedocs.io) where you can find detailed information on all functions, classes, and modules.

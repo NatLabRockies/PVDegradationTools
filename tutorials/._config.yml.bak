@@ -41,6 +41,15 @@ html:
   use_issues_button: true
   use_repository_button: true
 
+# Configure Sphinx to limit TOC depth
+sphinx:
+  config:
+    html_theme_options:
+      navigation_depth: 1
+      show_nav_level: 1
+    # Limit the depth of the in-page table of contents
+    globaltoc_maxdepth: 1
+
 launch_buttons:
   thebe: true
   colab_url: "https://colab.research.google.com"

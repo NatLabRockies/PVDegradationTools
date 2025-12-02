@@ -5,18 +5,18 @@ Tutorials for geospatial analysis and scenario-based modeling.
 ## Tutorials
 
 ### Local Execution
-- **local_scenario.ipynb** - Geospatial analysis for local scenarios (no HPC required)
+1. **01_local_scenario.ipynb** - Geospatial analysis for local scenarios (no HPC required)
 
 ### HPC Required Tutorials
 The following tutorials require access to High Performance Computing (HPC) resources:
 
-- **geospatial_templates.ipynb** - Templates for geospatial analysis workflows
-- **scenario_geographical_features.ipynb** - Incorporating geographical features into scenarios
-- **scenario_geospatial.ipynb** - Large-scale geospatial scenario analysis
-- **scenario_mountain_downselect.ipynb** - Non-uniform mountain terrain downselection
-- **scenario_single_location.ipynb** - Detailed single-location scenario analysis
-- **scenario_temperature.ipynb** - Temperature-based scenario modeling
-- **module_standoff_iec63126.ipynb** - Module standoff calculations for IEC TS 63126 standard
+2. **02_geospatial_templates.ipynb** - Templates for geospatial analysis workflows
+3. **03_scenario_geographical_features.ipynb** - Incorporating geographical features into scenarios
+4. **04_scenario_geospatial.ipynb** - Large-scale geospatial scenario analysis
+5. **05_scenario_mountain_downselect.ipynb** - Non-uniform mountain terrain downselection
+6. **06_scenario_single_location.ipynb** - Detailed single-location scenario analysis
+7. **07_scenario_temperature.ipynb** - Temperature-based scenario modeling
+8. **08_module_standoff_iec63126.ipynb** - Module standoff calculations for IEC TS 63126 standard
 
 ## HPC Access
 
@@ -25,7 +25,7 @@ The following tutorials require access to High Performance Computing (HPC) resou
 - Multi-location scenario analyses
 - Distributed computing workflows
 
-If you don't have HPC access, start with **local_scenario.ipynb** which runs on standard hardware.
+If you don't have HPC access, start with **01_local_scenario.ipynb** which runs on standard hardware.
 
 ## Topics Covered
 
