@@ -56,5 +56,5 @@ features.addLocation(downsample_factor=10)
 [32m   1132[39m [38;5;28;01mif[39;00m KESTREL_HOSTNAME != device_domain:
 [32m-> [39m[32m1133[39m     [38;5;28;01mraise[39;00m [38;5;167;01mConnectionError[39;00m(msg)
 
-[31mConnectionError[39m: connected to dx.internal.cloudapp.netnot a node of kestrel.hpc.nrel.gov
+[31mConnectionError[39m: connected to cx.internal.cloudapp.netnot a node of kestrel.hpc.nrel.gov
 
