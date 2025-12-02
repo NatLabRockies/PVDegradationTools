@@ -54,14 +54,15 @@ jobs:
         jupyter-book build tutorials
 
     # Deploy to gh-pages-dev branch for development
-    - name: Deploy to gh-pages-dev
+    - name: Deploy to gh-pages preview
       if: github.event_name == 'pull_request' || github.ref == 'refs/heads/development'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: tutorials/_build/html
-        publish_branch: gh-pages-dev
-        force_orphan: true
+        publish_branch: gh-pages
+        destination_dir: dev-preview
+        keep_files: true
 
     # Upload the book's HTML as an artifact (main only)
     - name: Upload artifact
