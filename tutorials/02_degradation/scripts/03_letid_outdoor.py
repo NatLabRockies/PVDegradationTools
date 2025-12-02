@@ -139,7 +139,7 @@ mc = ModelChain(system, location, aoi_model="physical")
 mc.run_model(weather)
 
 # %% [markdown]
-# ## Set up timeseries
+# # Set up timeseries
 # In this example, injection is a function of both the operating point of the module (which we will assume is maximum power point) and irradiance. Maximum power point injection is equivalent to $(I_{sc}-I_{mp})/I_{sc}\times Ee$, where $Ee$ is effective irradiance, the irradiance absorbed by the module's cells. We normalize it to 1-sun irradiance, 1000 $W/m^2$.
 #
 # We will use the irradiance, DC operating point, and cell temperature from the pvlib modelchain results.
@@ -167,7 +167,7 @@ timesteps.reset_index(inplace=True, drop=True)
 timesteps
 
 # %% [markdown]
-# ## Device parameters
+# # Device parameters
 # To define a device, we need to define several important quantities about the device: wafer thickness (in $\mu m$), rear surface recombination velocity (in cm/s), and cell area (in cm<sup>2</sup>).
 
 # %%
@@ -189,7 +189,7 @@ depth = generation_df["Depth (um)"]
 d_base = 27  # cm^2/s electron diffusivity. See https://www2.pvlighthouse.com.au/calculators/mobility%20calculator/mobility%20calculator.aspx for details
 
 # %% [markdown]
-# ## Degradation parameters
+# # Degradation parameters
 # To model the device's degradation, we need to define several more important quantities about the degradation the device will experience. These include undegraded and degraded lifetime (in $\mu s$).
 
 # %%
@@ -225,7 +225,7 @@ timesteps.loc[0, "tau"] = letid.tau_now(
 )  # calculate tau for the first timestep
 
 # %% [markdown]
-# ## Run through timesteps
+# # Run through timesteps
 # Since each timestep depends on the preceding timestep, we need to calculate in a loop. This will take a few minutes depending on the length of the timeseries.
 
 # %%
@@ -324,7 +324,7 @@ for index, timestep in timesteps.iterrows():
         )
 
 # %% [markdown]
-# ## Finish calculating degraded device parameters.
+# # Finish calculating degraded device parameters.
 # Now that we have calculated defect states, we can calculate all the quantities that depend on defect states.
 
 # %%
@@ -351,7 +351,7 @@ timesteps
 # Note of course that all these calculated device parameters are modeled STC device parameters, not the instantaneous, weather-dependent values. This isn't a robust performance model of a degraded module.
 
 # %% [markdown]
-# ## Plot the results
+# # Plot the results
 
 # %%
 from cycler import cycler
@@ -388,7 +388,7 @@ plt.show()
 # The example data provided for Golden, CO, shows how $N_A$ increases in cold weather, and power temporarily recovers, due to temporary recovery of LETID (B->A).
 
 # %% [markdown]
-# ##### The function `calc_letid_outdoors` wraps all of the steps above into a single function:
+# # The function `calc_letid_outdoors` wraps all of the steps above into a single function:
 
 # %%
 nA_0 = 100

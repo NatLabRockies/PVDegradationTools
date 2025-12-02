@@ -1,7 +1,7 @@
 # %% [markdown]
 # # Tools - Module Standoff for IEC TS 63126
 #
-# ### Calculation of module standoff distance according to IEC TS 63126
+# ## Calculation of module standoff distance according to IEC TS 63126
 #
 # **Requirements:**
 # - Local weather data file or site longitude and latittude
@@ -60,7 +60,7 @@ print("dask version", dask.__version__)
 print(DATA_DIR)
 
 # %% [markdown]
-# ## 1. Import Weather Data
+# # 1. Import Weather Data
 #
 # The function has these minimum requirements when using a weather data file:
 # - Weather data containing (at least) DNI, DHI, GHI, Temperature, RH, and Wind-Speed data at module level.
@@ -87,7 +87,7 @@ print(META)
 # print(META)
 
 # %% [markdown]
-# ## 2. Calculate Installation Standoff Minimum - Level 1 and Level 2
+# # 2. Calculate Installation Standoff Minimum - Level 1 and Level 2
 #
 # According to IEC TS 63126, Level 0, Level 1 and Level 2 certification is limited to T₉₈<70°C, <80°C and <90°C, respectively. Level 0 certification is essentially compliance to IEC 61730 and IEC 61215. The default value of T₉₈<70°C represents the minimium gap to avoid higher temperature certification according to IEC TS 63126. This minimum standoff ($x_{min}$) is the distance between the bottom of the module frame and the roof and can be extimated for a given environment as,
 #
@@ -149,7 +149,7 @@ print("Second calculation standoff = ", "%.1f" % standoff_2["x"].iloc[0], " cm."
 print(pvdeg.standards.interpret_standoff(standoff_1=standoff_1, standoff_2=standoff_2))
 
 # %% [markdown]
-# ## 3. Calculate $X_{eff}$ from provided module temperature data.
+# # 3. Calculate $X_{eff}$ from provided module temperature data.
 #
 # To do this calculation, one must use a set of data with:
 #    - meterological irradiance data sufficient to calculate the POA irradiance (DHI, GHI, and DNI),
@@ -190,7 +190,7 @@ x_eff = pvdeg.standards.eff_gap(
 print("The effective standoff for this system is", "%.1f" % x_eff, "cm.")
 
 # %% [markdown]
-# ## 4. Calculate $T_{98}$ for a given azimuth, tilt, and $X_{eff}$.
+# # 4. Calculate $T_{98}$ for a given azimuth, tilt, and $X_{eff}$.
 #
 # Equation 2 can be reorganized as,
 #
@@ -230,7 +230,7 @@ print(
 )
 
 # %% [markdown]
-# ## 5. Plot $X_{min}$ for all azimuth and tilt for a given $T_{98}$.
+# # 5. Plot $X_{min}$ for all azimuth and tilt for a given $T_{98}$.
 #
 # The temperature of a system is affected by the orientation. This section will scan all possible tilts and azimuths calculating the minimum standoff distance for a given $T_{98}$. Similar additional factors as above can also be modified but are not included here for simplicity. The tilt_step and azimuth_step are the number of degrees for each step for the 90° and 180° tilt and azimuth spans, respectively. The default for this calculation is for $T_{98}$=70°C, the boundary between Level 0 and Level 1 requirements. The temperature model information given below is unnecessary as these are default values that would get populated automatically. However, they were included here for clarity into a standard practice as per IEC TS 63126.
 #
@@ -333,7 +333,7 @@ plt.savefig(
 plt.show()
 
 # %% [markdown]
-# ## 6. Plot $T_{98}$  for all azimuth and tilt for a given $X_{eff}$.
+# # 6. Plot $T_{98}$  for all azimuth and tilt for a given $X_{eff}$.
 #
 # The temperature of a system is affected by the orientation and the effective standoff, $X_{eff}$, of the system. This section will scan all possible tilts and azimuths calculating the $T_{98}$ for a given $X_{eff}$. As above, additional factors can be modified but are not included here for simplicity. The tilt_step and azimuth_step are the number of degrees for each step for the 90° and 180° tilt and azimuth spans, respectively. The default for this calculation is for $X_{eff}$=10 cm, a common effective standoff distance on a rooftop system. A value of $X_{eff}$=None will run the calculations for an open rack system and $X_{eff}$=0 for an insulated-back system.
 
@@ -429,7 +429,7 @@ plt.savefig(
 plt.show(T98_fig)
 
 # %% [markdown]
-# ## 7. Plot $X_{min}$ for a $T_{98}$, and plot $T_{98}$ for a given region.
+# # 7. Plot $X_{min}$ for a $T_{98}$, and plot $T_{98}$ for a given region.
 #
 # This last Objective is much more complicated and is set up to utilize acess to a lot of computational power to run many sites simultaneously to create a regional map of standoff distance.
 # For more in-depth instructions on doing this, look at the tutorial "Scenario - Geospatial.ipynb" here in PVDeg.
@@ -476,7 +476,7 @@ geospatial_standoff_scenario.plot_world("x")
 geospatial_standoff_scenario.plot_world("T98_inf")
 
 # %% [markdown]
-# ## 8. Save data outputs.
+# # 8. Save data outputs.
 #
 # This cell contains a number of pre-scripted commands for exporting and saving data. The code to save plots is located after the plot creation and is blocked by default. First check that the output folder exists, then unblock the code for data you would like to save.
 

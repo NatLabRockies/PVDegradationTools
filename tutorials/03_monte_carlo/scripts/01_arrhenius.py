@@ -32,13 +32,13 @@ print("Pvlib version ", pvlib.__version__)
 print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
-# ## Correlated Monte Carlo Simulation (parameters)
+# # Correlated Monte Carlo Simulation (parameters)
 #
 # For this simulation we will be using an arrhenius equation to calculate degredation rate given by $R_D = R_0 * I ^ X * e ^ {\frac{-Ea}{kT}}$, where R0 is prefactor degredation, I is irradiance, X is the irridiance relation, Ea is activation energy and T is degrees K
 #
 # We will use R0, X and Ea to preform a 3 variable monte carlo simulation to calculate degredation.
 #
-# ### Required inputs
+# ## Required inputs
 # To run a monte carlo simulation with pvdeg.montecarlo the following inputs will be required
 # - function (currently only works with pvdeg.montecarlo.vecArrhenius() but will eventually work with most pvdeg calculation functions)
 # - function arguments (ex: metadata, weather, cell temperature, solar position, etc.)
@@ -47,7 +47,7 @@ print("pvdeg version ", pvdeg.__version__)
 # - number of trials to run
 
 # %% [markdown]
-# ### Defining Correlation Coefficients
+# # Defining Correlation Coefficients
 # pvdeg.montecarlo stores correlation coefficients in a ``Corr`` object. To represent a given correlation coefficient follow the given syntax below, replacing the values in the brackets with your correlation coefficients
 #
 #     {my_correlation_object} = Corr('{variable1}', '{variable2}', {correlation coefficient})
@@ -67,7 +67,7 @@ corr_coeff = [corr_Ea_X, corr_Ea_LnR0, corr_X_LnR0]
 type(corr_Ea_X)
 
 # %% [markdown]
-# ### Defining Mean and Standard Deviation
+# # Defining Mean and Standard Deviation
 # We will store the mean and correlation for each variable, expressed when we defined the correlation cefficients. If a variable is left out at this stage, the monte carlo simulation will throw errors.
 
 # %%
@@ -81,7 +81,7 @@ stats_dict = {
 n = 20000
 
 # %% [markdown]
-# ### Generating Monte Carlo Input Data
+# # Generating Monte Carlo Input Data
 # Next we will use the information collected above to generate correlated data from our modeling constant correlations, means and standard deviations.
 
 # %%
@@ -92,7 +92,7 @@ mc_inputs = pvdeg.montecarlo.generateCorrelatedSamples(
 print(mc_inputs)
 
 # %% [markdown]
-# #### Sanity Check
+# # Sanity Check
 # We can observe the mean and standard deviation of our newly correlated samples before using them for calculations to ensure that we have not incorrectly altered the data. The mean and standard deviation should be the similar (within a range) to your original input (the error comes from the standard distribution of generated random numbers)
 #
 # This also applies to the correlation coefficients originally inputted, they should be witin the same range as those orginally supplied.
@@ -111,7 +111,7 @@ print("Ea_lnR0", round(np.corrcoef(mc_inputs["Ea"], mc_inputs["LnR0"])[0][1], 3)
 print("X_lnR0", round(np.corrcoef(mc_inputs["X"], mc_inputs["LnR0"])[0][1], 3))
 
 # %% [markdown]
-# ### Other Function Requirements
+# # Other Function Requirements
 # Based on the function chosen to run in the monte carlo simulation, various other data will be required. In this case we will need cell temperature and total plane of array irradiance.
 #
 # <div class="alert alert-block alert-info">
@@ -157,7 +157,7 @@ function_kwargs = {"poa_global": poa_global, "module_temp": cell_temperature}
 help(pvdeg.montecarlo.simulate)
 
 # %% [markdown]
-# ### Running the Monte Carlo Simulation
+# # Running the Monte Carlo Simulation
 # We will pass the target function, `pvdeg.degredation.vecArrhenius()`, its required arguments via the correlated_samples and func_kwargs. Our fixed arguments will be passed in the form of a dictionary while the randomized monte carlo input data will be contained in a DataFrame.
 #
 # All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,
@@ -170,7 +170,7 @@ results = pvdeg.montecarlo.simulate(
 )
 
 # %% [markdown]
-# ### Viewing Our Data
+# # Viewing Our Data
 # Let's plot the results using a histogram
 
 # %%

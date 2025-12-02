@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pvdeg
 
 # %% [markdown]
-# ### Grabbing Weather Data from PVGIS
+# # Grabbing Weather Data from PVGIS
 #
 # Use pvdeg to make an API call to PVGIS to collect location and weather data for Manhattan, NYC.
 
@@ -16,7 +16,7 @@ weather_df, meta_dict = pvdeg.weather.get(
 )
 
 # %% [markdown]
-# ### Calculating Temperature and Irradiance
+# # Calculating Temperature and Irradiance
 #
 # Use pvdeg to calculate timeseries temperature for a theoretical module from the previous metorological data.
 #
@@ -42,7 +42,7 @@ plt.title("TML Module Irradiance, Manhattan")
 plt.show()
 
 # %% [markdown]
-# ### Define Custom Expressions from Latex or
+# # Define Custom Expressions from Latex or
 #
 # We will use an altered arrhenius equation with an irrandiance relation (ignore the fact that this exists in pvdeg already).
 #
@@ -60,7 +60,7 @@ ln_R_D_expr = (
 ln_R_D_expr
 
 # %% [markdown]
-# ### Calculating Degradation Expression
+# # Calculating Degradation Expression
 #
 # Generally more processing will have to happen outside of these functions than built in pvdeg functions.
 # Here we are defining our arguments and correcting units. When trying to calculate using timeseries we will pass `pandas.Series` objects to the arguments.
@@ -77,7 +77,7 @@ poa_global = poa_irradiance[
 poa_global_kw = poa_global / 1000  # [W/m^2] -> [kW/m^2]
 
 # %% [markdown]
-# ### This is quite slow
+# # This is quite slow
 
 # %%
 values_kwarg = {
@@ -92,7 +92,7 @@ values_kwarg = {
 res = pvdeg.symbolic.calc_kwarg_timeseries(expr=ln_R_D_expr, kwarg=values_kwarg)
 
 # %% [markdown]
-# ### Total degradation
+# # Total degradation
 #
 # To calculate accumulated degradation, we can sum each of the substep values and convert to log scale (need to do this because prefactor was in log scale).
 
@@ -100,7 +100,7 @@ res = pvdeg.symbolic.calc_kwarg_timeseries(expr=ln_R_D_expr, kwarg=values_kwarg)
 np.log10(res.sum())
 
 # %% [markdown]
-# ## Example with Single Values
+# # Example with Single Values
 
 # %% [markdown]
 # leakage current
@@ -142,7 +142,7 @@ res = pvdeg.symbolic.calc_kwarg_floats(expr=pid, kwarg=pid_kwarg)
 res
 
 # %% [markdown]
-# ### Calculate Values in a Dataframe using a symbolic expression
+# # Calculate Values in a Dataframe using a symbolic expression
 #
 # After creating the symbolic expression in using latex with `pvdeg.symbolic.symbolic_from_latex`, feed it to the function to calculate the leakage current at each row in the dataframe.
 # This expression calculation only accesses one dataframe row at a time so we cannot do any summations or windowed timeseries averiging within the call. At this point, write your own python function. If you create functions that would be useful, please email us your source code or create an issue and copy and paste your code there. If it is relevant it may be added to the package (credit will be given).

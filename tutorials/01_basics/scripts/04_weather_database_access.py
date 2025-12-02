@@ -29,7 +29,7 @@
 # The following figure showcases this calulation for the entire United States. We used pvlib and data from the National Solar Radiation Database (NSRDB) to calculate the module temperatures for different mounting configuration and applied our model to obtain the standoff distance for roof-mounted PV systems.
 
 # %% [markdown]
-# ## Single location example
+# # Single location example
 
 # %%
 # if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:
@@ -48,7 +48,7 @@ print("Python version ", sys.version)
 print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
-# ## 1. NSRDB - HSDS on Kestrel
+# # 1. NSRDB - HSDS on Kestrel
 #
 # This method requires a direct connection to NREL's high performance computer "Eagle". If you are not running this journal from Eagle, skip this section and proceed to section **2.**
 #
@@ -94,7 +94,7 @@ weather_arg = {
 # Lets verify the weather data we fetched by running a familiar calculation; standoff distance.
 
 # %% [markdown]
-# ## 2. NSRDB - API
+# # 2. NSRDB - API
 #
 # To access the NREL NSRDB, you will need an API key. Key's are free, but require you to set up an account. Without an API key, you can use a demonstration API which is severely limited. To set up an account and get your API key, visit https://developer.nrel.gov/signup/
 #
@@ -139,7 +139,7 @@ meta_clean = {k: v for k, v in meta.items() if k not in ["irradiance_time_offset
 print(meta_clean)
 
 # %% [markdown]
-# ## 3. PVGIS
+# # 3. PVGIS
 #
 # This method uses the PVGIS database, a public resource. It requires no API key or user account.
 

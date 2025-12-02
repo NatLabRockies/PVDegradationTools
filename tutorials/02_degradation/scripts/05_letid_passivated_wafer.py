@@ -40,7 +40,7 @@ print("Pandas version ", pd.__version__)
 print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
-# ## Device parameters
+# # Device parameters
 # For modeling a wafer, we don't need as many device parameters. Wafer thickness, lifetime, and an optical generation profile, which allows us to calculate generation current, which we take to be device current assuming surface recombination is very low.
 
 # %%
@@ -56,7 +56,7 @@ depth = generation_df["Depth (um)"]
 j_gen = collection.generation_current(generation, depth)
 
 # %% [markdown]
-# ## Degradation parameters
+# # Degradation parameters
 # Here we'll model LETID under 0.5-sun, open-circuit injection. In a passivated wafer, recombination per volume ($\frac{\Delta n}{\tau}$) must equal generation per volume ($\frac{Jq}{W}$), which gives $\Delta n = \frac{Jq\tau}{W}$
 #
 # The term $\Delta n^{x_{ij}}$ is calculated for wafers by the function ```letid.carrier_factor_wafer```, which adjusts the rate of the transition $i \rightarrow j$ for $\Delta n$.
@@ -70,7 +70,7 @@ mechanism_params = utilities.get_kinetics("D037")
 injection = 0.5  #
 
 # %% [markdown]
-# ### Demonstrate calculation of dn^x_ij
+# # Demonstrate calculation of dn^x_ij
 # 1. Calculate $\Delta n$ of the wafer
 
 # %%
@@ -126,7 +126,7 @@ letid.carrier_factor_wafer(
 )
 
 # %% [markdown]
-# ## Degradation parameters
+# # Degradation parameters
 # To model the device's degradation, we need to define several more important quantities about the degradation the device will experience. These include undegraded and degraded lifetime (in $\mu s$), and starting defect state percentages
 
 # %%
@@ -143,7 +143,7 @@ mechanism_params = utilities.get_kinetics("D037")
 print(mechanism_params)
 
 # %% [markdown]
-# ## Set up timeseries
+# # Set up timeseries
 # In this example, we are going to model a wafer exposed to 0.5 suns illumination at $125\degree C$ for 24 hours, and compare to experimental data from [Wyller *et al.*  2021](https://doi.org/10.1109/JPHOTOV.2021.3078367).
 
 # %%
@@ -178,7 +178,7 @@ timesteps.loc[0, "tau"] = letid.tau_now(
 timesteps
 
 # %% [markdown]
-# ## Run through timesteps
+# # Run through timesteps
 # Since each timestep depends on the preceding timestep, we need to calculate in a loop. This will take a few minutes depending on the length of the timeseries.
 
 # %%
@@ -241,7 +241,7 @@ for index, timestep in timesteps.iterrows():
         timesteps.at[index, "NC"] = n_C + dN_Cdt * t_step
 
 # %% [markdown]
-# ## Finish calculating degraded device parameters.
+# # Finish calculating degraded device parameters.
 # Now that we have calculated defect states, we can calculate all the quantities that depend on defect states. Since this is a wafer, device parameters like Jsc, Voc, FF, etc., aren't really appropriate
 #
 # For wafers, results are often presented in terms of normalized defect density (NDD), where
@@ -261,7 +261,7 @@ timesteps["time (s)"] = (
 timesteps
 
 # %% [markdown]
-# ## Plot the results
+# # Plot the results
 
 # %%
 from cycler import cycler
@@ -306,7 +306,7 @@ ax.set_title(
 plt.show()
 
 # %% [markdown]
-# ## Compare model results to experimental data
+# # Compare model results to experimental data
 # Experimental data (0.5 suns, 125&deg;C, 150&deg;C, 175&deg;C) from [Wyller 2021](https://doi.org/10.1109/JPHOTOV.2021.3078367).
 # Comparison with experimental data requires normalization constant ($C_{norm}$), which relates NDD to $N_B$ as described in [Repins 2023](https://doi.org/10.1557/s43577-022-00438-8).
 

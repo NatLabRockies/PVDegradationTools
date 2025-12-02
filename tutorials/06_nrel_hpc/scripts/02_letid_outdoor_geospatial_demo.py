@@ -22,7 +22,7 @@ print("Pandas version ", pd.__version__)
 print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
-# ## Single location example
+# # Single location example
 
 # %%
 weather_file = os.path.join(DATA_DIR, "psm3_demo.csv")
@@ -45,7 +45,7 @@ kwargs = {
 pvdeg.letid.calc_letid_outdoors(weather_df=WEATHER, meta=META, **kwargs)
 
 # %% [markdown]
-# ### Start distributed compute cluster - DASK
+# # Start distributed compute cluster - DASK
 
 # %%
 local = {

@@ -3,7 +3,7 @@ import pvdeg
 import numpy as np
 
 # %% [markdown]
-# ## Adding Points
+# # Adding Points
 #
 # We are going to add all of the points in the American West to the scenario and downsample by a factor of 1. This will include only half of the points in the latitude axis and half in the longitude axis.
 
@@ -16,7 +16,7 @@ dynamic_points.addLocation(
 )
 
 # %% [markdown]
-# ### Preview The Scenario's Points
+# # Preview The Scenario's Points
 #
 # Use `plot_cords` to get a quick snapshot of all coordinates included in the scenario's metadata.
 
@@ -31,11 +31,11 @@ dynamic_points.plot_coords(
 dynamic_points.meta_data
 
 # %% [markdown]
-# ## Downselecting
+# # Downselecting
 #
 # Using weighted random choices based on elevation we will create a sparse grid from the full metadata for fast calculations. This requires sklearn to be installed but this is not in the `pvdeg` dependency list to you will have to install it seperately.
 #
-# ### Normalization
+# ## Normalization
 #
 # At each metadata point in our dataset we will calculate a weight based on its changes in elevation compared to its neighbors. The higher the weight, the greater the change in elevation from a point's immediate neighbors. The downselection methods and functions use these weights to randomly select a subset of the datapoints, prefferentially selecting those with higher weights.
 #
@@ -44,7 +44,7 @@ dynamic_points.meta_data
 # *Note: `pvdeg`'s downselection functions use `numpy.random`, the random seed is not fixed so the result will change between runs.*
 
 # %% [markdown]
-# ### Providing a KdTree
+# # Providing a KdTree
 #
 # As shown below the lines to create a kdtree are commented out.
 #
@@ -65,7 +65,7 @@ dynamic_points.downselect_elevation_stochastic(
 dynamic_points.plot_coords()
 
 # %% [markdown]
-# ## Extracting from Scenario
+# # Extracting from Scenario
 #
 # Scenarios provide an easy way to select and downsample geospatial data but we can easily pull out the data to use other `pvdeg` functions on it. In the cell below, we extract the weather data and meta data from the scenario and take only the matching entries from the weather. Then we load the xarray dataset into memory. Previously, it was stored lazily out of memory but we want to do operations on it. (Chunking causes issues when calculating so this eliminates any chunks)
 
@@ -79,7 +79,7 @@ sub_weather = weather.sel(
 sub_weather = sub_weather.compute()  # load into memory
 
 # %% [markdown]
-# ### Geospatial Calculation
+# # Geospatial Calculation
 #
 # Run a standoff calculation on the extracted scenario weather data and scenario meta data.
 
@@ -95,7 +95,7 @@ geo = {
 analysis_result = pvdeg.geospatial.analysis(**geo)
 
 # %% [markdown]
-# ### Viewing Results
+# # Viewing Results
 #
 # Inspecting the xarray dataset below shows us that we have many Not a Number (NaN) entries. These occur because we did not provide weather data at every point in the grid of possile latitude-longitude pairs. Expanding the `x` datavariable shows that there are some valid results but these are uncommon.
 
@@ -103,7 +103,7 @@ analysis_result = pvdeg.geospatial.analysis(**geo)
 analysis_result
 
 # %% [markdown]
-# ## Plotting Sparse Data I
+# # Plotting Sparse Data I
 #
 # If we try to plot existing data with the current plotting methods exposed by `pvdeg` we will encounter issues. This will produce weak plotting results.
 

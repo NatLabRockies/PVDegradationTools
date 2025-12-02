@@ -7,14 +7,14 @@ import pickle
 import xarray as xr
 
 # %% [markdown]
-# ## Pysam
+# # Pysam
 #
 # rundown on pysam...
 #
 # https://nrel-pysam.readthedocs.io/en/main/inputs-from-sam.html
 
 # %% [markdown]
-# ### PVGIS
+# # PVGIS
 #
 # Only works with PVGIS
 
@@ -35,7 +35,7 @@ results = pvdeg.pysam.pysam(
 results["annual_energy"]
 
 # %% [markdown]
-# ### Local Geospatial
+# # Local Geospatial
 #
 # Using PySAM with geospatial data requires proper formatting of the weather DataFrame to match PySAM's expectations.
 
@@ -45,7 +45,7 @@ GEO_WEATHER = xr.open_dataset(os.path.join(TEST_DATA_DIR, "summit-weather.nc"))
 
 
 # %% [markdown]
-# ### Local Geospatial - PySAM Integration
+# # Local Geospatial - PySAM Integration
 #
 # The geospatial weather data is in half-hourly format (17520 timesteps) but PySAM expects hourly data (8760 timesteps). The wrapper function below handles this conversion automatically.
 
@@ -96,7 +96,7 @@ geo_res = pvdeg.geospatial.analysis(
 geo_res
 
 # %% [markdown]
-# ## NSRDB API
+# # NSRDB API
 
 # %%
 weather_db = "PSM4"
@@ -106,7 +106,7 @@ weather_arg = {"api_key": "DEMO_KEY", "email": "user@mail.com", "map_variables":
 weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)
 
 # %% [markdown]
-# ### Geospatial Scenario
+# # Geospatial Scenario
 
 # %%
 location_grabber = pvdeg.GeospatialScenario()

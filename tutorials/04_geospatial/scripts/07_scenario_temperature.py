@@ -16,7 +16,7 @@ print("Python version ", sys.version)
 print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
-# ## Adding Modules and Pipeline Jobs (Run Functions on Scenario Object)
+# # Adding Modules and Pipeline Jobs (Run Functions on Scenario Object)
 #
 # Material: `OX003` corresponds to a set of EVA material parameters from the default file `O2Permeation.json` in the `pvdeg/data` directory. Look in these files to see available options.
 
@@ -97,7 +97,7 @@ scene_temp.addJob(
 )
 
 # %% [markdown]
-# ## Run and View Scenario Results
+# # Run and View Scenario Results
 
 # %%
 scene_temp.run()
@@ -108,7 +108,7 @@ scene_temp
 scene_temp.dump()
 
 # %% [markdown]
-# ## Plotting and Extracting Results
+# # Plotting and Extracting Results
 # These methods are independent of one another (i.e. you do not need to extract before plotting but both are shown below.)
 
 # %%
@@ -142,7 +142,7 @@ else:
     print("No function results found")
 
 # %% [markdown]
-# ## Create a Copy of a Scenario
+# # Create a Copy of a Scenario
 
 # %%
 from pathlib import Path

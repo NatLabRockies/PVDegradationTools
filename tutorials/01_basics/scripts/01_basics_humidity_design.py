@@ -1,6 +1,6 @@
 # %% [markdown]
 # # 1 - Basics, Humidity, Design
-# ### Module Humidity and Edge Seal Width
+# ## Module Humidity and Edge Seal Width
 #
 #
 # **Requirements:**
@@ -34,7 +34,7 @@ print("Pandas version ", pd.__version__)
 print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
-# ## 1. Reading in Weather Data and Site Meta-Data
+# # 1. Reading in Weather Data and Site Meta-Data
 # Most `pvdeg` functions have been standardized to operate from popular weather files such as TMY3, EPW, and PSM3. For high-performance computer users, NSRDB and other database fetching tools can be used. For these tutorials, we will use local weather files. Unless otherwise stated, functions require the following fields within a weather file:
 #
 # - date-time index
@@ -95,7 +95,7 @@ sunup_weather = WEATHER[WEATHER["ghi"] > 0]
 sunup_weather
 
 # %% [markdown]
-# ## 2. Solar Position, POA, and Module Temperature
+# # 2. Solar Position, POA, and Module Temperature
 #
 # Many operations with `PVDEG` require solar position, POA irradiance, and module temperature. Usually a `pvdeg` method will calculate these data sets automatically when it is required, however it will not keep the data for external use. For now, we will calculate them directly. This is helpful when you need to use the data for an external calculation. Here, we generate the solar position (azimuth, elevation, etc), plane of array irradiance (POA), and module temperature. `PVDEG` has wrappers for quickly using `PVLIB` to generate these figures with minimal input
 
@@ -148,11 +148,11 @@ temp_mod = pvdeg.temperature.module(
 temp_mod.loc["1999-01-01 13:30:00-07:00":"1999-01-01 17:30:00-07:00"]
 
 # %% [markdown]
-# ## 3. Module Humidities
+# # 3. Module Humidities
 # `PVDEG` can be used to calculate the relative humidity of several layers within a PV module: the outside surface of the module, front ecapsulant, back encapsulant, and backsheet. This can be done with 2 techniques: Automatically and Manually.
 
 # %% [markdown]
-# ### 3.a. Automatic
+# # 3.a. Automatic
 # Use the function `humidity.module`. This method does all of the calculations behind the scenes. It requires only 2 inputs (weather data and meta data). It will return a dataframe with all the layers of the module.
 
 # %%
@@ -162,7 +162,7 @@ rh_module = pvdeg.humidity.module(
 rh_module.head()
 
 # %% [markdown]
-# ### 3.b. Manual
+# # 3.b. Manual
 # Use the individual functions to calculate the RH in each layer. These are named and require more extensive input parameters. This must be done in the correct order:
 # 1. Surface Outside
 # 2. Front Encapsulant
@@ -196,7 +196,7 @@ rh_backsheet = pvdeg.humidity.backsheet_from_encap(
 )
 
 # %% [markdown]
-# ## 4. Design: Edge Seal Width
+# # 4. Design: Edge Seal Width
 # `pvdeg.design.edge_seal_width` calculates the width [cm] required for several years of water ingress. If you do not specify the number of years, it will use the default value of 25. As with most `pvdeg` functions, we can automatically generate all necessary data if we pass the two arguments (weather_df, meta).
 
 # %%
@@ -222,7 +222,7 @@ edge_seal_width = pvdeg.design.edge_seal_width(
 print(edge_seal_width)
 
 # %% [markdown]
-# ### Alternate Edge Seal Width
+# # Alternate Edge Seal Width
 # If you have the dew point, or wet-bulb temperature, you can calculate the edge seal width directly.
 
 # %%

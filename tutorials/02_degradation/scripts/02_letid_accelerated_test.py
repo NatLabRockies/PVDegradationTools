@@ -42,7 +42,7 @@ print("Pandas version ", pd.__version__)
 print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
-# ## Device parameters
+# # Device parameters
 # To define a device, we need to define several important quantities about the device: wafer thickness (in $\mu m$), rear surface recombination velocity (in cm/s), and cell area (in cm<sup>2</sup>). The values defined below are representative of a typical PERC solar cell.
 
 # %%
@@ -51,7 +51,7 @@ s_rear = 46  # cm/s
 cell_area = 243  # cm^2
 
 # %% [markdown]
-# ##### Other device parameters
+# # Other device parameters
 # Other required device parameters: base diffusivity (in $cm^2/s$), and optical generation profile, which allow us to estimate current collection in the device.
 
 # %%
@@ -64,7 +64,7 @@ depth = generation_df["Depth (um)"]
 d_base = 27  # cm^2/s electron diffusivity. See https://www2.pvlighthouse.com.au/calculators/mobility%20calculator/mobility%20calculator.aspx for details
 
 # %% [markdown]
-# ## Degradation parameters
+# # Degradation parameters
 # To model the device's degradation, we need to define several more important quantities about the degradation the device will experience. These include undegraded and degraded lifetime (in $\mu s$).
 
 # %%
@@ -111,7 +111,7 @@ mechanism_params = utilities.get_kinetics("D037")
 print(mechanism_params)
 
 # %% [markdown]
-# ## Set up timeseries
+# # Set up timeseries
 # In this example, we are going to model test with constant temperature and current injection. IEC TS 63342 prescribes two to three weeks of injection equivalent to $2\times(I_{sc}-I_{mp})$, at $75\degree C$. For most typical c-Si modules, $2\times(I_{sc}-I_{mp})$ is roughly equal to $0.1\times I_{sc}$. So we will set injection equal to 0.1 "suns" of injection.
 #
 # We will create a pandas datetime series and calculate the changes in defect states for each timestep.
@@ -154,7 +154,7 @@ timesteps.loc[0, "tau"] = letid.tau_now(
 timesteps
 
 # %% [markdown]
-# ## Run through timesteps
+# # Run through timesteps
 # Since each timestep depends on the preceding timestep, we need to calculate in a loop. This will take a few minutes depending on the length of the timeseries.
 
 # %%
@@ -239,7 +239,7 @@ for index, timestep in timesteps.iterrows():
         timesteps.at[index, "NC"] = n_C + dN_Cdt * t_step
 
 # %% [markdown]
-# ## Finish calculating degraded device parameters.
+# # Finish calculating degraded device parameters.
 # Now that we have calculated defect states, we can calculate all the quantities that depend on defect states.
 
 # %%
@@ -265,7 +265,7 @@ timesteps["time (days)"] = (
 timesteps
 
 # %% [markdown]
-# ## Plot the results
+# # Plot the results
 #
 #
 

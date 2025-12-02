@@ -39,7 +39,7 @@ print("Pandas version ", pd.__version__)
 print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
-# ## 1. Read in spectral irradiance data
+# # 1. Read in spectral irradiance data
 #
 # Spectral degradation has 4 main requirements:
 # - Spectral Irradiance [W/m^2 nm]
@@ -59,7 +59,7 @@ SPECTRA = pd.read_csv(os.path.join(DATA_DIR, "spectra.csv"), header=0, index_col
 SPECTRA.head()
 
 # %% [markdown]
-# ### 2. Calculate Degradation
+# # 2. Calculate Degradation
 #
 # The spectral degradation function has several optional paramters. For more information, refer to the documentation. Below is a function call with the minimum required information.
 

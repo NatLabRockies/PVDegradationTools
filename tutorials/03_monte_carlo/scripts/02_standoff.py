@@ -28,7 +28,7 @@ print("Pvlib version ", pvlib.__version__)
 print("Pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
-# ### Simple Standoff Calculation
+# # Simple Standoff Calculation
 #
 # This is copied from another tutorial called `4 - Standards.ipynb`, please visit this page for a more in depth explanation of the process for a single standoff calculation.
 #
@@ -67,7 +67,7 @@ print(height1)
 print(height2)
 
 # %% [markdown]
-# ### Defining Correlation Coefficients, Mean and Standard Deviation For Monte Carlo Simulation
+# # Defining Correlation Coefficients, Mean and Standard Deviation For Monte Carlo Simulation
 #
 # We will leave the list of correlations blank because our variables are not correlated. For a correlated use case visit the `Monte Carlo - Arrhenius.ipynb` tutorial.
 #
@@ -85,7 +85,7 @@ samples = pvdeg.montecarlo.generateCorrelatedSamples(corr_coeff, stats, 500)
 print(samples)
 
 # %% [markdown]
-# #### Standoff Monte Carlo Inputs
+# # Standoff Monte Carlo Inputs
 #
 # When using the pvdeg.montecarlo.simulate() function on a target function all of the target function's required arguments must still be given. Our non-changing arguments will be stored in a dictionary. The randomized monte carlo input data will also be passed to the target function via the simulate function. All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,
 
@@ -116,7 +116,7 @@ results = pvdeg.montecarlo.simulate(
 )
 
 # %% [markdown]
-# #### Dealing With Series
+# # Dealing With Series
 # Notice how our results are contained in a pandas series instead of a dataframe.
 #
 # This means we have to do an extra step to view our results. Run the block below to confirm that our results are indeed contained in a series. And convert them into a simpler dataframe.
@@ -131,7 +131,7 @@ results_df = pd.concat(results.tolist()).reset_index(drop=True)
 print(results_df)
 
 # %% [markdown]
-# ### Viewing Our Data
+# # Viewing Our Data
 # Let's plot the results using a histogram
 
 # %%

@@ -1,6 +1,6 @@
 # %% [markdown]
 # # A - Van't Hoff Degradation
-# ### Calculate site specific degradation according to the Van't Hoff equation
+# ## Calculate site specific degradation according to the Van't Hoff equation
 # ***
 # Michael Kempe
 #
@@ -31,7 +31,7 @@ import pvdeg
 from pvdeg import DATA_DIR
 
 # %% [markdown]
-# ## 1. Read In the Weather File
+# # 1. Read In the Weather File
 #
 # This is usually the first step. Use a PSM3, TMY3, or EPW file. For this demo, use the provided PSM3 weather file.
 
@@ -48,7 +48,7 @@ print(
 )
 
 # %% [markdown]
-# ## 2. Generate Basic Modeling Data
+# # 2. Generate Basic Modeling Data
 #
 # For this tutorial we will need solar position, POA, PV cell and module temperature. Let's gernate those individually with their respective functions.
 
@@ -64,7 +64,7 @@ temp_cell = pvdeg.temperature.cell(weather_df=WEATHER, meta=META, poa=poa_df)
 temp_module = pvdeg.temperature.module(weather_df=WEATHER, meta=META, poa=poa_df)
 
 # %% [markdown]
-# ## 3. VantHoff Degradation
+# # 3. VantHoff Degradation
 #
 # Van't Hoff Irradiance Degradation Equation:
 # $$ R_o = R_D ·  G^p  · T_f^{\frac{T}{10} }$$
@@ -109,7 +109,7 @@ print(
 )
 
 # %% [markdown]
-# ## 4. Arrhenius
+# # 4. Arrhenius
 # Calculate the Acceleration Factor between the rate of degredation of a modeled environmnet versus a modeled controlled environmnet
 #
 # Example: "If the *AF*=25 then 1 year of Controlled Environment exposure is equal to 25 years in the field"
@@ -156,7 +156,7 @@ irr_weighted_avg_a = pvdeg.degradation.IwaArrhenius(
 )
 
 # %% [markdown]
-# ## 5. Quick Method (Degradation)
+# # 5. Quick Method (Degradation)
 #
 # For quick calculations, you can omit POA and both module and cell temperature. The function will calculate these figures as needed using the available weather data with the default options for PV module configuration.
 
@@ -197,7 +197,7 @@ irr_weighted_avg_a = pvdeg.degradation.IwaArrhenius(
 )
 
 # %% [markdown]
-# ## 6. Solder Fatigue
+# # 6. Solder Fatigue
 #
 # Estimate the thermomechanical fatigue of flat plate photovoltaic module solder joints over the time range given using estimated cell temperature. Like other `pvdeg` funcitons, the minimal parameters are (weather_df, meta). Running the function with only these two inputs will use default PV module configurations ( open_rack_glass_polymer ) and the 'sapm' temperature model over the entire length of the weather data.
 

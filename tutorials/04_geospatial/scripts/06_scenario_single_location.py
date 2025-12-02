@@ -26,7 +26,7 @@ print("Python version ", sys.version)
 print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
-# ## Define Single Point Scenario Object
+# # Define Single Point Scenario Object
 # Scenario is a general class that can be used to replace the legacy functional pvdeg analysis approach with an object orented one. ``Scenario`` can preform single location or geospatial analysis. The scenario constructor takes many arguments but the only required one for the following use cases is the ``name`` attribute. It is visible in when we display the entire scenario and is present in the file of saved information about the scenario. We also need to provide the class constructor with our API key and email.
 #
 # A way around this is to provide the weather and metadata in the pipeline job arguments or you can load data from somewhere else and provide it in the same fashion.
@@ -41,7 +41,7 @@ simple_scenario = pvdeg.Scenario(
 )
 
 # %% [markdown]
-# ## Adding A Location
+# # Adding A Location
 # To add a single point using data from the Physical Solar Model (PSM3), simply feed the scenario a single coordinate in tuple form via the ``addLocation`` method. Currently this is the only way to add a location to a non-geospatial scenario, all of the other arguments are unusable when ``Scenario.geospatial == False``.
 #
 # Attempting to add a second location by calling the method again with a different coordinate pair will overwrite the old location data stored in the class instance.
@@ -55,14 +55,14 @@ simple_scenario.addLocation(
 simple_scenario.weather_data
 
 # %% [markdown]
-# ## Scenario Pipelines
+# # Scenario Pipelines
 #
 # The pipeline is a list of tasks called jobs for the scenario to run. We will populate the pipeline with a list of jobs before executing them all at once.
 #
 # To add a job to the pipeline use the ``updatePipeline`` method. Two examples of adding functions to the pipeline will be shown below.
 
 # %% [markdown]
-# ### Adding a job without function arguments
+# # Adding a job without function arguments
 #
 # The simplest case of adding a job to the pipeline is when it only requires us to provide simple weather and metadata. In the function definition and docstring these appear as ``weather_df`` and ``meta``. Since these attributes are contained in our scenario class instance we do not have to worry about them. We can simply add the function as shown below.
 
@@ -70,7 +70,7 @@ simple_scenario.weather_data
 simple_scenario.addJob(func=pvdeg.standards.standoff)
 
 # %% [markdown]
-# ### Adding a job with function arguments
+# # Adding a job with function arguments
 #
 # When adding a job that contains a function requiring other arguments such as ``solder_fatigue`` which requires a value for ``wind_factor``, we will need to provide it. The most straightforeward way to do this is using a kwargs dictionary and passing it to the function. We do not unpack the dictionary before passing it. This is done inside of the scenario at pipeline runtime (when ``runPipeline`` is called).
 
@@ -80,8 +80,8 @@ kwargs = {"wind_factor": 0.33}
 simple_scenario.addJob(func=pvdeg.fatigue.solder_fatigue, func_kwarg=kwargs)
 
 # %% [markdown]
-# ### Adding a job with weather and metadata from outside of the class
-# ### Not functional
+# # Adding a job with weather and metadata from outside of the class
+# ## Not functional
 #
 # could just directly set weather data with scenario.weather_data = weather and scenario.meta_data = meta but that would only work for all of the jobs in the pipeline
 #
@@ -99,7 +99,7 @@ simple_scenario.addJob(func=pvdeg.standards.standoff, func_kwarg=kwargs)
 # (simple_scenario.pipeline[1]['job'])(**simple_scenario.pipeline[1]['params'])
 
 # %% [markdown]
-# ## View Scenario
+# # View Scenario
 #
 # The ``viewScenario`` method provides an overview of the information contained within your scenario object. Here you can see if it contains the location weather and metadata. As well as the jobs in the pipeline and their arguments.
 
@@ -107,7 +107,7 @@ simple_scenario.addJob(func=pvdeg.standards.standoff, func_kwarg=kwargs)
 simple_scenario.viewScenario()
 
 # %% [markdown]
-# ## Display
+# # Display
 #
 # The fancier cousin of viewScenario. Only works in a jupyter environemnt as it uses a special ipython backend to render the html and javascript.
 #
@@ -121,14 +121,14 @@ simple_scenario.viewScenario()
 simple_scenario
 
 # %% [markdown]
-# ## Executing Pipeline Jobs
+# # Executing Pipeline Jobs
 # To run the pipeline after we have populated it with the desired jobs call the ``runPipeline`` method on our scenario instance. This will run all of the jobs we have previously added. The functions that need weather and metadata will grab it from the scenario instance using the correct location added above. The pipeline jobs results will be saved to the scenario instance.
 
 # %%
 simple_scenario.run()
 
 # %% [markdown]
-# ## Results Series ##
+# # Results Series ##
 # We will use a series to store the various return values of functions run in our pipeline. These can partially obfuscate the dataframes within them so to access the dataframes, use the function name to access it. To get one of the results we can index it using dictionary syntax. If the job was called `'KSDJQ'` do `'simple_scenario.results['KSDJQ']` to directly access the result for that job
 
 # %%
@@ -146,7 +146,7 @@ for keys, results in simple_scenario.results.items():
     display(results)
 
 # %% [markdown]
-# ## Cleaning Up the Scenario
+# # Cleaning Up the Scenario
 #
 # Each scenario object creates a directory named ``pvd_job_...`` that contains information about the scenario instance. To remove the directory and all of its information call ``clean`` on the scenario. This will permanently delete the directory created by the scenario.
 
