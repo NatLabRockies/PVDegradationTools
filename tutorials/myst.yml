@@ -59,35 +59,35 @@ project:
           title: Arrhenius Monte Carlo
         - file: 03_monte_carlo/02_standoff.ipynb
           title: Standoff Monte Carlo
-    - title: 04 - Geospatial & Scenarios
+    - title: 04 - Scenarios
       children:
-        - file: 04_geospatial/01_local_scenario.ipynb
-          title: Local Scenario
-        - file: 04_geospatial/02_geospatial_templates.ipynb
+        - file: 04_scenario/01_scenario_temperature.ipynb
+          title: Temperature Scenario
+        - file: 04_scenario/02_scenario_single_location.ipynb
+          title: Single Location
+        - file: 04_scenario/03_scenario_mountain_downselect.ipynb
+          title: Mountain Downselect
+    - title: 05 - Geospatial Analysis
+      children:
+        - file: 05_geospatial/01_geospatial_templates.ipynb
           title: Geospatial Templates (HPC)
-        - file: 04_geospatial/03_scenario_geographical_features.ipynb
-          title: Geographical Features (HPC)
-        - file: 04_geospatial/04_scenario_geospatial.ipynb
-          title: Scenario Geospatial (HPC)
-        - file: 04_geospatial/05_scenario_mountain_downselect.ipynb
-          title: Mountain Downselect (HPC)
-        - file: 04_geospatial/06_scenario_single_location.ipynb
-          title: Single Location (HPC)
-        - file: 04_geospatial/07_scenario_temperature.ipynb
-          title: Temperature Scenario (HPC)
-        - file: 04_geospatial/09_geospatial_world_map.ipynb
+        - file: 05_geospatial/02_geospatial_world_map.ipynb
           title: Geospatial World Map (HPC)
-        - file: 04_geospatial/10_letid_outdoor_geospatial_demo.ipynb
+        - file: 05_geospatial/03_letid_outdoor_geospatial_demo.ipynb
           title: LETID Outdoor Geospatial Demo (HPC)
-    - title: 05 - Advanced Topics
+        - file: 05_geospatial/04_scenario_geographical_features.ipynb
+          title: Geographical Features (HPC)
+        - file: 05_geospatial/05_scenario_geospatial.ipynb
+          title: Scenario Geospatial (HPC)
+    - title: 06 - Advanced Topics
       children:
-        - file: 05_advanced/01_custom_functions_nopython.ipynb
+        - file: 06_advanced/01_custom_functions_nopython.ipynb
           title: Custom Functions with Numba
-        - file: 05_advanced/03_pysam_api.ipynb
+        - file: 06_advanced/03_pysam_api.ipynb
           title: PySAM with API (API Key Required)
-        - file: 05_advanced/04_nsrdb_distributed_api.ipynb
+        - file: 06_advanced/04_nsrdb_distributed_api.ipynb
           title: NSRDB Distributed (API Key Required)
-        - file: 05_advanced/05_pvgis_distributed.ipynb
+        - file: 06_advanced/05_pvgis_distributed.ipynb
           title: PVGIS Distributed
     - title: 06 - Workshop Demos
       children:

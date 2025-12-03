@@ -24,9 +24,9 @@ import xarray as xr
 # %% [markdown]
 # # Loading Geospatial Data
 #
-# This step skips over making the `pvdeg.weather.get` call with `geospatial == True`. See the [Duramat Demo](../10_workshop_demos/02_duramat_live_demo.ipynb) for information on how to do this traditionally.
+# This step skips over making the `pvdeg.weather.get` call with `geospatial == True`. See the [Duramat Demo](./DuraMAT%20Live%20Demo.ipynb) for information on how to do this traditionally.
 #
-# We can also use a `GeospatialScenario` object. See the [Geospatial Scenario Tutorial](./04_scenario_geospatial.ipynb) for more information on how to use this approach.
+# We can also use a `GeospatialScenario` object. See the [Geospatial Scenario Tutorial](./Scenario%20-%20Geospatial.ipynb) for more information on how to use this approach.
 #
 # *The cell below loads a pickled xarray object, this is not the best way to do this. xarray datasets should be stored as `.nc` - netcdf files*
 

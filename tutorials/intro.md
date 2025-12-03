@@ -18,9 +18,11 @@ instructions on the [PVDeg Github page](https://github.com/NREL/PVDegradationToo
 
 **[03 - Monte Carlo Simulations](03_monte_carlo/01_arrhenius.ipynb)** - Uncertainty quantification through Monte Carlo methods for Arrhenius degradation and standoff calculations
 
-**[04 - Geospatial & Scenarios](04_geospatial/01_local_scenario.ipynb)** - Large-scale spatial analysis and scenario-based workflows for regional degradation assessments (includes HPC-specific workflows)
+**[04 - Scenarios](04_scenario/01_scenario_temperature.ipynb)** - Scenario-based workflows for local, geographical, and regional PV system analysis (includes HPC-specific workflows)
 
-**[05 - Advanced Topics](05_advanced/01_custom_functions_nopython.ipynb)** - Custom functions with Numba, PySAM integration, and distributed computing with NSRDB/PVGIS APIs
+**[05 - Geospatial Analysis](05_geospatial/01_geospatial_templates.ipynb)** - Large-scale spatial analysis, geospatial templates, and world map visualizations for regional degradation assessments (HPC)
+
+**[06 - Advanced Topics](06_advanced/01_custom_functions_nopython.ipynb)** - Custom functions with Numba, PySAM integration, and distributed computing with NSRDB/PVGIS APIs
 
 **[10 - Workshop Demos](10_workshop_demos/01_astm_live_demo.ipynb)** - Interactive demonstrations from ASTM and DuraMAT workshops
 

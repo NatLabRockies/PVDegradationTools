@@ -37,37 +37,38 @@ parts:
     title: Arrhenius Monte Carlo
   - file: 03_monte_carlo/02_standoff
     title: Standoff Monte Carlo
-- caption: 04 - Geospatial & Scenarios
+- caption: 04 - Scenarios
   titlesonly: true
   chapters:
-  - file: 04_geospatial/01_local_scenario
-    title: Local Scenario
-  - file: 04_geospatial/02_geospatial_templates
+  - file: 04_scenario/01_scenario_temperature
+    title: Temperature Scenario
+  - file: 04_scenario/02_scenario_single_location
+    title: Single Location
+  - file: 04_scenario/03_scenario_mountain_downselect
+    title: Mountain Downselect
+- caption: 05 - Geospatial Analysis
+  titlesonly: true
+  chapters:
+  - file: 05_geospatial/01_geospatial_templates
     title: Geospatial Templates (HPC)
-  - file: 04_geospatial/03_scenario_geographical_features
-    title: Geographical Features (HPC)
-  - file: 04_geospatial/04_scenario_geospatial
-    title: Scenario Geospatial (HPC)
-  - file: 04_geospatial/05_scenario_mountain_downselect
-    title: Mountain Downselect (HPC)
-  - file: 04_geospatial/06_scenario_single_location
-    title: Single Location (HPC)
-  - file: 04_geospatial/07_scenario_temperature
-    title: Temperature Scenario (HPC)
-  - file: 04_geospatial/09_geospatial_world_map
+  - file: 05_geospatial/02_geospatial_world_map
     title: Geospatial World Map (HPC)
-  - file: 04_geospatial/10_letid_outdoor_geospatial_demo
+  - file: 05_geospatial/03_letid_outdoor_geospatial_demo
     title: LETID Outdoor Geospatial Demo (HPC)
-- caption: 05 - Advanced Topics
+  - file: 05_geospatial/04_scenario_geographical_features
+    title: Geographical Features (HPC)
+  - file: 05_geospatial/05_scenario_geospatial
+    title: Scenario Geospatial (HPC)
+- caption: 06 - Advanced Topics
   titlesonly: true
   chapters:
-  - file: 05_advanced/01_custom_functions_nopython
+  - file: 06_advanced/01_custom_functions_nopython
     title: Custom Functions with Numba
-  - file: 05_advanced/03_pysam_api
+  - file: 06_advanced/03_pysam_api
     title: PySAM with API (API Key Required)
-  - file: 05_advanced/04_nsrdb_distributed_api
+  - file: 06_advanced/04_nsrdb_distributed_api
     title: NSRDB Distributed (API Key Required)
-  - file: 05_advanced/05_pvgis_distributed
+  - file: 06_advanced/05_pvgis_distributed
     title: PVGIS Distributed
 - caption: 06 - Workshop Demos
   titlesonly: true

@@ -432,7 +432,7 @@ plt.show(T98_fig)
 # # 7. Plot $X_{min}$ for a $T_{98}$, and plot $T_{98}$ for a given region.
 #
 # This last Objective is much more complicated and is set up to utilize acess to a lot of computational power to run many sites simultaneously to create a regional map of standoff distance.
-# For more in-depth instructions on doing this, look at the tutorial "Scenario - Geospatial.ipynb" here in PVDeg.
+# For more in-depth instructions on doing this, look at the tutorial "04_scenario_geospatial.ipynb" here in PVDeg.
 #
 # Step #1: Create an object, "geospatial_standoff_scenario" to be used to run the computations.
 

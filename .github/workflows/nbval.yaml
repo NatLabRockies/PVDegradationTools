@@ -27,8 +27,8 @@ jobs:
         "02_degradation/06_vant_hoff_degradation_model.ipynb:5"
         "03_monte_carlo/01_arrhenius.ipynb:180"
         "03_monte_carlo/02_standoff.ipynb:30"
-        "04_geospatial/01_local_scenario.ipynb:1"
-        "05_advanced/01_custom_functions_nopython.ipynb:30"
+        "04_scenario/01_local_scenario.ipynb:1"
+        "06_advanced/01_custom_functions_nopython.ipynb:30"
         "10_workshop_demos/01_astm_live_demo.ipynb:10"
     steps:
       - name: Calculate batch matrix
