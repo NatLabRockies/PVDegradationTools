@@ -97,6 +97,14 @@ project:
           title: ASTM Live Demo
         - file: 07_workshop_demos/02_duramat_live_demo.ipynb
           title: DuraMAT Live Demo (HPC)
+    - title: Tools
+      children:
+        - file: tools/Tools - Edge Seal Oxygen Ingress.ipynb
+          title: Edge Seal Oxygen Ingress
+        - file: tools/Tools - Degradation.ipynb
+          title: Degradation
+        - file: tools/Tools - Module Standoff for IEC TS 63126.ipynb
+          title: Module Standoff for IEC TS 63126 (HPC)
 site:
   options:
     logo: ../docs/source/_static/logo-vectors/PVdeg-Logo-Horiz-Color.svg

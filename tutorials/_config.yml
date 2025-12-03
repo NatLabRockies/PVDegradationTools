@@ -38,6 +38,8 @@ execute:
     - "06_nrel_hpc/01_geospatial_world_map.ipynb"
     - "06_nrel_hpc/02_letid_outdoor_geospatial_demo.ipynb"
     - "07_workshop_demos/02_duramat_live_demo.ipynb"
+    # Tools requiring HPC access
+    - "tools/Tools - Module Standoff for IEC TS 63126.ipynb"
 
 # Define the name of the latex output file for PDF builds
 latex:

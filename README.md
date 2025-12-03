@@ -116,8 +116,7 @@ You can also run the tutorial locally in a virtual environment, i.e., `venv` or
    - `05_advanced/` - Advanced topics and API access
    - `06_nrel_hpc/` - NREL HPC-specific workflows (requires HPC access)
    - `07_workshop_demos/` - Workshop and demonstration notebooks
-
-   For analysis tools, see the separate Tools section.
+   - `tools/` - Standalone analysis and calculation tools
 
 
 Documentation

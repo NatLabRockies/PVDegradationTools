@@ -14,17 +14,17 @@ repos:
     rev: 25.9.0
     hooks:
     -   id: black
-        exclude: '^(tutorials/|tools/)'
+        exclude: '^tutorials/'
 -   repo: https://github.com/PyCQA/flake8
     rev: 7.3.0 # Use the desired flake8 version
     hooks:
     -   id: flake8
-        exclude: '^(tutorials/|tools/)'
+        exclude: '^tutorials/'
 -   repo: https://github.com/mwouts/jupytext
     rev: v1.18.1
     hooks:
     -   id: jupytext
         args: [--sync, --pipe, black]
-        files: '^(tutorials/|tools/).*\.ipynb$'
+        files: '^tutorials/.*\.ipynb$'
         additional_dependencies:
           - black==25.9.0

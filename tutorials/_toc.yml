@@ -79,3 +79,12 @@ parts:
     title: ASTM Live Demo
   - file: 07_workshop_demos/02_duramat_live_demo
     title: DuraMAT Live Demo (HPC)
+- caption: Tools
+  titlesonly: true
+  chapters:
+  - file: tools/Tools - Edge Seal Oxygen Ingress
+    title: Edge Seal Oxygen Ingress
+  - file: tools/Tools - Degradation
+    title: Degradation
+  - file: tools/Tools - Module Standoff for IEC TS 63126
+    title: Module Standoff for IEC TS 63126 (HPC)
