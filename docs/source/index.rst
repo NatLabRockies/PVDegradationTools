@@ -60,10 +60,6 @@ Click the "Cite this repository" button on the `GitHub repository <https://githu
 
    Daxini, R., Ovaitt, S., Springer, M., Ford, T., & Kempe, M. (2025). PVDeg: a python package for modeling degradation on solar photovoltaic systems. Journal of Open Source Software (In Review).
 
-**Latest Release:**
-
-Please cite the DOI corresponding to the specific version of PVDeg that you used. Visit `Zenodo <https://zenodo.org/records/8088578/latest>`_ and use the "Cite as" section in the right sidebar to copy the citation in your preferred format (BibTeX, APA, etc.).
-
 **Software Record:**
 
 .. code-block::
