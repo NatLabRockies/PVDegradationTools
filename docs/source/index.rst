@@ -60,12 +60,6 @@ Click the "Cite this repository" button on the `GitHub repository <https://githu
 
    Daxini, R., Ovaitt, S., Springer, M., Ford, T., & Kempe, M. (2025). PVDeg: a python package for modeling degradation on solar photovoltaic systems. Journal of Open Source Software (In Review).
 
-**Software Record:**
-
-.. code-block::
-
-   Holsapple, Derek, Ayala Pelaez, Silvana, Kempe, Michael. "PV Degradation Tools", NREL Github 2020, Software Record SWR-20-71.
-
 
 .. toctree::
    :hidden:
