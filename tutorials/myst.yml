@@ -75,6 +75,10 @@ project:
           title: Single Location (HPC)
         - file: 04_geospatial/07_scenario_temperature.ipynb
           title: Temperature Scenario (HPC)
+        - file: 04_geospatial/09_geospatial_world_map.ipynb
+          title: Geospatial World Map (HPC)
+        - file: 04_geospatial/10_letid_outdoor_geospatial_demo.ipynb
+          title: LeTID Outdoor Geospatial Demo (HPC)
     - title: 05 - Advanced Topics
       children:
         - file: 05_advanced/01_custom_functions_nopython.ipynb
@@ -85,17 +89,11 @@ project:
           title: NSRDB Distributed (API Key Required)
         - file: 05_advanced/05_pvgis_distributed.ipynb
           title: PVGIS Distributed
-    - title: 06 - NREL HPC
+    - title: 06 - Workshop Demos
       children:
-        - file: 06_nrel_hpc/01_geospatial_world_map.ipynb
-          title: Geospatial World Map (HPC)
-        - file: 06_nrel_hpc/02_letid_outdoor_geospatial_demo.ipynb
-          title: LeTID Outdoor Geospatial Demo (HPC)
-    - title: 07 - Workshop Demos
-      children:
-        - file: 07_workshop_demos/01_astm_live_demo.ipynb
+        - file: 10_workshop_demos/01_astm_live_demo.ipynb
           title: ASTM Live Demo
-        - file: 07_workshop_demos/02_duramat_live_demo.ipynb
+        - file: 10_workshop_demos/02_duramat_live_demo.ipynb
           title: DuraMAT Live Demo (HPC)
     - title: Tools
       children:

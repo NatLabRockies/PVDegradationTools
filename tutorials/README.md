@@ -7,10 +7,9 @@ PVDeg is an open-source Python package for modeling photovoltaic (PV) degradatio
 - `01_basics/` - Introduction to PVDeg fundamentals
 - `02_degradation/` - Degradation mechanism modeling (LID, LeTID, Van't Hoff)
 - `03_monte_carlo/` - Monte Carlo uncertainty analysis
-- `04_geospatial/` - Geospatial and HPC scenarios
+- `04_geospatial/` - Geospatial and HPC scenarios (includes NREL HPC workflows)
 - `05_advanced/` - Advanced topics and API access
-- `06_nrel_hpc/` - NREL HPC-specific workflows (requires HPC access)
-- `07_workshop_demos/` - Workshop and demonstration notebooks
+- `10_workshop_demos/` - Workshop and demonstration notebooks
 
 For standalone analysis tools, see the [Tools](../tools/) directory.
 

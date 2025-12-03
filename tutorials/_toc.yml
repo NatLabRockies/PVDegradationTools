@@ -54,6 +54,10 @@ parts:
     title: Single Location (HPC)
   - file: 04_geospatial/07_scenario_temperature
     title: Temperature Scenario (HPC)
+  - file: 04_geospatial/09_geospatial_world_map
+    title: Geospatial World Map (HPC)
+  - file: 04_geospatial/10_letid_outdoor_geospatial_demo
+    title: LeTID Outdoor Geospatial Demo (HPC)
 - caption: 05 - Advanced Topics
   titlesonly: true
   chapters:
@@ -65,19 +69,12 @@ parts:
     title: NSRDB Distributed (API Key Required)
   - file: 05_advanced/05_pvgis_distributed
     title: PVGIS Distributed
-- caption: 06 - NREL HPC
+- caption: 06 - Workshop Demos
   titlesonly: true
   chapters:
-  - file: 06_nrel_hpc/01_geospatial_world_map
-    title: Geospatial World Map (HPC)
-  - file: 06_nrel_hpc/02_letid_outdoor_geospatial_demo
-    title: LeTID Outdoor Geospatial Demo (HPC)
-- caption: 07 - Workshop Demos
-  titlesonly: true
-  chapters:
-  - file: 07_workshop_demos/01_astm_live_demo
+  - file: 10_workshop_demos/01_astm_live_demo
     title: ASTM Live Demo
-  - file: 07_workshop_demos/02_duramat_live_demo
+  - file: 10_workshop_demos/02_duramat_live_demo
     title: DuraMAT Live Demo (HPC)
 - caption: Tools
   titlesonly: true

@@ -35,9 +35,9 @@ execute:
     - "05_advanced/03_pysam_api.ipynb"
     - "05_advanced/04_nsrdb_distributed_api.ipynb"
     - "05_advanced/05_pvgis_distributed.ipynb"
-    - "06_nrel_hpc/01_geospatial_world_map.ipynb"
-    - "06_nrel_hpc/02_letid_outdoor_geospatial_demo.ipynb"
-    - "07_workshop_demos/02_duramat_live_demo.ipynb"
+    - "04_geospatial/09_geospatial_world_map.ipynb"
+    - "04_geospatial/10_letid_outdoor_geospatial_demo.ipynb"
+    - "10_workshop_demos/02_duramat_live_demo.ipynb"
     # Tools requiring HPC access
     - "tools/Tools - Module Standoff for IEC TS 63126.ipynb"
 
