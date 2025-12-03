@@ -575,6 +575,7 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pvlib</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </pre></div>
@@ -600,7 +601,7 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
 Pandas version  2.3.3
 Pvlib version  0.13.1
-Pvdeg version  0.1.dev1+gd8ea7cbc7
+Pvdeg version  0.1.dev1+g94687ee30
 </pre></div>
 </div>
 </div>
@@ -613,21 +614,21 @@ Pvdeg version  0.1.dev1+gd8ea7cbc7
 <b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a> so register now.)
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;PSM4&quot;</span>
-<span class="n">weather_id</span> <span class="o">=</span> <span class="p">(</span><span class="mf">40.633365593159226</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.9945801019899</span><span class="p">)</span>  <span class="c1"># Manhattan, NYC</span>
-<span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;api_key&quot;</span><span class="p">:</span> <span class="s2">&quot;DEMO_KEY&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;user@mail.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;map_variables&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load weather data from locally saved files to avoid API rate limits</span>
+<span class="n">WEATHER</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/psm4_nyc.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../data/meta_nyc.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">META</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
-<span class="n">WEATHER</span><span class="p">,</span> <span class="n">META</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">weather_db</span><span class="p">,</span> <span class="n">weather_id</span><span class="p">,</span> <span class="o">**</span><span class="n">weather_arg</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Column &quot;relative_humidity&quot; not found in DataFrame. Calculating...
-                                                                     
+<span class="c1"># To use the NSRDB API instead, uncomment the lines below and add your API key</span>
+<span class="c1"># Get your API key at: https://developer.nrel.gov/signup/</span>
+<span class="c1"># weather_db = &quot;PSM4&quot;</span>
+<span class="c1"># weather_id = (40.633365593159226, -73.9945801019899)  # Manhattan, NYC</span>
+<span class="c1"># weather_arg = {</span>
+<span class="c1">#     &quot;api_key&quot;: &quot;YOUR_API_KEY&quot;,</span>
+<span class="c1">#     &quot;email&quot;: &quot;user@mail.com&quot;,</span>
+<span class="c1">#     &quot;map_variables&quot;: True,</span>
+<span class="c1"># }</span>
+<span class="c1"># WEATHER, META = pvdeg.weather.get(weather_db, weather_id, **weather_arg)</span>
 </pre></div>
 </div>
 </div>
@@ -657,7 +658,9 @@ Pvdeg version  0.1.dev1+gd8ea7cbc7
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
-The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
           x      T98_0    T98_inf
 0  0.522443  71.778148  48.754265
           x      T98_0    T98_inf
@@ -690,18 +693,18 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          X_0  wind_factor
-0    5.835281     0.576846
-1    1.459931    -0.138561
-2    7.112485     0.958108
-3    4.660894    -0.199646
-4    2.581551    -0.072158
-..        ...          ...
-495  5.333220    -0.513657
-496  1.410717    -0.576276
-497  2.374198     0.021997
-498  5.345026     0.141504
-499  3.193772     0.109029
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
+0     1.605340     1.251997
+1     6.306292     0.452973
+2     4.149301     0.706380
+3    15.546790     0.717258
+4    10.839882     1.091688
+..         ...          ...
+495   6.603392     0.401330
+496   7.773978    -0.556979
+497   7.224912    -0.554011
+498   4.536382     0.315871
+499   5.980685     0.417632
 
 [500 rows x 2 columns]
 </pre></div>
@@ -770,17 +773,17 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.000000  66.732801  45.855930
-1    0.260632  73.796770  50.574291
-2    0.000000  60.637525  41.974269
-3    0.904375  74.100288  50.852163
-4    0.400193  73.304833  50.291023
+0    0.000000  54.385014  38.687535
+1    0.000000  68.395918  47.018762
+2    0.000000  65.063755  44.718288
+3    0.000000  64.924811  44.599493
+4    0.000000  58.085520  40.542899
 ..        ...        ...        ...
-495  1.394791  75.437702  51.808501
-496  0.382278  75.613075  51.966056
-497  0.276840  72.476173  49.978176
-498  0.386258  71.558176  49.207721
-499  0.272254  71.829395  49.441382
+495  0.000000  68.880755  47.465307
+496  2.081500  75.547277  51.932064
+497  1.931261  75.539980  51.921478
+498  0.000000  69.868364  48.059968
+499  0.000000  68.721058  47.365530
 
 [500 rows x 3 columns]
 </pre></div>
@@ -815,7 +818,7 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/13f5ca0f64dcc3fb1e41ad1321f9a27b9fda3c6468b22754d8fd62f939218460.png" src="../_images/13f5ca0f64dcc3fb1e41ad1321f9a27b9fda3c6468b22754d8fd62f939218460.png" />
+<img alt="../_images/269c8fb0012777c6a25a0c930a71cfa6f49a84f4f921dea67750cff5892f909b.png" src="../_images/269c8fb0012777c6a25a0c930a71cfa6f49a84f4f921dea67750cff5892f909b.png" />
 </div>
 </div>
 </section>
