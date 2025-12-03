@@ -1,11 +1,10 @@
 # %% [markdown]
 # # A - Van't Hoff Degradation
 # ## Calculate site specific degradation according to the Van't Hoff equation
-# ***
+#
 # Michael Kempe
 #
 # 2023.08.31
-# ***
 #
 # **Requirements**:
 # - compatible weather file (PSM3, TMY3, EPW) or lattitude and longitude of desired site
@@ -22,7 +21,7 @@
 
 # %%
 # if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:
-# pip install pvdeg==0.1.1
+# pip install pvdeg
 
 # %%
 import os

@@ -34,7 +34,7 @@
 # %%
 # if running on google colab, uncomment the next line and execute this cell to install the dependencies
 # and prevent "ModuleNotFoundError" in later cells:
-# #!pip install pvdeg==0.4.2
+# #!pip install pvdeg
 
 # %%
 import os
