@@ -62,108 +62,88 @@ PVDeg has been adopted in multiple studies across the PV reliability community:
 - **Agrivoltaics and System-Level Modeling**: Combined with PySAM to assess degradation-driven yield losses in dual-use agrivoltaic systems
 - **Material-Property Parameterization**: Studies of UV-induced polymer degradation and moisture-related failures in encapsulants and backsheets
 
-Tutorials
-=========
-
-### Jupyter Book
-
-For in depth tutorials you can run online, see our [Jupyter Book](https://nrel.github.io/PVDegradationTools/intro.html)
-
-**Development Preview:** Preview the latest development changes at [dev-preview](https://nrel.github.io/PVDegradationTools/dev-preview/intro.html)
-
-Clicking on the rocket-icon on the top allows you to launch the notebooks on [Google Colaboratory](https://colab.research.google.com/) for interactive mode.
-Just uncomment the first line `pip install ...` to install the environment on each notebook if you follow this mode.
-
-### Binder
-
-To run these tutorials in Binder, you can click here:
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/NREL/PVDegradationTools/main)
-It takes a minute to load the environment.
-
-### Locally
-
-You can also run the tutorial locally in a virtual environment, i.e., `venv` or
-[miniconda](https://docs.conda.io/en/latest/miniconda.html).
-
-1. Create and activate a new environment, e.g., on Mac/Linux terminal with `venv`:
-   ```
-   python -m venv pvdeg
-   . pvdeg/bin/activate
-   ```
-   or with `conda`:
-   ```
-   conda create -n pvdeg
-   conda activate pvdeg
-   ```
-
-1. Install `pvdeg` into the new environment with `pip`:
-   ```
-   python -m pip install pvdeg
-   ```
-
-1. Start a Jupyter session:
-
-   ```
-   jupyter notebook
-   ```
-
-1. Use the file explorer in Jupyter lab to browse to `tutorials`
-   and start the first Tutorial. Tutorials are organized into the following categories:
-   - `01_basics/` - Introduction to PVDeg fundamentals
-   - `02_degradation/` - Degradation mechanism modeling (LID, LeTID, Van't Hoff)
-   - `03_monte_carlo/` - Monte Carlo uncertainty analysis
-   - `04_geospatial/` - Geospatial and HPC scenarios (includes NREL HPC workflows)
-   - `05_advanced/` - Advanced topics and API access
-   - `10_workshop_demos/` - Workshop and demonstration notebooks
-   - `tools/` - Standalone analysis and calculation tools
-
-
 Documentation
 =============
 
-Full API documentation is available at [ReadTheDocs](https://PVDegradationTools.readthedocs.io) where you can find detailed information on all functions, classes, and modules.
+Full documentation is available at **[ReadTheDocs](https://pvdegradationtools.readthedocs.io)** including:
 
+- 📚 [API Reference](https://pvdegradationtools.readthedocs.io/en/latest/api.html) - Complete function and class documentation
+- 📖 [User Guide](https://pvdegradationtools.readthedocs.io/en/latest/user_guide/installation.html) - Installation, tutorials, and usage guides
+- 🔧 [Contributing Guide](https://pvdegradationtools.readthedocs.io/en/latest/user_guide/contributing.html) - Development setup and guidelines
+- 📰 [What's New](https://pvdegradationtools.readthedocs.io/en/latest/whatsnew/index.html) - Release notes and changelogs
 
 Installation
 ============
 
-PVDeg releases may be installed using the `pip` and `conda` tools. Compatible with Python 3.10 and above.
+PVDeg releases may be installed using `pip` and `conda` tools. Compatible with Python 3.10 and above.
 
-Install with:
+**Quick Install:**
 
-    pip install pvdeg
+```bash
+pip install pvdeg
+```
 
-### Optional Dependencies
+**With optional dependencies:**
 
-PVDeg offers optional dependency groups for specific use cases:
+| Group | Install Command | Purpose |
+|-------|----------------|---------|
+| **sam** | `pip install pvdeg[sam]` | PySAM support for system modeling |
+| **docs** | `pip install pvdeg[docs]` | Sphinx documentation tools |
+| **test** | `pip install pvdeg[test]` | Testing and validation tools |
+| **books** | `pip install pvdeg[books]` | Jupyter Book publishing |
+| **all** | `pip install pvdeg[all]` | All optional dependencies |
 
-    pip install pvdeg[sam]      # Install with PySAM support
-    pip install pvdeg[docs]     # Install documentation tools
-    pip install pvdeg[test]     # Install testing tools
-    pip install pvdeg[books]    # Install Jupyter Book tools
-    pip install pvdeg[all]      # Install all optional dependencies
+**Developer Installation:**
 
-### Developer Installation
+```bash
+git clone https://github.com/YOUR-USERNAME/PVDegradationTools.git
+cd PVDegradationTools
+pip install -e .[all]
+```
 
-For developer installation, clone the repository, navigate to the folder location and install as:
+📖 **For detailed installation instructions including conda environments, HPC setup, troubleshooting, and version compatibility, see the [Installation Guide](https://pvdegradationtools.readthedocs.io/en/latest/user_guide/installation.html).**
 
-    pip install -e .[all]
+Tutorials
+=========
 
-Running jupyter notebooks using anaconda prompt
-===============================================
+PVDeg provides comprehensive tutorials organized by topic. Choose your preferred environment:
 
-Note that in order to run notebooks cleanly and validate outputs, use the following
-commands to run either one notebook:
+### Jupyter Book (Recommended)
 
-    jupyter nbconvert --to notebook --execute --inplace "tutorials/01_basics/01_basics_humidity_design.ipynb"
+Interactive tutorials with live execution: [**PVDeg Jupyter Book**](https://nrel.github.io/PVDegradationTools/intro.html)
 
-or all notebooks inside a specific tutorial category:
+- Click the 🚀 rocket icon to launch notebooks in [Google Colab](https://colab.research.google.com/)
+- **Development Preview:** See latest changes at [dev-preview](https://nrel.github.io/PVDegradationTools/dev-preview/intro.html)
 
-    jupyter nbconvert --to notebook --execute --inplace "tutorials/01_basics/*.ipynb"
+### Binder
 
-This avoids formatting issues that may arise depending on your own local environment
-or IDE.
+Run tutorials in your browser without installation: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/NREL/PVDegradationTools/main)
 
+### Local Installation
+
+1. **Install PVDeg** (see [Installation](#installation))
+
+2. **Clone the repository** to access tutorial notebooks:
+   ```bash
+   git clone https://github.com/NREL/PVDegradationTools.git
+   cd PVDegradationTools
+   ```
+
+3. **Start Jupyter:**
+   ```bash
+   jupyter notebook
+   ```
+
+4. **Navigate to tutorials** organized by category:
+   - `01_basics/` - Introduction to PVDeg fundamentals
+   - `02_degradation/` - Degradation mechanism modeling
+   - `03_monte_carlo/` - Monte Carlo uncertainty analysis
+   - `04_geospatial/` - Geospatial and HPC scenarios
+   - `05_advanced/` - Advanced topics and API access
+   - `10_workshop_demos/` - Workshop demonstrations
+   - `tools/` - Standalone analysis tools
+
+📖 **For more information on running and validating notebooks, see the [documentation](https://pvdegradationtools.readthedocs.io).**
 
 License
 =======
