@@ -522,7 +522,7 @@ Code Review Process
 * Maintainers will review your pull request within a few days
 * Discussion and iteration are normal - don't be discouraged
 * Address feedback by pushing new commits to your branch
-* Ping ``@NREL/pvdeg-maintainers`` if your pull request seems forgotten
+* Ping one of the pvdeg maintainers if your pull request seems forgotten
 * Once approved, maintainers will merge your changes
 * Your contribution will be included in the next release
 
@@ -586,6 +586,5 @@ Community Guidelines
 * Focus on constructive feedback
 * Welcome newcomers and help them learn
 * Give credit where it's due
-* Follow the `NREL Code of Conduct <https://github.com/NREL/.github/blob/main/CODE_OF_CONDUCT.md>`_
 
 Thank you for contributing to PVDeg and supporting the PV research community! 🌞
