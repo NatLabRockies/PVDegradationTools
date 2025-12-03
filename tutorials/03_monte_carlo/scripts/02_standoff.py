@@ -12,6 +12,7 @@
 import pvlib
 import numpy as np
 import pandas as pd
+import json
 import pvdeg
 import matplotlib.pyplot as plt
 
@@ -36,15 +37,21 @@ print("Pvdeg version ", pvdeg.__version__)
 # </div>
 
 # %%
-weather_db = "PSM4"
-weather_id = (40.633365593159226, -73.9945801019899)  # Manhattan, NYC
-weather_arg = {
-    "api_key": "DEMO_KEY",
-    "email": "user@mail.com",
-    "map_variables": True,
-}
+# Load weather data from locally saved files to avoid API rate limits
+WEATHER = pd.read_csv("../data/psm4_nyc.csv", index_col=0, parse_dates=True)
+with open("../data/meta_nyc.json", "r") as f:
+    META = json.load(f)
 
-WEATHER, META = pvdeg.weather.get(weather_db, weather_id, **weather_arg)
+# To use the NSRDB API instead, uncomment the lines below and add your API key
+# Get your API key at: https://developer.nrel.gov/signup/
+# weather_db = "PSM4"
+# weather_id = (40.633365593159226, -73.9945801019899)  # Manhattan, NYC
+# weather_arg = {
+#     "api_key": "YOUR_API_KEY",
+#     "email": "user@mail.com",
+#     "map_variables": True,
+# }
+# WEATHER, META = pvdeg.weather.get(weather_db, weather_id, **weather_arg)
 
 # %%
 # simple standoff calculation
