@@ -50,9 +50,9 @@ Citing PVDeg
 
 If you use PVDeg in a published work, please cite both the software and the paper.
 
-**GitHub Citation (Recommended):**
+**Software Citation:**
 
-Visit the `PVDeg repository <https://github.com/NREL/PVDegradationTools>`_ and click the "Cite this repository" button in the right sidebar. This provides formatted citations for both the software and the preferred paper citation in multiple formats (BibTeX, APA, etc.).
+Click the "Cite this repository" button on the `GitHub repository <https://github.com/NREL/PVDegradationTools>`_, or visit `Zenodo <https://zenodo.org/records/8088578/latest>`_ for the DOI corresponding to your specific version. On the Zenodo page, use the "Cite as" section in the right sidebar to copy the citation in your preferred format (BibTeX, APA, etc.).
 
 **JOSS Paper (In Review):**
 

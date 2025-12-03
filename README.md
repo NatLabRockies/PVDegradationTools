@@ -180,9 +180,13 @@ Citing
 
 If you use PVDeg in a published work, please cite both the software and the paper.
 
-**Quick Citation:**
+**Software Citation:**
 
-Click the **"Cite this repository"** button in the right sidebar of this page. It provides formatted citations for both the software and the preferred paper citation in multiple formats (BibTeX, APA, etc.).
+Click the **"Cite this repository"** button in the right sidebar to get a formatted citation, or visit Zenodo for the DOI corresponding to your specific version:
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8088578.svg)](https://zenodo.org/records/8088578/latest)
+
+On the Zenodo page, use the "Cite as" section in the right sidebar to copy the citation in your preferred format (BibTeX, APA, etc.).
 
 **JOSS Paper (In Review):**
 

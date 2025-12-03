@@ -48,30 +48,3 @@ url: "https://pvdegradationtools.readthedocs.io"
 type: software
 version: 0.7.0
 date-released: 2025-01-01
-preferred-citation:
-  type: article
-  title: "PVDeg: a python package for modeling degradation on solar photovoltaic systems"
-  authors:
-    - family-names: Daxini
-      given-names: Rajiv
-      affiliation: National Renewable Energy Laboratory
-      orcid: "https://orcid.org/0000-0003-1993-9408"
-    - family-names: Ovaitt
-      given-names: Silvana
-      affiliation: National Renewable Energy Laboratory
-      orcid: "https://orcid.org/0000-0003-0180-728X"
-    - family-names: Springer
-      given-names: Martin
-      affiliation: National Renewable Energy Laboratory
-      orcid: "https://orcid.org/0000-0001-6803-108X"
-    - family-names: Ford
-      given-names: Tobin
-      affiliation: National Renewable Energy Laboratory
-      orcid: "https://orcid.org/0009-0000-7428-5625"
-    - family-names: Kempe
-      given-names: Michael
-      affiliation: National Renewable Energy Laboratory
-      orcid: "https://orcid.org/0000-0003-3312-0482"
-  journal: "Journal of Open Source Software"
-  status: in-review
-  year: 2025
