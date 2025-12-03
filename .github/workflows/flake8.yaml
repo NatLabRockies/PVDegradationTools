@@ -28,4 +28,4 @@ jobs:
       run: echo '::add-matcher::.github/workflows/flake8-linter-matcher.json'
     - name: Run flake8 on changed files only
       run: |
-        git diff origin/$GITHUB_BASE_REF HEAD -- "*.py" | flake8 --config=.flake8 --diff
+        git diff origin/$GITHUB_BASE_REF HEAD --name-only -- "*.py" | grep -v -E "(tutorials/.*/scripts/|tools/.*/scripts/)" | xargs -r git diff origin/$GITHUB_BASE_REF HEAD -- | flake8 --config=.flake8 --diff

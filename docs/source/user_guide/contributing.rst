@@ -3,273 +3,588 @@
 Contributing
 ============
 
-.. note::
-        This contributing document is heavily based on pvlib-python
-        contribution guidelines. This is still a work in progress
+We welcome contributions to PVDeg! Whether you're fixing bugs, adding features,
+improving documentation, or contributing to our material property databases, your
+help is valuable to the PV community.
 
-Encouraging more people to help develop Pvdeg is essential to our
-success. Therefore, we want to make it easy and rewarding for you to
-contribute.
+For a quick overview, see `CONTRIBUTING.md <https://github.com/NREL/PVDegradationTools/blob/main/CONTRIBUTING.md>`_ on GitHub.
 
-There is a lot of material in this section, aimed at a variety of
-contributors from novice to expert. Don't worry if you don't (yet)
-understand parts of it.
+This guide provides comprehensive details for contributors.
 
 
-Easy ways to contribute
+Easy Ways to Contribute
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Here are a few ideas for how you can contribute, even if you are new to
-bifacial_radiance, git, or Python:
+Here are ways to contribute, even if you're new to PVDeg, git, or Python:
 
-* Ask and answer `pvdeg questions on StackOverflow <http://stackoverflow.com/questions/tagged/pvdeg>`_.
-* Make `GitHub issues <https://github.com/NREL/PVDegradationTools/issues>`_
-  and contribute to the conversations about how to resolve them.
-* Read issues and pull requests that other people created and
-  contribute to the conversation about how to resolve them.
-* Improve the documentation and the unit tests.
-* Improve the IPython/Jupyter Notebook tutorials or write new ones that
-  demonstrate how to use Pvdeg in your area of expertise.
-* Tell your friends and colleagues about pvdeg
-* Add your project to our
-  `Projects and publications that use pvdeg wiki
-  <https://github.com/NREL/PVDegradationTools/wiki>`_.
+* **Report bugs or request features** via `GitHub issues <https://github.com/NREL/PVDegradationTools/issues>`_
+* **Join discussions** on existing issues and pull requests
+* **Improve documentation** - fix typos, clarify explanations, add examples
+* **Enhance unit tests** - increase coverage or improve test quality
+* **Create or improve tutorials** - demonstrate PVDeg in your area of expertise
+* **Contribute to material databases** - add validated degradation parameters and properties
+* **Share your work** - add your project to our `wiki <https://github.com/NREL/PVDegradationTools/wiki>`_
+* **Spread the word** - tell colleagues about PVDeg
 
+Getting Started
+~~~~~~~~~~~~~~~
 
-How to contribute new code
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Development Environment Setup
+------------------------------
 
-The basics
-----------
+1. **Fork and clone the repository**:
 
-Contributors to pvdeg use GitHub's pull requests to add/modify
-its source code. The GitHub pull request process can be intimidating for
-new users, but you'll find that it becomes straightforward once you use
-it a few times. Please let us know if you get stuck at any point in the
-process. Here's an outline of the process:
+   .. code-block:: bash
 
-#. Create a GitHub issue and get initial feedback from users and
-   maintainers. If the issue is a bug report, please include the
-   code needed to reproduce the problem.
-#. Obtain the latest version of pvdeg: Fork the pvdeg
-   project to your GitHub account, ``git clone`` your fork to your computer.
-#. Make some or all of your changes/additions and ``git commit`` them to
-   your local repository.
-#. Share your changes with us via a pull request: ``git push`` your
-   local changes to your GitHub fork, then go to GitHub make a pull
-   request.
+       git clone https://github.com/YOUR-USERNAME/PVDegradationTools.git
+       cd PVDegradationTools
 
-The Pandas project maintains an excellent `contributing page
-<http://pandas.pydata.org/pandas-docs/stable/contributing.html>`_ that goes
-into detail on each of these steps. Also see GitHub's `Set Up Git
-<https://help.github.com/articles/set-up-git/>`_ and `Using Pull
-Requests <https://help.github.com/articles/using-pull-requests/>`_.
+2. **Create a virtual environment**:
 
-We strongly recommend using virtual environments for development.
-Virtual environments make it trivial to switch between different
-versions of software. This `astropy guide
-<http://astropy.readthedocs.org/en/latest/development/workflow/
-virtual_pythons.html>`_ is a good reference for virtual environments. If
-this is your first pull request, don't worry about using a virtual
-environment.
+   Using venv:
 
-You must include documentation and unit tests for any new or improved
-code. We can provide help and advice on this after you start the pull
-request. See the Testing section below.
+   .. code-block:: bash
 
+       python -m venv pvdeg-dev
+       source pvdeg-dev/bin/activate  # Windows: pvdeg-dev\\Scripts\\activate
 
-.. _pull-request-scope:
+   Or using conda:
 
-Pull request scope
-------------------
+   .. code-block:: bash
 
-This section can be summed up as "less is more".
+       conda create -n pvdeg-dev python=3.11
+       conda activate pvdeg-dev
 
-A pull request can quickly become unmanageable if too many lines are
-added or changed. "Too many" is hard to define, but as a rule of thumb,
-we encourage contributions that contain less than 50 lines of primary code.
-50 lines of primary code will typically need at least 250 lines
-of documentation and testing. This is about the limit of what the
-maintainers can review on a regular basis.
+3. **Install in editable mode with all dependencies**:
 
-A pull request can also quickly become unmanageable if it proposes
-changes to the API in order to implement another feature. Consider
-clearly and concisely documenting all proposed API changes before
-implementing any code.
+   .. code-block:: bash
 
-Questions about related issues frequently come up in the process of
-addressing implementing code for a pull request. Please try to avoid
-expanding the scope of your pull request (this also applies to
-reviewers!). We'd rather see small, well-documented additions to the
-project's technical debt than see a pull request languish because its
-scope expanded beyond what the reviewer community is capable of
-processing.
+       pip install -e .[all]
 
-Of course, sometimes it is necessary to make a large pull request. We
-only ask that you take a few minutes to consider how to break it into
-smaller chunks before proceeding.
+4. **Install pre-commit hooks**:
 
-When should I submit a pull request?
-------------------------------------
+   .. code-block:: bash
 
-The short answer: anytime.
+       pre-commit install
 
-The long answer: it depends. If in doubt, go ahead and submit. You do
-not need to make all of your changes before creating a pull request.
-Your pull requests will automatically be updated when you commit new
-changes and push them to GitHub.
+   Pre-commit hooks automatically enforce code quality standards before each commit.
 
-There are pros and cons to submitting incomplete pull-requests. On the
-plus side, it gives everybody an easy way to comment on the code and can
-make the process more efficient. On the minus side, it's easy for an
-incomplete pull request to grow into a multi-month saga that leaves
-everyone unhappy. If you submit an incomplete pull request, please be
-very clear about what you would like feedback on and what we should
-ignore. Alternatives to incomplete pull requests include creating a
-`gist <https://gist.github.com>`_ or experimental branch and linking to
-it in the corresponding issue.
+5. **(Optional but required for HPC) Register Jupyter kernel**:
 
-The best way to ensure that a pull request will be reviewed and merged in
-a timely manner is to:
+   .. code-block:: bash
 
-#. Start by creating an issue. The issue should be well-defined and
-   actionable.
-#. Ask the maintainers to tag the issue with the appropriate milestone.
-#. Tag pvdeg community members or ``@pvdeg/maintainer`` when the pull
-   request is ready for review. (see :ref:`pull-request-reviews`)
+       python -m ipykernel install --user --name=pvdeg-dev
 
+   This is especially important when working on HPC systems like NREL's Kestrel.
 
-.. _pull-request-reviews:
+Pre-commit Hooks
+~~~~~~~~~~~~~~~~
 
-Pull request reviews
---------------------
+We use pre-commit hooks to maintain code quality and consistency.
 
-The pvdeg community and maintainers will review your pull request in a
-timely fashion. Please "ping" ``@pvdeg/maintainer`` if it seems that
-your pull request has been forgotten at any point in the pull request
-process.
+What the Hooks Do
+-----------------
 
-Keep in mind that the PV modeling community is diverse and each pvdeg
-community member brings a different perspective when reviewing code.
-Some reviewers bring years of expertise in the sub-field that your code
-contributes to and will focus on the details of the algorithm. Other
-reviewers will be more focused on integrating your code with the rest of
-pvdeg, ensuring that it is feasible to maintain, that it meets the
-:ref:`code style <code-style>` guidelines, and that it is
-:ref:`comprehensively tested <testing>`. Limiting the scope of the pull
-request makes it much more likely that all of these reviews can be
-conducted and any issues can be resolved in a timely fashion.
+Our ``.pre-commit-config.yaml`` configuration runs:
 
-Sometimes it's hard for reviewers to be immediately available, so the
-right amount of patience is to be expected. That said, interested
-reviewers should do their best to not wait until the last minute to put
-in their two cents.
+* **black** - Python code formatter (line length: 88 characters)
+* **flake8** - Python linter for style guide enforcement
+* **jupytext** - Syncs Jupyter notebooks with Python scripts for version control
+* **trailing-whitespace** - Removes trailing whitespace
+* **end-of-file-fixer** - Ensures files end with newline
+* **check-yaml** - Validates YAML syntax
+* **check-added-large-files** - Prevents committing large files
 
+Running Pre-commit Manually
+----------------------------
 
-.. _code-style:
+Run all hooks on all files:
 
-Code style
-~~~~~~~~~~
+.. code-block:: bash
 
-pvdeg generally follows the `PEP 8 -- Style Guide for Python Code
-<https://www.python.org/dev/peps/pep-0008/>`_. Maximum line length for code
-is 88 characters.
+    pre-commit run --all-files
 
-Code must be compatible with Python 3.10 and above.
+Run hooks on specific files:
 
-*ALIGN WITH PROJECT VARIABLE NAMES*
-pvdeg uses a mix of full and abbreviated variable names. See
-:ref:`variables_style_rules`. We could be better about consistency.
-Prefer full names for new contributions. This is especially important
-for the API. Abbreviations can be used within a function to improve the
-readability of formulae.
+.. code-block:: bash
 
-Set your editor to strip extra whitespace from line endings. This
-prevents the git commit history from becoming cluttered with whitespace
-changes.
+    pre-commit run --files path/to/file.py
 
-Please see :ref:`API` for information specific to documentation
-style.
+Skip hooks for a specific commit (use sparingly):
 
-Remove any ``logging`` calls and ``print`` statements that you added
-during development. ``warning`` is ok.
+.. code-block:: bash
 
-We typically use GitHub's
-"`squash and merge <https://help.github.com/articles/about-pull-request-merges/#squash-and-merge-your-pull-request-commits>`_"
-feature to merge your pull request into pvdeg. GitHub will condense the
-commit history of your branch into a single commit when merging into
-pvdeg/main (the commit history on your branch remains
-unchanged). Therefore, you are free to make commits that are as big or
-small as you'd like while developing your pull request.
+    git commit --no-verify -m "commit message"
 
+Jupytext Synchronization
+-------------------------
 
-.. _documentation:
+Notebooks in ``tutorials/`` are automatically synced with Python scripts in ``scripts/`` folders.
 
-Documentation
-~~~~~~~~~~~~~
+When you edit a notebook:
 
-Documentation must be written in
-`numpydoc format <https://numpydoc.readthedocs.io/>`_ format which is rendered
-using the `Sphinx Napoleon extension
-<https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html>`_.
+1. Pre-commit hook creates/updates a ``.py`` script version
+2. Both files are staged for commit
+3. Version control works well with notebooks (diffs show code changes, not JSON)
 
-The numpydoc format includes a specification for the allowable input
-types. Python's `duck typing <https://en.wikipedia.org/wiki/Duck_typing>`_
-allows for multiple input types to work for many parameters. pvdeg uses
-the following generic descriptors as short-hand to indicate which
-specific types may be used:
+Manual sync:
 
-* dict-like : dict, OrderedDict, pd.Series
-* numeric : scalar, np.array, pd.Series. Typically int or float dtype.
-* array-like : np.array, pd.Series. Typically int or float dtype.
+.. code-block:: bash
 
-Parameters that specify a specific type require that specific input type.
+    jupytext --sync tutorials/**/*.ipynb
 
-Read the Docs will automatically build the documentation for each pull
-request. Please confirm the documentation renders correctly by following
-the ``continuous-documentation/read-the-docs`` link within the checks
-status box at the bottom of the pull request.
-
-.. _testing:
-
-Testing
-~~~~~~~
-
-Developers **must** include comprehensive tests for any additions or
-modifications to pvdeg. New unit test code should be placed in the corresponding test module in the pvdeg/test directory.
-If you create a new testing file, remember to include it in ``__init__.py``.
-
-A pull request will automatically run the tests for you on Linux platform and python versions 2.7 and 3.6. However, it is typically more efficient to run and debug the tests in your own local
-environment.
-
-pvdeg's unit tests can easily be run by executing ``pytest`` on the
-pvdeg directory:
-
-``pytest pvdeg``
-
-or, for a single module:
-
-``pytest pvdeg/test/spectral.py``
-
-or, for a single test:
-
-``pytest pvdeg/test/spectral.py::test_poa_irradiance``
-
-We suggest using pytest's ``--pdb`` flag to debug test failures rather
-than using ``print`` or ``logging`` calls. For example:
-
-``pytest pvdeg/test/spectral.py --pdb``
-
-will drop you into the
-`pdb debugger <https://docs.python.org/3/library/pdb.html>`_ at the
-location of a test failure. As described in :ref:`code-style`, pvdeg
-code does not use ``print`` or ``logging`` calls, and this also applies
-to the test suite (with rare exceptions).
-
-This documentation
+Code Contributions
 ~~~~~~~~~~~~~~~~~~
 
-If this documentation is unclear, help us improve it! Consider looking
-at the `pandas
-documentation <http://pandas.pydata.org/pandas-docs/stable/
-contributing.html>`_ for inspiration.
+Code Style
+----------
+
+We follow standard Python conventions:
+
+* **PEP 8** style guide with 88 character line length (black default)
+* **Google-style docstrings** for functions and classes (numpydoc format)
+* Type hints encouraged for function signatures
+* Descriptive variable names (avoid single letters except in loops)
+* Code must be compatible with Python 3.10 and above
+* Remove ``print`` statements and ``logging`` calls before committing (``warning`` is acceptable)
+* Set your editor to strip trailing whitespace
+
+**Variable naming**: PVDeg uses a mix of full and abbreviated names. Prefer full names for new contributions, especially in the API. Abbreviations can be used within functions to improve readability of formulae.
+
+Example docstring:
+
+.. code-block:: python
+
+    def calculate_degradation(temp, humidity, irradiance):
+        """
+        Calculate degradation rate based on environmental conditions.
+
+        Parameters
+        ----------
+        temp : float or array-like
+            Temperature in degrees Celsius.
+        humidity : float or array-like
+            Relative humidity as percentage (0-100).
+        irradiance : float or array-like
+            Irradiance in W/m².
+
+        Returns
+        -------
+        float or array-like
+            Degradation rate in %/year.
+
+        Notes
+        -----
+        Based on the Arrhenius equation with humidity acceleration factor.
+        See [1]_ for detailed methodology.
+
+        References
+        ----------
+        .. [1] Author et al. (2020). "Title." Journal. DOI.
+        """
+        pass
+
+**Generic type descriptors** used in PVDeg documentation:
+
+* **dict-like**: dict, OrderedDict, pd.Series
+* **numeric**: scalar, np.array, pd.Series (typically int or float dtype)
+* **array-like**: np.array, pd.Series (typically int or float dtype)
+
+Parameters that specify a specific type require that exact input type.
+
+Testing
+-------
+
+All code contributions should include unit tests.
+
+**Running the test suite**:
+
+.. code-block:: bash
+
+    pytest tests/
+
+**Run tests with coverage report**:
+
+.. code-block:: bash
+
+    pytest --cov=pvdeg --cov-report=html tests/
+
+**Test specific modules**:
+
+.. code-block:: bash
+
+    pytest tests/test_spectral.py
+
+**Test notebooks** (requires nbval):
+
+.. code-block:: bash
+
+    pytest --nbval tutorials/
+
+**Writing tests**:
+
+* Place tests in ``tests/`` directory
+* Name test files ``test_<module>.py``
+* Use descriptive test function names: ``test_<function>_<scenario>``
+* Include edge cases and error conditions
+* Use pytest fixtures for shared test data
+* Mock external dependencies (weather APIs, file downloads)
+* New test files must be included in ``tests/__init__.py``
+
+**Debugging tests**: Use pytest's ``--pdb`` flag to drop into the debugger at test failures:
+
+.. code-block:: bash
+
+    pytest tests/test_spectral.py --pdb
+
+This is preferred over adding ``print`` or ``logging`` statements.
+
+Example test:
+
+.. code-block:: python
+
+    import pytest
+    import numpy as np
+    from pvdeg import spectral
+
+    def test_spectral_degradation_basic():
+        """Test spectral degradation with simple inputs."""
+        wavelengths = np.array([300, 400, 500, 600, 700])
+        spectrum = np.array([0.1, 0.3, 0.5, 0.4, 0.2])
+
+        result = spectral.calc_degradation(wavelengths, spectrum)
+
+        assert isinstance(result, float)
+        assert result > 0
+        assert result < 100  # Reasonable degradation range
+
+    def test_spectral_degradation_with_nan():
+        """Test spectral degradation handles NaN values."""
+        wavelengths = np.array([300, 400, np.nan, 600, 700])
+        spectrum = np.array([0.1, 0.3, 0.5, 0.4, 0.2])
+
+        with pytest.raises(ValueError, match="NaN values"):
+            spectral.calc_degradation(wavelengths, spectrum)
+
+Documentation
+-------------
+
+**Building documentation locally**:
+
+1. Install documentation dependencies:
+
+   .. code-block:: bash
+
+       pip install -e .[docs]
+
+2. Build the docs:
+
+   .. code-block:: bash
+
+       cd docs
+       make html
+
+3. View in browser:
+
+   .. code-block:: bash
+
+       # Open docs/build/html/index.html
+
+**Verifying documentation**: Read the Docs automatically builds documentation for each pull request. Confirm it renders correctly by following the ``continuous-documentation/read-the-docs`` link in the PR checks.
+
+**Documentation types**:
+
+* **API documentation**: Automatically generated from docstrings
+* **User guide**: RST files in ``docs/source/user_guide/``
+* **Tutorials**: Jupyter notebooks in ``tutorials/``
+* **What's new**: Release notes in ``docs/source/whatsnew/``
+
+**Tutorial guidelines**:
+
+* Place tutorials in appropriate ``tutorials/<category>/`` folder
+* Use descriptive names: ``01_intro_to_topic.ipynb``
+* Include markdown cells explaining concepts
+* Use local data files when possible (avoid API dependencies for reproducibility)
+* Keep execution time under 5 minutes
+* Clear outputs before committing (pre-commit will help)
+
+Notebook Validation
+-------------------
+
+When contributing notebook changes, it's important to validate that notebooks execute correctly
+and produce consistent outputs across different environments.
+
+**Why validate notebooks?**
+
+* Ensures reproducibility across different systems and environments
+* Catches environment-specific bugs before they reach users
+* Maintains consistent output formatting in version control
+* Verifies that all cells execute in the correct order
+* Confirms that notebooks work with current dependencies
+
+**Using nbconvert for validation**
+
+The ``jupyter nbconvert`` command executes notebooks in a clean kernel and validates outputs.
+This is the recommended approach for testing notebook changes.
+
+Execute a single notebook:
+
+.. code-block:: bash
+
+    jupyter nbconvert --to notebook --execute --inplace "tutorials/01_basics/01_basics_humidity_design.ipynb"
+
+Execute all notebooks in a category:
+
+.. code-block:: bash
+
+    jupyter nbconvert --to notebook --execute --inplace "tutorials/01_basics/*.ipynb"
+
+Execute all tutorial notebooks (use with caution - may take a long time):
+
+.. code-block:: bash
+
+    jupyter nbconvert --to notebook --execute --inplace "tutorials/**/*.ipynb"
+
+**Understanding the flags**:
+
+* ``--to notebook``: Converts back to notebook format (not HTML or other formats)
+* ``--execute``: Executes all cells in order with a fresh kernel
+* ``--inplace``: Overwrites the original notebook with execution results
+
+**Using pytest with nbval**
+
+For automated testing, use pytest with the nbval plugin to validate notebooks:
+
+.. code-block:: bash
+
+    # Test all notebooks
+    pytest --nbval tutorials/
+
+    # Test specific notebook
+    pytest --nbval tutorials/01_basics/01_basics_humidity_design.ipynb
+
+    # Skip output comparison (only check execution)
+    pytest --nbval --nbval-lax tutorials/
+
+The ``--nbval-lax`` flag is useful when outputs may vary slightly (e.g., timestamps, random numbers)
+but you still want to verify the notebook executes without errors.
+
+**Best practices for notebook contributions**:
+
+1. **Clear outputs before committing**: Use ``jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace notebook.ipynb``
+   or let pre-commit hooks handle it automatically
+
+2. **Test locally first**: Always run notebooks locally before pushing to verify they work
+
+3. **Use relative paths**: Ensure data paths work from the repository root
+
+4. **Document dependencies**: If a notebook requires optional dependencies (e.g., PySAM),
+   note this in a markdown cell at the top
+
+5. **Handle API keys gracefully**: Use commented-out API sections with local data alternatives,
+   following the pattern in existing notebooks
+
+6. **Keep execution time reasonable**: Aim for under 5 minutes per notebook. For longer analyses,
+   consider pre-computing results or creating separate demo notebooks
+
+7. **Version control friendly**: Clear all outputs before committing (jupytext and pre-commit help with this)
+
+**Troubleshooting notebook validation failures**:
+
+* **Import errors**: Verify all dependencies are installed in your environment
+* **Path errors**: Check that data files exist at expected locations
+* **Kernel errors**: Ensure your Jupyter kernel is properly registered (see installation guide)
+* **Timeout errors**: Increase timeout with ``--ExecutePreprocessor.timeout=600`` (seconds)
+* **API failures**: For notebooks with API calls, use local data or mock responses in tests
+
+Database Contributions
+~~~~~~~~~~~~~~~~~~~~~~
+
+One of the most valuable contributions you can make is adding validated material
+property data and degradation parameters to our databases.
+
+What to Contribute
+------------------
+
+We maintain several JSON databases in ``pvdeg/data/``:
+
+* **DegradationDatabase.json**: Degradation rates, activation energies, temperature coefficients
+* **H2Opermeation.json**: Water vapor transmission rates for encapsulants and barriers
+* **O2permeation.json**: Oxygen permeation rates
+* **AApermeation.json**: Acetic acid permeation data
+* **albedo.json**: Ground albedo values for different surfaces
+
+How to Contribute
+-----------------
+
+1. **Locate peer-reviewed data**: Published journal articles, conference proceedings, or technical reports
+2. **Prepare structured data**: Follow the JSON format in existing entries
+3. **Document metadata**: Include measurement conditions, equipment, uncertainties
+4. **Submit via pull request**: Add your data to the appropriate JSON file with citation
+
+Data Quality Guidelines
+-----------------------
+
+* **Peer-reviewed sources**: Prefer published research over manufacturer specs
+* **Complete metadata**: Temperature, humidity, test conditions, sample details
+* **Uncertainty quantification**: Include error bars or confidence intervals when available
+* **Clear units**: Explicitly state all units
+* **Proper citations**: Full reference with DOI when possible
+
+Example JSON Entry
+------------------
+
+.. code-block:: json
+
+    {
+        "material": "EVA",
+        "property": "activation_energy",
+        "value": 0.87,
+        "units": "eV",
+        "conditions": {
+            "temperature_range": "60-85 C",
+            "test_method": "Arrhenius analysis",
+            "sample_thickness": "0.46 mm"
+        },
+        "uncertainty": 0.05,
+        "reference": {
+            "authors": "Smith et al.",
+            "title": "Degradation study of EVA encapsulants",
+            "journal": "Solar Energy Materials",
+            "year": 2020,
+            "doi": "10.1016/j.solmat.2020.xxxxx"
+        }
+    }
+
+Submitting Changes
+~~~~~~~~~~~~~~~~~~
+
+Pull Request Process
+--------------------
+
+1. **Create a feature branch**:
+
+   .. code-block:: bash
+
+       git checkout -b feature/descriptive-name
+
+   Use prefixes: ``feature/``, ``bugfix/``, ``docs/``, ``refactor/``
+
+2. **Make changes and commit**:
+
+   .. code-block:: bash
+
+       git add .
+       git commit -m "Add descriptive commit message"
+
+   Write clear commit messages explaining *why* the change was made.
+
+3. **Push to your fork**:
+
+   .. code-block:: bash
+
+       git push origin feature/descriptive-name
+
+4. **Open a pull request** on GitHub:
+
+   * Provide a clear description of changes
+   * Reference related issues (e.g., "Closes #123")
+   * Ensure all CI checks pass (tests, pre-commit hooks)
+   * Request review from maintainers or tag ``@NREL/pvdeg-maintainers``
+
+**Best practices**:
+
+* Keep pull requests focused and manageable (preferably <50 lines of primary code)
+* Consider breaking large changes into smaller, incremental pull requests
+* Submit pull requests early if you want feedback (mark as draft if incomplete)
+* Be patient - reviewers bring diverse expertise and perspectives
+* GitHub will automatically "squash and merge" your commits into a single commit
+
+Pull Request Checklist
+----------------------
+
+Before submitting your pull request, verify:
+
+- [ ] Code follows PEP 8 style (black formatting applied)
+- [ ] All tests pass locally (``pytest tests/``)
+- [ ] New functionality includes unit tests
+- [ ] Docstrings added/updated for new/modified functions
+- [ ] Type hints included for function signatures
+- [ ] Pre-commit hooks pass (``pre-commit run --all-files``)
+- [ ] Documentation updated if adding features
+- [ ] What's new entry added if significant change
+- [ ] Notebooks clear outputs and sync with ``.py`` scripts
+- [ ] Database entries include proper citations and metadata
+
+Code Review Process
+-------------------
+
+* Maintainers will review your pull request within a few days
+* Discussion and iteration are normal - don't be discouraged
+* Address feedback by pushing new commits to your branch
+* Ping one of the pvdeg maintainers if your pull request seems forgotten
+* Once approved, maintainers will merge your changes
+* Your contribution will be included in the next release
+
+**Understanding reviews**: The PV modeling community is diverse. Reviewers may focus on:
+
+* Algorithm details and scientific accuracy
+* Integration with existing PVDeg code
+* Code maintainability and style
+* Test coverage and documentation quality
+
+Contributor License Agreement
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+First-time contributors must sign the `Contributor License Agreement (CLA)
+<https://github.com/NREL/PVDegradationTools/blob/main/cla-1.0.md>`_.
+This protects both you and the project.
+
+When you submit your first pull request, a bot will comment with instructions
+to sign the CLA. Simply follow the provided link.
+
+Release Process
+~~~~~~~~~~~~~~~
+
+For maintainers and contributors interested in the release workflow:
+
+**Versioning**: We follow `semantic versioning <https://semver.org/>`_ (MAJOR.MINOR.PATCH)
+
+* MAJOR: Incompatible API changes
+* MINOR: New features (backward compatible)
+* PATCH: Bug fixes (backward compatible)
+
+**Testing releases**:
+
+* Pre-release tags (``v0.7.0-rc1``, ``v0.7.0-alpha1``) → TestPyPI only
+* Final tags (``v0.7.0``) → TestPyPI and PyPI
+
+**What's new**: Update ``docs/source/whatsnew/releases/vX.Y.Z.rst`` with:
+
+* Enhancements
+* Breaking changes
+* Deprecations
+* Bug fixes
+* Dependency updates
+* Issue references (#123)
+
+Getting Help
+~~~~~~~~~~~~
+
+If you have questions or need help:
+
+* **Ask on GitHub Discussions**: `<https://github.com/NREL/PVDegradationTools/discussions>`_
+* **Open an issue**: For bugs or feature requests
+* **Check the documentation**: `<https://pvdegradationtools.readthedocs.io/>`_
+* **Review existing PRs**: See how others approached similar problems
+
+Community Guidelines
+~~~~~~~~~~~~~~~~~~~~
+
+* Be respectful and professional
+* Assume positive intent in all interactions
+* Focus on constructive feedback
+* Welcome newcomers and help them learn
+* Give credit where it's due
+
+Thank you for contributing to PVDeg and supporting the PV research community! 🌞

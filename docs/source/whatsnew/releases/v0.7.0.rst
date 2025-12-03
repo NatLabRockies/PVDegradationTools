@@ -1,8 +1,52 @@
-v0.7.0 (2025-10-22)
+v0.7.0 (2025-12-05)
 ===================
+
+Breaking Changes
+----------------
+- Update NSRDB weather data retrieval to use PSM v4 instead of
+  PSM v3. Instances of ``pvlib.iotools.get_psm3()`` replaced with
+  ``pvlib.iotools.get_nsrdb_psm4_tmy()``. (:issue:`286`, :pull:`287`)
+- Enable multi-material handling in the Scenario class:
+    - Allow `material` parameter in `scenario.addModule()` to be a nested dictionary of
+      multiple materials from different materials files
+    - Update `utilities._add_material()` and `scenario.add_material()` to support this
+      functionality.
+
 
 Enhancements
 ------------
+- Add Python 3.13 support. (:issue:`279`, :pull:`281`)
+- Remove `kinetic_parameters.json` and merged parameters into
+  'DegradationDatabase.json`. (:issue:`176`, :pull:`248`)
+- Update citation references in documentation homepage (``index.rst``) and README with
+  current Zenodo DOI link, JOSS paper (in review), and software record. (:issue:`283`,
+  :pull:`302`)
+- Add CONTRIBUTING.md with comprehensive guidelines for code contributions, pre-commit
+  hooks, and database contributions. Highlights community-driven material property and
+  degradation parameter databases. Includes detailed pre-commit installation and usage
+  documentation, and ipykernel setup instructions for conda environments.
+  (:issue:`145`, :issue:`293`, :issue:`296`, :pull:`302`)
+- Configure ReadTheDocs to build documentation on every pull request for preview and
+  review. (:issue:`258`, :pull:`302`)
+- Restructure tutorial notebooks and migrate from ``tutorials_and_tools/`` to new
+  ``tutorials/`` directory with improved organization and naming conventions.
+  (:issue:`232`, :issue:`271`, :pull:`302`)
+    - Reorganize tutorials into logical themed folders: ``01_basics`` (4 notebooks),
+      ``02_degradation`` (6 notebooks), ``03_monte_carlo`` (2 notebooks),
+      ``04_scenario`` (3 notebooks), ``05_geospatial`` (5 notebooks),
+      ``06_advanced`` (4 notebooks), ``10_workshop_demos`` (2 notebooks), and
+      ``tools`` (3 tool notebooks).
+    - Add newer notebooks to Jupyter Book build and update table of contents.
+    - Update notebooks to load pre-saved weather data by default to avoid API rate
+      limits: ``03_monte_carlo/01_arrhenius.ipynb`` (Miami),
+      ``01_basics/04_weather_database_access.ipynb`` (Golden, CO),
+      ``03_monte_carlo/02_standoff.ipynb`` (NYC).
+    - Add jupytext configuration and Python script versions for all notebooks with
+      pre-commit hook synchronization for version control.
+    - Update Eagle HPC references to Kestrel (NREL's current HPC system).
+    - Update all configuration files (``_toc.yml``, ``_config.yml``, ``myst.yml``),
+      GitHub Actions workflows (``nbval.yaml``, ``testbook.yaml``,
+      ``deploy-books.yml``), and CI/CD pipelines for new structure.
 - Add pysam module to support InSPIRE Agrivoltaics geospatial simulations. Currently our
   pysam wrapper implementation is largely project specific. We aim to generalize this
   module in the future to support out of the box geospatial pysam calculations for all
@@ -23,6 +67,24 @@ Enhancements
     - :py:mod:`inspire_ground_irradiance()` to calculate inter-row ground irradiance for the InSPIRE agrivoltaics irradiance dataset.
     - :py:mod:`solar_resource_dict()` to create solar_resource collections for SAM input from PVDeg weather and metadata.
 
+
+Deprecations
+-------------
+- Drop Python 3.9 support. The minimum supported Python version is now 3.10. (:issue:`279`, :pull:`281`)
+
+
+Bug Fixes
+---------
+- Update MD5 checksum references in documentation from old hash to new hash (:pull:`276`)
+
+
+Dependencies
+------------
+- Pin h5py<=3.14.0 (:issue:`278`, :pull:`277`)
+
+
 Contributors
 ------------
+- Rajiv Daxini (:ghuser:`RDaxini`)
+- Martin Springer (:ghuser:`martin-springer`)
 - Tobin Ford (:ghuser:`tobin-ford`)
