@@ -13,4 +13,5 @@ instructions on the [PVDeg Github page](https://github.com/NREL/PVDegradationToo
 For standalone analysis tools, see the Tools section in the navigation menu or visit the [tools directory](../tools/).
 
 ```{tableofcontents}
+:titlesonly:
 ```

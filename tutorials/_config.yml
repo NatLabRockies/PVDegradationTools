@@ -18,7 +18,27 @@ exclude_patterns:
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
+  # 'auto' = execute notebooks that don't have outputs
+  # 'cache' = use cached outputs, don't execute
   execute_notebooks: auto
+  exclude_patterns:
+    # These notebooks will be included but use cached outputs (not re-executed)
+    # They require HPC/SLURM access, API keys, or take too long to execute
+    - "02_degradation/02_letid_accelerated_test.ipynb"
+    - "03_monte_carlo/01_arrhenius.ipynb"
+    - "04_geospatial/02_geospatial_templates.ipynb"
+    - "04_geospatial/03_scenario_geographical_features.ipynb"
+    - "04_geospatial/04_scenario_geospatial.ipynb"
+    - "04_geospatial/05_scenario_mountain_downselect.ipynb"
+    - "04_geospatial/06_scenario_single_location.ipynb"
+    - "04_geospatial/07_scenario_temperature.ipynb"
+    - "04_geospatial/08_module_standoff_iec63126.ipynb"
+    - "05_advanced/03_pysam_api.ipynb"
+    - "05_advanced/04_nsrdb_distributed_api.ipynb"
+    - "05_advanced/05_pvgis_distributed.ipynb"
+    - "06_nrel_hpc/01_geospatial_world_map.ipynb"
+    - "06_nrel_hpc/02_letid_outdoor_geospatial_demo.ipynb"
+    - "07_workshop_demos/02_duramat_live_demo.ipynb"
 
 # Define the name of the latex output file for PDF builds
 latex:
