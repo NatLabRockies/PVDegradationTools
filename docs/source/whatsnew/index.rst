@@ -2,7 +2,14 @@
 
 What's New
 ==========
-PVDegradationTools (pvdeg) change log:
+
+This page contains the release notes for PVDeg, documenting new features, breaking changes,
+bug fixes, and other improvements in each version.
+
+For information on contributing to future releases, see :ref:`contributing`.
+
+Release Notes
+-------------
 
 .. include:: releases/v0.7.0.rst
 .. include:: releases/v0.6.1.rst
