@@ -83,7 +83,7 @@ print(meta)
 # display(weather_df)
 
 # %% [markdown]
-# #### POA Irradiance
+# ### POA Irradiance
 # Next we need to calculate the stress parameters including temperature and humidity. We start with POA irradiance.
 # Irradiance_kwarg governs the array orientation for doing the POA calculations.
 # It is defaulted to a north-south single axis tracking. A fixed tilt set of parameters is included but is blocked out.
@@ -107,7 +107,7 @@ weather_df["poa_global"] = poa_df["poa_global"]
 
 # %% [markdown]
 #
-# #### Get Spectrally Resolved Irradiance Data
+# ### Get Spectrally Resolved Irradiance Data
 # This first set of commands will calculate spectrally resolved irradiance data. This may or may not be needed for a given degradation model and can be skipped here.
 
 # %%
@@ -161,7 +161,7 @@ wavelengths = np.arange(
 
 
 # %% [markdown]
-# #### Get Cell Temperature and Module Surface Temperature
+# ### Get Cell Temperature and Module Surface Temperature
 # The following will calculate the cell and module surface temperature using the King model as a default. Other models can be used as described at,
 # https://pvlib-python.readthedocs.io/en/stable/reference/pv_modeling/temperature.html. The difference is less than one °C for ground mounted systems
 # but can be as high as 3 °C for a high temperature building integrated system.
@@ -179,7 +179,7 @@ weather_df["temperature"] = weather_df["temp_module"]
 # weather_df['temperature'] = weather_df['temp_cell']
 
 # %% [markdown]
-# #### Humidity
+# ### Humidity
 # Depending on the component for which the calculation is being run on, the desired humidity may be the atmospheric humidity, the module surface humidity, the humidity in front of a cell with a permeable backsheet, the humidity in the backsheet, the humidity in the back encapsulant or another custom humidity location such as a diffusion limited location. The folowing are options for doing all of these calculations. Here all the different humidities are put in the weather_df dataframe, but to select one to be specifically used it should be named 'RH' for most degradation functions (check the documentation of a specific degradation calculation if in doubt). Here the surface humidity is selected as a default.
 #
 # Append the calculated values into the weather DataFrame.

@@ -1,7 +1,7 @@
 # %% [markdown]
-# # Tools - Edge Seal Oxygen Ingress Calculator tool
+# # Edge Seal Oxygen Ingress Calculator tool
 #
-# ### Calculation of oxygen ingress profile through an edge seal and into the encapsulant.
+# ## Calculation of oxygen ingress profile through an edge seal and into the encapsulant.
 #
 # **Requirements:**
 # - Local weather data file or site longitude and latittude.

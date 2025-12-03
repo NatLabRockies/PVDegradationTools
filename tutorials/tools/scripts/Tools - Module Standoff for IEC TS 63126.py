@@ -1,7 +1,7 @@
 # %% [markdown]
-# # Tools - Module Standoff for IEC TS 63126
+# # Module Standoff for IEC TS 63126
 #
-# ### Calculation of module standoff distance according to IEC TS 63126
+# ## Calculation of module standoff distance according to IEC TS 63126
 #
 # **Requirements:**
 # - Local weather data file or site longitude and latittude

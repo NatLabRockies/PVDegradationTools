@@ -38,7 +38,8 @@ execute:
     - "04_geospatial/09_geospatial_world_map.ipynb"
     - "04_geospatial/10_letid_outdoor_geospatial_demo.ipynb"
     - "10_workshop_demos/02_duramat_live_demo.ipynb"
-    # Tools requiring HPC access
+    # Tools requiring HPC access or have execution issues
+    - "tools/Tools - Degradation.ipynb"
     - "tools/Tools - Module Standoff for IEC TS 63126.ipynb"
 
 # Define the name of the latex output file for PDF builds
