@@ -76,11 +76,6 @@
       "scheme": "url"
     }
   ],
-  "grants": [
-    {
-      "id": "DE-AC36-08GO28308"
-    }
-  ],
   "communities": [
     {
       "identifier": "duramat"
