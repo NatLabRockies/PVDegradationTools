@@ -381,6 +381,12 @@
 
 
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/Tools%20-%20Edge%20Seal%20Oxygen%20Ingress.html">Edge Seal Oxygen Ingress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/Tools%20-%20Degradation.html">Degradation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/Tools%20-%20Module%20Standoff%20for%20IEC%20TS%2063126.html">Module Standoff for IEC TS 63126 (HPC)</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -553,7 +559,7 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
-<span class="c1"># !pip install pvdeg==0.3.3</span>
+<span class="c1"># !pip install pvdeg</span>
 </pre></div>
 </div>
 </div>
@@ -588,7 +594,7 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
 Pandas version  2.3.3
 Pvlib version  0.13.1
-Pvdeg version  0.1.dev1+gfa7335403
+Pvdeg version  0.1.dev1+gd75aaa2cc
 </pre></div>
 </div>
 </div>
@@ -678,18 +684,18 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
-0    -3.091394     0.518222
-1     0.297312     0.082249
-2     6.203638     0.499642
-3    10.461234     0.432570
-4     9.067286     0.782992
-..         ...          ...
-495   3.119716     0.433018
-496  10.513644     0.367536
-497   9.316438    -0.592741
-498   8.116928    -0.045293
-499   1.946098     0.015063
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          X_0  wind_factor
+0    8.464185     0.506875
+1    8.142826     0.110792
+2    5.563744     1.427537
+3    4.389976    -0.391095
+4    8.526321     0.717070
+..        ...          ...
+495  2.301452     0.634125
+496  9.042171     0.647055
+497 -1.386190     0.407452
+498  4.018828     0.435722
+499  5.684341     0.148075
 
 [500 rows x 2 columns]
 </pre></div>
@@ -758,17 +764,17 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.320776  67.676057  46.421568
-1    0.027964  72.013113  49.587341
-2    0.000000  67.850418  46.597031
-3    0.000000  68.621739  47.235676
-4    0.000000  63.944395  43.923552
+0    0.000000  67.784444  46.523757
+1    0.688442  71.814777  49.429593
+2    0.000000  49.907793  36.683302
+3    1.046006  74.995064  51.434697
+4    0.000000  64.927110  44.601923
 ..        ...        ...        ...
-495  0.000000  68.616556  47.231477
-496  0.000000  69.266216  47.622480
-497  2.545563  75.659290  51.988658
-498  1.173708  73.082416  50.187240
-499  0.233178  72.544439  50.010963
+495  0.000000  65.978345  45.330437
+496  0.000000  65.839594  45.210506
+497  0.074783  68.814824  47.433502
+498  0.000000  68.585198  47.206089
+499  0.400628  71.520529  49.177199
 
 [500 rows x 3 columns]
 </pre></div>
@@ -803,7 +809,7 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/59f0c16f06579dc835b40fb5299649e0126530f69a82f8a7ad9e70748a89f7d4.png" src="../_images/59f0c16f06579dc835b40fb5299649e0126530f69a82f8a7ad9e70748a89f7d4.png" />
+<img alt="../_images/cfb548c4497b1db3480f52d0d95ebf97526794840c560733863145012cccae88.png" src="../_images/cfb548c4497b1db3480f52d0d95ebf97526794840c560733863145012cccae88.png" />
 </div>
 </div>
 </section>
