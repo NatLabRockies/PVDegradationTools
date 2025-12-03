@@ -6,7 +6,7 @@
 .. .. image:: ../../tutorials_and_tools/pvdeg_logo.png
 ..    :width: 500
 
-.. image:: ./_static/logo-vectors/PVdeg-Logo-Horiz-Color.svg
+.. .. image:: ./_static/logo-vectors/PVdeg-Logo-Horiz-Color.svg
 
 
 Welcome to PVDeg!
