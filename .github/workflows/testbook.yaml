@@ -8,14 +8,14 @@ jobs:
     env:
       NOTEBOOK_DIR: "tutorials"
       TESTBOOK_NOTEBOOK_LIST: |
-        "05_advanced/03_pysam_api.ipynb"
-        "05_advanced/04_nsrdb_distributed_api.ipynb"
-        "04_geospatial/03_scenario_geographical_features.ipynb"
-        "04_geospatial/04_scenario_geospatial.ipynb"
-        "04_geospatial/05_scenario_mountain_downselect.ipynb"
-        "04_geospatial/06_scenario_single_location.ipynb"
-        "04_geospatial/07_scenario_temperature.ipynb"
-        "04_geospatial/02_geospatial_templates.ipynb"
+        "06_advanced/03_pysam_api.ipynb"
+        "06_advanced/04_nsrdb_distributed_api.ipynb"
+        "04_scenario/01_scenario_temperature.ipynb"
+        "04_scenario/02_scenario_single_location.ipynb"
+        "04_scenario/03_scenario_mountain_downselect.ipynb"
+        "05_geospatial/01_geospatial_templates.ipynb"
+        "05_geospatial/04_scenario_geographical_features.ipynb"
+        "05_geospatial/05_scenario_geospatial.ipynb"
 
     steps:
       - uses: actions/checkout@v4
