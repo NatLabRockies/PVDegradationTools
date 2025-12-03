@@ -32,7 +32,6 @@ execute:
     - "04_geospatial/05_scenario_mountain_downselect.ipynb"
     - "04_geospatial/06_scenario_single_location.ipynb"
     - "04_geospatial/07_scenario_temperature.ipynb"
-    - "04_geospatial/08_module_standoff_iec63126.ipynb"
     - "05_advanced/03_pysam_api.ipynb"
     - "05_advanced/04_nsrdb_distributed_api.ipynb"
     - "05_advanced/05_pvgis_distributed.ipynb"

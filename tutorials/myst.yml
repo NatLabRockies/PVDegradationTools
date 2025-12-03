@@ -75,8 +75,6 @@ project:
           title: Single Location (HPC)
         - file: 04_geospatial/07_scenario_temperature.ipynb
           title: Temperature Scenario (HPC)
-        - file: 04_geospatial/08_module_standoff_iec63126.ipynb
-          title: Module Standoff IEC TS 63126 (HPC)
     - title: 05 - Advanced Topics
       children:
         - file: 05_advanced/01_custom_functions_nopython.ipynb

@@ -54,8 +54,6 @@ parts:
     title: Single Location (HPC)
   - file: 04_geospatial/07_scenario_temperature
     title: Temperature Scenario (HPC)
-  - file: 04_geospatial/08_module_standoff_iec63126
-    title: Module Standoff IEC TS 63126 (HPC)
 - caption: 05 - Advanced Topics
   titlesonly: true
   chapters:
