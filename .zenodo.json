@@ -38,19 +38,21 @@
     }
   ],
   "contributors": [
-
     {
       "name": "Campanelli, Mark",
-      "affiliation": "Intelligent Measurement Systems LLC"
+      "affiliation": "Intelligent Measurement Systems LLC",
+      "type": "Other"
     },
     {
       "name": "Wells, Trenton",
-      "affiliation": "National Renewable Energy Laboratory"
+      "affiliation": "National Renewable Energy Laboratory",
+      "type": "Other"
     },
     {
       "name": "Anderson, Kevin",
       "affiliation": "Sandia National Laboratories",
-      "orcid": "0000-0002-1166-7957"
+      "orcid": "0000-0002-1166-7957",
+      "type": "Other"
     }
   ],
   "keywords": [
