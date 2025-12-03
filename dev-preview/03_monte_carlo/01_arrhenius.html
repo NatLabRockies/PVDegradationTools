@@ -328,15 +328,6 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../04_geospatial/08_module_standoff_iec63126.html">Tools - Module Standoff for IEC TS 63126</a></li>
-
-
-
-
-
-
-
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">05 - Advanced Topics</span></p>
 <ul class="nav bd-sidenav">
@@ -606,11 +597,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.11.0-1018-azure
-Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
-Pandas version  2.3.3
-Pvlib version  0.13.1
-pvdeg version  0.1.dev1+gba5c79cf9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Windows 11
+Python version  3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]
+Pandas version  2.2.3
+Pvlib version  0.13.0
+pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 </pre></div>
 </div>
 </div>
@@ -818,12 +809,12 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 
 simulate(func: Callable, correlated_samples: pandas.core.frame.DataFrame, **function_kwargs) -&gt; pandas.core.series.Series
     Apply a target function to data to preform a monte carlo simulation.
-    
+
     If you get
     a key error and the target function has default parameters, try adding them to your
     ``func_kwargs`` dictionary instead of using the default value from the target
     function.
-    
+
     Parameters
     ----------
     func : function
@@ -834,7 +825,7 @@ simulate(func: Callable, correlated_samples: pandas.core.frame.DataFrame, **func
     function_kwargs : dict
         Keyword arguments to pass to func, only include arguments not named in your
         correlated_samples columns
-    
+
     Returns
     -------
     res : pandas.Series
@@ -854,71 +845,6 @@ simulate(func: Callable, correlated_samples: pandas.core.frame.DataFrame, **func
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
     <span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">degradation</span><span class="o">.</span><span class="n">vecArrhenius</span><span class="p">,</span> <span class="n">correlated_samples</span><span class="o">=</span><span class="n">mc_inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">function_kwargs</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">results</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">degradation</span><span class="o">.</span><span class="n">vecArrhenius</span><span class="p">,</span> <span class="n">correlated_samples</span><span class="o">=</span><span class="n">mc_inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">function_kwargs</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/montecarlo.py:328,</span> in <span class="ni">simulate</span><span class="nt">(func, correlated_samples, **function_kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">324</span>     <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">row_args</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">326</span> <span class="c1"># this line is often flagged when target function is not given required arguments</span>
-<span class="g g-Whitespace">    </span><span class="mi">327</span> <span class="c1"># problems also arise when target function parameter names are not lowercase</span>
-<span class="ne">--&gt; </span><span class="mi">328</span> <span class="n">result</span> <span class="o">=</span> <span class="n">correlated_samples</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">apply_func</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">330</span> <span class="k">return</span> <span class="n">result</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pandas/core/frame.py:10401,</span> in <span class="ni">DataFrame.apply</span><span class="nt">(self, func, axis, raw, result_type, args, by_row, engine, engine_kwargs, **kwargs)</span>
-<span class="g g-Whitespace">  </span><span class="mi">10387</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas.core.apply</span><span class="w"> </span><span class="kn">import</span> <span class="n">frame_apply</span>
-<span class="g g-Whitespace">  </span><span class="mi">10389</span> <span class="n">op</span> <span class="o">=</span> <span class="n">frame_apply</span><span class="p">(</span>
-<span class="g g-Whitespace">  </span><span class="mi">10390</span>     <span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">  </span><span class="mi">10391</span>     <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>  <span class="mi">10399</span>     <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">  </span><span class="mi">10400</span> <span class="p">)</span>
-<span class="ne">&gt; </span><span class="mi">10401</span> <span class="k">return</span> <span class="n">op</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span><span class="o">.</span><span class="n">__finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;apply&quot;</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pandas/core/apply.py:916,</span> in <span class="ni">FrameApply.apply</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">913</span> <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">914</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_raw</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">,</span> <span class="n">engine_kwargs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">engine_kwargs</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">916</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_standard</span><span class="p">()</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pandas/core/apply.py:1063,</span> in <span class="ni">FrameApply.apply_standard</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1061</span> <span class="k">def</span><span class="w"> </span><span class="nf">apply_standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1062</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;python&quot;</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1063</span>         <span class="n">results</span><span class="p">,</span> <span class="n">res_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_series_generator</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1064</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1065</span>         <span class="n">results</span><span class="p">,</span> <span class="n">res_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_series_numba</span><span class="p">()</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pandas/core/apply.py:1081,</span> in <span class="ni">FrameApply.apply_series_generator</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1078</span> <span class="k">with</span> <span class="n">option_context</span><span class="p">(</span><span class="s2">&quot;mode.chained_assignment&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1079</span>     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">series_gen</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1080</span>         <span class="c1"># ignore SettingWithCopy here in case the user mutates</span>
-<span class="ne">-&gt; </span><span class="mi">1081</span>         <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1082</span>         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ABCSeries</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1083</span>             <span class="c1"># If we have a view on v, we need to make a copy because</span>
-<span class="g g-Whitespace">   </span><span class="mi">1084</span>             <span class="c1">#  series_generator will swap out the underlying data</span>
-<span class="g g-Whitespace">   </span><span class="mi">1085</span>             <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/montecarlo.py:324,</span> in <span class="ni">simulate.&lt;locals&gt;.apply_func</span><span class="nt">(row)</span>
-<span class="g g-Whitespace">    </span><span class="mi">321</span> <span class="k">def</span><span class="w"> </span><span class="nf">apply_func</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">322</span>     <span class="n">row_args</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">row</span><span class="o">.</span><span class="n">items</span><span class="p">()}}</span>
-<span class="ne">--&gt; </span><span class="mi">324</span>     <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">row_args</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/degradation.py:944,</span> in <span class="ni">vecArrhenius</span><span class="nt">(poa_global, module_temp, ea, x, lnr0)</span>
-<span class="g g-Whitespace">    </span><span class="mi">939</span> <span class="n">degradation</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="g g-Whitespace">    </span><span class="mi">940</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">poa_global_scaled</span><span class="p">)):</span>
-<span class="g g-Whitespace">    </span><span class="mi">941</span>     <span class="n">degradation</span> <span class="o">+=</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">942</span>         <span class="n">R0</span>
-<span class="g g-Whitespace">    </span><span class="mi">943</span>         <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">ea_scaled</span> <span class="o">/</span> <span class="p">(</span><span class="mf">273.15</span> <span class="o">+</span> <span class="n">module_temp</span><span class="p">[</span><span class="n">entry</span><span class="p">]))</span>
-<span class="ne">--&gt; </span><span class="mi">944</span>         <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">poa_global_scaled</span><span class="p">[</span><span class="n">entry</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">945</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">947</span> <span class="k">return</span> <span class="n">degradation</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">poa_global</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>

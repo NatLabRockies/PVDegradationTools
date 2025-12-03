@@ -328,15 +328,6 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../04_geospatial/08_module_standoff_iec63126.html">Tools - Module Standoff for IEC TS 63126</a></li>
-
-
-
-
-
-
-
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">05 - Advanced Topics</span></p>
 <ul class="nav bd-sidenav">
@@ -611,10 +602,10 @@ Both procedures essentially prescribe exposure to constant light or current inje
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.11.0-1018-azure
-Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
-Pandas version  2.3.3
-pvdeg version  0.1.dev1+gba5c79cf9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Windows 11
+Python version  3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]
+Pandas version  2.2.3
+pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 </pre></div>
 </div>
 </div>
@@ -1054,63 +1045,6 @@ pvdeg version  0.1.dev1+gba5c79cf9
         <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;NA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_A</span> <span class="o">+</span> <span class="n">dN_Adt</span> <span class="o">*</span> <span class="n">t_step</span>
         <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;NB&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_B</span> <span class="o">+</span> <span class="n">dN_Bdt</span> <span class="o">*</span> <span class="n">t_step</span>
         <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;NC&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_C</span> <span class="o">+</span> <span class="n">dN_Cdt</span> <span class="o">*</span> <span class="n">t_step</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">line</span> <span class="mi">30</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="n">k_BA</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">k_ij</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;v_ba&quot;</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;ea_ba&quot;</span><span class="p">],</span> <span class="n">temperature</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="n">k_BC</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">k_ij</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;v_bc&quot;</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;ea_bc&quot;</span><span class="p">],</span> <span class="n">temperature</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">30</span> <span class="n">k_CB</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">k_ij</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span>     <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;v_cb&quot;</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;ea_cb&quot;</span><span class="p">],</span> <span class="n">temperature</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="n">x_ab</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">carrier_factor</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span>     <span class="n">tau</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span>     <span class="s2">&quot;ab&quot;</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>     <span class="mi">42</span>     <span class="n">mechanism_params</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span> <span class="n">x_ba</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">carrier_factor</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">45</span>     <span class="n">tau</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span>     <span class="s2">&quot;ba&quot;</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>     <span class="mi">52</span>     <span class="n">mechanism_params</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/letid.py:67,</span> in <span class="ni">k_ij</span><span class="nt">(attempt_frequency, activation_energy, temperature)</span>
-<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="k">def</span><span class="w"> </span><span class="nf">k_ij</span><span class="p">(</span><span class="n">attempt_frequency</span><span class="p">,</span> <span class="n">activation_energy</span><span class="p">,</span> <span class="n">temperature</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Calculate Arrhenius rate constant.</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span><span class="sd"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span><span class="sd">     Returns Arrhenius rate constant given attempt frequency, activation energy,</span>
-<span class="sd">   (...)     65         Arrhenius reaction rate constant [s⁻¹].</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">67</span>     <span class="n">temperature</span> <span class="o">=</span> <span class="n">convert_temperature</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span>     <span class="n">q</span> <span class="o">=</span> <span class="n">elementary_charge</span>
-<span class="g g-Whitespace">     </span><span class="mi">69</span>     <span class="n">k</span> <span class="o">=</span> <span class="n">Boltzmann</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/scipy/constants/_constants.py:274,</span> in <span class="ni">convert_temperature</span><span class="nt">(val, old_scale, new_scale)</span>
-<span class="g g-Whitespace">    </span><span class="mi">234</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">235</span><span class="sd"> Convert from a temperature scale to another one among Celsius, Kelvin,</span>
-<span class="g g-Whitespace">    </span><span class="mi">236</span><span class="sd"> Fahrenheit, and Rankine scales.</span>
-<span class="sd">   (...)    271 </span>
-<span class="g g-Whitespace">    </span><span class="mi">272</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">273</span> <span class="n">xp</span> <span class="o">=</span> <span class="n">array_namespace</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">274</span> <span class="n">_val</span> <span class="o">=</span> <span class="n">_asarray</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">xp</span><span class="o">=</span><span class="n">xp</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">275</span> <span class="c1"># Convert from `old_scale` to Kelvin</span>
-<span class="g g-Whitespace">    </span><span class="mi">276</span> <span class="k">if</span> <span class="n">old_scale</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;celsius&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]:</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/scipy/_lib/_array_api.py:201,</span> in <span class="ni">_asarray</span><span class="nt">(array, dtype, order, copy, xp, check_finite, subok)</span>
-<span class="g g-Whitespace">    </span><span class="mi">199</span>     <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="n">subok</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">200</span> <span class="k">elif</span> <span class="n">subok</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">201</span>     <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">202</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">203</span>     <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>

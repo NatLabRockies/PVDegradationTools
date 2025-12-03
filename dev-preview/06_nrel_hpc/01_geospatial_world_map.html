@@ -326,15 +326,6 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../04_geospatial/08_module_standoff_iec63126.html">Tools - Module Standoff for IEC TS 63126</a></li>
-
-
-
-
-
-
-
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">05 - Advanced Topics</span></p>
 <ul class="nav bd-sidenav">
@@ -569,14 +560,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Importing libraries...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done!
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="calculate-standoff">
@@ -614,59 +597,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Starting Dask client...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dashboard: http://10.1.0.122:8787/status
-Cluster ready!
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ERROR:tornado.application:Exception in callback functools.partial(&lt;bound method IOLoop._discard_future_result of &lt;tornado.platform.asyncio.AsyncIOMainLoop object at 0x7fe6c47c0a50&gt;&gt;, &lt;Task finished name=&#39;Task-29&#39; coro=&lt;SpecCluster._correct_state_internal() done, defined at /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/distributed/deploy/spec.py:352&gt; exception=FileNotFoundError(2, &#39;No such file or directory&#39;)&gt;)
-Traceback (most recent call last):
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/tornado/ioloop.py&quot;, line 758, in _run_callback
-    ret = callback()
-          ^^^^^^^^^^
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/tornado/ioloop.py&quot;, line 782, in _discard_future_result
-    future.result()
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/distributed/deploy/spec.py&quot;, line 396, in _correct_state_internal
-    await asyncio.gather(*worker_futs)
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/asyncio/tasks.py&quot;, line 694, in _wrap_awaitable
-    return (yield from awaitable.__await__())
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/distributed/deploy/spec.py&quot;, line 74, in _
-    await self.start()
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/dask_jobqueue/core.py&quot;, line 426, in start
-    out = await self._submit_job(fn)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/dask_jobqueue/core.py&quot;, line 409, in _submit_job
-    return await self._call(shlex.split(self.submit_command) + [script_filename])
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/dask_jobqueue/core.py&quot;, line 503, in _call
-    proc = await create_subproc(
-           ^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/asyncio/subprocess.py&quot;, line 223, in create_subprocess_exec
-    transport, protocol = await loop.subprocess_exec(
-                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/asyncio/base_events.py&quot;, line 1708, in subprocess_exec
-    transport = await self._make_subprocess_transport(
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/asyncio/unix_events.py&quot;, line 207, in _make_subprocess_transport
-    transp = _UnixSubprocessTransport(self, protocol, args, shell,
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/asyncio/base_subprocess.py&quot;, line 36, in __init__
-    self._start(args=args, shell=shell, stdin=stdin, stdout=stdout,
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/asyncio/unix_events.py&quot;, line 818, in _start
-    self._proc = subprocess.Popen(
-                 ^^^^^^^^^^^^^^^^^
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/subprocess.py&quot;, line 1026, in __init__
-    self._execute_child(args, executable, preexec_fn, close_fds,
-  File &quot;/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/subprocess.py&quot;, line 1955, in _execute_child
-    raise child_exception_type(errno_num, err_msg, err_filename)
-FileNotFoundError: [Errno 2] No such file or directory: &#39;sbatch&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -695,35 +625,6 @@ FileNotFoundError: [Errno 2] No such file or directory: &#39;sbatch&#39;
 <span class="n">weather_ds_himawari</span><span class="p">,</span> <span class="n">meta_df_himawari</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
     <span class="n">weather_db</span><span class="p">,</span> <span class="n">geospatial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">weather_arg</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ConnectionError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">15</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="s2">&quot;Himawari&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="s2">&quot;tmy-2020&quot;</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>     <span class="mi">12</span>     <span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="p">}</span>
-<span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">weather_ds_himawari</span><span class="p">,</span> <span class="n">meta_df_himawari</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">weather_db</span><span class="p">,</span> <span class="n">geospatial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">weather_arg</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/weather.py:260,</span> in <span class="ni">get</span><span class="nt">(database, id, geospatial, find_meta, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">258</span> <span class="k">elif</span> <span class="n">geospatial</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">259</span>     <span class="k">if</span> <span class="n">database</span> <span class="o">==</span> <span class="s2">&quot;NSRDB&quot;</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">260</span>         <span class="n">nrel_kestrel_check</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">262</span>         <span class="n">weather_ds</span><span class="p">,</span> <span class="n">meta_df</span> <span class="o">=</span> <span class="n">get_NSRDB</span><span class="p">(</span><span class="n">geospatial</span><span class="o">=</span><span class="n">geospatial</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">263</span>         <span class="n">meta_df</span><span class="p">[</span><span class="s2">&quot;wind_height&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/utilities.py:1133,</span> in <span class="ni">nrel_kestrel_check</span><span class="nt">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1130</span> <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;connected to </span><span class="si">{</span><span class="n">device_domain</span><span class="si">}</span><span class="s2">&quot;</span> <span class="sa">f</span><span class="s2">&quot;not a node of </span><span class="si">{</span><span class="n">KESTREL_HOSTNAME</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1132</span> <span class="k">if</span> <span class="n">KESTREL_HOSTNAME</span> <span class="o">!=</span> <span class="n">device_domain</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1133</span>     <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-
-<span class="ne">ConnectionError</span>: connected to yx.internal.cloudapp.netnot a node of kestrel.hpc.nrel.gov
 </pre></div>
 </div>
 </div>

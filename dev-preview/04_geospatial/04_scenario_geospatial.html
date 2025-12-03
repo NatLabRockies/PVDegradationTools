@@ -326,15 +326,6 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="08_module_standoff_iec63126.html">Tools - Module Standoff for IEC TS 63126</a></li>
-
-
-
-
-
-
-
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">05 - Advanced Topics</span></p>
 <ul class="nav bd-sidenav">
@@ -584,44 +575,6 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">addLocation</span><span class="p">(</span>
     <span class="n">state</span><span class="o">=</span><span class="s2">&quot;Colorado&quot;</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="s2">&quot;Summit&quot;</span><span class="p">,</span> <span class="n">see_added</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">downsample_factor</span><span class="o">=</span><span class="mi">3</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ConnectionError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">addLocation</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">state</span><span class="o">=</span><span class="s2">&quot;Colorado&quot;</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="s2">&quot;Summit&quot;</span><span class="p">,</span> <span class="n">see_added</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">downsample_factor</span><span class="o">=</span><span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/geospatialscenario.py:188,</span> in <span class="ni">GeospatialScenario.addLocation</span><span class="nt">(self, country, state, county, satellite, year, nsrdb_attributes, downsample_factor, gids, bbox_kwarg, see_added)</span>
-<span class="g g-Whitespace">    </span><span class="mi">180</span> <span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;NSRDB&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">181</span> <span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
-<span class="g g-Whitespace">    </span><span class="mi">182</span>     <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="n">satellite</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">183</span>     <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="n">year</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">184</span>     <span class="s2">&quot;NREL_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="n">nsrdb_attributes</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">186</span> <span class="p">}</span>
-<span class="ne">--&gt; </span><span class="mi">188</span> <span class="n">geo_weather</span><span class="p">,</span> <span class="n">geo_meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">189</span>     <span class="n">weather_db</span><span class="p">,</span> <span class="n">geospatial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">weather_arg</span>
-<span class="g g-Whitespace">    </span><span class="mi">190</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">192</span> <span class="k">if</span> <span class="n">gids</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">193</span>     <span class="n">geo_meta</span> <span class="o">=</span> <span class="n">geo_meta</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">gids</span><span class="p">]</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/weather.py:260,</span> in <span class="ni">get</span><span class="nt">(database, id, geospatial, find_meta, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">258</span> <span class="k">elif</span> <span class="n">geospatial</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">259</span>     <span class="k">if</span> <span class="n">database</span> <span class="o">==</span> <span class="s2">&quot;NSRDB&quot;</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">260</span>         <span class="n">nrel_kestrel_check</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">262</span>         <span class="n">weather_ds</span><span class="p">,</span> <span class="n">meta_df</span> <span class="o">=</span> <span class="n">get_NSRDB</span><span class="p">(</span><span class="n">geospatial</span><span class="o">=</span><span class="n">geospatial</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">263</span>         <span class="n">meta_df</span><span class="p">[</span><span class="s2">&quot;wind_height&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/utilities.py:1133,</span> in <span class="ni">nrel_kestrel_check</span><span class="nt">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1130</span> <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;connected to </span><span class="si">{</span><span class="n">device_domain</span><span class="si">}</span><span class="s2">&quot;</span> <span class="sa">f</span><span class="s2">&quot;not a node of </span><span class="si">{</span><span class="n">KESTREL_HOSTNAME</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1132</span> <span class="k">if</span> <span class="n">KESTREL_HOSTNAME</span> <span class="o">!=</span> <span class="n">device_domain</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1133</span>     <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-
-<span class="ne">ConnectionError</span>: connected to yx.internal.cloudapp.netnot a node of kestrel.hpc.nrel.gov
 </pre></div>
 </div>
 </div>

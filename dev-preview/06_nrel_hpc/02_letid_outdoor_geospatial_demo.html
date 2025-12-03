@@ -326,15 +326,6 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../04_geospatial/08_module_standoff_iec63126.html">Tools - Module Standoff for IEC TS 63126</a></li>
-
-
-
-
-
-
-
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">05 - Advanced Topics</span></p>
 <ul class="nav bd-sidenav">
@@ -579,14 +570,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.11.0-1018-azure
-Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
-Pandas version  2.3.3
-pvdeg version  0.1.dev1+gba5c79cf9
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="single-location-example">
@@ -619,34 +602,6 @@ pvdeg version  0.1.dev1+gba5c79cf9
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pvdeg</span><span class="o">.</span><span class="n">letid</span><span class="o">.</span><span class="n">calc_letid_outdoors</span><span class="p">(</span><span class="n">weather_df</span><span class="o">=</span><span class="n">WEATHER</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">letid</span><span class="o">.</span><span class="n">calc_letid_outdoors</span><span class="p">(</span><span class="n">weather_df</span><span class="o">=</span><span class="n">WEATHER</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/letid.py:1091,</span> in <span class="ni">calc_letid_outdoors</span><span class="nt">(tau_0, tau_deg, wafer_thickness, s_rear, na_0, nb_0, nc_0, weather_df, meta, mechanism_params, generation_df, d_base, cell_area, tilt, azimuth, module_parameters, inverter_parameters, temp_model, temperature_model_parameters)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1086</span>     <span class="n">generation</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span>
-<span class="g g-Whitespace">   </span><span class="mi">1087</span>         <span class="s2">&quot;Generation (cm-3s-1)&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1088</span>     <span class="p">]</span>  <span class="c1"># TODO: fix this to accept multiple formats of generation depth profile</span>
-<span class="g g-Whitespace">   </span><span class="mi">1089</span>     <span class="n">depth</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span><span class="s2">&quot;Depth (um)&quot;</span><span class="p">]</span>
-<span class="ne">-&gt; </span><span class="mi">1091</span> <span class="n">mechanism_params</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_kinetics</span><span class="p">(</span><span class="n">mechanism_params</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1093</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">timestep</span> <span class="ow">in</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-<span class="g g-Whitespace">   </span><span class="mi">1094</span>     <span class="c1"># first row tau has already been assigned</span>
-<span class="g g-Whitespace">   </span><span class="mi">1095</span>     <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1096</span>         <span class="c1"># calc device parameters for first row</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/utilities.py:101,</span> in <span class="ni">get_kinetics</span><span class="nt">(name, fname, encoding)</span>
-<span class="g g-Whitespace">     </span><span class="mi">98</span>     <span class="n">parameters_list</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">99</span>     <span class="k">return</span> <span class="s2">&quot;Choose a set of kinetic parameters:&quot;</span><span class="p">,</span> <span class="p">[</span><span class="o">*</span><span class="n">parameters_list</span><span class="p">]</span>
-<span class="ne">--&gt; </span><span class="mi">101</span> <span class="n">kinetic_parameters</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">103</span> <span class="n">extracted_params</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="g g-Whitespace">    </span><span class="mi">104</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kinetic_parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-
-<span class="ne">KeyError</span>: &#39;repins&#39;
 </pre></div>
 </div>
 </div>
