@@ -20,7 +20,7 @@
   <td>Documentation</td>
   <td>
 	<a href='https://PVDegradationTools.readthedocs.io'>
-	    <img src='https://readthedocs.org/projects/pvdegradationtools/badge/?version=stable' alt='Documentation Status' />
+	    <img src='https://readthedocs.org/projects/pvdegradationtools/badge/?version=latest' alt='Documentation Status' />
 	</a>
   </td>
 </tr>
