@@ -10,18 +10,10 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.11"
-    # You can also specify other tool versions:
-    # nodejs: "19"
-    # rust: "1.64"
-    # golang: "1.19"
 
 # Build documentation in the docs/ directory with Sphinx
 sphinx:
    configuration: docs/source/conf.py
-
-# If using Sphinx, optionally build your docs in additional formats such as PDF
-# formats:
-#    - pdf
 
 # Optionally declare the Python requirements required to build your docs
 python:
@@ -30,3 +22,8 @@ python:
           path: .
           extra_requirements:
               - docs
+
+# Note: Branch-to-version mapping is configured in ReadTheDocs dashboard:
+# - 'main' branch -> 'stable' version (default)
+# - 'development' branch -> 'latest' version
+# To configure: Project Settings > Versions > Activate/set as default
