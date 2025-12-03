@@ -44,5 +44,5 @@ jobs:
           else
             git add CITATION.cff
             git commit -m "chore: update CITATION.cff to version ${{ steps.get_version.outputs.version }}"
-            git push origin HEAD:${{ github.event.repository.default_branch }}
+            git push origin HEAD:development
           fi
