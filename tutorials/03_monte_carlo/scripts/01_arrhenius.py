@@ -119,15 +119,23 @@ print("X_lnR0", round(np.corrcoef(mc_inputs["X"], mc_inputs["LnR0"])[0][1], 3))
 # </div>
 
 # %%
-weather_db = "PSM4"
-weather_id = (25.783388, -80.189029)
-weather_arg = {
-    "api_key": "DEMO_KEY",
-    "email": "user@mail.com",
-    "map_variables": True,
-}
+# Load pre-saved weather data for this tutorial
+# This avoids API rate limits during testing and builds
+import json
 
-weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)
+weather_df = pd.read_csv("../data/psm4_miami.csv", index_col=0, parse_dates=True)
+with open("../data/meta_miami.json", "r") as f:
+    meta = json.load(f)
+
+# Uncomment below to fetch fresh data with your own API key:
+# weather_db = "PSM4"
+# weather_id = (25.783388, -80.189029)
+# weather_arg = {
+#     "api_key": "YOUR_API_KEY",  # Get your key at https://developer.nrel.gov/signup/
+#     "email": "your.email@example.com",
+#     "map_variables": True,
+# }
+# weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)
 
 # %% [markdown]
 # Calculate the sun position, poa irradiance, and module temperature.

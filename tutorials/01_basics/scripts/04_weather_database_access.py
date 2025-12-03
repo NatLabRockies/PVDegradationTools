@@ -4,18 +4,18 @@
 # **Requirements:**
 # - Internet access
 # - NSRDB API key. API keys are free. You can request and obtain an API key in about 5 minutes. To get your own key, visit https://developer.nrel.gov/signup/
-# - Step **1.** is for Eagle HPC users. You will need an account with NREL's Eagle computer for this method.
+# - Step **1.** is for Kestrel HPC users. You will need an account with NREL's Kestrel computer for this method.
 #
 # **Objectives:**
 #
 # Using direct access to large scale weather databases, we're going to estimate the minimum standoff distance for a roof mounted PV system. We'll do this in 3 ways using both the NSRDB and PVGIS database.
-# 1. Single Location, NSRDB via NREL's high performance computer, Eagle.
+# 1. Single Location, NSRDB via NREL's high performance computer, Kestrel.
 # 2. Single Location via NSRDB public API key.
 # 3. Single Location via the PVGIS public database
 #
 # **Background:**
 #
-# This journal will demonstrate all existing built-in methods for directly accessing public weather databases. Some methods are restriced to certain user groups. For general users, see methods **2** and **3**. For users with an active Eagle HPC account, you may use method **1** as well as **2** and **3**.
+# This journal will demonstrate all existing built-in methods for directly accessing public weather databases. Some methods are restriced to certain user groups. For general users, see methods **2** and **3**. For users with an active Kestrel HPC account, you may use method **1** as well as **2** and **3**.
 #
 # For all users and all steps: This journal will run significantly longer than other tutorials and have significant internet traffic as you fetch large datasets.
 
@@ -37,6 +37,7 @@
 
 # %%
 import pvdeg
+import pandas as pd
 
 # %%
 # This information helps with debugging and getting support :)
@@ -50,7 +51,7 @@ print("pvdeg version ", pvdeg.__version__)
 # %% [markdown]
 # # 1. NSRDB - HSDS on Kestrel
 #
-# This method requires a direct connection to NREL's high performance computer "Eagle". If you are not running this journal from Eagle, skip this section and proceed to section **2.**
+# This method requires a direct connection to NREL's high performance computer "Kestrel". If you are not running this journal from Kestrel, skip this section and proceed to section **2.**
 #
 # In this step:
 #
@@ -105,19 +106,27 @@ weather_arg = {
 #     - names = '2019' : collect a weather dataframe including measured relative humidity.
 
 # %%
-API_KEY = "your_api_key_here"
-# The example API key here is for demonstation and is rate-limited per IP.
-# To get your own API key, visit https://developer.nrel.gov/signup/
+# Load pre-saved weather data for this tutorial
+# This avoids API rate limits during testing and builds
+import json
 
-weather_db = "PSM4"
-weather_id = (39.741931, -105.169891)
-weather_arg = {
-    "api_key": "DEMO_KEY",
-    "email": "user@mail.com",
-    "map_variables": True,
-}
+weather_df = pd.read_csv("../data/psm4_golden.csv", index_col=0, parse_dates=True)
+with open("../data/meta_golden.json", "r") as f:
+    meta = json.load(f)
 
-weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)
+# Uncomment below to fetch fresh data with your own API key:
+# API_KEY = "your_api_key_here"
+# # The example API key here is for demonstation and is rate-limited per IP.
+# # To get your own API key, visit https://developer.nrel.gov/signup/
+# weather_db = "PSM4"
+# weather_id = (39.741931, -105.169891)
+# weather_arg = {
+#     "api_key": "DEMO_KEY",
+#     "email": "user@mail.com",
+#     "map_variables": True,
+# }
+# weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)
+
 # Perform calculation and output interpretation or results
 res = pvdeg.standards.standoff(
     weather_df=weather_df,
@@ -171,5 +180,3 @@ print(pvdeg.standards.interpret_standoff(res))
 # Clean metadata for consistent output (remove variable fields)
 meta_clean = {k: v for k, v in meta.items() if k not in ["irradiance_time_offset"]}
 print(meta_clean)
-
-# %%
