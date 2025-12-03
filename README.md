@@ -96,7 +96,7 @@ pip install pvdeg
 **Developer Installation:**
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/PVDegradationTools.git
+git clone https://github.com/NREL/PVDegradationTools.git
 cd PVDegradationTools
 pip install -e .[all]
 ```
