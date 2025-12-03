@@ -17,6 +17,7 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Extract version from tag
         id: get_version
