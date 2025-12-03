@@ -1,6 +1,25 @@
 v0.7.0 (2025-10-22)
 ===================
 
+Breaking Changes
+----------------
+- Update NSRDB weather data retrieval to use PSM v4 instead of
+  PSM v3. Instances of ``pvlib.iotools.get_psm3()`` replaced with
+  ``pvlib.iotools.get_nsrdb_psm4_tmy()``. (:issue:`286`, :pull:`287`)
+- Enable multi-material handling in the Scenario class:
+    - Allow `material` parameter in `scenario.addModule()` to be a nested dictionary of
+      multiple materials from different materials files
+    - Update `utilities._add_material()` and `scenario.add_material()` to support this
+      functionality.
+
+
+Enhancements
+------------
+- Add Python 3.13 support. (:issue:`279`, :pull:`281`)
+- Remove `kinetic_parameters.json` and merged parameters into
+  'DegradationDatabase.json`. (:issue:`176`, :pull:`248`)
+
+
 Enhancements
 ------------
 - Restructure tutorial notebooks and migrate from ``tutorials_and_tools/`` to new
@@ -39,6 +58,24 @@ Enhancements
     - :py:mod:`inspire_ground_irradiance()` to calculate inter-row ground irradiance for the InSPIRE agrivoltaics irradiance dataset.
     - :py:mod:`solar_resource_dict()` to create solar_resource collections for SAM input from PVDeg weather and metadata.
 
+
+Deprecations
+-------------
+- Drop Python 3.9 support. The minimum supported Python version is now 3.10. (:issue:`279`, :pull:`281`)
+
+
+Bug Fixes
+---------
+- Update MD5 checksum references in documentation from old hash to new hash (:pull:`276`)
+
+
+Dependencies
+------------
+- Pin h5py<=3.14.0 (:issue:`278`, :pull:`277`)
+
+
 Contributors
 ------------
+- Rajiv Daxini (:ghuser:`RDaxini`)
+- Martin Springer (:ghuser:`martin-springer`)
 - Tobin Ford (:ghuser:`tobin-ford`)
