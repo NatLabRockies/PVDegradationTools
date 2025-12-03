@@ -18,13 +18,11 @@ instructions on the [PVDeg Github page](https://github.com/NREL/PVDegradationToo
 
 **[03 - Monte Carlo Simulations](03_monte_carlo/01_arrhenius.ipynb)** - Uncertainty quantification through Monte Carlo methods for Arrhenius degradation and standoff calculations
 
-**[04 - Geospatial & Scenarios](04_geospatial/01_local_scenario.ipynb)** - Large-scale spatial analysis and scenario-based workflows for regional degradation assessments (many require HPC access)
+**[04 - Geospatial & Scenarios](04_geospatial/01_local_scenario.ipynb)** - Large-scale spatial analysis and scenario-based workflows for regional degradation assessments (includes HPC-specific workflows)
 
 **[05 - Advanced Topics](05_advanced/01_custom_functions_nopython.ipynb)** - Custom functions with Numba, PySAM integration, and distributed computing with NSRDB/PVGIS APIs
 
-**[06 - NREL HPC](06_nrel_hpc/01_geospatial_world_map.ipynb)** - Workflows specifically designed for NREL's High Performance Computing environment (requires HPC access)
-
-**[07 - Workshop Demos](07_workshop_demos/01_astm_live_demo.ipynb)** - Interactive demonstrations from ASTM and DuraMAT workshops
+**[06 - Workshop Demos](10_workshop_demos/01_astm_live_demo.ipynb)** - Interactive demonstrations from ASTM and DuraMAT workshops
 
 **[Tools](tools/Tools%20-%20Edge%20Seal%20Oxygen%20Ingress.ipynb)** - Standalone calculation tools for edge seal oxygen ingress, degradation analysis, and module standoff calculations
 
