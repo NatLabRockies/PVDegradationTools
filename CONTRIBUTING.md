@@ -23,6 +23,12 @@ Thank you for your interest in contributing to PVDeg! This guide will help you g
    pip install -e .[all]
    ```
 
+4. (Optional, but required for HPC environments) If using conda and want to use notebooks in Jupyter, register the environment as a kernel:
+   ```bash
+   python -m ipykernel install --user --name=pvdeg-dev
+   ```
+   This allows you to select the `pvdeg-dev` kernel when running Jupyter notebooks. This step is especially important when working on HPC systems like NREL's Kestrel.
+
 ### Pre-commit Hooks
 
 We use pre-commit hooks to maintain code quality and consistency. These hooks automatically run checks before each commit.
