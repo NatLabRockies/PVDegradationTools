@@ -565,17 +565,17 @@ document.write(`
 <ul class="simple">
 <li><p>Internet access</p></li>
 <li><p>NSRDB API key. API keys are free. You can request and obtain an API key in about 5 minutes. To get your own key, visit <a class="reference external" href="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a></p></li>
-<li><p>Step <strong>1.</strong> is for Eagle HPC users. You will need an account with NREL’s Eagle computer for this method.</p></li>
+<li><p>Step <strong>1.</strong> is for Kestrel HPC users. You will need an account with NREL’s Kestrel computer for this method.</p></li>
 </ul>
 <p><strong>Objectives:</strong></p>
 <p>Using direct access to large scale weather databases, we’re going to estimate the minimum standoff distance for a roof mounted PV system. We’ll do this in 3 ways using both the NSRDB and PVGIS database.</p>
 <ol class="arabic simple">
-<li><p>Single Location, NSRDB via NREL’s high performance computer, Eagle.</p></li>
+<li><p>Single Location, NSRDB via NREL’s high performance computer, Kestrel.</p></li>
 <li><p>Single Location via NSRDB public API key.</p></li>
 <li><p>Single Location via the PVGIS public database</p></li>
 </ol>
 <p><strong>Background:</strong></p>
-<p>This journal will demonstrate all existing built-in methods for directly accessing public weather databases. Some methods are restriced to certain user groups. For general users, see methods <strong>2</strong> and <strong>3</strong>. For users with an active Eagle HPC account, you may use method <strong>1</strong> as well as <strong>2</strong> and <strong>3</strong>.</p>
+<p>This journal will demonstrate all existing built-in methods for directly accessing public weather databases. Some methods are restriced to certain user groups. For general users, see methods <strong>2</strong> and <strong>3</strong>. For users with an active Kestrel HPC account, you may use method <strong>1</strong> as well as <strong>2</strong> and <strong>3</strong>.</p>
 <p>For all users and all steps: This journal will run significantly longer than other tutorials and have significant internet traffic as you fetch large datasets.</p>
 <p>This example demonstrates the calculation of a minimum standoff distance necessary for roof-mounted PV modules to ensure that the <span class="math notranslate nohighlight">\(T_{98}\)</span> operational temperature remains under 70°C, in which case the more rigorous thermal stability testing requirements of IEC TS 63126 would not needed to be considered. We use data from [Fuentes, 1987] to model the approximate exponential decay in temperature, <span class="math notranslate nohighlight">\(T(X)\)</span>, with increasing standoff distance, <span class="math notranslate nohighlight">\(X\)</span>, as,</p>
 <div class="math notranslate nohighlight">
@@ -596,6 +596,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
@@ -615,7 +616,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.11.0-1018-azure
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
-pvdeg version  0.1.dev1+g39a982afb
+pvdeg version  0.1.dev1+gd8ea7cbc7
 </pre></div>
 </div>
 </div>
@@ -623,7 +624,7 @@ pvdeg version  0.1.dev1+g39a982afb
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="nsrdb-hsds-on-kestrel">
 <h1>1. NSRDB - HSDS on Kestrel<a class="headerlink" href="#nsrdb-hsds-on-kestrel" title="Link to this heading">#</a></h1>
-<p>This method requires a direct connection to NREL’s high performance computer “Eagle”. If you are not running this journal from Eagle, skip this section and proceed to section <strong>2.</strong></p>
+<p>This method requires a direct connection to NREL’s high performance computer “Kestrel”. If you are not running this journal from Kestrel, skip this section and proceed to section <strong>2.</strong></p>
 <p>In this step:</p>
 <p>First we select a database. Here, we will use the NSRDB. Since we are modeling a single location, we can pass the <code class="docutils literal notranslate"><span class="pre">weather_id</span></code> as tuple (lat, long). A location gid can be used as well. ‘gid’ is a unique identifier to a geographic location within the NSRDB. We’ll look at how to find gids later on.</p>
 <p>Next, we want to select a satellite, named dataset (year of data), and what weather attributes we want to fetch. For further options, see the documentation for <code class="docutils literal notranslate"><span class="pre">pvdeg.weather.get</span></code></p>
@@ -679,19 +680,27 @@ pvdeg version  0.1.dev1+g39a982afb
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">API_KEY</span> <span class="o">=</span> <span class="s2">&quot;your_api_key_here&quot;</span>
-<span class="c1"># The example API key here is for demonstation and is rate-limited per IP.</span>
-<span class="c1"># To get your own API key, visit https://developer.nrel.gov/signup/</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load pre-saved weather data for this tutorial</span>
+<span class="c1"># This avoids API rate limits during testing and builds</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
-<span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;PSM4&quot;</span>
-<span class="n">weather_id</span> <span class="o">=</span> <span class="p">(</span><span class="mf">39.741931</span><span class="p">,</span> <span class="o">-</span><span class="mf">105.169891</span><span class="p">)</span>
-<span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;api_key&quot;</span><span class="p">:</span> <span class="s2">&quot;DEMO_KEY&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;user@mail.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;map_variables&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">}</span>
+<span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/psm4_golden.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../data/meta_golden.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
-<span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">weather_db</span><span class="p">,</span> <span class="n">weather_id</span><span class="p">,</span> <span class="o">**</span><span class="n">weather_arg</span><span class="p">)</span>
+<span class="c1"># Uncomment below to fetch fresh data with your own API key:</span>
+<span class="c1"># API_KEY = &quot;your_api_key_here&quot;</span>
+<span class="c1"># # The example API key here is for demonstation and is rate-limited per IP.</span>
+<span class="c1"># # To get your own API key, visit https://developer.nrel.gov/signup/</span>
+<span class="c1"># weather_db = &quot;PSM4&quot;</span>
+<span class="c1"># weather_id = (39.741931, -105.169891)</span>
+<span class="c1"># weather_arg = {</span>
+<span class="c1">#     &quot;api_key&quot;: &quot;DEMO_KEY&quot;,</span>
+<span class="c1">#     &quot;email&quot;: &quot;user@mail.com&quot;,</span>
+<span class="c1">#     &quot;map_variables&quot;: True,</span>
+<span class="c1"># }</span>
+<span class="c1"># weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)</span>
+
 <span class="c1"># Perform calculation and output interpretation or results</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">(</span>
     <span class="n">weather_df</span><span class="o">=</span><span class="n">weather_df</span><span class="p">,</span>
@@ -715,9 +724,7 @@ pvdeg version  0.1.dev1+g39a982afb
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Column &quot;relative_humidity&quot; not found in DataFrame. Calculating...
-                                                                     
-The array surface_tilt angle was not provided, therefore the latitude of  39.7 was used.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  39.7 was used.
 The estimated T₉₈ of an insulated-back module is 75.9°C. 
 The estimated T₉₈ of an open-rack module is 51.6°C. 
 Level 0 certification is valid for a standoff greather than 1.8 cm. 
