@@ -174,7 +174,15 @@ License
 Contributing
 ============
 
-We welcome contributions to this software. Please read the copyright license agreement (cla-1.0.md), with instructions on signing it in sign-CLA.md.
+We welcome contributions to this software! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions on:
+- Setting up your development environment
+- Installing and using pre-commit hooks
+- Code style guidelines
+- Testing and documentation requirements
+- **Contributing to material property and degradation parameter databases**
+- Submitting pull requests
+
+Please read the copyright license agreement (cla-1.0.md), with instructions on signing it in sign-CLA.md.
 
 All code, documentation, and discussion contributors are acknowledged for their contributions to the PVDeg project.
 
