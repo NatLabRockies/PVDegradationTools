@@ -1,0 +1,1438 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Geospatial World Map (HPC) &#8212; PVDEG Tutorials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05_geospatial/02_geospatial_world_map';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="LETID Outdoor Geospatial Demo (HPC)" href="03_letid_outdoor_geospatial_demo.html" />
+    <link rel="prev" title="Geospatial Templates (HPC)" href="01_geospatial_templates.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-light" alt="PVDEG Tutorials - Home"/>
+    <script>document.write(`<img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-dark" alt="PVDEG Tutorials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">01 - Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/01_basics_humidity_design.html">Humidity Design Basics</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/02_degradation.html">Degradation Overview</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/03_spectral_degradation.html">Spectral Degradation</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/04_weather_database_access.html">Weather Database Access</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">02 - Degradation Mechanisms</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/01_bo_lid_accelerated_test.html">B-O LID Accelerated Test</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/02_letid_accelerated_test.html">LETID Accelerated Test</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/03_letid_outdoor.html">LETID Outdoor</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/04_letid_outdoor_scenario.html">LETID Outdoor Scenario</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/05_letid_passivated_wafer.html">LETID Passivated Wafer</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/06_vant_hoff_degradation_model.html">Van’t Hoff Degradation Model</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 - Monte Carlo Simulations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_monte_carlo/01_arrhenius.html">Arrhenius Monte Carlo</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../03_monte_carlo/02_standoff.html">Standoff Monte Carlo</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">04 - Scenarios</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_scenario/01_scenario_temperature.html">Temperature Scenario</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../04_scenario/02_scenario_single_location.html">Single Location</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../04_scenario/03_scenario_mountain_downselect.html">Mountain Downselect</a></li>
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">05 - Geospatial Analysis</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_geospatial_templates.html">Geospatial Templates (HPC)</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Geospatial World Map (HPC)</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="03_letid_outdoor_geospatial_demo.html">LETID Outdoor Geospatial Demo (HPC)</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="04_scenario_geographical_features.html">Geographical Features (HPC)</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="05_scenario_geospatial.html">Scenario Geospatial (HPC)</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">06 - Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_advanced/01_custom_functions_nopython.html">Custom Functions with Numba</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../06_advanced/03_pysam_api.html">PySAM with API (API Key Required)</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../06_advanced/04_nsrdb_distributed_api.html">NSRDB Distributed (API Key Required)</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../06_advanced/05_pvgis_distributed.html">PVGIS Distributed</a></li>
+
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">06 - Workshop Demos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10_workshop_demos/01_astm_live_demo.html">ASTM Live Demo</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../10_workshop_demos/02_duramat_live_demo.html">DuraMAT Live Demo (HPC)</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/Tools%20-%20Edge%20Seal%20Oxygen%20Ingress.html">Edge Seal Oxygen Ingress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/Tools%20-%20Degradation.html">Degradation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/Tools%20-%20Module%20Standoff%20for%20IEC%20TS%2063126.html">Module Standoff for IEC TS 63126 (HPC)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/05_geospatial/02_geospatial_world_map.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Geospatial World Map (HPC)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Geospatial World Map (HPC)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-standoff">Calculate Standoff</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#post-process">Post process</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="geospatial-world-map-hpc">
+<h1>Geospatial World Map (HPC)<a class="headerlink" href="#geospatial-world-map-hpc" title="Link to this heading">#</a></h1>
+<p>M. Springer 2024-06-05</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Importing libraries...&quot;</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="calculate-standoff">
+<h1>Calculate Standoff<a class="headerlink" href="#calculate-standoff" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">work_dir</span> <span class="o">=</span> <span class="s2">&quot;/projects/pvsoiling/pvdeg/analysis/world_map/standoff_fine&quot;</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;/projects/pvsoiling/pvdeg/analysis/world_map/data&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">local</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;manager&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;n_workers&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">kestrel</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;manager&quot;</span><span class="p">:</span> <span class="s2">&quot;slurm&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;n_jobs&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>  <span class="c1"># Max number of nodes used for parallel processing</span>
+    <span class="s2">&quot;cores&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">&quot;processes&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s2">&quot;memory&quot;</span><span class="p">:</span> <span class="s2">&quot;245GB&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;account&quot;</span><span class="p">:</span> <span class="s2">&quot;pvfem&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;queue&quot;</span><span class="p">:</span> <span class="s2">&quot;standard&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;walltime&quot;</span><span class="p">:</span> <span class="s2">&quot;8:00:00&quot;</span><span class="p">,</span>
+    <span class="c1"># &quot;scheduler_options&quot;: {&quot;host&quot;: socket.gethostname()},</span>
+<span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting Dask client...&quot;</span><span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">start_dask</span><span class="p">(</span><span class="n">hpc</span><span class="o">=</span><span class="n">kestrel</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cluster ready!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get weather data</span>
+<span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;NSRDB&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="s2">&quot;Himawari&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="s2">&quot;tmy-2020&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NREL_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;air_temperature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dhi&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ghi&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dni&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;relative_humidity&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">weather_ds_himawari</span><span class="p">,</span> <span class="n">meta_df_himawari</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="n">weather_db</span><span class="p">,</span> <span class="n">geospatial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">weather_arg</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meta_df_himawari_sub</span><span class="p">,</span> <span class="n">gids_meta_df_himawari</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">gid_downsampling</span><span class="p">(</span>
+    <span class="n">meta_df_himawari</span><span class="p">,</span> <span class="mi">3</span>
+<span class="p">)</span>
+<span class="n">weather_ds_himawari_sub</span> <span class="o">=</span> <span class="n">weather_ds_himawari</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="n">meta_df_himawari_sub</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_himawari</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span>
+    <span class="s2">&quot;weather_ds&quot;</span><span class="p">:</span> <span class="n">weather_ds_himawari_sub</span><span class="p">,</span>
+    <span class="s2">&quot;meta_df&quot;</span><span class="p">:</span> <span class="n">meta_df_himawari_sub</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">standoff_res_himawari</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">analysis</span><span class="p">(</span><span class="o">**</span><span class="n">geo_himawari</span><span class="p">)</span>
+<span class="n">standoff_res_himawari</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_himawari.nc&quot;</span><span class="p">))</span>
+<span class="n">standoff_res_himawari</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_himawari.csv&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="s2">&quot;GOES&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="mi">2021</span><span class="p">,</span>
+    <span class="s2">&quot;NREL_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;air_temperature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dhi&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ghi&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dni&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;relative_humidity&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">weather_ds_goes</span><span class="p">,</span> <span class="n">meta_df_goes</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="n">weather_db</span><span class="p">,</span> <span class="n">geospatial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">weather_arg</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meta_df_goes_sub</span><span class="p">,</span> <span class="n">gids_meta_df_goes</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">gid_downsampling</span><span class="p">(</span><span class="n">meta_df_goes</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">weather_ds_goes_sub</span> <span class="o">=</span> <span class="n">weather_ds_goes</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="n">meta_df_goes_sub</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_goes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span>
+    <span class="s2">&quot;weather_ds&quot;</span><span class="p">:</span> <span class="n">weather_ds_goes_sub</span><span class="p">,</span>
+    <span class="s2">&quot;meta_df&quot;</span><span class="p">:</span> <span class="n">meta_df_goes_sub</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">standoff_res_goes</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">analysis</span><span class="p">(</span><span class="o">**</span><span class="n">geo_goes</span><span class="p">)</span>
+<span class="n">standoff_res_goes</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_goes.nc&quot;</span><span class="p">))</span>
+<span class="n">standoff_res_goes</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_goes.csv&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="s2">&quot;METEOSAT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="mi">2019</span><span class="p">,</span>
+    <span class="s2">&quot;NREL_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;air_temperature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dhi&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ghi&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dni&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;relative_humidity&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">weather_ds_meteosat</span><span class="p">,</span> <span class="n">meta_df_meteosat</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="n">weather_db</span><span class="p">,</span> <span class="n">geospatial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">weather_arg</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meta_df_meteosat_sub</span><span class="p">,</span> <span class="n">gids_meta_df_meteosat</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">gid_downsampling</span><span class="p">(</span>
+    <span class="n">meta_df_meteosat</span><span class="p">,</span> <span class="mi">4</span>
+<span class="p">)</span>
+<span class="n">weather_ds_meteosat_sub</span> <span class="o">=</span> <span class="n">weather_ds_meteosat</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="n">meta_df_meteosat_sub</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_meteosat</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span>
+    <span class="s2">&quot;weather_ds&quot;</span><span class="p">:</span> <span class="n">weather_ds_meteosat_sub</span><span class="p">,</span>
+    <span class="s2">&quot;meta_df&quot;</span><span class="p">:</span> <span class="n">meta_df_meteosat_sub</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">standoff_res_meteosat</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">analysis</span><span class="p">(</span><span class="o">**</span><span class="n">geo_meteosat</span><span class="p">)</span>
+<span class="n">standoff_res_meteosat</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_meteosat.nc&quot;</span><span class="p">))</span>
+<span class="n">standoff_res_meteosat</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_meteosat.csv&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Auxillary data</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span>
+
+<span class="n">fp_weather_aux</span> <span class="o">=</span> <span class="s2">&quot;/projects/pvsoiling/pvdeg/data/world_map_aux.h5&quot;</span>
+<span class="n">fp_meta_aux</span> <span class="o">=</span> <span class="s2">&quot;/projects/pvsoiling/pvdeg/data/meta_world_map_aux.csv&quot;</span>
+
+<span class="c1"># weather_aux = pvdeg.weather.read(fp_weather_aux, &#39;h5&#39;)</span>
+<span class="n">meta_aux</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fp_meta_aux</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># xarray work around for aux data</span>
+<span class="n">dss</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">drop_variables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;meta&quot;</span><span class="p">,</span> <span class="s2">&quot;time_index&quot;</span><span class="p">,</span> <span class="s2">&quot;tmy_year&quot;</span><span class="p">,</span> <span class="s2">&quot;tmy_year_short&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinates&quot;</span><span class="p">]</span>
+
+<span class="n">hf</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">fp_weather_aux</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">attr</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">hf</span><span class="p">)</span>
+
+<span class="n">attr_to_read</span> <span class="o">=</span> <span class="p">[</span><span class="n">elem</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">attr</span> <span class="k">if</span> <span class="n">elem</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">drop_variables</span><span class="p">]</span>
+
+<span class="n">chunks</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">shapes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">attr_to_read</span><span class="p">:</span>
+    <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hf</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">chunks</span> <span class="k">if</span> <span class="n">hf</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">chunks</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">))</span>
+    <span class="n">shapes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hf</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span> <span class="k">if</span> <span class="n">hf</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">))</span>
+<span class="n">chunks</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">chunks</span><span class="p">))</span>
+<span class="n">shapes</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">shapes</span><span class="p">))</span>
+
+
+<span class="n">time_index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">hf</span><span class="p">[</span><span class="s2">&quot;time_index&quot;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span><span class="o">.</span><span class="n">values</span>
+<span class="n">meta_df</span> <span class="o">=</span> <span class="n">meta_aux</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;gid&quot;</span><span class="p">:</span> <span class="n">meta_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="n">time_index</span><span class="p">}</span>
+<span class="n">coords_len</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="n">time_index</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;gid&quot;</span><span class="p">:</span> <span class="n">meta_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+    <span class="n">fp_weather_aux</span><span class="p">,</span>
+    <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;h5netcdf&quot;</span><span class="p">,</span>
+    <span class="n">phony_dims</span><span class="o">=</span><span class="s2">&quot;sort&quot;</span><span class="p">,</span>
+    <span class="n">chunks</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;phony_dim_0&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;phony_dim_1&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span>
+    <span class="n">drop_variables</span><span class="o">=</span><span class="n">drop_variables</span><span class="p">,</span>
+    <span class="n">mask_and_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">decode_cf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">data_vars</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">var</span><span class="p">),</span> <span class="s2">&quot;psm_scale_factor&quot;</span><span class="p">):</span>
+        <span class="n">scale_factor</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">ds</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">.</span><span class="n">psm_scale_factor</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">scale_factor</span><span class="p">)</span>
+        <span class="nb">getattr</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;scale_factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scale_factor</span>
+
+<span class="n">rename</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="p">(</span>
+    <span class="n">phony</span><span class="p">,</span>
+    <span class="n">length</span><span class="p">,</span>
+<span class="p">)</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">sizes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">length</span> <span class="o">==</span> <span class="n">coords_len</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]:</span>
+        <span class="n">rename</span><span class="p">[</span><span class="n">phony</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;time&quot;</span>
+    <span class="k">elif</span> <span class="n">length</span> <span class="o">==</span> <span class="n">coords_len</span><span class="p">[</span><span class="s2">&quot;gid&quot;</span><span class="p">]:</span>
+        <span class="n">rename</span><span class="p">[</span><span class="n">phony</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;gid&quot;</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">rename</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">assign_coords</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+
+<span class="c1"># TODO: In case re-chunking becomes necessary</span>
+<span class="c1"># ax0 = list(ds.sizes.keys())[list(ds.sizes.values()).index(shapes[0])]</span>
+<span class="c1"># ax1 = list(ds.sizes.keys())[list(ds.sizes.values()).index(shapes[1])]</span>
+<span class="c1"># ds = ds.chunk(chunks={ax0:chunks[0], ax1:chunks[1]})</span>
+<span class="n">dss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dss</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">decode_cf</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+
+<span class="c1"># Rechunk time axis</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">unify_chunks</span><span class="p">()</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="n">chunks</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;gid&quot;</span><span class="p">:</span> <span class="n">ds</span><span class="o">.</span><span class="n">chunks</span><span class="p">[</span><span class="s2">&quot;gid&quot;</span><span class="p">]})</span>
+
+<span class="n">weather_ds</span> <span class="o">=</span> <span class="n">ds</span>
+
+<span class="n">DSET_MAP</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;air_temperature&quot;</span><span class="p">:</span> <span class="s2">&quot;temp_air&quot;</span><span class="p">,</span> <span class="s2">&quot;Relative Humidity&quot;</span><span class="p">:</span> <span class="s2">&quot;relative_humidity&quot;</span><span class="p">}</span>
+<span class="n">META_MAP</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;elevation&quot;</span><span class="p">:</span> <span class="s2">&quot;altitude&quot;</span><span class="p">,</span> <span class="s2">&quot;Local Time Zone&quot;</span><span class="p">:</span> <span class="s2">&quot;tz&quot;</span><span class="p">,</span> <span class="s2">&quot;timezone&quot;</span><span class="p">:</span> <span class="s2">&quot;tz&quot;</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">dset</span> <span class="ow">in</span> <span class="n">weather_ds</span><span class="o">.</span><span class="n">data_vars</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">dset</span> <span class="ow">in</span> <span class="n">DSET_MAP</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">weather_ds</span> <span class="o">=</span> <span class="n">weather_ds</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="n">dset</span><span class="p">:</span> <span class="n">DSET_MAP</span><span class="p">[</span><span class="n">dset</span><span class="p">]})</span>
+
+<span class="k">for</span> <span class="n">mset</span> <span class="ow">in</span> <span class="n">meta_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">mset</span> <span class="ow">in</span> <span class="n">META_MAP</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">meta_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">mset</span><span class="p">:</span> <span class="n">META_MAP</span><span class="p">[</span><span class="n">mset</span><span class="p">]},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">weather_ds_aux</span> <span class="o">=</span> <span class="n">weather_ds</span>
+
+<span class="n">geo_aux</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span>
+    <span class="s2">&quot;weather_ds&quot;</span><span class="p">:</span> <span class="n">weather_ds_aux</span><span class="p">,</span>
+    <span class="s2">&quot;meta_df&quot;</span><span class="p">:</span> <span class="n">meta_aux</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">standoff_res_aux</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">analysis</span><span class="p">(</span><span class="o">**</span><span class="n">geo_aux</span><span class="p">)</span>
+<span class="n">standoff_res_aux</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_aux.nc&quot;</span><span class="p">))</span>
+<span class="n">standoff_res_aux</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_aux.csv&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;NSRDB&quot;</span>
+<span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="s2">&quot;METEOSAT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="mi">2019</span><span class="p">,</span>
+    <span class="s2">&quot;NREL_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;air_temperature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dhi&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ghi&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dni&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;relative_humidity&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+<span class="n">weather_ds_meteosat</span><span class="p">,</span> <span class="n">meta_df_meteosat</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="n">weather_db</span><span class="p">,</span> <span class="n">geospatial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">weather_arg</span>
+<span class="p">)</span>
+
+<span class="n">time_hourly</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;2019-01-01&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span>
+<span class="n">weather_ds_meteosat_hourly</span> <span class="o">=</span> <span class="n">weather_ds_meteosat</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time_hourly</span><span class="p">)</span>
+
+<span class="n">europe</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Spain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Portugal&quot;</span><span class="p">,</span>  <span class="c1">#&#39;Ireland&#39;, &#39;United Kingdom&#39;,</span>
+    <span class="s2">&quot;France&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Belgium&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Netherlands&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Norway&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Luxembourg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Germany&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Switzerland&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Italy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Monaco&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Denmark&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Liechtenstein&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Austria&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Sweden&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Czech Republic&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;San Marino&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Slovenia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Croatia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Poland&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Malta&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Bosnia and Herzegovina&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Hungary&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Slovakia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Montenegro&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Serbia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Albania&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Greece&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Romania&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Macedonia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Latvia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Lithuania&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Finland&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Estonia&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Ukraine&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Bulgaria&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Belarus&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Moldova&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Turkey&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Cyprus&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Northern Cyprus&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Georgia&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">meta_df_europe</span> <span class="o">=</span> <span class="n">meta_df_meteosat</span><span class="p">[</span><span class="n">meta_df_meteosat</span><span class="p">[</span><span class="s2">&quot;country&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">europe</span><span class="p">)]</span>
+
+<span class="n">meta_df_europe_sub</span><span class="p">,</span> <span class="n">gids_sub</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">gid_downsampling</span><span class="p">(</span><span class="n">meta_df_europe</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">weather_europe_sub</span> <span class="o">=</span> <span class="n">weather_ds_meteosat_hourly</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="n">meta_df_europe_sub</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">meta_uk</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../../world_map/data/meta_pvgis_uk_4300.csv&quot;</span><span class="p">)</span>
+<span class="n">meta_uk_sub</span><span class="p">,</span> <span class="n">gids_sub</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">gid_downsampling</span><span class="p">(</span><span class="n">meta_uk</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">meta_scan1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">/meta_pvgis_scan_coarse1500.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">meta_scan12</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">/meta_pvgis_scan_coarse_1500_1599.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">meta_scan2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">/meta_pvgis_scan_coarse2100.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">meta_scan</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">meta_scan1</span><span class="p">,</span> <span class="n">meta_scan12</span><span class="p">,</span> <span class="n">meta_scan2</span><span class="p">])</span>
+
+<span class="n">meta_pvgis</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">meta_scan</span><span class="p">,</span> <span class="n">meta_uk_sub</span><span class="p">])</span>
+
+<span class="n">lat_NSRDB</span> <span class="o">=</span> <span class="n">meta_df_europe_sub</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">meta_pvgis</span><span class="p">[</span><span class="s2">&quot;latitude_pvgis&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">meta_pvgis</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">]</span>
+<span class="n">meta_pvgis</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">meta_pvgis</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span>
+        <span class="n">lat_NSRDB</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">lat_NSRDB</span><span class="p">))]</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">meta_df_europe_sub</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="k">else</span> <span class="n">x</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">lon_NSRDB</span> <span class="o">=</span> <span class="n">meta_df_europe_sub</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">meta_pvgis</span><span class="p">[</span><span class="s2">&quot;longitude_pvgis&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">meta_pvgis</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]</span>
+<span class="n">meta_pvgis</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">meta_pvgis</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span>
+        <span class="n">lon_NSRDB</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">lon_NSRDB</span><span class="p">))]</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">meta_df_europe_sub</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="k">else</span> <span class="n">x</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">meta_pvgis</span><span class="p">[</span><span class="s2">&quot;tz&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">meta_pvgis</span> <span class="o">=</span> <span class="n">meta_pvgis</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="n">meta_eu_coarse</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">meta_df_europe_sub</span><span class="p">,</span> <span class="n">meta_pvgis</span><span class="p">])</span>
+<span class="n">meta_eu_coarse</span><span class="p">[</span><span class="s2">&quot;tz&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">meta_eu_coarse</span> <span class="o">=</span> <span class="n">meta_eu_coarse</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">meta_eu_coarse</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../../world_map/data/meta_eu_coarse.csv&quot;</span><span class="p">)</span>
+
+<span class="n">weather_uk</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;../../world_map/data/weather_ds_uk_4300.nc&quot;</span><span class="p">)</span>
+<span class="n">weather_uk</span> <span class="o">=</span> <span class="n">weather_uk</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="n">meta_uk</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">weather_uk_sub</span> <span class="o">=</span> <span class="n">weather_uk</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="n">meta_uk_sub</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">weather_scan1</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;../../world_map/data/weather_ds_scan_coarse1500.nc&quot;</span><span class="p">)</span>
+<span class="n">weather_scan12</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+    <span class="s2">&quot;../../world_map/data/weather_ds_scan_coarse_1500_1599.nc&quot;</span>
+<span class="p">)</span>
+<span class="n">weather_scan2</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;../../world_map/data/weather_ds_scan_coarse2100.nc&quot;</span><span class="p">)</span>
+<span class="n">weather_scan</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">weather_scan1</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1500</span><span class="p">)),</span>
+        <span class="n">weather_scan12</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1501</span><span class="p">,</span> <span class="mi">1599</span><span class="p">)),</span>
+        <span class="n">weather_scan2</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1600</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+    <span class="p">],</span>
+    <span class="n">dim</span><span class="o">=</span><span class="s2">&quot;gid&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">weather_scan</span> <span class="o">=</span> <span class="n">weather_scan</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="n">meta_scan</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="c1"># weather_scan = xr.concat([weather_scan1, weather_scan2], dim=&#39;gid&#39;)</span>
+
+<span class="n">weather_pvgis</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">weather_scan</span><span class="p">,</span> <span class="n">weather_uk_sub</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="s2">&quot;gid&quot;</span><span class="p">)</span>
+<span class="n">weather_pvgis</span> <span class="o">=</span> <span class="n">weather_pvgis</span><span class="o">.</span><span class="n">drop_vars</span><span class="p">([</span><span class="s2">&quot;IR(h)&quot;</span><span class="p">,</span> <span class="s2">&quot;wind_direction&quot;</span><span class="p">,</span> <span class="s2">&quot;pressure&quot;</span><span class="p">])</span>
+
+<span class="n">weather_pvgis</span> <span class="o">=</span> <span class="n">weather_pvgis</span><span class="o">.</span><span class="n">assign_coords</span><span class="p">({</span><span class="s2">&quot;gid&quot;</span><span class="p">:</span> <span class="n">meta_pvgis</span><span class="o">.</span><span class="n">index</span><span class="p">})</span>
+<span class="n">weather_pvgis</span> <span class="o">=</span> <span class="n">weather_pvgis</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="n">chunks</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;gid&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">})</span>
+<span class="n">weather_pvgis</span> <span class="o">=</span> <span class="n">weather_pvgis</span><span class="o">.</span><span class="n">unify_chunks</span><span class="p">()</span>
+
+<span class="n">meta_df_pvgis_sub</span><span class="p">,</span> <span class="n">gids_meta_df_pvgis</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">gid_downsampling</span><span class="p">(</span><span class="n">meta_pvgis</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">weather_ds_pvgis_sub</span> <span class="o">=</span> <span class="n">weather_pvgis</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="n">meta_df_pvgis_sub</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="c1"># weather_europe_sub = weather_europe_sub.assign_coords({&#39;time&#39;: pd.date_range(&quot;2022-01-01&quot;, freq=&quot;h&quot;, periods=365 * 24),})</span>
+<span class="c1"># weather_eu_coarse = xr.concat([weather_europe_sub, weather_pvgis], dim=&#39;gid&#39;)</span>
+<span class="c1"># weather_eu_coarse = weather_eu_coarse.assign_coords({&#39;gid&#39;: meta_eu_coarse.index})</span>
+<span class="c1"># weather_eu_coarse = weather_eu_coarse.chunk(chunks={&quot;time&quot;: -1, &quot;gid&quot;: 100})</span>
+<span class="c1"># weather_eu_coarse = weather_eu_coarse.unify_chunks()</span>
+
+<span class="c1"># with open(&#39;weather_eu_coarse.pickle&#39;, &#39;wb&#39;) as handle:</span>
+<span class="c1">#     pickle.dump(weather_eu_coarse, handle, protocol=pickle.HIGHEST_PROTOCOL)</span>
+
+
+<span class="n">geo_pvgis</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span>
+    <span class="s2">&quot;weather_ds&quot;</span><span class="p">:</span> <span class="n">weather_pvgis</span><span class="p">,</span>
+    <span class="s2">&quot;meta_df&quot;</span><span class="p">:</span> <span class="n">meta_pvgis</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">standoff_res_pvgis</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">analysis</span><span class="p">(</span><span class="o">**</span><span class="n">geo_pvgis</span><span class="p">)</span>
+<span class="n">standoff_res_pvgis</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_pvgis.nc&quot;</span><span class="p">))</span>
+<span class="n">standoff_res_pvgis</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_pvgis.csv&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meta_north</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">/meta_pvgis_north_3300.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">weather_north</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">/weather_ds_north_3300.nc&quot;</span><span class="p">)</span>
+<span class="n">weather_north</span> <span class="o">=</span> <span class="n">weather_north</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="n">meta_north</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">weather_north</span> <span class="o">=</span> <span class="n">weather_north</span><span class="o">.</span><span class="n">assign_coords</span><span class="p">({</span><span class="s2">&quot;gid&quot;</span><span class="p">:</span> <span class="n">meta_north</span><span class="o">.</span><span class="n">index</span><span class="p">})</span>
+<span class="n">weather_north</span> <span class="o">=</span> <span class="n">weather_north</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="n">chunks</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;gid&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">})</span>
+<span class="n">weather_north</span> <span class="o">=</span> <span class="n">weather_north</span><span class="o">.</span><span class="n">unify_chunks</span><span class="p">()</span>
+
+
+<span class="n">geo_pvgis</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span>
+    <span class="s2">&quot;weather_ds&quot;</span><span class="p">:</span> <span class="n">weather_north</span><span class="p">,</span>
+    <span class="s2">&quot;meta_df&quot;</span><span class="p">:</span> <span class="n">meta_north</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">standoff_res_pvgis</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">analysis</span><span class="p">(</span><span class="o">**</span><span class="n">geo_pvgis</span><span class="p">)</span>
+<span class="n">standoff_res_pvgis</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_pvgis_north.nc&quot;</span><span class="p">))</span>
+<span class="n">standoff_res_pvgis</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_pvgis_north.csv&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="post-process">
+<h1>Post process<a class="headerlink" href="#post-process" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">global_land_mask</span><span class="w"> </span><span class="kn">import</span> <span class="n">globe</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.io.shapereader</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">shpreader</span>
+
+<span class="n">work_dir</span> <span class="o">=</span> <span class="s2">&quot;/projects/pvsoiling/pvdeg/analysis/world_map/standoff_fine&quot;</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;/projects/pvsoiling/pvdeg/analysis/world_map/data&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create 0cm standoff locations</span>
+
+<span class="n">lon_north</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">179</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="n">lat_north</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="n">lon_grid_north</span><span class="p">,</span> <span class="n">lat_grid_north</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">lon_north</span><span class="p">,</span> <span class="n">lat_north</span><span class="p">)</span>
+<span class="n">land_north</span> <span class="o">=</span> <span class="n">globe</span><span class="o">.</span><span class="n">is_land</span><span class="p">(</span><span class="n">lat_grid_north</span><span class="p">,</span> <span class="n">lon_grid_north</span><span class="p">)</span>
+<span class="n">lon_land_north</span> <span class="o">=</span> <span class="n">lon_grid_north</span><span class="p">[</span><span class="n">land_north</span><span class="p">]</span>
+<span class="n">lat_land_north</span> <span class="o">=</span> <span class="n">lat_grid_north</span><span class="p">[</span><span class="n">land_north</span><span class="p">]</span>
+
+<span class="n">lon_south</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">179</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="n">lat_south</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="n">lon_grid_south</span><span class="p">,</span> <span class="n">lat_grid_south</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">lon_south</span><span class="p">,</span> <span class="n">lat_south</span><span class="p">)</span>
+<span class="n">land_south</span> <span class="o">=</span> <span class="n">globe</span><span class="o">.</span><span class="n">is_land</span><span class="p">(</span><span class="n">lat_grid_south</span><span class="p">,</span> <span class="n">lon_grid_south</span><span class="p">)</span>
+<span class="n">lon_land_south</span> <span class="o">=</span> <span class="n">lon_grid_south</span><span class="p">[</span><span class="n">land_south</span><span class="p">]</span>
+<span class="n">lat_land_south</span> <span class="o">=</span> <span class="n">lat_grid_south</span><span class="p">[</span><span class="n">land_south</span><span class="p">]</span>
+
+
+<span class="n">lon_asia</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="n">lat_asia</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+
+<span class="n">lon</span> <span class="o">=</span> <span class="n">lon_asia</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">lon_asia</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="mi">61</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">lat_coord</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">lat_asia</span><span class="p">)):</span>
+    <span class="n">lon_sub</span> <span class="o">=</span> <span class="n">lon_asia</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="o">-</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">lat_sub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">lon_sub</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">lat_coord</span><span class="p">)</span>
+    <span class="n">lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lon_sub</span><span class="p">)</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lat_sub</span><span class="p">)</span>
+
+<span class="n">lon_asia</span> <span class="o">=</span> <span class="n">lon</span>
+<span class="n">lat_asia</span> <span class="o">=</span> <span class="n">lat</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">lon_land_north</span><span class="p">,</span> <span class="n">lat_land_north</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">lon_land_south</span><span class="p">,</span> <span class="n">lat_land_south</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">template_params</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">template_parameters</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">)</span>
+<span class="n">standoff_zero_north</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">zero_template</span><span class="p">(</span>
+    <span class="n">lat_land_north</span><span class="p">,</span> <span class="n">lon_land_north</span><span class="p">,</span> <span class="o">**</span><span class="n">template_params</span>
+<span class="p">)</span>
+<span class="n">standoff_zero_south</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">zero_template</span><span class="p">(</span>
+    <span class="n">lat_land_south</span><span class="p">,</span> <span class="n">lon_land_south</span><span class="p">,</span> <span class="o">**</span><span class="n">template_params</span>
+<span class="p">)</span>
+<span class="n">standoff_zero_asia</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">zero_template</span><span class="p">(</span>
+    <span class="n">lat_asia</span><span class="p">,</span> <span class="n">lon_asia</span><span class="p">,</span> <span class="o">**</span><span class="n">template_params</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">standoff_aux</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_aux.nc&quot;</span><span class="p">))</span>
+<span class="n">standoff_himawari</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_himawari.nc&quot;</span><span class="p">))</span>
+<span class="n">standoff_meteosat</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_meteosat.nc&quot;</span><span class="p">))</span>
+<span class="n">standoff_north</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_pvgis_north.nc&quot;</span><span class="p">))</span>
+<span class="n">standoff_pvgis</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_pvgis.nc&quot;</span><span class="p">))</span>
+<span class="n">standoff_goes</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_goes.nc&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="o">-</span><span class="mi">85</span><span class="p">,</span> <span class="mi">85</span><span class="p">],</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="n">shapename</span> <span class="o">=</span> <span class="s2">&quot;admin_0_countries&quot;</span>
+<span class="n">states_shp</span> <span class="o">=</span> <span class="n">shpreader</span><span class="o">.</span><span class="n">natural_earth</span><span class="p">(</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="s2">&quot;110m&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;cultural&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">shapename</span>
+<span class="p">)</span>
+
+<span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;Spectral_r&quot;</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mf">0.75</span>
+
+
+<span class="n">standoff_zero_north</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+    <span class="n">add_colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">standoff_zero_south</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+    <span class="n">add_colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">standoff_zero_asia</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+    <span class="n">add_colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">cm</span> <span class="o">=</span> <span class="n">standoff_himawari</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+    <span class="n">add_colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">standoff_north</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+    <span class="n">add_colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">standoff_aux</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+    <span class="n">add_colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">standoff_pvgis</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+    <span class="n">add_colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">standoff_meteosat</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+    <span class="n">add_colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">standoff_goes</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+    <span class="n">add_colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">ax</span><span class="o">.</span><span class="n">add_geometries</span><span class="p">(</span>
+    <span class="n">shpreader</span><span class="o">.</span><span class="n">Reader</span><span class="p">(</span><span class="n">states_shp</span><span class="p">)</span><span class="o">.</span><span class="n">geometries</span><span class="p">(),</span>
+    <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+    <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">cb_title</span> <span class="o">=</span> <span class="s2">&quot;Standoff distance [cm]&quot;</span>
+<span class="n">cb</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.78</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">cb_title</span><span class="p">)</span>
+<span class="c1"># ax.set_title(&#39;title&#39;)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">85</span><span class="p">,</span> <span class="mi">85</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Longitude&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Latitude&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_dir</span><span class="p">,</span> <span class="s2">&quot;standoff_map.png&quot;</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./05_geospatial"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_geospatial_templates.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Geospatial Templates (HPC)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_letid_outdoor_geospatial_demo.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">LETID Outdoor Geospatial Demo (HPC)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Geospatial World Map (HPC)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-standoff">Calculate Standoff</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#post-process">Post process</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin Springer, Matthew Brown, Silvana Ovaitt, Tobin Ford, Joseph Karas, Michael Kempe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
