@@ -18,7 +18,7 @@ instructions on the [PVDeg Github page](https://github.com/NREL/PVDegradationToo
 
 **[03 - Monte Carlo Simulations](03_monte_carlo/01_arrhenius.ipynb)** - Uncertainty quantification through Monte Carlo methods for Arrhenius degradation and standoff calculations
 
-**[04 - Scenarios](04_scenario/01_scenario_temperature.ipynb)** - Scenario-based workflows for local, geographical, and regional PV system analysis (includes HPC-specific workflows)
+**[04 - Scenarios](04_scenario/01_scenario_temperature.ipynb)** - Scenario-based workflows allowing for easy analysis of different PV module materials or deployment locations.
 
 **[05 - Geospatial Analysis](05_geospatial/01_geospatial_templates.ipynb)** - Large-scale spatial analysis, geospatial templates, and world map visualizations for regional degradation assessments (HPC)
 
