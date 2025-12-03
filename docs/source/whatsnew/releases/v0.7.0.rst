@@ -26,6 +26,8 @@ Enhancements
   degradation parameter databases. Includes detailed pre-commit installation and usage
   documentation, and ipykernel setup instructions for conda environments.
   (:issue:`145`, :issue:`293`, :issue:`296`, :pull:`302`)
+- Configure ReadTheDocs to build documentation on every pull request for preview and
+  review. (:issue:`258`, :pull:`302`)
 - Restructure tutorial notebooks and migrate from ``tutorials_and_tools/`` to new
   ``tutorials/`` directory with improved organization and naming conventions.
   (:issue:`232`, :issue:`271`, :pull:`302`)
