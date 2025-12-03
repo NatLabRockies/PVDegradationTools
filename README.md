@@ -178,7 +178,11 @@ change something about PVDeg, then please make an issue on our
 Citing
 ======
 
-If you use PVDeg in a published work, please cite:
+If you use PVDeg in a published work, please cite both the software and the paper.
+
+**Quick Citation:**
+
+Click the **"Cite this repository"** button in the right sidebar of this page. It provides formatted citations for both the software and the preferred paper citation in multiple formats (BibTeX, APA, etc.).
 
 **JOSS Paper (In Review):**
 
@@ -186,7 +190,11 @@ If you use PVDeg in a published work, please cite:
 
 **Latest Release:**
 
+Please cite the DOI corresponding to the specific version of PVDeg that you used:
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8088578.svg)](https://zenodo.org/records/8088578/latest)
+
+On the Zenodo page, use the "Cite as" section in the right sidebar to copy the citation in your preferred format (BibTeX, APA, etc.).
 
 **Software Record:**
 

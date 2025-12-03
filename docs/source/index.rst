@@ -48,7 +48,11 @@ PVDeg's Monte Carlo engine samples parameter distributions and their correlation
 Citing PVDeg
 ============
 
-If you use PVDeg in a published work, please cite:
+If you use PVDeg in a published work, please cite both the software and the paper.
+
+**GitHub Citation (Recommended):**
+
+Visit the `PVDeg repository <https://github.com/NREL/PVDegradationTools>`_ and click the "Cite this repository" button in the right sidebar. This provides formatted citations for both the software and the preferred paper citation in multiple formats (BibTeX, APA, etc.).
 
 **JOSS Paper (In Review):**
 
@@ -58,8 +62,7 @@ If you use PVDeg in a published work, please cite:
 
 **Latest Release:**
 
-Please cite the DOI corresponding to the specific version that you used.
-DOIs are listed at `Zenodo.org <https://zenodo.org/records/8088578/latest>`_
+Please cite the DOI corresponding to the specific version of PVDeg that you used. Visit `Zenodo <https://zenodo.org/records/8088578/latest>`_ and use the "Cite as" section in the right sidebar to copy the citation in your preferred format (BibTeX, APA, etc.).
 
 **Software Record:**
 

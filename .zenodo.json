@@ -4,26 +4,28 @@
   "creators": [
     {
       "name": "Springer, Martin",
-      "affiliation": "National Renewable Energy Laboratory"
+      "affiliation": "National Renewable Energy Laboratory",
+      "orcid": "0000-0001-6803-108X"
     },
     {
       "name": "Brown, Matthew",
       "affiliation": "National Renewable Energy Laboratory",
-      "type": "Other"
+      "orcid": "0000-0002-0988-3431"
     },
     {
       "name": "Ovaitt, Silvana",
       "affiliation": "National Renewable Energy Laboratory",
-      "orcid": "0000-0002-9726-3003"
+      "orcid": "0000-0003-0180-728X"
     },
     {
       "name": "Ford, Tobin",
-      "affiliation": "National Renewable Energy Laboratory"
+      "affiliation": "National Renewable Energy Laboratory",
+      "orcid": "0009-0000-7428-5625"
     },
     {
       "name": "Daxini, Rajiv",
       "affiliation": "National Renewable Energy Laboratory",
-      "orcid": "0000-0002-5449-4979"
+      "orcid": "0000-0003-1993-9408"
     },
     {
       "name": "Holsapple, Derek",
@@ -32,23 +34,23 @@
     {
       "name": "Kempe, Michael",
       "affiliation": "National Renewable Energy Laboratory",
-      "orcid": "0000-0001-7803-5374"
+      "orcid": "0000-0003-3312-0482"
     }
   ],
   "contributors": [
 
     {
       "name": "Campanelli, Mark",
-      "type": "Other"
+      "affiliation": "Intelligent Measurement Systems LLC"
     },
     {
       "name": "Wells, Trenton",
-      "type": "National Renewable Energy Laboratory"
+      "affiliation": "National Renewable Energy Laboratory"
     },
     {
       "name": "Anderson, Kevin",
       "affiliation": "Sandia National Laboratories",
-      "type": "Other"
+      "orcid": "0000-0002-1166-7957"
     }
   ],
   "keywords": [
