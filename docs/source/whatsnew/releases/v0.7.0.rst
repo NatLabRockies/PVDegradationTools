@@ -22,6 +22,22 @@ Enhancements
 
 Enhancements
 ------------
+- Restructure tutorial notebooks and migrate from ``tutorials_and_tools/`` to new
+  ``tutorials/`` directory with improved organization. (:pull:`302`)
+    - Reorganize tutorials into logical themed folders: ``01_basics`` (4 notebooks),
+      ``02_degradation`` (6 notebooks), ``03_monte_carlo`` (2 notebooks),
+      ``04_scenario`` (3 notebooks), ``05_geospatial`` (5 notebooks),
+      ``06_advanced`` (4 notebooks), ``10_workshop_demos`` (2 notebooks), and
+      ``tools`` (3 tool notebooks).
+    - Update notebooks to load pre-saved weather data by default to avoid API rate
+      limits: ``03_monte_carlo/01_arrhenius.ipynb`` (Miami),
+      ``01_basics/04_weather_database_access.ipynb`` (Golden, CO).
+    - Add jupytext configuration and Python script versions for all notebooks with
+      pre-commit hook synchronization.
+    - Update Eagle HPC references to Kestrel (NREL's current HPC system).
+    - Update all configuration files (``_toc.yml``, ``_config.yml``, ``myst.yml``),
+      GitHub Actions workflows (``nbval.yaml``, ``testbook.yaml``,
+      ``deploy-books.yml``), and CI/CD pipelines for new structure.
 - Add pysam module to support InSPIRE Agrivoltaics geospatial simulations. Currently our
   pysam wrapper implementation is largely project specific. We aim to generalize this
   module in the future to support out of the box geospatial pysam calculations for all

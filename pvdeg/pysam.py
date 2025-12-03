@@ -78,8 +78,8 @@ def pysam(
     pv_model: str
         choose pySam photovoltaic system model.
         Some models are less thorough and run faster.
-        pvwatts8 is ~50x faster than pysamv1 but only calculates 46 parameters while
-        pysamv1 calculates 195.
+        pvwatts8 is ~50x faster than pvsamv1 but only calculates 46 parameters while
+        pvsamv1 calculates 195.
 
             options: ``pvwatts8``, ``pvsamv1``
 

@@ -12,19 +12,7 @@
 Welcome to pvdeg!
 ==============================================================
 
-This PVDegradation Tools Model is a first-of-its-kind detailed spatio-temporal
-modeling assessment tool that empowers users to calculate various PV degradation
-modes, for different PV technologies and materials in its database.
-
-NREL is developing the pvdeg model to help PV Researchers, Module manufacturers,
-and other PV stakeholders assess different materials and technologies for
-different degradation modes in all locations throughout the world. Available as
-open source, the PVDegradation model currently supports PV energy calculations
-for water vapor pressure, ingress rate, edge seal width, Van Hofft Irradiance
-Degradation, Weighted Average Irradiance, Arrehnius Acceleration Factor,
-relative humidity in the outside, front and back encapsulant and backsheet,
-spectral degradation, and solder fatigue. More functions for standards and
-other degradation profiles are in the works.
+PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation, developed at the National Renewable Energy Laboratory (NREL) and supported by the Durable Module Materials (DuraMAT) consortium. It provides modular functions, materials databases, and calculation workflows for simulating degradation mechanisms (e.g., LeTID, hydrolysis, UV exposure) using weather data from the National Solar Radiation Database (NSRDB) and the Photovoltaic Geographical Information System (PVGIS). By integrating Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables field-relevant predictions and uncertainty quantification of module reliability and lifetime.
 
 The source code for pvdeg is hosted on `github <https://github.com/NREL/pvdeg>`_. Please see the :ref:`installation` page for installation help.
 
@@ -35,35 +23,49 @@ See :ref:`tutorials` to learn how to use and experiment with various functionali
     :alt: PVDeg-Flow diagram.
 
 
+Key Features
+============
+
+- **Core Degradation Functions**: Dedicated functions for physical degradation mechanisms including moisture ingress, LeTID, UV exposure, and thermal stress
+- **Scenario Class**: Simplified workflow interface for complex multi-parameter degradation studies
+- **Geospatial Analysis**: Large-scale spatial analyses with parallel processing across geographic regions
+- **Monte Carlo Framework**: Uncertainty quantification through parameter distribution sampling
+- **Material Databases**: Curated degradation parameters, kinetic coefficients, and material properties
+- **Weather Data Integration**: Seamless access to NSRDB and PVGIS meteorological data
+- **Standards Support**: Contributions to IEC TS 63126 and other standardization efforts
+
 How the Model Works
 ===================
 
-Coupled with pvlib for module performan and weather/irradiance calculations,
-PVDegradation Tool estimates degradations, and accelerated factors on
-user-defined parameters. The `Data Library` is under development as part of the
-PVDegradationTool project, compiling literature parameters and functions.
+PVDeg's core API provides dedicated functions for calculating physical degradation mechanisms, accessing material properties and environmental stressors. These functions rely on standardized environmental stressors such as temperature, irradiance, and humidity, and can be chained to produce lifetime predictions under realistic field conditions.
 
-The PVDegradationTool simulatineously reads tens of terabytes of time-series
-solar data from state-of-art resource data set National Solar Radiation Database
-(NSRDB), publicly available on the cloud, enabling the execution of pvdeg
-beyond the confines of NREL's high-performance computing capabilities.
+To simplify complex workflows, PVDeg wraps its core functions into a ``Scenario`` class that defines locations, module configurations, and degradation mechanisms. This enables user-friendly workflows, simplifying the setup and execution of complex multi-parameter degradation studies.
+
+The geospatial analysis layer enables large-scale spatial analyses by automatically distributing degradation calculations across geographic regions using parallel processing and advanced data structures. It integrates environmental data from NSRDB and PVGIS and automates sampling across latitude-longitude grids to produce maps, such as standoff distance distribution used in IEC TS 63126 compliance studies.
+
+PVDeg's Monte Carlo engine samples parameter distributions and their correlations to generate thousands of realizations, producing confidence intervals on degradation rates rather than single deterministic values. This capability can help quantify uncertainty in complex and non-linear module lifetime predictions, and identify which parameters most strongly affect reliability risk.
 
 Citing PVDegradation Tools
 ==========================
 
-If you use this calculator in a published work, please cite:
+If you use PVDeg in a published work, please cite:
+
+**JOSS Paper (In Review):**
+
+.. code-block::
+
+   Daxini, R., Ovaitt, S., Springer, M., Ford, T., & Kempe, M. (2025). PVDeg: a python package for modeling degradation on solar photovoltaic systems. Journal of Open Source Software (In Review).
+
+**Latest Release:**
+
+Please cite the DOI corresponding to the specific version that you used.
+DOIs are listed at `Zenodo.org <https://zenodo.org/records/8088578/latest>`_
+
+**Software Record:**
 
 .. code-block::
 
    Holsapple, Derek, Ayala Pelaez, Silvana, Kempe, Michael. "PV Degradation Tools", NREL Github 2020, Software Record SWR-20-71.
-
-
-Please also cite the DOI corresponding to the specific version that you used.
-DOIs are listed at Zenodo.org. `linked here <https://zenodo.org/records/17266145>`_
-
-.. code-block::
-
-   RDaxini, Martin Springer, Tobin Ford, Matt, MDKempe, Silvana Ovaitt, AidanWesley, joe karas, Mark Campanelli, Derek M Holsapple, maxx-mill, & Kevin Anderson. (2025). NREL/PVDegradationTools: 0.6.1 (0.6.1). Zenodo. https://doi.org/10.5281/zenodo.17266145
 
 
 .. toctree::
