@@ -1,5 +1,5 @@
 # %% [markdown]
-# # B-O LID - Accelerated Test
+# # B-O LID Accelerated Test
 #
 # ## Example: Boron-oxygen light-induced degradation (B-O LID) progression in accelerated tests
 #
@@ -14,9 +14,6 @@
 # 3. Create timeseries of temperature and current injection
 # 4. Run through timeseries, calculating defect states
 # 5. Calculate device degradation and plot
-#
-#
-#
 
 # %%
 # if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:

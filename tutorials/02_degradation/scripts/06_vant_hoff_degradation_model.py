@@ -1,5 +1,5 @@
 # %% [markdown]
-# # A - Van't Hoff Degradation
+# # Van't Hoff Degradation Model
 # ## Calculate site specific degradation according to the Van't Hoff equation
 #
 # Michael Kempe

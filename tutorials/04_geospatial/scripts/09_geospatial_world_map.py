@@ -1,5 +1,5 @@
 # %% [markdown]
-# # Note: This notebook is in development
+# # Geospatial World Map (HPC)
 # M. Springer 2024-06-05
 
 # %%

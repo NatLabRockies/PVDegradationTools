@@ -1,5 +1,5 @@
 # %% [markdown]
-# # Monte Carlo - Arrhenius Degradation
+# # Arrhenius Monte Carlo
 #
 #
 # A monte carlo simulation can be used to predict results of an event with a certain amount of uncertainty. This will be introduced to our use case via mean and standard deviation for each modeling constant. Correlated multivariate monte carlo simulations expand on this by linking the behavior of multiple input variables together with correlation data, in our case we will use correlation coefficients but

@@ -1,5 +1,5 @@
 # %% [markdown]
-# # DuraMAT Workshop Live Demo - Geospatial analysis
+# # DuraMAT Live Demo (HPC)
 #
 # ![PVDeg Logo](../images/pvdeg_logo.svg)
 #

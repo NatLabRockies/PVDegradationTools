@@ -1,5 +1,5 @@
 # %% [markdown]
-# # LETID - Accelerated Tests
+# # LETID Accelerated Test
 #
 #
 # Several standardized accelerated tests have been developed for LETID. These include [IEC TS 63342](https://webstore.iec.ch/publication/67332) for c-Si photovoltaic modules, and [IEC TS 63202-4](https://webstore.iec.ch/publication/67612) for c-Si photovoltaic cells.
@@ -14,8 +14,6 @@
 # 3. Create timeseries of temperature and current injection
 # 4. Run through timeseries, calculating defect states
 # 5. Calculate device degradation and plot
-#
-#
 
 # %%
 # if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:

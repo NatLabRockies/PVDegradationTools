@@ -1,3 +1,7 @@
+# %% [markdown]
+# # PVGIS Distributed
+#
+
 # %%
 import pvdeg
 from global_land_mask import globe

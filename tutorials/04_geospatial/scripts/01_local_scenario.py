@@ -1,5 +1,5 @@
 # %% [markdown]
-# # Running Geospatial Analysis Locally #
+# # Local Scenario
 #
 # Author: Tobin Ford
 # Email : tobin.ford@nrel.gov

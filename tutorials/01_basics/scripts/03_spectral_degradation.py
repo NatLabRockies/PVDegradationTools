@@ -1,5 +1,5 @@
 # %% [markdown]
-# # 3 - Spectral Degradation
+# # Spectral Degradation
 #
 # **Requirements:**
 # - spectral irradiance (measured or simulated)

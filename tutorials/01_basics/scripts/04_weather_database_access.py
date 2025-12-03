@@ -1,5 +1,5 @@
 # %% [markdown]
-# # 4 - Weather Database Access
+# # Weather Database Access
 #
 # **Requirements:**
 # - Internet access

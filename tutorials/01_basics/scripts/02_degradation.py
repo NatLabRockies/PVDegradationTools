@@ -1,5 +1,5 @@
 # %% [markdown]
-# # 2 - Degradation
+# # Degradation Overview
 # Degradation and Solder Fatigue
 #
 # **Requirements**:

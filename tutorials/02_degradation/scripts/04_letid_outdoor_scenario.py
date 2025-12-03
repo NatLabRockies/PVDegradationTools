@@ -1,5 +1,5 @@
 # %% [markdown]
-# # LETID - Outdoor Scenario Based on Accelerated Test
+# # LETID Outdoor Scenario
 #
 # This is an example for using a test result to model LETID progression in outdoor environments
 #
@@ -21,7 +21,6 @@
 # 4. Define necessary degradation parameters: degraded lifetime and defect states
 # 5. Run through timeseries, calculating defect states
 # 6. Calculate device degradation and plot
-#
 
 # %%
 # if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:

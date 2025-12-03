@@ -1,3 +1,7 @@
+# %% [markdown]
+# # Custom Functions with Numba
+#
+
 # %%
 import numpy as np
 import sympy as sp

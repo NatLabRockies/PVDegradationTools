@@ -1,5 +1,5 @@
 # %% [markdown]
-# # Edge Seal Oxygen Ingress Calculator tool
+# # Edge Seal Oxygen Ingress Calculator
 #
 # ## Calculation of oxygen ingress profile through an edge seal and into the encapsulant.
 #

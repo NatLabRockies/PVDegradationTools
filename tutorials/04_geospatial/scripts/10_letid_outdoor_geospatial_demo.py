@@ -1,8 +1,7 @@
 # %% [markdown]
-# # LETID - Outdoor Geospatioal Demo
+# # LETID Outdoor Geospatial Demo (HPC)
 #
 # ![PVDeg Logo](../images/pvdeg_logo.svg)
-#
 
 # %%
 import matplotlib.pyplot as plt

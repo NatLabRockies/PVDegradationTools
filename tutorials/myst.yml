@@ -44,13 +44,13 @@ project:
         - file: 02_degradation/01_bo_lid_accelerated_test.ipynb
           title: B-O LID Accelerated Test
         - file: 02_degradation/02_letid_accelerated_test.ipynb
-          title: LeTID Accelerated Test
+          title: LETID Accelerated Test
         - file: 02_degradation/03_letid_outdoor.ipynb
-          title: LeTID Outdoor
+          title: LETID Outdoor
         - file: 02_degradation/04_letid_outdoor_scenario.ipynb
-          title: LeTID Outdoor Scenario
+          title: LETID Outdoor Scenario
         - file: 02_degradation/05_letid_passivated_wafer.ipynb
-          title: LeTID Passivated Wafer
+          title: LETID Passivated Wafer
         - file: 02_degradation/06_vant_hoff_degradation_model.ipynb
           title: Van't Hoff Degradation Model
     - title: 03 - Monte Carlo Simulations
@@ -78,7 +78,7 @@ project:
         - file: 04_geospatial/09_geospatial_world_map.ipynb
           title: Geospatial World Map (HPC)
         - file: 04_geospatial/10_letid_outdoor_geospatial_demo.ipynb
-          title: LeTID Outdoor Geospatial Demo (HPC)
+          title: LETID Outdoor Geospatial Demo (HPC)
     - title: 05 - Advanced Topics
       children:
         - file: 05_advanced/01_custom_functions_nopython.ipynb

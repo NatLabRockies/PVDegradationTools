@@ -1,5 +1,5 @@
 # %% [markdown]
-# # 1 - Basics, Humidity, Design
+# # Humidity Design Basics
 # ## Module Humidity and Edge Seal Width
 #
 #

@@ -21,13 +21,13 @@ parts:
   - file: 02_degradation/01_bo_lid_accelerated_test
     title: B-O LID Accelerated Test
   - file: 02_degradation/02_letid_accelerated_test
-    title: LeTID Accelerated Test
+    title: LETID Accelerated Test
   - file: 02_degradation/03_letid_outdoor
-    title: LeTID Outdoor
+    title: LETID Outdoor
   - file: 02_degradation/04_letid_outdoor_scenario
-    title: LeTID Outdoor Scenario
+    title: LETID Outdoor Scenario
   - file: 02_degradation/05_letid_passivated_wafer
-    title: LeTID Passivated Wafer
+    title: LETID Passivated Wafer
   - file: 02_degradation/06_vant_hoff_degradation_model
     title: Van't Hoff Degradation Model
 - caption: 03 - Monte Carlo Simulations
@@ -57,7 +57,7 @@ parts:
   - file: 04_geospatial/09_geospatial_world_map
     title: Geospatial World Map (HPC)
   - file: 04_geospatial/10_letid_outdoor_geospatial_demo
-    title: LeTID Outdoor Geospatial Demo (HPC)
+    title: LETID Outdoor Geospatial Demo (HPC)
 - caption: 05 - Advanced Topics
   titlesonly: true
   chapters:

@@ -1,9 +1,8 @@
 # %% [markdown]
-# # Monte Carlo - Standoff Calculation
+# # Standoff Monte Carlo
 #
 # See Monte Carlo - Arrhenius Degredation for a more in depth guide. Steps will be shortened for brevity.
 # This journal applies a Monte Carlo to the Standoff Calculation
-#
 
 # %%
 # if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:

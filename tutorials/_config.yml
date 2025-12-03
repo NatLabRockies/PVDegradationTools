@@ -71,5 +71,7 @@ sphinx:
       show_nav_level: 1
 
 launch_buttons:
-  thebe: true
+  notebook_interface: "classic"
+  binderhub_url: "https://mybinder.org"
   colab_url: "https://colab.research.google.com"
+  thebe: true

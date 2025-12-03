@@ -1,5 +1,5 @@
 # %% [markdown]
-# # Scenario Objects - OOP Approach to PVDEG
+# # Single Location (HPC)
 #
 # Author: Tobin Ford | tobin.ford@nrel.gov
 #

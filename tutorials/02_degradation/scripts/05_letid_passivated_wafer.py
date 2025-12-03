@@ -1,5 +1,5 @@
 # %% [markdown]
-# # LETID - Passivated Wafer
+# # LETID Passivated Wafer
 #
 # This example shows how to simulate an accelerated test performed on a well-passivated Si wafer, rather than a solar cell.
 # In a well-passivated wafer, carrier injection ($\Delta n$) is linearly proportional to carrier lifetime, assuming surface recombination velocity can be approximated to be zero.
@@ -15,7 +15,6 @@
 # 3. Create timeseries of temperature and injection
 # 4. Run through timeseries, calculating defect states
 # 5. Calculate device degradation and plot
-#
 
 # %%
 # if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:

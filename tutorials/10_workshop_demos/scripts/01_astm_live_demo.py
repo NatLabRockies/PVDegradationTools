@@ -1,5 +1,5 @@
 # %% [markdown]
-# # ASTM Demonstration
+# # ASTM Live Demo
 #
 # ![PVDeg Logo](../images/pvdeg_logo.svg)
 #
@@ -18,7 +18,6 @@
 # where $T_0$ is the temperature for $X=0$ (insulated back) and $\Delta T$ is the temperature difference between an insulated back ($X=0$) and open rack mounting configuration ($X=\infty)$.
 #
 # The following figure showcases this calulation for the entire United States. We used pvlib and data from the National Solar Radiation Database (NSRDB) to calculate the module temperatures for different mounting configuration and applied our model to obtain the standoff distance for roof-mounted PV systems.
-#
 
 # %%
 # if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:
