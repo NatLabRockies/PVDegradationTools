@@ -33,5 +33,3 @@ instructions on the [PVDeg Github page](https://github.com/NREL/PVDegradationToo
 **[Degradation and Acceleration Factors](tools/Tools%20-%20Degradation.ipynb)** - Estimation of degradation and calculation of acceleration factors using the degradation database
 
 **[Module Standoff for IEC TS 63126](tools/Tools%20-%20Module%20Standoff%20for%20IEC%20TS%2063126.ipynb)** - Calculation of module standoff distance according to IEC TS 63126
-
-**Browse using the sidebar navigation** ← Use the menu on the left to explore individual notebooks within each category.
