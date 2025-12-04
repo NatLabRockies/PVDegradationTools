@@ -13,14 +13,14 @@
 <tr>
   <td>Publications</td>
   <td>
-     <a href="https://doi.org/10.5281/zenodo.8088578"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8088578.svg" alt="DOI"></a>
+     <a href="https://zenodo.org/records/8088578/latest"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8088578.svg" alt="DOI"></a>
   </td>
 </tr>
 <tr>
   <td>Documentation</td>
   <td>
 	<a href='https://PVDegradationTools.readthedocs.io'>
-	    <img src='https://readthedocs.org/projects/pvdegradationtools/badge/?version=stable' alt='Documentation Status' />
+	    <img src='https://readthedocs.org/projects/pvdegradationtools/badge/?version=latest' alt='Documentation Status' />
 	</a>
   </td>
 </tr>
@@ -39,94 +39,111 @@
 
 
 
-# PV Degradation Tools (pvdeg)
+# PVDeg: Python Package for Modeling Degradation in Photovoltaic Systems
 
-This repository contains functions for calculating degradation of photovoltaic modules. For example, functions to calculate front and rear relative Humidity, as well as Acceleration Factors. A degradation calculation function is also being developed, considering humidity and spectral irradiances models.
+PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation, developed at the National Renewable Energy Laboratory (NREL) and supported by the Durable Module Materials (DuraMAT) consortium. It provides modular functions, materials databases, and calculation workflows for simulating degradation mechanisms (e.g., LeTID, hydrolysis, UV exposure) using weather data from the National Solar Radiation Database (NSRDB) and the Photovoltaic Geographical Information System (PVGIS). By integrating Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables field-relevant predictions and uncertainty quantification of module reliability and lifetime.
 
+## Key Features
 
-Tutorials
-=========
+- **Core Degradation Functions**: Dedicated functions for physical degradation mechanisms including moisture ingress, LeTID, UV exposure, and thermal stress
+- **Scenario Class**: Simplified workflow interface for complex multi-parameter degradation studies
+- **Geospatial Analysis**: Large-scale spatial analyses with parallel processing across geographic regions
+- **Monte Carlo Framework**: Uncertainty quantification through parameter distribution sampling
+- **Material Databases**: Curated degradation parameters, kinetic coefficients, and material properties
+- **Weather Data Integration**: Seamless access to NSRDB and PVGIS meteorological data
+- **Standards Support**: Contributions to IEC TS 63126 and other standardization efforts
+## Example Applications
 
-### Jupyter Book
+PVDeg has been adopted in multiple studies across the PV reliability community:
 
-For in depth Tutorials you can run online, see our [jupyter-book](https://nrel.github.io/PVDegradationTools/intro.html) [![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://nrel.github.io/PVDegradationTools/intro.html)
-
-Clicking on the rocket-icon on the top allows you to launch the journals on [Google Colaboratory](https://colab.research.google.com/) for interactive mode.
-Just uncomment the first line `pip install ...`  to install the environment on each journal if you follow this mode.
-
-### Binder
-
-To run these tutorials in Binder, you can click here:
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/NREL/PVDegradationTools/main)
-It takes a minute to load the environment.
-
-### Locally
-
-You can also run the tutorial locally in a virtual environment, i.e., `venv` or
-[miniconda](https://docs.conda.io/en/latest/miniconda.html).
-
-1. Create and activate a new environment, e.g., on Mac/Linux terminal with `venv`:
-   ```
-   python -m venv pvdeg
-   . pvdeg/bin/activate
-   ```
-   or with `conda`:
-   ```
-   conda create -n pvdeg
-   conda activate pvdeg
-   ```
-
-1. Install `pvdeg` into the new environment with `pip`:
-   ```
-   python -m pip install pvdeg
-   ```
-
-1. Start a Jupyter session:
-
-   ```
-   jupyter notebook
-   ```
-
-1. Use the file explorer in Jupyter lab to browse to `tutorials`
-   and start the first Tutorial.
-
+- **Thermal Stability and IEC TS 63126 Compliance**: Calculate effective standoff distances and generate public maps supporting the IEC TS 63126 standard
+- **Light and Elevated Temperature Induced Degradation (LeTID)**: Integrated into international interlaboratory comparison studies and field-aged array analyses
+- **Geospatial Performance Modeling**: Coupled with GeoGridFusion to streamline weather-data storage and spatial queries for large-scale degradation simulations
+- **Agrivoltaics and System-Level Modeling**: Combined with PySAM to assess degradation-driven yield losses in dual-use agrivoltaic systems
+- **Material-Property Parameterization**: Studies of UV-induced polymer degradation and moisture-related failures in encapsulants and backsheets
 
 Documentation
 =============
 
-Documentation is available in [ReadTheDocs](https://PVDegradationTools.readthedocs.io) where you can find more details on the API functions.
+Full documentation is available at **[ReadTheDocs](https://pvdegradationtools.readthedocs.io)** including:
 
+- 📚 [API Reference](https://pvdegradationtools.readthedocs.io/en/latest/api.html) - Complete function and class documentation
+- 📖 [User Guide](https://pvdegradationtools.readthedocs.io/en/latest/user_guide/installation.html) - Installation, tutorials, and usage guides
+- 🔧 [Contributing Guide](https://pvdegradationtools.readthedocs.io/en/latest/user_guide/contributing.html) - Development setup and guidelines
+- 📰 [What's New](https://pvdegradationtools.readthedocs.io/en/latest/whatsnew/index.html) - Release notes and changelogs
 
 Installation
 ============
 
-Relative Humidity and Acceleration Factors for Solar Modules releases may be installed using the ``pip`` and ``conda`` tools. Compatible with Python 3.5 and above.
+PVDeg releases may be installed using `pip` and `conda` tools. Compatible with Python 3.10 and above.
 
-Install with:
+**Quick Install:**
 
-    pip install pvdeg
+```bash
+pip install pvdeg
+```
 
-For developer installation, clone the repository, navigate to the folder location and install as:
+**With optional dependencies:**
 
-    pip install -e .[all]
+| Group | Install Command | Purpose |
+|-------|----------------|---------|
+| **sam** | `pip install pvdeg[sam]` | PySAM support for system modeling |
+| **docs** | `pip install pvdeg[docs]` | Sphinx documentation tools |
+| **test** | `pip install pvdeg[test]` | Testing and validation tools |
+| **books** | `pip install pvdeg[books]` | Jupyter Book publishing |
+| **all** | `pip install pvdeg[all]` | All optional dependencies |
 
-Running jupyter notebooks using anaconda prompt
-===============================================
+**Developer Installation:**
 
-Note that in order to run notebooks cleanly and validate outputs, use the following
-commands to run either one notebook:
+```bash
+git clone https://github.com/NREL/PVDegradationTools.git
+cd PVDegradationTools
+pip install -e .[all]
+```
 
-    jupyter nbconvert --to notebook --execute --inplace "tutorials_and_tools/
-    tutorials_and_tools/Monte Carlo - Arrhenius.ipynb"
+📖 **For detailed installation instructions including conda environments, HPC setup, troubleshooting, and version compatibility, see the [Installation Guide](https://pvdegradationtools.readthedocs.io/en/latest/user_guide/installation.html).**
 
-or all notebooks inside the tutorials and tools folder:
+Tutorials
+=========
 
-    jupyter nbconvert --to notebook --execute --inplace "tutorials_and_tools/
-    tutorials_and_tools/*.ipynb"
+PVDeg provides comprehensive tutorials organized by topic. Choose your preferred environment:
 
-This avoids formatting issues that may arise depending on your own local environment
-or IDE.
+### Jupyter Book (Recommended)
 
+Interactive tutorials with live execution: [**PVDeg Jupyter Book**](https://nrel.github.io/PVDegradationTools/intro.html)
+
+- Click the 🚀 rocket icon to launch notebooks in [Google Colab](https://colab.research.google.com/)
+- **Development Preview:** See latest changes at [dev-preview](https://nrel.github.io/PVDegradationTools/dev-preview/intro.html)
+
+### Binder
+
+Run tutorials in your browser without installation: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/NREL/PVDegradationTools/main)
+
+### Local Installation
+
+1. **Install PVDeg** (see [Installation](#installation))
+
+2. **Clone the repository** to access tutorial notebooks:
+   ```bash
+   git clone https://github.com/NREL/PVDegradationTools.git
+   cd PVDegradationTools
+   ```
+
+3. **Start Jupyter:**
+   ```bash
+   jupyter notebook
+   ```
+
+4. **Navigate to tutorials** organized by category:
+   - `01_basics/` - Introduction to PVDeg fundamentals
+   - `02_degradation/` - Degradation mechanism modeling
+   - `03_monte_carlo/` - Monte Carlo uncertainty analysis
+   - `04_geospatial/` - Geospatial and HPC scenarios
+   - `05_advanced/` - Advanced topics and API access
+   - `10_workshop_demos/` - Workshop demonstrations
+   - `tools/` - Standalone analysis tools
+
+📖 **For more information on running and validating notebooks, see the [documentation](https://pvdegradationtools.readthedocs.io).**
 
 License
 =======
@@ -135,26 +152,50 @@ License
 
 
 Contributing
-=======
+============
 
-We welcome contributiosn to this software, but please read the copyright license agreement (cla-1.0.md), with instructions on signing it in sign-CLA.md. For questions, email us.
+We welcome contributions to this software! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions on:
+- Setting up your development environment
+- Installing and using pre-commit hooks
+- Code style guidelines
+- Testing and documentation requirements
+- **Contributing to material property and degradation parameter databases**
+- Submitting pull requests
+
+Please read the copyright license agreement (cla-1.0.md), with instructions on signing it in sign-CLA.md.
+
+All code, documentation, and discussion contributors are acknowledged for their contributions to the PVDeg project.
 
 
 Getting support
 ===============
 
 If you suspect that you may have discovered a bug or if you'd like to
-change something about pvdeg, then please make an issue on our
-[GitHub issues page](hhttps://github.com/NREL/PVDegradationTools/issues).
+change something about PVDeg, then please make an issue on our
+[GitHub issues page](https://github.com/NREL/PVDegradationTools/issues).
 
 
 Citing
 ======
 
-If you use this functions in a published work, please cite:
+If you use PVDeg in a published work, please cite both the software and the paper.
 
-	Holsapple, Derek, Ayala Pelaez, Silvana, Kempe, Michael. "PV Degradation Tools", NREL Github 2020, Software Record SWR-20-71.
+**Software Citation:**
 
-And/or the specific release from Zenodo:
+Click the **"Cite this repository"** button in the right sidebar to get a formatted citation, or visit Zenodo for the DOI corresponding to your specific version:
 
-	Martin Springer, Tobin Ford, Rajiv Daxini, Matthew Brown, Silvana Ovaitt, Joseph Karas, Mark Campanelli, Derek M Holsapple, Kevin Anderson, Michael Kempe. (2025). NREL/PVDegradationTools: 0.6.1 (0.6.1). Zenodo. https://doi.org/10.5281/zenodo.17265988
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8088578.svg)](https://zenodo.org/records/8088578/latest)
+
+On the Zenodo page, use the "Cite as" section in the right sidebar to copy the citation in your preferred format (BibTeX, APA, etc.).
+
+**JOSS Paper (In Review):**
+
+	Daxini, R., Ovaitt, S., Springer, M., Ford, T., & Kempe, M. (2025). PVDeg: a python package for modeling degradation on solar photovoltaic systems. Journal of Open Source Software (In Review).
+
+
+Acknowledgements
+================
+
+This work was authored by the National Renewable Energy Laboratory, operated by Alliance for Sustainable Energy, LLC, for the U.S. Department of Energy (DOE) under Contract No. DE-AC36-08GO28308. Funding provided as part of the Durable Modules Materials Consortium (DuraMAT), an Energy Materials Network Consortium funded by the U.S. Department of Energy, Office of Energy Efficiency and Renewable Energy, Solar Energy Technologies Office Agreement Number 32509. The research was performed using computational resources sponsored by the Department of Energy's Office of Energy Efficiency and Renewable Energy and located at the National Renewable Energy Laboratory. The views expressed in the article do not necessarily represent the views of the DOE or the U.S. Government. The U.S. Government retains and the publisher, by accepting the article for publication, acknowledges that the U.S. Government retains a nonexclusive, paid-up, irrevocable, worldwide license to publish or reproduce the published form of this work, or allow others to do so, for U.S. Government purposes.
+
+**NREL Software Record:** SWR-20-71 (Holsapple, Derek; Ayala Pelaez, Silvana; Kempe, Michael. "PV Degradation Tools", NREL Github 2020)

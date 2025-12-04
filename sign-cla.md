@@ -59,18 +59,19 @@ Replace the bracketed text as follows:
 * `[your name]` with your name.
 * `[your github userid]` with your GitHub userid.
 
-You can confirm the MD5 checksum of the CLA by running the md5 program over `cla-1.0.md`:
+You can confirm the MD5 checksum of the CLA by running the md5 program over
+`cla-1.0.md`:
 
 ```
 md5 cla-1.0.md
-MD5 (cla-1.0.md) = 46ea45f996295bdb0652333d516a6d0a
+MD5 (cla-1.0.md) = 2aa6e2788a0ff4d45cabfc839290e1ca
 ```
 
 or on Windows
 
 ```
 CertUtil -hashfile cla-1.0.md MD5
-MD5 hash of cla-1.0.md: 46ea45f996295bdb0652333d516a6d0a
+MD5 hash of cla-1.0.md: 2aa6e2788a0ff4d45cabfc839290e1ca
 ```
 
 If the output is different from above, do not sign the CLA and let us know.

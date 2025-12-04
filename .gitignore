@@ -47,8 +47,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
-# pvdeg scenario output files generated
-pvd_*
+# pvdeg scenario output files generated during testing
 tests/pvd_*
 
 # Translations
@@ -70,7 +69,10 @@ instance/
 docs/sphinx/_build/
 
 # tutorial jupyter-book
+_build/
 pvdeg_tutorials/_build/
+tutorials/_build/
+tutorials_and_tools/_build/
 
 # PyBuilder
 target/
@@ -109,3 +111,8 @@ TEMP/
 
 # Slurm log files
 slurm-*.out
+
+# Run information
+tests\data\h5_pytest.h5
+tests/TEMP_test_addModule_materials.py
+/tutorials_and_tools/tutorials_and_tools/pvd_job_temperature and degradation/pipeline_results

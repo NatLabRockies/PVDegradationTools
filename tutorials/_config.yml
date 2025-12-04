@@ -1,0 +1,78 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: PVDEG Tutorials
+author: Martin Springer, Matthew Brown, Silvana Ovaitt, Tobin Ford, Joseph Karas, Michael Kempe
+logo: ../docs/source/_static/logo-vectors/PVdeg-Logo-Horiz-Color.svg
+
+# Auto-exclude files not in the toc
+only_build_toc_files        : true
+
+# Exclude patterns for files that shouldn't be built
+exclude_patterns:
+  - "_build"
+  - ".ipynb_checkpoints"
+  - "*/scripts"
+  - "*/scripts/*"
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  # 'auto' = execute notebooks that don't have outputs
+  # 'cache' = use cached outputs, don't execute
+  execute_notebooks: auto
+  exclude_patterns:
+    # These notebooks will be included but use cached outputs (not re-executed)
+    # They require HPC/SLURM access, API keys, or take too long to execute
+    - "02_degradation/02_letid_accelerated_test.ipynb"
+    - "02_degradation/05_letid_passivated_wafer.ipynb"
+    - "03_monte_carlo/01_arrhenius.ipynb"
+    - "04_scenario/02_scenario_single_location.ipynb"
+    - "04_scenario/03_scenario_mountain_downselect.ipynb"
+    - "05_geospatial/01_geospatial_templates.ipynb"
+    - "05_geospatial/02_geospatial_world_map.ipynb"
+    - "05_geospatial/03_letid_outdoor_geospatial_demo.ipynb"
+    - "05_geospatial/04_scenario_geographical_features.ipynb"
+    - "05_geospatial/05_scenario_geospatial.ipynb"
+    - "06_advanced/03_pysam_api.ipynb"
+    - "06_advanced/04_nsrdb_distributed_api.ipynb"
+    - "06_advanced/05_pvgis_distributed.ipynb"
+    - "10_workshop_demos/01_astm_live_demo.ipynb"
+    - "10_workshop_demos/02_duramat_live_demo.ipynb"
+    # Tools requiring HPC access or have execution issues
+    - "tools/Tools - Degradation.ipynb"
+    - "tools/Tools - Module Standoff for IEC TS 63126.ipynb"
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: book.tex
+
+# Add a bibtex file so that we can create citations
+bibtex_bibfiles:
+  - references.bib
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/NREL/PVDegradationTools
+  path_to_book: tutorials  # Optional path to your book, relative to the repository root
+  branch: main
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+  use_issues_button: true
+  use_repository_button: true
+
+# Configure Sphinx to limit TOC depth
+sphinx:
+  config:
+    html_theme_options:
+      navigation_depth: 1
+      show_nav_level: 1
+
+launch_buttons:
+  notebook_interface: "classic"
+  binderhub_url: "https://mybinder.org"
+  colab_url: "https://colab.research.google.com"
+  thebe: true
