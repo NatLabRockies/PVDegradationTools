@@ -60,7 +60,7 @@ jobs:
     name: >-
       Publish Python 🐍 distribution 📦 to PyPI
     # Only publish to PyPI on final release tags (not rc, alpha, beta, etc.)
-    if: startsWith(github.ref, 'refs/tags/') && !contains(github.ref, 'rc') && !contains(github.ref, 'alpha') && !contains(github.ref, 'beta') && !contains(github.ref, 'a') && !contains(github.ref, 'b')
+    if: startsWith(github.ref, 'refs/tags/') && !contains(github.ref, 'rc') && !contains(github.ref, 'alpha') && !contains(github.ref, 'beta')
     needs:
     - build
     runs-on: ubuntu-latest
