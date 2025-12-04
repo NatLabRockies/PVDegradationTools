@@ -1656,7 +1656,10 @@ def optimal_gcr_pitch_bifacial_fixed_tilt(
 
 
 def practical_gcr_pitch_bifiacial_fixed_tilt(
-    latitude: float, cw: float
+    latitude: float,
+    cw: float,
+    pitch_ceil: float = 12,
+    pitch_floor: float = 3.8,
 ) -> tuple[float, float, float]:
     """
     Calculate pitch for fixed tilt systems for InSPIRE Agrivoltaics Irradiance Dataset.
@@ -1678,6 +1681,10 @@ def practical_gcr_pitch_bifiacial_fixed_tilt(
         latitude [°]
     cw: float
         collector width [m]
+    pitch_ceil: float
+        maximum pitch [m], default 12 chosen based on practical considerations by InSPIRE team.
+    pitch_floor: float
+        minimum pitch [m], default 3.8 chosen based on practical considerations by InSPIRE team.
 
     Returns
     -------
@@ -1693,11 +1700,13 @@ def practical_gcr_pitch_bifiacial_fixed_tilt(
         latitude=latitude, cw=cw
     )
 
-    pitch_ceil = min(pitch_optimal, 12)  # 12 m pitch ceiling
-    pitch_practical = max(pitch_ceil, 3.8)  # 3.8m pitch floor
+    pitch_capped = min(pitch_optimal, pitch_ceil)  # pitch ceiling
+    pitch_practical = max(pitch_capped, pitch_floor)  # pitch floor
 
-    if not (3.8 <= pitch_practical <= 12):
-        raise ValueError("calculated practical pitch is outside range [3.8m, 12m]")
+    if not (pitch_floor <= pitch_practical <= pitch_ceil):
+        raise ValueError(
+            f"calculated practical pitch is outside range [{pitch_floor}m, {pitch_ceil}m]"
+        )
 
     tilt_practical = min(latitude, 40)
 

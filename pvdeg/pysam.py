@@ -64,6 +64,9 @@ def pysam(
     config_files: dict[str:str] = None,
     results: list[str] = None,
     practical_pitch_tilt_considerations: bool = False,
+    practical_pitch_scale_factor: float = 1,
+    practical_pitch_floor: float = 3.8,
+    practical_pitch_ceil: float = 12,
 ) -> dict:
     """
     Run SAM solar simulation.
@@ -202,6 +205,15 @@ def pysam(
         Calculates optimal GCR using `pvdeg.utilities.optimal_gcr_pitch` for fixed tilt bifacial systems.
         Imposes a minimum pitch of 3.8m and maximum pitch of 12m.
 
+    practical_pitch_scale_factor: float
+        Scale calcuated practical pitch and gcr by this factor.
+
+    practical_pitch_floor: float
+        Minimum pitch [m] when applying practical pitch/tilt considerations.
+
+    practical_pitch_ceil: float
+        Maximum pitch [m] when applying practical pitch/tilt considerations.
+
     Returns
     -------
     pysam_res: dict
@@ -253,7 +265,12 @@ def pysam(
 
     if practical_pitch_tilt_considerations is True:
         _apply_practical_pitch_tilt(
-            pysam_model=pysam_model, meta=meta, subarrays=subarrays
+            pysam_model=pysam_model, 
+            meta=meta, 
+            subarrays=subarrays, 
+            pitch_factor=practical_pitch_scale_factor, 
+            pitch_floor=practical_pitch_floor, 
+            pitch_ceil=practical_pitch_ceil,
         )
 
     pysam_model.unassign("solar_resource_file")
@@ -274,13 +291,22 @@ def pysam(
     return pysam_res
 
 
-def _apply_practical_pitch_tilt(pysam_model, meta: dict, subarrays: set[str]) -> None:
+def _apply_practical_pitch_tilt(
+    pysam_model, 
+    meta: dict, 
+    subarrays: set[str], 
+    pitch_factor: float=1, 
+    pitch_floor: float=3.8, 
+    pitch_ceil: float=12
+) -> None:
     """
     Apply practical pitch/tilt constraints to all subarrays on the model.
     Mutates `pysam_model` in-place. Raises the same errors as the inlined code.
     """
     logger.info("overriding pitch with practical considerations")
     logger.info(f"subarrays {subarrays}")
+
+    assert pitch_factor > 0
 
     # Build parameter name lists for all discovered subarrays
     param_latitude_tilt = [f"{s}_tilt_eq_lat" for s in subarrays]
@@ -314,8 +340,14 @@ def _apply_practical_pitch_tilt(pysam_model, meta: dict, subarrays: set[str]) ->
 
     # collector width of 2m for the inspire scenarios
     tilt_prac, pitch_prac, gcr_prac = practical_gcr_pitch_bifiacial_fixed_tilt(
-        latitude=meta["latitude"], cw=2
+        latitude=meta["latitude"], 
+        cw=2, 
+        pitch_floor=pitch_floor, 
+        pitch_ceil=pitch_ceil,
     )
+
+    pitch_prac *= pitch_factor
+    gcr_prac /= pitch_factor
 
     # Apply practical tilt/GCR (pitch is implied via GCR in SAM)
     for name in param_tilt:
@@ -427,6 +459,7 @@ def inspire_ground_irradiance(weather_df, meta, config_files):
     tracking_setups = ["01", "02", "03", "04", "05"]
     # fixed tilt setups calculate pitch/gcr as a function of latitude capped at 40 deg
     pratical_considerations_setups = ["06", "07", "08", "09"]
+    double_pitch_setups = ["09"]
     # vertical tilt (fixed spacing) 10
 
     logger.info(f"config file string: {config_files['pv']} -- debug")
@@ -438,9 +471,25 @@ def inspire_ground_irradiance(weather_df, meta, config_files):
             "setup with practical consieration detected, "
             "using pysam inspire_practical_consideration_pitch_tilt=True"
         )
+
+        pitch_ceil=12
+        pitch_floor=3.8
+        pitch_factor=1
+
+        if any(double_pitch_setup in config_files["pv"] for double_pitch_setup in double_pitch_setups):
+            pitch_ceil=24,
+            pitch_floor=7.6,
+            pitch_factor=2
+            logging.info(f"double pitch setup detected, adjusting practical pitch limits.")
+            logging.info(f"using pitch factor of {pitch_factor}, pitch floor of {pitch_floor}m, pitch ceil of {pitch_ceil}m")
+
         pratical_consideration = True
         tilt_used, pitch_used, gcr_used = practical_gcr_pitch_bifiacial_fixed_tilt(
-            latitude=meta["latitude"], cw=cw
+            latitude=meta["latitude"],
+            cw=cw,
+            # pitch factor is only provided in the pysam call
+            pitch_ceil=pitch_ceil,
+            pitch_floor=pitch_floor,
         )
 
     # why would this be not in
@@ -473,6 +522,9 @@ def inspire_ground_irradiance(weather_df, meta, config_files):
         config_files=config_files,
         # tell model to calculate practical tilt, pitch, gcr again inside function
         practical_pitch_tilt_considerations=pratical_consideration,
+        pitch_factor=pitch_factor,
+        practical_pitch_ceil=pitch_ceil,
+        practical_pitch_floor=pitch_floor,
     )
 
     ds_result = _handle_pysam_return(
