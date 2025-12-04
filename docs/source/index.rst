@@ -6,15 +6,15 @@
 .. .. image:: ../../tutorials_and_tools/pvdeg_logo.png
 ..    :width: 500
 
-.. image:: ./_static/logo-vectors/PVdeg-Logo-Horiz-Color.svg
+.. .. image:: ./_static/logo-vectors/PVdeg-Logo-Horiz-Color.svg
 
 
-Welcome to pvdeg!
+Welcome to PVDeg!
 ==============================================================
 
 PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation, developed at the National Renewable Energy Laboratory (NREL) and supported by the Durable Module Materials (DuraMAT) consortium. It provides modular functions, materials databases, and calculation workflows for simulating degradation mechanisms (e.g., LeTID, hydrolysis, UV exposure) using weather data from the National Solar Radiation Database (NSRDB) and the Photovoltaic Geographical Information System (PVGIS). By integrating Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables field-relevant predictions and uncertainty quantification of module reliability and lifetime.
 
-The source code for pvdeg is hosted on `github <https://github.com/NREL/pvdeg>`_. Please see the :ref:`installation` page for installation help.
+The source code for PVDeg is hosted on `github <https://github.com/NREL/pvdeg>`_. Please see the :ref:`installation` page for installation help.
 
 See :ref:`tutorials` to learn how to use and experiment with various functionalities
 
@@ -45,27 +45,20 @@ The geospatial analysis layer enables large-scale spatial analyses by automatica
 
 PVDeg's Monte Carlo engine samples parameter distributions and their correlations to generate thousands of realizations, producing confidence intervals on degradation rates rather than single deterministic values. This capability can help quantify uncertainty in complex and non-linear module lifetime predictions, and identify which parameters most strongly affect reliability risk.
 
-Citing PVDegradation Tools
-==========================
+Citing PVDeg
+============
 
-If you use PVDeg in a published work, please cite:
+If you use PVDeg in a published work, please cite both the software and the paper.
+
+**Software Citation:**
+
+Click the "Cite this repository" button on the `GitHub repository <https://github.com/NREL/PVDegradationTools>`_, or visit `Zenodo <https://zenodo.org/records/8088578/latest>`_ for the DOI corresponding to your specific version. On the Zenodo page, use the "Cite as" section in the right sidebar to copy the citation in your preferred format (BibTeX, APA, etc.).
 
 **JOSS Paper (In Review):**
 
 .. code-block::
 
-   Daxini, R., Ovaitt, S., Springer, M., Ford, T., & Kempe, M. (2025). PVDeg: a python package for modeling degradation on solar photovoltaic systems. Journal of Open Source Software (In Review).
-
-**Latest Release:**
-
-Please cite the DOI corresponding to the specific version that you used.
-DOIs are listed at `Zenodo.org <https://zenodo.org/records/8088578/latest>`_
-
-**Software Record:**
-
-.. code-block::
-
-   Holsapple, Derek, Ayala Pelaez, Silvana, Kempe, Michael. "PV Degradation Tools", NREL Github 2020, Software Record SWR-20-71.
+   Daxini, R., Ovaitt, S., Springer, M., Ford, T., & Kempe, M. (2026). PVDeg: a python package for modeling degradation on solar photovoltaic systems. Journal of Open Source Software (In Review).
 
 
 .. toctree::

@@ -1,0 +1,50 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the software and the paper from preferred-citation."
+title: "PVDeg: Photovoltaic Degradation Tools"
+abstract: "PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation, developed at the National Renewable Energy Laboratory (NREL) and supported by the Durable Module Materials (DuraMAT) consortium. It provides modular functions, materials databases, and calculation workflows for simulating degradation mechanisms (e.g., LeTID, hydrolysis, UV exposure) using weather data from the National Solar Radiation Database (NSRDB) and the Photovoltaic Geographical Information System (PVGIS). By integrating Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables field-relevant predictions and uncertainty quantification of module reliability and lifetime."
+authors:
+  - family-names: Springer
+    given-names: Martin
+    affiliation: National Renewable Energy Laboratory
+    orcid: "https://orcid.org/0000-0001-6803-108X"
+  - family-names: Brown
+    given-names: Matthew
+    affiliation: National Renewable Energy Laboratory
+    orcid: "https://orcid.org/0000-0002-0988-3431"
+  - family-names: Ovaitt
+    given-names: Silvana
+    affiliation: National Renewable Energy Laboratory
+    orcid: "https://orcid.org/0000-0003-0180-728X"
+  - family-names: Ford
+    given-names: Tobin
+    affiliation: National Renewable Energy Laboratory
+    orcid: "https://orcid.org/0009-0000-7428-5625"
+  - family-names: Daxini
+    given-names: Rajiv
+    affiliation: National Renewable Energy Laboratory
+    orcid: "https://orcid.org/0000-0003-1993-9408"
+  - family-names: Holsapple
+    given-names: Derek
+    affiliation: National Renewable Energy Laboratory
+  - family-names: Kempe
+    given-names: Michael
+    affiliation: National Renewable Energy Laboratory
+    orcid: "https://orcid.org/0000-0003-3312-0482"
+keywords:
+  - photovoltaic
+  - solar energy
+  - degradation
+  - reliability
+  - module lifetime
+  - LeTID
+  - Monte Carlo
+  - geospatial analysis
+  - NSRDB
+  - PVGIS
+  - DuraMAT
+license: BSD-3-Clause
+repository-code: "https://github.com/NREL/PVDegradationTools"
+url: "https://pvdegradationtools.readthedocs.io"
+type: software
+version: 0.7.0rc8
+date-released: 2025-12-03
