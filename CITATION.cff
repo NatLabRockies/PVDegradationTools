@@ -46,5 +46,5 @@ license: BSD-3-Clause
 repository-code: "https://github.com/NREL/PVDegradationTools"
 url: "https://pvdegradationtools.readthedocs.io"
 type: software
-version: 0.7.0rc8
-date-released: 2025-12-03
+version: 0.7.0
+date-released: 2025-12-04
