@@ -1,5 +1,4 @@
 """utilities.py."""
-
 import os
 import json
 import pandas as pd
@@ -13,7 +12,9 @@ from collections import OrderedDict
 import xarray as xr
 from subprocess import run
 import cartopy.feature as cfeature
+import logging
 
+logger = logging.getLogger(__name__)
 
 # A mapping to simplify access to files stored in `pvdeg/data`
 pvdeg_datafiles = {
@@ -1660,6 +1661,7 @@ def practical_gcr_pitch_bifiacial_fixed_tilt(
     cw: float,
     pitch_ceil: float = 12,
     pitch_floor: float = 3.8,
+    pitch_factor: float = 1,
 ) -> tuple[float, float, float]:
     """
     Calculate pitch for fixed tilt systems for InSPIRE Agrivoltaics Irradiance Dataset.
@@ -1685,6 +1687,8 @@ def practical_gcr_pitch_bifiacial_fixed_tilt(
         maximum pitch [m], default 12 chosen based on practical considerations by InSPIRE team.
     pitch_floor: float
         minimum pitch [m], default 3.8 chosen based on practical considerations by InSPIRE team.
+    pitch_factor: float
+        pitch scaling factor
 
     Returns
     -------
@@ -1700,6 +1704,12 @@ def practical_gcr_pitch_bifiacial_fixed_tilt(
         latitude=latitude, cw=cw
     )
 
+    print('calculated optimal pitch  ', pitch_optimal)
+    logger.debug(f'calculated optimal pitch  {pitch_optimal}')
+
+    pitch_optimal *= pitch_factor
+    gcr_optimal /= pitch_factor
+
     pitch_capped = min(pitch_optimal, pitch_ceil)  # pitch ceiling
     pitch_practical = max(pitch_capped, pitch_floor)  # pitch floor
 
@@ -1710,7 +1720,9 @@ def practical_gcr_pitch_bifiacial_fixed_tilt(
 
     tilt_practical = min(latitude, 40)
 
-    # practical gcr from practical pitch
+    print("calculated practical-pitch", pitch_practical)
+    logger.debug(f"calculated practical-pitch {pitch_practical}")
+
     gcr_practical = cw / pitch_practical
 
     return float(tilt_practical), float(pitch_practical), float(gcr_practical)

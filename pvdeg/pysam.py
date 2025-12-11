@@ -344,10 +344,8 @@ def _apply_practical_pitch_tilt(
         cw=2, 
         pitch_floor=pitch_floor, 
         pitch_ceil=pitch_ceil,
+        pitch_factor=pitch_factor,
     )
-
-    pitch_prac *= pitch_factor
-    gcr_prac /= pitch_factor
 
     # Apply practical tilt/GCR (pitch is implied via GCR in SAM)
     for name in param_tilt:
@@ -465,7 +463,7 @@ def inspire_ground_irradiance(weather_df, meta, config_files):
     logger.info(f"config file string: {config_files['pv']} -- debug")
 
     cw = 2  # collector width 2 [m]
-    pratical_consideration = False
+    practical_pitch_kwarg={}
     if any(setup in config_files["pv"] for setup in pratical_considerations_setups):
         logger.info(
             "setup with practical consieration detected, "
@@ -477,20 +475,28 @@ def inspire_ground_irradiance(weather_df, meta, config_files):
         pitch_factor=1
 
         if any(double_pitch_setup in config_files["pv"] for double_pitch_setup in double_pitch_setups):
-            pitch_ceil=24,
-            pitch_floor=7.6,
+            pitch_ceil=24
+            pitch_floor=7.6
             pitch_factor=2
-            logging.info(f"double pitch setup detected, adjusting practical pitch limits.")
-            logging.info(f"using pitch factor of {pitch_factor}, pitch floor of {pitch_floor}m, pitch ceil of {pitch_ceil}m")
 
-        pratical_consideration = True
+            logger.info(f"double pitch setup detected, adjusting practical pitch limits.")
+            logger.info(f"using pitch factor of {pitch_factor}, pitch floor of {pitch_floor}m, pitch ceil of {pitch_ceil}m")
+
         tilt_used, pitch_used, gcr_used = practical_gcr_pitch_bifiacial_fixed_tilt(
             latitude=meta["latitude"],
             cw=cw,
             # pitch factor is only provided in the pysam call
             pitch_ceil=pitch_ceil,
             pitch_floor=pitch_floor,
+            pitch_factor=pitch_factor
         )
+
+        practical_pitch_kwarg = {
+            'practical_pitch_tilt_considerations':True,
+            'practical_pitch_scale_factor':pitch_factor,
+            'practical_pitch_ceil':pitch_ceil,
+            'practical_pitch_floor':pitch_floor
+        }
 
     # why would this be not in
     # this should check in "10" is in the config files
@@ -520,11 +526,8 @@ def inspire_ground_irradiance(weather_df, meta, config_files):
         meta=meta,
         pv_model="pvsamv1",
         config_files=config_files,
-        # tell model to calculate practical tilt, pitch, gcr again inside function
-        practical_pitch_tilt_considerations=pratical_consideration,
-        pitch_factor=pitch_factor,
-        practical_pitch_ceil=pitch_ceil,
-        practical_pitch_floor=pitch_floor,
+        # if required, tell model to calculate practical tilt, pitch, gcr again inside function
+        **practical_pitch_kwarg
     )
 
     ds_result = _handle_pysam_return(
