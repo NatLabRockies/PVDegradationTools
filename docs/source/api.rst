@@ -1,15 +1,9 @@
 API
 ===
+
 Modules, methods, classes and attributes are explained here.
 
-
 .. currentmodule:: pvdeg
-
-.. automodule:: pvdeg
-    :no-members:
-    :no-inherited-members:
-
-:py:mod:`pvdeg`
 
 .. autosummary::
     :toctree: _autosummary/
@@ -22,6 +16,7 @@ Modules, methods, classes and attributes are explained here.
     humidity
     letid
     montecarlo
+    pysam
     scenario
     geospatial
     spectral

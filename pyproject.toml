@@ -57,6 +57,7 @@ dependencies = [
     "pre-commit",
     "sympy",
     "zarr",
+    "jupytext",
 ]
 dynamic = ["version"]
 
@@ -79,13 +80,10 @@ test = [
     "NREL-PySAM",
 ]
 books = [
-    "jupyter-book",
+    "jupyter-book<2.0",
 ]
 sam = [
     "NREL-PySAM",
-]
-inspire = [
-    "NREL-PySAM==5.1.0",
 ]
 all = [
     "pvdeg[docs,test,books,sam]",

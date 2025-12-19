@@ -13,6 +13,7 @@ from rex import Outputs
 import shutil
 import io
 import sys
+from pathlib import Path
 
 import pytest
 from pvdeg import TEST_DATA_DIR, DATA_DIR
@@ -443,3 +444,12 @@ def test_tilt_azimuth_scan_basic():
 
 # def test_search_json_bad():
 #     ...
+
+
+def test_load_gcr_from_config():
+    fp = TEST_DATA_DIR / Path("SAM/01/01_pvsamv1.json")
+
+    config_files = {"pv": str(fp)}
+    gcr = pvdeg.utilities._load_gcr_from_config(config_files=config_files)
+
+    assert gcr == 0.4

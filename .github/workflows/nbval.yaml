@@ -15,23 +15,20 @@ jobs:
     env:
       # Notebooks with estimated runtime in seconds (format: "notebook:runtime")
       ALL_NOTEBOOKS: |
-        "1 - Basics, Humidity, Design.ipynb:10"
-        "2 - Degradation.ipynb:5"
-        "3 - Spectral Degradation.ipynb:5"
-        "4 - Weather Database Access.ipynb:15"
-        "ASTM Live Demo.ipynb:10"
-        "B-O LID - Accelerated Test.ipynb:10"
-        "Custom-Functions-Nopython.ipynb:30"
-        "LETID - Accelerated Test.ipynb:120"
-        "LETID - Outdoor LETID.ipynb:30"
-        "LETID - Outdoor Scenario Based on Accelerated Test Result.ipynb:45"
-        "LETID - Passivated Wafer.ipynb:80"
-        "Monte Carlo - Arrhenius.ipynb:180"
-        "Monte Carlo - Standoff.ipynb:30"
-        "Pysam - Single Location.ipynb:25"
-        "Tools - Edge Seal Oxygen Ingress.ipynb:15"
-        "Van't Hoff Degradation Model.ipynb:5"
-        "Geospatial - Local Scenario.ipynb:1"
+        "01_basics/01_basics_humidity_design.ipynb:10"
+        "01_basics/02_degradation.ipynb:5"
+        "01_basics/03_spectral_degradation.ipynb:5"
+        "01_basics/04_weather_database_access.ipynb:15"
+        "02_degradation/01_bo_lid_accelerated_test.ipynb:10"
+        "02_degradation/02_letid_accelerated_test.ipynb:120"
+        "02_degradation/03_letid_outdoor.ipynb:30"
+        "02_degradation/04_letid_outdoor_scenario.ipynb:45"
+        "02_degradation/05_letid_passivated_wafer.ipynb:80"
+        "02_degradation/06_vant_hoff_degradation_model.ipynb:5"
+        "03_monte_carlo/01_arrhenius.ipynb:180"
+        "03_monte_carlo/02_standoff.ipynb:30"
+        "06_advanced/01_custom_functions_nopython.ipynb:30"
+        "10_workshop_demos/01_astm_live_demo.ipynb:10"
     steps:
       - name: Calculate batch matrix
         id: set-matrix
@@ -151,7 +148,7 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.calculate-batches.outputs.matrix) }}
     env:
-      NOTEBOOK_DIR: "tutorials_and_tools/tutorials_and_tools"
+      NOTEBOOK_DIR: "tutorials"
       SANITIZE_CFG: "nbval_sanitization_rules.cfg"
       ALL_NOTEBOOKS: ${{ needs.calculate-batches.outputs.notebooks }}
       BATCH_ASSIGNMENTS: ${{ needs.calculate-batches.outputs.batch_assignments }}
@@ -168,14 +165,14 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('tutorials_and_tools/requirements.txt', 'pyproject.toml') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('tutorials/requirements.txt', 'pyproject.toml') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
       - name: Install notebook environment
         run: |
           python -m pip install --upgrade pip wheel
-          pip install --timeout=300 -r tutorials_and_tools/requirements.txt
+          pip install --timeout=300 -r tutorials/requirements.txt
           pip install --timeout=300 -e .[test]
           pip install nbval global_land_mask dotenv imageio nrel-pysam
           pip install nbconvert[webpdf]
