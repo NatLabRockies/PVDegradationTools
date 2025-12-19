@@ -456,7 +456,7 @@ def inspire_ground_irradiance(weather_df, meta, config_files):
 
     tracking_setups = ["01", "02", "03", "04", "05"]
     # fixed tilt setups calculate pitch/gcr as a function of latitude capped at 40 deg
-    pratical_considerations_setups = ["06", "07", "08", "09"]
+    pratical_considerations_setups = ["06", "07", "08", "09", "11"]
     double_pitch_setups = ["09"]
     # vertical tilt (fixed spacing) 10
 

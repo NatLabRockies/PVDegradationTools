@@ -1704,7 +1704,6 @@ def practical_gcr_pitch_bifiacial_fixed_tilt(
         latitude=latitude, cw=cw
     )
 
-    print('calculated optimal pitch  ', pitch_optimal)
     logger.debug(f'calculated optimal pitch  {pitch_optimal}')
 
     pitch_optimal *= pitch_factor
@@ -1720,7 +1719,6 @@ def practical_gcr_pitch_bifiacial_fixed_tilt(
 
     tilt_practical = min(latitude, 40)
 
-    print("calculated practical-pitch", pitch_practical)
     logger.debug(f"calculated practical-pitch {pitch_practical}")
 
     gcr_practical = cw / pitch_practical
