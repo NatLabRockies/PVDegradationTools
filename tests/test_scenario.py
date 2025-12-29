@@ -153,12 +153,12 @@ def test_addModule_string_material_valid():
     assert len(scenario.modules) == 1
     assert scenario.modules[0]["module_name"] == "test_module"
     assert scenario.modules[0]["material_params"] == {
-        "Ead": 29.43112031,
-        "Do": 0.129061678,
-        "Eas": 16.6314948252219,
-        "So": 0.136034525059804,
-        "Eap": 49.1083457348515,
-        "Po": 528718258.338532,
+        "Ead": 30.3488412640457,
+        "Do": 0.186363361953945,
+        "Eas": 18.806969751765,
+        "So": 0.00873335936357483,
+        "Eap": 51.3842343231651,
+        "Po": 1081181905.42824
     }
 
 
@@ -202,12 +202,12 @@ def test_addModule_dict_single_material_valid_name():
     assert scenario.modules[0]["module_name"] == "test_module"
     assert scenario.modules[0]["material_params"] == {
         "encapsulant": {
-            "Ead": 29.43112031,
-            "Do": 0.129061678,
-            "Eas": 16.6314948252219,
-            "So": 0.136034525059804,
-            "Eap": 49.1083457348515,
-            "Po": 528718258.338532,
+            "Ead": 30.3488412640457,
+            "Do": 0.186363361953945,
+            "Eas": 18.806969751765,
+            "So": 0.00873335936357483,
+            "Eap": 51.3842343231651,
+            "Po": 1081181905.42824
         }
     }
 
@@ -261,12 +261,12 @@ def test_addModule_dict_multiple_material_valid():
     assert scenario.modules[0]["module_name"] == "test_module"
     assert scenario.modules[0]["material_params"] == {
         "encapsulant": {
-            "Ead": 29.43112031,
-            "Do": 0.129061678,
-            "Eas": 16.6314948252219,
-            "So": 0.136034525059804,
-            "Eap": 49.1083457348515,
-            "Po": 528718258.338532,
+            "Ead": 30.3488412640457,
+            "Do": 0.186363361953945,
+            "Eas": 18.806969751765,
+            "So": 0.00873335936357483,
+            "Eap": 51.3842343231651,
+            "Po": 1081181905.42824
         },
         "backsheet": {
             "Ead": 96.5385865449266,

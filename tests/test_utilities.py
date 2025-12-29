@@ -250,39 +250,66 @@ def test_read_material_special():
 def test_read_material_normal():
     res = {
         "name": "ST504",
-        "alias": "PET1",
+        "alias": "PET-1",
         "contributor": "Michael Kempe",
         "source": "unpublished measurements",
+        "range": {
+            "temperature": {
+                "min": 10,
+                "max": 85
+            }
+        },
         "Fickian": True,
         "Ead": {
             "name": "Diffusivity Activation Energy",
             "units": "kJ/mol",
-            "value": 47.603,
+            "value": 47.6412046902932,
+            "stdev": 0.836010716399879
         },
         "Do": {
             "name": "Diffusivity Prefactor",
-            "units": "cm²/s",
-            "value": 0.554153,
+            "units": "cm\u00c2\u00b2/s",
+            "value": 0.561705749061449
+        },
+        "lnDo": {
+            "name": "Logarithm of Diffusivity Prefactor",
+            "units": "ln(cm\u00c2\u00b2/s)",
+            "value": -0.57677714438584,
+            "stdev": 0.328180655396844
         },
         "Eas": {
             "name": "Solubility Activation Energy",
             "units": "kJ/mol",
-            "value": -11.5918,
+            "value": -16.0578477956147,
+            "stdev": 1.81625072292457
         },
         "So": {
             "name": "Solubility Prefactor",
-            "units": "g/cm³/atm",
-            "value": 9.554366e-07,
+            "units": "g/cm\u00c2\u00b3/atm",
+            "value": 1.47761656395834E-07
+        },
+        "lnSo": {
+            "name": "Logarithm of Solubility Prefactor",
+            "units": "ln(g/cm\u00c2\u00b3/atm)",
+            "value": -15.7276652910761,
+            "stdev": 0.712979320625446
         },
         "Eap": {
             "name": "Permeability Activation Energy",
             "units": "kJ/mol",
-            "value": 34.2011,
+            "value": 31.559196935565,
+            "stdev": 0.998737931730306
         },
         "Po": {
             "name": "Permeability Prefactor",
-            "units": "g·mm/m²/day/atm",
-            "value": 2128.8937,
+            "units": "g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm",
+            "value": 707.510576516865
+        },
+        "lnPo": {
+            "name": "Logarithm of Permeability Prefactor",
+            "units": "ln(g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm)",
+            "value": 6.5617525785461,
+            "stdev": 0.386931254591448
         },
     }
 
@@ -324,39 +351,66 @@ def test_read_material_property_missing_params():
 def test_read_material_fp_override():
     res = {
         "name": "ST504",
-        "alias": "PET1",
+        "alias": "PET-1",
         "contributor": "Michael Kempe",
         "source": "unpublished measurements",
+        "range": {
+            "temperature": {
+                "min": 10,
+                "max": 85
+            }
+        },
         "Fickian": True,
         "Ead": {
             "name": "Diffusivity Activation Energy",
             "units": "kJ/mol",
-            "value": 47.603,
+            "value": 47.6412046902932,
+            "stdev": 0.836010716399879
         },
         "Do": {
             "name": "Diffusivity Prefactor",
-            "units": "cm²/s",
-            "value": 0.554153,
+            "units": "cm\u00c2\u00b2/s",
+            "value": 0.561705749061449
+        },
+        "lnDo": {
+            "name": "Logarithm of Diffusivity Prefactor",
+            "units": "ln(cm\u00c2\u00b2/s)",
+            "value": -0.57677714438584,
+            "stdev": 0.328180655396844
         },
         "Eas": {
             "name": "Solubility Activation Energy",
             "units": "kJ/mol",
-            "value": -11.5918,
+            "value": -16.0578477956147,
+            "stdev": 1.81625072292457
         },
         "So": {
             "name": "Solubility Prefactor",
-            "units": "g/cm³/atm",
-            "value": 9.554366e-07,
+            "units": "g/cm\u00c2\u00b3/atm",
+            "value": 1.47761656395834E-07
+        },
+        "lnSo": {
+            "name": "Logarithm of Solubility Prefactor",
+            "units": "ln(g/cm\u00c2\u00b3/atm)",
+            "value": -15.7276652910761,
+            "stdev": 0.712979320625446
         },
         "Eap": {
             "name": "Permeability Activation Energy",
             "units": "kJ/mol",
-            "value": 34.2011,
+            "value": 31.559196935565,
+            "stdev": 0.998737931730306
         },
         "Po": {
             "name": "Permeability Prefactor",
-            "units": "g·mm/m²/day/atm",
-            "value": 2128.8937,
+            "units": "g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm",
+            "value": 707.510576516865
+        },
+        "lnPo": {
+            "name": "Logarithm of Permeability Prefactor",
+            "units": "ln(g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm)",
+            "value": 6.5617525785461,
+            "stdev": 0.386931254591448
         },
     }
 
