@@ -68,7 +68,7 @@
     },
     "OX002": {
         "name": "ST504",
-        "alias": "PET1",
+        "alias": "PET-1",
         "contributor": "Michael Kempe",
         "source": "unpublished measurements",
         "range": {
@@ -104,7 +104,7 @@
         "So": {
             "name": "Solubility Prefactor",
             "units": "g/cm\u00c2\u00b3/atm",
-            "value": 1.47761656395834e-07
+            "value": 1.47761656395834E-07
         },
         "lnSo": {
             "name": "Logarithm of Solubility Prefactor",
@@ -133,12 +133,16 @@
     "OX003": {
         "alias": "EVA-1",
         "Fickian": true,
-        "Ead": 30.3488412640457,
-        "Do": 0.186363361953945,
-        "Eas": 18.806969751765,
-        "So": 0.00873335936357483,
-        "Eap": 51.3842343231651,
-        "Po": 1081181905.42824
+        "range": {"temperature": {"min": 5, "max": 85} },
+        "Ead": { "name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 30.3488412640457, "stdev": 1.66567590601733 },
+        "Do": { "name": "Diffusivity Prefactor", "units": "cm²/s", "value": 0.186363361953945 },
+        "lnDo": { "name": "Diffusivity Prefactor", "units": "ln(cm²/s)", "value": -1.68005695209138, "stdev": 0.627778477662801},
+        "Eas": { "name": "Solubility Activation Energy", "units": "kJ/mol", "value": 18.806969751765, "stdev": 5.51229654374758 },
+        "So": { "name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.00873335936357483 },
+        "lnSo": { "name": "Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -4.74060517632563, "stdev": 2.1850939750279},
+        "Eap": { "name": "Permeability Activation Energy", "units": "kJ/mol", "value": 51.3842343231651, "stdev": 3.37587902382362 },
+        "Po": { "name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 1081181905.42824 },
+        "lnPo": { "name": "Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 20.8013206365886, "stdev": 1.31040598625681}
     },
     "OX004": {
         "name": "AAA polyamide backsheet",
