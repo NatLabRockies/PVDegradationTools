@@ -204,7 +204,7 @@ def test_add_material(tmp_path):
         "So": 1,
         "Eap": 1,
         "Po": 1,
-    }
+        }
 
     # Ensure the test file exists
     src_file = os.path.join(DATA_DIR, "O2permeation.json")
@@ -250,41 +250,22 @@ def test_read_material_special():
 def test_read_material_normal():
     res = {
         "name": "ST504",
-        "alias": "PET1",
+        "alias": "PET-1",
         "contributor": "Michael Kempe",
         "source": "unpublished measurements",
+        "comment": "Uncertainties computed from a linear regression of ln(P), ln(D), and ln(S) vs 1/T.",
         "Fickian": True,
-        "Ead": {
-            "name": "Diffusivity Activation Energy",
-            "units": "kJ/mol",
-            "value": 47.603,
-        },
-        "Do": {
-            "name": "Diffusivity Prefactor",
-            "units": "cm²/s",
-            "value": 0.554153,
-        },
-        "Eas": {
-            "name": "Solubility Activation Energy",
-            "units": "kJ/mol",
-            "value": -11.5918,
-        },
-        "So": {
-            "name": "Solubility Prefactor",
-            "units": "g/cm³/atm",
-            "value": 9.554366e-07,
-        },
-        "Eap": {
-            "name": "Permeability Activation Energy",
-            "units": "kJ/mol",
-            "value": 34.2011,
-        },
-        "Po": {
-            "name": "Permeability Prefactor",
-            "units": "g·mm/m²/day/atm",
-            "value": 2128.8937,
-        },
-    }
+        "range": {"temperature": {"min": 25, "max": 85}},
+        "Ead": {"name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 47.64, "stdev": 0.8360},
+        "Do": {"name": "Diffusivity Prefactor", "units": "cm²/s", "value": 0.5617},
+        "lnDo": {"name": "Logarithm of Diffusivity Prefactor", "units": "ln(cm²/s)", "value": -0.5768, "stdev": 0.3282},
+        "Eas": {"name": "Solubility Activation Energy", "units": "kJ/mol", "value": -16.06, "stdev": 1.816},
+        "So": {"name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.0000001478},
+        "lnSo": {"name": "Logarithm of Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -15.73, "stdev": 0.7130},
+        "Eap": {"name": "Permeability Activation Energy", "units": "kJ/mol", "value": 31.56, "stdev": 0.9987},
+        "Po": {"name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 707.5},
+        "lnPo": {"name": "Logarithm of Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 6.562, "stdev": 0.3869}
+        }
 
     template_material = pvdeg.utilities.read_material(
         pvdeg_file="O2permeation", key="OX002", values_only=False
@@ -297,7 +278,7 @@ def test_read_material_property_select_params():
     res = {
         "name": "ST504",
         "Fickian": True,
-    }
+        }
 
     template_material = pvdeg.utilities.read_material_property(
         pvdeg_file="O2permeation", key="OX002", parameters=["name", "Fickian"]
@@ -310,7 +291,7 @@ def test_read_material_property_missing_params():
     res = {
         "namenotindict1": None,
         "namenotindict2": None,
-    }
+        }
 
     template_material = pvdeg.utilities.read_material_property(
         pvdeg_file="O2permeation",
@@ -324,41 +305,22 @@ def test_read_material_property_missing_params():
 def test_read_material_fp_override():
     res = {
         "name": "ST504",
-        "alias": "PET1",
+        "alias": "PET-1",
         "contributor": "Michael Kempe",
         "source": "unpublished measurements",
+        "comment": "Uncertainties computed from a linear regression of ln(P), ln(D), and ln(S) vs 1/T.",
         "Fickian": True,
-        "Ead": {
-            "name": "Diffusivity Activation Energy",
-            "units": "kJ/mol",
-            "value": 47.603,
-        },
-        "Do": {
-            "name": "Diffusivity Prefactor",
-            "units": "cm²/s",
-            "value": 0.554153,
-        },
-        "Eas": {
-            "name": "Solubility Activation Energy",
-            "units": "kJ/mol",
-            "value": -11.5918,
-        },
-        "So": {
-            "name": "Solubility Prefactor",
-            "units": "g/cm³/atm",
-            "value": 9.554366e-07,
-        },
-        "Eap": {
-            "name": "Permeability Activation Energy",
-            "units": "kJ/mol",
-            "value": 34.2011,
-        },
-        "Po": {
-            "name": "Permeability Prefactor",
-            "units": "g·mm/m²/day/atm",
-            "value": 2128.8937,
-        },
-    }
+        "range": {"temperature": {"min": 25, "max": 85}},
+        "Ead": {"name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 47.64, "stdev": 0.8360},
+        "Do": {"name": "Diffusivity Prefactor", "units": "cm²/s", "value": 0.5617},
+        "lnDo": {"name": "Logarithm of Diffusivity Prefactor", "units": "ln(cm²/s)", "value": -0.5768, "stdev": 0.3282},
+        "Eas": {"name": "Solubility Activation Energy", "units": "kJ/mol", "value": -16.06, "stdev": 1.816},
+        "So": {"name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.0000001478},
+        "lnSo": {"name": "Logarithm of Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -15.73, "stdev": 0.7130},
+        "Eap": {"name": "Permeability Activation Energy", "units": "kJ/mol", "value": 31.56, "stdev": 0.9987},
+        "Po": {"name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 707.5},
+        "lnPo": {"name": "Logarithm of Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 6.562, "stdev": 0.3869}
+        }
 
     template_material = pvdeg.utilities.read_material(
         pvdeg_file="O2permeation",
