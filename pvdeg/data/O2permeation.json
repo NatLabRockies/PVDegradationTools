@@ -1,662 +1,205 @@
 {
     "OX000": {
-        "comment": "This data is for oxygen permeation parameters. The activation energies are in [kJ/mol]. Do is in [cm\u00c2\u00b2/s]. So is in [g/cm\u00c2\u00b3/atm]. Po is in[g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm]."
-    },
+        "comment": "This data is for oxygen permeation parameters. The activation energies are in [kJ/mol]. Do is in [cm²/s]. So is in [g/cm³/atm]. Po is in[g·mm/m²/day/atm]."
+},
     "OX001": {
         "name": "Tedlar",
         "alias": "PVF",
         "contributor": "Michael Kempe",
         "source": "unpublished measurements",
-        "range": {
-            "temperature": {
-                "min": 5,
-                "max": 85
-            }
-        },
+        "comment": "Uncertainties computed from a linear regression of ln(P), ln(D), and ln(S) vs 1/T.",
         "Fickian": true,
-        "Ead": {
-            "name": "Diffusivity Activation Energy",
-            "units": "kJ/mol",
-            "value": 30.4829806851499,
-            "stdev": 1.30634808525531
-        },
-        "Do": {
-            "name": "Diffusivity Prefactor",
-            "units": "cm\u00c2\u00b2/s",
-            "value": 0.000142100413011334
-        },
-        "lnDo": {
-            "name": "Logarithm of Diffusivity Prefactor",
-            "units": "ln(cm\u00c2\u00b2/s)",
-            "value": -8.85897661638174,
-            "stdev": 0.498813220504525
-        },
-        "Eas": {
-            "name": "Solubility Activation Energy",
-            "units": "kJ/mol",
-            "value": -0.272265891847877,
-            "stdev": 1.96029517498912
-        },
-        "So": {
-            "name": "Solubility Prefactor",
-            "units": "g/cm\u00c2\u00b3/atm",
-            "value": 0.000291121561353598
-        },
-        "lnSo": {
-            "name": "Logarithm of Solubility Prefactor",
-            "units": "ln(g/cm\u00c2\u00b3/atm)",
-            "value": -8.14176964141013,
-            "stdev": 0.748515009446893
-        },
-        "Eap": {
-            "name": "Permeability Activation Energy",
-            "units": "kJ/mol",
-            "value": 30.2107147933021,
-            "stdev": 0.889901126815091
-        },
-        "Po": {
-            "name": "Permeability Prefactor",
-            "units": "g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm",
-            "value": 357.42378906591
-        },
-        "lnPo": {
-            "name": "Logarithm of Permeability Prefactor",
-            "units": "ln(g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm)",
-            "value": 5.87892216197051,
-            "stdev": 0.339797984937903
-        }
-    },
+        "range": {"temperature": {"min": 5, "max": 85}},
+        "Ead": {"name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 30.48, "stdev": 1.306},
+        "Do": {"name": "Diffusivity Prefactor", "units": "cm²/s", "value": 0.0001421},
+        "lnDo": {"name": "Logarithm of Diffusivity Prefactor", "units": "ln(cm²/s)", "value": -8.859, "stdev": 0.4988},
+        "Eas": {"name": "Solubility Activation Energy", "units": "kJ/mol", "value": -0.2723, "stdev": 1.960},
+        "So": {"name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.0002911},
+        "lnSo": {"name": "Logarithm of Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -8.142, "stdev": 0.7485},
+        "Eap": {"name": "Permeability Activation Energy", "units": "kJ/mol", "value": 30.21, "stdev": 0.8899},
+        "Po": {"name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 357.4},
+        "lnPo": {"name": "Logarithm of Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 5.879, "stdev": 0.3398}
+},
     "OX002": {
         "name": "ST504",
         "alias": "PET-1",
         "contributor": "Michael Kempe",
         "source": "unpublished measurements",
-        "range": {
-            "temperature": {
-                "min": 10,
-                "max": 85
-            }
-        },
+        "comment": "Uncertainties computed from a linear regression of ln(P), ln(D), and ln(S) vs 1/T.",
         "Fickian": true,
-        "Ead": {
-            "name": "Diffusivity Activation Energy",
-            "units": "kJ/mol",
-            "value": 47.6412046902932,
-            "stdev": 0.836010716399879
-        },
-        "Do": {
-            "name": "Diffusivity Prefactor",
-            "units": "cm\u00c2\u00b2/s",
-            "value": 0.561705749061449
-        },
-        "lnDo": {
-            "name": "Logarithm of Diffusivity Prefactor",
-            "units": "ln(cm\u00c2\u00b2/s)",
-            "value": -0.57677714438584,
-            "stdev": 0.328180655396844
-        },
-        "Eas": {
-            "name": "Solubility Activation Energy",
-            "units": "kJ/mol",
-            "value": -16.0578477956147,
-            "stdev": 1.81625072292457
-        },
-        "So": {
-            "name": "Solubility Prefactor",
-            "units": "g/cm\u00c2\u00b3/atm",
-            "value": 1.47761656395834E-07
-        },
-        "lnSo": {
-            "name": "Logarithm of Solubility Prefactor",
-            "units": "ln(g/cm\u00c2\u00b3/atm)",
-            "value": -15.7276652910761,
-            "stdev": 0.712979320625446
-        },
-        "Eap": {
-            "name": "Permeability Activation Energy",
-            "units": "kJ/mol",
-            "value": 31.559196935565,
-            "stdev": 0.998737931730306
-        },
-        "Po": {
-            "name": "Permeability Prefactor",
-            "units": "g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm",
-            "value": 707.510576516865
-        },
-        "lnPo": {
-            "name": "Logarithm of Permeability Prefactor",
-            "units": "ln(g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm)",
-            "value": 6.5617525785461,
-            "stdev": 0.386931254591448
-        }
-    },
+        "range": {"temperature": {"min": 25, "max": 85}},
+        "Ead": {"name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 47.64, "stdev": 0.8360},
+        "Do": {"name": "Diffusivity Prefactor", "units": "cm²/s", "value": 0.5617},
+        "lnDo": {"name": "Logarithm of Diffusivity Prefactor", "units": "ln(cm²/s)", "value": -0.5768, "stdev": 0.3282},
+        "Eas": {"name": "Solubility Activation Energy", "units": "kJ/mol", "value": -16.06, "stdev": 1.816},
+        "So": {"name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.0000001478},
+        "lnSo": {"name": "Logarithm of Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -15.73, "stdev": 0.7130},
+        "Eap": {"name": "Permeability Activation Energy", "units": "kJ/mol", "value": 31.56, "stdev": 0.9987},
+        "Po": {"name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 707.5},
+        "lnPo": {"name": "Logarithm of Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 6.562, "stdev": 0.3869}
+},
     "OX003": {
         "alias": "EVA-1",
+        "contributor": "Michael Kempe",
+        "source": "unpublished measurements",
+        "comment": "Uncertainties computed from a linear regression of ln(P), ln(D), and ln(S) vs 1/T.",
         "Fickian": true,
-        "range": {"temperature": {"min": 5, "max": 85} },
-        "Ead": { "name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 30.3488412640457, "stdev": 1.66567590601733 },
-        "Do": { "name": "Diffusivity Prefactor", "units": "cm²/s", "value": 0.186363361953945 },
-        "lnDo": { "name": "Diffusivity Prefactor", "units": "ln(cm²/s)", "value": -1.68005695209138, "stdev": 0.627778477662801},
-        "Eas": { "name": "Solubility Activation Energy", "units": "kJ/mol", "value": 18.806969751765, "stdev": 5.51229654374758 },
-        "So": { "name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.00873335936357483 },
-        "lnSo": { "name": "Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -4.74060517632563, "stdev": 2.1850939750279},
-        "Eap": { "name": "Permeability Activation Energy", "units": "kJ/mol", "value": 51.3842343231651, "stdev": 3.37587902382362 },
-        "Po": { "name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 1081181905.42824 },
-        "lnPo": { "name": "Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 20.8013206365886, "stdev": 1.31040598625681}
-    },
+        "range": {"temperature": {"min": 5, "max": 85}},
+        "Ead": {"name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 30.35, "stdev": 1.666},
+        "Do": {"name": "Diffusivity Prefactor", "units": "cm²/s", "value": 0.1864},
+        "lnDo": {"name": "Logarithm of Diffusivity Prefactor", "units": "ln(cm²/s)", "value": -1.680, "stdev": 0.6278},
+        "Eas": {"name": "Solubility Activation Energy", "units": "kJ/mol", "value": 18.81, "stdev": 5.512},
+        "So": {"name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.008733},
+        "lnSo": {"name": "Logarithm of Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -4.741, "stdev": 2.185},
+        "Eap": {"name": "Permeability Activation Energy", "units": "kJ/mol", "value": 51.38, "stdev": 3.376},
+        "Po": {"name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 1081000000},
+        "lnPo": {"name": "Logarithm of Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 20.80, "stdev": 1.310}
+},
     "OX004": {
         "name": "AAA polyamide backsheet",
         "alias": "AAA",
         "contributor": "Michael Kempe",
         "source": "unpublished measurements",
-        "comment": "This is the trilayer polyamide backsheet that saw cracking in the field after 3 or 4 years of exposure",
-        "range": {
-            "temperature": {
-                "min": 6.8,
-                "max": 85
-            }
-        },
+        "comment": "This is the trilayer polyamide backsheet that saw cracking in the field after 3 or 4 years of exposure. Uncertainties computed from a linear regression of ln(P), ln(D), and ln(S) vs 1/T.",
         "Fickian": true,
-        "Ead": {
-            "name": "Diffusivity Activation Energy",
-            "units": "kJ/mol",
-            "value": 37.3837028363099,
-            "stdev": 1.4059295171476
-        },
-        "Do": {
-            "name": "Diffusivity Prefactor",
-            "units": "cm\u00c2\u00b2/s",
-            "value": 23.8308250590919
-        },
-        "lnDo": {
-            "name": "Logarithm of Diffusivity Prefactor",
-            "units": "ln(cm\u00c2\u00b2/s)",
-            "value": 3.17097991321763,
-            "stdev": 0.540645390252578
-        },
-        "Eas": {
-            "name": "Solubility Activation Energy",
-            "units": "kJ/mol",
-            "value": -0.749385271305265,
-            "stdev": 1.58931574536815
-        },
-        "So": {
-            "name": "Solubility Prefactor",
-            "units": "g/cm\u00c2\u00b3/atm",
-            "value": 6.77132875688743e-06
-        },
-        "lnSo": {
-            "name": "Logarithm of Solubility Prefactor",
-            "units": "ln(g/cm\u00c2\u00b3/atm)",
-            "value": -11.9028132189713,
-            "stdev": 0.611165937487691
-        },
-        "Eap": {
-            "name": "Permeability Activation Energy",
-            "units": "kJ/mol",
-            "value": 36.6343175650046,
-            "stdev": 0.468836681233115
-        },
-        "Po": {
-            "name": "Permeability Prefactor",
-            "units": "g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm",
-            "value": 1394205.27283858
-        },
-        "lnPo": {
-            "name": "Logarithm of Permeability Prefactor",
-            "units": "ln(g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm)",
-            "value": 14.1478351140088,
-            "stdev": 0.180289543251257
-        }
-    },
+        "range": {"temperature": {"min": 6.8, "max": 85}},
+        "Ead": {"name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 37.38, "stdev": 1.406},
+        "Do": {"name": "Diffusivity Prefactor", "units": "cm²/s", "value": 23.83},
+        "lnDo": {"name": "Logarithm of Diffusivity Prefactor", "units": "ln(cm²/s)", "value": 3.171, "stdev": 0.5406},
+        "Eas": {"name": "Solubility Activation Energy", "units": "kJ/mol", "value": -0.7494, "stdev": 1.589},
+        "So": {"name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.000006771},
+        "lnSo": {"name": "Logarithm of Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -11.90, "stdev": 0.6112},
+        "Eap": {"name": "Permeability Activation Energy", "units": "kJ/mol", "value": 36.63, "stdev": 0.4688},
+        "Po": {"name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 1394000},
+        "lnPo": {"name": "Logarithm of Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 14.15, "stdev": 0.1803}
+},
     "OX005": {
         "name": "Helioseal_101_dry",
         "alias": "PIB-A",
         "contributor": "Michael Kempe",
-        "comment": "This measurement is from a fresh film with active desiccant.",
+        "comment": "This measurement is from a fresh film with active desiccant. Uncertainties computed from a linear regression of ln(P), ln(D), and ln(S) vs 1/T.",
         "source": "unpublished measurements",
-        "range": {
-            "temperature": {
-                "min": 7,
-                "max": 82.7
-            }
-        },
         "Fickian": true,
-        "Ead": {
-            "name": "Diffusivity Activation Energy",
-            "units": "kJ/mol",
-            "value": 45.2379239138169,
-            "stdev": 1.04836819523508
-        },
-        "Do": {
-            "name": "Diffusivity Prefactor",
-            "units": "cm\u00c2\u00b2/s",
-            "value": 3.649322236421
-        },
-        "lnDo": {
-            "name": "Logarithm of Diffusivity Prefactor",
-            "units": "ln(cm\u00c2\u00b2/s)",
-            "value": 1.29454146170035,
-            "stdev": 0.407529362703462
-        },
-        "Eas": {
-            "name": "Solubility Activation Energy",
-            "units": "kJ/mol",
-            "value": -2.81369469114369,
-            "stdev": 2.15427371264941
-        },
-        "So": {
-            "name": "Solubility Prefactor",
-            "units": "g/cm\u00c2\u00b3/atm",
-            "value": 5.51611064877736e-05
-        },
-        "lnSo": {
-            "name": "Logarithm of Solubility Prefactor",
-            "units": "ln(g/cm\u00c2\u00b3/atm)",
-            "value": -9.80525244563606,
-            "stdev": 0.837425054666002
-        },
-        "Eap": {
-            "name": "Permeability Activation Energy",
-            "units": "kJ/mol",
-            "value": 42.4242292226732,
-            "stdev": 2.24959487560159
-        },
-        "Po": {
-            "name": "Permeability Prefactor",
-            "units": "g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm",
-            "value": 1739237.63752587
-        },
-        "lnPo": {
-            "name": "Logarithm of Permeability Prefactor",
-            "units": "ln(g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm)",
-            "value": 14.3689574358267,
-            "stdev": 0.874478995224877
-        }
-    },
+        "range": {"temperature": {"min": 7, "max": 82.3}},
+        "Ead": {"name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 45.24, "stdev": 1.048},
+        "Do": {"name": "Diffusivity Prefactor", "units": "cm²/s", "value": 3.649},
+        "lnDo": {"name": "Logarithm of Diffusivity Prefactor", "units": "ln(cm²/s)", "value": 1.295, "stdev": 0.4075},
+        "Eas": {"name": "Solubility Activation Energy", "units": "kJ/mol", "value": -2.814, "stdev": 2.154},
+        "So": {"name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.00005516},
+        "lnSo": {"name": "Logarithm of Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -9.805, "stdev": 0.8374},
+        "Eap": {"name": "Permeability Activation Energy", "units": "kJ/mol", "value": 42.42, "stdev": 2.250},
+        "Po": {"name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 1739000},
+        "lnPo": {"name": "Logarithm of Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 14.37, "stdev": 0.8745}
+},
     "OX006": {
         "name": "Helioseal_101_wet",
         "alias": "PIB-A Wet",
         "contributor": "Michael Kempe",
-        "comment": "This measurement is after saturation with water.",
+        "comment": "This measurement is after saturation with water. Uncertainties computed from a linear regression of ln(P), ln(D), and ln(S) vs 1/T.",
         "source": "unpublished measurements",
-        "range": {
-            "temperature": {
-                "min": 7.5,
-                "max": 63
-            }
-        },
         "Fickian": true,
-        "Ead": {
-            "name": "Diffusivity Activation Energy",
-            "units": "kJ/mol",
-            "value": 50.7559555451228,
-            "stdev": 4.00598180112007
-        },
-        "Do": {
-            "name": "Diffusivity Prefactor",
-            "units": "cm\u00c2\u00b2/s",
-            "value": 37.2424760878286
-        },
-        "lnDo": {
-            "name": "Logarithm of Diffusivity Prefactor",
-            "units": "ln(cm\u00c2\u00b2/s)",
-            "value": 3.61744994020464,
-            "stdev": 1.57308587384869
-        },
-        "Eas": {
-            "name": "Solubility Activation Energy",
-            "units": "kJ/mol",
-            "value": 2.73445636465624,
-            "stdev": 4.6479793516889
-        },
-        "So": {
-            "name": "Solubility Prefactor",
-            "units": "g/cm\u00c2\u00b3/atm",
-            "value": 0.000154058954487253
-        },
-        "lnSo": {
-            "name": "Logarithm of Solubility Prefactor",
-            "units": "ln(g/cm\u00c2\u00b3/atm)",
-            "value": -8.77817520746224,
-            "stdev": 1.82518818683546
-        },
-        "Eap": {
-            "name": "Permeability Activation Energy",
-            "units": "kJ/mol",
-            "value": 53.490411909779,
-            "stdev": 4.13269908900538
-        },
-        "Po": {
-            "name": "Permeability Prefactor",
-            "units": "g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm",
-            "value": 49572319.063168
-        },
-        "lnPo": {
-            "name": "Logarithm of Permeability Prefactor",
-            "units": "ln(g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm)",
-            "value": 17.7189431525048,
-            "stdev": 1.62284575430772
-        }
-    },
+        "range": {"temperature": {"min": 7.5, "max": 63}},
+        "Ead": {"name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 50.76, "stdev": 4.006},
+        "Do": {"name": "Diffusivity Prefactor", "units": "cm²/s", "value": 37.24},
+        "lnDo": {"name": "Logarithm of Diffusivity Prefactor", "units": "ln(cm²/s)", "value": 3.617, "stdev": 1.573},
+        "Eas": {"name": "Solubility Activation Energy", "units": "kJ/mol", "value": 2.734, "stdev": 4.648},
+        "So": {"name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.0001541},
+        "lnSo": {"name": "Logarithm of Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -8.778, "stdev": 1.825},
+        "Eap": {"name": "Permeability Activation Energy", "units": "kJ/mol", "value": 53.49, "stdev": 4.133},
+        "Po": {"name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 49570000},
+        "lnPo": {"name": "Logarithm of Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 17.72, "stdev": 1.623}
+},
     "OX007": {
         "name": "LPO3_dry",
         "alias": "PIB-B",
         "contributor": "Michael Kempe",
-        "comment": "This measurement is from a fresh film with active desiccant.",
+        "comment": "This measurement is from a fresh film with active desiccant. Uncertainties computed from a linear regression of ln(P), ln(D), and ln(S) vs 1/T.",
         "source": "unpublished measurements",
-        "range": {
-            "temperature": {
-                "min": 5.25,
-                "max": 85
-            }
-        },
         "Fickian": true,
-        "Ead": {
-            "name": "Diffusivity Activation Energy",
-            "units": "kJ/mol",
-            "value": 41.8747463870785,
-            "stdev": 1.61025143805659
-        },
-        "Do": {
-            "name": "Diffusivity Prefactor",
-            "units": "cm\u00c2\u00b2/s",
-            "value": 0.940649826157739
-        },
-        "lnDo": {
-            "name": "Logarithm of Diffusivity Prefactor",
-            "units": "ln(cm\u00c2\u00b2/s)",
-            "value": -0.0611843381357957,
-            "stdev": 0.609459168608059
-        },
-        "Eas": {
-            "name": "Solubility Activation Energy",
-            "units": "kJ/mol",
-            "value": 5.98620470759825,
-            "stdev": 5.4529538992794
-        },
-        "So": {
-            "name": "Solubility Prefactor",
-            "units": "g/cm\u00c2\u00b3/atm",
-            "value": 2.72071647229497e-05
-        },
-        "lnSo": {
-            "name": "Logarithm of Solubility Prefactor",
-            "units": "ln(g/cm\u00c2\u00b3/atm)",
-            "value": -10.5120302104164,
-            "stdev": 2.09609698879676
-        },
-        "Eap": {
-            "name": "Permeability Activation Energy",
-            "units": "kJ/mol",
-            "value": 44.9002971136429,
-            "stdev": 1.42757699553932
-        },
-        "Po": {
-            "name": "Permeability Prefactor",
-            "units": "g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm",
-            "value": 2992127.23692038
-        },
-        "lnPo": {
-            "name": "Logarithm of Permeability Prefactor",
-            "units": "ln(g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm)",
-            "value": 14.911495142881,
-            "stdev": 0.548755756402216
-        }
-    },
+        "range": {"temperature": {"min": 5.25, "max": 85}},
+        "Ead": {"name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 41.87, "stdev": 1.610},
+        "Do": {"name": "Diffusivity Prefactor", "units": "cm²/s", "value": 0.9406},
+        "lnDo": {"name": "Logarithm of Diffusivity Prefactor", "units": "ln(cm²/s)", "value": -0.06118, "stdev": 0.6095},
+        "Eas": {"name": "Solubility Activation Energy", "units": "kJ/mol", "value": 5.986, "stdev": 5.453},
+        "So": {"name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.00002721},
+        "lnSo": {"name": "Logarithm of Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -10.51, "stdev": 2.096},
+        "Eap": {"name": "Permeability Activation Energy", "units": "kJ/mol", "value": 44.90, "stdev": 1.428},
+        "Po": {"name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 2992000},
+        "lnPo": {"name": "Logarithm of Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 14.91, "stdev": 0.5488}
+},
     "OX008": {
         "name": "LPO3_wet",
         "alias": "PIB-B",
         "contributor": "Michael Kempe",
-        "comment": "This measurement is after saturation with water.",
+        "comment": "This measurement is after saturation with water. Uncertainties computed from a linear regression of ln(P), ln(D), and ln(S) vs 1/T.",
         "source": "unpublished measurements",
-        "range": {
-            "temperature": {
-                "min": 7,
-                "max": 83
-            }
-        },
+
         "Fickian": true,
-        "Ead": {
-            "name": "Diffusivity Activation Energy",
-            "units": "kJ/mol",
-            "value": 50.7707938037899,
-            "stdev": 2.65142836455948
-        },
-        "Do": {
-            "name": "Diffusivity Prefactor",
-            "units": "cm\u00c2\u00b2/s",
-            "value": 22.9935596511643
-        },
-        "lnDo": {
-            "name": "Logarithm of Diffusivity Prefactor",
-            "units": "ln(cm\u00c2\u00b2/s)",
-            "value": 3.13521416155081,
-            "stdev": 0.981302931096899
-        },
-        "Eas": {
-            "name": "Solubility Activation Energy",
-            "units": "kJ/mol",
-            "value": -2.97963821680531,
-            "stdev": 3.25567293169799
-        },
-        "So": {
-            "name": "Solubility Prefactor",
-            "units": "g/cm\u00c2\u00b3/atm",
-            "value": 1.73726314328044e-06
-        },
-        "lnSo": {
-            "name": "Logarithm of Solubility Prefactor",
-            "units": "ln(g/cm\u00c2\u00b3/atm)",
-            "value": -13.2631995892141,
-            "stdev": 1.21656335808295
-        },
-        "Eap": {
-            "name": "Permeability Activation Energy",
-            "units": "kJ/mol",
-            "value": 46.3048994986326,
-            "stdev": 2.05006941063141
-        },
-        "Po": {
-            "name": "Permeability Prefactor",
-            "units": "g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm",
-            "value": 6098325.03678058
-        },
-        "lnPo": {
-            "name": "Logarithm of Permeability Prefactor",
-            "units": "ln(g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm)",
-            "value": 15.6235247073041,
-            "stdev": 0.76605954554536
-        }
-    },
+        "range": {"temperature": {"min": 7, "max": 83}},
+        "Ead": {"name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 50.77, "stdev": 2.651},
+        "Do": {"name": "Diffusivity Prefactor", "units": "cm²/s", "value": 22.99},
+        "lnDo": {"name": "Logarithm of Diffusivity Prefactor", "units": "ln(cm²/s)", "value": 3.135, "stdev": 0.9813},
+        "Eas": {"name": "Solubility Activation Energy", "units": "kJ/mol", "value": -2.980, "stdev": 3.256},
+        "So": {"name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.000001737},
+        "lnSo": {"name": "Logarithm of Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -13.26, "stdev": 1.217},
+        "Eap": {"name": "Permeability Activation Energy", "units": "kJ/mol", "value": 46.30, "stdev": 2.050},
+        "Po": {"name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 6098000},
+        "lnPo": {"name": "Logarithm of Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 15.62, "stdev": 0.7661}
+},
     "OX009": {
         "name": "Nagase_dry",
         "alias": "PIB-B",
         "contributor": "Michael Kempe",
-        "comment": "This measurement is from a fresh film with active desiccant.",
+        "comment": "This measurement is from a fresh film with active desiccant. Uncertainties computed from a linear regression of ln(P), ln(D), and ln(S) vs 1/T.",
         "source": "unpublished measurements",
         "Fickian": true,
-        "Ead": {
-            "name": "Diffusivity Activation Energy",
-            "units": "kJ/mol",
-            "value": 47.5370852045655,
-            "stdev": 2.26134419431366
-        },
-        "Do": {
-            "name": "Diffusivity Prefactor",
-            "units": "cm\u00c2\u00b2/s",
-            "value": 11.2264962149631
-        },
-        "lnDo": {
-            "name": "Logarithm of Diffusivity Prefactor",
-            "units": "ln(cm\u00c2\u00b2/s)",
-            "value": 2.41827671783806,
-            "stdev": 0.87515308112808
-        },
-        "Eas": {
-            "name": "Solubility Activation Energy",
-            "units": "kJ/mol",
-            "value": 0.573053055186259,
-            "stdev": 1.01072655241439
-        },
-        "So": {
-            "name": "Solubility Prefactor",
-            "units": "g/cm\u00c2\u00b3/atm",
-            "value": 0.000176292362495222
-        },
-        "lnSo": {
-            "name": "Logarithm of Solubility Prefactor",
-            "units": "ln(g/cm\u00c2\u00b3/atm)",
-            "value": -8.64336679056961,
-            "stdev": 0.39638400773051
-        },
-        "Eap": {
-            "name": "Permeability Activation Energy",
-            "units": "kJ/mol",
-            "value": 50.4311930097271,
-            "stdev": 1.90690300161787
-        },
-        "Po": {
-            "name": "Permeability Prefactor",
-            "units": "g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm",
-            "value": 38749668.9879314
-        },
-        "lnPo": {
-            "name": "Logarithm of Permeability Prefactor",
-            "units": "ln(g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm)",
-            "value": 17.4726327714802,
-            "stdev": 0.74784406556753
-        }
-    },
+        "range": {"temperature": {"min": 5, "max": 85}},
+        "Ead": {"name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 47.54, "stdev": 2.261},
+        "Do": {"name": "Diffusivity Prefactor", "units": "cm²/s", "value": 11.23},
+        "lnDo": {"name": "Logarithm of Diffusivity Prefactor", "units": "ln(cm²/s)", "value": 2.418, "stdev": 0.8752},
+        "Eas": {"name": "Solubility Activation Energy", "units": "kJ/mol", "value": 0.5731, "stdev": 1.011},
+        "So": {"name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.0001763},
+        "lnSo": {"name": "Logarithm of Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -8.643, "stdev": 0.3964},
+        "Eap": {"name": "Permeability Activation Energy", "units": "kJ/mol", "value": 50.43, "stdev": 1.907},
+        "Po": {"name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 38750000},
+        "lnPo": {"name": "Logarithm of Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 17.47, "stdev": 0.7478}
+},
     "OX010": {
         "name": "Nagase_wet",
         "alias": "PIB-B",
         "contributor": "Michael Kempe",
-        "comment": "This measurement is after saturation with water.",
+        "comment": "This measurement is after saturation with water. Uncertainties computed from a linear regression of ln(P), ln(D), and ln(S) vs 1/T.",
         "source": "unpublished measurements",
-        "range": {
-            "temperature": {
-                "min": 5,
-                "max": 81
-            }
-        },
         "Fickian": true,
-        "Ead": {
-            "name": "Diffusivity Activation Energy",
-            "units": "kJ/mol",
-            "value": 42.0992266897235,
-            "stdev": 2.87339873478558
-        },
-        "Do": {
-            "name": "Diffusivity Prefactor",
-            "units": "cm\u00c2\u00b2/s",
-            "value": 0.973239618914914
-        },
-        "lnDo": {
-            "name": "Logarithm of Diffusivity Prefactor",
-            "units": "ln(cm\u00c2\u00b2/s)",
-            "value": -0.0271249589600551,
-            "stdev": 1.10200472058657
-        },
-        "Eas": {
-            "name": "Solubility Activation Energy",
-            "units": "kJ/mol",
-            "value": 3.70611924169167,
-            "stdev": 1.78410603814852
-        },
-        "So": {
-            "name": "Solubility Prefactor",
-            "units": "g/cm\u00c2\u00b3/atm",
-            "value": 0.000840535316428838
-        },
-        "lnSo": {
-            "name": "Logarithm of Solubility Prefactor",
-            "units": "ln(g/cm\u00c2\u00b3/atm)",
-            "value": -7.08147158764161,
-            "stdev": 0.684239626148993
-        },
-        "Eap": {
-            "name": "Permeability Activation Energy",
-            "units": "kJ/mol",
-            "value": 45.8053459314151,
-            "stdev": 2.20240293420866
-        },
-        "Po": {
-            "name": "Permeability Prefactor",
-            "units": "g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm",
-            "value": 7067885.22183513
-        },
-        "lnPo": {
-            "name": "Logarithm of Permeability Prefactor",
-            "units": "ln(g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm)",
-            "value": 15.7710718731607,
-            "stdev": 0.844664682541098
-        }
-    },
+        "range": {"temperature": {"min": 6.1, "max": 82}},
+        "Ead": {"name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 42.10, "stdev": 2.873},
+        "Do": {"name": "Diffusivity Prefactor", "units": "cm²/s", "value": 0.9732},
+        "lnDo": {"name": "Logarithm of Diffusivity Prefactor", "units": "ln(cm²/s)", "value": -0.02712, "stdev": 1.102},
+        "Eas": {"name": "Solubility Activation Energy", "units": "kJ/mol", "value": 3.706, "stdev": 1.784},
+        "So": {"name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.0008405},
+        "lnSo": {"name": "Logarithm of Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -7.081, "stdev": 0.6842},
+        "Eap": {"name": "Permeability Activation Energy", "units": "kJ/mol", "value": 45.81, "stdev": 2.202},
+        "Po": {"name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 7068000},
+        "lnPo": {"name": "Logarithm of Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 15.77, "stdev": 0.8447}
+},
     "OX011": {
         "name": "Oppanol_B_200",
         "contributor": "Michael Kempe",
+        "comment": "Uncertainties computed from a linear regression of ln(P), ln(D), and ln(S) vs 1/T.",
         "Source": "G. J. Van Amerongen, The Permeability of Different Rubbers to Gases and Its Relation to Diffusivity and Solubility, Journal of Applied Physics 17, 972 (1946); https://doi.org/10.1063/1.1707667",
         "alias": "PIB-lit",
-        "range": {
-            "temperature": {
-                "min": 17,
-                "max": 50
-            }
-        },
         "Fickian": true,
-        "Ead": {
-            "name": "Diffusivity Activation Energy",
-            "units": "kJ/mol",
-            "value": 46.1588523288883,
-            "stdev": 1.1247958021836
-        },
-        "Do": {
-            "name": "Diffusivity Prefactor",
-            "units": "cm\u00c2\u00b2/s",
-            "value": 10.0046713697576
-        },
-        "lnDo": {
-            "name": "Logarithm of Diffusivity Prefactor",
-            "units": "ln(cm\u00c2\u00b2/s)",
-            "value": 2.30305212089529,
-            "stdev": 0.441441903803991
-        },
-        "Eas": {
-            "name": "Solubility Activation Energy",
-            "units": "kJ/mol",
-            "value": -1.44129004123392,
-            "stdev": 1.38230281234015
-        },
-        "So": {
-            "name": "Solubility Prefactor",
-            "units": "g/cm\u00c2\u00b3/atm",
-            "value": 8.66504325145098e-05
-        },
-        "lnSo": {
-            "name": "Logarithm of Solubility Prefactor",
-            "units": "ln(g/cm\u00c2\u00b3/atm)",
-            "value": -9.35362855030317,
-            "stdev": 0.54197346346768
-        },
-        "Eap": {
-            "name": "Permeability Activation Energy",
-            "units": "kJ/mol",
-            "value": 45.7457126425636,
-            "stdev": 0.487134980393976
-        },
-        "Po": {
-            "name": "Permeability Prefactor",
-            "units": "g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm",
-            "value": 11283311.6429978
-        },
-        "lnPo": {
-            "name": "Logarithm of Permeability Prefactor",
-            "units": "ln(g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm)",
-            "value": 16.2388353463186,
-            "stdev": 0.191182962042684
-        }
-    },
+        "range": {"temperature": {"min": 17, "max": 50}},
+        "Ead": {"name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 46.16, "stdev": 1.125},
+        "Do": {"name": "Diffusivity Prefactor", "units": "cm²/s", "value": 10.00},
+        "lnDo": {"name": "Logarithm of Diffusivity Prefactor", "units": "ln(cm²/s)", "value": 2.303, "stdev": 0.4414},
+        "Eas": {"name": "Solubility Activation Energy", "units": "kJ/mol", "value": -1.441, "stdev": 1.382},
+        "So": {"name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.00008665},
+        "lnSo": {"name": "Logarithm of Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -9.354, "stdev": 0.5420},
+        "Eap": {"name": "Permeability Activation Energy", "units": "kJ/mol", "value": 45.75, "stdev": 0.4871},
+        "Po": {"name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 11280000},
+        "lnPo": {"name": "Logarithm of Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 16.24, "stdev": 0.1912}
+},
     "OX012": {
         "name": "EVA",
         "alias": "EVA-2",
@@ -667,76 +210,29 @@
             "name": "Diffusivity Activation Energy",
             "units": "kJ/mol",
             "value": 28.1814557950317
-        },
+},
         "Do": {
             "name": "Diffusivity Prefactor",
-            "units": "cm\u00c2\u00b2/s",
+            "units": "cm²/s",
             "value": 0.0331146659105106
-        }
-    },
+}
+},
     "OX013": {
         "name": "polyolefin elastomer (POE)",
         "alias": "POE-1",
         "contributor": "Michael Kempe",
         "source": "unpublished measurements",
-        "comment": "This is a NREL laboratory formulation made similar to a typical EVA but using Dow Chemical Engage 8100, a poly ethylene octene copolymer, as the base resin.",
-        "range": {
-            "temperature": {
-                "min": 8,
-                "max": 59
-            }
-        },
+        "comment": "This is a NREL laboratory formulation made similar to a typical EVA but using Dow Chemical Engage 8100, a poly ethylene octene copolymer, as the base resin. Uncertainties computed from a linear regression of ln(P), ln(D), and ln(S) vs 1/T.",
         "Fickian": true,
-        "Ead": {
-            "name": "Diffusivity Activation Energy",
-            "units": "kJ/mol",
-            "value": 32.9383421354172,
-            "stdev": 3.32312299555662
-        },
-        "Do": {
-            "name": "Diffusivity Prefactor",
-            "units": "cm\u00c2\u00b2/s",
-            "value": 1.00914093168826
-        },
-        "lnDo": {
-            "name": "Logarithm of Diffusivity Prefactor",
-            "units": "ln(cm\u00c2\u00b2/s)",
-            "value": 0.00909940623459349,
-            "stdev": 1.30133585859903
-        },
-        "Eas": {
-            "name": "Solubility Activation Energy",
-            "units": "kJ/mol",
-            "value": 6.33957790915805,
-            "stdev": 2.0672797666538
-        },
-        "So": {
-            "name": "Solubility Prefactor",
-            "units": "g/cm\u00c2\u00b3/atm",
-            "value": 0.00148313008211379
-        },
-        "lnSo": {
-            "name": "Logarithm of Solubility Prefactor",
-            "units": "ln(g/cm\u00c2\u00b3/atm)",
-            "value": -6.51360050415472,
-            "stdev": 0.809547312482855
-        },
-        "Eap": {
-            "name": "Permeability Activation Energy",
-            "units": "kJ/mol",
-            "value": 39.2779200445752,
-            "stdev": 4.00770095512696
-        },
-        "Po": {
-            "name": "Permeability Prefactor",
-            "units": "g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm",
-            "value": 1939706.70565142
-        },
-        "lnPo": {
-            "name": "Logarithm of Permeability Prefactor",
-            "units": "ln(g\u00c2\u00b7mm/m\u00c2\u00b2/day/atm)",
-            "value": 14.4780473369564,
-            "stdev": 1.56941677163975
-        }
-    }
+        "range": {"temperature": {"min": 17, "max": 50}},
+        "Ead": {"name": "Diffusivity Activation Energy", "units": "kJ/mol", "value": 46.16, "stdev": 1.125},
+        "Do": {"name": "Diffusivity Prefactor", "units": "cm²/s", "value": 10.00},
+        "lnDo": {"name": "Logarithm of Diffusivity Prefactor", "units": "ln(cm²/s)", "value": 2.303, "stdev": 0.4414},
+        "Eas": {"name": "Solubility Activation Energy", "units": "kJ/mol", "value": -1.441, "stdev": 1.382},
+        "So": {"name": "Solubility Prefactor", "units": "g/cm³/atm", "value": 0.00008665},
+        "lnSo": {"name": "Logarithm of Solubility Prefactor", "units": "ln(g/cm³/atm)", "value": -9.354, "stdev": 0.5420},
+        "Eap": {"name": "Permeability Activation Energy", "units": "kJ/mol", "value": 45.75, "stdev": 0.4871},
+        "Po": {"name": "Permeability Prefactor", "units": "g·mm/m²/day/atm", "value": 11280000},
+        "lnPo": {"name": "Logarithm of Permeability Prefactor", "units": "ln(g·mm/m²/day/atm)", "value": 16.24, "stdev": 0.1912}
+}
 }
