@@ -28,7 +28,7 @@ keywords = [
     "PV",
 ]
 dependencies = [
-    "aiohttp==3.12.14",
+    "aiohttp==3.13.3",
     "numpy>=1.19.3",
     "pvlib>=0.12.0",
     "scipy>1.6.0",
