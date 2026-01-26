@@ -486,6 +486,9 @@ def convert_tmy(file_in, file_out="h5_from_tmy.h5"):
     }
     meta = pd.DataFrame(meta)
 
+    for col in meta.select_dtypes(include=["string"]).columns:
+        meta[col] = meta[col].astype("object")
+
     with Outputs(file_out, "w") as f:
         f.meta = meta
         f.time_index = time_index
