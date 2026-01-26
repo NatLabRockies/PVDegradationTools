@@ -601,7 +601,7 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
 Pandas version  3.0.0
 Pvlib version  0.14.0
-Pvdeg version  0.1.dev1+g320888a5f
+Pvdeg version  0.1.dev1+g9b9972aa0
 </pre></div>
 </div>
 </div>
@@ -659,7 +659,9 @@ Pvdeg version  0.1.dev1+g320888a5f
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
-          x      T98_0    T98_inf
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          x      T98_0    T98_inf
 0  0.522443  71.778148  48.754265
           x      T98_0    T98_inf
 0  0.490293  71.778148  48.754265
@@ -692,17 +694,17 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
-0     4.006530     1.328949
-1     3.413748    -0.299065
-2     6.441126    -0.494197
-3    10.821930     0.156079
-4     5.710785     0.455507
+0     5.955571     0.455445
+1     8.553491    -0.431758
+2     6.077487     0.039753
+3     7.041115    -0.170139
+4    15.063254     0.235889
 ..         ...          ...
-495   8.712697     0.775266
-496   5.016953     0.468140
-497   8.246220     0.289086
-498   3.314899     1.633933
-499   4.704892     0.673740
+495   4.503969     0.124261
+496   5.428170     0.637102
+497  -2.930494     0.104697
+498   7.286135    -0.095731
+499   5.163037    -0.046306
 
 [500 rows x 2 columns]
 </pre></div>
@@ -742,6 +744,12 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/standards.py:367: RuntimeWarning: invalid value encountered in log
+  x = -x_0 * np.log(1 - (T98_0 - T98) / (T98_0 - T98_inf))
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="dealing-with-series">
@@ -771,17 +779,17 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.000000  52.627740  37.868800
-1    0.748848  74.618287  51.171571
-2    1.662322  75.372647  51.753101
-3    0.738612  71.474481  49.125194
-4    0.000000  68.370624  46.994329
+0    0.000000  68.371241  46.994662
+1    2.113947  75.162314  51.587092
+2    0.662550  72.317771  49.877198
+3    1.304682  73.929726  50.696246
+4    0.495533  70.715318  48.611407
 ..        ...        ...        ...
-495  0.000000  64.098096  44.023118
-496  0.000000  68.248221  46.909325
-497  0.067771  70.179315  48.270878
-498  0.000000  44.570024  34.438335
-499  0.000000  65.583290  44.970999
+495  0.356315  71.701927  49.326690
+496  0.000000  65.945978  45.299091
+497  0.000000  71.865153  49.470233
+498  1.224731  73.587079  50.403170
+499  0.749225  73.093731  50.190041
 
 [500 rows x 3 columns]
 </pre></div>
@@ -816,7 +824,7 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2844235dee05690d782bb2941c8b15d57bf164a57067b6428c11bef4ac5b7dc1.png" src="../_images/2844235dee05690d782bb2941c8b15d57bf164a57067b6428c11bef4ac5b7dc1.png" />
+<img alt="../_images/4822601da910e557c7ef59c3c5f300b176f86b756ad3d4dfa8480afa2e8b3c67.png" src="../_images/4822601da910e557c7ef59c3c5f300b176f86b756ad3d4dfa8480afa2e8b3c67.png" />
 </div>
 </div>
 </section>
