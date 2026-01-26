@@ -174,7 +174,7 @@ def test_module_edge_cases():
             "dni": [0, 900, 400],
             "dhi": [0, 100, 100],
         },
-        index=pd.date_range("2020-01-01", periods=3, freq="H"),
+        index=pd.date_range("2020-01-01", periods=3, freq="h"),
     )
     meta = {"latitude": 40, "longitude": -105, "altitude": 1600}
     result = pvdeg.humidity.module(
