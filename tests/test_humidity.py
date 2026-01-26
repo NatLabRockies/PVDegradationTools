@@ -64,11 +64,11 @@ def test_water_saturation_pressure_mean():
         temp=WEATHER["temp_air"]
     )
     assert water_saturation_pressure_avg[1] == pytest.approx(0.47607, abs=5e-5)
-    assert water_saturation_pressure_avg[0][0] == pytest.approx(0.469731, abs=5e-5)
-    assert water_saturation_pressure_avg[0][1] == pytest.approx(0.465908, abs=5e-5)
-    assert water_saturation_pressure_avg[0][2] == pytest.approx(0.462112, abs=5e-5)
-    assert water_saturation_pressure_avg[0][3] == pytest.approx(0.462112, abs=5e-5)
-    assert water_saturation_pressure_avg[0][4] == pytest.approx(0.458343, abs=5e-5)
+    assert water_saturation_pressure_avg[0].iloc[0] == pytest.approx(0.469731, abs=5e-5)
+    assert water_saturation_pressure_avg[0].iloc[1] == pytest.approx(0.465908, abs=5e-5)
+    assert water_saturation_pressure_avg[0].iloc[2] == pytest.approx(0.462112, abs=5e-5)
+    assert water_saturation_pressure_avg[0].iloc[3] == pytest.approx(0.462112, abs=5e-5)
+    assert water_saturation_pressure_avg[0].iloc[4] == pytest.approx(0.458343, abs=5e-5)
 
 
 def test_water_saturation_pressure_individual_points():
@@ -81,11 +81,11 @@ def test_water_saturation_pressure_individual_points():
     water_saturation_pressure = pvdeg.humidity.water_saturation_pressure(
         temp=WEATHER["temp_air"], average=False
     )
-    assert water_saturation_pressure[0] == pytest.approx(0.469731, abs=5e-5)
-    assert water_saturation_pressure[1] == pytest.approx(0.465908, abs=5e-5)
-    assert water_saturation_pressure[2] == pytest.approx(0.462112, abs=5e-5)
-    assert water_saturation_pressure[3] == pytest.approx(0.462112, abs=5e-5)
-    assert water_saturation_pressure[4] == pytest.approx(0.458343, abs=5e-5)
+    assert water_saturation_pressure.iloc[0] == pytest.approx(0.469731, abs=5e-5)
+    assert water_saturation_pressure.iloc[1] == pytest.approx(0.465908, abs=5e-5)
+    assert water_saturation_pressure.iloc[2] == pytest.approx(0.462112, abs=5e-5)
+    assert water_saturation_pressure.iloc[3] == pytest.approx(0.462112, abs=5e-5)
+    assert water_saturation_pressure.iloc[4] == pytest.approx(0.458343, abs=5e-5)
 
 
 def test_module():
