@@ -18,20 +18,23 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Get data from a supplied data file (Do not use the next box of code if using your own file)
-weather_file = os.path.join(DATA_DIR, "psm3_demo.csv")
-weather_df, meta = pvdeg.weather.read(weather_file, "psm")
-print(sorted(meta.keys()))
+# load weather and location data, use pvlib read_psm3 function with map_variables = True
+
+sam_file = "psm3.csv"
+weather, meta = pvdeg.weather.read(
+    os.path.join(DATA_DIR, sam_file), file_type="PSM3", map_variables=True
+)
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
 [31mAttributeError[39m                            Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[4][39m[32m, line 3[39m
-[32m      1[39m [38;5;66;03m# Get data from a supplied data file (Do not use the next box of code if using your own file)[39;00m
-[32m      2[39m weather_file = os.path.join(DATA_DIR, [33m"[39m[33mpsm3_demo.csv[39m[33m"[39m)
-[32m----> [39m[32m3[39m weather_df, meta = [43mpvdeg[49m[43m.[49m[43mweather[49m[43m.[49m[43mread[49m[43m([49m[43mweather_file[49m[43m,[49m[43m [49m[33;43m"[39;49m[33;43mpsm[39;49m[33;43m"[39;49m[43m)[49m
-[32m      4[39m [38;5;28mprint[39m([38;5;28msorted[39m(meta.keys()))
+[36mCell[39m[36m [39m[32mIn[4][39m[32m, line 4[39m
+[32m      1[39m [38;5;66;03m# load weather and location data, use pvlib read_psm3 function with map_variables = True[39;00m
+[32m      3[39m sam_file = [33m"[39m[33mpsm3.csv[39m[33m"[39m
+[32m----> [39m[32m4[39m weather, meta = [43mpvdeg[49m[43m.[49m[43mweather[49m[43m.[49m[43mread[49m[43m([49m
+[32m      5[39m [43m    [49m[43mos[49m[43m.[49m[43mpath[49m[43m.[49m[43mjoin[49m[43m([49m[43mDATA_DIR[49m[43m,[49m[43m [49m[43msam_file[49m[43m)[49m[43m,[49m[43m [49m[43mfile_type[49m[43m=[49m[33;43m"[39;49m[33;43mPSM3[39;49m[33;43m"[39;49m[43m,[49m[43m [49m[43mmap_variables[49m[43m=[49m[38;5;28;43;01mTrue[39;49;00m
+[32m      6[39m [43m)[49m
 
 [36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/weather.py:292[39m, in [36mread[39m[34m(file_in, file_type, map_variables, find_meta, **kwargs)[39m
 [32m    289[39m file_type = file_type.upper()
