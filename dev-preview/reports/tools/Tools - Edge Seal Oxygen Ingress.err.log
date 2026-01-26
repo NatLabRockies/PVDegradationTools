@@ -18,29 +18,47 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Get data from a supplied data file (Do not use the next box of code if using your own file)
-weather_file = os.path.join(DATA_DIR, "psm3_demo.csv")
-weather_df, meta = pvdeg.weather.read(weather_file, "psm")
-print(sorted(meta.keys()))
+oxygen_profile = pvdeg.diffusion.esdiffusion(
+    temperature=temperature,
+    edge_seal=es,
+    encapsulant=enc,
+    edge_seal_width=esw,
+    encapsulant_width=encw,
+    seal_nodes=sn,
+    encapsulant_nodes=en,
+    press=pressure,
+    repeat=2,
+)
 ------------------
 
+----- stdout -----
+Oxygen ingress parameters loaded for the edge seal.
+Oxygen ingress parameters loaded for the encapsulant.
+The edge seal is Helioseal_101_dry .
+The encapsulant is None .
+------------------
 
 [31m---------------------------------------------------------------------------[39m
 [31mAttributeError[39m                            Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[4][39m[32m, line 3[39m
-[32m      1[39m [38;5;66;03m# Get data from a supplied data file (Do not use the next box of code if using your own file)[39;00m
-[32m      2[39m weather_file = os.path.join(DATA_DIR, [33m"[39m[33mpsm3_demo.csv[39m[33m"[39m)
-[32m----> [39m[32m3[39m weather_df, meta = [43mpvdeg[49m[43m.[49m[43mweather[49m[43m.[49m[43mread[49m[43m([49m[43mweather_file[49m[43m,[49m[43m [49m[33;43m"[39;49m[33;43mpsm[39;49m[33;43m"[39;49m[43m)[49m
-[32m      4[39m [38;5;28mprint[39m([38;5;28msorted[39m(meta.keys()))
+[36mCell[39m[36m [39m[32mIn[8][39m[32m, line 1[39m
+[32m----> [39m[32m1[39m oxygen_profile = [43mpvdeg[49m[43m.[49m[43mdiffusion[49m[43m.[49m[43mesdiffusion[49m[43m([49m
+[32m      2[39m [43m    [49m[43mtemperature[49m[43m=[49m[43mtemperature[49m[43m,[49m
+[32m      3[39m [43m    [49m[43medge_seal[49m[43m=[49m[43mes[49m[43m,[49m
+[32m      4[39m [43m    [49m[43mencapsulant[49m[43m=[49m[43menc[49m[43m,[49m
+[32m      5[39m [43m    [49m[43medge_seal_width[49m[43m=[49m[43mesw[49m[43m,[49m
+[32m      6[39m [43m    [49m[43mencapsulant_width[49m[43m=[49m[43mencw[49m[43m,[49m
+[32m      7[39m [43m    [49m[43mseal_nodes[49m[43m=[49m[43msn[49m[43m,[49m
+[32m      8[39m [43m    [49m[43mencapsulant_nodes[49m[43m=[49m[43men[49m[43m,[49m
+[32m      9[39m [43m    [49m[43mpress[49m[43m=[49m[43mpressure[49m[43m,[49m
+[32m     10[39m [43m    [49m[43mrepeat[49m[43m=[49m[32;43m2[39;49m[43m,[49m
+[32m     11[39m [43m)[49m
 
-[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/weather.py:292[39m, in [36mread[39m[34m(file_in, file_type, map_variables, find_meta, **kwargs)[39m
-[32m    289[39m file_type = file_type.upper()
-[32m    291[39m [38;5;28;01mif[39;00m file_type [38;5;129;01min[39;00m [[33m"[39m[33mPSM3[39m[33m"[39m, [33m"[39m[33mPSM[39m[33m"[39m]:
-[32m--> [39m[32m292[39m     weather_df, meta = [43miotools[49m[43m.[49m[43mread_psm3[49m(filename=file_in, map_variables=[38;5;28;01mTrue[39;00m)
-[32m    293[39m [38;5;28;01melif[39;00m file_type [38;5;129;01min[39;00m [[33m"[39m[33mTMY3[39m[33m"[39m, [33m"[39m[33mTMY[39m[33m"[39m]:
-[32m    294[39m     weather_df, meta = iotools.read_tmy3(
-[32m    295[39m         filename=file_in
-[32m    296[39m     )  [38;5;66;03m# map variable not worki - check pvlib for map_variables[39;00m
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/diffusion.py:152[39m, in [36mesdiffusion[39m[34m(temperature, edge_seal, encapsulant, edge_seal_width, encapsulant_width, seal_nodes, encapsulant_nodes, press, repeat, Dos, Eads, Sos, Eass, Doe, Eade, Soe, Ease, react_func, deg_func, deg, perm, printout, **kwarg)[39m
+[32m    150[39m [38;5;66;03m# These are the encapsulant oxygen permeaiton parameters[39;00m
+[32m    151[39m [38;5;28;01mif[39;00m Doe [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[32m--> [39m[32m152[39m     Doe = [43mencp[49m[43m.[49m[43mget[49m[43m([49m[33;43m"[39;49m[33;43mDo[39;49m[33;43m"[39;49m[43m,[49m[43m [49m[43m{[49m[43m}[49m[43m)[49m[43m.[49m[43mget[49m([33m"[39m[33mvalue[39m[33m"[39m)
+[32m    153[39m [38;5;28;01mif[39;00m Eade [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[32m    154[39m     Eade = encp.get([33m"[39m[33mEad[39m[33m"[39m, {}).get([33m"[39m[33mvalue[39m[33m"[39m) / [32m0.0083144626[39m
 
-[31mAttributeError[39m: module 'pvlib.iotools' has no attribute 'read_psm3'
+[31mAttributeError[39m: 'float' object has no attribute 'get'
 

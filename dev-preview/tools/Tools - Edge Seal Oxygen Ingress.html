@@ -612,7 +612,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.11.0-1018-azure
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
 Pandas version  3.0.0
-pvdeg version  0.1.dev1+gc1edf6f9c
+pvdeg version  0.1.dev1+g320888a5f
 </pre></div>
 </div>
 </div>
@@ -636,24 +636,7 @@ pvdeg version  0.1.dev1+gc1edf6f9c
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Get data from a supplied data file (Do not use the next box of code if using your own file)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">weather_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;psm3_demo.csv&quot;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">weather_file</span><span class="p">,</span> <span class="s2">&quot;psm&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/weather.py:292,</span> in <span class="ni">read</span><span class="nt">(file_in, file_type, map_variables, find_meta, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">289</span> <span class="n">file_type</span> <span class="o">=</span> <span class="n">file_type</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">291</span> <span class="k">if</span> <span class="n">file_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;PSM3&quot;</span><span class="p">,</span> <span class="s2">&quot;PSM&quot;</span><span class="p">]:</span>
-<span class="ne">--&gt; </span><span class="mi">292</span>     <span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">iotools</span><span class="o">.</span><span class="n">read_psm3</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">file_in</span><span class="p">,</span> <span class="n">map_variables</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">293</span> <span class="k">elif</span> <span class="n">file_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;TMY3&quot;</span><span class="p">,</span> <span class="s2">&quot;TMY&quot;</span><span class="p">]:</span>
-<span class="g g-Whitespace">    </span><span class="mi">294</span>     <span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">iotools</span><span class="o">.</span><span class="n">read_tmy3</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">295</span>         <span class="n">filename</span><span class="o">=</span><span class="n">file_in</span>
-<span class="g g-Whitespace">    </span><span class="mi">296</span>     <span class="p">)</span>  <span class="c1"># map variable not worki - check pvlib for map_variables</span>
-
-<span class="ne">AttributeError</span>: module &#39;pvlib.iotools&#39; has no attribute &#39;read_psm3&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;City&#39;, &#39;Clearsky DHI Units&#39;, &#39;Clearsky DNI Units&#39;, &#39;Clearsky GHI Units&#39;, &#39;Cloud Type -15&#39;, &#39;Cloud Type 0&#39;, &#39;Cloud Type 1&#39;, &#39;Cloud Type 10&#39;, &#39;Cloud Type 11&#39;, &#39;Cloud Type 12&#39;, &#39;Cloud Type 2&#39;, &#39;Cloud Type 3&#39;, &#39;Cloud Type 4&#39;, &#39;Cloud Type 5&#39;, &#39;Cloud Type 6&#39;, &#39;Cloud Type 7&#39;, &#39;Cloud Type 8&#39;, &#39;Cloud Type 9&#39;, &#39;Country&#39;, &#39;DHI Units&#39;, &#39;DNI Units&#39;, &#39;Dew Point Units&#39;, &#39;Fill Flag 0&#39;, &#39;Fill Flag 1&#39;, &#39;Fill Flag 2&#39;, &#39;Fill Flag 3&#39;, &#39;Fill Flag 4&#39;, &#39;Fill Flag 5&#39;, &#39;GHI Units&#39;, &#39;Location ID&#39;, &#39;Precipitable Water Units&#39;, &#39;Pressure Units&#39;, &#39;Relative Humidity Units&#39;, &#39;Solar Zenith Angle Units&#39;, &#39;Source&#39;, &#39;State&#39;, &#39;Surface Albedo Units&#39;, &#39;Temperature Units&#39;, &#39;Version&#39;, &#39;Wind Direction Units&#39;, &#39;Wind Speed Units&#39;, &#39;altitude&#39;, &#39;latitude&#39;, &#39;longitude&#39;, &#39;tz&#39;]
 </pre></div>
 </div>
 </div>
@@ -732,7 +715,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;name&#39;: &#39;EVA&#39;, &#39;alias&#39;: &#39;EVA-1&#39;, &#39;contributor&#39;: &#39;Michael Kempe&#39;, &#39;source&#39;: &#39;unpublished measurements&#39;, &#39;Fickian&#39;: True, &#39;Ead&#39;: 29.43112031, &#39;Do&#39;: 0.129061678, &#39;Eas&#39;: 16.6314948252219, &#39;So&#39;: 0.136034525059804, &#39;Eap&#39;: 49.1083457348515, &#39;Po&#39;: 528718258.338532}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;alias&#39;: &#39;EVA-1&#39;, &#39;Fickian&#39;: True, &#39;Ead&#39;: 29.43112031, &#39;Do&#39;: 0.129061678, &#39;Eas&#39;: 16.6314948252219, &#39;So&#39;: 0.136034525059804, &#39;Eap&#39;: 49.1083457348515, &#39;Po&#39;: 528718258.338532}
 {&#39;name&#39;: &#39;Coveme&#39;, &#39;alias&#39;: &#39;Stabilized PET&#39;, &#39;contributor&#39;: &#39;Michael Kempe&#39;, &#39;source&#39;: &#39;unpublished measurements&#39;, &#39;Fickian&#39;: True, &#39;Ead&#39;: 47.5191721120378, &#39;Do&#39;: 1.31884541208636, &#39;Eas&#39;: 11.3377908247284, &#39;So&#39;: 0.53540550732342, &#39;Eap&#39;: 58.8569629367662, &#39;Po&#39;: 6100851717.55522}
 </pre></div>
 </div>
@@ -762,7 +745,32 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Oxygen ingress parameters loaded for the edge seal.
 Oxygen ingress parameters loaded for the encapsulant.
 The edge seal is Helioseal_101_dry .
-The encapsulant is EVA .
+The encapsulant is None .
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">oxygen_profile</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">diffusion</span><span class="o">.</span><span class="n">esdiffusion</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">edge_seal</span><span class="o">=</span><span class="n">es</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">encapsulant</span><span class="o">=</span><span class="n">enc</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">edge_seal_width</span><span class="o">=</span><span class="n">esw</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">encapsulant_width</span><span class="o">=</span><span class="n">encw</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">seal_nodes</span><span class="o">=</span><span class="n">sn</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">encapsulant_nodes</span><span class="o">=</span><span class="n">en</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">press</span><span class="o">=</span><span class="n">pressure</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/diffusion.py:152,</span> in <span class="ni">esdiffusion</span><span class="nt">(temperature, edge_seal, encapsulant, edge_seal_width, encapsulant_width, seal_nodes, encapsulant_nodes, press, repeat, Dos, Eads, Sos, Eass, Doe, Eade, Soe, Ease, react_func, deg_func, deg, perm, printout, **kwarg)</span>
+<span class="g g-Whitespace">    </span><span class="mi">150</span> <span class="c1"># These are the encapsulant oxygen permeaiton parameters</span>
+<span class="g g-Whitespace">    </span><span class="mi">151</span> <span class="k">if</span> <span class="n">Doe</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">152</span>     <span class="n">Doe</span> <span class="o">=</span> <span class="n">encp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Do&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">153</span> <span class="k">if</span> <span class="n">Eade</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">154</span>     <span class="n">Eade</span> <span class="o">=</span> <span class="n">encp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Ead&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.0083144626</span>
+
+<span class="ne">AttributeError</span>: &#39;float&#39; object has no attribute &#39;get&#39;
 </pre></div>
 </div>
 </div>

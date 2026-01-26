@@ -614,7 +614,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.11.0-1018-azure
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
 Pandas version  3.0.0
-pvdeg version  0.1.dev1+gc1edf6f9c
+pvdeg version  0.1.dev1+g320888a5f
 </pre></div>
 </div>
 </div>
@@ -645,26 +645,6 @@ pvdeg version  0.1.dev1+gc1edf6f9c
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PSM_FILE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;psm3_demo.csv&quot;</span><span class="p">)</span>
 
 <span class="n">WEATHER</span><span class="p">,</span> <span class="n">META</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">PSM_FILE</span><span class="p">,</span> <span class="s2">&quot;psm&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">PSM_FILE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;psm3_demo.csv&quot;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">WEATHER</span><span class="p">,</span> <span class="n">META</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">PSM_FILE</span><span class="p">,</span> <span class="s2">&quot;psm&quot;</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/weather.py:292,</span> in <span class="ni">read</span><span class="nt">(file_in, file_type, map_variables, find_meta, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">289</span> <span class="n">file_type</span> <span class="o">=</span> <span class="n">file_type</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">291</span> <span class="k">if</span> <span class="n">file_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;PSM3&quot;</span><span class="p">,</span> <span class="s2">&quot;PSM&quot;</span><span class="p">]:</span>
-<span class="ne">--&gt; </span><span class="mi">292</span>     <span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">iotools</span><span class="o">.</span><span class="n">read_psm3</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">file_in</span><span class="p">,</span> <span class="n">map_variables</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">293</span> <span class="k">elif</span> <span class="n">file_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;TMY3&quot;</span><span class="p">,</span> <span class="s2">&quot;TMY&quot;</span><span class="p">]:</span>
-<span class="g g-Whitespace">    </span><span class="mi">294</span>     <span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">iotools</span><span class="o">.</span><span class="n">read_tmy3</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">295</span>         <span class="n">filename</span><span class="o">=</span><span class="n">file_in</span>
-<span class="g g-Whitespace">    </span><span class="mi">296</span>     <span class="p">)</span>  <span class="c1"># map variable not worki - check pvlib for map_variables</span>
-
-<span class="ne">AttributeError</span>: module &#39;pvlib.iotools&#39; has no attribute &#39;read_psm3&#39;
 </pre></div>
 </div>
 </div>
@@ -798,7 +778,7 @@ pvdeg version  0.1.dev1+gc1edf6f9c
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Source&#39;: &#39;NSRDB&#39;,
- &#39;Location ID&#39;: &#39;145809&#39;,
+ &#39;Location ID&#39;: 145809.0,
  &#39;City&#39;: &#39;-&#39;,
  &#39;State&#39;: &#39;-&#39;,
  &#39;Country&#39;: &#39;-&#39;,
@@ -840,8 +820,8 @@ pvdeg version  0.1.dev1+gc1edf6f9c
  &#39;Version&#39;: &#39;3.0.6&#39;,
  &#39;latitude&#39;: 39.73,
  &#39;longitude&#39;: -105.18,
- &#39;altitude&#39;: 1820,
- &#39;tz&#39;: -7}
+ &#39;tz&#39;: -7.0,
+ &#39;altitude&#39;: 1820.0}
 </pre></div>
 </div>
 </div>
@@ -1962,7 +1942,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.4499535870958669)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.44995358709586686)
 </pre></div>
 </div>
 </div>
