@@ -37,14 +37,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-# This routine will get a meteorological dataset from anywhere in the world where it is available
-# weather_id = (24.7136, 46.6753) #Riyadh, Saudi Arabia
-# weather_id = (35.6754, 139.65) #Tokyo, Japan
-# weather_id = (-43.52646, 172.62165) #Christchurch, New Zealand
-# weather_id = (64.84031, -147.73836) #Fairbanks, Alaska
-# weather_id = (65.14037, -21.91633) #Reykjavik, Iceland
-weather_id = (33.4152, -111.8315)  # Mesa, Arizona
-weather_df, meta = pvdeg.weather.get_anywhere(id=weather_id, database="PVGIS")
-print(meta)
+['weather_db = "PVGIS"', '# weather_id = (39.741931, -105.169891)', 'weather_id = (24.7136, 46.6753)  # Riyadh, Saudi Arabia', "# weather_arg = {'map_variables': True}", '']
+...
+['print(pvdeg.standards.interpret_standoff(res))', '', '# Clean metadata for consistent output (remove variable fields)', 'meta_clean = {k: v for k, v in meta.items() if k not in ["irradiance_time_offset"]}', 'print(meta_clean)']
 -------------------
 
