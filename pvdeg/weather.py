@@ -288,12 +288,16 @@ def read(file_in, file_type, map_variables=True, find_meta=False, **kwargs):
     supported = ["psm3", "tmy3", "epw", "h5", "csv"]
     file_type = file_type.upper()
 
-    if file_type in ["PSM3", "PSM", "TMY3", "TMY", "CSV"]:
+    if file_type in ["PSM3", "PSM"]:
         weather_df, meta = csv_read(filename=file_in)
+    elif file_type in ["TMY3", "TMY"]:
+        weather_df, meta = iotools.read_tmy3(filename=file_in)
     elif file_type == "EPW":
-        weather_df, meta = csv_read.read_epw(filename=file_in)
+        weather_df, meta = iotools.read_epw(filename=file_in)
     elif file_type == "H5":
         weather_df, meta = read_h5(file=file_in, **kwargs)
+    elif file_type == "CSV":
+        weather_df, meta = csv_read(filename=file_in)
     else:
         print(f"File-Type not recognized. supported types: \n{supported}")
 
