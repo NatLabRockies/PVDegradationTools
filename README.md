@@ -41,7 +41,7 @@
 
 # PVDeg: Python Package for Modeling Degradation in Photovoltaic Systems
 
-PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation, developed at the National Renewable Energy Laboratory (NREL) and supported by the Durable Module Materials (DuraMAT) consortium. It provides modular functions, materials databases, and calculation workflows for simulating degradation mechanisms (e.g., LeTID, hydrolysis, UV exposure) using weather data from the National Solar Radiation Database (NSRDB) and the Photovoltaic Geographical Information System (PVGIS). By integrating Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables field-relevant predictions and uncertainty quantification of module reliability and lifetime.
+PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation, developed at the National Laboratory of the Rockies (NLR, formerly NREL) and supported by the Durable Module Materials (DuraMAT) consortium. It provides modular functions, materials databases, and calculation workflows for simulating degradation mechanisms (e.g., LeTID, hydrolysis, UV exposure) using weather data from the National Solar Radiation Database (NSRDB) and the Photovoltaic Geographical Information System (PVGIS). By integrating Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables field-relevant predictions and uncertainty quantification of module reliability and lifetime.
 
 ## Key Features
 
@@ -96,7 +96,7 @@ pip install pvdeg
 **Developer Installation:**
 
 ```bash
-git clone https://github.com/NREL/PVDegradationTools.git
+git clone https://github.com/NatLabRockies/PVDegradationTools.git
 cd PVDegradationTools
 pip install -e .[all]
 ```
@@ -110,14 +110,14 @@ PVDeg provides comprehensive tutorials organized by topic. Choose your preferred
 
 ### Jupyter Book (Recommended)
 
-Interactive tutorials with live execution: [**PVDeg Jupyter Book**](https://nrel.github.io/PVDegradationTools/intro.html)
+Interactive tutorials with live execution: [**PVDeg Jupyter Book**](https://NatLabRockies.github.io/PVDegradationTools/intro.html)
 
 - Click the 🚀 rocket icon to launch notebooks in [Google Colab](https://colab.research.google.com/)
-- **Development Preview:** See latest changes at [dev-preview](https://nrel.github.io/PVDegradationTools/dev-preview/intro.html)
+- **Development Preview:** See latest changes at [dev-preview](https://NatLabRockies.github.io/PVDegradationTools/dev-preview/intro.html)
 
 ### Binder
 
-Run tutorials in your browser without installation: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/NREL/PVDegradationTools/main)
+Run tutorials in your browser without installation: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/NatLabRockies/PVDegradationTools/main)
 
 ### Local Installation
 
@@ -125,7 +125,7 @@ Run tutorials in your browser without installation: [![Binder](https://mybinder.
 
 2. **Clone the repository** to access tutorial notebooks:
    ```bash
-   git clone https://github.com/NREL/PVDegradationTools.git
+   git clone https://github.com/NatLabRockies/PVDegradationTools.git
    cd PVDegradationTools
    ```
 
@@ -148,7 +148,7 @@ Run tutorials in your browser without installation: [![Binder](https://mybinder.
 License
 =======
 
-[BSD 3-clause](https://github.com/NREL/PVDegradationTools/blob/main/LICENSE.md)
+[BSD 3-clause](https://github.com/NatLabRockies/PVDegradationTools/blob/main/LICENSE.md)
 
 
 Contributing
@@ -172,7 +172,7 @@ Getting support
 
 If you suspect that you may have discovered a bug or if you'd like to
 change something about PVDeg, then please make an issue on our
-[GitHub issues page](https://github.com/NREL/PVDegradationTools/issues).
+[GitHub issues page](https://github.com/NatLabRockies/PVDegradationTools/issues).
 
 
 Citing
@@ -198,4 +198,4 @@ Acknowledgements
 
 This work was authored by the National Renewable Energy Laboratory, operated by Alliance for Sustainable Energy, LLC, for the U.S. Department of Energy (DOE) under Contract No. DE-AC36-08GO28308. Funding provided as part of the Durable Modules Materials Consortium (DuraMAT), an Energy Materials Network Consortium funded by the U.S. Department of Energy, Office of Energy Efficiency and Renewable Energy, Solar Energy Technologies Office Agreement Number 32509. The research was performed using computational resources sponsored by the Department of Energy's Office of Energy Efficiency and Renewable Energy and located at the National Renewable Energy Laboratory. The views expressed in the article do not necessarily represent the views of the DOE or the U.S. Government. The U.S. Government retains and the publisher, by accepting the article for publication, acknowledges that the U.S. Government retains a nonexclusive, paid-up, irrevocable, worldwide license to publish or reproduce the published form of this work, or allow others to do so, for U.S. Government purposes.
 
-**NREL Software Record:** SWR-20-71 (Holsapple, Derek; Ayala Pelaez, Silvana; Kempe, Michael. "PV Degradation Tools", NREL Github 2020)
+**NLR Software Record:** SWR-20-71 (Holsapple, Derek; Ayala Pelaez, Silvana; Kempe, Michael. "PV Degradation Tools", NLR Github 2020)
