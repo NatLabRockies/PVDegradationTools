@@ -18,14 +18,14 @@ For standalone analysis tools, see the [Tools](../tools/) directory.
 
 ### Jupyter Book
 
-For learning to use PVDeg through our tutorials, or running the available tools online, see our [jupyter-book](https://nrel.github.io/PVDegradationTools/intro.html)
+For learning to use PVDeg through our tutorials, or running the available tools online, see our [jupyter-book](https://NatLabRockies.github.io/PVDegradationTools/intro.html)
 Clicking on the rocket-icon on the top allows you to launch the notebooks on [Google Colaboratory](https://colab.research.google.com/) for interactive mode.
 Just uncomment the first line `pip install ...` to install the environment on each notebook if you follow this mode.
 
 ### Binder
 
 To run these tutorials or tools in Binder, you can click here:
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/NREL/PVDegradationTools/main)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/NatLabRockies/PVDegradationTools/main)
 It takes a minute to load the environment.
 
 ### Locally
