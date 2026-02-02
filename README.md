@@ -1,11 +1,11 @@
-<img src="https://raw.githubusercontent.com/NREL/PVDegradationTools/refs/heads/main/docs/source/_static/logo-vectors/PVdeg-Logo-Horiz-Color.svg" width="600">
+<img src="https://raw.githubusercontent.com/NatLabRockies/PVDegradationTools/refs/heads/main/docs/source/_static/logo-vectors/PVdeg-Logo-Horiz-Color.svg" width="600">
 
 
 <table>
 <tr>
   <td>License</td>
   <td>
-    <a href="https://github.com/NREL/PVDegradationTools/blob/master/LICENSE.md">
+    <a href="https://github.com/NatLabRockies/PVDegradationTools/blob/main/LICENSE.md">
     <img src="https://img.shields.io/pypi/l/pvlib.svg" alt="license" />
     </a>
 </td>
@@ -27,11 +27,11 @@
 <tr>
   <td>Build status</td>
   <td>
-   <a href="https://github.com/NREL/PVDegradationTools/actions/workflows/pytest.yml?query=branch%3Amain">
-      <img src="https://github.com/NREL/PVDegradationTools/actions/workflows/pytest.yml/badge.svg?branch=main" alt="GitHub Actions Testing Status" />
+   <a href="https://github.com/NatLabRockies/PVDegradationTools/actions/workflows/pytest.yml?query=branch%3Amain">
+      <img src="https://github.com/NatLabRockies/PVDegradationTools/actions/workflows/pytest.yml/badge.svg?branch=main" alt="GitHub Actions Testing Status" />
    </a>
-   <a href="https://codecov.io/gh/NREL/PVDegradationTools" >
-   <img src="https://codecov.io/gh/NREL/PVDegradationTools/graph/badge.svg?token=4I24S8BTG7"/>
+   <a href="https://codecov.io/gh/NatLabRockies/PVDegradationTools" >
+   <img src="https://codecov.io/gh/NatLabRockies/PVDegradationTools/graph/badge.svg?token=4I24S8BTG7"/>
    </a>
   </td>
 </tr>
