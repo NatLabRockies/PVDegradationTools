@@ -620,7 +620,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.11.0-1018-azure
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
 Pandas version  3.0.0
-pvdeg version  0.1.dev1+gca915b647
+pvdeg version  0.1.dev1+g8a44bd91a
 </pre></div>
 </div>
 </div>
@@ -870,6 +870,29 @@ pvdeg version  0.1.dev1+gca915b647
 <span class="n">weather</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="n">sam_file</span><span class="p">),</span> <span class="n">file_type</span><span class="o">=</span><span class="s2">&quot;PSM3&quot;</span><span class="p">,</span> <span class="n">map_variables</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># load weather and location data, use pvlib read_psm3 function</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">sam_file</span> <span class="o">=</span> <span class="s2">&quot;psm3.csv&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">weather</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="n">sam_file</span><span class="p">),</span> <span class="n">file_type</span><span class="o">=</span><span class="s2">&quot;PSM3&quot;</span><span class="p">,</span> <span class="n">map_variables</span><span class="o">=</span><span class="kc">True</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/weather.py:292,</span> in <span class="ni">read</span><span class="nt">(file_in, file_type, map_variables, find_meta, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">289</span> <span class="n">file_type</span> <span class="o">=</span> <span class="n">file_type</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">291</span> <span class="k">if</span> <span class="n">file_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;PSM3&quot;</span><span class="p">,</span> <span class="s2">&quot;PSM&quot;</span><span class="p">]:</span>
+<span class="ne">--&gt; </span><span class="mi">292</span>     <span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">iotools</span><span class="o">.</span><span class="n">read_psm3</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">file_in</span><span class="p">,</span> <span class="n">map_variables</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">293</span> <span class="k">elif</span> <span class="n">file_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;TMY3&quot;</span><span class="p">,</span> <span class="s2">&quot;TMY&quot;</span><span class="p">]:</span>
+<span class="g g-Whitespace">    </span><span class="mi">294</span>     <span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">iotools</span><span class="o">.</span><span class="n">read_tmy3</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">295</span>         <span class="n">filename</span><span class="o">=</span><span class="n">file_in</span>
+<span class="g g-Whitespace">    </span><span class="mi">296</span>     <span class="p">)</span>  <span class="c1"># map variable not worki - check pvlib for map_variables</span>
+
+<span class="ne">AttributeError</span>: module &#39;pvlib.iotools&#39; has no attribute &#39;read_psm3&#39;
 </pre></div>
 </div>
 </div>
@@ -1635,10 +1658,6 @@ pvdeg version  0.1.dev1+gca915b647
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/scipy/optimize/_chandrupatla.py:437: RuntimeWarning: invalid value encountered in divide
-  C = A / (A + B)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ModelChain: 
   name: None
   clearsky_model: ineichen
@@ -2124,7 +2143,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 19:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -2140,7 +2159,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 20:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -2156,7 +2175,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 21:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -2172,7 +2191,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 22:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -2188,7 +2207,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 23:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -2275,7 +2294,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>0.661315</td>
       <td>9.981480</td>
       <td>...</td>
-      <td>-0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2299,7 +2318,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>0.661315</td>
       <td>9.981480</td>
       <td>...</td>
-      <td>-0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2323,7 +2342,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>0.661315</td>
       <td>9.981480</td>
       <td>...</td>
-      <td>-0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2347,7 +2366,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>0.661315</td>
       <td>9.981480</td>
       <td>...</td>
-      <td>-0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2371,7 +2390,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>0.661315</td>
       <td>9.981480</td>
       <td>...</td>
-      <td>-0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2411,7 +2430,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 19:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -2419,7 +2438,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>0.656723</td>
       <td>9.955304</td>
       <td>...</td>
-      <td>-0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2435,7 +2454,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 20:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -2443,7 +2462,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>0.656723</td>
       <td>9.955304</td>
       <td>...</td>
-      <td>-0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2459,7 +2478,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 21:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -2467,7 +2486,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>0.656723</td>
       <td>9.955304</td>
       <td>...</td>
-      <td>-0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2483,7 +2502,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 22:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -2491,7 +2510,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>0.656723</td>
       <td>9.955304</td>
       <td>...</td>
-      <td>-0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2507,7 +2526,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 23:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -2515,7 +2534,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>0.656723</td>
       <td>9.955304</td>
       <td>...</td>
-      <td>-0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2572,7 +2591,7 @@ pvdeg version  0.1.dev1+gca915b647
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/50f133a78e97d769ede2b78a9f8a1d1e8f19260d3b8746d8298a5f2ad3782ad5.png" src="../_images/50f133a78e97d769ede2b78a9f8a1d1e8f19260d3b8746d8298a5f2ad3782ad5.png" />
+<img alt="../_images/3a9e8ab74e99299a98625cdea1fa351bae7a2cf2dce7518d635b61a83242c345.png" src="../_images/3a9e8ab74e99299a98625cdea1fa351bae7a2cf2dce7518d635b61a83242c345.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2616,10 +2635,10 @@ pvdeg version  0.1.dev1+gca915b647
        &#39;Voc&#39;, &#39;Isc&#39;, &#39;FF&#39;, &#39;Pmp&#39;, &#39;Pmp_norm&#39;, &#39;i_sc&#39;, &#39;v_oc&#39;, &#39;i_mp&#39;, &#39;v_mp&#39;,
        &#39;p_mp&#39;, &#39;i_x&#39;, &#39;i_xx&#39;, &#39;Effective irradiance&#39;, &#39;ghi&#39;, &#39;dhi&#39;, &#39;dni&#39;,
        &#39;wind_speed&#39;, &#39;temp_air&#39;, &#39;precipitable_water&#39;],
-      dtype=&#39;str&#39;)
+      dtype=&#39;object&#39;)
 </pre></div>
 </div>
-<img alt="../_images/8b2336fe2f7fc38298d196dd116924621ccf70cf210e28bb3738b556d6086afc.png" src="../_images/8b2336fe2f7fc38298d196dd116924621ccf70cf210e28bb3738b556d6086afc.png" />
+<img alt="../_images/b7e7f465f75748e9f665a47bd0b441c3cf1520b55d8cd3777a5a77f06c1b396a.png" src="../_images/b7e7f465f75748e9f665a47bd0b441c3cf1520b55d8cd3777a5a77f06c1b396a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2752,10 +2771,10 @@ pvdeg version  0.1.dev1+gca915b647
        &#39;Voc&#39;, &#39;Isc&#39;, &#39;FF&#39;, &#39;Pmp&#39;, &#39;Pmp_norm&#39;, &#39;i_sc&#39;, &#39;v_oc&#39;, &#39;i_mp&#39;, &#39;v_mp&#39;,
        &#39;p_mp&#39;, &#39;i_x&#39;, &#39;i_xx&#39;, &#39;Effective irradiance&#39;, &#39;ghi&#39;, &#39;dhi&#39;, &#39;dni&#39;,
        &#39;wind_speed&#39;, &#39;temp_air&#39;, &#39;precipitable_water&#39;, &#39;Timedelta&#39;],
-      dtype=&#39;str&#39;)
+      dtype=&#39;object&#39;)
 </pre></div>
 </div>
-<img alt="../_images/e0da22399f6ef99adadd20ed65af440a907684c5e28e7f557d34bd47029df7b4.png" src="../_images/e0da22399f6ef99adadd20ed65af440a907684c5e28e7f557d34bd47029df7b4.png" />
+<img alt="../_images/745a611ee25d2aad38accf71f22099dbdafdab9e5133fede63d791d9aed7b5c5.png" src="../_images/745a611ee25d2aad38accf71f22099dbdafdab9e5133fede63d791d9aed7b5c5.png" />
 </div>
 </div>
 </section>
@@ -2783,10 +2802,6 @@ pvdeg version  0.1.dev1+gca915b647
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/scipy/optimize/_chandrupatla.py:437: RuntimeWarning: invalid value encountered in divide
-  C = A / (A + B)
-</pre></div>
-</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2929,7 +2944,7 @@ pvdeg version  0.1.dev1+gca915b647
       <th>1999-12-31 19:30:00-07:00</th>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -2944,7 +2959,7 @@ pvdeg version  0.1.dev1+gca915b647
       <th>1999-12-31 20:30:00-07:00</th>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -2959,7 +2974,7 @@ pvdeg version  0.1.dev1+gca915b647
       <th>1999-12-31 21:30:00-07:00</th>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -2974,7 +2989,7 @@ pvdeg version  0.1.dev1+gca915b647
       <th>1999-12-31 22:30:00-07:00</th>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -2989,7 +3004,7 @@ pvdeg version  0.1.dev1+gca915b647
       <th>1999-12-31 23:30:00-07:00</th>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -3203,7 +3218,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 19:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -3227,7 +3242,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 20:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -3251,7 +3266,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 21:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -3275,7 +3290,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 22:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
@@ -3299,7 +3314,7 @@ pvdeg version  0.1.dev1+gca915b647
       <td>1999-12-31 23:30:00-07:00</td>
       <td>0.0</td>
       <td>NaN</td>
-      <td>29.749661</td>
+      <td>29.749662</td>
       <td>6.666236e+01</td>
       <td>3.587983e+00</td>
       <td>90.001455</td>
