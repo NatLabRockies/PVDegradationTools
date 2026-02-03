@@ -9,6 +9,13 @@ Enhancements
 ------------
 
 
+Documentation
+-------------
+- Update references to "NREL" and "National Renewable Laboratory" in text and URLs
+  with the new name National Laboratory of the Rockies (NatLabRockies or NLR)
+  (:pull:`315`)
+
+
 Deprecations
 -------------
 
