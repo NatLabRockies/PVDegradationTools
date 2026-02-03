@@ -7,7 +7,8 @@ Breaking Changes
 
 Enhancements
 ------------
-
+- Add module-level constant R_GAS = 0.0083144626 in :py:mod:`pvdeg.diffusion` to avoid
+  magic numbers in code. (:pull:`313`)
 
 Deprecations
 -------------
