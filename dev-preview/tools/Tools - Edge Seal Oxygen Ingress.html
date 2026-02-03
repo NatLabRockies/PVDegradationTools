@@ -612,7 +612,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.11.0-1018-azure
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
 Pandas version  3.0.0
-pvdeg version  0.1.dev1+gfa7810c62
+pvdeg version  0.1.dev1+g03435296b
 </pre></div>
 </div>
 </div>
@@ -748,6 +748,31 @@ The edge seal is Helioseal_101_dry .
 The encapsulant is Unknown .
 </pre></div>
 </div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">oxygen_profile</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">diffusion</span><span class="o">.</span><span class="n">esdiffusion</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">edge_seal</span><span class="o">=</span><span class="n">es</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">encapsulant</span><span class="o">=</span><span class="n">enc</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">edge_seal_width</span><span class="o">=</span><span class="n">esw</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">encapsulant_width</span><span class="o">=</span><span class="n">encw</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">seal_nodes</span><span class="o">=</span><span class="n">sn</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">encapsulant_nodes</span><span class="o">=</span><span class="n">en</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">press</span><span class="o">=</span><span class="n">pressure</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/diffusion.py:174,</span> in <span class="ni">esdiffusion</span><span class="nt">(temperature, edge_seal, encapsulant, edge_seal_width, encapsulant_width, seal_nodes, encapsulant_nodes, press, repeat, Dos, Eads, Sos, Eass, Doe, Eade, Soe, Ease, react_func, deg_func, deg, perm, printout, **kwarg)</span>
+<span class="g g-Whitespace">    </span><span class="mi">172</span>     <span class="n">Doe</span> <span class="o">=</span> <span class="n">_get_value</span><span class="p">(</span><span class="n">encp</span><span class="p">,</span> <span class="s2">&quot;Do&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">173</span> <span class="k">if</span> <span class="n">Eade</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">174</span>     <span class="n">Eade</span> <span class="o">=</span> <span class="n">encp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Ead&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="n">R_GAS</span>
+<span class="g g-Whitespace">    </span><span class="mi">175</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">176</span>     <span class="n">Eade</span> <span class="o">=</span> <span class="n">Eade</span> <span class="o">/</span> <span class="n">R_GAS</span>
+
+<span class="ne">AttributeError</span>: &#39;float&#39; object has no attribute &#39;get&#39;
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -765,7 +790,7 @@ The encapsulant is Unknown .
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Created directory: /home/runner/work/PVDegradationTools/PVDegradationTools/TEMP/results
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[WinError 183] Cannot create a file when that file already exists: &#39;C:\\Users\\rdaxini\\Documents\\GitHub\\PVDegradationTools_NREL\\TEMP\\results&#39;
 </pre></div>
 </div>
 </div>
@@ -799,7 +824,7 @@ The encapsulant is Unknown .
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/20ae97e9bf5760ed6b93e1566bb5cb14380daea1815002635dcf5b539c48a2ab.png" src="../_images/20ae97e9bf5760ed6b93e1566bb5cb14380daea1815002635dcf5b539c48a2ab.png" />
+<img alt="../_images/78a19e700b786ec4202067a06e6d835da979561db6f34c86a2db9dab5da80845.png" src="../_images/78a19e700b786ec4202067a06e6d835da979561db6f34c86a2db9dab5da80845.png" />
 </div>
 </div>
 </section>
@@ -825,6 +850,7 @@ The encapsulant is Unknown .
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OX001=Tedlar
 OX002=ST504
+OX003=EVA
 OX004=AAA polyamide backsheet
 OX005=Helioseal_101_dry
 OX006=Helioseal_101_wet
@@ -864,7 +890,7 @@ OX013=polyolefin elastomer (POE)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Your results will be stored in /home/runner/work/PVDegradationTools/PVDegradationTools/TEMP/results
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Your results will be stored in C:\Users\rdaxini\Documents\GitHub\PVDegradationTools_NREL\TEMP\results
 The folder must already exist or the file will not be created
 </pre></div>
 </div>
