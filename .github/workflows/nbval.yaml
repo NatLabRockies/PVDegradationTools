@@ -176,6 +176,8 @@ jobs:
           pip install --timeout=300 -e .[test]
           pip install nbval global_land_mask dotenv imageio nrel-pysam
           pip install nbconvert[webpdf]
+          pip install --upgrade certifi
+          pip install pip-system-certs
 
       - name: Set batch notebooks
         run: |
