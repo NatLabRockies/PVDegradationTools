@@ -1,0 +1,29 @@
+v0.7.1 (XXXX-XX-XX)
+===================
+
+Breaking Changes
+----------------
+
+
+Enhancements
+------------
+
+
+Deprecations
+-------------
+
+
+Bug Fixes
+---------
+- Fixed compatibility issues with pandas 3.0.0 and pvlib 0.14.0, including DataFrame
+  dtype changes and deprecated function calls. (:pull:`314`)
+
+
+Dependencies
+------------
+
+
+Contributors
+------------
+- Rajiv Daxini (:ghuser:`rdaxini`)
+

@@ -403,7 +403,7 @@ def test_new_id():
 
 
 def test_strip_normalize_tmy():
-    idx = pd.date_range("2023-01-01 00:00", periods=24, freq="H", tz="UTC")
+    idx = pd.date_range("2023-01-01 00:00", periods=24, freq="h", tz="UTC")
     df = pd.DataFrame({"ghi": range(24)}, index=idx)
     start = idx[5].to_pydatetime()
     end = idx[10].to_pydatetime()

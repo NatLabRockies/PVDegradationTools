@@ -129,35 +129,53 @@ def esdiffusion(
             print("Encapsulant material not found")
     if printout:
         try:
-            print("The edge seal is", esp.get("name"), ".")
-            print("The encapsulant is", encp.get("name"), ".")
+            # Handle both nested dict and flat dict formats
+            esp_name = (
+                esp.get("name")
+                if isinstance(esp.get("name"), str)
+                else esp.get("name", {}).get("value", "Unknown")
+            )
+            encp_name = (
+                encp.get("name")
+                if isinstance(encp.get("name"), str)
+                else encp.get("name", {}).get("value", "Unknown")
+            )
+            print("The edge seal is", esp_name, ".")
+            print("The encapsulant is", encp_name, ".")
         except Exception:
             print("Unknown material selected.")
 
+    # Helper function to extract values from nested or flat dicts
+    def _get_value(d, key, default=None):
+        val = d.get(key, default)
+        if isinstance(val, dict) and "value" in val:
+            return val["value"]
+        return val
+
     # These are the edge seal oxygen or water permeation parameters
     if Dos is None:
-        Dos = esp.get("Do", {}).get("value")
+        Dos = _get_value(esp, "Do")
     if Eads is None:
-        Eads = esp.get("Ead", {}).get("value") / 0.0083144626
+        Eads = _get_value(esp, "Ead") / 0.0083144626
     else:
         Eads = Eads / 0.0083144626
     if Sos is None:
-        Sos = esp.get("So", {}).get("value") * press
+        Sos = _get_value(esp, "So") * press
     if Eass is None:
-        Eass = esp.get("Eas", {}).get("value") / 0.0083144626
+        Eass = _get_value(esp, "Eas") / 0.0083144626
     else:
         Eass = Eass / 0.0083144626
     # These are the encapsulant oxygen permeaiton parameters
     if Doe is None:
-        Doe = encp.get("Do", {}).get("value")
+        Doe = _get_value(encp, "Do")
     if Eade is None:
-        Eade = encp.get("Ead", {}).get("value") / 0.0083144626
+        Eade = _get_value(encp, "Ead") / 0.0083144626
     else:
         Eade = Eade / 0.0083144626
     if Soe is None:
-        Soe = encp.get("So", {}).get("value") * press
+        Soe = _get_value(encp, "So") * press
     if Ease is None:
-        Ease = encp.get("Eas", {}).get("value") / 0.0083144626
+        Ease = _get_value(encp, "Eas") / 0.0083144626
     else:
         Ease = Ease / 0.0083144626
 
