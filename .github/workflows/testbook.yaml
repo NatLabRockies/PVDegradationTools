@@ -28,8 +28,10 @@ jobs:
           python -m pip install --upgrade pip wheel
           pip install --timeout=300 -r tutorials/requirements.txt
           pip install --timeout=300 -e .[test]
-          pip install testbook
-          pip install global_land_mask dotenv imageio nrel-pysam
+          pip install --upgrade certifi
+          pip install pip-system-certs
+          pip install testbook nbval global_land_mask dotenv imageio nrel-pysam
+          pip install nbconvert[webpdf]
       - name: Run all testbook notebooks in one environment
         env:
           api_key: "DEMO_KEY"
