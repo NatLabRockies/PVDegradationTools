@@ -158,26 +158,26 @@ def esdiffusion(
     if Dos is None:
         Dos = _get_value(esp, "Do")
     if Eads is None:
-        Eads = esp.get("Ead", {}).get("value") / R_GAS
+        Eads = _get_value(esp, "Ead") / R_GAS
     else:
         Eads = Eads / R_GAS
     if Sos is None:
         Sos = _get_value(esp, "So") * press
     if Eass is None:
-        Eass = esp.get("Eas", {}).get("value") / R_GAS
+        Eass = _get_value(esp, "Eas") / R_GAS
     else:
         Eass = Eass / R_GAS
     # These are the encapsulant oxygen permeaiton parameters
     if Doe is None:
         Doe = _get_value(encp, "Do")
     if Eade is None:
-        Eade = encp.get("Ead", {}).get("value") / R_GAS
+        Eade = _get_value(encp, "Ead") / R_GAS
     else:
         Eade = Eade / R_GAS
     if Soe is None:
         Soe = _get_value(encp, "So") * press
     if Ease is None:
-        Ease = encp.get("Eas", {}).get("value") / R_GAS
+        Ease = _get_value(encp, "Eas") / R_GAS
     else:
         Ease = Ease / R_GAS
 
