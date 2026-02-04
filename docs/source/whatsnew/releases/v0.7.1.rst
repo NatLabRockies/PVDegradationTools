@@ -22,7 +22,7 @@ Bug Fixes
 
 Dependencies
 ------------
-
+- Bump aiohttp from 3.12.14 to 3.13.3 (:pull:`311`)
 
 Contributors
 ------------
