@@ -41,7 +41,16 @@
 
 # PVDeg: Python Package for Modeling Degradation in Photovoltaic Systems
 
-PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation, developed at the National Laboratory of the Rockies (NLR, formerly NREL) and supported by the Durable Module Materials (DuraMAT) consortium. It provides modular functions, materials databases, and calculation workflows for simulating degradation mechanisms (e.g., LeTID, hydrolysis, UV exposure) using weather data from the National Solar Radiation Database (NSRDB) and the Photovoltaic Geographical Information System (PVGIS). By integrating Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables field-relevant predictions and uncertainty quantification of module reliability and lifetime.
+PVDeg is an open-source Python package for modeling photovoltaic (PV)
+degradation, developed at the National Laboratory of the Rockies
+(NLR, formerly NREL) and supported by the Durable Module Materials (DuraMAT)
+consortium. It provides modular functions, materials databases, and calculation
+workflows for simulating degradation mechanisms (e.g., LeTID, hydrolysis, UV
+exposure) using weather data from the National Solar Radiation Database (NSRDB)
+and the Photovoltaic Geographical Information System (PVGIS). By integrating
+Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables
+field-relevant predictions and uncertainty quantification of module reliability
+and lifetime.
 
 ## Key Features
 
@@ -154,7 +163,8 @@ License
 Contributing
 ============
 
-We welcome contributions to this software! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions on:
+We welcome contributions to this software! Please see
+[CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions on:
 - Setting up your development environment
 - Installing and using pre-commit hooks
 - Code style guidelines
@@ -162,9 +172,11 @@ We welcome contributions to this software! Please see [CONTRIBUTING.md](CONTRIBU
 - **Contributing to material property and degradation parameter databases**
 - Submitting pull requests
 
-Please read the copyright license agreement (cla-1.0.md), with instructions on signing it in sign-CLA.md.
+Please read the copyright license agreement (cla-1.0.md), with instructions on
+signing it in sign-CLA.md.
 
-All code, documentation, and discussion contributors are acknowledged for their contributions to the PVDeg project.
+All code, documentation, and discussion contributors are acknowledged for their
+contributions to the PVDeg project.
 
 
 Getting support
@@ -196,6 +208,21 @@ On the Zenodo page, use the "Cite as" section in the right sidebar to copy the c
 Acknowledgements
 ================
 
-This work was authored by the National Renewable Energy Laboratory, operated by Alliance for Sustainable Energy, LLC, for the U.S. Department of Energy (DOE) under Contract No. DE-AC36-08GO28308. Funding provided as part of the Durable Modules Materials Consortium (DuraMAT), an Energy Materials Network Consortium funded by the U.S. Department of Energy, Office of Energy Efficiency and Renewable Energy, Solar Energy Technologies Office Agreement Number 32509. The research was performed using computational resources sponsored by the Department of Energy's Office of Energy Efficiency and Renewable Energy and located at the National Renewable Energy Laboratory. The views expressed in the article do not necessarily represent the views of the DOE or the U.S. Government. The U.S. Government retains and the publisher, by accepting the article for publication, acknowledges that the U.S. Government retains a nonexclusive, paid-up, irrevocable, worldwide license to publish or reproduce the published form of this work, or allow others to do so, for U.S. Government purposes.
+This work was authored in part by the National Laboratory of the Rockies
+for the U.S. Department of Energy (DOE), operated under Contract No.
+DE-AC36-08GO28308. Funding provided as part of the Durable Module Materials
+Consortium 2 (DuraMAT 2) funded by the by U.S. DOE Office of Critical Minerals
+and Energy Innovation (CMEI) Solar Energy Technologies Office (SETO), Agreement
+38259. The views expressed in the article do not necessarily represent the
+views of the DOE or the U.S. Government. The U.S. Government retains and the
+publisher, by accepting the article for publication, acknowledges that the U.S.
+Government retains a nonexclusive, paid-up, irrevocable, worldwide license to
+publish or reproduce the published form of this work, or allow others to do so,
+for U.S. Government purposes
+
+HPC disclaimer: A portion of This research was performed using computational
+resources sponsored by the U.S. Department of Energy's Office of Critical
+Minerals and Energy Innovation and located at the National Laboratory of the
+Rockies.
 
 **NLR Software Record:** SWR-20-71 (Holsapple, Derek; Ayala Pelaez, Silvana; Kempe, Michael. "PV Degradation Tools", NLR Github 2020)
