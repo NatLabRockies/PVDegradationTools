@@ -37,4 +37,6 @@ Dependencies
 Contributors
 ------------
 - Rajiv Daxini (:ghuser:`rdaxini`)
+- Martin Springer (:ghuser:`martin-springer`)
+- Silvana Ovaitt (:ghuser:`shirubana`)
 
