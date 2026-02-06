@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -618,9 +618,9 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.11.0-1018-azure
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
-Pandas version  2.3.3
-pvlib version  0.13.1
-pvdeg version  0.1.dev1+g25fa88ae5
+Pandas version  3.0.0
+pvlib version  0.15.0
+pvdeg version  0.1.dev1+g8634a0c38
 </pre></div>
 </div>
 </div>
@@ -1131,6 +1131,10 @@ For this example, we’ll model a fixed latitude tilt system at NREL, in Golden,
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/scipy/optimize/_chandrupatla.py:437: RuntimeWarning: invalid value encountered in divide
+  C = A / (A + B)
+</pre></div>
+</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ModelChain: 
   name: None
   clearsky_model: ineichen
@@ -1557,7 +1561,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
       <td>0.044058</td>
       <td>99.992005</td>
       <td>0.007995</td>
-      <td>5.966711e-09</td>
+      <td>5.966710e-09</td>
       <td>114.989971</td>
       <td>41.590966</td>
       <td>0.666326</td>
@@ -1620,7 +1624,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
       <td>9.515577</td>
       <td>0.001159</td>
       <td>41.396088</td>
-      <td>54.267061</td>
+      <td>54.267060</td>
       <td>4.336851e+00</td>
       <td>72.235986</td>
       <td>41.384030</td>
@@ -1636,7 +1640,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
       <td>28.119796</td>
       <td>0.044562</td>
       <td>41.396882</td>
-      <td>54.265942</td>
+      <td>54.265941</td>
       <td>4.337177e+00</td>
       <td>72.236540</td>
       <td>41.384034</td>
@@ -1652,7 +1656,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
       <td>23.314672</td>
       <td>0.034774</td>
       <td>41.402923</td>
-      <td>54.259760</td>
+      <td>54.259759</td>
       <td>4.337317e+00</td>
       <td>72.239600</td>
       <td>41.384057</td>
@@ -1683,8 +1687,8 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
       <td>1999-12-31 16:30:00-07:00</td>
       <td>4.552365</td>
       <td>0.001190</td>
-      <td>41.415660</td>
-      <td>54.246967</td>
+      <td>41.415661</td>
+      <td>54.246966</td>
       <td>4.337373e+00</td>
       <td>72.245934</td>
       <td>41.384105</td>
@@ -1738,7 +1742,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/aae1e21be3596bcb3393089a584b0fbfcf2242f5425871e386190c4b047be897.png" src="../_images/aae1e21be3596bcb3393089a584b0fbfcf2242f5425871e386190c4b047be897.png" />
+<img alt="../_images/639feb3fd1f1b68ba86f0511f109bf45961254e55a61df113922a303257f5029.png" src="../_images/639feb3fd1f1b68ba86f0511f109bf45961254e55a61df113922a303257f5029.png" />
 </div>
 </div>
 <p>The example data provided for Golden, CO, shows how <span class="math notranslate nohighlight">\(N_A\)</span> increases in cold weather, and power temporarily recovers, due to temporary recovery of LETID (B-&gt;A).</p>
@@ -1770,6 +1774,10 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/scipy/optimize/_chandrupatla.py:437: RuntimeWarning: invalid value encountered in divide
+  C = A / (A + B)
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1915,7 +1923,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
       <td>27.833654</td>
       <td>6.778463e+01</td>
       <td>4.381716e+00</td>
-      <td>66.112141</td>
+      <td>66.112142</td>
       <td>41.333851</td>
       <td>0.654974</td>
       <td>10.044126</td>
@@ -1930,7 +1938,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
       <td>27.833654</td>
       <td>6.778463e+01</td>
       <td>4.381716e+00</td>
-      <td>66.112141</td>
+      <td>66.112142</td>
       <td>41.333851</td>
       <td>0.654974</td>
       <td>10.044126</td>
@@ -1945,7 +1953,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
       <td>27.833654</td>
       <td>6.778463e+01</td>
       <td>4.381716e+00</td>
-      <td>66.112141</td>
+      <td>66.112142</td>
       <td>41.333851</td>
       <td>0.654974</td>
       <td>10.044126</td>
@@ -1960,7 +1968,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
       <td>27.833654</td>
       <td>6.778463e+01</td>
       <td>4.381716e+00</td>
-      <td>66.112141</td>
+      <td>66.112142</td>
       <td>41.333851</td>
       <td>0.654974</td>
       <td>10.044126</td>
@@ -1975,7 +1983,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
       <td>27.833654</td>
       <td>6.778463e+01</td>
       <td>4.381716e+00</td>
-      <td>66.112141</td>
+      <td>66.112142</td>
       <td>41.333851</td>
       <td>0.654974</td>
       <td>10.044126</td>

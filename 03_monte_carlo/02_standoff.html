@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -599,9 +599,9 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.11.0-1018-azure
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
-Pandas version  2.3.3
-Pvlib version  0.13.1
-Pvdeg version  0.1.dev1+g25fa88ae5
+Pandas version  3.0.0
+Pvlib version  0.15.0
+Pvdeg version  0.1.dev1+g8634a0c38
 </pre></div>
 </div>
 </div>
@@ -658,9 +658,7 @@ Pvdeg version  0.1.dev1+g25fa88ae5
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
+The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
           x      T98_0    T98_inf
 0  0.522443  71.778148  48.754265
           x      T98_0    T98_inf
@@ -693,18 +691,18 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          X_0  wind_factor
-0    2.621905     0.182699
-1   -0.155672     0.466237
-2    2.888131     0.521454
-3    5.956088     1.544551
-4    2.577917     0.366486
-..        ...          ...
-495  7.599369    -0.149063
-496  6.499046     0.469731
-497  5.187625     0.464210
-498  2.075401     0.386871
-499 -2.083049     0.365401
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
+0    10.028633     0.193252
+1     0.371756    -0.266383
+2    10.676916     0.747428
+3     3.183079     0.324179
+4     1.376820     0.261396
+..         ...          ...
+495   7.424142     0.489705
+496   5.471571     0.406244
+497   1.803082    -0.586344
+498   6.944351    -0.208396
+499   5.365525     0.696882
 
 [500 rows x 2 columns]
 </pre></div>
@@ -760,7 +758,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.series.Series&#39;&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.Series&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -773,17 +771,17 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.145433  71.198899  48.979796
-1    0.012157  68.266642  46.925381
-2    0.000000  67.638826  46.401058
-3    0.000000  46.829346  35.426679
-4    0.000000  69.277934  47.630760
+0    0.511929  71.105757  48.886501
+1    0.079129  74.490847  51.067257
+2    0.000000  64.608897  44.281142
+3    0.000000  69.744832  47.994504
+4    0.025875  70.408160  48.484869
 ..        ...        ...        ...
-495  1.372659  73.840082  50.602662
-496  0.000000  68.232791  46.895884
-497  0.000000  68.286212  46.942451
-498  0.000000  69.004264  47.552714
-499  0.067212  69.290027  47.639305
+495  0.000000  67.982971  46.699614
+496  0.000000  68.826137  47.439702
+497  0.490472  75.633281  51.979945
+498  1.367375  74.159950  50.885032
+499  0.000000  65.199800  44.795912
 
 [500 rows x 3 columns]
 </pre></div>
@@ -818,7 +816,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/cf0b0f745fee33ffefdef34e503d73a3c083cea1937213a15710187d8f3ed15a.png" src="../_images/cf0b0f745fee33ffefdef34e503d73a3c083cea1937213a15710187d8f3ed15a.png" />
+<img alt="../_images/0f0d096fa251935533d8dc6908e86d7ed6fa0ff833425d99e06caa9aa82ee90c.png" src="../_images/0f0d096fa251935533d8dc6908e86d7ed6fa0ff833425d99e06caa9aa82ee90c.png" />
 </div>
 </div>
 </section>
