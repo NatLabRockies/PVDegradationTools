@@ -10,11 +10,13 @@ Enhancements
 - Add module-level constant R_GAS = 0.0083144626 in :py:mod:`pvdeg.diffusion` to avoid
   magic numbers in code. (:pull:`313`)
 
+
 Documentation
 -------------
 - Update references to "NREL" and "National Renewable Laboratory" in text and URLs
-  with the new name National Laboratory of the Rockies (NatLabRockies or NLR)
-  (:pull:`315`)
+  with the new name National Laboratory of the Rockies (NatLabRockies or NLR).
+  Other associated names of government bodies and contractors have also been
+  updated as required. (:pull:`315`)
 
 
 Deprecations
@@ -30,6 +32,7 @@ Bug Fixes
 Dependencies
 ------------
 - Bump aiohttp from 3.12.14 to 3.13.3 (:pull:`311`)
+
 
 Contributors
 ------------
