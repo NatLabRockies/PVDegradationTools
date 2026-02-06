@@ -1,4 +1,4 @@
-v0.7.1 (XXXX-XX-XX)
+v0.7.1 (2026-02-06)
 ===================
 
 Breaking Changes
@@ -16,7 +16,7 @@ Documentation
 - Update references to "NREL" and "National Renewable Laboratory" in text and URLs
   with the new name National Laboratory of the Rockies (NatLabRockies or NLR).
   Other associated names of government bodies and contractors have also been
-  updated as required. (:pull:`315`)
+  updated as required. This includes an update to the CLA and its checksum (:pull:`315`).
 
 
 Deprecations
