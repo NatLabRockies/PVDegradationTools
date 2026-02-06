@@ -1,10 +1,6 @@
 v0.7.1 (2026-02-06)
 ===================
 
-Breaking Changes
-----------------
-
-
 Enhancements
 ------------
 - Add module-level constant R_GAS = 0.0083144626 in :py:mod:`pvdeg.diffusion` to avoid
