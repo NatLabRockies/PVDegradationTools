@@ -601,7 +601,7 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
 Pandas version  3.0.0
 Pvlib version  0.15.0
-Pvdeg version  0.1.dev1+g0ab393ee7
+Pvdeg version  0.1.dev1+g2bacff59f
 </pre></div>
 </div>
 </div>
@@ -693,18 +693,18 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          X_0  wind_factor
-0    6.709141    -0.110126
-1    3.964125     0.288789
-2    8.371153     0.747719
-3    4.936733     0.051814
-4    1.739193    -0.312161
-..        ...          ...
-495  6.401247    -1.403044
-496  4.434584     0.091598
-497  8.201489     0.424764
-498  8.048173    -0.864440
-499  3.440239     0.711322
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
+0     2.167889     0.419309
+1     5.782385    -0.009886
+2     2.713324     0.575271
+3     6.070965     0.542718
+4     8.087994     0.393506
+..         ...          ...
+495   9.111421     0.378919
+496   4.384402    -0.216882
+497   6.486677     0.339759
+498   7.559429     0.152575
+499  10.941852    -0.213444
 
 [500 rows x 2 columns]
 </pre></div>
@@ -744,6 +744,12 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/standards.py:367: RuntimeWarning: invalid value encountered in log
+  x = -x_0 * np.log(1 - (T98_0 - T98) / (T98_0 - T98_inf))
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="dealing-with-series">
@@ -773,17 +779,17 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    1.155670  73.671203  50.470083
-1    0.033402  70.183844  48.273238
-2    0.000000  64.603945  44.278604
-3    0.516952  72.229172  49.807228
-4    0.386679  74.679110  51.207391
+0    0.000000  68.705887  47.351289
+1    0.751513  72.763356  50.089603
+2    0.000000  66.764369  45.873190
+3    0.000000  67.334143  46.204086
+4    0.000000  68.953641  47.531054
 ..        ...        ...        ...
-495  2.233864  77.029839  53.166551
-496  0.406903  71.966117  49.540522
-497  0.000000  68.659159  47.304772
-498  2.476462  76.277197  52.577836
-499  0.000000  65.006799  44.661118
+495  0.000000  69.123882  47.568940
+496  0.875209  74.217085  50.912751
+497  0.000000  69.571032  47.861857
+498  0.523217  71.494535  49.145637
+499  2.172108  74.194025  50.900546
 
 [500 rows x 3 columns]
 </pre></div>
@@ -818,7 +824,7 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f993bbe89818ea717f0c41e02c37020dd5eccee0bede4ab7d9bc4abb81ae0643.png" src="../_images/f993bbe89818ea717f0c41e02c37020dd5eccee0bede4ab7d9bc4abb81ae0643.png" />
+<img alt="../_images/1cc74c0c9e63fee1a2c82079876bdac71ba6978041e225548b48044111e6be33.png" src="../_images/1cc74c0c9e63fee1a2c82079876bdac71ba6978041e225548b48044111e6be33.png" />
 </div>
 </div>
 </section>
