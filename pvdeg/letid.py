@@ -952,7 +952,7 @@ def calc_letid_outdoors(
 
     meta : dict
         dict of location information for builidng a pvlib.Location object, e.g. from
-        psm3 data accessed via pvlib.iotools.read_psm3
+        PSM3 data accessed via pvdeg.weather.read(file, 'csv')
 
     mechanism_params : str
         Dictionary of mechanism parameters.
@@ -1007,7 +1007,7 @@ def calc_letid_outdoors(
     See also
     --------
     pvlib.modelchain.ModelChain.run_model
-    pvlib.iotools.read_psm3
+    pvdeg.weather.read
     pvlib.pvsystem.PVSystem
     pvlib.temperature
     """
