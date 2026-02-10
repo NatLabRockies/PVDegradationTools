@@ -39,10 +39,9 @@ PVDeg is developed openly on GitHub and releases are distributed via the Python 
 
 As PV deployment expands, especially into new and demanding operational environments, material degradation poses a challenge to the lifetime of PV modules. Modeling degradation is crucial for anticipating performance losses, guiding material selection, and enabling proactive maintenance strategies that extend the operational lifetime of PV modules in diverse environments. Existing PV modeling tools such as pvlib-python [@pvlib] and SAM [@SAM] can simulate system energy yield, but not degradation. PVDeg fills this gap by providing modular degradation models, material databases, and uncertainty quantification workflows. PVDeg supports both research and industry use by automating degradation modeling, enabling reproducible studies of module lifetime and performance worldwide. It also supports ongoing standardization work, including contributions to IEC TS 63126 [@IEC63126]. PVDeg is an important component of a growing ecosystem of open-source tools for solar energy [@Holmgren2018].
 
-![Example of geospatial degradation modeling in PVDeg: (a) calculated standoff distances for IEC TS 63126 across the continental U.S.\label{fig:visualization}](IECTS_63126.PNG){ width=80% }
+![Example of geospatial degradation modeling in PVDeg: (a) calculated standoff distances for IEC TS 63126 across the continental U.S.\label{fig:visualization}](IECTS_63126.PNG)
 
-# Software Functionality
-
+# Software Design
 ## Core Functions
 The core API provides dedicated functions for calculating physical degradation mechanisms, accessing material properties and environmental stressors.  Examples include `pvdeg.humidity.module()` for moisture ingress modeling [@pickett2013hydrolysis], and `pvdeg.letid.calc_letid_outdoors()` for modeling light and elevated temperature induced degradation (LeTID) [@karas2022letidstudy; @repins2023longterm]. These functions rely on standardized environmental stressors such as temperature, irradiance, and humidity, and can be chained to produce lifetime predictions under realistic field conditions.
 
@@ -53,7 +52,6 @@ To simplify complex workflows, PVDeg wraps its core functions into a ``Scenario`
 The geospatial analysis layer enables large-scale spatial analyses by automatically distributing degradation calculations across geographic regions using parallel processing and advanced data structures. It integrates environmental data from NSRDB and PVGIS and automates sampling across latitude-longitude grids to produce maps, such as standoff distance distribution used in IEC TS 63126 compliance studies [@IEC63126]. The geospatial layer includes specialized visualization functions for mapping results and supports both uniform and stochastic spatial sampling strategies to balance computational efficiency with geographic coverage. Parallelization routines are compatible with NREL's open-source *GeoGridFusion* framework [@ford2025geogridfusion; @Tobin2025geogridfusion], allowing users to down-select meteorological datasets efficiently and strategically, and execute computations without high-performance computing access. This capability supports national- and global-scale analyses of degradation phenomena.
 
 ## Monte Carlo Framework
-
 Laboratory-to-field extrapolation carries significant uncertainty in kinetic parameters. PVDeg’s Monte Carlo engine samples parameter distributions and their correlations to generate thousands of realizations, producing confidence intervals on degradation rates rather than single deterministic values. This capability, described in [@springer2022futureproofing], can help quantify uncertainty in complex and non-linear module lifetime predictions, and identify which parameters most strongly affect reliability risk.
 
 ## Tutorials and Tools
@@ -73,14 +71,15 @@ Since its first release as PV Degradation Tools [@Holsapple2020pvdegtools], PVDe
 These applications highlight PVDeg’s versatility as the “PV Library of degradation phenomena” — an open, community-driven platform linking materials science, environmental modeling, and field performance.
 
 # Ongoing Development
-
-Version 0.7.0 is the latest stable release, incorporating support for NSRDB PSM v4 weather data, multi-material handling in the Scenario class, and compatibility with Python 3.13. The Jupyter notebook tools and tutorials have also undergone major restructuring for improved usability and clarity.
+Version 0.7.1 is the latest stable release, incorporating support for NSRDB PSM v4 weather data, multi-material handling in the Scenario class, and compatibility with Python 0.14.0. The Jupyter notebook tools and tutorials have also undergone major restructuring for improved usability and clarity.
 
 DuraMAT-funded projects will expand the degradation and material parameter databases using large language model driven literature searches, and enhancing the Scenario class to enable handling multiple materials and degradation pathways within the same workflow. This will mitigate the need for users to design and execute Scenarios for different degradation pathways and materials.
 
 
-# Acknowledgements
+# AI usage disclosure
+Generative AI was used to support the creation of docstrings in the software, and changelogs published in release notes. No generative AI tools were used in the writing of this manuscript or preparation of supporting materials. All outputs created using generative AI were thoroughly vetted by the contributor(s) for accuracy.
 
+# Acknowledgements
 We acknowledge all code, documentation, and discussion contributors to the PVDeg project, in particular Derek Holsapple for building the foundational Python code, and Aidan Wesley for helping with data acquisition.
 
 This work was authored by the National Laboratory of the Rockies for the U.S. Department of Energy (DOE) under Contract No. DE-AC36-08GO28308. Funding provided as part of the Durable Modules Materials Consortium (DuraMAT), an Energy Materials Network Consortium funded by the U S Department of Energy, Office of Energy Efficiency and Renewable Energy, Solar Energy Technologies Office Agreement Number 32509. The research was performed using computational resources sponsored by the Department of Energy's Office of Energy Efficiency and Renewable Energy and located at the National Laboratory of the Rockies. The views expressed in the article do not necessarily represent the views of the DOE or the U.S. Government. The U.S. Government retains and the publisher, by accepting the article for publication, acknowledges that the U.S. Government retains a nonexclusive, paid-up, irrevocable, worldwide license to publish or reproduce the published form of this work, or allow others to do so, for U.S. Government purposes.
