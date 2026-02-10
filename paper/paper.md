@@ -62,8 +62,7 @@ The tutorials and tools component of PVDeg consists of a comprehensive suite of 
 ## Open datasets
 A growing component of PVDeg is its compilation of community-driven open datasets for PV degradation modeling. These databases include curated degradation parameters and material property data, such as kinetic coefficients for common degradation mechanisms, UV-albedo data, and permeation properties for materials (e.g., H$_2$O, O$_2$, acetic acid). The datasets are continuously expanded and updated, serving as a growing resource for users to access validated values for modeling and analysis. Users are encouraged to contribute their own data, enhancing the collective knowledge base and supporting reproducible research. The core PVDeg API also provides users with a means to seamlessly query these datasets and use them in their own modeling workflows, analysis, and investigations. The development and maintenance of these degradation databases and associated API calls also supports reproducible, reliable, and field-relevant degradation modeling for the PV community.
 
-# Example Applications
-
+# Research Impact Statement
 Since its first release as PV Degradation Tools [@Holsapple2020pvdegtools], PVDeg has been adopted in multiple studies across the PV reliability community:
 * Thermal Stability and IEC TS 63126 Compliance: Used to calculate effective standoff distances and generate public maps supporting the IEC TS 63126 standard [@IEC63126].
 * Light and Elevated Temperature Induced Degradation (LeTID): Integrated into the international interlaboratory comparison study of LeTID effects in crystalline-silicon modules [@karas2022letidstudy] and follow-up analyses of field-aged arrays [@repins2023longterm; @karas2024letid].
