@@ -47,7 +47,7 @@ def test_Scenario_add(monkeypatch, tmp_path):
     a.restore_credentials(email=EMAIL, api_key=API_KEY)
     a.addLocation(lat_long=(40.63336, -73.99458))
     a.addModule(module_name="test-module")
-    a.addJob(func=standoff, func_kwarg={"wind_factor": 0.35})
+    a.addJob(func=(standoff, {"wind_factor": 0.35}))
 
     restored = Scenario.load_json(
         file_path=os.path.join(TEST_DATA_DIR, "test-scenario.json")
@@ -139,7 +139,7 @@ def test_addJob_bad(monkeypatch):
     a = Scenario(name="bad-job")
     monkeypatch.setattr("pvdeg.utilities.new_id", monkeypatch_badjob_new_id_fail)
     with pytest.warns(UserWarning, match="Failed to add job: invalid_job"):
-        a.addJob(func=lambda: None, func_kwarg={})
+        a.addJob(func=lambda: None)
 
 
 def test_addModule_string_material_valid():
