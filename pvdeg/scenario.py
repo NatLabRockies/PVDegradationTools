@@ -543,6 +543,23 @@ class Scenario:
             - A callable function (no kwargs)
             - A tuple (function, kwargs_dict) for a single job with kwargs
             - A list of functions and/or tuples for multiple jobs
+
+        Examples:
+        ---------
+        Single job without kwargs:
+        >>> scenario.addJob(func=pvdeg.fatigue.solder_fatigue)
+
+        Single job with kwargs:
+        >>> scenario.addJob(
+        ...     func=(pvdeg.humidity.module, {'encapsulant': 'W001'})
+        ... )
+
+        Multiple jobs:
+        >>> scenario.addJob(func=[
+        ...     (pvdeg.humidity.module, {'encapsulant': 'W001'}),
+        ...     pvdeg.fatigue.solder_fatigue,
+        ...     (pvdeg.degradation.arrhenius, {'Ro': 1.5, 'Ea': 45})
+        ... ])
         """
         # Normalize input to list of jobs
         jobs_to_add = []
