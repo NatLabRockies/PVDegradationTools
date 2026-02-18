@@ -18,116 +18,43 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-scene_temp = pvdeg.Scenario(
-    name="temperature and degradation",
-    api_key="DEMO_KEY",
+from pathlib import Path
+
+parent_dir = Path(pvdeg.PVDEG_DIR).parent
+new_path = parent_dir / "tutorials" / "data" / "temperature_and_degradation.json"
+
+copy = pvdeg.scenario.Scenario.load_json(
+    file_path=str(new_path),
     email="user@mail.com",
+    api_key="DEMO_KEY",
 )
 
-scene_temp.addLocation(
-    lat_long=(25.783388, -80.189029),
-)
-
-# this module will be overwritten because another with the same name is added afterwards
-scene_temp.addModule(module_name="sapm_1", temperature_model="sapm")
-
-scene_temp.addModule(
-    module_name="sapm_1",
-    racking="open_rack_glass_polymer",
-    materials="OX003",
-    temperature_model="sapm",
-    irradiance_kwarg={"azimuth": 120, "tilt": 30},
-    model_kwarg={"irrad_ref": 1100},
-)
-
-scene_temp.addModule(
-    module_name="pvsyst_1",
-    racking="freestanding",
-    materials="OX003",
-    temperature_model="pvsyst",
-    irradiance_kwarg={"azimuth": 180, "tilt": 0},
-    model_kwarg={"module_efficiency": 0.15},
-)
-scene_temp.addModule(
-    module_name="sapm_2",
-    racking="open_rack_glass_polymer",
-    materials="OX003",
-    temperature_model="sapm",
-    irradiance_kwarg={"azimuth": 120, "tilt": 30},
-    model_kwarg={"irrad_ref": 1000},
-)
-scene_temp.addModule(
-    module_name="sapm_3",
-    racking="open_rack_glass_polymer",
-    materials="OX003",
-    temperature_model="sapm",
-    irradiance_kwarg={"azimuth": 180, "tilt": 0},
-    model_kwarg={"irrad_ref": 1000},
-)
-
-scene_temp.addModule(
-    module_name="pvsyst_2",
-    racking="freestanding",
-    materials="OX003",
-    temperature_model="pvsyst",
-    irradiance_kwarg={"azimuth": 180, "tilt": 0},
-    model_kwarg={"module_efficiency": 0.2},
-)
-
-scene_temp.addJob(
-    func=pvdeg.temperature.temperature,
-    func_kwarg={"cell_or_mod": "cell"},
-)
-
-scene_temp.addJob(
-    func=pvdeg.degradation.vantHoff_deg,
-    func_kwarg={"I_chamber": 1000, "temp_chamber": 25},
-)
-
-scene_temp.addJob(
-    func=pvdeg.degradation.vantHoff_deg,
-    func_kwarg={"I_chamber": 1000, "temp_chamber": 30},
-)
-
-scene_temp.addJob(
-    func=pvdeg.degradation.IwaVantHoff,
-)
+copy
 ------------------
 
------ stdout -----
- Column "relative_humidity" not found in DataFrame. Calculating...
------ stderr -----
-/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/scenario.py:367: UserWarning: WARNING - Module already found by name "sapm_1"
-  warnings.warn(f'WARNING - Module already found by name "{module_name}"')
-/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/scenario.py:368: UserWarning: Module will be replaced with new instance.
-  warnings.warn("Module will be replaced with new instance.")
-------------------
 
 [31m---------------------------------------------------------------------------[39m
-[31mTypeError[39m                                 Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[4][39m[32m, line 57[39m
-[32m     39[39m scene_temp.addModule(
-[32m     40[39m     module_name=[33m"[39m[33msapm_3[39m[33m"[39m,
-[32m     41[39m     racking=[33m"[39m[33mopen_rack_glass_polymer[39m[33m"[39m,
-[32m   (...)[39m[32m     45[39m     model_kwarg={[33m"[39m[33mirrad_ref[39m[33m"[39m: [32m1000[39m},
-[32m     46[39m )
-[32m     48[39m scene_temp.addModule(
-[32m     49[39m     module_name=[33m"[39m[33mpvsyst_2[39m[33m"[39m,
-[32m     50[39m     racking=[33m"[39m[33mfreestanding[39m[33m"[39m,
-[32m   (...)[39m[32m     54[39m     model_kwarg={[33m"[39m[33mmodule_efficiency[39m[33m"[39m: [32m0.2[39m},
-[32m     55[39m )
-[32m---> [39m[32m57[39m [43mscene_temp[49m[43m.[49m[43maddJob[49m[43m([49m
-[32m     58[39m [43m    [49m[43mfunc[49m[43m=[49m[43mpvdeg[49m[43m.[49m[43mtemperature[49m[43m.[49m[43mtemperature[49m[43m,[49m
-[32m     59[39m [43m    [49m[43mfunc_kwarg[49m[43m=[49m[43m{[49m[33;43m"[39;49m[33;43mcell_or_mod[39;49m[33;43m"[39;49m[43m:[49m[43m [49m[33;43m"[39;49m[33;43mcell[39;49m[33;43m"[39;49m[43m}[49m[43m,[49m
-[32m     60[39m [43m)[49m
-[32m     62[39m scene_temp.addJob(
-[32m     63[39m     func=pvdeg.degradation.vantHoff_deg,
-[32m     64[39m     func_kwarg={[33m"[39m[33mI_chamber[39m[33m"[39m: [32m1000[39m, [33m"[39m[33mtemp_chamber[39m[33m"[39m: [32m25[39m},
-[32m     65[39m )
-[32m     67[39m scene_temp.addJob(
-[32m     68[39m     func=pvdeg.degradation.vantHoff_deg,
-[32m     69[39m     func_kwarg={[33m"[39m[33mI_chamber[39m[33m"[39m: [32m1000[39m, [33m"[39m[33mtemp_chamber[39m[33m"[39m: [32m30[39m},
-[32m     70[39m )
+[31mFileNotFoundError[39m                         Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[9][39m[32m, line 6[39m
+[32m      3[39m parent_dir = Path(pvdeg.PVDEG_DIR).parent
+[32m      4[39m new_path = parent_dir / [33m"[39m[33mtutorials[39m[33m"[39m / [33m"[39m[33mdata[39m[33m"[39m / [33m"[39m[33mtemperature_and_degradation.json[39m[33m"[39m
+[32m----> [39m[32m6[39m copy = [43mpvdeg[49m[43m.[49m[43mscenario[49m[43m.[49m[43mScenario[49m[43m.[49m[43mload_json[49m[43m([49m
+[32m      7[39m [43m    [49m[43mfile_path[49m[43m=[49m[38;5;28;43mstr[39;49m[43m([49m[43mnew_path[49m[43m)[49m[43m,[49m
+[32m      8[39m [43m    [49m[43memail[49m[43m=[49m[33;43m"[39;49m[33;43muser@mail.com[39;49m[33;43m"[39;49m[43m,[49m
+[32m      9[39m [43m    [49m[43mapi_key[49m[43m=[49m[33;43m"[39;49m[33;43mDEMO_KEY[39;49m[33;43m"[39;49m[43m,[49m
+[32m     10[39m [43m)[49m
+[32m     12[39m copy
 
-[31mTypeError[39m: Scenario.addJob() got an unexpected keyword argument 'func_kwarg'
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/scenario.py:731[39m, in [36mScenario.load_json[39m[34m(cls, file_path, email, api_key)[39m
+[32m    723[39m [38;5;129m@classmethod[39m
+[32m    724[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mload_json[39m(
+[32m    725[39m     [38;5;28mcls[39m,
+[32m   (...)[39m[32m    728[39m     api_key: Optional[[38;5;28mstr[39m] = [38;5;28;01mNone[39;00m,
+[32m    729[39m ):
+[32m    730[39m [38;5;250m    [39m[33;03m"""Import scenario dictionaries from existing 'scenario.json' file."""[39;00m
+[32m--> [39m[32m731[39m     [38;5;28;01mwith[39;00m [38;5;28;43mopen[39;49m[43m([49m[43mfile_path[49m[43m,[49m[43m [49m[33;43m"[39;49m[33;43mr[39;49m[33;43m"[39;49m[43m)[49m [38;5;28;01mas[39;00m f:
+[32m    732[39m         data = json.load(f)
+[32m    733[39m     name = data[[33m"[39m[33mname[39m[33m"[39m]
+
+[31mFileNotFoundError[39m: [Errno 2] No such file or directory: '/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/tutorials/data/temperature_and_degradation.json'
 
