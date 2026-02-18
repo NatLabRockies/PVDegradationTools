@@ -532,23 +532,69 @@ class Scenario:
 
     def addJob(
         self,
-        func=None,
-        func_kwarg={},
+        func,
     ):
-        """Add a pvdeg function to the scenario pipeline.
+        """Add pvdeg function(s) to the scenario pipeline.
 
         Parameters:
         -----------
-        func : function
-            pvdeg function to use for single point calculation.
-            All regular pvdeg functions will work at a single point when
-            ``Scenario.geospatial == False``
-        func_params : dict
-            job specific keyword argument dictionary to provide to the function
+        func : function, tuple, or list
+            Specify job(s) to add. Can be:
+            - A callable function (no kwargs)
+            - A tuple (function, kwargs_dict) for a single job with kwargs
+            - A list of functions and/or tuples for multiple jobs
         """
-        if func is None or not callable(func):
-            raise ValueError(f'FAILED: Requested function "{func}" not found')
+        # Normalize input to list of jobs
+        jobs_to_add = []
 
+        if isinstance(func, list):
+            jobs_to_add = func
+        else:
+            # Single job (either bare function or tuple)
+            jobs_to_add = [func]
+
+        # Process each job
+        for job in jobs_to_add:
+            if isinstance(job, tuple):
+                # Job is (function, kwargs_dict)
+                if len(job) != 2:
+                    raise ValueError(
+                        "Job tuple must have exactly 2 elements "
+                        f"(function, kwargs), got {len(job)}"
+                    )
+                job_func, job_kwargs = job
+                if not callable(job_func):
+                    raise ValueError(
+                        "First element of job tuple must be callable, "
+                        f"got {type(job_func)}"
+                    )
+                if not isinstance(job_kwargs, dict):
+                    raise ValueError(
+                        "Second element of job tuple must be a dict, "
+                        f"got {type(job_kwargs)}"
+                    )
+                self._add_single_job(job_func, job_kwargs)
+
+            elif callable(job):
+                # Job is just a function with no kwargs
+                self._add_single_job(job, {})
+
+            else:
+                raise ValueError(
+                    "Each job must be either a callable or a tuple "
+                    f"(function, kwargs), got {type(job)}"
+                )
+
+    def _add_single_job(self, func, func_kwarg):
+        """Internal helper to add a single job to the pipeline.
+
+        Parameters:
+        -----------
+        func : callable
+            Function to add to pipeline
+        func_kwarg : dict
+            Keyword arguments for the function
+        """
         try:
             job_id = utilities.new_id(self.pipeline)
             job_dict = {"job": func, "params": func_kwarg}
