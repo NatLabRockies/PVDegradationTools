@@ -392,3 +392,24 @@ def test_addJob_invalid_job_type():
         ValueError, match="Each job must be either a callable or a tuple"
     ):
         s.addJob(func=123)
+
+
+def test_addJob_jobs_added():
+    s = Scenario(name="jobs-to-add-norm")
+    # Single function
+    s.addJob(func=standoff)
+    assert any(job["job"] == standoff for job in s.pipeline.values())
+    # Single tuple
+    s2 = Scenario(name="jobs-to-add-norm-tuple")
+    s2.addJob(func=(standoff, {"wind_factor": 0.35}))
+    assert any(
+        job["job"] == standoff and job["params"].get("wind_factor") == 0.35
+        for job in s2.pipeline.values()
+    )
+    # List of functions/tuples
+    s3 = Scenario(name="jobs-to-add-norm-list")
+    s3.addJob(func=[standoff, (standoff, {"wind_factor": 0.5})])
+    assert any(
+        job["job"] == standoff and job["params"].get("wind_factor") == 0.5
+        for job in s3.pipeline.values()
+    )
