@@ -362,3 +362,33 @@ def test_add_material_mixed_valid_invalid():
         ValueError, match="material_name is required for layer 'invalid_layer'"
     ):
         scenario.add_material(materials_dict)
+
+
+def test_addJob_tuple_wrong_length():
+    s = Scenario(name="tuple-wrong-length")
+    # Tuple with only one element
+    with pytest.raises(ValueError, match="Job tuple must have exactly 2 elements"):
+        s.addJob(func=(standoff,))
+    # Tuple with three elements
+    with pytest.raises(ValueError, match="Job tuple must have exactly 2 elements"):
+        s.addJob(func=(standoff, {"wind_factor": 0.35}, 123))
+
+
+def test_addJob_tuple_noncallable():
+    s = Scenario(name="tuple-noncallable")
+    with pytest.raises(ValueError, match="First element of job tuple must be callable"):
+        s.addJob(func=(123, {"wind_factor": 0.35}))
+
+
+def test_addJob_tuple_kwargs_not_dict():
+    s = Scenario(name="tuple-kwargs-not-dict")
+    with pytest.raises(ValueError, match="Second element of job tuple must be a dict"):
+        s.addJob(func=(standoff, [1, 2, 3]))
+
+
+def test_addJob_invalid_job_type():
+    s = Scenario(name="invalid-job-type")
+    with pytest.raises(
+        ValueError, match="Each job must be either a callable or a tuple"
+    ):
+        s.addJob(func=123)
