@@ -1,0 +1,88 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+- caption: 01 - Basics
+  titlesonly: true
+  chapters:
+  - file: 01_basics/01_basics_humidity_design
+    title: Humidity Design Basics
+  - file: 01_basics/02_degradation
+    title: Degradation Overview
+  - file: 01_basics/03_spectral_degradation
+    title: Spectral Degradation
+  - file: 01_basics/04_weather_database_access
+    title: Weather Database Access
+- caption: 02 - Degradation Mechanisms
+  titlesonly: true
+  chapters:
+  - file: 02_degradation/01_bo_lid_accelerated_test
+    title: B-O LID Accelerated Test
+  - file: 02_degradation/02_letid_accelerated_test
+    title: LETID Accelerated Test
+  - file: 02_degradation/03_letid_outdoor
+    title: LETID Outdoor
+  - file: 02_degradation/04_letid_outdoor_scenario
+    title: LETID Outdoor Scenario
+  - file: 02_degradation/05_letid_passivated_wafer
+    title: LETID Passivated Wafer
+  - file: 02_degradation/06_vant_hoff_degradation_model
+    title: Van't Hoff Degradation Model
+- caption: 03 - Monte Carlo Simulations
+  titlesonly: true
+  chapters:
+  - file: 03_monte_carlo/01_arrhenius
+    title: Arrhenius Monte Carlo
+  - file: 03_monte_carlo/02_standoff
+    title: Standoff Monte Carlo
+- caption: 04 - Scenarios
+  titlesonly: true
+  chapters:
+  - file: 04_scenario/01_scenario_temperature
+    title: Temperature Scenario
+  - file: 04_scenario/02_scenario_single_location
+    title: Single Location
+  - file: 04_scenario/03_scenario_mountain_downselect
+    title: Mountain Downselect
+- caption: 05 - Geospatial Analysis
+  titlesonly: true
+  chapters:
+  - file: 05_geospatial/01_geospatial_templates
+    title: Geospatial Templates (HPC)
+  - file: 05_geospatial/02_geospatial_world_map
+    title: Geospatial World Map (HPC)
+  - file: 05_geospatial/03_letid_outdoor_geospatial_demo
+    title: LETID Outdoor Geospatial Demo (HPC)
+  - file: 05_geospatial/04_scenario_geographical_features
+    title: Geographical Features (HPC)
+  - file: 05_geospatial/05_scenario_geospatial
+    title: Scenario Geospatial (HPC)
+- caption: 06 - Advanced Topics
+  titlesonly: true
+  chapters:
+  - file: 06_advanced/01_custom_functions_nopython
+    title: Custom Functions with Numba
+  - file: 06_advanced/03_pysam_api
+    title: PySAM with API (API Key Required)
+  - file: 06_advanced/04_nsrdb_distributed_api
+    title: NSRDB Distributed (API Key Required)
+  - file: 06_advanced/05_pvgis_distributed
+    title: PVGIS Distributed
+- caption: 06 - Workshop Demos
+  titlesonly: true
+  chapters:
+  - file: 10_workshop_demos/01_astm_live_demo
+    title: ASTM Live Demo
+  - file: 10_workshop_demos/02_duramat_live_demo
+    title: DuraMAT Live Demo (HPC)
+- caption: Tools
+  titlesonly: true
+  chapters:
+  - file: tools/Tools - Edge Seal Oxygen Ingress
+    title: Edge Seal Oxygen Ingress
+  - file: tools/Tools - Degradation
+    title: Degradation
+  - file: tools/Tools - Module Standoff for IEC TS 63126
+    title: Module Standoff for IEC TS 63126 (HPC)

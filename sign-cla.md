@@ -41,8 +41,8 @@ Put the following in the file:
 [date]
 
 I hereby agree to the terms of the Contributors License
-Agreement, version 1.0, with MD5 checksum
-46ea45f996295bdb0652333d516a6d0a.
+Agreement, version 1.01, with MD5 checksum
+93888c3304015c6b99de6dac7252a812.
 
 I furthermore declare that I am authorized and able to make this
 agreement and sign this declaration.
@@ -71,7 +71,7 @@ or on Windows
 
 ```
 CertUtil -hashfile cla-1.0.md MD5
-MD5 hash of cla-1.0.md: 2aa6e2788a0ff4d45cabfc839290e1ca
+MD5 hash of cla-1.0.md: 93888c3304015c6b99de6dac7252a812
 ```
 
 If the output is different from above, do not sign the CLA and let us know.

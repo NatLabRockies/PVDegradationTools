@@ -115,7 +115,7 @@ def water_saturation_pressure(temp, average=True):
 
     Water saturation pressure (psat) model created from an emperical fit of
     ln(psat) vs temperature using a 6th order polynomial fit. The fit produced
-    R^2=0.999813. Calculation created by Michael Kempe, unpublished data.
+    R²=0.999813. Calculation created by Michael Kempe, unpublished data.
     The fit used data from -40°C to 200°C.
 
     Parameters:
@@ -838,7 +838,7 @@ def backsheet(
         For PET backsheet W017, Ea_p_b=55.4064573018373 [kJ/mol]
     backsheet_thickness : float
         Thickness of the backsheet [mm].
-        The suggested value for a PET backsheet is t=0.3 [mm]
+        The suggested value for a PET backsheet is 0.3 [mm]
     So_e : float
         Encapsulant solubility prefactor in [g/cm³]
         So = 1.81390702[g/cm³] is the suggested value for EVA W001.
@@ -945,7 +945,7 @@ def module(
         The suggested value for PET W17 is Po = 1319534666.90318 [g·mm/m²/day].
     Ea_p_b : float
         Backsheet permeation  activation energy [kJ/mol].
-    t : float
+    backsheet_thickness : float
         Thickness of the backsheet [mm].
         The suggested value for a PET backsheet is 0.3mm.
     So_e : float
@@ -1039,9 +1039,10 @@ def module(
     )
 
     Ce_back_encap = back_encapsulant_water_concentration(
+        temp_module=temp_module,
+        rh_surface=None,
         rh_ambient=weather_df["relative_humidity"],
         temp_ambient=weather_df["temp_air"],
-        temp_module=temp_module,
         Po_b=Po_b,
         Ea_p_b=Ea_p_b,
         backsheet_thickness=backsheet_thickness,

@@ -1,0 +1,86 @@
+{
+  "title": "PVDeg: Photovoltaic Degradation Tools",
+  "description": "PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation, developed at the National Renewable Energy Laboratory (NREL) and supported by the Durable Module Materials (DuraMAT) consortium. It provides modular functions, materials databases, and calculation workflows for simulating degradation mechanisms (e.g., LeTID, hydrolysis, UV exposure) using weather data from the National Solar Radiation Database (NSRDB) and the Photovoltaic Geographical Information System (PVGIS). By integrating Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables field-relevant predictions and uncertainty quantification of module reliability and lifetime.",
+  "creators": [
+    {
+      "name": "Springer, Martin",
+      "affiliation": "National Renewable Energy Laboratory",
+      "orcid": "0000-0001-6803-108X"
+    },
+    {
+      "name": "Brown, Matthew",
+      "affiliation": "National Renewable Energy Laboratory",
+      "orcid": "0000-0002-0988-3431"
+    },
+    {
+      "name": "Ovaitt, Silvana",
+      "affiliation": "National Renewable Energy Laboratory",
+      "orcid": "0000-0003-0180-728X"
+    },
+    {
+      "name": "Ford, Tobin",
+      "affiliation": "National Renewable Energy Laboratory",
+      "orcid": "0009-0000-7428-5625"
+    },
+    {
+      "name": "Daxini, Rajiv",
+      "affiliation": "National Renewable Energy Laboratory",
+      "orcid": "0000-0003-1993-9408"
+    },
+    {
+      "name": "Holsapple, Derek",
+      "affiliation": "National Renewable Energy Laboratory"
+    },
+    {
+      "name": "Kempe, Michael",
+      "affiliation": "National Renewable Energy Laboratory",
+      "orcid": "0000-0003-3312-0482"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Campanelli, Mark",
+      "affiliation": "Intelligent Measurement Systems LLC",
+      "type": "Other"
+    },
+    {
+      "name": "Wells, Trenton",
+      "affiliation": "National Renewable Energy Laboratory",
+      "type": "Other"
+    },
+    {
+      "name": "Anderson, Kevin",
+      "affiliation": "Sandia National Laboratories",
+      "orcid": "0000-0002-1166-7957",
+      "type": "Other"
+    }
+  ],
+  "keywords": [
+    "photovoltaic",
+    "solar energy",
+    "degradation",
+    "reliability",
+    "module lifetime",
+    "LeTID",
+    "Monte Carlo",
+    "geospatial analysis",
+    "NSRDB",
+    "PVGIS",
+    "DuraMAT"
+  ],
+  "license": "BSD-3-Clause",
+  "upload_type": "software",
+  "access_right": "open",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/NREL/PVDegradationTools",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ],
+  "communities": [
+    {
+      "identifier": "duramat"
+    }
+  ]
+}

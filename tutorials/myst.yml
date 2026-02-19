@@ -1,0 +1,110 @@
+version: 1
+project:
+  title: PVDEG Tutorials
+  authors:
+    - name: Martin Springer
+    - name: Matthew Brown
+    - name: Silvana Ovaitt
+    - name: Tobin Ford
+    - name: Joseph Karas
+    - name: Michael Kempe
+  exclude:
+    - _build
+    - .ipynb_checkpoints
+    - '*/scripts'
+    - '*/scripts/*'
+  github: NREL/PVDegradationTools
+  thebe:
+    binder:
+      repo: NREL/PVDegradationTools
+      provider: github
+      ref: main
+  bibliography:
+    - references.bib
+  exports:
+    - format: pdf
+      template: plain_latex_book
+      output: exports/book.pdf
+  defaults:
+    titlesonly: true
+  toc:
+    - file: intro.md
+    - title: 01 - Basics
+      children:
+        - file: 01_basics/01_basics_humidity_design.ipynb
+          title: Humidity Design Basics
+        - file: 01_basics/02_degradation.ipynb
+          title: Degradation Overview
+        - file: 01_basics/03_spectral_degradation.ipynb
+          title: Spectral Degradation
+        - file: 01_basics/04_weather_database_access.ipynb
+          title: Weather Database Access
+    - title: 02 - Degradation Mechanisms
+      children:
+        - file: 02_degradation/01_bo_lid_accelerated_test.ipynb
+          title: B-O LID Accelerated Test
+        - file: 02_degradation/02_letid_accelerated_test.ipynb
+          title: LETID Accelerated Test
+        - file: 02_degradation/03_letid_outdoor.ipynb
+          title: LETID Outdoor
+        - file: 02_degradation/04_letid_outdoor_scenario.ipynb
+          title: LETID Outdoor Scenario
+        - file: 02_degradation/05_letid_passivated_wafer.ipynb
+          title: LETID Passivated Wafer
+        - file: 02_degradation/06_vant_hoff_degradation_model.ipynb
+          title: Van't Hoff Degradation Model
+    - title: 03 - Monte Carlo Simulations
+      children:
+        - file: 03_monte_carlo/01_arrhenius.ipynb
+          title: Arrhenius Monte Carlo
+        - file: 03_monte_carlo/02_standoff.ipynb
+          title: Standoff Monte Carlo
+    - title: 04 - Scenarios
+      children:
+        - file: 04_scenario/01_scenario_temperature.ipynb
+          title: Temperature Scenario
+        - file: 04_scenario/02_scenario_single_location.ipynb
+          title: Single Location
+        - file: 04_scenario/03_scenario_mountain_downselect.ipynb
+          title: Mountain Downselect
+    - title: 05 - Geospatial Analysis
+      children:
+        - file: 05_geospatial/01_geospatial_templates.ipynb
+          title: Geospatial Templates (HPC)
+        - file: 05_geospatial/02_geospatial_world_map.ipynb
+          title: Geospatial World Map (HPC)
+        - file: 05_geospatial/03_letid_outdoor_geospatial_demo.ipynb
+          title: LETID Outdoor Geospatial Demo (HPC)
+        - file: 05_geospatial/04_scenario_geographical_features.ipynb
+          title: Geographical Features (HPC)
+        - file: 05_geospatial/05_scenario_geospatial.ipynb
+          title: Scenario Geospatial (HPC)
+    - title: 06 - Advanced Topics
+      children:
+        - file: 06_advanced/01_custom_functions_nopython.ipynb
+          title: Custom Functions with Numba
+        - file: 06_advanced/03_pysam_api.ipynb
+          title: PySAM with API (API Key Required)
+        - file: 06_advanced/04_nsrdb_distributed_api.ipynb
+          title: NSRDB Distributed (API Key Required)
+        - file: 06_advanced/05_pvgis_distributed.ipynb
+          title: PVGIS Distributed
+    - title: 06 - Workshop Demos
+      children:
+        - file: 10_workshop_demos/01_astm_live_demo.ipynb
+          title: ASTM Live Demo
+        - file: 10_workshop_demos/02_duramat_live_demo.ipynb
+          title: DuraMAT Live Demo (HPC)
+    - title: Tools
+      children:
+        - file: tools/Tools - Edge Seal Oxygen Ingress.ipynb
+          title: Edge Seal Oxygen Ingress
+        - file: tools/Tools - Degradation.ipynb
+          title: Degradation
+        - file: tools/Tools - Module Standoff for IEC TS 63126.ipynb
+          title: Module Standoff for IEC TS 63126 (HPC)
+site:
+  options:
+    logo: ../docs/source/_static/logo-vectors/PVdeg-Logo-Horiz-Color.svg
+    folders: true
+  template: book-theme

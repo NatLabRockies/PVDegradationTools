@@ -29,7 +29,7 @@ def collection_probability(x, thickness, s, diffusion_length, d):
         Minority carrier diffusion length [cm].
 
     d : numeric
-        Minority carrier diffusivity [cm^2/Vs].
+        Minority carrier diffusivity [cm²/Vs].
 
     Returns
     -------
@@ -82,13 +82,13 @@ def calculate_jsc_from_tau_cp(
         Wafer thickness [um].
 
     d_base : numeric
-        Minority carrier diffusivity [cm^2/Vs].
+        Minority carrier diffusivity [cm²/Vs].
 
     s_rear : numeric
         Rear surface recombination velocity [cm/s].
 
     generation : array-like
-        array of generation current G(z), e.g. from PVlighthouse OPAL2 [cm^3/s] [1]_.
+        array of generation current G(z), e.g. from PVlighthouse OPAL2 [cm³/s] [1]_.
 
     depth : array-like
         array of wafer depth 0-z [um].
@@ -100,7 +100,7 @@ def calculate_jsc_from_tau_cp(
         Minority carrier diffusion length of the emitter [um].
 
     d_emitter : numeric, default 5
-        Minority carrier diffusivity in the emitter [cm^2/s].
+        Minority carrier diffusivity in the emitter [cm²/s].
 
     s_emitter : numeric, default 1e4
         Front surface recombination velocity [cm/s].
@@ -113,7 +113,7 @@ def calculate_jsc_from_tau_cp(
     Returns
     -------
     jsc : numeric
-        Short circuit current of the solar cell [mA/cm^2].
+        Short circuit current of the solar cell [mA/cm²].
 
     Notes
     -----
@@ -229,7 +229,7 @@ def calculate_jsc_from_tau_iqe(
         Wafer thickness [um].
 
     d_base : numeric
-        Minority carrier diffusivity [cm^2/Vs].
+        Minority carrier diffusivity [cm²/Vs].
 
     s_rear : numeric
         Rear surface recombination velocity [cm/s].
@@ -250,7 +250,7 @@ def calculate_jsc_from_tau_iqe(
         Diffusion length of the emitter [um].
 
     d_emitter : numeric, default 4
-        Minority carrier diffusivity in the emitter [cm^2/s].
+        Minority carrier diffusivity in the emitter [cm²/s].
 
     s_emitter : numeric, default 4.86e5
         Front surface recombination velocity [cm/s].
@@ -263,7 +263,7 @@ def calculate_jsc_from_tau_iqe(
     Returns
     -------
     jsc : numeric
-        Short circuit current of the solar cell [mA/cm^2]
+        Short circuit current of the solar cell [mA/cm²]
 
     Notes
     -----
@@ -331,7 +331,7 @@ def generation_current(generation, depth):
     Parameters
     ----------
     generation : array-like
-        array of generation current G(z), e.g. from PVlighthouse OPAL2 [cm^3/s] [1]_.
+        array of generation current G(z), e.g. from PVlighthouse OPAL2 [cm³/s] [1]_.
 
     depth : array-like
         array of wafer depth 0-z [um].
@@ -339,7 +339,7 @@ def generation_current(generation, depth):
     Returns
     -------
     j_gen : numeric
-        generation current [mA/cm^2]
+        generation current [mA/cm²]
     """
     q = elementary_charge
 
