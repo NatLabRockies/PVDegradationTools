@@ -915,7 +915,7 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;wind_factor&quot;</span><span class="p">:</span> <span class="mf">0.33</span><span class="p">}</span>
 
-<span class="n">simple_scenario</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">fatigue</span><span class="o">.</span><span class="n">solder_fatigue</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
+<span class="n">simple_scenario</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">fatigue</span><span class="o">.</span><span class="n">solder_fatigue</span><span class="p">,</span> <span class="n">func_kwarg</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -934,7 +934,7 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 
 <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;weather_df&quot;</span><span class="p">:</span> <span class="n">weather</span><span class="p">,</span> <span class="s2">&quot;meta&quot;</span><span class="p">:</span> <span class="n">meta</span><span class="p">}</span>
 
-<span class="n">simple_scenario</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
+<span class="n">simple_scenario</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span> <span class="n">func_kwarg</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="c1"># FIX THIS CASE IN SCENARIO CLASS</span>
 <span class="c1"># (simple_scenario.pipeline[1][&#39;job&#39;])(**simple_scenario.pipeline[1][&#39;params&#39;])</span>

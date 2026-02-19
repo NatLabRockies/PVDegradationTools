@@ -45,16 +45,16 @@ copy
 [32m     10[39m [43m)[49m
 [32m     12[39m copy
 
-[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/scenario.py:731[39m, in [36mScenario.load_json[39m[34m(cls, file_path, email, api_key)[39m
-[32m    723[39m [38;5;129m@classmethod[39m
-[32m    724[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mload_json[39m(
-[32m    725[39m     [38;5;28mcls[39m,
-[32m   (...)[39m[32m    728[39m     api_key: Optional[[38;5;28mstr[39m] = [38;5;28;01mNone[39;00m,
-[32m    729[39m ):
-[32m    730[39m [38;5;250m    [39m[33;03m"""Import scenario dictionaries from existing 'scenario.json' file."""[39;00m
-[32m--> [39m[32m731[39m     [38;5;28;01mwith[39;00m [38;5;28;43mopen[39;49m[43m([49m[43mfile_path[49m[43m,[49m[43m [49m[33;43m"[39;49m[33;43mr[39;49m[33;43m"[39;49m[43m)[49m [38;5;28;01mas[39;00m f:
-[32m    732[39m         data = json.load(f)
-[32m    733[39m     name = data[[33m"[39m[33mname[39m[33m"[39m]
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pvdeg/scenario.py:668[39m, in [36mScenario.load_json[39m[34m(cls, file_path, email, api_key)[39m
+[32m    660[39m [38;5;129m@classmethod[39m
+[32m    661[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mload_json[39m(
+[32m    662[39m     [38;5;28mcls[39m,
+[32m   (...)[39m[32m    665[39m     api_key: Optional[[38;5;28mstr[39m] = [38;5;28;01mNone[39;00m,
+[32m    666[39m ):
+[32m    667[39m [38;5;250m    [39m[33;03m"""Import scenario dictionaries from existing 'scenario.json' file."""[39;00m
+[32m--> [39m[32m668[39m     [38;5;28;01mwith[39;00m [38;5;28;43mopen[39;49m[43m([49m[43mfile_path[49m[43m,[49m[43m [49m[33;43m"[39;49m[33;43mr[39;49m[33;43m"[39;49m[43m)[49m [38;5;28;01mas[39;00m f:
+[32m    669[39m         data = json.load(f)
+[32m    670[39m     name = data[[33m"[39m[33mname[39m[33m"[39m]
 
 [31mFileNotFoundError[39m: [Errno 2] No such file or directory: '/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/tutorials/data/temperature_and_degradation.json'
 
