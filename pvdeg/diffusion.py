@@ -6,6 +6,8 @@ import pandas as pd
 from pvdeg import DATA_DIR
 import numpy as np
 
+R_GAS = 0.0083144626  # [kJ/mol-K]
+
 
 def esdiffusion(
     temperature,
@@ -156,28 +158,28 @@ def esdiffusion(
     if Dos is None:
         Dos = _get_value(esp, "Do")
     if Eads is None:
-        Eads = _get_value(esp, "Ead") / 0.0083144626
+        Eads = _get_value(esp, "Ead") / R_GAS
     else:
-        Eads = Eads / 0.0083144626
+        Eads = Eads / R_GAS
     if Sos is None:
         Sos = _get_value(esp, "So") * press
     if Eass is None:
-        Eass = _get_value(esp, "Eas") / 0.0083144626
+        Eass = _get_value(esp, "Eas") / R_GAS
     else:
-        Eass = Eass / 0.0083144626
+        Eass = Eass / R_GAS
     # These are the encapsulant oxygen permeaiton parameters
     if Doe is None:
         Doe = _get_value(encp, "Do")
     if Eade is None:
-        Eade = _get_value(encp, "Ead") / 0.0083144626
+        Eade = _get_value(encp, "Ead") / R_GAS
     else:
-        Eade = Eade / 0.0083144626
+        Eade = Eade / R_GAS
     if Soe is None:
         Soe = _get_value(encp, "So") * press
     if Ease is None:
-        Ease = _get_value(encp, "Eas") / 0.0083144626
+        Ease = _get_value(encp, "Eas") / R_GAS
     else:
-        Ease = Ease / 0.0083144626
+        Ease = Ease / R_GAS
 
     so = Sos / Soe
     eas = Eass - Ease

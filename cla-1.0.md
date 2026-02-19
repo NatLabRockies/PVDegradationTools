@@ -1,8 +1,8 @@
 The Contributors License Agreement
 ==========================================
 
-Version 1.0
------------
+Version 1.01
+------------
 I agree to contribute to pvdeg.
 I agree to the following terms and conditions for my contributions:
 First, I agree that I am licensing the copyright to my contributions
@@ -11,7 +11,7 @@ Second, I agree that, in order to conform to any future open source
 software license(s) under which pvdeg  may be provided, the terms of
 my copyright license may be modified without any notice to me and
 without my consent.
-Third, I hereby grant to Alliance for Sustainable Energy, LLC,
+Third, I hereby grant to Alliance for Energy Innovation, LLC,
 to any successor manager and distributor of pvdeg  appointed by
 the U.S. Department of Energy, and to all recipients of
 a version of pvdeg that includes my contributions, a non-exclusive,

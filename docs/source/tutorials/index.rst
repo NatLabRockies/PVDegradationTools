@@ -12,7 +12,7 @@ Jupyter Book (Recommended)
 Interactive tutorials with live execution: `PVDeg Jupyter Book <https://nrel.github.io/PVDegradationTools/intro.html>`_
 
 - Click the 🚀 rocket icon to launch notebooks in `Google Colab <https://colab.research.google.com/>`_
-- **Development Preview:** See latest changes at `dev-preview <https://nrel.github.io/PVDegradationTools/dev-preview/intro.html>`_
+- **Development Preview:** See latest changes at `dev-preview <https://natlabrockies.github.io/PVDegradationTools/dev-preview/intro.html>`_
 
 Binder
 ------
@@ -54,7 +54,7 @@ Local Installation
 NREL HPC (Kestrel)
 ------------------
 
-Running notebooks on Kestrel is documented on the `NREL HPC Documentation <https://nrel.github.io/HPC/Documentation/Development/Jupyter/>`_.
+Running notebooks on Kestrel is documented on the `NREL HPC Documentation <https://natlabrockies.github.io/HPC/Documentation/Development/Jupyter/>`_.
 
 **Important:** Register a custom iPykernel before running notebooks on Kestrel:
 
