@@ -160,7 +160,7 @@ def test_arrhenius_basic():
     # Basic test with only temperature dependence
     df = pd.DataFrame(
         {
-            "temp": [25, 30, 35],
+            "temperature": [25, 30, 35],
             "relative_humidity": [40, 50, 60],
             "temp_air": [20, 25, 30],
             "temp_module": [25, 30, 35],
@@ -175,7 +175,7 @@ def test_arrhenius_with_humidity():
     # Test with humidity dependence
     df = pd.DataFrame(
         {
-            "temp": [25, 30, 35],
+            "temperature": [25, 30, 35],
             "relative_humidity": [40, 50, 60],
             "temp_air": [20, 25, 30],
             "temp_module": [25, 30, 35],
@@ -190,7 +190,7 @@ def test_arrhenius_with_irradiance():
     # Test with irradiance dependence
     df = pd.DataFrame(
         {
-            "temp": [25, 30, 35],
+            "temperature": [25, 30, 35],
             "relative_humidity": [40, 50, 60],
             "temp_air": [20, 25, 30],
             "temp_module": [25, 30, 35],
@@ -205,7 +205,7 @@ def test_arrhenius_all_dependence():
     # Test with all dependencies
     df = pd.DataFrame(
         {
-            "temp": [25, 30, 35],
+            "temperature": [25, 30, 35],
             "relative_humidity": [40, 50, 60],
             "temp_air": [20, 25, 30],
             "temp_module": [25, 30, 35],
@@ -220,7 +220,7 @@ def test_arrhenius_no_dependence():
     # Test with no dependence (Ea=0, n=0, p=0)
     df = pd.DataFrame(
         {
-            "temp": [25, 30, 35],
+            "temperature": [25, 30, 35],
             "relative_humidity": [40, 50, 60],
             "temp_air": [20, 25, 30],
             "temp_module": [25, 30, 35],
@@ -235,7 +235,7 @@ def test_arrhenius_action_spectra_no_dependence():
     # Test with no dependence (Ea=0, n=0, p=0)
     df = pd.DataFrame(
         {
-            "temp": [25, 30, 35],
+            "temperature": [25, 30, 35],
             "relative_humidity": [40, 50, 60],
             "temp_air": [20, 25, 30],
             "temp_module": [25, 30, 35],

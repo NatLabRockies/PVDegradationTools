@@ -1,0 +1,49 @@
+name: Update CITATION.cff
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  update-citation:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Extract version from tag
+        id: get_version
+        run: |
+          TAG=${GITHUB_REF#refs/tags/v}
+          echo "version=$TAG" >> $GITHUB_OUTPUT
+          echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+
+      - name: Update CITATION.cff
+        run: |
+          VERSION="${{ steps.get_version.outputs.version }}"
+          DATE="${{ steps.get_version.outputs.date }}"
+
+          # Update version and date-released fields
+          sed -i "s/^version: .*/version: $VERSION/" CITATION.cff
+          sed -i "s/^date-released: .*/date-released: $DATE/" CITATION.cff
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet CITATION.cff; then
+            echo "No changes to CITATION.cff"
+          else
+            git add CITATION.cff
+            git commit -m "chore: update CITATION.cff to version ${{ steps.get_version.outputs.version }}"
+            git push origin HEAD:development
+          fi

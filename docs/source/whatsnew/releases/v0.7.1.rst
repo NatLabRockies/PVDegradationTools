@@ -1,0 +1,38 @@
+v0.7.1 (2026-02-06)
+===================
+
+Enhancements
+------------
+- Add module-level constant R_GAS = 0.0083144626 in :py:mod:`pvdeg.diffusion` to avoid
+  magic numbers in code. (:pull:`313`)
+
+
+Documentation
+-------------
+- Update references to "NREL" and "National Renewable Laboratory" in text and URLs
+  with the new name National Laboratory of the Rockies (NatLabRockies or NLR).
+  Other associated names of government bodies and contractors have also been
+  updated as required. This includes an update to the CLA and its checksum (:pull:`315`).
+
+
+Deprecations
+-------------
+
+
+Bug Fixes
+---------
+- Fixed compatibility issues with pandas 3.0.0 and pvlib 0.14.0, including DataFrame
+  dtype changes and deprecated function calls. (:pull:`314`)
+
+
+Dependencies
+------------
+- Bump aiohttp from 3.12.14 to 3.13.3 (:pull:`311`)
+
+
+Contributors
+------------
+- Rajiv Daxini (:ghuser:`rdaxini`)
+- Martin Springer (:ghuser:`martin-springer`)
+- Silvana Ovaitt (:ghuser:`shirubana`)
+

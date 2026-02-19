@@ -19,3 +19,5 @@ exclude =
     .venv
     build
     tutorials_and_tools/tutorials_and_tools/*.py
+    tutorials/**/scripts/*.py
+    tools/**/scripts/*.py
