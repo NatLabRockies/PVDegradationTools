@@ -6,8 +6,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pvdeg"
 description = "Pvdeg is a python library that supports the calculation of degradation related parameters for photovoltaic (PV) modules."
-authors = [{name = "Pvdeg Python Developers", email = "Michael.Kempe@nrel.gov"}]
-maintainers = [{email = "Silvana.Ovaitt@nrel.gov"}]
+authors = [{name = "Pvdeg Python Developers", email = "Michael.Kempe@nlr.gov"}]
+maintainers = [{email = "Silvana.Ovaitt@nlr.gov"}]
 license = {text = "BSD-3"}
 readme = "README.md"
 requires-python = ">=3.10.0"
@@ -32,7 +32,7 @@ dependencies = [
     "numpy>=1.19.3",
     "pvlib>=0.12.0",
     "scipy>1.6.0",
-    "NREL-rex",
+    "NLR-rex",
     "cartopy",
     "dask[dataframe]",
     "dask-jobqueue",
@@ -93,10 +93,10 @@ all = [
 console_scripts = "pvdeg.cli:cli"
 
 [project.urls]
-Homepage = "https://github.com/NREL/PVDegradationTools"
-"Bug Tracker" = "https://github.com/NREL/PVDegradationTools/issues"
+Homepage = "https://github.com/NatLabRockies/PVDegradationTools"
+"Bug Tracker" = "https://github.com/NatLabRockies/PVDegradationTools/issues"
 Documentation = "https://pvdegradationtools.readthedocs.io/"
-"Source Code" = "https://github.com/NREL/PVDegradationTools"
+"Source Code" = "https://github.com/NatLabRockies/PVDegradationTools"
 
 [tool.setuptools.packages.find]
 include = ["pvdeg"]
