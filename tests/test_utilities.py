@@ -230,9 +230,9 @@ def test_add_material(tmp_path):
 
 
 # this only works because we are not running on kestrel
-def test_nlr_kestrel_check_bad():
+def test_nrel_kestrel_check_bad():
     with pytest.raises(ConnectionError):
-        pvdeg.utilities.nlr_kestrel_check()
+        pvdeg.utilities.nrel_kestrel_check()
 
 
 # NEW MATERIAL UTIL FUNCTIONS

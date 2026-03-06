@@ -112,8 +112,8 @@ git push origin feature/my-feature
 
 - 📖 [Full Contributing Guide](https://pvdegradationtools.readthedocs.io/en/latest/user_guide/contributing.html) - Comprehensive documentation
 - 📦 [Installation Guide](https://pvdegradationtools.readthedocs.io/en/latest/user_guide/installation.html) - Detailed setup instructions
-- 🐛 [GitHub Issues](https://github.com/NatLabRockies/PVDegradationTools/issues) - Report bugs or request features
-- 💬 [GitHub Discussions](https://github.com/NatLabRockies/PVDegradationTools/discussions) - Ask questions
+- 🐛 [GitHub Issues](https://github.com/NREL/PVDegradationTools/issues) - Report bugs or request features
+- 💬 [GitHub Discussions](https://github.com/NREL/PVDegradationTools/discussions) - Ask questions
 
 ## Contributor License Agreement
 

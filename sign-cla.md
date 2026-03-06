@@ -84,8 +84,8 @@ Sending the Email
 -----------------
 
 Send an email to pvdeg's official Open Sourceror
-at [silvana.ovaitt@nlr.gov](mailto:silvana.ovaitt@nlr.gov),
-cc-ing [michael.kempe@nlr.gov](mailto:michael.kempe@nlr.gov),
+at [silvana.ovaitt@nrel.gov](mailto:silvana.ovaitt@nrel.gov),
+cc-ing [michael.kempe@nrel.gov](mailto:michael.kempe@nrel.gov),
 with the subject "CLA pvdeg"
 and the following body:
 

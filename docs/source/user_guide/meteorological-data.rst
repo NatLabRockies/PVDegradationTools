@@ -12,8 +12,8 @@ The methodology for these datasets varies but both are gridded geospatial datase
 .. _NSRDB:
 NSRDB 
 ------
-The NSRDB is produced by NLR and combines multiple datasets but we are most concerned with `Physical Solar Model 3 (PSM3) <https://developer.nlr.gov/docs/solar/nsrdb/psm3-2-2-download/>`_. This data was generated using satellite data from multiple channels to derive cloud 
-and aerosol properties, then fed into a radiative transfer model. Learn more about the NSRDB `here <https://nsrdb.nlr.gov/about/what-is-the-nsrdb#:~:text=The%20PSM%20is%20a%20two-step%20physical%20modeling%20process%2C,%28Xie%20et%20al.%2C%202016%29%2C%20in%20the%20subsequent%20step.>`_. 
+The NSRDB is produced by NREL and combines multiple datasets but we are most concerned with `Physical Solar Model 3 (PSM3) <https://developer.nrel.gov/docs/solar/nsrdb/psm3-2-2-download/>`_. This data was generated using satellite data from multiple channels to derive cloud 
+and aerosol properties, then fed into a radiative transfer model. Learn more about the NSRDB `here <https://nsrdb.nrel.gov/about/what-is-the-nsrdb#:~:text=The%20PSM%20is%20a%20two-step%20physical%20modeling%20process%2C,%28Xie%20et%20al.%2C%202016%29%2C%20in%20the%20subsequent%20step.>`_. 
 
 The NSRDB is free to use but requires an api-key and email. See :ref:`NSRDB_API_Key` for more information. 
 For our purposes, the api is limited to 1000 requests per day, although you can request a batch download via email with a singificantly higher rate limit (not recommended for PVDeg).
@@ -23,14 +23,14 @@ Flowchart showing the dataflow from satellite to solar radiation measurement.
 .. image::  meteorological-data-details/data_flow_chart.png
     :alt: dataflow from satellite to solar radiation measurement, image missing
 
-`<https://nsrdb.nlr.gov/about/what-is-the-nsrdb>`_
+`<https://nsrdb.nrel.gov/about/what-is-the-nsrdb>`_
 
 NSRDB data are seperated by satellite/model source. Each dataset is shown below, much of the PVDeg project uses the *Americas* data.
 
 .. image::  meteorological-data-details/nsrdb_global_coverage.jpg
     :alt: NSRDB data sources, image missing
 
-`<https://nsrdb.nlr.gov/about/what-is-the-nsrdb>`_
+`<https://nsrdb.nrel.gov/about/what-is-the-nsrdb>`_
 
 
 .. _PVGIS:

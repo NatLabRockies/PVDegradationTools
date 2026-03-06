@@ -65,12 +65,12 @@ def test_get():
     """Test with (lat,lon) and gid options."""
     # TODO: Test with AWS
 
-    # #Test with lat, lon on NLR HPC
+    # #Test with lat, lon on NREL HPC
     # weather_db = 'NSRDB'
-    # weather_id = (39.741931, -105.169891) #NLR
+    # weather_id = (39.741931, -105.169891) #NREL
     # weather_arg = {'satellite' : 'GOES',
     #                'names' : 2021,
-    #                'NLR_HPC' : True,
+    #                'NREL_HPC' : True,
     #                'attributes' : ['air_temperature', 'wind_speed', 'dhi',
     #                                'ghi', 'dni','relative_humidity']}
 
@@ -80,7 +80,7 @@ def test_get():
     # assert isinstance(weather_df, pd.DataFrame)
     # assert len(weather_df) != 0
 
-    # #Test with gid on NLR HPC
+    # #Test with gid on NREL HPC
     # weather_id = 1933572
     # weather_df, meta = pvdeg.weather.load(weather_db, weather_id, **weather_arg)
     pass
@@ -316,7 +316,7 @@ def test_get_nsrdb_fnames_tmy(monkeypatch):
     files, hsds = pvdeg.weather.get_NSRDB_fnames(
         satellite="Americas",
         names="TMY",
-        NLR_HPC=True,
+        NREL_HPC=True,
     )
 
     # HPC path -> h5py (not HSDS)
@@ -332,10 +332,10 @@ def test_get_NSRDB_ds_has_kestrel_nsrdb_fnames_tmy(monkeypatch):
     """For TMY, get_NSRDB should store only the last element of the sorted list."""
 
     # Fake get_NSRDB_fnames to return UNSORTED list + hsds flag
-    def fake_get_NSRDB_fnames(satellite, names, NLR_HPC):
+    def fake_get_NSRDB_fnames(satellite, names, NREL_HPC):
         assert satellite == "Americas"
         assert names == "TMY"
-        assert NLR_HPC is True
+        assert NREL_HPC is True
         return SORTED_TMY_DIR, False
 
     # Fake ini_h5_geospatial to return an empty dataset/meta (no attrs set here)
@@ -353,7 +353,7 @@ def test_get_NSRDB_ds_has_kestrel_nsrdb_fnames_tmy(monkeypatch):
     ds, meta = pvdeg.weather.get_NSRDB(
         satellite="Americas",
         names="TMY",
-        NLR_HPC=True,
+        NREL_HPC=True,
         geospatial=True,
     )
 
@@ -366,10 +366,10 @@ def test_get_NSRDB_ds_has_kestrel_nsrdb_fnames_tmy(monkeypatch):
 def test_get_NSRDB_ds_has_kestrel_nsrdb_fnames_year(monkeypatch):
     """For a specific year, get_NSRDB should store the full sorted list."""
 
-    def fake_get_NSRDB_fnames(satellite, names, NLR_HPC):
+    def fake_get_NSRDB_fnames(satellite, names, NREL_HPC):
         assert satellite == "Americas"
         assert names == 2024
-        assert NLR_HPC is False
+        assert NREL_HPC is False
         return SORTED_TMY_DIR, True
 
     def fake_ini_h5_geospatial(nsrdb_fnames):
@@ -385,7 +385,7 @@ def test_get_NSRDB_ds_has_kestrel_nsrdb_fnames_year(monkeypatch):
     ds, meta = pvdeg.weather.get_NSRDB(
         satellite="Americas",
         names=2024,
-        NLR_HPC=False,
+        NREL_HPC=False,
         geospatial=True,
     )
 

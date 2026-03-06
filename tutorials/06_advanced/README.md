@@ -21,7 +21,7 @@ The following tutorials require API access to external data sources:
 ⚠️ **Note**: Several tutorials require API keys:
 
 - **NSRDB API Key**: Required for `03_pysam_api.ipynb` and `04_nsrdb_distributed_api.ipynb`
-  - Get your free API key at: https://developer.nlr.gov/signup/
+  - Get your free API key at: https://developer.nrel.gov/signup/
   - Rate limits apply for free tier
 
 ## Topics Covered

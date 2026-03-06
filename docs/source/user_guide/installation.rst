@@ -5,7 +5,7 @@ Installation
 
 PVDeg releases may be installed using pip. Compatible with Python 3.10 and above.
 
-For a quick start, see the **Installation** section in our `README.md <https://github.com/NatLabRockies/PVDegradationTools/blob/main/README.md#installation>`_.
+For a quick start, see the **Installation** section in our `README.md <https://github.com/NREL/PVDegradationTools/blob/main/README.md#installation>`_.
 
 Base Install
 ------------
@@ -20,7 +20,7 @@ This installs PVDeg with all required dependencies for basic degradation modelin
 
 * Core scientific computing libraries (numpy, pandas, scipy)
 * PV modeling with pvlib
-* Weather data access (NLR-rex)
+* Weather data access (NREL-rex)
 * Geospatial tools (cartopy, geopy)
 * Jupyter notebook support (jupyterlab, notebook)
 * Pre-commit hooks for development
@@ -103,7 +103,7 @@ While PVDeg is installed via pip, you can use conda to manage your Python enviro
        python -m ipykernel install --user --name=pvdeg
 
    This allows you to select the ``pvdeg`` kernel when running Jupyter notebooks,
-   especially important on HPC systems like NLR's Kestrel.
+   especially important on HPC systems like NREL's Kestrel.
 
 Developer Installation
 ----------------------

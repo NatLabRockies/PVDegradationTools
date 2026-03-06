@@ -28,7 +28,7 @@ WEATHER_SINGLE_LOC = GEO_WEATHER.isel(gid=0).to_dataframe()
 META_SINGLE_LOC = GEO_META.iloc[0].to_dict()
 
 
-def test_pysam_missing_nlr_pysam_deps(monkeypatch, caplog):
+def test_pysam_missing_nrel_pysam_deps(monkeypatch, caplog):
     real_import = builtins.__import__
 
     def fake_import(name, *args, **kwargs):

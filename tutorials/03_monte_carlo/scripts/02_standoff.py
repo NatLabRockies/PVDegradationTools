@@ -1,21 +1,14 @@
-#!/usr/bin/env python
-# coding: utf-8
-
+# %% [markdown]
 # # Standoff Monte Carlo
-# 
+#
 # See Monte Carlo - Arrhenius Degredation for a more in depth guide. Steps will be shortened for brevity.
 # This journal applies a Monte Carlo to the Standoff Calculation
 
-# In[1]:
-
-
+# %%
 # if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:
-# !pip install pvdeg
+# # !pip install pvdeg
 
-
-# In[2]:
-
-
+# %%
 import pvlib
 import numpy as np
 import pandas as pd
@@ -23,10 +16,7 @@ import json
 import pvdeg
 import matplotlib.pyplot as plt
 
-
-# In[3]:
-
-
+# %%
 # This information helps with debugging and getting support :)
 import sys
 import platform
@@ -37,25 +27,23 @@ print("Pandas version ", pd.__version__)
 print("Pvlib version ", pvlib.__version__)
 print("Pvdeg version ", pvdeg.__version__)
 
-
+# %% [markdown]
 # # Simple Standoff Calculation
-# 
+#
 # This is copied from another tutorial called `4 - Standards.ipynb`, please visit this page for a more in depth explanation of the process for a single standoff calculation.
-# 
+#
 # <div class="alert alert-block alert-info">
-# <b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a> so register now.)
+# <b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a> so register now.)
 # </div>
 
-# In[4]:
-
-
+# %%
 # Load weather data from locally saved files to avoid API rate limits
 WEATHER = pd.read_csv("../data/psm4_nyc.csv", index_col=0, parse_dates=True)
 with open("../data/meta_nyc.json", "r") as f:
     META = json.load(f)
 
 # To use the NSRDB API instead, uncomment the lines below and add your API key
-# Get your API key at: https://developer.nlr.gov/signup/
+# Get your API key at: https://developer.nrel.gov/signup/
 # weather_db = "PSM4"
 # weather_id = (40.633365593159226, -73.9945801019899)  # Manhattan, NYC
 # weather_arg = {
@@ -65,10 +53,7 @@ with open("../data/meta_nyc.json", "r") as f:
 # }
 # WEATHER, META = pvdeg.weather.get(weather_db, weather_id, **weather_arg)
 
-
-# In[5]:
-
-
+# %%
 # simple standoff calculation
 height1 = pvdeg.standards.standoff(weather_df=WEATHER, meta=META)
 
@@ -87,16 +72,14 @@ height2 = pvdeg.standards.standoff(
 print(height1)
 print(height2)
 
-
+# %% [markdown]
 # # Defining Correlation Coefficients, Mean and Standard Deviation For Monte Carlo Simulation
-# 
+#
 # We will leave the list of correlations blank because our variables are not correlated. For a correlated use case visit the `Monte Carlo - Arrhenius.ipynb` tutorial.
-# 
+#
 # Mean and standard deviation must always be populated if being used to create a dataset. However, you can feed your own correlated or uncorrelated data into the simulate function but column names must be consistent.
 
-# In[6]:
-
-
+# %%
 # These numbers may not make sense in the context of the problem but work for demonstraiting the process
 stats = {"X_0": {"mean": 5, "stdev": 3}, "wind_factor": {"mean": 0.33, "stdev": 0.5}}
 
@@ -104,20 +87,15 @@ corr_coeff = []
 
 samples = pvdeg.montecarlo.generateCorrelatedSamples(corr_coeff, stats, 500)
 
-
-# In[7]:
-
-
+# %%
 print(samples)
 
-
+# %% [markdown]
 # # Standoff Monte Carlo Inputs
-# 
+#
 # When using the pvdeg.montecarlo.simulate() function on a target function all of the target function's required arguments must still be given. Our non-changing arguments will be stored in a dictionary. The randomized monte carlo input data will also be passed to the target function via the simulate function. All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,
 
-# In[8]:
-
-
+# %%
 # defining arguments to pass to the target function, standoff() in this case
 function_kwargs = {
     "weather_df": WEATHER,
@@ -143,33 +121,26 @@ results = pvdeg.montecarlo.simulate(
     **function_kwargs,
 )
 
-
+# %% [markdown]
 # # Dealing With Series
 # Notice how our results are contained in a pandas series instead of a dataframe.
-# 
+#
 # This means we have to do an extra step to view our results. Run the block below to confirm that our results are indeed contained in a series. And convert them into a simpler dataframe.
 
-# In[9]:
-
-
+# %%
 print(type(results))
 
 # Convert from pandas Series to pandas DataFrame
 results_df = pd.concat(results.tolist()).reset_index(drop=True)
 
-
-# In[10]:
-
-
+# %%
 print(results_df)
 
-
+# %% [markdown]
 # # Viewing Our Data
 # Let's plot the results using a histogram
 
-# In[11]:
-
-
+# %%
 bin_edges = np.arange(results_df["x"].min(), results_df["x"].max() + 0.1, 0.05)
 plt.figure(figsize=(8, 6))
 plt.hist(
@@ -188,4 +159,3 @@ plt.axvline(np.median(results_df["x"]), linestyle="--", label="median")
 plt.legend()
 plt.grid(True)
 plt.show()
-

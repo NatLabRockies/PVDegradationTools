@@ -181,7 +181,7 @@ class GeospatialScenario(pvdeg.Scenario):
         weather_arg = {
             "satellite": satellite,
             "names": year,
-            "NLR_HPC": True,
+            "NREL_HPC": True,
             "attributes": nsrdb_attributes,
         }
 
@@ -794,7 +794,7 @@ class GeospatialScenario(pvdeg.Scenario):
         weather_arg = {
             "satellite": "Americas",
             "names": year,
-            "NLR_HPC": True,
+            "NREL_HPC": True,
             # 'attributes': ['air_temperature', 'wind_speed', 'dhi', 'ghi', 'dni',
             # 'relative_humidity']}
             "attributes": [],  # does having do atributes break anything, should we just
