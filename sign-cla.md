@@ -64,7 +64,7 @@ You can confirm the MD5 checksum of the CLA by running the md5 program over
 
 ```
 md5 cla-1.0.md
-MD5 (cla-1.0.md) = 2aa6e2788a0ff4d45cabfc839290e1ca
+MD5 (cla-1.0.md) = 93888c3304015c6b99de6dac7252a812
 ```
 
 or on Windows
