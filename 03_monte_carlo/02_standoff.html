@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -597,11 +597,11 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.11.0-1018-azure
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.14.0-1017-azure
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
-Pandas version  3.0.0
+Pandas version  2.3.3
 Pvlib version  0.15.0
-Pvdeg version  0.1.dev1+g8634a0c38
+Pvdeg version  0.1.dev1+g09db35703
 </pre></div>
 </div>
 </div>
@@ -611,7 +611,7 @@ Pvdeg version  0.1.dev1+g8634a0c38
 <h1>Simple Standoff Calculation<a class="headerlink" href="#simple-standoff-calculation" title="Link to this heading">#</a></h1>
 <p>This is copied from another tutorial called <code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">-</span> <span class="pre">Standards.ipynb</span></code>, please visit this page for a more in depth explanation of the process for a single standoff calculation.</p>
 <div class="alert alert-block alert-info">
-<b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a> so register now.)
+<b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a> so register now.)
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load weather data from locally saved files to avoid API rate limits</span>
@@ -620,7 +620,7 @@ Pvdeg version  0.1.dev1+g8634a0c38
     <span class="n">META</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="c1"># To use the NSRDB API instead, uncomment the lines below and add your API key</span>
-<span class="c1"># Get your API key at: https://developer.nrel.gov/signup/</span>
+<span class="c1"># Get your API key at: https://developer.nlr.gov/signup/</span>
 <span class="c1"># weather_db = &quot;PSM4&quot;</span>
 <span class="c1"># weather_id = (40.633365593159226, -73.9945801019899)  # Manhattan, NYC</span>
 <span class="c1"># weather_arg = {</span>
@@ -658,7 +658,9 @@ Pvdeg version  0.1.dev1+g8634a0c38
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
-The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
           x      T98_0    T98_inf
 0  0.522443  71.778148  48.754265
           x      T98_0    T98_inf
@@ -692,17 +694,17 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
-0    10.028633     0.193252
-1     0.371756    -0.266383
-2    10.676916     0.747428
-3     3.183079     0.324179
-4     1.376820     0.261396
+0     2.232726     1.298832
+1     5.533044    -0.581585
+2     6.127831     0.056119
+3     2.504179    -0.117855
+4    -0.550226     0.552665
 ..         ...          ...
-495   7.424142     0.489705
-496   5.471571     0.406244
-497   1.803082    -0.586344
-498   6.944351    -0.208396
-499   5.365525     0.696882
+495  12.132950     0.180592
+496   3.226716    -0.348741
+497   7.631582     0.371652
+498   8.494232     0.601314
+499   3.862896     0.168491
 
 [500 rows x 2 columns]
 </pre></div>
@@ -758,7 +760,7 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.Series&#39;&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.series.Series&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -771,17 +773,17 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.511929  71.105757  48.886501
-1    0.079129  74.490847  51.067257
-2    0.000000  64.608897  44.281142
-3    0.000000  69.744832  47.994504
-4    0.025875  70.408160  48.484869
+0    0.000000  53.329408  38.193266
+1    1.501781  75.621170  51.973405
+2    0.632950  72.200005  49.781981
+3    0.435898  73.705422  50.511791
+4    0.069026  67.182412  46.101942
 ..        ...        ...        ...
-495  0.000000  67.982971  46.699614
-496  0.000000  68.826137  47.439702
-497  0.490472  75.633281  51.979945
-498  1.367375  74.159950  50.885032
-499  0.000000  65.199800  44.795912
+495  0.683642  71.217334  48.998299
+496  0.740295  74.821240  51.304221
+497  0.000000  69.222720  47.589925
+498  0.000000  66.354076  45.641534
+499  0.237071  71.325870  49.052042
 
 [500 rows x 3 columns]
 </pre></div>
@@ -816,7 +818,7 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0f0d096fa251935533d8dc6908e86d7ed6fa0ff833425d99e06caa9aa82ee90c.png" src="../_images/0f0d096fa251935533d8dc6908e86d7ed6fa0ff833425d99e06caa9aa82ee90c.png" />
+<img alt="../_images/09ec797705e5f6093450e5e80d26d55bfdd4e37729ed9600c91621f41c89201d.png" src="../_images/09ec797705e5f6093450e5e80d26d55bfdd4e37729ed9600c91621f41c89201d.png" />
 </div>
 </div>
 </section>
