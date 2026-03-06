@@ -564,13 +564,13 @@ document.write(`
 <p><strong>Requirements:</strong></p>
 <ul class="simple">
 <li><p>Internet access</p></li>
-<li><p>NSRDB API key. API keys are free. You can request and obtain an API key in about 5 minutes. To get your own key, visit <a class="reference external" href="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a></p></li>
-<li><p>Step <strong>1.</strong> is for Kestrel HPC users. You will need an account with NLR’s Kestrel computer for this method.</p></li>
+<li><p>NSRDB API key. API keys are free. You can request and obtain an API key in about 5 minutes. To get your own key, visit <a class="reference external" href="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a></p></li>
+<li><p>Step <strong>1.</strong> is for Kestrel HPC users. You will need an account with NREL’s Kestrel computer for this method.</p></li>
 </ul>
 <p><strong>Objectives:</strong></p>
 <p>Using direct access to large scale weather databases, we’re going to estimate the minimum standoff distance for a roof mounted PV system. We’ll do this in 3 ways using both the NSRDB and PVGIS database.</p>
 <ol class="arabic simple">
-<li><p>Single Location, NSRDB via NLR’s high performance computer, Kestrel.</p></li>
+<li><p>Single Location, NSRDB via NREL’s high performance computer, Kestrel.</p></li>
 <li><p>Single Location via NSRDB public API key.</p></li>
 <li><p>Single Location via the PVGIS public database</p></li>
 </ol>
@@ -616,7 +616,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.14.0-1017-azure
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
-pvdeg version  0.1.dev1+g09db35703
+pvdeg version  0.1.dev1+g321beb370
 </pre></div>
 </div>
 </div>
@@ -624,7 +624,7 @@ pvdeg version  0.1.dev1+g09db35703
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="nsrdb-hsds-on-kestrel">
 <h1>1. NSRDB - HSDS on Kestrel<a class="headerlink" href="#nsrdb-hsds-on-kestrel" title="Link to this heading">#</a></h1>
-<p>This method requires a direct connection to NLR’s high performance computer “Kestrel”. If you are not running this journal from Kestrel, skip this section and proceed to section <strong>2.</strong></p>
+<p>This method requires a direct connection to NREL’s high performance computer “Kestrel”. If you are not running this journal from Kestrel, skip this section and proceed to section <strong>2.</strong></p>
 <p>In this step:</p>
 <p>First we select a database. Here, we will use the NSRDB. Since we are modeling a single location, we can pass the <code class="docutils literal notranslate"><span class="pre">weather_id</span></code> as tuple (lat, long). A location gid can be used as well. ‘gid’ is a unique identifier to a geographic location within the NSRDB. We’ll look at how to find gids later on.</p>
 <p>Next, we want to select a satellite, named dataset (year of data), and what weather attributes we want to fetch. For further options, see the documentation for <code class="docutils literal notranslate"><span class="pre">pvdeg.weather.get</span></code></p>
@@ -639,7 +639,7 @@ pvdeg version  0.1.dev1+g09db35703
 <span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="s2">&quot;GOES&quot;</span><span class="p">,</span>
     <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="mi">2021</span><span class="p">,</span>
-    <span class="s2">&quot;NLR_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;NREL_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
     <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&quot;air_temperature&quot;</span><span class="p">,</span>
         <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
@@ -650,7 +650,7 @@ pvdeg version  0.1.dev1+g09db35703
     <span class="p">],</span>
 <span class="p">}</span>
 
-<span class="c1"># Uncomment the following when working on NLR Kestrel</span>
+<span class="c1"># Uncomment the following when working on NREL Kestrel</span>
 
 <span class="c1"># weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)</span>
 
@@ -667,7 +667,7 @@ pvdeg version  0.1.dev1+g09db35703
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="nsrdb-api">
 <h1>2. NSRDB - API<a class="headerlink" href="#nsrdb-api" title="Link to this heading">#</a></h1>
-<p>To access the NLR NSRDB, you will need an API key. Key’s are free, but require you to set up an account. Without an API key, you can use a demonstration API which is severely limited. To set up an account and get your API key, visit <a class="reference external" href="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a></p>
+<p>To access the NREL NSRDB, you will need an API key. Key’s are free, but require you to set up an account. Without an API key, you can use a demonstration API which is severely limited. To set up an account and get your API key, visit <a class="reference external" href="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a></p>
 <p>Key Notes:</p>
 <ul class="simple">
 <li><p>set <code class="docutils literal notranslate"><span class="pre">attributes</span> <span class="pre">=</span> <span class="pre">[]</span></code> to return all possible attributes (weather fields)</p></li>
@@ -691,7 +691,7 @@ pvdeg version  0.1.dev1+g09db35703
 <span class="c1"># Uncomment below to fetch fresh data with your own API key:</span>
 <span class="c1"># API_KEY = &quot;your_api_key_here&quot;</span>
 <span class="c1"># # The example API key here is for demonstation and is rate-limited per IP.</span>
-<span class="c1"># # To get your own API key, visit https://developer.nlr.gov/signup/</span>
+<span class="c1"># # To get your own API key, visit https://developer.nrel.gov/signup/</span>
 <span class="c1"># weather_db = &quot;PSM4&quot;</span>
 <span class="c1"># weather_id = (39.741931, -105.169891)</span>
 <span class="c1"># weather_arg = {</span>
