@@ -47,7 +47,7 @@ def test_Scenario_add(monkeypatch, tmp_path):
     a.restore_credentials(email=EMAIL, api_key=API_KEY)
     a.addLocation(lat_long=(40.63336, -73.99458))
     a.addModule(module_name="test-module")
-    a.addJob(func=(standoff, {"wind_factor": 0.35}))
+    a.addJob(func=(standoff, "encapsulant"))
 
     restored = Scenario.load_json(
         file_path=os.path.join(TEST_DATA_DIR, "test-scenario.json")
@@ -139,7 +139,7 @@ def test_addJob_bad(monkeypatch):
     a = Scenario(name="bad-job")
     monkeypatch.setattr("pvdeg.utilities.new_id", monkeypatch_badjob_new_id_fail)
     with pytest.warns(UserWarning, match="Failed to add job: invalid_job"):
-        a.addJob(func=lambda: None)
+        a.addJob(func=(standoff, "encapsulant"))
 
 
 def test_addModule_string_material_valid():
@@ -367,49 +367,95 @@ def test_add_material_mixed_valid_invalid():
 def test_addJob_tuple_wrong_length():
     s = Scenario(name="tuple-wrong-length")
     # Tuple with only one element
-    with pytest.raises(ValueError, match="Job tuple must have exactly 2 elements"):
+    with pytest.raises(ValueError, match="Job tuple must have 2 or 3 elements"):
         s.addJob(func=(standoff,))
-    # Tuple with three elements
-    with pytest.raises(ValueError, match="Job tuple must have exactly 2 elements"):
-        s.addJob(func=(standoff, {"wind_factor": 0.35}, 123))
+    # Tuple with four elements (too many)
+    with pytest.raises(ValueError, match="Job tuple must have 2 or 3 elements"):
+        s.addJob(func=(standoff, {}, "encapsulant", "extra"))
 
 
-def test_addJob_tuple_noncallable():
-    s = Scenario(name="tuple-noncallable")
+def test_addJob_2tuple_first_not_callable():
+    s = Scenario(name="2tuple-noncallable")
+    # 2-tuple: first element not callable
     with pytest.raises(ValueError, match="First element of job tuple must be callable"):
-        s.addJob(func=(123, {"wind_factor": 0.35}))
+        s.addJob(func=(123, "encapsulant"))
 
 
-def test_addJob_tuple_kwargs_not_dict():
-    s = Scenario(name="tuple-kwargs-not-dict")
-    with pytest.raises(ValueError, match="Second element of job tuple must be a dict"):
+def test_addJob_2tuple_second_not_str():
+    s = Scenario(name="2tuple-second-not-str")
+    # 2-tuple: second element is a dict, not a layer name string
+    with pytest.raises(
+        ValueError, match="Second element of a 2-tuple must be a layer name"
+    ):
+        s.addJob(func=(standoff, {"wind_factor": 0.35}))
+
+
+def test_addJob_2tuple_second_not_str_list():
+    s = Scenario(name="2tuple-second-not-str-list")
+    # 2-tuple: second element is a list, not a layer name string
+    with pytest.raises(
+        ValueError, match="Second element of a 2-tuple must be a layer name"
+    ):
         s.addJob(func=(standoff, [1, 2, 3]))
+
+
+def test_addJob_3tuple_first_not_callable():
+    s = Scenario(name="3tuple-noncallable")
+    with pytest.raises(ValueError, match="First element of job tuple must be callable"):
+        s.addJob(func=(123, {}, "encapsulant"))
+
+
+def test_addJob_3tuple_second_not_dict():
+    s = Scenario(name="3tuple-second-not-dict")
+    with pytest.raises(ValueError, match="Second element of a 3-tuple must be a dict"):
+        s.addJob(func=(standoff, "not_a_dict", "encapsulant"))
+
+
+def test_addJob_3tuple_third_not_str():
+    s = Scenario(name="3tuple-third-not-str")
+    with pytest.raises(
+        ValueError, match="Third element of a 3-tuple must be a layer name"
+    ):
+        s.addJob(func=(standoff, {}, 123))
 
 
 def test_addJob_invalid_job_type():
     s = Scenario(name="invalid-job-type")
-    with pytest.raises(
-        ValueError, match="Each job must be either a callable or a tuple"
-    ):
+    # Non-tuple (e.g. plain int) is not accepted
+    with pytest.raises(ValueError, match="Each job must be a tuple"):
         s.addJob(func=123)
 
 
-def test_addJob_jobs_added():
-    s = Scenario(name="jobs-to-add-norm")
-    # Single function
-    s.addJob(func=standoff)
-    assert any(job["job"] == standoff for job in s.pipeline.values())
-    # Single tuple
-    s2 = Scenario(name="jobs-to-add-norm-tuple")
-    s2.addJob(func=(standoff, {"wind_factor": 0.35}))
-    assert any(
-        job["job"] == standoff and job["params"].get("wind_factor") == 0.35
-        for job in s2.pipeline.values()
+def test_addJob_2tuple_valid():
+    s = Scenario(name="2tuple-valid")
+    s.addJob(func=(standoff, "encapsulant"))
+    jobs = list(s.pipeline.values())
+    assert len(jobs) == 1
+    assert jobs[0]["job"] == standoff
+    assert jobs[0]["params"] == {}
+    assert jobs[0]["material_layer"] == "encapsulant"
+
+
+def test_addJob_3tuple_valid():
+    s = Scenario(name="3tuple-valid")
+    s.addJob(func=(standoff, {"wind_factor": 0.35}, "encapsulant"))
+    jobs = list(s.pipeline.values())
+    assert len(jobs) == 1
+    assert jobs[0]["job"] == standoff
+    assert jobs[0]["params"] == {"wind_factor": 0.35}
+    assert jobs[0]["material_layer"] == "encapsulant"
+
+
+def test_addJob_list_valid():
+    s = Scenario(name="list-valid")
+    s.addJob(
+        func=[
+            (standoff, "encapsulant"),
+            (standoff, {"wind_factor": 0.5}, "backsheet"),
+        ]
     )
-    # List of functions/tuples
-    s3 = Scenario(name="jobs-to-add-norm-list")
-    s3.addJob(func=[standoff, (standoff, {"wind_factor": 0.5})])
-    assert any(
-        job["job"] == standoff and job["params"].get("wind_factor") == 0.5
-        for job in s3.pipeline.values()
-    )
+    jobs = list(s.pipeline.values())
+    assert len(jobs) == 2
+    assert jobs[0]["material_layer"] == "encapsulant"
+    assert jobs[1]["material_layer"] == "backsheet"
+    assert jobs[1]["params"] == {"wind_factor": 0.5}
