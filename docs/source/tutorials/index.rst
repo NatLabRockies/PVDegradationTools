@@ -9,7 +9,7 @@ PVDeg provides comprehensive tutorials organized by topic. Choose your preferred
 Jupyter Book (Recommended)
 ---------------------------
 
-Interactive tutorials with live execution: `PVDeg Jupyter Book <https://nrel.github.io/PVDegradationTools/intro.html>`_
+Interactive tutorials with live execution: `PVDeg Jupyter Book <https://NatLabRockies.github.io/PVDegradationTools/intro.html>`_
 
 - Click the 🚀 rocket icon to launch notebooks in `Google Colab <https://colab.research.google.com/>`_
 - **Development Preview:** See latest changes at `dev-preview <https://natlabrockies.github.io/PVDegradationTools/dev-preview/intro.html>`_
@@ -20,7 +20,7 @@ Binder
 Run tutorials in your browser without installation:
 
 .. image:: https://mybinder.org/badge_logo.svg
-    :target: https://mybinder.org/v2/gh/NREL/PVDegradationTools/main
+    :target: https://mybinder.org/v2/gh/NatLabRockies/PVDegradationTools/main
     :alt: Binder
 
 Local Installation
@@ -32,7 +32,7 @@ Local Installation
 
    .. code-block:: bash
 
-      git clone https://github.com/NREL/PVDegradationTools.git
+      git clone https://github.com/NatLabRockies/PVDegradationTools.git
       cd PVDegradationTools
 
 3. **Start Jupyter:**
@@ -51,10 +51,10 @@ Local Installation
    - ``10_workshop_demos/`` - Workshop demonstrations
    - ``tools/`` - Standalone analysis tools
 
-NREL HPC (Kestrel)
+NLR HPC (Kestrel)
 ------------------
 
-Running notebooks on Kestrel is documented on the `NREL HPC Documentation <https://natlabrockies.github.io/HPC/Documentation/Development/Jupyter/>`_.
+Running notebooks on Kestrel is documented on the `NLR HPC Documentation <https://natlabrockies.github.io/HPC/Documentation/Development/Jupyter/>`_.
 
 **Important:** Register a custom iPykernel before running notebooks on Kestrel:
 

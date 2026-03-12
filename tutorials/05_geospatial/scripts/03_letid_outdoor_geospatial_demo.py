@@ -1,16 +1,23 @@
-# %% [markdown]
+#!/usr/bin/env python
+# coding: utf-8
+
 # # LETID Outdoor Geospatial Demo (HPC)
-#
+# 
 # ![PVDeg Logo](../images/pvdeg_logo.svg)
 
-# %%
+# In[ ]:
+
+
 import matplotlib.pyplot as plt
 import pandas as pd
 import pvdeg
 from pvdeg import DATA_DIR
 import os
 
-# %%
+
+# In[ ]:
+
+
 # This information helps with debugging and getting support :)
 import sys
 import platform
@@ -20,14 +27,19 @@ print("Python version ", sys.version)
 print("Pandas version ", pd.__version__)
 print("pvdeg version ", pvdeg.__version__)
 
-# %% [markdown]
+
 # # Single location example
 
-# %%
+# In[ ]:
+
+
 weather_file = os.path.join(DATA_DIR, "psm3_demo.csv")
 WEATHER, META = pvdeg.weather.read(weather_file, "psm")
 
-# %%
+
+# In[ ]:
+
+
 kwargs = {
     "tau_0": 115,  # us, carrier lifetime in non-degraded states, e.g. LETID/LID states A or C
     "tau_deg": 55,  # us, carrier lifetime in fully-degraded state, e.g. LETID/LID state B
@@ -40,13 +52,18 @@ kwargs = {
     "mechanism_params": "repins",
 }
 
-# %%
+
+# In[ ]:
+
+
 pvdeg.letid.calc_letid_outdoors(weather_df=WEATHER, meta=META, **kwargs)
 
-# %% [markdown]
+
 # # Start distributed compute cluster - DASK
 
-# %%
+# In[ ]:
+
+
 local = {
     "manager": "local",
     "n_workers": 1,
@@ -67,14 +84,17 @@ kestrel = {
 
 pvdeg.geospatial.start_dask(hpc=kestrel)
 
-# %%
+
+# In[ ]:
+
+
 # Get weather data
 weather_db = "NSRDB"
 
 weather_arg = {
     "satellite": "Americas",
     "names": 2022,
-    "NREL_HPC": True,
+    "NLR_HPC": True,
     "attributes": [
         "air_temperature",
         "wind_speed",
@@ -93,13 +113,22 @@ meta_SW_sub, gids_SW_sub = pvdeg.utilities.gid_downsampling(meta_SW, 6)
 
 weather_SW_sub = weather_ds.sel(gid=meta_SW_sub.index)
 
-# %%
+
+# In[ ]:
+
+
 weather_SW_sub
 
-# %%
+
+# In[ ]:
+
+
 meta_df
 
-# %%
+
+# In[ ]:
+
+
 # Define desired analysis
 geo = {
     "func": pvdeg.letid.calc_letid_outdoors,
@@ -118,10 +147,16 @@ geo = {
 
 letid_res = pvdeg.geospatial.analysis(**geo)
 
-# %%
+
+# In[ ]:
+
+
 letid_res
 
-# %%
+
+# In[ ]:
+
+
 import datetime
 
 ims = []
@@ -147,7 +182,10 @@ for n in range(1, 13):
 # ims = [imageio.imread(f'./images/RH_animation_{n}.png') for n in range(1, 13)]
 # imageio.mimwrite(f'./images/RH_animation.gif', ims, format='GIF', duration=1000, loop=10)
 
-# %%
+
+# In[ ]:
+
+
 import datetime
 
 ims = []
@@ -217,10 +255,14 @@ for n in range(1, 13):
 
                     plt.savefig(f"./images/LETID_plot_animation_{n}.png", dpi=600)
 
-# %%
+
+# In[ ]:
+
+
 import imageio
 
 ims = [imageio.imread(f"./images/LETID_plot_animation_{n}.png") for n in range(1, 13)]
 imageio.mimwrite(
     "./images/LETID_plot_animation.gif", ims, format="GIF", duration=1000, loop=10
 )
+

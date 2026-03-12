@@ -1,23 +1,30 @@
-# %% [markdown]
+#!/usr/bin/env python
+# coding: utf-8
+
 # # DuraMAT Live Demo (HPC)
-#
+# 
 # ![PVDeg Logo](../images/pvdeg_logo.svg)
-#
-#
+# 
+# 
 # **Steps:**
 # 1. Initialize weather data into xarray
 # 2. Calculate installation standoff for New Mexico
 # 3. Plot results
-#
+# 
 # **Xarray: multi-dimensional data frame**
-#
+# 
 # ![Xarray](../images/xarray.webp)
 
-# %%
+# In[1]:
+
+
 import pandas as pd
 import pvdeg
 
-# %%
+
+# In[2]:
+
+
 # This information helps with debugging and getting support :)
 import sys
 import platform
@@ -27,20 +34,25 @@ print("Python version ", sys.version)
 print("Pandas version ", pd.__version__)
 print("pvdeg version ", pvdeg.__version__)
 
-# %% [markdown]
+
 # # 1 Start distributed compute cluster - DASK
 
-# %%
+# In[3]:
+
+
 pvdeg.geospatial.start_dask()
 
-# %%
+
+# In[ ]:
+
+
 # Get weather data
 weather_db = "NSRDB"
 
 weather_arg = {
     "satellite": "Americas",
     "names": 2022,
-    "NREL_HPC": True,
+    "NLR_HPC": True,
     "attributes": [
         "air_temperature",
         "wind_speed",
@@ -53,17 +65,29 @@ weather_arg = {
 
 weather_ds, meta_df = pvdeg.weather.get(weather_db, geospatial=True, **weather_arg)
 
-# %%
+
+# In[ ]:
+
+
 weather_ds
 
-# %%
+
+# In[ ]:
+
+
 meta_NM = meta_df[meta_df["state"] == "New Mexico"]
 
-# %%
+
+# In[ ]:
+
+
 meta_NM_sub, gids_NM_sub = pvdeg.utilities.gid_downsampling(meta_NM, 4)
 weather_NM_sub = weather_ds.sel(gid=meta_NM_sub.index)
 
-# %%
+
+# In[ ]:
+
+
 geo = {
     "func": pvdeg.standards.standoff,
     "weather_ds": weather_NM_sub,
@@ -72,10 +96,16 @@ geo = {
 
 standoff_res = pvdeg.geospatial.analysis(**geo)
 
-# %%
+
+# In[ ]:
+
+
 standoff_res
 
-# %%
+
+# In[ ]:
+
+
 fig, ax = pvdeg.geospatial.plot_USA(
     standoff_res["x"],
     cmap="viridis",
@@ -85,18 +115,20 @@ fig, ax = pvdeg.geospatial.plot_USA(
     cb_title="Standoff (cm)",
 )
 
-# %% [markdown]
+
 # # Relative Humidity Example - Time dimension
 
-# %%
+# In[ ]:
+
+
 # State bar of new mexico: (35.16482, -106.58979)
 
 weather_db = "NSRDB"
-weather_id = (35.16482, -106.58979)  # NREL (39.741931, -105.169891)
+weather_id = (35.16482, -106.58979)  # NLR (39.741931, -105.169891)
 weather_arg = {
     "satellite": "Americas",
     "names": 2022,
-    "NREL_HPC": True,
+    "NLR_HPC": True,
     "attributes": [
         "air_temperature",
         "wind_speed",
@@ -111,16 +143,28 @@ weather_df, meta = pvdeg.weather.get(
     weather_db, weather_id, geospatial=False, **weather_arg
 )
 
-# %%
+
+# In[ ]:
+
+
 RH_module = pvdeg.humidity.module(weather_df=weather_df, meta=meta)
 
-# %%
+
+# In[ ]:
+
+
 RH_module
 
-# %%
+
+# In[ ]:
+
+
 RH_module.plot(ls="--")
 
-# %%
+
+# In[ ]:
+
+
 geo = {
     "func": pvdeg.humidity.module,
     "weather_ds": weather_NM_sub,
@@ -129,10 +173,16 @@ geo = {
 
 RH_module = pvdeg.geospatial.analysis(**geo)
 
-# %%
+
+# In[ ]:
+
+
 RH_module
 
-# %%
+
+# In[ ]:
+
+
 # from matplotlib.animation import FuncAnimation
 # from matplotlib.animation import PillowWriter
 # import matplotlib.animation as animation
@@ -156,7 +206,11 @@ RH_module
 # ims = [imageio.imread(f'./images/RH_animation_{n}.png') for n in range(1, 13)]
 # imageio.mimwrite(f'../images/RH_animation.gif', ims, format='GIF', duration=1000, loop=10)
 
-# %% [markdown]
+
 # <!-- ![Animation](../images/RH_animation.gif) - Animation not available, see code above to generate -->
 
-# %%
+# In[ ]:
+
+
+
+

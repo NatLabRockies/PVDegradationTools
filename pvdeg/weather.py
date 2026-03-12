@@ -1,7 +1,7 @@
 """Collection of classes and functions to obtain spectral parameters."""
 
 from pvdeg import humidity
-from pvdeg.utilities import nrel_kestrel_check
+from pvdeg.utilities import nlr_kestrel_check
 
 from typing import Union
 from pvlib import iotools
@@ -128,7 +128,7 @@ def get(
     -------
     Collecting a single site of PSM4 NSRDB data. *Api key and email must be replaced
     with your personal api key and email*.
-    [Request a key!](https://developer.nrel.gov/signup/)
+    [Request a key!](https://developer.nlr.gov/signup/)
 
     .. code-block:: python
 
@@ -149,7 +149,7 @@ def get(
 
         weather_df, meta_dict = pvdeg.weather.get(database="PVGIS", id=(49.95, 1.5))
 
-    Collecting geospatial data from NSRDB on Kestrel (NREL INTERNAL USERS ONLY)
+    Collecting geospatial data from NSRDB on Kestrel (NLR INTERNAL USERS ONLY)
 
     satellite options:
         ``"GOES", "METEOSAT", "Himawari", "SUNY", "CONUS", "Americas"``
@@ -161,7 +161,7 @@ def get(
         weather_arg = {
             "satellite": "Americas",
             "names": "TMY",
-            "NREL_HPC": True,
+            "NLR_HPC": True,
             "attributes": [
                     "air_temperature",
                     "wind_speed",
@@ -257,7 +257,7 @@ def get(
 
     elif geospatial:
         if database == "NSRDB":
-            nrel_kestrel_check()
+            nlr_kestrel_check()
 
             weather_ds, meta_df = get_NSRDB(geospatial=geospatial, **kwargs)
             meta_df["wind_height"] = 2
@@ -611,7 +611,7 @@ def ini_h5_geospatial(fps):
     return weather_ds, meta_df
 
 
-def get_NSRDB_fnames(satellite, names, NREL_HPC=False, **_):
+def get_NSRDB_fnames(satellite, names, NLR_HPC=False, **_):
     """Get a sorted list of NSRDB files for a given satellite and year.
 
     Parameters
@@ -622,8 +622,8 @@ def get_NSRDB_fnames(satellite, names, NREL_HPC=False, **_):
         PVLIB naming convention year or 'TMY':
         If int, year of desired data
         If str, 'TMY' or 'TMY3'
-    NREL_HPC : (bool)
-        If True, use NREL HPC path
+    NLR_HPC : (bool)
+        If True, use NLR HPC path
         If False, use AWS path
 
     Returns
@@ -642,11 +642,11 @@ def get_NSRDB_fnames(satellite, names, NREL_HPC=False, **_):
         "CONUS": "conus",
         "Americas": "current",
     }
-    if NREL_HPC:
+    if NLR_HPC:
         hpc_fp = "/datasets/NSRDB/"
         hsds = False
     else:
-        hpc_fp = "/nrel/nsrdb/v3/"
+        hpc_fp = "/nlr/nsrdb/v3/"
         hsds = True
 
     if type(names) in [int, float]:
@@ -672,7 +672,7 @@ def get_NSRDB_fnames(satellite, names, NREL_HPC=False, **_):
 def get_NSRDB(
     satellite=None,
     names="TMY",
-    NREL_HPC=False,
+    NLR_HPC=False,
     gid=None,
     location=None,
     geospatial=False,
@@ -690,8 +690,8 @@ def get_NSRDB(
     names : (int or str)
         If int, year of desired data
         If str, 'TMY' or 'TMY3'
-    NREL_HPC : (bool)
-        If True, use NREL HPC path
+    NLR_HPC : (bool)
+        If True, use NLR HPC path
         If False, use AWS path
     gid : (int)
         gid for the desired location
@@ -714,7 +714,7 @@ def get_NSRDB(
         satellite, gid = get_satellite(location)
     if not geospatial:
         nsrdb_fnames, hsds = get_NSRDB_fnames(
-            satellite=satellite, names=names, NREL_HPC=NREL_HPC
+            satellite=satellite, names=names, NLR_HPC=NLR_HPC
         )
 
         dattr = {}
@@ -768,7 +768,7 @@ def get_NSRDB(
         # the year it was created. this creates problems, we only want to combine the
         # files if they are NOT TMY
 
-        nsrdb_fnames, hsds = get_NSRDB_fnames(satellite, names, NREL_HPC)
+        nsrdb_fnames, hsds = get_NSRDB_fnames(satellite, names, NLR_HPC)
 
         if isinstance(names, str) and names.lower() in ["tmy", "tmy3"]:
             # maintain as list with last element of sorted list
@@ -1380,7 +1380,7 @@ def weather_distributed(
 
     NSRDB (including `database="PSM4"`) is rate limited and your key will face
     restrictions after making too many requests.
-    See rates [here](https://developer.nrel.gov/docs/solar/nsrdb/guide/).
+    See rates [here](https://developer.nlr.gov/docs/solar/nsrdb/guide/).
 
     Parameters
     ----------
@@ -1400,12 +1400,12 @@ def weather_distributed(
 
     api_key: str
         Only required when making NSRDB requests using "PSM4".
-        [NSRDB developer API key](https://developer.nrel.gov/signup/)
+        [NSRDB developer API key](https://developer.nlr.gov/signup/)
 
     email: str
         Only required when making NSRDB requests using "PSM4".
         [NSRDB developer account email associated with
-        `api_key`](https://developer.nrel.gov/signup/)
+        `api_key`](https://developer.nlr.gov/signup/)
 
     Returns
     -------
