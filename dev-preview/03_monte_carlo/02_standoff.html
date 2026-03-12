@@ -585,9 +585,9 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.14.0-1017-azure
 Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
-Pandas version  3.0.1
+Pandas version  2.3.3
 Pvlib version  0.15.0
-Pvdeg version  0.1.dev1+g72ca1288d
+Pvdeg version  0.1.dev1+gc2fb0bd00
 </pre></div>
 </div>
 </div>
@@ -597,7 +597,7 @@ Pvdeg version  0.1.dev1+g72ca1288d
 <h1>Simple Standoff Calculation<a class="headerlink" href="#simple-standoff-calculation" title="Link to this heading">#</a></h1>
 <p>This is copied from another tutorial called <code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">-</span> <span class="pre">Standards.ipynb</span></code>, please visit this page for a more in depth explanation of the process for a single standoff calculation.</p>
 <div class="alert alert-block alert-info">
-<b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a> so register now.)
+<b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a> so register now.)
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load weather data from locally saved files to avoid API rate limits</span>
@@ -606,7 +606,7 @@ Pvdeg version  0.1.dev1+g72ca1288d
     <span class="n">META</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="c1"># To use the NSRDB API instead, uncomment the lines below and add your API key</span>
-<span class="c1"># Get your API key at: https://developer.nrel.gov/signup/</span>
+<span class="c1"># Get your API key at: https://developer.nlr.gov/signup/</span>
 <span class="c1"># weather_db = &quot;PSM4&quot;</span>
 <span class="c1"># weather_id = (40.633365593159226, -73.9945801019899)  # Manhattan, NYC</span>
 <span class="c1"># weather_arg = {</span>
@@ -644,10 +644,10 @@ Pvdeg version  0.1.dev1+g72ca1288d
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
-The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          x      T98_0    T98_inf
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
+          x      T98_0    T98_inf
 0  0.522443  71.778148  48.754265
           x      T98_0    T98_inf
 0  0.490293  71.778148  48.754265
@@ -680,17 +680,17 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          X_0  wind_factor
-0    7.721918     0.754526
-1    6.223622    -0.418075
-2    4.598975     1.011472
-3    5.511906     0.727077
-4    7.688256     0.767431
+0    4.117092     0.866393
+1    9.014801    -0.073964
+2    9.303532     0.080209
+3    1.427983    -0.109772
+4    4.879351     0.152328
 ..        ...          ...
-495  3.811537     0.252889
-496  8.318945     0.533789
-497  7.665333     1.067218
-498  1.271848    -0.417649
-499 -0.421918     0.072828
+495  8.774103     0.899367
+496  2.074804     0.359849
+497  0.715495     1.143836
+498  2.414471     0.222571
+499  1.670101     0.410296
 
 [500 rows x 2 columns]
 </pre></div>
@@ -746,7 +746,7 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.Series&#39;&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.series.Series&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -759,17 +759,17 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.000000  64.484087  44.219138
-1    1.524188  75.121565  51.543789
-2    0.000000  59.551655  41.379830
-3    0.000000  64.829919  44.473269
-4    0.000000  64.236832  44.098999
+0    0.000000  62.425166  42.968282
+1    1.407284  73.328532  50.299025
+2    0.881231  72.026699  49.600628
+3    0.245863  73.669624  50.468822
+4    0.338054  71.495968  49.147076
 ..        ...        ...        ...
-495  0.090946  70.517978  48.549642
-496  0.000000  67.475365  46.295671
-497  0.000000  58.609808  40.814000
-498  0.311383  75.120304  51.541809
-499  0.000000  72.077614  49.658220
+495  0.000000  61.764456  42.616347
+496  0.000000  69.351640  47.687409
+497  0.000000  56.771276  39.960142
+498  0.093433  70.839748  48.716555
+499  0.000000  68.788101  47.418863
 
 [500 rows x 3 columns]
 </pre></div>
@@ -804,7 +804,7 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/aac3af685bca124e874eb08560be04d5e7f3664ae798c17271a0060c42f913d7.png" src="../_images/aac3af685bca124e874eb08560be04d5e7f3664ae798c17271a0060c42f913d7.png" />
+<img alt="../_images/794da2e82214ed96316057a675c5022eecb5edf57f5787927b60a5666aaedbc8.png" src="../_images/794da2e82214ed96316057a675c5022eecb5edf57f5787927b60a5666aaedbc8.png" />
 </div>
 </div>
 </section>
