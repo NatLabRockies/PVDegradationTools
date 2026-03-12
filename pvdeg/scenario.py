@@ -536,8 +536,11 @@ class Scenario:
     ):
         """Add pvdeg function(s) to the scenario pipeline.
 
-        A material layer must always be specified so that ``run()`` knows
-        which layer's material parameters to inject into the function.
+        A material layer is optional. When specified, ``run()`` will inject
+        the matching layer's material parameters into the function automatically.
+        Functions that do not require material parameters (e.g. ``standoff``,
+        ``solder_fatigue``) can be added as a bare callable or a
+        ``(function, kwargs)`` 2-tuple without a layer name.
 
         Parameters:
         -----------
