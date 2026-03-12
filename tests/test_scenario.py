@@ -381,18 +381,20 @@ def test_addJob_2tuple_first_not_callable():
         s.addJob(func=(123, "encapsulant"))
 
 
-def test_addJob_2tuple_second_not_str():
-    s = Scenario(name="2tuple-second-not-str")
-    # 2-tuple: second element is a dict, not a layer name string
-    with pytest.raises(
-        ValueError, match="Second element of a 2-tuple must be a layer name"
-    ):
-        s.addJob(func=(standoff, {"wind_factor": 0.35}))
+def test_addJob_2tuple_second_dict_no_layer():
+    s = Scenario(name="2tuple-second-dict-no-layer")
+    # 2-tuple: second element is a dict — backward compat, no layer injection
+    s.addJob(func=(standoff, {"wind_factor": 0.35}))
+    jobs = list(s.pipeline.values())
+    assert len(jobs) == 1
+    assert jobs[0]["job"] == standoff
+    assert jobs[0]["params"] == {"wind_factor": 0.35}
+    assert jobs[0]["material_layer"] is None
 
 
-def test_addJob_2tuple_second_not_str_list():
-    s = Scenario(name="2tuple-second-not-str-list")
-    # 2-tuple: second element is a list, not a layer name string
+def test_addJob_2tuple_second_invalid_type():
+    s = Scenario(name="2tuple-second-invalid-type")
+    # 2-tuple: second element is a list — not str (layer) or dict (kwargs)
     with pytest.raises(
         ValueError, match="Second element of a 2-tuple must be a layer name"
     ):
@@ -421,9 +423,20 @@ def test_addJob_3tuple_third_not_str():
 
 def test_addJob_invalid_job_type():
     s = Scenario(name="invalid-job-type")
-    # Non-tuple (e.g. plain int) is not accepted
-    with pytest.raises(ValueError, match="Each job must be a tuple"):
+    # Non-callable, non-tuple (e.g. plain int) is not accepted
+    with pytest.raises(ValueError, match="Each job must be a callable"):
         s.addJob(func=123)
+
+
+def test_addJob_bare_callable_valid():
+    s = Scenario(name="bare-callable-valid")
+    # Bare callable — no layer, no extra kwargs
+    s.addJob(func=standoff)
+    jobs = list(s.pipeline.values())
+    assert len(jobs) == 1
+    assert jobs[0]["job"] == standoff
+    assert jobs[0]["params"] == {}
+    assert jobs[0]["material_layer"] is None
 
 
 def test_addJob_2tuple_valid():
