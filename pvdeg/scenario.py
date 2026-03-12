@@ -33,7 +33,7 @@ class Scenario:
         path: Optional[str] = None,
         gids: Optional[Union[int, List[int], np.ndarray[int]]] = None,
         modules: Optional[list] = None,
-        pipeline=OrderedDict(),
+        pipeline: Optional[OrderedDict] = None,
         file: Optional[str] = None,
         results=None,
         weather_data: Optional[pd.DataFrame] = None,  # df
@@ -70,7 +70,7 @@ class Scenario:
         self.path = path
         self.modules = modules if modules is not None else []
         self.gids = gids
-        self.pipeline = pipeline
+        self.pipeline = pipeline if pipeline is not None else OrderedDict()
         self.results = results
         self.weather_data = weather_data
         self.meta_data = meta_data
