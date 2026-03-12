@@ -536,13 +536,25 @@ class Scenario:
     ):
         """Add pvdeg function(s) to the scenario pipeline.
 
+        A material layer must always be specified so that ``run()`` knows
+        which layer's material parameters to inject into the function.
+
         Parameters:
         -----------
-        func : function, tuple, or list
-            Specify job(s) to add. Can be:
-            - A callable function (no kwargs)
-            - A tuple (function, kwargs_dict) for a single job with kwargs
-            - A list of functions and/or tuples for multiple jobs
+        func : tuple or list of tuples
+            Specify job(s) to add. Each job must be one of:
+
+            - A 2-tuple ``(function, layer_name)`` — bind a function to a
+              material layer. Material parameter values are injected
+              automatically by ``run()``.
+            - A 3-tuple ``(function, extra_kwargs, layer_name)`` — as above
+              but also supply extra non-material arguments (e.g. experimental
+              conditions such as ``I_chamber``).
+            - A list of 2- or 3-tuples for adding multiple jobs at once.
+
+            ``layer_name`` (str) must match a key in the module's
+            ``material_params`` dict (e.g. ``"encapsulant"``,
+            ``"backsheet"``).
 
         Examples:
         ---------
@@ -562,24 +574,35 @@ class Scenario:
         ... ])
         """
         # Normalize input to list of jobs
-        jobs_to_add = []
-
         if isinstance(func, list):
             jobs_to_add = func
         else:
-            # Single job (either bare function or tuple)
             jobs_to_add = [func]
 
         # Process each job
         for job in jobs_to_add:
-            if isinstance(job, tuple):
-                # Job is (function, kwargs_dict)
-                if len(job) != 2:
+            if not isinstance(job, tuple):
+                raise ValueError(
+                    "Each job must be a tuple (function, layer_name) or "
+                    f"(function, extra_kwargs, layer_name), got {type(job)}"
+                )
+
+            if len(job) == 2:
+                job_func, layer_name = job
+                if not callable(job_func):
                     raise ValueError(
-                        "Job tuple must have exactly 2 elements "
-                        f"(function, kwargs), got {len(job)}"
+                        "First element of job tuple must be callable, "
+                        f"got {type(job_func)}"
                     )
-                job_func, job_kwargs = job
+                if not isinstance(layer_name, str):
+                    raise ValueError(
+                        "Second element of a 2-tuple must be a layer name "
+                        f"(str), got {type(layer_name)}"
+                    )
+                self._add_single_job(job_func, {}, layer_name)
+
+            elif len(job) == 3:
+                job_func, job_kwargs, layer_name = job
                 if not callable(job_func):
                     raise ValueError(
                         "First element of job tuple must be callable, "
@@ -587,22 +610,22 @@ class Scenario:
                     )
                 if not isinstance(job_kwargs, dict):
                     raise ValueError(
-                        "Second element of job tuple must be a dict, "
-                        f"got {type(job_kwargs)}"
+                        "Second element of a 3-tuple must be a dict of "
+                        f"extra kwargs, got {type(job_kwargs)}"
                     )
-                self._add_single_job(job_func, job_kwargs)
-
-            elif callable(job):
-                # Job is just a function with no kwargs
-                self._add_single_job(job, {})
+                if not isinstance(layer_name, str):
+                    raise ValueError(
+                        "Third element of a 3-tuple must be a layer name "
+                        f"(str), got {type(layer_name)}"
+                    )
+                self._add_single_job(job_func, job_kwargs, layer_name)
 
             else:
                 raise ValueError(
-                    "Each job must be either a callable or a tuple "
-                    f"(function, kwargs), got {type(job)}"
+                    "Job tuple must have 2 or 3 elements, " f"got {len(job)}"
                 )
 
-    def _add_single_job(self, func, func_kwarg):
+    def _add_single_job(self, func, func_kwarg, material_layer=None):
         """Internal helper to add a single job to the pipeline.
 
         Parameters:
@@ -610,11 +633,19 @@ class Scenario:
         func : callable
             Function to add to pipeline
         func_kwarg : dict
-            Keyword arguments for the function
+            Extra keyword arguments for the function (non-material params)
+        material_layer : str or None
+            Name of the material layer whose parameters should be injected
+            at runtime (e.g. ``"encapsulant"``, ``"backsheet"``). If None,
+            no material params are injected.
         """
         try:
             job_id = utilities.new_id(self.pipeline)
-            job_dict = {"job": func, "params": func_kwarg}
+            job_dict = {
+                "job": func,
+                "params": func_kwarg,
+                "material_layer": material_layer,
+            }
             self.pipeline[job_id] = job_dict
         except Exception as e:
             warnings.warn(f"Failed to add job: {e}")
