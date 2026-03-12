@@ -81,17 +81,27 @@ scene_temp.addModule(
     model_kwarg={"module_efficiency": 0.2},
 )
 
-scene_temp.addJob(func=(pvdeg.temperature.temperature, {"cell_or_mod": "cell"}))
-
 scene_temp.addJob(
-    func=(pvdeg.degradation.vantHoff_deg, {"I_chamber": 1000, "temp_chamber": 25})
+    func=(pvdeg.temperature.temperature, {"cell_or_mod": "cell"}, "EVA-1")
 )
 
 scene_temp.addJob(
-    func=(pvdeg.degradation.vantHoff_deg, {"I_chamber": 1000, "temp_chamber": 30})
+    func=(
+        pvdeg.degradation.vantHoff_deg,
+        {"I_chamber": 1000, "temp_chamber": 25},
+        "EVA-1",
+    )
 )
 
-scene_temp.addJob(func=pvdeg.degradation.IwaVantHoff)
+scene_temp.addJob(
+    func=(
+        pvdeg.degradation.vantHoff_deg,
+        {"I_chamber": 1000, "temp_chamber": 30},
+        "EVA-1",
+    )
+)
+
+scene_temp.addJob(func=(pvdeg.degradation.IwaVantHoff, "EVA-1"))
 
 # %% [markdown]
 # # Run and View Scenario Results
