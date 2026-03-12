@@ -558,19 +558,28 @@ class Scenario:
 
         Examples:
         ---------
-        Single job without kwargs:
-        >>> scenario.addJob(func=pvdeg.fatigue.solder_fatigue)
-
-        Single job with kwargs:
+        Bind a degradation function to the encapsulant layer:
         >>> scenario.addJob(
-        ...     func=(pvdeg.humidity.module, {'encapsulant': 'W001'})
+        ...     func=(pvdeg.degradation.arrhenius, "encapsulant")
         ... )
 
-        Multiple jobs:
+        With extra non-material kwargs and a layer binding:
+        >>> scenario.addJob(
+        ...     func=(
+        ...         pvdeg.degradation.vantHoff_deg,
+        ...         {"I_chamber": 1000, "temp_chamber": 25},
+        ...         "encapsulant",
+        ...     )
+        ... )
+
+        Multiple jobs at once:
         >>> scenario.addJob(func=[
-        ...     (pvdeg.humidity.module, {'encapsulant': 'W001'}),
-        ...     pvdeg.fatigue.solder_fatigue,
-        ...     (pvdeg.degradation.arrhenius, {'Ro': 1.5, 'Ea': 45})
+        ...     (pvdeg.degradation.arrhenius, "encapsulant"),
+        ...     (
+        ...         pvdeg.degradation.vantHoff_deg,
+        ...         {"I_chamber": 1000, "temp_chamber": 25},
+        ...         "backsheet",
+        ...     ),
         ... ])
         """
         # Normalize input to list of jobs
