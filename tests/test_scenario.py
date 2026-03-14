@@ -88,6 +88,47 @@ def test_Scenario_run(monkeypatch, tmp_path):
     pd.testing.assert_frame_equal(res_df, known_df, check_dtype=False)
 
 
+def test_run_multilayer_material_injection(monkeypatch, tmp_path):
+    """Test that run() handles nested (multi-layer) material_params correctly.
+
+    Each job is bound to a different material layer. Material params that don't
+    match the function signature should be silently filtered out. Results for
+    both jobs should be produced.
+    """
+    monkeypatch.setattr(
+        target=Scenario, name="addLocation", value=monkeypatch_addLocation
+    )
+
+    s = Scenario(name="multilayer-run-test", path=tmp_path)
+    monkeypatch_addLocation(s)
+
+    s.addModule(
+        module_name="two-layer-module",
+        materials={
+            "encapsulant": {
+                "material_file": "O2permeation",
+                "material_name": "OX003",
+            },
+            "backsheet": {
+                "material_file": "O2permeation",
+                "material_name": "OX004",
+            },
+        },
+    )
+
+    s.addJob(func=(standoff, "encapsulant"))
+    s.addJob(func=(standoff, {"wind_factor": 0.35}, "backsheet"))
+
+    s.run()
+
+    module_results = s.results["two-layer-module"]
+    assert len(module_results) == 2
+
+    for job_id, result in module_results.items():
+        assert result is not None
+        assert isinstance(result, pd.DataFrame)
+
+
 # def test_clean():
 #     a = Scenario(name='clean-a')
 #     a.file = 'non-existent-file.json'
