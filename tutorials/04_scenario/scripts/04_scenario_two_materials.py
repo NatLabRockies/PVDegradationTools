@@ -79,20 +79,23 @@ scenario.addModule(
 # degradation_spectral does not use weather_df/meta at all — its inputs are
 # passed directly as extra kwargs via the 3-tuple (func, kwargs, layer_name).
 # arrhenius only needs weather_df, which the scenario injects automatically.
+
 scenario.addJob(
-    func=(
-        pvdeg.degradation.degradation_spectral,
-        {
-            "spectra": SPECTRA["Spectra"],
-            "rh": SPECTRA["RH"],
-            "temp": SPECTRA["Temperature"],
-            "wavelengths": wavelengths,
-            "time": SPECTRA.index,
-        },
-        "encapsulant",
-    )
+    func=[
+        (
+            pvdeg.degradation.degradation_spectral,
+            {
+                "spectra": SPECTRA["Spectra"],
+                "rh": SPECTRA["RH"],
+                "temp": SPECTRA["Temperature"],
+                "wavelengths": wavelengths,
+                "time": SPECTRA.index,
+            },
+            "encapsulant",
+        ),
+        (pvdeg.degradation.arrhenius, "backsheet"),
+    ]
 )
-scenario.addJob(func=(pvdeg.degradation.arrhenius, "backsheet"))
 
 # %% [markdown]
 # ## Run the pipeline
