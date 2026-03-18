@@ -53,16 +53,21 @@ def _resolve_material_params(material_params, material_layer):
     if is_nested:
         if material_layer not in material_params:
             warnings.warn(
-                f"Layer '{material_layer}' not found in module material_params. "
+                f"Layer '{material_layer}' is missing from material_params. "
                 "No material parameters will be injected for this job. "
                 f"Available layers: {list(material_params.keys())}"
             )
             return {}
         return material_params[material_layer]
     else:
-        # Flat dict — single material, inject everything (backward compat).
-        # The layer name is treated as a label only.
-        return material_params
+        # material_params is flat (single material) but a layer name was
+        # requested — layer selection requires a nested material dict.
+        warnings.warn(
+            f"Layer '{material_layer}' was specified but material_params is not "
+            "structured as named layers. No material parameters will be injected. "
+            "Use a dict-of-dicts when calling addModule to enable layer selection."
+        )
+        return {}
 
 
 class Scenario:
