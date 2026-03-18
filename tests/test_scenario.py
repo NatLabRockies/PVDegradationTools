@@ -1,4 +1,4 @@
-from pvdeg.scenario import Scenario
+from pvdeg.scenario import Scenario, _resolve_material_params
 from pvdeg.standards import standoff
 from pvdeg import TEST_DATA_DIR
 from pvdeg import weather
@@ -513,3 +513,19 @@ def test_addJob_list_valid():
     assert jobs[0]["material_layer"] == "encapsulant"
     assert jobs[1]["material_layer"] == "backsheet"
     assert jobs[1]["params"] == {"wind_factor": 0.5}
+
+
+def test_resolve_material_params_missing_layer_warns():
+    """Warning + empty dict when requested layer is absent from nested params."""
+    nested = {"encapsulant": {"Ead": 30.0}, "backsheet": {"Ead": 25.0}}
+    with pytest.warns(UserWarning, match="missing from material_params"):
+        result = _resolve_material_params(nested, "frontsheet")
+    assert result == {}
+
+
+def test_resolve_material_params_flat_with_layer_warns():
+    """Warning + empty dict when material_params is flat but a layer is requested."""
+    flat = {"Ead": 29.4, "Do": 0.13}
+    with pytest.warns(UserWarning, match="not structured as named layers"):
+        result = _resolve_material_params(flat, "encapsulant")
+    assert result == {}
