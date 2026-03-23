@@ -153,6 +153,7 @@ print(meta_clean)
 # This method uses the PVGIS database, a public resource. It requires no API key or user account.
 
 # %%
+# nbval-ignore-output
 weather_db = "PVGIS"
 # weather_id = (39.741931, -105.169891)
 weather_id = (24.7136, 46.6753)  # Riyadh, Saudi Arabia
