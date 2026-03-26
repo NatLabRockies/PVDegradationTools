@@ -153,31 +153,30 @@ print(meta_clean)
 # This method uses the PVGIS database, a public resource. It requires no API key or user account.
 
 # %%
-# nbval-skip
-weather_db = "PVGIS"
-# weather_id = (39.741931, -105.169891)
-weather_id = (24.7136, 46.6753)  # Riyadh, Saudi Arabia
-# weather_arg = {'map_variables': True}
+# weather_db = "PVGIS"
+# # weather_id = (39.741931, -105.169891)
+# weather_id = (24.7136, 46.6753)  # Riyadh, Saudi Arabia
+# # weather_arg = {'map_variables': True}
 
-# TMY
-weather_df, meta = pvdeg.weather.get(weather_db, weather_id)
+# # TMY
+# weather_df, meta = pvdeg.weather.get(weather_db, weather_id)
 
-# Perform calculation
-res = pvdeg.standards.standoff(
-    weather_df=weather_df,
-    meta=meta,
-    tilt=None,
-    azimuth=180,
-    sky_model="isotropic",
-    temp_model="sapm",
-    conf_0="insulated_back_glass_polymer",
-    conf_inf="open_rack_glass_polymer",
-    T98=70,
-    x_0=6.5,
-    wind_factor=0.33,
-)
-print(pvdeg.standards.interpret_standoff(res))
+# # Perform calculation
+# res = pvdeg.standards.standoff(
+#     weather_df=weather_df,
+#     meta=meta,
+#     tilt=None,
+#     azimuth=180,
+#     sky_model="isotropic",
+#     temp_model="sapm",
+#     conf_0="insulated_back_glass_polymer",
+#     conf_inf="open_rack_glass_polymer",
+#     T98=70,
+#     x_0=6.5,
+#     wind_factor=0.33,
+# )
+# print(pvdeg.standards.interpret_standoff(res))
 
-# Clean metadata for consistent output (remove variable fields)
-meta_clean = {k: v for k, v in meta.items() if k not in ["irradiance_time_offset"]}
-print(meta_clean)
+# # Clean metadata for consistent output (remove variable fields)
+# meta_clean = {k: v for k, v in meta.items() if k not in ["irradiance_time_offset"]}
+# print(meta_clean)
