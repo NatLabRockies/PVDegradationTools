@@ -20,6 +20,56 @@ import pprint
 from IPython.display import display, HTML
 
 
+def _resolve_material_params(material_params, material_layer):
+    """Resolve which material parameters to inject for a given job.
+
+    Parameters:
+    -----------
+    material_params : dict
+        The module's material parameters. Either a flat dict of scalar
+        values (single-material, from ``addModule(materials="OX003")``)
+        or a nested dict of dicts (multi-layer, from
+        ``addModule(materials={"encapsulant": {...}, ...})``).
+    material_layer : str or None
+        The layer name bound to the job via ``addJob``. If ``None``,
+        no material parameters are injected.
+
+    Returns:
+    --------
+    dict
+        Flat dict of material parameters to inject into the function, or
+        an empty dict if no injection is needed.
+    """
+    if material_layer is None:
+        return {}
+
+    # Detect nested (multi-layer) vs flat (single-material) structure.
+    # Nested: all values are dicts, e.g. {"encapsulant": {"Ead": ...}}
+    # Flat:   values are scalars,   e.g. {"Ead": 29.4, "Do": 0.13, ...}
+    is_nested = material_params and all(
+        isinstance(v, dict) for v in material_params.values()
+    )
+
+    if is_nested:
+        if material_layer not in material_params:
+            warnings.warn(
+                f"Layer '{material_layer}' is missing from material_params. "
+                "No material parameters will be injected for this job. "
+                f"Available layers: {list(material_params.keys())}"
+            )
+            return {}
+        return material_params[material_layer]
+    else:
+        # material_params is flat (single material) but a layer name was
+        # requested — layer selection requires a nested material dict.
+        warnings.warn(
+            f"Layer '{material_layer}' was specified but material_params is not "
+            "structured as named layers. No material parameters will be injected. "
+            "Use a dict-of-dicts when calling addModule to enable layer selection."
+        )
+        return {}
+
+
 class Scenario:
     """Scenario object, contains all parameters and criteria for a given scenario.
 
@@ -680,8 +730,13 @@ class Scenario:
         """
         Run all jobs in pipeline on scenario object for each module in the scenario.
 
-        Note: if a pipeline job contains a function not adhering to package
-        wide pv parameter naming scheme, the job will raise a fatal error.
+        For jobs bound to a material layer (via ``addJob``), only the
+        parameters for that layer are injected. For jobs with no layer
+        binding, no material parameters are injected.
+
+        Note: if a pipeline job contains a function not adhering to the
+        package-wide pv parameter naming scheme, the job will raise a
+        fatal error.
 
         Parameters:
         -----------
@@ -698,35 +753,36 @@ class Scenario:
             for module in self.modules:
                 module_result = {}
 
+                weather_dict = {
+                    "weather_df": self.weather_data,
+                    "meta": self.meta_data,
+                }
+
+                temperature_args = {
+                    "temp_model": module["temp_model"],
+                    "model_kwarg": module["model_kwarg"],
+                    "irradiance_kwarg": module["irradiance_kwarg"],
+                    "conf": module["racking"],
+                    **module["irradiance_kwarg"],
+                }
+
                 for id, job in self.pipeline.items():
-                    func, params = job["job"], job["params"]
+                    func = job["job"]
+                    params = job["params"]
+                    material_layer = job.get("material_layer", None)
 
-                    weather_dict = {
-                        "weather_df": self.weather_data,
-                        "meta": self.meta_data,
-                    }
-
-                    temperature_args = {
-                        "temp_model": module["temp_model"],
-                        "model_kwarg": module["model_kwarg"],
-                        "irradiance_kwarg": module["irradiance_kwarg"],
-                        "conf": module["racking"],
-                        **module["irradiance_kwarg"],
-                    }
-
-                    combined = (
-                        weather_dict | temperature_args | module["material_params"]
+                    # Resolve material params for this specific job's layer
+                    job_material_params = _resolve_material_params(
+                        module["material_params"], material_layer
                     )
 
+                    combined = weather_dict | temperature_args | job_material_params
+
                     func_params = signature(func).parameters
-                    func_args = {
-                        k: v for k, v in combined.items() if k in func_params.keys()
-                    }
+                    func_args = {k: v for k, v in combined.items() if k in func_params}
 
                     res = func(**params, **func_args)
-
-                    if id not in module_result.keys():
-                        module_result[id] = res
+                    module_result[id] = res
 
                 results_dict[module["module_name"]] = module_result
 

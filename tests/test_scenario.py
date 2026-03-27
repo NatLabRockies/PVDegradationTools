@@ -1,4 +1,4 @@
-from pvdeg.scenario import Scenario
+from pvdeg.scenario import Scenario, _resolve_material_params
 from pvdeg.standards import standoff
 from pvdeg import TEST_DATA_DIR
 from pvdeg import weather
@@ -86,6 +86,47 @@ def test_Scenario_run(monkeypatch, tmp_path):
     )
 
     pd.testing.assert_frame_equal(res_df, known_df, check_dtype=False)
+
+
+def test_run_multilayer_material_injection(monkeypatch, tmp_path):
+    """Test that run() handles nested (multi-layer) material_params correctly.
+
+    Each job is bound to a different material layer. Material params that don't
+    match the function signature should be silently filtered out. Results for
+    both jobs should be produced.
+    """
+    monkeypatch.setattr(
+        target=Scenario, name="addLocation", value=monkeypatch_addLocation
+    )
+
+    s = Scenario(name="multilayer-run-test", path=tmp_path)
+    monkeypatch_addLocation(s)
+
+    s.addModule(
+        module_name="two-layer-module",
+        materials={
+            "encapsulant": {
+                "material_file": "O2permeation",
+                "material_name": "OX003",
+            },
+            "backsheet": {
+                "material_file": "O2permeation",
+                "material_name": "OX004",
+            },
+        },
+    )
+
+    s.addJob(func=(standoff, "encapsulant"))
+    s.addJob(func=(standoff, {"wind_factor": 0.35}, "backsheet"))
+
+    s.run()
+
+    module_results = s.results["two-layer-module"]
+    assert len(module_results) == 2
+
+    for job_id, result in module_results.items():
+        assert result is not None
+        assert isinstance(result, pd.DataFrame)
 
 
 # def test_clean():
@@ -472,3 +513,19 @@ def test_addJob_list_valid():
     assert jobs[0]["material_layer"] == "encapsulant"
     assert jobs[1]["material_layer"] == "backsheet"
     assert jobs[1]["params"] == {"wind_factor": 0.5}
+
+
+def test_resolve_material_params_missing_layer_warns():
+    """Warning + empty dict when requested layer is absent from nested params."""
+    nested = {"encapsulant": {"Ead": 30.0}, "backsheet": {"Ead": 25.0}}
+    with pytest.warns(UserWarning, match="missing from material_params"):
+        result = _resolve_material_params(nested, "frontsheet")
+    assert result == {}
+
+
+def test_resolve_material_params_flat_with_layer_warns():
+    """Warning + empty dict when material_params is flat but a layer is requested."""
+    flat = {"Ead": 29.4, "Do": 0.13}
+    with pytest.warns(UserWarning, match="not structured as named layers"):
+        result = _resolve_material_params(flat, "encapsulant")
+    assert result == {}
