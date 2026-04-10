@@ -616,6 +616,17 @@ class Scenario:
             ``material_params`` dict (e.g. ``"encapsulant"``,
             ``"backsheet"``).
 
+        name : str or None
+            Optional unique name for this job. Used for sequential analysis in the
+            Scenario pipeline. Pass this name to a later job's ``depends_on`` variable
+            to forward the output of this job as an input to the later job at run time.
+        depends_on : dict or None
+            ``{kwarg_name: source_job_name}`` mapping. The job from which to take the
+            output as an input for this job. At run time, ``run()`` resolves each source
+            (depends on) job's result and passes it as the named kwarg to this function.
+            The source job must already exist in the pipeline (i.e. have been added with
+            a matching ``name``).
+
         Examples:
         ---------
         Bind a degradation function to the encapsulant layer:
@@ -641,6 +652,17 @@ class Scenario:
         ...         "backsheet",
         ...     ),
         ... ])
+
+        Chain jobs with ``depends_on`` — pass the result of ``arrhenius``
+        as the ``activation_result`` kwarg to a downstream function:
+        >>> scenario.addJob(
+        ...     func=(pvdeg.degradation.arrhenius, "encapsulant"),
+        ...     name="arrhenius_enc",
+        ... )
+        >>> scenario.addJob(
+        ...     func=pvdeg.degradation.some_downstream_func,
+        ...     depends_on={"activation_result": "arrhenius_enc"},
+        ... )
         """
         # name/depends_on cannot be used with list form
         if isinstance(func, list) and (name is not None or depends_on is not None):
