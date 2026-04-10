@@ -308,15 +308,15 @@
         "Degradation": "Optical Transmittance In-Situ measurement",
         "Comments": "LED Light at 550nm",
         "EquationType": "Perovskite_1",
-        "Equation": "R_D=R_{0,WPO}\\cdot e^{ \\left( \\frac{-E_{a,WPO}}{R\\cdot T_K } \\right) } \\cdot \\left< \\frac{P_{O_2}\\cdot P_{H_2 O}\\cdot G_{550}^{0.7} }{ \\left[ 1+K_{2W}\\cdot P_{O_2} \\left(1+K_{3W}\\cdot G_{550}^{0.7} \\right) \\right]^2}  \\right> +R_{0,DPO}\\cdot e^ {\\left( \\frac{-E_{a,DPO}}{R\\cdot T_K} \\right) } \\cdot \\frac{P_{O_2} \\cdot G_{550}^{0.7} }{1+K_{2D}\\cdot P_{O_2} \\cdot \\left( 1+K_3D\\cdot G_{550}^{0.7}  \\right)} +R_{0,hum}\\cdot e^ { \\left( \\frac {-E_a^{hum}}{R\\cdot T_K } \\right) } \\cdot P_{H_2 O}\\cdot G_{550}^{0.7}+R_{0,therm}\\cdot e^{ \\left( \\frac{-E_a^{therm}}{R\\cdot T_K } \\right) }",
+        "Equation": "R_D=k_{0,WPO}\\cdot e^{ \\left( \\frac{-E_{A,WPO}}{R\\cdot T_K } \\right) } \\cdot \\frac{P_{O_2}\\cdot P_{H_2 O}\\cdot I_{in}^{0.7} }{ \\left[ 1+K_{2W}\\cdot P_{O_2} \\left(1+K_{3W}\\cdot I_{in}^{0.7} \\right) \\right]^2} +k_{0,DPO}\\cdot e^ {\\left( \\frac{-E_{A,DPO}}{R\\cdot T_K} \\right) } \\cdot \\frac{P_{O_2} \\cdot I_{in}^{0.7} }{1+K_{2D}\\cdot P_{O_2} \\cdot \\left( 1+K_{3D}\\cdot I_{in}^{0.7} \\right)} +k_{0,hum}\\cdot e^ { \\left( \\frac {-E_{A}^{hum}}{R\\cdot T_K } \\right) } \\cdot P_{H_2 O}\\cdot I_{in}^{0.7}+k_{0,therm}\\cdot e^{ \\left( \\frac{-E_{A}^{therm}}{R\\cdot T_K } \\right) }",
         "R_D": {
             "units": "mol/(m^2·s)"
         },
-        "R_0,WPO": {
+        "k_0,WPO": {
             "value": 3.16E-25,
             "units": "mol/(m^2·s·kpa^2 )·(photons/(m^2·s))^(-0.7)"
         },
-        "E_a,WPO": {
+        "E_A,WPO": {
             "value": -8.6827,
             "units": "kJ/mol"
         },
@@ -328,11 +328,11 @@
             "value": 4.32E-15,
             "units": "(photons/(m^2·s))^(-0.7)"
         },
-        "R_0,DPO": {
+        "k_0,DPO": {
             "value": 5.45E-15,
             "units": "mol/(m^2·s·kpa )·(photons/(m^2·s))^(-0.7)"
         },
-        "E_a,DPO": {
+        "E_A,DPO": {
             "value": 59.82,
             "units": "kJ/mol"
         },
@@ -344,19 +344,19 @@
             "value": 6.97E-15,
             "units": "(photons/(m^2·s))^(-0.7)"
         },
-        "R_0,hum": {
+        "k_0,hum": {
             "value": 9.2E-22,
             "units": "mol/(m^2·s·kpa)·(photons/(m^2·s))^(-0.7)"
         },
-        "E_a^hum": {
+        "E_A^hum": {
             "value": 19.3,
             "units": "kJ/mol"
         },
-        "E_a^therm": {
+        "E_A^therm": {
             "value": 43.42,
             "units": "kJ/mol"
         },
-        "R_0,therm": {
+        "k_0,therm": {
             "value": 0.00041,
             "units": "mol/(m^2·s)"
         }
