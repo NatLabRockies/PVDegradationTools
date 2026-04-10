@@ -626,43 +626,6 @@ class Scenario:
             (depends on) job's result and passes it as the named kwarg to this function.
             The source job must already exist in the pipeline (i.e. have been added with
             a matching ``name``).
-
-        Examples:
-        ---------
-        Bind a degradation function to the encapsulant layer:
-        >>> scenario.addJob(
-        ...     func=(pvdeg.degradation.arrhenius, "encapsulant")
-        ... )
-
-        With extra non-material kwargs and a layer binding:
-        >>> scenario.addJob(
-        ...     func=(
-        ...         pvdeg.degradation.vantHoff_deg,
-        ...         {"I_chamber": 1000, "temp_chamber": 25},
-        ...         "encapsulant",
-        ...     )
-        ... )
-
-        Multiple jobs at once:
-        >>> scenario.addJob(func=[
-        ...     (pvdeg.degradation.arrhenius, "encapsulant"),
-        ...     (
-        ...         pvdeg.degradation.vantHoff_deg,
-        ...         {"I_chamber": 1000, "temp_chamber": 25},
-        ...         "backsheet",
-        ...     ),
-        ... ])
-
-        Chain jobs with ``depends_on`` — pass the result of ``arrhenius``
-        as the ``activation_result`` kwarg to a downstream function:
-        >>> scenario.addJob(
-        ...     func=(pvdeg.degradation.arrhenius, "encapsulant"),
-        ...     name="arrhenius_enc",
-        ... )
-        >>> scenario.addJob(
-        ...     func=pvdeg.degradation.some_downstream_func,
-        ...     depends_on={"activation_result": "arrhenius_enc"},
-        ... )
         """
         # name/depends_on cannot be used with list form
         if isinstance(func, list) and (name is not None or depends_on is not None):
