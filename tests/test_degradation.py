@@ -330,3 +330,50 @@ def test_arrhenius_action_spectra_uneven_time_one_DataFrame():
     df = pd.concat([df, times, spectra], axis=1)
     result = pvdeg.degradation.arrhenius(weather_df=df, p=0.5, n=1, Ea=40, C2=0.07)
     assert result == pytest.approx(2.928567627e-9, abs=1e-13)
+
+
+_PEROVSKITE_DF = pd.DataFrame(
+    {
+        "temp_air": [20.0, 25.0, 30.0],
+        "relative_humidity": [40.0, 50.0, 60.0],
+    }
+)
+
+
+def test_perovskite_no_weather_df():
+    with pytest.raises(ValueError):
+        pvdeg.degradation.perovskite_degradation()
+
+
+def test_perovskite_no_rh():
+    df = pd.DataFrame({"temp_air": [20.0, 25.0, 30.0]})
+    with pytest.raises(ValueError):
+        pvdeg.degradation.perovskite_degradation(weather_df=df)
+
+
+def test_perovskite_invalid_component():
+    with pytest.raises(ValueError):
+        pvdeg.degradation.perovskite_degradation(
+            weather_df=_PEROVSKITE_DF, component="invalid"
+        )
+
+
+def test_perovskite_total():
+    result = pvdeg.degradation.perovskite_degradation(weather_df=_PEROVSKITE_DF)
+    assert isinstance(result, pd.Series)
+    assert len(result) == 3
+    assert result.name == "perovskite_degradation_total"
+    assert not result.isna().any()
+    assert (result > 0).all()
+
+
+def test_perovskite_components():
+    for comp in ("WPO", "DPO", "r_hum", "r_therm"):
+        result = pvdeg.degradation.perovskite_degradation(
+            weather_df=_PEROVSKITE_DF, component=comp
+        )
+        assert isinstance(result, pd.Series)
+        assert len(result) == 3
+        assert result.name == f"perovskite_degradation_{comp}"
+        assert not result.isna().any()
+        assert (result > 0).all()
