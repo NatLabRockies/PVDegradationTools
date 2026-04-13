@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Weather Database Access &#8212; PVDEG Tutorials</title>
+    <title>&lt;no title&gt; &#8212; PVDEG Tutorials</title>
   
   
   
@@ -60,8 +60,6 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '01_basics/04_weather_database_access';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -163,7 +161,7 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">01 - Basics</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_basics_humidity_design.html">Humidity Design Basics</a></li>
 
 
@@ -182,11 +180,6 @@
 <li class="toctree-l1"><a class="reference internal" href="03_spectral_degradation.html">Spectral Degradation</a></li>
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Weather Database Access</a></li>
-
-
-
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">02 - Degradation Mechanisms</span></p>
 <ul class="nav bd-sidenav">
@@ -197,14 +190,6 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="../02_degradation/02_letid_accelerated_test.html">LETID Accelerated Test</a></li>
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="../02_degradation/03_letid_outdoor.html">LETID Outdoor</a></li>
 
 
 
@@ -237,39 +222,9 @@
 
 
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 - Monte Carlo Simulations</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_monte_carlo/01_arrhenius.html">Arrhenius Monte Carlo</a></li>
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="../03_monte_carlo/02_standoff.html">Standoff Monte Carlo</a></li>
-
-
-
-
-
-</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">04 - Scenarios</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../04_scenario/01_scenario_temperature.html">Temperature Scenario</a></li>
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="../04_scenario/02_scenario_single_location.html">Single Location</a></li>
-
-
-
-
-
-
-
 
 
 
@@ -302,12 +257,6 @@
 
 
 
-
-
-<li class="toctree-l1"><a class="reference internal" href="../05_geospatial/02_geospatial_world_map.html">Geospatial World Map (HPC)</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="../05_geospatial/03_letid_outdoor_geospatial_demo.html">LETID Outdoor Geospatial Demo (HPC)</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="../05_geospatial/04_scenario_geographical_features.html">Geographical Features (HPC)</a></li>
@@ -347,12 +296,6 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../06_advanced/04_nsrdb_distributed_api.html">NSRDB Distributed (API Key Required)</a></li>
-
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="../06_advanced/05_pvgis_distributed.html">PVGIS Distributed</a></li>
 
 
@@ -372,9 +315,6 @@
 
 
 
-
-
-<li class="toctree-l1"><a class="reference internal" href="../10_workshop_demos/02_duramat_live_demo.html">DuraMAT Live Demo (HPC)</a></li>
 
 
 </ul>
@@ -518,7 +458,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Weather Database Access</h1>
+    <h1><no title></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -527,12 +467,7 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Weather Database Access</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-location-example">Single location example</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nsrdb-hsds-on-kestrel">1. NSRDB - HSDS on Kestrel</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nsrdb-api">2. NSRDB - API</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pvgis">3. PVGIS</a></li>
+                <ul class="simple visible nav section-nav flex-column">
 </ul>
 
             </nav>
@@ -545,36 +480,259 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="weather-database-access">
-<h1>Weather Database Access<a class="headerlink" href="#weather-database-access" title="Link to this heading">#</a></h1>
-<p><strong>Requirements:</strong></p>
-<ul class="simple">
-<li><p>Internet access</p></li>
-<li><p>NSRDB API key. API keys are free. You can request and obtain an API key in about 5 minutes. To get your own key, visit <a class="reference external" href="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a></p></li>
-<li><p>Step <strong>1.</strong> is for Kestrel HPC users. You will need an account with NLR’s Kestrel computer for this method.</p></li>
-</ul>
-<p><strong>Objectives:</strong></p>
-<p>Using direct access to large scale weather databases, we’re going to estimate the minimum standoff distance for a roof mounted PV system. We’ll do this in 3 ways using both the NSRDB and PVGIS database.</p>
-<ol class="arabic simple">
-<li><p>Single Location, NSRDB via NLR’s high performance computer, Kestrel.</p></li>
-<li><p>Single Location via NSRDB public API key.</p></li>
-<li><p>Single Location via the PVGIS public database</p></li>
-</ol>
-<p><strong>Background:</strong></p>
-<p>This journal will demonstrate all existing built-in methods for directly accessing public weather databases. Some methods are restriced to certain user groups. For general users, see methods <strong>2</strong> and <strong>3</strong>. For users with an active Kestrel HPC account, you may use method <strong>1</strong> as well as <strong>2</strong> and <strong>3</strong>.</p>
-<p>For all users and all steps: This journal will run significantly longer than other tutorials and have significant internet traffic as you fetch large datasets.</p>
-<p>This example demonstrates the calculation of a minimum standoff distance necessary for roof-mounted PV modules to ensure that the <span class="math notranslate nohighlight">\(T_{98}\)</span> operational temperature remains under 70°C, in which case the more rigorous thermal stability testing requirements of IEC TS 63126 would not needed to be considered. We use data from [Fuentes, 1987] to model the approximate exponential decay in temperature, <span class="math notranslate nohighlight">\(T(X)\)</span>, with increasing standoff distance, <span class="math notranslate nohighlight">\(X\)</span>, as,</p>
-<div class="math notranslate nohighlight">
-\[ X = -X_0 \ln\left(1-\frac{T_0-T}{\Delta T}\right)\]</div>
-<p>where <span class="math notranslate nohighlight">\(T_0\)</span> is the temperature for <span class="math notranslate nohighlight">\(X=0\)</span> (insulated back) and <span class="math notranslate nohighlight">\(\Delta T\)</span> is the temperature difference between an insulated back (<span class="math notranslate nohighlight">\(X=0\)</span>) and open rack mounting configuration (<span class="math notranslate nohighlight">\(X=\infty)\)</span>.</p>
-<p>The following figure showcases this calulation for the entire United States. We used pvlib and data from the National Solar Radiation Database (NSRDB) to calculate the module temperatures for different mounting configuration and applied our model to obtain the standoff distance for roof-mounted PV systems.</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="single-location-example">
-<h1>Single location example<a class="headerlink" href="#single-location-example" title="Link to this heading">#</a></h1>
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Weather Database Access</span>
+<span class="c1">#</span>
+<span class="c1"># **Requirements:**</span>
+<span class="c1"># - Internet access</span>
+<span class="c1"># - NSRDB API key. API keys are free. You can request and obtain an API key in about 5 minutes. To get your own key, visit https://developer.nlr.gov/signup/</span>
+<span class="c1"># - Step **1.** is for Kestrel HPC users. You will need an account with NLR&#39;s Kestrel computer for this method.</span>
+<span class="c1">#</span>
+<span class="c1"># **Objectives:**</span>
+<span class="c1">#</span>
+<span class="c1"># Using direct access to large scale weather databases, we&#39;re going to estimate the minimum standoff distance for a roof mounted PV system. We&#39;ll do this in 3 ways using both the NSRDB and PVGIS database.</span>
+<span class="c1"># 1. Single Location, NSRDB via NLR&#39;s high performance computer, Kestrel.</span>
+<span class="c1"># 2. Single Location via NSRDB public API key.</span>
+<span class="c1"># 3. Single Location via the PVGIS public database</span>
+<span class="c1">#</span>
+<span class="c1"># **Background:**</span>
+<span class="c1">#</span>
+<span class="c1"># This journal will demonstrate all existing built-in methods for directly accessing public weather databases. Some methods are restriced to certain user groups. For general users, see methods **2** and **3**. For users with an active Kestrel HPC account, you may use method **1** as well as **2** and **3**.</span>
+<span class="c1">#</span>
+<span class="c1"># For all users and all steps: This journal will run significantly longer than other tutorials and have significant internet traffic as you fetch large datasets.</span>
+
+<span class="c1"># This example demonstrates the calculation of a minimum standoff distance necessary for roof-mounted PV modules to ensure that the $T_{98}$ operational temperature remains under 70°C, in which case the more rigorous thermal stability testing requirements of IEC TS 63126 would not needed to be considered. We use data from [Fuentes, 1987] to model the approximate exponential decay in temperature, $T(X)$, with increasing standoff distance, $X$, as,</span>
+<span class="c1">#</span>
+<span class="c1"># $$ X = -X_0 \ln\left(1-\frac{T_0-T}{\Delta T}\right)$$</span>
+<span class="c1">#</span>
+<span class="c1"># where $T_0$ is the temperature for $X=0$ (insulated back) and $\Delta T$ is the temperature difference between an insulated back ($X=0$) and open rack mounting configuration ($X=\infty)$.</span>
+<span class="c1">#</span>
+<span class="c1"># The following figure showcases this calulation for the entire United States. We used pvlib and data from the National Solar Radiation Database (NSRDB) to calculate the module temperatures for different mounting configuration and applied our model to obtain the standoff distance for roof-mounted PV systems.</span>
+
+<span class="c1"># # Single location example</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
-<span class="c1"># !pip install pvdeg</span>
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pvdeg
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pvdeg in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (0.1.dev1+g5b9c72c94)
+Requirement already satisfied: aiohttp==3.13.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.13.4)
+Requirement already satisfied: numpy&gt;=1.19.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2.4.4)
+Requirement already satisfied: pvlib&gt;=0.12.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.15.0)
+Requirement already satisfied: scipy&gt;1.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.17.1)
+Requirement already satisfied: NLR-rex in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.5.0)
+Requirement already satisfied: cartopy in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.25.0)
+Requirement already satisfied: dask[dataframe] in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2026.3.0)
+Requirement already satisfied: dask-jobqueue in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.9.0)
+Requirement already satisfied: bokeh in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.9.0)
+Requirement already satisfied: geopy in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2.4.1)
+Requirement already satisfied: h5netcdf in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.8.1)
+Requirement already satisfied: h5py&lt;=3.14.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.14.0)
+Requirement already satisfied: jupyterlab in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (4.5.6)
+Requirement already satisfied: matplotlib in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.10.8)
+Requirement already satisfied: netCDF4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.7.4)
+Requirement already satisfied: notebook in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (7.5.5)
+Requirement already satisfied: numba in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.65.0)
+Requirement already satisfied: openpyxl in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.1.5)
+Requirement already satisfied: pandas in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2.3.3)
+Requirement already satisfied: photovoltaic in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.1.9)
+Requirement already satisfied: python-dateutil in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2.9.0.post0)
+Requirement already satisfied: pytz in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2026.1.post1)
+Requirement already satisfied: seaborn in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.13.2)
+Requirement already satisfied: tables in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.11.1)
+Requirement already satisfied: tqdm in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (4.67.3)
+Requirement already satisfied: xarray in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2026.2.0)
+Requirement already satisfied: pre-commit in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (4.5.1)
+Requirement already satisfied: sympy in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.14.0)
+Requirement already satisfied: zarr in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.1.6)
+Requirement already satisfied: jupytext in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.19.1)
+Requirement already satisfied: aiohappyeyeballs&gt;=2.5.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (2.6.1)
+Requirement already satisfied: aiosignal&gt;=1.4.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (1.4.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: attrs&gt;=17.3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (26.1.0)
+Requirement already satisfied: frozenlist&gt;=1.1.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (1.8.0)
+Requirement already satisfied: multidict&lt;7.0,&gt;=4.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (6.7.1)
+Requirement already satisfied: propcache&gt;=0.2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (0.4.1)
+Requirement already satisfied: yarl&lt;2.0,&gt;=1.17.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (1.23.0)
+Requirement already satisfied: idna&gt;=2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from yarl&lt;2.0,&gt;=1.17.0-&gt;aiohttp==3.13.4-&gt;pvdeg) (3.11)
+Requirement already satisfied: typing-extensions&gt;=4.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiosignal&gt;=1.4.0-&gt;aiohttp==3.13.4-&gt;pvdeg) (4.15.0)
+Requirement already satisfied: requests in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvlib&gt;=0.12.0-&gt;pvdeg) (2.33.1)
+Requirement already satisfied: tzdata&gt;=2022.7 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pandas-&gt;pvdeg) (2026.1)
+Requirement already satisfied: six&gt;=1.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from python-dateutil-&gt;pvdeg) (1.17.0)
+Requirement already satisfied: Jinja2&gt;=2.9 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (3.1.6)
+Requirement already satisfied: contourpy&gt;=1.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (1.3.3)
+Requirement already satisfied: narwhals&gt;=1.13 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (2.19.0)
+Requirement already satisfied: packaging&gt;=16.8 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (26.0)
+Requirement already satisfied: pillow&gt;=7.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (12.2.0)
+Requirement already satisfied: PyYAML&gt;=3.10 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (6.0.3)
+Requirement already satisfied: tornado&gt;=6.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (6.5.5)
+Requirement already satisfied: xyzservices&gt;=2021.09.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (2026.3.0)
+Requirement already satisfied: MarkupSafe&gt;=2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from Jinja2&gt;=2.9-&gt;bokeh-&gt;pvdeg) (3.0.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: shapely&gt;=2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from cartopy-&gt;pvdeg) (2.1.2)
+Requirement already satisfied: pyshp&gt;=2.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from cartopy-&gt;pvdeg) (3.0.3)
+Requirement already satisfied: pyproj&gt;=3.3.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from cartopy-&gt;pvdeg) (3.7.2)
+Requirement already satisfied: cycler&gt;=0.10 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib-&gt;pvdeg) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib-&gt;pvdeg) (4.62.1)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib-&gt;pvdeg) (1.5.0)
+Requirement already satisfied: pyparsing&gt;=3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib-&gt;pvdeg) (3.3.2)
+Requirement already satisfied: certifi in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pyproj&gt;=3.3.1-&gt;cartopy-&gt;pvdeg) (2026.2.25)
+Requirement already satisfied: distributed&gt;=2022.02.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask-jobqueue-&gt;pvdeg) (2026.3.0)
+Requirement already satisfied: click&gt;=8.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (8.3.2)
+Requirement already satisfied: cloudpickle&gt;=3.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (3.1.2)
+Requirement already satisfied: fsspec&gt;=2021.09.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (2026.3.0)
+Requirement already satisfied: partd&gt;=1.4.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (1.4.2)
+Requirement already satisfied: toolz&gt;=0.12.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (1.1.0)
+Requirement already satisfied: importlib_metadata&gt;=4.13.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (9.0.0)
+Requirement already satisfied: locket&gt;=1.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (1.0.0)
+Requirement already satisfied: msgpack&gt;=1.0.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (1.1.2)
+Requirement already satisfied: psutil&gt;=5.8.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (7.2.2)
+Requirement already satisfied: sortedcontainers&gt;=2.0.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (2.4.0)
+Requirement already satisfied: tblib!=3.2.0,!=3.2.1,&gt;=1.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (3.2.2)
+Requirement already satisfied: urllib3&gt;=1.26.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (2.6.3)
+Requirement already satisfied: zict&gt;=3.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (3.0.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: zipp&gt;=3.20 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from importlib_metadata&gt;=4.13.0-&gt;dask[dataframe]-&gt;pvdeg) (3.23.0)
+Requirement already satisfied: pyarrow&gt;=16.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (23.0.1)
+Requirement already satisfied: geographiclib&lt;3,&gt;=1.52 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from geopy-&gt;pvdeg) (2.1)
+Requirement already satisfied: async-lru&gt;=1.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (2.3.0)
+Requirement already satisfied: httpx&lt;1,&gt;=0.25.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (0.28.1)
+Requirement already satisfied: ipykernel!=6.30.0,&gt;=6.5.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (7.2.0)
+Requirement already satisfied: jupyter-core in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (5.9.1)
+Requirement already satisfied: jupyter-lsp&gt;=2.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (2.3.1)
+Requirement already satisfied: jupyter-server&lt;3,&gt;=2.4.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (2.17.0)
+Requirement already satisfied: jupyterlab-server&lt;3,&gt;=2.28.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (2.28.0)
+Requirement already satisfied: notebook-shim&gt;=0.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (0.2.4)
+Requirement already satisfied: setuptools&gt;=41.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (79.0.1)
+Requirement already satisfied: traitlets in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (5.14.3)
+Requirement already satisfied: anyio in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from httpx&lt;1,&gt;=0.25.0-&gt;jupyterlab-&gt;pvdeg) (4.13.0)
+Requirement already satisfied: httpcore==1.* in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from httpx&lt;1,&gt;=0.25.0-&gt;jupyterlab-&gt;pvdeg) (1.0.9)
+Requirement already satisfied: h11&gt;=0.16 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from httpcore==1.*-&gt;httpx&lt;1,&gt;=0.25.0-&gt;jupyterlab-&gt;pvdeg) (0.16.0)
+Requirement already satisfied: argon2-cffi&gt;=21.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (25.1.0)
+Requirement already satisfied: jupyter-client&gt;=7.4.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (8.8.0)
+Requirement already satisfied: jupyter-events&gt;=0.11.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.12.0)
+Requirement already satisfied: jupyter-server-terminals&gt;=0.4.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.5.4)
+Requirement already satisfied: nbconvert&gt;=6.4.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (7.17.1)
+Requirement already satisfied: nbformat&gt;=5.3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (5.10.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: overrides&gt;=5.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (7.7.0)
+Requirement already satisfied: prometheus-client&gt;=0.9 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.25.0)
+Requirement already satisfied: pyzmq&gt;=24 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (27.1.0)
+Requirement already satisfied: send2trash&gt;=1.8.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (2.1.0)
+Requirement already satisfied: terminado&gt;=0.8.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.18.1)
+Requirement already satisfied: websocket-client&gt;=1.7 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.9.0)
+Requirement already satisfied: babel&gt;=2.10 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (2.18.0)
+Requirement already satisfied: json5&gt;=0.9.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (0.14.0)
+Requirement already satisfied: jsonschema&gt;=4.18.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (4.26.0)
+Requirement already satisfied: argon2-cffi-bindings in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (25.1.0)
+Requirement already satisfied: comm&gt;=0.1.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.2.3)
+Requirement already satisfied: debugpy&gt;=1.6.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (1.8.20)
+Requirement already satisfied: ipython&gt;=7.23.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (9.10.1)
+Requirement already satisfied: matplotlib-inline&gt;=0.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.2.1)
+Requirement already satisfied: nest-asyncio&gt;=1.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (1.6.0)
+Requirement already satisfied: decorator&gt;=4.3.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (5.2.1)
+Requirement already satisfied: ipython-pygments-lexers&gt;=1.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (1.1.1)
+Requirement already satisfied: jedi&gt;=0.18.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.19.2)
+Requirement already satisfied: pexpect&gt;4.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (4.9.0)
+Requirement already satisfied: prompt_toolkit&lt;3.1.0,&gt;=3.0.41 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (3.0.52)
+Requirement already satisfied: pygments&gt;=2.11.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (2.20.0)
+Requirement already satisfied: stack_data&gt;=0.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.6.3)
+Requirement already satisfied: wcwidth in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.6.0)
+Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jedi&gt;=0.18.1-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.8.6)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (2025.9.1)
+Requirement already satisfied: referencing&gt;=0.28.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (0.37.0)
+Requirement already satisfied: rpds-py&gt;=0.25.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (0.30.0)
+Requirement already satisfied: platformdirs&gt;=2.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-core-&gt;jupyterlab-&gt;pvdeg) (4.9.6)
+Requirement already satisfied: python-json-logger&gt;=2.0.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (4.1.0)
+Requirement already satisfied: rfc3339-validator in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.1.4)
+Requirement already satisfied: rfc3986-validator&gt;=0.1.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.1.1)
+Requirement already satisfied: fqdn in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.5.1)
+Requirement already satisfied: isoduration in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (20.11.0)
+Requirement already satisfied: jsonpointer&gt;1.13 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (3.1.1)
+Requirement already satisfied: rfc3987-syntax&gt;=1.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.1.0)
+Requirement already satisfied: uri-template in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.3.0)
+Requirement already satisfied: webcolors&gt;=24.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (25.10.0)
+Requirement already satisfied: beautifulsoup4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (4.14.3)
+Requirement already satisfied: bleach!=5.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bleach[css]!=5.0.0-&gt;nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (6.3.0)
+Requirement already satisfied: defusedxml in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.7.1)
+Requirement already satisfied: jupyterlab-pygments in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.3.0)
+Requirement already satisfied: mistune&lt;4,&gt;=2.0.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (3.2.0)
+Requirement already satisfied: nbclient&gt;=0.5.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.10.4)
+Requirement already satisfied: pandocfilters&gt;=1.4.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.5.1)
+Requirement already satisfied: webencodings in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bleach!=5.0.0-&gt;bleach[css]!=5.0.0-&gt;nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.5.1)
+Requirement already satisfied: tinycss2&lt;1.5,&gt;=1.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bleach[css]!=5.0.0-&gt;nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.4.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: fastjsonschema&gt;=2.15 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbformat&gt;=5.3.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (2.21.2)
+Requirement already satisfied: ptyprocess&gt;=0.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pexpect&gt;4.3-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.7.0)
+Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from requests-&gt;pvlib&gt;=0.12.0-&gt;pvdeg) (3.4.7)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: lark&gt;=1.2.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from rfc3987-syntax&gt;=1.1.0-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.3.1)
+Requirement already satisfied: executing&gt;=1.2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (2.2.1)
+Requirement already satisfied: asttokens&gt;=2.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (3.0.1)
+Requirement already satisfied: pure-eval in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.2.3)
+Requirement already satisfied: cffi&gt;=1.0.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (2.0.0)
+Requirement already satisfied: pycparser in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from cffi&gt;=1.0.1-&gt;argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (3.0)
+Requirement already satisfied: soupsieve&gt;=1.6.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from beautifulsoup4-&gt;nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (2.8.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: arrow&gt;=0.15.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.4.0)
+Requirement already satisfied: markdown-it-py&gt;=1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupytext-&gt;pvdeg) (3.0.0)
+Requirement already satisfied: mdit-py-plugins in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupytext-&gt;pvdeg) (0.5.0)
+Requirement already satisfied: mdurl~=0.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from markdown-it-py&gt;=1.0-&gt;jupytext-&gt;pvdeg) (0.1.2)
+Requirement already satisfied: cftime in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from netCDF4-&gt;pvdeg) (1.6.5)
+Requirement already satisfied: h5pyd&gt;=0.18.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from NLR-rex-&gt;pvdeg) (0.24.0)
+Requirement already satisfied: s3fs&gt;=2023.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from NLR-rex-&gt;pvdeg) (2026.3.0)
+Requirement already satisfied: scikit-learn&gt;=1.6.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from NLR-rex-&gt;pvdeg) (1.8.0)
+Requirement already satisfied: toml&gt;=0.10.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from NLR-rex-&gt;pvdeg) (0.10.2)
+Requirement already satisfied: requests_unixsocket in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from h5pyd&gt;=0.18.0-&gt;NLR-rex-&gt;pvdeg) (0.4.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: aiobotocore&lt;4.0.0,&gt;=2.19.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (3.4.0)
+Requirement already satisfied: aioitertools&lt;1.0.0,&gt;=0.5.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiobotocore&lt;4.0.0,&gt;=2.19.0-&gt;s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (0.13.0)
+Requirement already satisfied: botocore&lt;1.42.85,&gt;=1.42.79 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiobotocore&lt;4.0.0,&gt;=2.19.0-&gt;s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (1.42.84)
+Requirement already satisfied: jmespath&lt;2.0.0,&gt;=0.7.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiobotocore&lt;4.0.0,&gt;=2.19.0-&gt;s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (1.1.0)
+Requirement already satisfied: wrapt&lt;3.0.0,&gt;=1.10.10 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiobotocore&lt;4.0.0,&gt;=2.19.0-&gt;s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (2.1.2)
+Requirement already satisfied: joblib&gt;=1.3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from scikit-learn&gt;=1.6.1-&gt;NLR-rex-&gt;pvdeg) (1.5.3)
+Requirement already satisfied: threadpoolctl&gt;=3.2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from scikit-learn&gt;=1.6.1-&gt;NLR-rex-&gt;pvdeg) (3.6.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: llvmlite&lt;0.48,&gt;=0.47.0dev0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from numba-&gt;pvdeg) (0.47.0)
+Requirement already satisfied: et-xmlfile in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from openpyxl-&gt;pvdeg) (2.0.0)
+Requirement already satisfied: cfgv&gt;=2.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pre-commit-&gt;pvdeg) (3.5.0)
+Requirement already satisfied: identify&gt;=1.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pre-commit-&gt;pvdeg) (2.6.18)
+Requirement already satisfied: nodeenv&gt;=0.11.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pre-commit-&gt;pvdeg) (1.10.0)
+Requirement already satisfied: virtualenv&gt;=20.10.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pre-commit-&gt;pvdeg) (21.2.1)
+Requirement already satisfied: distlib&lt;1,&gt;=0.3.7 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from virtualenv&gt;=20.10.0-&gt;pre-commit-&gt;pvdeg) (0.4.0)
+Requirement already satisfied: filelock&lt;4,&gt;=3.24.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from virtualenv&gt;=20.10.0-&gt;pre-commit-&gt;pvdeg) (3.25.2)
+Requirement already satisfied: python-discovery&gt;=1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from virtualenv&gt;=20.10.0-&gt;pre-commit-&gt;pvdeg) (1.2.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from sympy-&gt;pvdeg) (1.3.0)
+Requirement already satisfied: numexpr&gt;=2.6.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from tables-&gt;pvdeg) (2.14.1)
+Requirement already satisfied: py-cpuinfo in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from tables-&gt;pvdeg) (9.0.0)
+Requirement already satisfied: blosc2&gt;=2.3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from tables-&gt;pvdeg) (4.1.2)
+Requirement already satisfied: ndindex in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from blosc2&gt;=2.3.0-&gt;tables-&gt;pvdeg) (1.10.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: donfig&gt;=0.8 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from zarr-&gt;pvdeg) (0.8.1.post1)
+Requirement already satisfied: google-crc32c&gt;=1.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from zarr-&gt;pvdeg) (1.8.0)
+Requirement already satisfied: numcodecs&gt;=0.14 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from zarr-&gt;pvdeg) (0.16.5)
 </pre></div>
 </div>
 </div>
@@ -596,24 +754,28 @@
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+
+
+<span class="c1"># # 1. NSRDB - HSDS on Kestrel</span>
+<span class="c1">#</span>
+<span class="c1"># This method requires a direct connection to NLR&#39;s high performance computer &quot;Kestrel&quot;. If you are not running this journal from Kestrel, skip this section and proceed to section **2.**</span>
+<span class="c1">#</span>
+<span class="c1"># In this step:</span>
+<span class="c1">#</span>
+<span class="c1"># First we select a database. Here, we will use the NSRDB. Since we are modeling a single location, we can pass the `weather_id` as tuple (lat, long). A location gid can be used as well. &#39;gid&#39; is a unique identifier to a geographic location within the NSRDB. We&#39;ll look at how to find gids later on.</span>
+<span class="c1">#</span>
+<span class="c1"># Next, we want to select a satellite, named dataset (year of data), and what weather attributes we want to fetch. For further options, see the documentation for `pvdeg.weather.get`</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1010-azure
 Python version  3.11.15 (main, Mar  3 2026, 16:10:12) [GCC 13.3.0]
-pvdeg version  0.1.dev1+gbed7f1a7c
+pvdeg version  0.1.dev1+g5b9c72c94
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="nsrdb-hsds-on-kestrel">
-<h1>1. NSRDB - HSDS on Kestrel<a class="headerlink" href="#nsrdb-hsds-on-kestrel" title="Link to this heading">#</a></h1>
-<p>This method requires a direct connection to NLR’s high performance computer “Kestrel”. If you are not running this journal from Kestrel, skip this section and proceed to section <strong>2.</strong></p>
-<p>In this step:</p>
-<p>First we select a database. Here, we will use the NSRDB. Since we are modeling a single location, we can pass the <code class="docutils literal notranslate"><span class="pre">weather_id</span></code> as tuple (lat, long). A location gid can be used as well. ‘gid’ is a unique identifier to a geographic location within the NSRDB. We’ll look at how to find gids later on.</p>
-<p>Next, we want to select a satellite, named dataset (year of data), and what weather attributes we want to fetch. For further options, see the documentation for <code class="docutils literal notranslate"><span class="pre">pvdeg.weather.get</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get weather data</span>
@@ -644,26 +806,25 @@ pvdeg version  0.1.dev1+gbed7f1a7c
 <span class="c1">#     conf_0=&#39;insulated_back_glass_polymer&#39;, conf_inf=&#39;open_rack_glass_polymer&#39;, T98=70, x_0=6.5, wind_factor=0.33)</span>
 <span class="c1"># print(pvdeg.standards.interpret_standoff(res))</span>
 <span class="c1"># print(meta)</span>
+
+
+<span class="c1"># `pvdeg.weather.get` returns the same variables as `weather.read` which we have used in each journal before this. We get a weather DataFrame and a meta-data dicitonary. Each contains a minimum of consistent fields, but may have additional fields based on the database accessed or the attributes requested.</span>
+<span class="c1">#</span>
+<span class="c1"># Lets verify the weather data we fetched by running a familiar calculation; standoff distance.</span>
+
+<span class="c1"># # 2. NSRDB - API</span>
+<span class="c1">#</span>
+<span class="c1"># To access the NLR NSRDB, you will need an API key. Key&#39;s are free, but require you to set up an account. Without an API key, you can use a demonstration API which is severely limited. To set up an account and get your API key, visit https://developer.nlr.gov/signup/</span>
+<span class="c1">#</span>
+<span class="c1"># Key Notes:</span>
+<span class="c1"># - set `attributes = []` to return all possible attributes (weather fields)</span>
+<span class="c1"># - There are 2 major methods with the API</span>
+<span class="c1">#     - names = &#39;tmy&#39; : generate a TMY-like weather dataframe aggregate. This will calculate the relative humidity from temperature and dew point.</span>
+<span class="c1">#     - names = &#39;2019&#39; : collect a weather dataframe including measured relative humidity.</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">pvdeg.weather.get</span></code> returns the same variables as <code class="docutils literal notranslate"><span class="pre">weather.read</span></code> which we have used in each journal before this. We get a weather DataFrame and a meta-data dicitonary. Each contains a minimum of consistent fields, but may have additional fields based on the database accessed or the attributes requested.</p>
-<p>Lets verify the weather data we fetched by running a familiar calculation; standoff distance.</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="nsrdb-api">
-<h1>2. NSRDB - API<a class="headerlink" href="#nsrdb-api" title="Link to this heading">#</a></h1>
-<p>To access the NLR NSRDB, you will need an API key. Key’s are free, but require you to set up an account. Without an API key, you can use a demonstration API which is severely limited. To set up an account and get your API key, visit <a class="reference external" href="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a></p>
-<p>Key Notes:</p>
-<ul class="simple">
-<li><p>set <code class="docutils literal notranslate"><span class="pre">attributes</span> <span class="pre">=</span> <span class="pre">[]</span></code> to return all possible attributes (weather fields)</p></li>
-<li><p>There are 2 major methods with the API</p>
-<ul>
-<li><p>names = ‘tmy’ : generate a TMY-like weather dataframe aggregate. This will calculate the relative humidity from temperature and dew point.</p></li>
-<li><p>names = ‘2019’ : collect a weather dataframe including measured relative humidity.</p></li>
-</ul>
-</li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load pre-saved weather data for this tutorial</span>
@@ -706,6 +867,11 @@ pvdeg version  0.1.dev1+gbed7f1a7c
 <span class="c1"># Clean metadata for consistent output</span>
 <span class="n">meta_clean</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">meta</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;irradiance_time_offset&quot;</span><span class="p">]}</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">meta_clean</span><span class="p">)</span>
+
+
+<span class="c1"># # 3. PVGIS</span>
+<span class="c1">#</span>
+<span class="c1"># This method uses the PVGIS database, a public resource. It requires no API key or user account.</span>
 </pre></div>
 </div>
 </div>
@@ -721,10 +887,6 @@ Level 2 certification is never required for this temperature                    
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="pvgis">
-<h1>3. PVGIS<a class="headerlink" href="#pvgis" title="Link to this heading">#</a></h1>
-<p>This method uses the PVGIS database, a public resource. It requires no API key or user account.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;PVGIS&quot;</span>
@@ -758,160 +920,17 @@ Level 2 certification is never required for this temperature                    
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">weather_id</span> <span class="o">=</span> <span class="p">(</span><span class="mf">24.7136</span><span class="p">,</span> <span class="mf">46.6753</span><span class="p">)</span>  <span class="c1"># Riyadh, Saudi Arabia</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># weather_arg = {&#39;map_variables&#39;: True}</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> 
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># TMY</span>
-<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">weather_db</span><span class="p">,</span> <span class="n">weather_id</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># Perform calculation</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">res</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">weather_df</span><span class="o">=</span><span class="n">weather_df</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>     <span class="mi">21</span>     <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/weather.py:199,</span> in <span class="ni">get</span><span class="nt">(database, id, geospatial, find_meta, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">197</span> <span class="k">elif</span> <span class="n">database</span> <span class="o">==</span> <span class="s2">&quot;PVGIS&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">198</span>     <span class="n">URL</span> <span class="o">=</span> <span class="s2">&quot;https://re.jrc.ec.europa.eu/api/v5_2/&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">199</span>     <span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">iotools</span><span class="o">.</span><span class="n">get_pvgis_tmy</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">200</span>         <span class="n">latitude</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="n">lon</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">URL</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
-<span class="g g-Whitespace">    </span><span class="mi">201</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">202</span>     <span class="n">inputs</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;inputs&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">203</span>     <span class="n">meta</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">]</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvlib/iotools/pvgis.py:523,</span> in <span class="ni">get_pvgis_tmy</span><span class="nt">(latitude, longitude, outputformat, usehorizon, userhorizon, startyear, endyear, map_variables, url, timeout, roll_utc_offset, coerce_year)</span>
-<span class="g g-Whitespace">    </span><span class="mi">521</span> <span class="k">if</span> <span class="n">endyear</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">522</span>     <span class="n">params</span><span class="p">[</span><span class="s1">&#39;endyear&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">endyear</span>
-<span class="ne">--&gt; </span><span class="mi">523</span> <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;tmy&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">524</span> <span class="c1"># PVGIS returns really well formatted error messages in JSON for HTTP/1.1</span>
-<span class="g g-Whitespace">    </span><span class="mi">525</span> <span class="c1"># 400 BAD REQUEST so try to return that if possible, otherwise raise the</span>
-<span class="g g-Whitespace">    </span><span class="mi">526</span> <span class="c1"># HTTP/1.1 error caught by requests</span>
-<span class="g g-Whitespace">    </span><span class="mi">527</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">res</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/requests/api.py:73,</span> in <span class="ni">get</span><span class="nt">(url, params, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">63</span><span class="w">     </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sends a GET request.</span>
-<span class="g g-Whitespace">     </span><span class="mi">64</span><span class="sd"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">65</span><span class="sd">     :param url: URL for the new :class:`Request` object.</span>
-<span class="sd">   (...)     70     :rtype: requests.Response</span>
-<span class="g g-Whitespace">     </span><span class="mi">71</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">73</span>     <span class="k">return</span> <span class="n">request</span><span class="p">(</span><span class="s2">&quot;get&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/requests/api.py:59,</span> in <span class="ni">request</span><span class="nt">(method, url, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="c1"># By using the &#39;with&#39; statement we are sure the session is closed, thus we</span>
-<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="c1"># avoid leaving sockets open which can trigger a ResourceWarning in some</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="c1"># cases, and look like a memory leak in others.</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span> <span class="k">with</span> <span class="n">sessions</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">59</span>     <span class="k">return</span> <span class="n">session</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/requests/sessions.py:592,</span> in <span class="ni">Session.request</span><span class="nt">(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)</span>
-<span class="g g-Whitespace">    </span><span class="mi">587</span> <span class="n">send_kwargs</span> <span class="o">=</span> <span class="p">{</span>
-<span class="g g-Whitespace">    </span><span class="mi">588</span>     <span class="s2">&quot;timeout&quot;</span><span class="p">:</span> <span class="n">timeout</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">589</span>     <span class="s2">&quot;allow_redirects&quot;</span><span class="p">:</span> <span class="n">allow_redirects</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">590</span> <span class="p">}</span>
-<span class="g g-Whitespace">    </span><span class="mi">591</span> <span class="n">send_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">592</span> <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">prep</span><span class="p">,</span> <span class="o">**</span><span class="n">send_kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">594</span> <span class="k">return</span> <span class="n">resp</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/requests/sessions.py:706,</span> in <span class="ni">Session.send</span><span class="nt">(self, request, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">703</span> <span class="n">start</span> <span class="o">=</span> <span class="n">preferred_clock</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">705</span> <span class="c1"># Send the request</span>
-<span class="ne">--&gt; </span><span class="mi">706</span> <span class="n">r</span> <span class="o">=</span> <span class="n">adapter</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">708</span> <span class="c1"># Total elapsed time of the request (approximately)</span>
-<span class="g g-Whitespace">    </span><span class="mi">709</span> <span class="n">elapsed</span> <span class="o">=</span> <span class="n">preferred_clock</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/requests/adapters.py:645,</span> in <span class="ni">HTTPAdapter.send</span><span class="nt">(self, request, stream, timeout, verify, cert, proxies)</span>
-<span class="g g-Whitespace">    </span><span class="mi">642</span>     <span class="n">timeout</span> <span class="o">=</span> <span class="n">TimeoutSauce</span><span class="p">(</span><span class="n">connect</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">read</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">644</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">645</span>     <span class="n">resp</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">646</span>         <span class="n">method</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">647</span>         <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">648</span>         <span class="n">body</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">body</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">649</span>         <span class="n">headers</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">650</span>         <span class="n">redirect</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">651</span>         <span class="n">assert_same_host</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">652</span>         <span class="n">preload_content</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">653</span>         <span class="n">decode_content</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">654</span>         <span class="n">retries</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_retries</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">655</span>         <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">656</span>         <span class="n">chunked</span><span class="o">=</span><span class="n">chunked</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">657</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">659</span> <span class="k">except</span> <span class="p">(</span><span class="n">ProtocolError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">)</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">660</span>     <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/connectionpool.py:787,</span> in <span class="ni">HTTPConnectionPool.urlopen</span><span class="nt">(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, preload_content, decode_content, **response_kw)</span>
-<span class="g g-Whitespace">    </span><span class="mi">784</span> <span class="n">response_conn</span> <span class="o">=</span> <span class="n">conn</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">release_conn</span> <span class="k">else</span> <span class="kc">None</span>
-<span class="g g-Whitespace">    </span><span class="mi">786</span> <span class="c1"># Make the request on the HTTPConnection object</span>
-<span class="ne">--&gt; </span><span class="mi">787</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">788</span>     <span class="n">conn</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">789</span>     <span class="n">method</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">790</span>     <span class="n">url</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">791</span>     <span class="n">timeout</span><span class="o">=</span><span class="n">timeout_obj</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">792</span>     <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">793</span>     <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">794</span>     <span class="n">chunked</span><span class="o">=</span><span class="n">chunked</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">795</span>     <span class="n">retries</span><span class="o">=</span><span class="n">retries</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">796</span>     <span class="n">response_conn</span><span class="o">=</span><span class="n">response_conn</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">797</span>     <span class="n">preload_content</span><span class="o">=</span><span class="n">preload_content</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">798</span>     <span class="n">decode_content</span><span class="o">=</span><span class="n">decode_content</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">799</span>     <span class="o">**</span><span class="n">response_kw</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">800</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">802</span> <span class="c1"># Everything went great!</span>
-<span class="g g-Whitespace">    </span><span class="mi">803</span> <span class="n">clean_exit</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/connectionpool.py:464,</span> in <span class="ni">HTTPConnectionPool._make_request</span><span class="nt">(self, conn, method, url, body, headers, retries, timeout, chunked, response_conn, preload_content, decode_content, enforce_content_length)</span>
-<span class="g g-Whitespace">    </span><span class="mi">461</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">462</span>     <span class="c1"># Trigger any extra validation we need to do.</span>
-<span class="g g-Whitespace">    </span><span class="mi">463</span>     <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">464</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_validate_conn</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">465</span>     <span class="k">except</span> <span class="p">(</span><span class="n">SocketTimeout</span><span class="p">,</span> <span class="n">BaseSSLError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">466</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_raise_timeout</span><span class="p">(</span><span class="n">err</span><span class="o">=</span><span class="n">e</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout_value</span><span class="o">=</span><span class="n">conn</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/connectionpool.py:1093,</span> in <span class="ni">HTTPSConnectionPool._validate_conn</span><span class="nt">(self, conn)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1091</span> <span class="c1"># Force connect early to allow us to validate the connection.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1092</span> <span class="k">if</span> <span class="n">conn</span><span class="o">.</span><span class="n">is_closed</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1093</span>     <span class="n">conn</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1095</span> <span class="c1"># TODO revise this, see https://github.com/urllib3/urllib3/issues/2791</span>
-<span class="g g-Whitespace">   </span><span class="mi">1096</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">conn</span><span class="o">.</span><span class="n">is_verified</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">conn</span><span class="o">.</span><span class="n">proxy_is_verified</span><span class="p">:</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/connection.py:759,</span> in <span class="ni">HTTPSConnection.connect</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">757</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">758</span>     <span class="n">sock</span><span class="p">:</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span> <span class="o">|</span> <span class="n">ssl</span><span class="o">.</span><span class="n">SSLSocket</span>
-<span class="ne">--&gt; </span><span class="mi">759</span>     <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="n">sock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new_conn</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">760</span>     <span class="n">server_hostname</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span>
-<span class="g g-Whitespace">    </span><span class="mi">761</span>     <span class="n">tls_in_tls</span> <span class="o">=</span> <span class="kc">False</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/connection.py:204,</span> in <span class="ni">HTTPConnection._new_conn</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">199</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Establish a socket connection and set nodelay settings on it.</span>
-<span class="g g-Whitespace">    </span><span class="mi">200</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">201</span><span class="sd"> :return: New socket connection.</span>
-<span class="g g-Whitespace">    </span><span class="mi">202</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">203</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">204</span>     <span class="n">sock</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">create_connection</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">205</span>         <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dns_host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">),</span>
-<span class="g g-Whitespace">    </span><span class="mi">206</span>         <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">207</span>         <span class="n">source_address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">source_address</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">208</span>         <span class="n">socket_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">socket_options</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">209</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">210</span> <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">gaierror</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">211</span>     <span class="k">raise</span> <span class="n">NameResolutionError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3/util/connection.py:73,</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address, socket_options)</span>
-<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="k">if</span> <span class="n">source_address</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">72</span>     <span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">source_address</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">73</span> <span class="n">sock</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">sa</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">74</span> <span class="c1"># Break explicitly a reference cycle</span>
-<span class="g g-Whitespace">     </span><span class="mi">75</span> <span class="n">err</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  24.7 was used.
+The estimated T₉₈ of an insulated-back module is 89.6°C. 
+The estimated T₉₈ of an open-rack module is 63.9°C. 
+Level 0 certification is valid for a standoff greather than 9.3 cm. 
+Level 1 certification is required for a standoff between 9.3 cm, and 3.0 cm. 
+Level 2 certification is required for a standoff less than 3.0 cm.
+{&#39;latitude&#39;: 24.7136, &#39;longitude&#39;: 46.6753, &#39;altitude&#39;: 646.0, &#39;wind_height&#39;: 10, &#39;Source&#39;: &#39;PVGIS&#39;}
 </pre></div>
 </div>
 </div>
 </div>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -978,12 +997,7 @@ Level 2 certification is never required for this temperature                    
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Weather Database Access</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-location-example">Single location example</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nsrdb-hsds-on-kestrel">1. NSRDB - HSDS on Kestrel</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nsrdb-api">2. NSRDB - API</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pvgis">3. PVGIS</a></li>
+    <ul class="simple visible nav section-nav flex-column">
 </ul>
 
   </nav></div>

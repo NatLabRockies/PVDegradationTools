@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>LETID Outdoor &#8212; PVDEG Tutorials</title>
+    <title>&lt;no title&gt; &#8212; PVDEG Tutorials</title>
   
   
   
@@ -60,8 +60,6 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '02_degradation/03_letid_outdoor';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -182,14 +180,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../01_basics/03_spectral_degradation.html">Spectral Degradation</a></li>
 
 
-<li class="toctree-l1"><a class="reference internal" href="../01_basics/04_weather_database_access.html">Weather Database Access</a></li>
-
-
-
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">02 - Degradation Mechanisms</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_bo_lid_accelerated_test.html">B-O LID Accelerated Test</a></li>
 
 
@@ -197,14 +190,6 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="02_letid_accelerated_test.html">LETID Accelerated Test</a></li>
-
-
-
-
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">LETID Outdoor</a></li>
 
 
 
@@ -237,39 +222,9 @@
 
 
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 - Monte Carlo Simulations</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_monte_carlo/01_arrhenius.html">Arrhenius Monte Carlo</a></li>
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="../03_monte_carlo/02_standoff.html">Standoff Monte Carlo</a></li>
-
-
-
-
-
-</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">04 - Scenarios</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../04_scenario/01_scenario_temperature.html">Temperature Scenario</a></li>
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="../04_scenario/02_scenario_single_location.html">Single Location</a></li>
-
-
-
-
-
-
-
 
 
 
@@ -302,12 +257,6 @@
 
 
 
-
-
-<li class="toctree-l1"><a class="reference internal" href="../05_geospatial/02_geospatial_world_map.html">Geospatial World Map (HPC)</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="../05_geospatial/03_letid_outdoor_geospatial_demo.html">LETID Outdoor Geospatial Demo (HPC)</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="../05_geospatial/04_scenario_geographical_features.html">Geographical Features (HPC)</a></li>
@@ -347,12 +296,6 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../06_advanced/04_nsrdb_distributed_api.html">NSRDB Distributed (API Key Required)</a></li>
-
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="../06_advanced/05_pvgis_distributed.html">PVGIS Distributed</a></li>
 
 
@@ -372,9 +315,6 @@
 
 
 
-
-
-<li class="toctree-l1"><a class="reference internal" href="../10_workshop_demos/02_duramat_live_demo.html">DuraMAT Live Demo (HPC)</a></li>
 
 
 </ul>
@@ -518,7 +458,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>LETID Outdoor</h1>
+    <h1><no title></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -527,15 +467,7 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">LETID Outdoor</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-timeseries">Set up timeseries</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#device-parameters">Device parameters</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#degradation-parameters">Degradation parameters</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-through-timesteps">Run through timesteps</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#finish-calculating-degraded-device-parameters">Finish calculating degraded device parameters.</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-results">Plot the results</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-function-calc-letid-outdoors-wraps-all-of-the-steps-above-into-a-single-function">The function <code class="docutils literal notranslate"><span class="pre">calc_letid_outdoors</span></code> wraps all of the steps above into a single function:</a></li>
+                <ul class="simple visible nav section-nav flex-column">
 </ul>
 
             </nav>
@@ -548,27 +480,248 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="letid-outdoor">
-<h1>LETID Outdoor<a class="headerlink" href="#letid-outdoor" title="Link to this heading">#</a></h1>
-<p>This is an example on how to model LETID progression in outdoor environments</p>
-<p>We can use the equations in this library to model LETID progression in a simulated outdoor environment, given that we have weather and system data. This example makes use of tools from the fabulous <a class="reference external" href="https://pvlib-python.readthedocs.io/en/stable/">pvlib</a> library to calculate system irradiance and temperature, which we use to calculate progression in LETID states.</p>
-<p>This will illustrate the potential of “Temporary Recovery”, i.e., the backwards transition of the LETID defect B-&gt;A that can take place with carrier injection at lower temperatures.</p>
-<p><strong>Requirements:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">pvlib</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></p></li>
-</ul>
-<p><strong>Objectives:</strong></p>
-<ol class="arabic simple">
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">pvlib</span></code> and provided weather files to set up a temperature and injection timeseries</p></li>
-<li><p>Define necessary solar cell device parameters</p></li>
-<li><p>Define necessary degradation parameters: degraded lifetime and defect states</p></li>
-<li><p>Run through timeseries, calculating defect states</p></li>
-<li><p>Calculate device degradation and plot</p></li>
-</ol>
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # LETID Outdoor</span>
+<span class="c1">#</span>
+<span class="c1"># This is an example on how to model LETID progression in outdoor environments</span>
+<span class="c1">#</span>
+<span class="c1"># We can use the equations in this library to model LETID progression in a simulated outdoor environment, given that we have weather and system data. This example makes use of tools from the fabulous [pvlib](https://pvlib-python.readthedocs.io/en/stable/) library to calculate system irradiance and temperature, which we use to calculate progression in LETID states.</span>
+<span class="c1">#</span>
+<span class="c1"># This will illustrate the potential of &quot;Temporary Recovery&quot;, i.e., the backwards transition of the LETID defect B-&gt;A that can take place with carrier injection at lower temperatures.</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1"># **Requirements:**</span>
+<span class="c1"># - `pvlib`, `pandas`, `numpy`, `matplotlib`</span>
+<span class="c1">#</span>
+<span class="c1"># **Objectives:**</span>
+<span class="c1"># 1. Use `pvlib` and provided weather files to set up a temperature and injection timeseries</span>
+<span class="c1"># 2. Define necessary solar cell device parameters</span>
+<span class="c1"># 3. Define necessary degradation parameters: degraded lifetime and defect states</span>
+<span class="c1"># 4. Run through timeseries, calculating defect states</span>
+<span class="c1"># 5. Calculate device degradation and plot</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
-<span class="c1"># !pip install pvdeg</span>
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pvdeg
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pvdeg in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (0.1.dev1+g5b9c72c94)
+Requirement already satisfied: aiohttp==3.13.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.13.4)
+Requirement already satisfied: numpy&gt;=1.19.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2.4.4)
+Requirement already satisfied: pvlib&gt;=0.12.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.15.0)
+Requirement already satisfied: scipy&gt;1.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.17.1)
+Requirement already satisfied: NLR-rex in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.5.0)
+Requirement already satisfied: cartopy in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.25.0)
+Requirement already satisfied: dask[dataframe] in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2026.3.0)
+Requirement already satisfied: dask-jobqueue in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.9.0)
+Requirement already satisfied: bokeh in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.9.0)
+Requirement already satisfied: geopy in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2.4.1)
+Requirement already satisfied: h5netcdf in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.8.1)
+Requirement already satisfied: h5py&lt;=3.14.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.14.0)
+Requirement already satisfied: jupyterlab in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (4.5.6)
+Requirement already satisfied: matplotlib in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.10.8)
+Requirement already satisfied: netCDF4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.7.4)
+Requirement already satisfied: notebook in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (7.5.5)
+Requirement already satisfied: numba in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.65.0)
+Requirement already satisfied: openpyxl in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.1.5)
+Requirement already satisfied: pandas in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2.3.3)
+Requirement already satisfied: photovoltaic in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.1.9)
+Requirement already satisfied: python-dateutil in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2.9.0.post0)
+Requirement already satisfied: pytz in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2026.1.post1)
+Requirement already satisfied: seaborn in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.13.2)
+Requirement already satisfied: tables in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.11.1)
+Requirement already satisfied: tqdm in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (4.67.3)
+Requirement already satisfied: xarray in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2026.2.0)
+Requirement already satisfied: pre-commit in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (4.5.1)
+Requirement already satisfied: sympy in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.14.0)
+Requirement already satisfied: zarr in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.1.6)
+Requirement already satisfied: jupytext in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.19.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: aiohappyeyeballs&gt;=2.5.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (2.6.1)
+Requirement already satisfied: aiosignal&gt;=1.4.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (1.4.0)
+Requirement already satisfied: attrs&gt;=17.3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (26.1.0)
+Requirement already satisfied: frozenlist&gt;=1.1.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (1.8.0)
+Requirement already satisfied: multidict&lt;7.0,&gt;=4.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (6.7.1)
+Requirement already satisfied: propcache&gt;=0.2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (0.4.1)
+Requirement already satisfied: yarl&lt;2.0,&gt;=1.17.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (1.23.0)
+Requirement already satisfied: idna&gt;=2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from yarl&lt;2.0,&gt;=1.17.0-&gt;aiohttp==3.13.4-&gt;pvdeg) (3.11)
+Requirement already satisfied: typing-extensions&gt;=4.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiosignal&gt;=1.4.0-&gt;aiohttp==3.13.4-&gt;pvdeg) (4.15.0)
+Requirement already satisfied: requests in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvlib&gt;=0.12.0-&gt;pvdeg) (2.33.1)
+Requirement already satisfied: tzdata&gt;=2022.7 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pandas-&gt;pvdeg) (2026.1)
+Requirement already satisfied: six&gt;=1.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from python-dateutil-&gt;pvdeg) (1.17.0)
+Requirement already satisfied: Jinja2&gt;=2.9 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (3.1.6)
+Requirement already satisfied: contourpy&gt;=1.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (1.3.3)
+Requirement already satisfied: narwhals&gt;=1.13 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (2.19.0)
+Requirement already satisfied: packaging&gt;=16.8 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (26.0)
+Requirement already satisfied: pillow&gt;=7.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (12.2.0)
+Requirement already satisfied: PyYAML&gt;=3.10 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (6.0.3)
+Requirement already satisfied: tornado&gt;=6.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (6.5.5)
+Requirement already satisfied: xyzservices&gt;=2021.09.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (2026.3.0)
+Requirement already satisfied: MarkupSafe&gt;=2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from Jinja2&gt;=2.9-&gt;bokeh-&gt;pvdeg) (3.0.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: shapely&gt;=2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from cartopy-&gt;pvdeg) (2.1.2)
+Requirement already satisfied: pyshp&gt;=2.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from cartopy-&gt;pvdeg) (3.0.3)
+Requirement already satisfied: pyproj&gt;=3.3.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from cartopy-&gt;pvdeg) (3.7.2)
+Requirement already satisfied: cycler&gt;=0.10 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib-&gt;pvdeg) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib-&gt;pvdeg) (4.62.1)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib-&gt;pvdeg) (1.5.0)
+Requirement already satisfied: pyparsing&gt;=3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib-&gt;pvdeg) (3.3.2)
+Requirement already satisfied: certifi in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pyproj&gt;=3.3.1-&gt;cartopy-&gt;pvdeg) (2026.2.25)
+Requirement already satisfied: distributed&gt;=2022.02.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask-jobqueue-&gt;pvdeg) (2026.3.0)
+Requirement already satisfied: click&gt;=8.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (8.3.2)
+Requirement already satisfied: cloudpickle&gt;=3.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (3.1.2)
+Requirement already satisfied: fsspec&gt;=2021.09.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (2026.3.0)
+Requirement already satisfied: partd&gt;=1.4.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (1.4.2)
+Requirement already satisfied: toolz&gt;=0.12.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (1.1.0)
+Requirement already satisfied: importlib_metadata&gt;=4.13.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (9.0.0)
+Requirement already satisfied: locket&gt;=1.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (1.0.0)
+Requirement already satisfied: msgpack&gt;=1.0.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (1.1.2)
+Requirement already satisfied: psutil&gt;=5.8.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (7.2.2)
+Requirement already satisfied: sortedcontainers&gt;=2.0.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (2.4.0)
+Requirement already satisfied: tblib!=3.2.0,!=3.2.1,&gt;=1.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (3.2.2)
+Requirement already satisfied: urllib3&gt;=1.26.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (2.6.3)
+Requirement already satisfied: zict&gt;=3.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (3.0.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: zipp&gt;=3.20 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from importlib_metadata&gt;=4.13.0-&gt;dask[dataframe]-&gt;pvdeg) (3.23.0)
+Requirement already satisfied: pyarrow&gt;=16.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (23.0.1)
+Requirement already satisfied: geographiclib&lt;3,&gt;=1.52 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from geopy-&gt;pvdeg) (2.1)
+Requirement already satisfied: async-lru&gt;=1.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (2.3.0)
+Requirement already satisfied: httpx&lt;1,&gt;=0.25.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (0.28.1)
+Requirement already satisfied: ipykernel!=6.30.0,&gt;=6.5.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (7.2.0)
+Requirement already satisfied: jupyter-core in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (5.9.1)
+Requirement already satisfied: jupyter-lsp&gt;=2.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (2.3.1)
+Requirement already satisfied: jupyter-server&lt;3,&gt;=2.4.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (2.17.0)
+Requirement already satisfied: jupyterlab-server&lt;3,&gt;=2.28.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (2.28.0)
+Requirement already satisfied: notebook-shim&gt;=0.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (0.2.4)
+Requirement already satisfied: setuptools&gt;=41.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (79.0.1)
+Requirement already satisfied: traitlets in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (5.14.3)
+Requirement already satisfied: anyio in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from httpx&lt;1,&gt;=0.25.0-&gt;jupyterlab-&gt;pvdeg) (4.13.0)
+Requirement already satisfied: httpcore==1.* in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from httpx&lt;1,&gt;=0.25.0-&gt;jupyterlab-&gt;pvdeg) (1.0.9)
+Requirement already satisfied: h11&gt;=0.16 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from httpcore==1.*-&gt;httpx&lt;1,&gt;=0.25.0-&gt;jupyterlab-&gt;pvdeg) (0.16.0)
+Requirement already satisfied: argon2-cffi&gt;=21.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (25.1.0)
+Requirement already satisfied: jupyter-client&gt;=7.4.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (8.8.0)
+Requirement already satisfied: jupyter-events&gt;=0.11.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.12.0)
+Requirement already satisfied: jupyter-server-terminals&gt;=0.4.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.5.4)
+Requirement already satisfied: nbconvert&gt;=6.4.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (7.17.1)
+Requirement already satisfied: nbformat&gt;=5.3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (5.10.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: overrides&gt;=5.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (7.7.0)
+Requirement already satisfied: prometheus-client&gt;=0.9 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.25.0)
+Requirement already satisfied: pyzmq&gt;=24 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (27.1.0)
+Requirement already satisfied: send2trash&gt;=1.8.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (2.1.0)
+Requirement already satisfied: terminado&gt;=0.8.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.18.1)
+Requirement already satisfied: websocket-client&gt;=1.7 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.9.0)
+Requirement already satisfied: babel&gt;=2.10 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (2.18.0)
+Requirement already satisfied: json5&gt;=0.9.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (0.14.0)
+Requirement already satisfied: jsonschema&gt;=4.18.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (4.26.0)
+Requirement already satisfied: argon2-cffi-bindings in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (25.1.0)
+Requirement already satisfied: comm&gt;=0.1.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.2.3)
+Requirement already satisfied: debugpy&gt;=1.6.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (1.8.20)
+Requirement already satisfied: ipython&gt;=7.23.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (9.10.1)
+Requirement already satisfied: matplotlib-inline&gt;=0.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.2.1)
+Requirement already satisfied: nest-asyncio&gt;=1.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (1.6.0)
+Requirement already satisfied: decorator&gt;=4.3.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (5.2.1)
+Requirement already satisfied: ipython-pygments-lexers&gt;=1.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (1.1.1)
+Requirement already satisfied: jedi&gt;=0.18.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.19.2)
+Requirement already satisfied: pexpect&gt;4.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (4.9.0)
+Requirement already satisfied: prompt_toolkit&lt;3.1.0,&gt;=3.0.41 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (3.0.52)
+Requirement already satisfied: pygments&gt;=2.11.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (2.20.0)
+Requirement already satisfied: stack_data&gt;=0.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.6.3)
+Requirement already satisfied: wcwidth in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.6.0)
+Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jedi&gt;=0.18.1-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.8.6)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (2025.9.1)
+Requirement already satisfied: referencing&gt;=0.28.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (0.37.0)
+Requirement already satisfied: rpds-py&gt;=0.25.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (0.30.0)
+Requirement already satisfied: platformdirs&gt;=2.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-core-&gt;jupyterlab-&gt;pvdeg) (4.9.6)
+Requirement already satisfied: python-json-logger&gt;=2.0.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (4.1.0)
+Requirement already satisfied: rfc3339-validator in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.1.4)
+Requirement already satisfied: rfc3986-validator&gt;=0.1.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.1.1)
+Requirement already satisfied: fqdn in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.5.1)
+Requirement already satisfied: isoduration in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (20.11.0)
+Requirement already satisfied: jsonpointer&gt;1.13 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (3.1.1)
+Requirement already satisfied: rfc3987-syntax&gt;=1.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.1.0)
+Requirement already satisfied: uri-template in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.3.0)
+Requirement already satisfied: webcolors&gt;=24.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (25.10.0)
+Requirement already satisfied: beautifulsoup4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (4.14.3)
+Requirement already satisfied: bleach!=5.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bleach[css]!=5.0.0-&gt;nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (6.3.0)
+Requirement already satisfied: defusedxml in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.7.1)
+Requirement already satisfied: jupyterlab-pygments in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.3.0)
+Requirement already satisfied: mistune&lt;4,&gt;=2.0.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (3.2.0)
+Requirement already satisfied: nbclient&gt;=0.5.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.10.4)
+Requirement already satisfied: pandocfilters&gt;=1.4.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.5.1)
+Requirement already satisfied: webencodings in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bleach!=5.0.0-&gt;bleach[css]!=5.0.0-&gt;nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.5.1)
+Requirement already satisfied: tinycss2&lt;1.5,&gt;=1.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bleach[css]!=5.0.0-&gt;nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.4.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: fastjsonschema&gt;=2.15 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbformat&gt;=5.3.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (2.21.2)
+Requirement already satisfied: ptyprocess&gt;=0.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pexpect&gt;4.3-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.7.0)
+Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from requests-&gt;pvlib&gt;=0.12.0-&gt;pvdeg) (3.4.7)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: lark&gt;=1.2.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from rfc3987-syntax&gt;=1.1.0-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.3.1)
+Requirement already satisfied: executing&gt;=1.2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (2.2.1)
+Requirement already satisfied: asttokens&gt;=2.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (3.0.1)
+Requirement already satisfied: pure-eval in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.2.3)
+Requirement already satisfied: cffi&gt;=1.0.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (2.0.0)
+Requirement already satisfied: pycparser in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from cffi&gt;=1.0.1-&gt;argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (3.0)
+Requirement already satisfied: soupsieve&gt;=1.6.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from beautifulsoup4-&gt;nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (2.8.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: arrow&gt;=0.15.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.4.0)
+Requirement already satisfied: markdown-it-py&gt;=1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupytext-&gt;pvdeg) (3.0.0)
+Requirement already satisfied: mdit-py-plugins in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupytext-&gt;pvdeg) (0.5.0)
+Requirement already satisfied: mdurl~=0.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from markdown-it-py&gt;=1.0-&gt;jupytext-&gt;pvdeg) (0.1.2)
+Requirement already satisfied: cftime in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from netCDF4-&gt;pvdeg) (1.6.5)
+Requirement already satisfied: h5pyd&gt;=0.18.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from NLR-rex-&gt;pvdeg) (0.24.0)
+Requirement already satisfied: s3fs&gt;=2023.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from NLR-rex-&gt;pvdeg) (2026.3.0)
+Requirement already satisfied: scikit-learn&gt;=1.6.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from NLR-rex-&gt;pvdeg) (1.8.0)
+Requirement already satisfied: toml&gt;=0.10.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from NLR-rex-&gt;pvdeg) (0.10.2)
+Requirement already satisfied: requests_unixsocket in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from h5pyd&gt;=0.18.0-&gt;NLR-rex-&gt;pvdeg) (0.4.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: aiobotocore&lt;4.0.0,&gt;=2.19.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (3.4.0)
+Requirement already satisfied: aioitertools&lt;1.0.0,&gt;=0.5.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiobotocore&lt;4.0.0,&gt;=2.19.0-&gt;s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (0.13.0)
+Requirement already satisfied: botocore&lt;1.42.85,&gt;=1.42.79 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiobotocore&lt;4.0.0,&gt;=2.19.0-&gt;s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (1.42.84)
+Requirement already satisfied: jmespath&lt;2.0.0,&gt;=0.7.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiobotocore&lt;4.0.0,&gt;=2.19.0-&gt;s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (1.1.0)
+Requirement already satisfied: wrapt&lt;3.0.0,&gt;=1.10.10 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiobotocore&lt;4.0.0,&gt;=2.19.0-&gt;s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (2.1.2)
+Requirement already satisfied: joblib&gt;=1.3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from scikit-learn&gt;=1.6.1-&gt;NLR-rex-&gt;pvdeg) (1.5.3)
+Requirement already satisfied: threadpoolctl&gt;=3.2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from scikit-learn&gt;=1.6.1-&gt;NLR-rex-&gt;pvdeg) (3.6.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: llvmlite&lt;0.48,&gt;=0.47.0dev0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from numba-&gt;pvdeg) (0.47.0)
+Requirement already satisfied: et-xmlfile in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from openpyxl-&gt;pvdeg) (2.0.0)
+Requirement already satisfied: cfgv&gt;=2.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pre-commit-&gt;pvdeg) (3.5.0)
+Requirement already satisfied: identify&gt;=1.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pre-commit-&gt;pvdeg) (2.6.18)
+Requirement already satisfied: nodeenv&gt;=0.11.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pre-commit-&gt;pvdeg) (1.10.0)
+Requirement already satisfied: virtualenv&gt;=20.10.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pre-commit-&gt;pvdeg) (21.2.1)
+Requirement already satisfied: distlib&lt;1,&gt;=0.3.7 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from virtualenv&gt;=20.10.0-&gt;pre-commit-&gt;pvdeg) (0.4.0)
+Requirement already satisfied: filelock&lt;4,&gt;=3.24.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from virtualenv&gt;=20.10.0-&gt;pre-commit-&gt;pvdeg) (3.25.2)
+Requirement already satisfied: python-discovery&gt;=1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from virtualenv&gt;=20.10.0-&gt;pre-commit-&gt;pvdeg) (1.2.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from sympy-&gt;pvdeg) (1.3.0)
+Requirement already satisfied: numexpr&gt;=2.6.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from tables-&gt;pvdeg) (2.14.1)
+Requirement already satisfied: py-cpuinfo in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from tables-&gt;pvdeg) (9.0.0)
+Requirement already satisfied: blosc2&gt;=2.3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from tables-&gt;pvdeg) (4.1.2)
+Requirement already satisfied: ndindex in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from blosc2&gt;=2.3.0-&gt;tables-&gt;pvdeg) (1.10.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: donfig&gt;=0.8 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from zarr-&gt;pvdeg) (0.8.1.post1)
+Requirement already satisfied: google-crc32c&gt;=1.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from zarr-&gt;pvdeg) (1.8.0)
+Requirement already satisfied: numcodecs&gt;=0.14 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from zarr-&gt;pvdeg) (0.16.5)
 </pre></div>
 </div>
 </div>
@@ -598,6 +751,10 @@
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas version &quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvlib version &quot;</span><span class="p">,</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+
+
+<span class="c1"># First, we&#39;ll use pvlib to create and run a model system, and use the irradiance, temperature, and operating point of that model to set up our LETID model</span>
+<span class="c1"># For this example, we&#39;ll model a fixed latitude tilt system at NLR, in Golden, CO, USA, using [NSRDB](https://nsrdb.nlr.gov/) hourly PSM weather data, SAPM temperature models, and module and inverter models from the CEC database.</span>
 </pre></div>
 </div>
 </div>
@@ -606,13 +763,11 @@
 Python version  3.11.15 (main, Mar  3 2026, 16:10:12) [GCC 13.3.0]
 Pandas version  2.3.3
 pvlib version  0.15.0
-pvdeg version  0.1.dev1+gbed7f1a7c
+pvdeg version  0.1.dev1+g5b9c72c94
 </pre></div>
 </div>
 </div>
 </div>
-<p>First, we’ll use pvlib to create and run a model system, and use the irradiance, temperature, and operating point of that model to set up our LETID model
-For this example, we’ll model a fixed latitude tilt system at NLR, in Golden, CO, USA, using <a class="reference external" href="https://nsrdb.nlr.gov/">NSRDB</a> hourly PSM weather data, SAPM temperature models, and module and inverter models from the CEC database.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load weather and location data, use pvlib read_psm3 function with map_variables = True</span>
@@ -1113,6 +1268,12 @@ For this example, we’ll model a fixed latitude tilt system at NLR, in Golden, 
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create and run pvlib modelchain</span>
 <span class="n">mc</span> <span class="o">=</span> <span class="n">ModelChain</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">aoi_model</span><span class="o">=</span><span class="s2">&quot;physical&quot;</span><span class="p">)</span>
 <span class="n">mc</span><span class="o">.</span><span class="n">run_model</span><span class="p">(</span><span class="n">weather</span><span class="p">)</span>
+
+
+<span class="c1"># # Set up timeseries</span>
+<span class="c1"># In this example, injection is a function of both the operating point of the module (which we will assume is maximum power point) and irradiance. Maximum power point injection is equivalent to $(I_{sc}-I_{mp})/I_{sc}\times Ee$, where $Ee$ is effective irradiance, the irradiance absorbed by the module&#39;s cells. We normalize it to 1-sun irradiance, 1000 $W/m^2$.</span>
+<span class="c1">#</span>
+<span class="c1"># We will use the irradiance, DC operating point, and cell temperature from the pvlib modelchain results.</span>
 </pre></div>
 </div>
 </div>
@@ -1137,11 +1298,6 @@ For this example, we’ll model a fixed latitude tilt system at NLR, in Golden, 
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="set-up-timeseries">
-<h1>Set up timeseries<a class="headerlink" href="#set-up-timeseries" title="Link to this heading">#</a></h1>
-<p>In this example, injection is a function of both the operating point of the module (which we will assume is maximum power point) and irradiance. Maximum power point injection is equivalent to <span class="math notranslate nohighlight">\((I_{sc}-I_{mp})/I_{sc}\times Ee\)</span>, where <span class="math notranslate nohighlight">\(Ee\)</span> is effective irradiance, the irradiance absorbed by the module’s cells. We normalize it to 1-sun irradiance, 1000 <span class="math notranslate nohighlight">\(W/m^2\)</span>.</p>
-<p>We will use the irradiance, DC operating point, and cell temperature from the pvlib modelchain results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ee</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">effective_irradiance</span>
@@ -1172,6 +1328,10 @@ For this example, we’ll model a fixed latitude tilt system at NLR, in Golden, 
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timesteps</span>
+
+
+<span class="c1"># # Device parameters</span>
+<span class="c1"># To define a device, we need to define several important quantities about the device: wafer thickness (in $\mu m$), rear surface recombination velocity (in cm/s), and cell area (in cm&lt;sup&gt;2&lt;/sup&gt;).</span>
 </pre></div>
 </div>
 </div>
@@ -1271,21 +1431,19 @@ For this example, we’ll model a fixed latitude tilt system at NLR, in Golden, 
 <p>4301 rows × 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="device-parameters">
-<h1>Device parameters<a class="headerlink" href="#device-parameters" title="Link to this heading">#</a></h1>
-<p>To define a device, we need to define several important quantities about the device: wafer thickness (in <span class="math notranslate nohighlight">\(\mu m\)</span>), rear surface recombination velocity (in cm/s), and cell area (in cm<sup>2</sup>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wafer_thickness</span> <span class="o">=</span> <span class="mi">180</span>  <span class="c1"># um</span>
 <span class="n">s_rear</span> <span class="o">=</span> <span class="mi">46</span>  <span class="c1"># cm/s</span>
 <span class="n">cell_area</span> <span class="o">=</span> <span class="mi">243</span>  <span class="c1"># cm^2</span>
+
+
+<span class="c1">#  &lt;b&gt; Other device parameters &lt;/b&gt;</span>
+<span class="c1"># Other required device parameters: base diffusivity (in cm&lt;sup&gt;2&lt;/sup&gt;/s), and optical generation profile, which allow us to estimate current collection in the device.</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><b> Other device parameters </b>
-Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and optical generation profile, which allow us to estimate current collection in the device.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generation_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span>
@@ -1295,25 +1453,29 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 <span class="n">depth</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span><span class="s2">&quot;Depth (um)&quot;</span><span class="p">]</span>
 
 <span class="n">d_base</span> <span class="o">=</span> <span class="mi">27</span>  <span class="c1"># cm^2/s electron diffusivity. See https://www2.pvlighthouse.com.au/calculators/mobility%20calculator/mobility%20calculator.aspx for details</span>
+
+
+<span class="c1"># # Degradation parameters</span>
+<span class="c1"># To model the device&#39;s degradation, we need to define several more important quantities about the degradation the device will experience. These include undegraded and degraded lifetime (in $\mu s$).</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="degradation-parameters">
-<h1>Degradation parameters<a class="headerlink" href="#degradation-parameters" title="Link to this heading">#</a></h1>
-<p>To model the device’s degradation, we need to define several more important quantities about the degradation the device will experience. These include undegraded and degraded lifetime (in <span class="math notranslate nohighlight">\(\mu s\)</span>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tau_0</span> <span class="o">=</span> <span class="mi">115</span>  <span class="c1"># us, carrier lifetime in non-degraded states, e.g. LETID/LID states A or C</span>
 <span class="n">tau_deg</span> <span class="o">=</span> <span class="mi">55</span>  <span class="c1"># us, carrier lifetime in fully-degraded state, e.g. LETID/LID state B</span>
+
+
+<span class="c1"># &lt;b&gt;Remaining degradation parameters: &lt;/b&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># The rest of the quantities to define are: the initial percentage of defects in each state (A, B, and C), and the dictionary of mechanism parameters.</span>
+<span class="c1">#</span>
+<span class="c1"># In this example, we&#39;ll assume the device starts in the fully-undegraded state (100% state A), and we&#39;ll use the kinetic parameters for LETID degradation from Repins.</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><b>Remaining degradation parameters: </b></p>
-<p>The rest of the quantities to define are: the initial percentage of defects in each state (A, B, and C), and the dictionary of mechanism parameters.</p>
-<p>In this example, we’ll assume the device starts in the fully-undegraded state (100% state A), and we’ll use the kinetic parameters for LETID degradation from Repins.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># starting defect state percentages</span>
@@ -1335,14 +1497,14 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 <span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;tau&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">tau_now</span><span class="p">(</span>
     <span class="n">tau_0</span><span class="p">,</span> <span class="n">tau_deg</span><span class="p">,</span> <span class="n">nB_0</span>
 <span class="p">)</span>  <span class="c1"># calculate tau for the first timestep</span>
+
+
+<span class="c1"># # Run through timesteps</span>
+<span class="c1"># Since each timestep depends on the preceding timestep, we need to calculate in a loop. This will take a few minutes depending on the length of the timeseries.</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="run-through-timesteps">
-<h1>Run through timesteps<a class="headerlink" href="#run-through-timesteps" title="Link to this heading">#</a></h1>
-<p>Since each timestep depends on the preceding timestep, we need to calculate in a loop. This will take a few minutes depending on the length of the timeseries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">timestep</span> <span class="ow">in</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
@@ -1438,14 +1600,14 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
         <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Voc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span>
             <span class="n">tau</span><span class="p">,</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">jsc</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">25</span>
         <span class="p">)</span>
+
+
+<span class="c1"># # Finish calculating degraded device parameters.</span>
+<span class="c1"># Now that we have calculated defect states, we can calculate all the quantities that depend on defect states.</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="finish-calculating-degraded-device-parameters">
-<h1>Finish calculating degraded device parameters.<a class="headerlink" href="#finish-calculating-degraded-device-parameters" title="Link to this heading">#</a></h1>
-<p>Now that we have calculated defect states, we can calculate all the quantities that depend on defect states.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;tau&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">tau_now</span><span class="p">(</span><span class="n">tau_0</span><span class="p">,</span> <span class="n">tau_deg</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;NB&quot;</span><span class="p">])</span>
@@ -1470,6 +1632,11 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 <span class="p">)</span>  <span class="c1"># this function quickly calculates the rest of the device parameters: Isc, FF, max power, and normalized max power</span>
 
 <span class="n">timesteps</span>
+
+
+<span class="c1"># Note of course that all these calculated device parameters are modeled STC device parameters, not the instantaneous, weather-dependent values. This isn&#39;t a robust performance model of a degraded module.</span>
+
+<span class="c1"># # Plot the results</span>
 </pre></div>
 </div>
 </div>
@@ -1689,10 +1856,6 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 <p>4301 rows × 13 columns</p>
 </div></div></div>
 </div>
-<p>Note of course that all these calculated device parameters are modeled STC device parameters, not the instantaneous, weather-dependent values. This isn’t a robust performance model of a degraded module.</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="plot-the-results">
-<h1>Plot the results<a class="headerlink" href="#plot-the-results" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cycler</span><span class="w"> </span><span class="kn">import</span> <span class="n">cycler</span>
@@ -1724,6 +1887,11 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Outdoor LETID </span><span class="se">\n</span><span class="si">{</span><span class="n">location</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># The example data provided for Golden, CO, shows how $N_A$ increases in cold weather, and power temporarily recovers, due to temporary recovery of LETID (B-&gt;A).</span>
+
+<span class="c1"># # The function `calc_letid_outdoors` wraps all of the steps above into a single function:</span>
 </pre></div>
 </div>
 </div>
@@ -1731,10 +1899,6 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 <img alt="../_images/639feb3fd1f1b68ba86f0511f109bf45961254e55a61df113922a303257f5029.png" src="../_images/639feb3fd1f1b68ba86f0511f109bf45961254e55a61df113922a303257f5029.png" />
 </div>
 </div>
-<p>The example data provided for Golden, CO, shows how <span class="math notranslate nohighlight">\(N_A\)</span> increases in cold weather, and power temporarily recovers, due to temporary recovery of LETID (B-&gt;A).</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="the-function-calc-letid-outdoors-wraps-all-of-the-steps-above-into-a-single-function">
-<h1>The function <code class="docutils literal notranslate"><span class="pre">calc_letid_outdoors</span></code> wraps all of the steps above into a single function:<a class="headerlink" href="#the-function-calc-letid-outdoors-wraps-all-of-the-steps-above-into-a-single-function" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nA_0</span> <span class="o">=</span> <span class="mi">100</span>
@@ -1982,7 +2146,6 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 <p>8760 rows × 12 columns</p>
 </div></div></div>
 </div>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2049,15 +2212,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">LETID Outdoor</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-timeseries">Set up timeseries</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#device-parameters">Device parameters</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#degradation-parameters">Degradation parameters</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-through-timesteps">Run through timesteps</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#finish-calculating-degraded-device-parameters">Finish calculating degraded device parameters.</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-results">Plot the results</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-function-calc-letid-outdoors-wraps-all-of-the-steps-above-into-a-single-function">The function <code class="docutils literal notranslate"><span class="pre">calc_letid_outdoors</span></code> wraps all of the steps above into a single function:</a></li>
+    <ul class="simple visible nav section-nav flex-column">
 </ul>
 
   </nav></div>
