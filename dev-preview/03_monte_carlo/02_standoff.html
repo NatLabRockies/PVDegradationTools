@@ -183,8 +183,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../01_basics/04_weather_database_access.html">Weather Database Access</a></li>
 
 
-
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">02 - Degradation Mechanisms</span></p>
 <ul class="nav bd-sidenav">
@@ -585,9 +583,9 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1010-azure
 Python version  3.11.15 (main, Mar  3 2026, 16:10:12) [GCC 13.3.0]
-Pandas version  2.3.3
+Pandas version  3.0.2
 Pvlib version  0.15.0
-Pvdeg version  0.1.dev1+gf46fcbea6
+Pvdeg version  0.1.dev1+g4057811de
 </pre></div>
 </div>
 </div>
@@ -597,7 +595,7 @@ Pvdeg version  0.1.dev1+gf46fcbea6
 <h1>Simple Standoff Calculation<a class="headerlink" href="#simple-standoff-calculation" title="Link to this heading">#</a></h1>
 <p>This is copied from another tutorial called <code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">-</span> <span class="pre">Standards.ipynb</span></code>, please visit this page for a more in depth explanation of the process for a single standoff calculation.</p>
 <div class="alert alert-block alert-info">
-<b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a> so register now.)
+<b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a> so register now.)
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load weather data from locally saved files to avoid API rate limits</span>
@@ -606,7 +604,7 @@ Pvdeg version  0.1.dev1+gf46fcbea6
     <span class="n">META</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="c1"># To use the NSRDB API instead, uncomment the lines below and add your API key</span>
-<span class="c1"># Get your API key at: https://developer.nlr.gov/signup/</span>
+<span class="c1"># Get your API key at: https://developer.nrel.gov/signup/</span>
 <span class="c1"># weather_db = &quot;PSM4&quot;</span>
 <span class="c1"># weather_id = (40.633365593159226, -73.9945801019899)  # Manhattan, NYC</span>
 <span class="c1"># weather_arg = {</span>
@@ -644,10 +642,10 @@ Pvdeg version  0.1.dev1+gf46fcbea6
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
+The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
-          x      T98_0    T98_inf
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          x      T98_0    T98_inf
 0  0.522443  71.778148  48.754265
           x      T98_0    T98_inf
 0  0.490293  71.778148  48.754265
@@ -680,17 +678,17 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
-0     3.708309     1.133914
-1     0.142137    -0.021974
-2     5.675775     0.348930
-3     6.269196     0.523412
-4     3.236571    -0.437752
+0     3.564899     0.305752
+1     3.470413     0.230264
+2     1.828635    -0.141207
+3     3.616580     0.465200
+4     5.597114     0.131683
 ..         ...          ...
-495   4.129513     0.460165
-496   2.159710     0.295119
-497   5.500154     0.505925
-498  10.326806     1.461999
-499   7.193084     0.486280
+495   8.907221    -0.104157
+496   8.890407     0.717682
+497  10.540333    -0.558803
+498   2.194355     0.083907
+499   9.053827    -0.317045
 
 [500 rows x 2 columns]
 </pre></div>
@@ -746,7 +744,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.series.Series&#39;&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.Series&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -759,17 +757,17 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.000000  56.954417  40.060978
-1    0.019176  72.870859  50.123506
-2    0.000000  69.471473  47.782700
-3    0.000000  67.616200  46.391206
-4    0.802924  75.180124  51.602088
+0    0.000000  69.942189  48.137213
+1    0.122687  70.768147  48.653443
+2    0.327351  73.807048  50.579984
+3    0.000000  68.276658  46.934116
+4    0.425677  71.638830  49.260471
 ..        ...        ...        ...
-495  0.000000  68.325099  46.969116
-496  0.008618  70.087067  48.222810
-497  0.000000  67.792685  46.533647
-498  0.000000  48.993146  36.292151
-499  0.000000  68.019174  46.729744
+495  1.517468  73.631783  50.446545
+496  0.000000  64.919638  44.594025
+497  2.825080  75.551744  51.938545
+498  0.205479  72.004821  49.576832
+499  2.016504  74.685009  51.220573
 
 [500 rows x 3 columns]
 </pre></div>
@@ -804,7 +802,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e654f9db00dc0625dba0b6a0217fc94660e9144eb383de29d83683ecde5afd13.png" src="../_images/e654f9db00dc0625dba0b6a0217fc94660e9144eb383de29d83683ecde5afd13.png" />
+<img alt="../_images/d75b303c757c3306e486a6834f1daeaa252f3b95b10b09ea0fe73bd913fa1fe8.png" src="../_images/d75b303c757c3306e486a6834f1daeaa252f3b95b10b09ea0fe73bd913fa1fe8.png" />
 </div>
 </div>
 </section>
