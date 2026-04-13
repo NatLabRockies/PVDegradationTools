@@ -932,7 +932,7 @@ def vecArrhenius(
     poa_global = poa_global[mask]
     module_temp = module_temp[mask]
 
-    ea_scaled = ea / 8.31446261815324e-03
+    ea_scaled = ea / R_GAS
     R0 = np.exp(lnr0)
     poa_global_scaled = poa_global / 1000
 
