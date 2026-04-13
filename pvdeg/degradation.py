@@ -953,6 +953,7 @@ def perovskite_degradation(
     component: str = "total",
     I_in: float = 1.59e21,
     P_O2: float = 21.2,
+    parameters: dict = None,
 ) -> pd.Series:
     """Compute MAPbI3 perovskite degradation rate using the full kinetic model in [1].
 
@@ -987,7 +988,7 @@ def perovskite_degradation(
     weather_df : pd.DataFrame
         Weather data with a time index.  Required column: ``'temp_air'`` [°C].
         Column ``'relative_humidity'`` [%] is required for the WPO and r_hum
-        terms; if absent a warning is raised.
+        terms; if absent a ValueError is raised.
     meta : dict
         Location metadata.  Not used directly; kept for pipeline compatibility.
     component : str, default ``"total"``
@@ -1007,6 +1008,11 @@ def perovskite_degradation(
     P_O2 : float, default ``21.2``
         Oxygen partial pressure :math:`P_{O_2}` [kPa].
         Default value corresponds to ambient air at sea level.
+    parameters : dict, optional
+        Parameter overrides. Keys match ``DegradationDatabase.json`` entry D015
+        (e.g. ``"k_0,WPO"``, ``"E_A,WPO"``, ``"K_2W"`` …). Any key present
+        here takes precedence over the hardcoded default. Retrieve the full
+        D015 parameter set with ``pvdeg.utilities.get_kinetics("D015")``.
 
     Returns
     -------
@@ -1037,25 +1043,27 @@ def perovskite_degradation(
 
     T_K = weather_df["temp_air"] + 273.15  # °C → K
 
+    p = parameters or {}
+
     # WPO (water-accelerated photooxidation, humid-air column)
-    k0_WPO = 3.16e-25  # mol/(m²·s·kPa²)·(photons/(m²·s))^(-0.7)
-    E_A_WPO = -8.6827  # kJ/mol
-    K_2W = 4.40e-3  # kPa⁻¹
-    K_3W = 4.32e-15  # (photons/(m²·s))^(-0.7)
+    k0_WPO = p.get("k_0,WPO", 3.16e-25)
+    E_A_WPO = p.get("E_A,WPO", -8.6827)
+    K_2W = p.get("K_2W", 4.40e-3)
+    K_3W = p.get("K_3W", 4.32e-15)
 
     # DPO (dry photooxidation, dry-air column)
-    k0_DPO = 5.45e-15
-    E_A_DPO = 59.82
-    K_2D = 3.28e-3
-    K_3D = 6.97e-15
+    k0_DPO = p.get("k_0,DPO", 5.45e-15)
+    E_A_DPO = p.get("E_A,DPO", 59.82)
+    K_2D = p.get("K_2D", 3.28e-3)
+    K_3D = p.get("K_3D", 6.97e-15)
 
     # Humidity-induced degradation
-    k0_hum = 9.2e-22
-    E_A_hum = 19.3
+    k0_hum = p.get("k_0,hum", 9.2e-22)
+    E_A_hum = p.get("E_A^hum", 19.3)
 
     # Thermal decomposition
-    k0_therm = 4.1e-4
-    E_A_therm = 43.42
+    k0_therm = p.get("k_0,therm", 4.1e-4)
+    E_A_therm = p.get("E_A^therm", 43.42)
 
     # Electron-activity proxy: n ∝ I_in^0.7
     n = I_in**0.7
