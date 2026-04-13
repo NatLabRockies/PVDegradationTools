@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '04_scenario/01_scenario_temperature';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="02_scenario_single_location.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="../03_monte_carlo/02_standoff.html" />
+    <link rel="next" title="Single Location" href="02_scenario_single_location.html" />
+    <link rel="prev" title="Standoff Monte Carlo" href="../03_monte_carlo/02_standoff.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -180,6 +180,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../01_basics/03_spectral_degradation.html">Spectral Degradation</a></li>
 
 
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/04_weather_database_access.html">Weather Database Access</a></li>
+
+
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">02 - Degradation Mechanisms</span></p>
 <ul class="nav bd-sidenav">
@@ -190,6 +195,14 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="../02_degradation/02_letid_accelerated_test.html">LETID Accelerated Test</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/03_letid_outdoor.html">LETID Outdoor</a></li>
 
 
 
@@ -222,9 +235,39 @@
 
 
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 - Monte Carlo Simulations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_monte_carlo/01_arrhenius.html">Arrhenius Monte Carlo</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../03_monte_carlo/02_standoff.html">Standoff Monte Carlo</a></li>
+
+
+
+
+
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">04 - Scenarios</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Temperature Scenario</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="02_scenario_single_location.html">Single Location</a></li>
+
+
+
+
+
+
+
 
 
 
@@ -257,6 +300,12 @@
 
 
 
+
+
+<li class="toctree-l1"><a class="reference internal" href="../05_geospatial/02_geospatial_world_map.html">Geospatial World Map (HPC)</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../05_geospatial/03_letid_outdoor_geospatial_demo.html">LETID Outdoor Geospatial Demo (HPC)</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="../05_geospatial/04_scenario_geographical_features.html">Geographical Features (HPC)</a></li>
@@ -296,6 +345,12 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="../06_advanced/04_nsrdb_distributed_api.html">NSRDB Distributed (API Key Required)</a></li>
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="../06_advanced/05_pvgis_distributed.html">PVGIS Distributed</a></li>
 
 
@@ -315,6 +370,9 @@
 
 
 
+
+
+<li class="toctree-l1"><a class="reference internal" href="../10_workshop_demos/02_duramat_live_demo.html">DuraMAT Live Demo (HPC)</a></li>
 
 
 </ul>
@@ -518,7 +576,7 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1010-azure
 Python version  3.11.15 (main, Mar  3 2026, 16:10:12) [GCC 13.3.0]
-pvdeg version  0.1.dev1+g5b9c72c94
+pvdeg version  0.1.dev1+gf46fcbea6
 </pre></div>
 </div>
 </div>
@@ -649,13 +707,13 @@ pvdeg version  0.1.dev1+g5b9c72c94
             </div>
             <div id="result_module_pvsyst_1" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
             
-                <div onclick="toggleVisibility('result_module_pvsyst_1_TNOUX')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_pvsyst_1_QSVOQ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_pvsyst_1_TNOUX" style="color: #E6E6FA;">►</span>
-                        TNOUX
+                        <span id="arrow_result_module_pvsyst_1_QSVOQ" style="color: #E6E6FA;">►</span>
+                        QSVOQ
                     </h5>
                 </div>
-                <div id="result_module_pvsyst_1_TNOUX" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_pvsyst_1_QSVOQ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -757,33 +815,33 @@ pvdeg version  0.1.dev1+g5b9c72c94
 </table>
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_pvsyst_1_JLTWQ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_pvsyst_1_HGPGB')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_pvsyst_1_JLTWQ" style="color: #E6E6FA;">►</span>
-                        JLTWQ
+                        <span id="arrow_result_module_pvsyst_1_HGPGB" style="color: #E6E6FA;">►</span>
+                        HGPGB
                     </h5>
                 </div>
-                <div id="result_module_pvsyst_1_JLTWQ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_pvsyst_1_HGPGB" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     1.7867026560372372
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_pvsyst_1_IOTMZ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_pvsyst_1_OITAD')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_pvsyst_1_IOTMZ" style="color: #E6E6FA;">►</span>
-                        IOTMZ
+                        <span id="arrow_result_module_pvsyst_1_OITAD" style="color: #E6E6FA;">►</span>
+                        OITAD
                     </h5>
                 </div>
-                <div id="result_module_pvsyst_1_IOTMZ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_pvsyst_1_OITAD" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     2.1215918545605397
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_pvsyst_1_IDVBJ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_pvsyst_1_TEPGO')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_pvsyst_1_IDVBJ" style="color: #E6E6FA;">►</span>
-                        IDVBJ
+                        <span id="arrow_result_module_pvsyst_1_TEPGO" style="color: #E6E6FA;">►</span>
+                        TEPGO
                     </h5>
                 </div>
-                <div id="result_module_pvsyst_1_IDVBJ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_pvsyst_1_TEPGO" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     180.0903828187382
                 </div>
                 </div>
@@ -795,13 +853,13 @@ pvdeg version  0.1.dev1+g5b9c72c94
             </div>
             <div id="result_module_pvsyst_2" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
             
-                <div onclick="toggleVisibility('result_module_pvsyst_2_TNOUX')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_pvsyst_2_QSVOQ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_pvsyst_2_TNOUX" style="color: #E6E6FA;">►</span>
-                        TNOUX
+                        <span id="arrow_result_module_pvsyst_2_QSVOQ" style="color: #E6E6FA;">►</span>
+                        QSVOQ
                     </h5>
                 </div>
-                <div id="result_module_pvsyst_2_TNOUX" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_pvsyst_2_QSVOQ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -903,33 +961,33 @@ pvdeg version  0.1.dev1+g5b9c72c94
 </table>
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_pvsyst_2_JLTWQ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_pvsyst_2_HGPGB')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_pvsyst_2_JLTWQ" style="color: #E6E6FA;">►</span>
-                        JLTWQ
+                        <span id="arrow_result_module_pvsyst_2_HGPGB" style="color: #E6E6FA;">►</span>
+                        HGPGB
                     </h5>
                 </div>
-                <div id="result_module_pvsyst_2_JLTWQ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_pvsyst_2_HGPGB" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     1.8469759777184775
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_pvsyst_2_IOTMZ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_pvsyst_2_OITAD')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_pvsyst_2_IOTMZ" style="color: #E6E6FA;">►</span>
-                        IOTMZ
+                        <span id="arrow_result_module_pvsyst_2_OITAD" style="color: #E6E6FA;">►</span>
+                        OITAD
                     </h5>
                 </div>
-                <div id="result_module_pvsyst_2_IOTMZ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
-                    2.1931624585970524
+                <div id="result_module_pvsyst_2_OITAD" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    2.193162458597053
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_pvsyst_2_IDVBJ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_pvsyst_2_TEPGO')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_pvsyst_2_IDVBJ" style="color: #E6E6FA;">►</span>
-                        IDVBJ
+                        <span id="arrow_result_module_pvsyst_2_TEPGO" style="color: #E6E6FA;">►</span>
+                        TEPGO
                     </h5>
                 </div>
-                <div id="result_module_pvsyst_2_IDVBJ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_pvsyst_2_TEPGO" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     174.42484550247343
                 </div>
                 </div>
@@ -941,13 +999,13 @@ pvdeg version  0.1.dev1+g5b9c72c94
             </div>
             <div id="result_module_sapm_1" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
             
-                <div onclick="toggleVisibility('result_module_sapm_1_TNOUX')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_sapm_1_QSVOQ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_sapm_1_TNOUX" style="color: #E6E6FA;">►</span>
-                        TNOUX
+                        <span id="arrow_result_module_sapm_1_QSVOQ" style="color: #E6E6FA;">►</span>
+                        QSVOQ
                     </h5>
                 </div>
-                <div id="result_module_sapm_1_TNOUX" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_sapm_1_QSVOQ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1049,34 +1107,34 @@ pvdeg version  0.1.dev1+g5b9c72c94
 </table>
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_sapm_1_JLTWQ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_sapm_1_HGPGB')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_sapm_1_JLTWQ" style="color: #E6E6FA;">►</span>
-                        JLTWQ
+                        <span id="arrow_result_module_sapm_1_HGPGB" style="color: #E6E6FA;">►</span>
+                        HGPGB
                     </h5>
                 </div>
-                <div id="result_module_sapm_1_JLTWQ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_sapm_1_HGPGB" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     2.0185177006789035
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_sapm_1_IOTMZ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_sapm_1_OITAD')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_sapm_1_IOTMZ" style="color: #E6E6FA;">►</span>
-                        IOTMZ
+                        <span id="arrow_result_module_sapm_1_OITAD" style="color: #E6E6FA;">►</span>
+                        OITAD
                     </h5>
                 </div>
-                <div id="result_module_sapm_1_IOTMZ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_sapm_1_OITAD" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     2.3968569686602503
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_sapm_1_IDVBJ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_sapm_1_TEPGO')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_sapm_1_IDVBJ" style="color: #E6E6FA;">►</span>
-                        IDVBJ
+                        <span id="arrow_result_module_sapm_1_TEPGO" style="color: #E6E6FA;">►</span>
+                        TEPGO
                     </h5>
                 </div>
-                <div id="result_module_sapm_1_IDVBJ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
-                    159.67273103005363
+                <div id="result_module_sapm_1_TEPGO" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    159.6727310300537
                 </div>
                 </div>
             <div onclick="toggleVisibility('result_module_sapm_2')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
@@ -1087,13 +1145,13 @@ pvdeg version  0.1.dev1+g5b9c72c94
             </div>
             <div id="result_module_sapm_2" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
             
-                <div onclick="toggleVisibility('result_module_sapm_2_TNOUX')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_sapm_2_QSVOQ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_sapm_2_TNOUX" style="color: #E6E6FA;">►</span>
-                        TNOUX
+                        <span id="arrow_result_module_sapm_2_QSVOQ" style="color: #E6E6FA;">►</span>
+                        QSVOQ
                     </h5>
                 </div>
-                <div id="result_module_sapm_2_TNOUX" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_sapm_2_QSVOQ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1195,33 +1253,33 @@ pvdeg version  0.1.dev1+g5b9c72c94
 </table>
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_sapm_2_JLTWQ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_sapm_2_HGPGB')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_sapm_2_JLTWQ" style="color: #E6E6FA;">►</span>
-                        JLTWQ
+                        <span id="arrow_result_module_sapm_2_HGPGB" style="color: #E6E6FA;">►</span>
+                        HGPGB
                     </h5>
                 </div>
-                <div id="result_module_sapm_2_JLTWQ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_sapm_2_HGPGB" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     2.006672850656661
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_sapm_2_IOTMZ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_sapm_2_OITAD')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_sapm_2_IOTMZ" style="color: #E6E6FA;">►</span>
-                        IOTMZ
+                        <span id="arrow_result_module_sapm_2_OITAD" style="color: #E6E6FA;">►</span>
+                        OITAD
                     </h5>
                 </div>
-                <div id="result_module_sapm_2_IOTMZ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_sapm_2_OITAD" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     2.3827919885468747
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_sapm_2_IDVBJ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_sapm_2_TEPGO')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_sapm_2_IDVBJ" style="color: #E6E6FA;">►</span>
-                        IDVBJ
+                        <span id="arrow_result_module_sapm_2_TEPGO" style="color: #E6E6FA;">►</span>
+                        TEPGO
                     </h5>
                 </div>
-                <div id="result_module_sapm_2_IDVBJ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_sapm_2_TEPGO" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     160.63669483237126
                 </div>
                 </div>
@@ -1233,13 +1291,13 @@ pvdeg version  0.1.dev1+g5b9c72c94
             </div>
             <div id="result_module_sapm_3" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
             
-                <div onclick="toggleVisibility('result_module_sapm_3_TNOUX')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_sapm_3_QSVOQ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_sapm_3_TNOUX" style="color: #E6E6FA;">►</span>
-                        TNOUX
+                        <span id="arrow_result_module_sapm_3_QSVOQ" style="color: #E6E6FA;">►</span>
+                        QSVOQ
                     </h5>
                 </div>
-                <div id="result_module_sapm_3_TNOUX" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_sapm_3_QSVOQ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1341,33 +1399,33 @@ pvdeg version  0.1.dev1+g5b9c72c94
 </table>
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_sapm_3_JLTWQ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_sapm_3_HGPGB')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_sapm_3_JLTWQ" style="color: #E6E6FA;">►</span>
-                        JLTWQ
+                        <span id="arrow_result_module_sapm_3_HGPGB" style="color: #E6E6FA;">►</span>
+                        HGPGB
                     </h5>
                 </div>
-                <div id="result_module_sapm_3_JLTWQ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_sapm_3_HGPGB" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     2.001840724211671
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_sapm_3_IOTMZ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_sapm_3_OITAD')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_sapm_3_IOTMZ" style="color: #E6E6FA;">►</span>
-                        IOTMZ
+                        <span id="arrow_result_module_sapm_3_OITAD" style="color: #E6E6FA;">►</span>
+                        OITAD
                     </h5>
                 </div>
-                <div id="result_module_sapm_3_IOTMZ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_sapm_3_OITAD" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     2.3770541563053107
                 </div>
                 
-                <div onclick="toggleVisibility('result_module_sapm_3_IDVBJ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <div onclick="toggleVisibility('result_module_sapm_3_TEPGO')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                     <h5 style="font-family: monospace; margin: 0;">
-                        <span id="arrow_result_module_sapm_3_IDVBJ" style="color: #E6E6FA;">►</span>
-                        IDVBJ
+                        <span id="arrow_result_module_sapm_3_TEPGO" style="color: #E6E6FA;">►</span>
+                        TEPGO
                     </h5>
                 </div>
-                <div id="result_module_sapm_3_IDVBJ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <div id="result_module_sapm_3_TEPGO" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                     161.3829183371276
                 </div>
                 </div></div>
@@ -1375,13 +1433,13 @@ pvdeg version  0.1.dev1+g5b9c72c94
             <div>
                 <h3>self.pipeline</h3>
                 <div>
-            <div id="TNOUX" onclick="toggleVisibility('pipeline_TNOUX')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+            <div id="QSVOQ" onclick="toggleVisibility('pipeline_QSVOQ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                 <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_pipeline_TNOUX" style="color: #b676c2;">►</span>  # noqa
-                    temperature, <span style="color: #b676c2;">#TNOUX</span>  # noqa
+                    <span id="arrow_pipeline_QSVOQ" style="color: #b676c2;">►</span>  # noqa
+                    temperature, <span style="color: #b676c2;">#QSVOQ</span>  # noqa
                 </h4>
             </div>
-            <div id="pipeline_TNOUX" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+            <div id="pipeline_QSVOQ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                 <p>Job: temperature</p>
                 <p>Parameters:</p>
                 <div style="margin-left: 20px;">
@@ -1391,13 +1449,13 @@ pvdeg version  0.1.dev1+g5b9c72c94
                 </div>
             </div>
             
-            <div id="JLTWQ" onclick="toggleVisibility('pipeline_JLTWQ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+            <div id="HGPGB" onclick="toggleVisibility('pipeline_HGPGB')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                 <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_pipeline_JLTWQ" style="color: #b676c2;">►</span>  # noqa
-                    vantHoff_deg, <span style="color: #b676c2;">#JLTWQ</span>  # noqa
+                    <span id="arrow_pipeline_HGPGB" style="color: #b676c2;">►</span>  # noqa
+                    vantHoff_deg, <span style="color: #b676c2;">#HGPGB</span>  # noqa
                 </h4>
             </div>
-            <div id="pipeline_JLTWQ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+            <div id="pipeline_HGPGB" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                 <p>Job: vantHoff_deg</p>
                 <p>Parameters:</p>
                 <div style="margin-left: 20px;">
@@ -1408,13 +1466,13 @@ pvdeg version  0.1.dev1+g5b9c72c94
                 </div>
             </div>
             
-            <div id="IOTMZ" onclick="toggleVisibility('pipeline_IOTMZ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+            <div id="OITAD" onclick="toggleVisibility('pipeline_OITAD')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                 <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_pipeline_IOTMZ" style="color: #b676c2;">►</span>  # noqa
-                    vantHoff_deg, <span style="color: #b676c2;">#IOTMZ</span>  # noqa
+                    <span id="arrow_pipeline_OITAD" style="color: #b676c2;">►</span>  # noqa
+                    vantHoff_deg, <span style="color: #b676c2;">#OITAD</span>  # noqa
                 </h4>
             </div>
-            <div id="pipeline_IOTMZ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+            <div id="pipeline_OITAD" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                 <p>Job: vantHoff_deg</p>
                 <p>Parameters:</p>
                 <div style="margin-left: 20px;">
@@ -1425,13 +1483,13 @@ pvdeg version  0.1.dev1+g5b9c72c94
                 </div>
             </div>
             
-            <div id="IDVBJ" onclick="toggleVisibility('pipeline_IDVBJ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+            <div id="TEPGO" onclick="toggleVisibility('pipeline_TEPGO')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                 <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_pipeline_IDVBJ" style="color: #b676c2;">►</span>  # noqa
-                    IwaVantHoff, <span style="color: #b676c2;">#IDVBJ</span>  # noqa
+                    <span id="arrow_pipeline_TEPGO" style="color: #b676c2;">►</span>  # noqa
+                    IwaVantHoff, <span style="color: #b676c2;">#TEPGO</span>  # noqa
                 </h4>
             </div>
-            <div id="pipeline_IDVBJ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+            <div id="pipeline_TEPGO" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                 <p>Job: IwaVantHoff</p>
                 <p>Parameters:</p>
                 <div style="margin-left: 20px;">
@@ -2031,7 +2089,7 @@ pvdeg version  0.1.dev1+g5b9c72c94
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">Standoff Monte Carlo</p>
       </div>
     </a>
     <a class="right-next"
@@ -2039,7 +2097,7 @@ pvdeg version  0.1.dev1+g5b9c72c94
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">Single Location</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

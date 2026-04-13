@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; PVDEG Tutorials</title>
+    <title>Standoff Monte Carlo &#8212; PVDEG Tutorials</title>
   
   
   
@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Temperature Scenario" href="../04_scenario/01_scenario_temperature.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="01_arrhenius.html" />
+    <link rel="prev" title="Arrhenius Monte Carlo" href="01_arrhenius.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -180,6 +180,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../01_basics/03_spectral_degradation.html">Spectral Degradation</a></li>
 
 
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/04_weather_database_access.html">Weather Database Access</a></li>
+
+
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">02 - Degradation Mechanisms</span></p>
 <ul class="nav bd-sidenav">
@@ -190,6 +195,14 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="../02_degradation/02_letid_accelerated_test.html">LETID Accelerated Test</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../02_degradation/03_letid_outdoor.html">LETID Outdoor</a></li>
 
 
 
@@ -222,9 +235,39 @@
 
 
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 - Monte Carlo Simulations</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_arrhenius.html">Arrhenius Monte Carlo</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Standoff Monte Carlo</a></li>
+
+
+
+
+
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">04 - Scenarios</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../04_scenario/01_scenario_temperature.html">Temperature Scenario</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../04_scenario/02_scenario_single_location.html">Single Location</a></li>
+
+
+
+
+
+
+
 
 
 
@@ -257,6 +300,12 @@
 
 
 
+
+
+<li class="toctree-l1"><a class="reference internal" href="../05_geospatial/02_geospatial_world_map.html">Geospatial World Map (HPC)</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../05_geospatial/03_letid_outdoor_geospatial_demo.html">LETID Outdoor Geospatial Demo (HPC)</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="../05_geospatial/04_scenario_geographical_features.html">Geographical Features (HPC)</a></li>
@@ -296,6 +345,12 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="../06_advanced/04_nsrdb_distributed_api.html">NSRDB Distributed (API Key Required)</a></li>
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="../06_advanced/05_pvgis_distributed.html">PVGIS Distributed</a></li>
 
 
@@ -315,6 +370,9 @@
 
 
 
+
+
+<li class="toctree-l1"><a class="reference internal" href="../10_workshop_demos/02_duramat_live_demo.html">DuraMAT Live Demo (HPC)</a></li>
 
 
 </ul>
@@ -458,7 +516,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Standoff Monte Carlo</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -467,7 +525,13 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Standoff Monte Carlo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-standoff-calculation">Simple Standoff Calculation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-correlation-coefficients-mean-and-standard-deviation-for-monte-carlo-simulation">Defining Correlation Coefficients, Mean and Standard Deviation For Monte Carlo Simulation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#standoff-monte-carlo-inputs">Standoff Monte Carlo Inputs</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-series">Dealing With Series</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-our-data">Viewing Our Data</a></li>
 </ul>
 
             </nav>
@@ -480,234 +544,14 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Standoff Monte Carlo</span>
-<span class="c1">#</span>
-<span class="c1"># See Monte Carlo - Arrhenius Degredation for a more in depth guide. Steps will be shortened for brevity.</span>
-<span class="c1"># This journal applies a Monte Carlo to the Standoff Calculation</span>
-</pre></div>
-</div>
-</div>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="standoff-monte-carlo">
+<h1>Standoff Monte Carlo<a class="headerlink" href="#standoff-monte-carlo" title="Link to this heading">#</a></h1>
+<p>See Monte Carlo - Arrhenius Degredation for a more in depth guide. Steps will be shortened for brevity.
+This journal applies a Monte Carlo to the Standoff Calculation</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
-<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pvdeg
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pvdeg in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (0.1.dev1+g5b9c72c94)
-Requirement already satisfied: aiohttp==3.13.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.13.4)
-Requirement already satisfied: numpy&gt;=1.19.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2.4.4)
-Requirement already satisfied: pvlib&gt;=0.12.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.15.0)
-Requirement already satisfied: scipy&gt;1.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.17.1)
-Requirement already satisfied: NLR-rex in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.5.0)
-Requirement already satisfied: cartopy in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.25.0)
-Requirement already satisfied: dask[dataframe] in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2026.3.0)
-Requirement already satisfied: dask-jobqueue in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.9.0)
-Requirement already satisfied: bokeh in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.9.0)
-Requirement already satisfied: geopy in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2.4.1)
-Requirement already satisfied: h5netcdf in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.8.1)
-Requirement already satisfied: h5py&lt;=3.14.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.14.0)
-Requirement already satisfied: jupyterlab in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (4.5.6)
-Requirement already satisfied: matplotlib in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.10.8)
-Requirement already satisfied: netCDF4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.7.4)
-Requirement already satisfied: notebook in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (7.5.5)
-Requirement already satisfied: numba in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.65.0)
-Requirement already satisfied: openpyxl in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.1.5)
-Requirement already satisfied: pandas in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2.3.3)
-Requirement already satisfied: photovoltaic in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.1.9)
-Requirement already satisfied: python-dateutil in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2.9.0.post0)
-Requirement already satisfied: pytz in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2026.1.post1)
-Requirement already satisfied: seaborn in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (0.13.2)
-Requirement already satisfied: tables in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.11.1)
-Requirement already satisfied: tqdm in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (4.67.3)
-Requirement already satisfied: xarray in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (2026.2.0)
-Requirement already satisfied: pre-commit in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (4.5.1)
-Requirement already satisfied: sympy in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.14.0)
-Requirement already satisfied: zarr in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (3.1.6)
-Requirement already satisfied: jupytext in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvdeg) (1.19.1)
-Requirement already satisfied: aiohappyeyeballs&gt;=2.5.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (2.6.1)
-Requirement already satisfied: aiosignal&gt;=1.4.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (1.4.0)
-Requirement already satisfied: attrs&gt;=17.3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (26.1.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: frozenlist&gt;=1.1.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (1.8.0)
-Requirement already satisfied: multidict&lt;7.0,&gt;=4.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (6.7.1)
-Requirement already satisfied: propcache&gt;=0.2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (0.4.1)
-Requirement already satisfied: yarl&lt;2.0,&gt;=1.17.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiohttp==3.13.4-&gt;pvdeg) (1.23.0)
-Requirement already satisfied: idna&gt;=2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from yarl&lt;2.0,&gt;=1.17.0-&gt;aiohttp==3.13.4-&gt;pvdeg) (3.11)
-Requirement already satisfied: typing-extensions&gt;=4.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiosignal&gt;=1.4.0-&gt;aiohttp==3.13.4-&gt;pvdeg) (4.15.0)
-Requirement already satisfied: requests in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pvlib&gt;=0.12.0-&gt;pvdeg) (2.33.1)
-Requirement already satisfied: tzdata&gt;=2022.7 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pandas-&gt;pvdeg) (2026.1)
-Requirement already satisfied: six&gt;=1.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from python-dateutil-&gt;pvdeg) (1.17.0)
-Requirement already satisfied: Jinja2&gt;=2.9 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (3.1.6)
-Requirement already satisfied: contourpy&gt;=1.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (1.3.3)
-Requirement already satisfied: narwhals&gt;=1.13 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (2.19.0)
-Requirement already satisfied: packaging&gt;=16.8 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (26.0)
-Requirement already satisfied: pillow&gt;=7.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (12.2.0)
-Requirement already satisfied: PyYAML&gt;=3.10 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (6.0.3)
-Requirement already satisfied: tornado&gt;=6.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (6.5.5)
-Requirement already satisfied: xyzservices&gt;=2021.09.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bokeh-&gt;pvdeg) (2026.3.0)
-Requirement already satisfied: MarkupSafe&gt;=2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from Jinja2&gt;=2.9-&gt;bokeh-&gt;pvdeg) (3.0.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: shapely&gt;=2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from cartopy-&gt;pvdeg) (2.1.2)
-Requirement already satisfied: pyshp&gt;=2.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from cartopy-&gt;pvdeg) (3.0.3)
-Requirement already satisfied: pyproj&gt;=3.3.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from cartopy-&gt;pvdeg) (3.7.2)
-Requirement already satisfied: cycler&gt;=0.10 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib-&gt;pvdeg) (0.12.1)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib-&gt;pvdeg) (4.62.1)
-Requirement already satisfied: kiwisolver&gt;=1.3.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib-&gt;pvdeg) (1.5.0)
-Requirement already satisfied: pyparsing&gt;=3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from matplotlib-&gt;pvdeg) (3.3.2)
-Requirement already satisfied: certifi in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pyproj&gt;=3.3.1-&gt;cartopy-&gt;pvdeg) (2026.2.25)
-Requirement already satisfied: distributed&gt;=2022.02.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask-jobqueue-&gt;pvdeg) (2026.3.0)
-Requirement already satisfied: click&gt;=8.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (8.3.2)
-Requirement already satisfied: cloudpickle&gt;=3.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (3.1.2)
-Requirement already satisfied: fsspec&gt;=2021.09.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (2026.3.0)
-Requirement already satisfied: partd&gt;=1.4.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (1.4.2)
-Requirement already satisfied: toolz&gt;=0.12.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (1.1.0)
-Requirement already satisfied: importlib_metadata&gt;=4.13.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (9.0.0)
-Requirement already satisfied: locket&gt;=1.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (1.0.0)
-Requirement already satisfied: msgpack&gt;=1.0.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (1.1.2)
-Requirement already satisfied: psutil&gt;=5.8.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (7.2.2)
-Requirement already satisfied: sortedcontainers&gt;=2.0.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (2.4.0)
-Requirement already satisfied: tblib!=3.2.0,!=3.2.1,&gt;=1.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (3.2.2)
-Requirement already satisfied: urllib3&gt;=1.26.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (2.6.3)
-Requirement already satisfied: zict&gt;=3.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from distributed&gt;=2022.02.0-&gt;dask-jobqueue-&gt;pvdeg) (3.0.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: zipp&gt;=3.20 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from importlib_metadata&gt;=4.13.0-&gt;dask[dataframe]-&gt;pvdeg) (3.23.0)
-Requirement already satisfied: pyarrow&gt;=16.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from dask[dataframe]-&gt;pvdeg) (23.0.1)
-Requirement already satisfied: geographiclib&lt;3,&gt;=1.52 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from geopy-&gt;pvdeg) (2.1)
-Requirement already satisfied: async-lru&gt;=1.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (2.3.0)
-Requirement already satisfied: httpx&lt;1,&gt;=0.25.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (0.28.1)
-Requirement already satisfied: ipykernel!=6.30.0,&gt;=6.5.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (7.2.0)
-Requirement already satisfied: jupyter-core in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (5.9.1)
-Requirement already satisfied: jupyter-lsp&gt;=2.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (2.3.1)
-Requirement already satisfied: jupyter-server&lt;3,&gt;=2.4.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (2.17.0)
-Requirement already satisfied: jupyterlab-server&lt;3,&gt;=2.28.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (2.28.0)
-Requirement already satisfied: notebook-shim&gt;=0.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (0.2.4)
-Requirement already satisfied: setuptools&gt;=41.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (79.0.1)
-Requirement already satisfied: traitlets in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-&gt;pvdeg) (5.14.3)
-Requirement already satisfied: anyio in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from httpx&lt;1,&gt;=0.25.0-&gt;jupyterlab-&gt;pvdeg) (4.13.0)
-Requirement already satisfied: httpcore==1.* in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from httpx&lt;1,&gt;=0.25.0-&gt;jupyterlab-&gt;pvdeg) (1.0.9)
-Requirement already satisfied: h11&gt;=0.16 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from httpcore==1.*-&gt;httpx&lt;1,&gt;=0.25.0-&gt;jupyterlab-&gt;pvdeg) (0.16.0)
-Requirement already satisfied: argon2-cffi&gt;=21.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (25.1.0)
-Requirement already satisfied: jupyter-client&gt;=7.4.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (8.8.0)
-Requirement already satisfied: jupyter-events&gt;=0.11.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.12.0)
-Requirement already satisfied: jupyter-server-terminals&gt;=0.4.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.5.4)
-Requirement already satisfied: nbconvert&gt;=6.4.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (7.17.1)
-Requirement already satisfied: nbformat&gt;=5.3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (5.10.4)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: overrides&gt;=5.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (7.7.0)
-Requirement already satisfied: prometheus-client&gt;=0.9 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.25.0)
-Requirement already satisfied: pyzmq&gt;=24 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (27.1.0)
-Requirement already satisfied: send2trash&gt;=1.8.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (2.1.0)
-Requirement already satisfied: terminado&gt;=0.8.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.18.1)
-Requirement already satisfied: websocket-client&gt;=1.7 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.9.0)
-Requirement already satisfied: babel&gt;=2.10 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (2.18.0)
-Requirement already satisfied: json5&gt;=0.9.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (0.14.0)
-Requirement already satisfied: jsonschema&gt;=4.18.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (4.26.0)
-Requirement already satisfied: argon2-cffi-bindings in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (25.1.0)
-Requirement already satisfied: comm&gt;=0.1.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.2.3)
-Requirement already satisfied: debugpy&gt;=1.6.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (1.8.20)
-Requirement already satisfied: ipython&gt;=7.23.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (9.10.1)
-Requirement already satisfied: matplotlib-inline&gt;=0.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.2.1)
-Requirement already satisfied: nest-asyncio&gt;=1.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (1.6.0)
-Requirement already satisfied: decorator&gt;=4.3.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (5.2.1)
-Requirement already satisfied: ipython-pygments-lexers&gt;=1.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (1.1.1)
-Requirement already satisfied: jedi&gt;=0.18.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.19.2)
-Requirement already satisfied: pexpect&gt;4.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (4.9.0)
-Requirement already satisfied: prompt_toolkit&lt;3.1.0,&gt;=3.0.41 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (3.0.52)
-Requirement already satisfied: pygments&gt;=2.11.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (2.20.0)
-Requirement already satisfied: stack_data&gt;=0.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.6.3)
-Requirement already satisfied: wcwidth in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from prompt_toolkit&lt;3.1.0,&gt;=3.0.41-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.6.0)
-Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jedi&gt;=0.18.1-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.8.6)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (2025.9.1)
-Requirement already satisfied: referencing&gt;=0.28.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (0.37.0)
-Requirement already satisfied: rpds-py&gt;=0.25.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.28.0-&gt;jupyterlab-&gt;pvdeg) (0.30.0)
-Requirement already satisfied: platformdirs&gt;=2.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-core-&gt;jupyterlab-&gt;pvdeg) (4.9.6)
-Requirement already satisfied: python-json-logger&gt;=2.0.4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (4.1.0)
-Requirement already satisfied: rfc3339-validator in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.1.4)
-Requirement already satisfied: rfc3986-validator&gt;=0.1.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.1.1)
-Requirement already satisfied: fqdn in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.5.1)
-Requirement already satisfied: isoduration in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (20.11.0)
-Requirement already satisfied: jsonpointer&gt;1.13 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (3.1.1)
-Requirement already satisfied: rfc3987-syntax&gt;=1.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.1.0)
-Requirement already satisfied: uri-template in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.3.0)
-Requirement already satisfied: webcolors&gt;=24.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (25.10.0)
-Requirement already satisfied: beautifulsoup4 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (4.14.3)
-Requirement already satisfied: bleach!=5.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bleach[css]!=5.0.0-&gt;nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (6.3.0)
-Requirement already satisfied: defusedxml in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.7.1)
-Requirement already satisfied: jupyterlab-pygments in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.3.0)
-Requirement already satisfied: mistune&lt;4,&gt;=2.0.3 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (3.2.0)
-Requirement already satisfied: nbclient&gt;=0.5.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.10.4)
-Requirement already satisfied: pandocfilters&gt;=1.4.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.5.1)
-Requirement already satisfied: webencodings in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bleach!=5.0.0-&gt;bleach[css]!=5.0.0-&gt;nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (0.5.1)
-Requirement already satisfied: tinycss2&lt;1.5,&gt;=1.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from bleach[css]!=5.0.0-&gt;nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.4.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: fastjsonschema&gt;=2.15 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from nbformat&gt;=5.3.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (2.21.2)
-Requirement already satisfied: ptyprocess&gt;=0.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pexpect&gt;4.3-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.7.0)
-Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from requests-&gt;pvlib&gt;=0.12.0-&gt;pvdeg) (3.4.7)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: lark&gt;=1.2.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from rfc3987-syntax&gt;=1.1.0-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.3.1)
-Requirement already satisfied: executing&gt;=1.2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (2.2.1)
-Requirement already satisfied: asttokens&gt;=2.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (3.0.1)
-Requirement already satisfied: pure-eval in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from stack_data&gt;=0.6.0-&gt;ipython&gt;=7.23.1-&gt;ipykernel!=6.30.0,&gt;=6.5.0-&gt;jupyterlab-&gt;pvdeg) (0.2.3)
-Requirement already satisfied: cffi&gt;=1.0.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (2.0.0)
-Requirement already satisfied: pycparser in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from cffi&gt;=1.0.1-&gt;argon2-cffi-bindings-&gt;argon2-cffi&gt;=21.1-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (3.0)
-Requirement already satisfied: soupsieve&gt;=1.6.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from beautifulsoup4-&gt;nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (2.8.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: arrow&gt;=0.15.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.11.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab-&gt;pvdeg) (1.4.0)
-Requirement already satisfied: markdown-it-py&gt;=1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupytext-&gt;pvdeg) (3.0.0)
-Requirement already satisfied: mdit-py-plugins in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from jupytext-&gt;pvdeg) (0.5.0)
-Requirement already satisfied: mdurl~=0.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from markdown-it-py&gt;=1.0-&gt;jupytext-&gt;pvdeg) (0.1.2)
-Requirement already satisfied: cftime in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from netCDF4-&gt;pvdeg) (1.6.5)
-Requirement already satisfied: h5pyd&gt;=0.18.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from NLR-rex-&gt;pvdeg) (0.24.0)
-Requirement already satisfied: s3fs&gt;=2023.6.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from NLR-rex-&gt;pvdeg) (2026.3.0)
-Requirement already satisfied: scikit-learn&gt;=1.6.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from NLR-rex-&gt;pvdeg) (1.8.0)
-Requirement already satisfied: toml&gt;=0.10.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from NLR-rex-&gt;pvdeg) (0.10.2)
-Requirement already satisfied: requests_unixsocket in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from h5pyd&gt;=0.18.0-&gt;NLR-rex-&gt;pvdeg) (0.4.1)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: aiobotocore&lt;4.0.0,&gt;=2.19.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (3.4.0)
-Requirement already satisfied: aioitertools&lt;1.0.0,&gt;=0.5.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiobotocore&lt;4.0.0,&gt;=2.19.0-&gt;s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (0.13.0)
-Requirement already satisfied: botocore&lt;1.42.85,&gt;=1.42.79 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiobotocore&lt;4.0.0,&gt;=2.19.0-&gt;s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (1.42.84)
-Requirement already satisfied: jmespath&lt;2.0.0,&gt;=0.7.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiobotocore&lt;4.0.0,&gt;=2.19.0-&gt;s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (1.1.0)
-Requirement already satisfied: wrapt&lt;3.0.0,&gt;=1.10.10 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from aiobotocore&lt;4.0.0,&gt;=2.19.0-&gt;s3fs&gt;=2023.6.0-&gt;NLR-rex-&gt;pvdeg) (2.1.2)
-Requirement already satisfied: joblib&gt;=1.3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from scikit-learn&gt;=1.6.1-&gt;NLR-rex-&gt;pvdeg) (1.5.3)
-Requirement already satisfied: threadpoolctl&gt;=3.2.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from scikit-learn&gt;=1.6.1-&gt;NLR-rex-&gt;pvdeg) (3.6.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: llvmlite&lt;0.48,&gt;=0.47.0dev0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from numba-&gt;pvdeg) (0.47.0)
-Requirement already satisfied: et-xmlfile in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from openpyxl-&gt;pvdeg) (2.0.0)
-Requirement already satisfied: cfgv&gt;=2.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pre-commit-&gt;pvdeg) (3.5.0)
-Requirement already satisfied: identify&gt;=1.0.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pre-commit-&gt;pvdeg) (2.6.18)
-Requirement already satisfied: nodeenv&gt;=0.11.1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pre-commit-&gt;pvdeg) (1.10.0)
-Requirement already satisfied: virtualenv&gt;=20.10.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from pre-commit-&gt;pvdeg) (21.2.1)
-Requirement already satisfied: distlib&lt;1,&gt;=0.3.7 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from virtualenv&gt;=20.10.0-&gt;pre-commit-&gt;pvdeg) (0.4.0)
-Requirement already satisfied: filelock&lt;4,&gt;=3.24.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from virtualenv&gt;=20.10.0-&gt;pre-commit-&gt;pvdeg) (3.25.2)
-Requirement already satisfied: python-discovery&gt;=1 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from virtualenv&gt;=20.10.0-&gt;pre-commit-&gt;pvdeg) (1.2.2)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from sympy-&gt;pvdeg) (1.3.0)
-Requirement already satisfied: numexpr&gt;=2.6.2 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from tables-&gt;pvdeg) (2.14.1)
-Requirement already satisfied: py-cpuinfo in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from tables-&gt;pvdeg) (9.0.0)
-Requirement already satisfied: blosc2&gt;=2.3.0 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from tables-&gt;pvdeg) (4.1.2)
-Requirement already satisfied: ndindex in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from blosc2&gt;=2.3.0-&gt;tables-&gt;pvdeg) (1.10.1)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: donfig&gt;=0.8 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from zarr-&gt;pvdeg) (0.8.1.post1)
-Requirement already satisfied: google-crc32c&gt;=1.5 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from zarr-&gt;pvdeg) (1.8.0)
-Requirement already satisfied: numcodecs&gt;=0.14 in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (from zarr-&gt;pvdeg) (0.16.5)
+<span class="c1"># !pip install pvdeg</span>
 </pre></div>
 </div>
 </div>
@@ -735,15 +579,6 @@ Requirement already satisfied: numcodecs&gt;=0.14 in /opt/hostedtoolcache/Python
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas version &quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pvlib version &quot;</span><span class="p">,</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-
-
-<span class="c1"># # Simple Standoff Calculation</span>
-<span class="c1">#</span>
-<span class="c1"># This is copied from another tutorial called `4 - Standards.ipynb`, please visit this page for a more in depth explanation of the process for a single standoff calculation.</span>
-<span class="c1">#</span>
-<span class="c1"># &lt;div class=&quot;alert alert-block alert-info&quot;&gt;</span>
-<span class="c1"># &lt;b&gt;Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at &lt;a ref=&quot;https://developer.nlr.gov/signup/&quot;&gt;https://developer.nlr.gov/signup/&lt;/a&gt; so register now.)</span>
-<span class="c1"># &lt;/div&gt;</span>
 </pre></div>
 </div>
 </div>
@@ -752,12 +587,18 @@ Requirement already satisfied: numcodecs&gt;=0.14 in /opt/hostedtoolcache/Python
 Python version  3.11.15 (main, Mar  3 2026, 16:10:12) [GCC 13.3.0]
 Pandas version  2.3.3
 Pvlib version  0.15.0
-Pvdeg version  0.1.dev1+g5b9c72c94
+Pvdeg version  0.1.dev1+gf46fcbea6
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="simple-standoff-calculation">
+<h1>Simple Standoff Calculation<a class="headerlink" href="#simple-standoff-calculation" title="Link to this heading">#</a></h1>
+<p>This is copied from another tutorial called <code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">-</span> <span class="pre">Standards.ipynb</span></code>, please visit this page for a more in depth explanation of the process for a single standoff calculation.</p>
+<div class="alert alert-block alert-info">
+<b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a> so register now.)
+</div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load weather data from locally saved files to avoid API rate limits</span>
 <span class="n">WEATHER</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/psm4_nyc.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -797,13 +638,6 @@ Pvdeg version  0.1.dev1+g5b9c72c94
 
 <span class="nb">print</span><span class="p">(</span><span class="n">height1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">height2</span><span class="p">)</span>
-
-
-<span class="c1"># # Defining Correlation Coefficients, Mean and Standard Deviation For Monte Carlo Simulation</span>
-<span class="c1">#</span>
-<span class="c1"># We will leave the list of correlations blank because our variables are not correlated. For a correlated use case visit the `Monte Carlo - Arrhenius.ipynb` tutorial.</span>
-<span class="c1">#</span>
-<span class="c1"># Mean and standard deviation must always be populated if being used to create a dataset. However, you can feed your own correlated or uncorrelated data into the simulate function but column names must be consistent.</span>
 </pre></div>
 </div>
 </div>
@@ -821,6 +655,11 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 </div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="defining-correlation-coefficients-mean-and-standard-deviation-for-monte-carlo-simulation">
+<h1>Defining Correlation Coefficients, Mean and Standard Deviation For Monte Carlo Simulation<a class="headerlink" href="#defining-correlation-coefficients-mean-and-standard-deviation-for-monte-carlo-simulation" title="Link to this heading">#</a></h1>
+<p>We will leave the list of correlations blank because our variables are not correlated. For a correlated use case visit the <code class="docutils literal notranslate"><span class="pre">Monte</span> <span class="pre">Carlo</span> <span class="pre">-</span> <span class="pre">Arrhenius.ipynb</span></code> tutorial.</p>
+<p>Mean and standard deviation must always be populated if being used to create a dataset. However, you can feed your own correlated or uncorrelated data into the simulate function but column names must be consistent.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># These numbers may not make sense in the context of the problem but work for demonstraiting the process</span>
@@ -836,33 +675,32 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
-
-
-<span class="c1"># # Standoff Monte Carlo Inputs</span>
-<span class="c1">#</span>
-<span class="c1"># When using the pvdeg.montecarlo.simulate() function on a target function all of the target function&#39;s required arguments must still be given. Our non-changing arguments will be stored in a dictionary. The randomized monte carlo input data will also be passed to the target function via the simulate function. All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
-0    10.483627    -0.219083
-1     3.647697    -0.360491
-2     4.422605     0.255291
-3     9.562557     0.542066
-4    -1.094830     0.214181
+0     3.708309     1.133914
+1     0.142137    -0.021974
+2     5.675775     0.348930
+3     6.269196     0.523412
+4     3.236571    -0.437752
 ..         ...          ...
-495   1.397857     1.137976
-496   9.720990     0.334512
-497  10.641853    -0.389470
-498   8.013644     0.374242
-499   5.551455     0.150394
+495   4.129513     0.460165
+496   2.159710     0.295119
+497   5.500154     0.505925
+498  10.326806     1.461999
+499   7.193084     0.486280
 
 [500 rows x 2 columns]
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="standoff-monte-carlo-inputs">
+<h1>Standoff Monte Carlo Inputs<a class="headerlink" href="#standoff-monte-carlo-inputs" title="Link to this heading">#</a></h1>
+<p>When using the pvdeg.montecarlo.simulate() function on a target function all of the target function’s required arguments must still be given. Our non-changing arguments will be stored in a dictionary. The randomized monte carlo input data will also be passed to the target function via the simulate function. All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
@@ -889,16 +727,15 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
     <span class="n">correlated_samples</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span>
     <span class="o">**</span><span class="n">function_kwargs</span><span class="p">,</span>
 <span class="p">)</span>
-
-
-<span class="c1"># # Dealing With Series</span>
-<span class="c1"># Notice how our results are contained in a pandas series instead of a dataframe.</span>
-<span class="c1">#</span>
-<span class="c1"># This means we have to do an extra step to view our results. Run the block below to confirm that our results are indeed contained in a series. And convert them into a simpler dataframe.</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="dealing-with-series">
+<h1>Dealing With Series<a class="headerlink" href="#dealing-with-series" title="Link to this heading">#</a></h1>
+<p>Notice how our results are contained in a pandas series instead of a dataframe.</p>
+<p>This means we have to do an extra step to view our results. Run the block below to confirm that our results are indeed contained in a series. And convert them into a simpler dataframe.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">results</span><span class="p">))</span>
@@ -917,32 +754,32 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">results_df</span><span class="p">)</span>
-
-
-<span class="c1"># # Viewing Our Data</span>
-<span class="c1"># Let&#39;s plot the results using a histogram</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    2.100118  74.231789  50.920534
-1    0.846180  74.870636  51.344994
-2    0.098235  70.482156  48.533219
-3    0.000000  67.344512  46.210804
-4    0.000000  70.916972  48.758809
+0    0.000000  56.954417  40.060978
+1    0.019176  72.870859  50.123506
+2    0.000000  69.471473  47.782700
+3    0.000000  67.616200  46.391206
+4    0.802924  75.180124  51.602088
 ..        ...        ...        ...
-495  0.000000  56.879657  40.025859
-496  0.000000  69.627878  47.906789
-497  2.533169  74.990378  51.431692
-498  0.000000  69.192732  47.578395
-499  0.387630  71.507152  49.160087
+495  0.000000  68.325099  46.969116
+496  0.008618  70.087067  48.222810
+497  0.000000  67.792685  46.533647
+498  0.000000  48.993146  36.292151
+499  0.000000  68.019174  46.729744
 
 [500 rows x 3 columns]
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="viewing-our-data">
+<h1>Viewing Our Data<a class="headerlink" href="#viewing-our-data" title="Link to this heading">#</a></h1>
+<p>Let’s plot the results using a histogram</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bin_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">results_df</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">results_df</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
@@ -967,9 +804,10 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0e91eb81d3847e6052778064e9d532795eb6c766bb1439d28e296b4508b3c398.png" src="../_images/0e91eb81d3847e6052778064e9d532795eb6c766bb1439d28e296b4508b3c398.png" />
+<img alt="../_images/e654f9db00dc0625dba0b6a0217fc94660e9144eb383de29d83683ecde5afd13.png" src="../_images/e654f9db00dc0625dba0b6a0217fc94660e9144eb383de29d83683ecde5afd13.png" />
 </div>
 </div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1007,7 +845,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">Arrhenius Monte Carlo</p>
       </div>
     </a>
     <a class="right-next"
@@ -1036,7 +874,13 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Standoff Monte Carlo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-standoff-calculation">Simple Standoff Calculation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-correlation-coefficients-mean-and-standard-deviation-for-monte-carlo-simulation">Defining Correlation Coefficients, Mean and Standard Deviation For Monte Carlo Simulation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#standoff-monte-carlo-inputs">Standoff Monte Carlo Inputs</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-series">Dealing With Series</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-our-data">Viewing Our Data</a></li>
 </ul>
 
   </nav></div>

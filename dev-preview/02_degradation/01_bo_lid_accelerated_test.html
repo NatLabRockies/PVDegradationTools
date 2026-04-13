@@ -66,7 +66,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="LETID Accelerated Test" href="02_letid_accelerated_test.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="../01_basics/04_weather_database_access.html" />
+    <link rel="prev" title="Weather Database Access" href="../01_basics/04_weather_database_access.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -182,6 +182,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../01_basics/03_spectral_degradation.html">Spectral Degradation</a></li>
 
 
+<li class="toctree-l1"><a class="reference internal" href="../01_basics/04_weather_database_access.html">Weather Database Access</a></li>
+
+
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">02 - Degradation Mechanisms</span></p>
 <ul class="current nav bd-sidenav">
@@ -192,6 +197,14 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="02_letid_accelerated_test.html">LETID Accelerated Test</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="03_letid_outdoor.html">LETID Outdoor</a></li>
 
 
 
@@ -224,9 +237,39 @@
 
 
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">03 - Monte Carlo Simulations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_monte_carlo/01_arrhenius.html">Arrhenius Monte Carlo</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../03_monte_carlo/02_standoff.html">Standoff Monte Carlo</a></li>
+
+
+
+
+
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">04 - Scenarios</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../04_scenario/01_scenario_temperature.html">Temperature Scenario</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../04_scenario/02_scenario_single_location.html">Single Location</a></li>
+
+
+
+
+
+
+
 
 
 
@@ -259,6 +302,12 @@
 
 
 
+
+
+<li class="toctree-l1"><a class="reference internal" href="../05_geospatial/02_geospatial_world_map.html">Geospatial World Map (HPC)</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../05_geospatial/03_letid_outdoor_geospatial_demo.html">LETID Outdoor Geospatial Demo (HPC)</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="../05_geospatial/04_scenario_geographical_features.html">Geographical Features (HPC)</a></li>
@@ -298,6 +347,12 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="../06_advanced/04_nsrdb_distributed_api.html">NSRDB Distributed (API Key Required)</a></li>
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="../06_advanced/05_pvgis_distributed.html">PVGIS Distributed</a></li>
 
 
@@ -317,6 +372,9 @@
 
 
 
+
+
+<li class="toctree-l1"><a class="reference internal" href="../10_workshop_demos/02_duramat_live_demo.html">DuraMAT Live Demo (HPC)</a></li>
 
 
 </ul>
@@ -546,7 +604,7 @@
 Python version  3.11.15 (main, Mar  3 2026, 16:10:12) [GCC 13.3.0]
 Pandas version  2.3.3
 pvlib version  0.15.0
-pvdeg version  0.1.dev1+g5b9c72c94
+pvdeg version  0.1.dev1+gf46fcbea6
 </pre></div>
 </div>
 </div>
@@ -602,9 +660,9 @@ pvdeg version  0.1.dev1+g5b9c72c94
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.03495240755084558),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.03495240755084543),
  np.float64(5.663466529792824),
- np.float64(5.465514739492932))
+ np.float64(5.465514739492933))
 </pre></div>
 </div>
 </div>
@@ -1165,7 +1223,7 @@ pvdeg version  0.1.dev1+g5b9c72c94
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">Weather Database Access</p>
       </div>
     </a>
     <a class="right-next"
