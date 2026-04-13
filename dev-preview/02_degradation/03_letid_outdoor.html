@@ -604,15 +604,15 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1010-azure
 Python version  3.11.15 (main, Mar  3 2026, 16:10:12) [GCC 13.3.0]
-Pandas version  2.3.3
+Pandas version  3.0.2
 pvlib version  0.15.0
-pvdeg version  0.1.dev1+ga24d697b5
+pvdeg version  0.1.dev1+g8745e9704
 </pre></div>
 </div>
 </div>
 </div>
 <p>First, we’ll use pvlib to create and run a model system, and use the irradiance, temperature, and operating point of that model to set up our LETID model
-For this example, we’ll model a fixed latitude tilt system at NLR, in Golden, CO, USA, using <a class="reference external" href="https://nsrdb.nlr.gov/">NSRDB</a> hourly PSM weather data, SAPM temperature models, and module and inverter models from the CEC database.</p>
+For this example, we’ll model a fixed latitude tilt system at NREL, in Golden, CO, USA, using <a class="reference external" href="https://nsrdb.nrel.gov/">NSRDB</a> hourly PSM weather data, SAPM temperature models, and module and inverter models from the CEC database.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load weather and location data, use pvlib read_psm3 function with map_variables = True</span>
