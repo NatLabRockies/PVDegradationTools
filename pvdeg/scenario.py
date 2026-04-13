@@ -583,6 +583,8 @@ class Scenario:
     def addJob(
         self,
         func,
+        name: Optional[str] = None,
+        depends_on: Optional[dict] = None,
     ):
         """Add pvdeg function(s) to the scenario pipeline.
 
@@ -614,32 +616,24 @@ class Scenario:
             ``material_params`` dict (e.g. ``"encapsulant"``,
             ``"backsheet"``).
 
-        Examples:
-        ---------
-        Bind a degradation function to the encapsulant layer:
-        >>> scenario.addJob(
-        ...     func=(pvdeg.degradation.arrhenius, "encapsulant")
-        ... )
-
-        With extra non-material kwargs and a layer binding:
-        >>> scenario.addJob(
-        ...     func=(
-        ...         pvdeg.degradation.vantHoff_deg,
-        ...         {"I_chamber": 1000, "temp_chamber": 25},
-        ...         "encapsulant",
-        ...     )
-        ... )
-
-        Multiple jobs at once:
-        >>> scenario.addJob(func=[
-        ...     (pvdeg.degradation.arrhenius, "encapsulant"),
-        ...     (
-        ...         pvdeg.degradation.vantHoff_deg,
-        ...         {"I_chamber": 1000, "temp_chamber": 25},
-        ...         "backsheet",
-        ...     ),
-        ... ])
+        name : str or None
+            Optional unique name for this job. Used for sequential analysis in the
+            Scenario pipeline. Pass this name to a later job's ``depends_on`` variable
+            to forward the output of this job as an input to the later job at run time.
+        depends_on : dict or None
+            ``{kwarg_name: source_job_name}`` mapping. The job from which to take the
+            output as an input for this job. At run time, ``run()`` resolves each source
+            (depends on) job's result and passes it as the named kwarg to this function.
+            The source job must already exist in the pipeline (i.e. have been added with
+            a matching ``name``).
         """
+        # name/depends_on cannot be used with list form
+        if isinstance(func, list) and (name is not None or depends_on is not None):
+            raise ValueError(
+                "'name' and 'depends_on' cannot be used with list-form addJob. "
+                "Call addJob separately for each job you want to name."
+            )
+
         # Normalize input to list of jobs
         if isinstance(func, list):
             jobs_to_add = func
@@ -647,82 +641,112 @@ class Scenario:
             jobs_to_add = [func]
 
         # Process each job
-        for job in jobs_to_add:
-            if callable(job):
-                self._add_single_job(job, {}, None)
+        if len(jobs_to_add) == 1:
+            return self._add_single_job(jobs_to_add[0], name, depends_on)
+        else:
+            return [self._add_single_job(job) for job in jobs_to_add]
 
-            elif isinstance(job, tuple):
-                if len(job) == 2:
-                    job_func, second = job
-                    if not callable(job_func):
-                        raise ValueError(
-                            "First element of job tuple must be callable, "
-                            f"got {type(job_func)}"
-                        )
-                    if isinstance(second, str):
-                        # (func, layer_name)
-                        self._add_single_job(job_func, {}, second)
-                    elif isinstance(second, dict):
-                        # (func, extra_kwargs) — no layer, backward compat
-                        self._add_single_job(job_func, second, None)
-                    else:
-                        raise ValueError(
-                            "Second element of a 2-tuple must be a layer name "
-                            f"(str) or extra kwargs (dict), got {type(second)}"
-                        )
-
-                elif len(job) == 3:
-                    job_func, job_kwargs, layer_name = job
-                    if not callable(job_func):
-                        raise ValueError(
-                            "First element of job tuple must be callable, "
-                            f"got {type(job_func)}"
-                        )
-                    if not isinstance(job_kwargs, dict):
-                        raise ValueError(
-                            "Second element of a 3-tuple must be a dict of "
-                            f"extra kwargs, got {type(job_kwargs)}"
-                        )
-                    if not isinstance(layer_name, str):
-                        raise ValueError(
-                            "Third element of a 3-tuple must be a layer name "
-                            f"(str), got {type(layer_name)}"
-                        )
-                    self._add_single_job(job_func, job_kwargs, layer_name)
-
-                else:
-                    raise ValueError(
-                        "Job tuple must have 2 or 3 elements, " f"got {len(job)}"
-                    )
-
-            else:
-                raise ValueError(
-                    "Each job must be a callable, a 2-tuple, or a 3-tuple, "
-                    f"got {type(job)}"
-                )
-
-    def _add_single_job(self, func, func_kwarg, material_layer=None):
-        """Internal helper to add a single job to the pipeline.
+    def _add_single_job(
+        self,
+        job_spec,
+        name: Optional[str] = None,
+        depends_on: Optional[dict] = None,
+    ):
+        """Parse a job spec and add a single job to the pipeline.
 
         Parameters:
         -----------
-        func : callable
-            Function to add to pipeline
-        func_kwarg : dict
-            Extra keyword arguments for the function (non-material params)
-        material_layer : str or None
-            Name of the material layer whose parameters should be injected
-            at runtime (e.g. ``"encapsulant"``, ``"backsheet"``). If None,
-            no material params are injected.
+        job_spec : callable or tuple
+            One of:
+            - A bare callable — no material layer, no extra kwargs.
+            - ``(func, layer_name)`` — bind to a material layer.
+            - ``(func, extra_kwargs)`` — extra kwargs, no layer (backward compat).
+            - ``(func, extra_kwargs, layer_name)`` — extra kwargs + layer binding.
+        name : str or None
+            Optional unique name for this job. Used with ``depends_on`` to
+            reference this job's output from a later job.
+        depends_on : dict or None
+            Mapping of ``{kwarg_name: source_job_name}`` declaring that the
+            result of a previously-named job should be forwarded as a keyword
+            argument to this job at run time.
         """
+        # --- Parse the spec into (func, func_kwarg, material_layer) ---
+        if callable(job_spec):
+            func, func_kwarg, material_layer = job_spec, {}, None
+        elif isinstance(job_spec, tuple):
+            if len(job_spec) == 2:
+                job_func, second = job_spec
+                if not callable(job_func):
+                    raise ValueError(
+                        "First element of job tuple must be callable, "
+                        f"got {type(job_func)}"
+                    )
+                if isinstance(second, str):
+                    func, func_kwarg, material_layer = job_func, {}, second
+                elif isinstance(second, dict):
+                    func, func_kwarg, material_layer = job_func, second, None
+                else:
+                    raise ValueError(
+                        "Second element of a 2-tuple must be a layer name "
+                        f"(str) or extra kwargs (dict), got {type(second)}"
+                    )
+            elif len(job_spec) == 3:
+                job_func, job_kwargs, layer_name = job_spec
+                if not callable(job_func):
+                    raise ValueError(
+                        "First element of job tuple must be callable, "
+                        f"got {type(job_func)}"
+                    )
+                if not isinstance(job_kwargs, dict):
+                    raise ValueError(
+                        "Second element of a 3-tuple must be a dict of "
+                        f"extra kwargs, got {type(job_kwargs)}"
+                    )
+                if not isinstance(layer_name, str):
+                    raise ValueError(
+                        "Third element of a 3-tuple must be a layer name "
+                        f"(str), got {type(layer_name)}"
+                    )
+                func, func_kwarg, material_layer = job_func, job_kwargs, layer_name
+            else:
+                raise ValueError(
+                    "Job tuple must have 2 or 3 elements, " f"got {len(job_spec)}"
+                )
+        else:
+            raise ValueError(
+                "Each job must be a callable, a 2-tuple, or a 3-tuple, "
+                f"got {type(job_spec)}"
+            )
+
+        # --- Validate and insert into pipeline ---
         try:
+            if name is not None:
+                existing_names = {
+                    j.get("name") for j in self.pipeline.values() if j.get("name")
+                }
+                if name in existing_names:
+                    raise ValueError(
+                        f"A job named '{name}' already exists in the pipeline."
+                    )
+            if depends_on:
+                existing_names = {
+                    j.get("name") for j in self.pipeline.values() if j.get("name")
+                }
+                for kwarg, source in depends_on.items():
+                    if source not in existing_names:
+                        raise ValueError(
+                            f"depends_on references unknown job '{source}'. "
+                            "Add the source job before the dependent job."
+                        )
             job_id = utilities.new_id(self.pipeline)
-            job_dict = {
+            self.pipeline[job_id] = {
                 "job": func,
                 "params": func_kwarg,
                 "material_layer": material_layer,
+                "name": name,
+                "depends_on": depends_on or {},
             }
-            self.pipeline[job_id] = job_dict
+            return job_id
         except Exception as e:
             warnings.warn(f"Failed to add job: {e}")
 
@@ -752,6 +776,7 @@ class Scenario:
         if self.modules:
             for module in self.modules:
                 module_result = {}
+                completed: dict = {}
 
                 weather_dict = {
                     "weather_df": self.weather_data,
@@ -770,19 +795,34 @@ class Scenario:
                     func = job["job"]
                     params = job["params"]
                     material_layer = job.get("material_layer", None)
+                    job_name = job.get("name")
+                    job_depends_on = job.get("depends_on", {})
+
+                    # Resolve upstream job outputs into kwargs
+                    upstream_kwargs = {}
+                    for kwarg, source_name in job_depends_on.items():
+                        if source_name in completed:
+                            upstream_kwargs[kwarg] = completed[source_name]
 
                     # Resolve material params for this specific job's layer
                     job_material_params = _resolve_material_params(
                         module["material_params"], material_layer
                     )
 
-                    combined = weather_dict | temperature_args | job_material_params
+                    combined = (
+                        weather_dict
+                        | temperature_args
+                        | job_material_params
+                        | upstream_kwargs
+                    )
 
                     func_params = signature(func).parameters
                     func_args = {k: v for k, v in combined.items() if k in func_params}
 
                     res = func(**params, **func_args)
                     module_result[id] = res
+                    if job_name:
+                        completed[job_name] = res
 
                 results_dict[module["module_name"]] = module_result
 
@@ -800,16 +840,26 @@ class Scenario:
 
         elif not self.modules:
             pipeline_results = {}
+            completed: dict = {}
 
             for id, job in self.pipeline.items():
                 func, params = job["job"], job["params"]
+                job_name = job.get("name")
+                job_depends_on = job.get("depends_on", {})
+
+                # Resolve upstream job outputs into kwargs
+                upstream_kwargs = {}
+                for kwarg, source_name in job_depends_on.items():
+                    if source_name in completed:
+                        upstream_kwargs[kwarg] = completed[source_name]
 
                 # Arguments to pass to the function
                 func_args = {
                     "weather_df": self.weather_data,
                     "meta": self.meta_data,
                 }
-                # Merge user-defined parameters, which can override weather/meta
+                # Merge upstream results, then user-defined parameters
+                func_args.update(upstream_kwargs)
                 if params:
                     func_args.update(params)
 
@@ -821,6 +871,8 @@ class Scenario:
 
                 results_dict[id] = result
                 pipeline_results = results_dict
+                if job_name:
+                    completed[job_name] = result
 
             for key in pipeline_results.keys():
                 if isinstance(results_dict[key], pd.DataFrame):
