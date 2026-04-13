@@ -945,3 +945,158 @@ def vecArrhenius(
         )
 
     return degradation / len(poa_global)
+
+
+def perovskite_degradation(
+    weather_df: pd.DataFrame = None,
+    meta: dict = None,
+    component: str = "total",
+    I_in: float = 1.59e21,
+    P_O2: float = 21.2,
+) -> pd.Series:
+    """Compute MAPbI3 perovskite degradation rate using the full kinetic model in [1].
+
+    The net degradation rate is the sum of four terms:
+
+    .. math::
+
+        r = r_{WPO} + r_{DPO} + r_{hum} + r_{therm}
+
+    where:
+
+    .. math::
+
+        r_{WPO} = k_{0,WPO} \\exp\\!\\left(\\frac{-E_{A,WPO}}{R T_K}\\right)
+                  \\frac{P_{O_2} P_{H_2O} I_{in}^{0.7}}
+                       {\\left[1 + K_{2W} P_{O_2}(1 + K_{3W} I_{in}^{0.7})\\right]^2}
+
+        r_{DPO} = k_{0,DPO} \\exp\\!\\left(\\frac{-E_{A,DPO}}{R T_K}\\right)
+                  \\frac{P_{O_2} I_{in}^{0.7}}
+                       {1 + K_{2D} P_{O_2}(1 + K_{3D} I_{in}^{0.7})}
+
+        r_{hum} = k_{0,hum} \\exp\\!\\left(\\frac{-E_A^{hum}}{R T_K}\\right)
+                  P_{H_2O}\\, I_{in}^{0.7}
+
+        r_{therm} = k_{0,therm} \\exp\\!\\left(\\frac{-E_A^{therm}}{R T_K}\\right)
+
+    All rate constants and activation energies are taken directly from Table 3
+    and SI §14 of [1], and are stored in ``DegradationDatabase.json`` entry D015.
+
+    Parameters
+    ----------
+    weather_df : pd.DataFrame
+        Weather data with a time index.  Required column: ``'temp_air'`` [°C].
+        Column ``'relative_humidity'`` [%] is required for the WPO and r_hum
+        terms; if absent a warning is raised.
+    meta : dict
+        Location metadata.  Not used directly; kept for pipeline compatibility.
+    component : str, default ``"total"``
+        Which component of the rate to return:
+
+        - ``"total"``   — full model: :math:`r_{WPO} + r_{DPO} + r_{hum} + r_{therm}`
+        - ``"WPO"``     — water-accelerated photooxidation term
+        - ``"DPO"``     — dry photooxidation term
+        - ``"r_hum"``   — humidity-induced minority pathway
+        - ``"r_therm"`` — thermal minority pathway
+
+    I_in : float, default ``1.59e21``
+        Incident above-bandgap photon flux :math:`I_{in}` [photons m⁻² s⁻¹].
+        The model uses :math:`n \\propto I_{in}^{0.7}` as the
+        electron-activity proxy. Default value corresponds to 1 sun of AM1.5G
+        above-bandgap photon flux.
+    P_O2 : float, default ``21.2``
+        Oxygen partial pressure :math:`P_{O_2}` [kPa].
+        Default value corresponds to ambient air at sea level.
+
+    Returns
+    -------
+    pd.Series
+        Time-indexed degradation rate [mol m⁻² s⁻¹].
+
+    Notes
+    -----
+    The minority pathways (:math:`r_{hum}`, :math:`r_{therm}`) are explicitly
+    parameterised in SI §14 of [1].  The paper notes that these are rough
+    approximations (they contribute ≪ 5 % of total degradation under typical
+    outdoor conditions) and that further work is required for more complete modelling of
+    those pathways.
+
+    References
+    ----------
+    [1] Siegler et al. (2022) *J. Am. Chem. Soc.* 144 (12), 5552–5561.
+        doi: 10.1021/jacs.2c00391
+    """
+
+    VALID_COMPONENTS = ("total", "WPO", "DPO", "r_hum", "r_therm")
+    if component not in VALID_COMPONENTS:
+        raise ValueError(
+            f"component must be one of {VALID_COMPONENTS}, got '{component}'"
+        )
+    if weather_df is None:
+        raise ValueError("weather_df is required")
+
+    T_K = weather_df["temp_air"] + 273.15  # °C → K
+
+    # WPO (water-accelerated photooxidation, humid-air column)
+    k0_WPO = 3.16e-25  # mol/(m²·s·kPa²)·(photons/(m²·s))^(-0.7)
+    E_A_WPO = -8.6827  # kJ/mol
+    K_2W = 4.40e-3  # kPa⁻¹
+    K_3W = 4.32e-15  # (photons/(m²·s))^(-0.7)
+
+    # DPO (dry photooxidation, dry-air column)
+    k0_DPO = 5.45e-15
+    E_A_DPO = 59.82
+    K_2D = 3.28e-3
+    K_3D = 6.97e-15
+
+    # Humidity-induced degradation
+    k0_hum = 9.2e-22
+    E_A_hum = 19.3
+
+    # Thermal decomposition
+    k0_therm = 4.1e-4
+    E_A_therm = 43.42
+
+    # Electron-activity proxy: n ∝ I_in^0.7
+    n = I_in**0.7
+
+    # Water-vapour partial pressure P_H2O [kPa] = (RH/100) × P_sat
+    if "relative_humidity" in weather_df.columns:
+        rh = weather_df["relative_humidity"]
+        P_sat, _ = humidity.water_saturation_pressure(weather_df["temp_air"])
+        P_H2O = (rh / 100.0) * P_sat
+    else:
+        raise ValueError("'relative_humidity' not found in weather_df")
+
+    r_WPO = (
+        k0_WPO
+        * np.exp(-E_A_WPO / (R_GAS * T_K))
+        * (P_O2 * P_H2O * n)
+        / (1.0 + K_2W * P_O2 * (1.0 + K_3W * n)) ** 2
+    )
+
+    r_DPO = (
+        k0_DPO
+        * np.exp(-E_A_DPO / (R_GAS * T_K))
+        * (P_O2 * n)
+        / (1.0 + K_2D * P_O2 * (1.0 + K_3D * n))
+    )
+
+    r_hum = k0_hum * np.exp(-E_A_hum / (R_GAS * T_K)) * P_H2O * n
+
+    r_therm = k0_therm * np.exp(-E_A_therm / (R_GAS * T_K))
+
+    components = {
+        "WPO": r_WPO,
+        "DPO": r_DPO,
+        "r_hum": r_hum,
+        "r_therm": r_therm,
+    }
+
+    if component == "total":
+        rate = r_WPO + r_DPO + r_hum + r_therm
+    else:
+        rate = components[component]
+
+    rate.name = f"perovskite_degradation_{component}"
+    return rate
