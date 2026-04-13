@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# %%
 
 # # LETID Outdoor
 #
@@ -20,14 +19,14 @@
 # 4. Run through timeseries, calculating defect states
 # 5. Calculate device degradation and plot
 
-# In[1]:
+# %%
 
 
 # if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:
 # !pip install pvdeg
 
 
-# In[2]:
+# %%
 
 
 from pvdeg import letid, collection, utilities, DATA_DIR
@@ -40,7 +39,7 @@ import matplotlib.pyplot as plt
 import pvdeg
 
 
-# In[3]:
+# %%
 
 
 # This information helps with debugging and getting support :)
@@ -57,7 +56,7 @@ print("pvdeg version ", pvdeg.__version__)
 # First, we'll use pvlib to create and run a model system, and use the irradiance, temperature, and operating point of that model to set up our LETID model
 # For this example, we'll model a fixed latitude tilt system at NLR, in Golden, CO, USA, using [NSRDB](https://nsrdb.nlr.gov/) hourly PSM weather data, SAPM temperature models, and module and inverter models from the CEC database.
 
-# In[4]:
+# %%
 
 
 # load weather and location data, use pvlib read_psm3 function with map_variables = True
@@ -68,13 +67,13 @@ weather, meta = pvdeg.weather.read(
 )
 
 
-# In[5]:
+# %%
 
 
 weather
 
 
-# In[6]:
+# %%
 
 
 # if our weather file doesn't have precipitable water, calculate it with pvlib
@@ -84,7 +83,7 @@ if "precipitable_water" not in weather.columns:
     )
 
 
-# In[7]:
+# %%
 
 
 # rename some columns for pvlib if they haven't been already
@@ -113,13 +112,13 @@ weather = weather[
 ]
 
 
-# In[8]:
+# %%
 
 
 weather
 
 
-# In[9]:
+# %%
 
 
 # import pvlib stuff and pick a module and inverter. Choice of these things will slightly affect the pvlib results which we later use to calculate injection.
@@ -141,7 +140,7 @@ temperature_model_parameters = TEMPERATURE_MODEL_PARAMETERS["sapm"][
 ]
 
 
-# In[10]:
+# %%
 
 
 # set up system in pvlib
@@ -163,7 +162,7 @@ system = PVSystem(
 )
 
 
-# In[11]:
+# %%
 
 
 # create and run pvlib modelchain
@@ -176,7 +175,7 @@ mc.run_model(weather)
 #
 # We will use the irradiance, DC operating point, and cell temperature from the pvlib modelchain results.
 
-# In[12]:
+# %%
 
 
 ee = mc.results.effective_irradiance
@@ -193,7 +192,7 @@ timesteps.reset_index(
 timesteps.rename(columns={"index": "Datetime"}, inplace=True)
 
 
-# In[13]:
+# %%
 
 
 # filter out times when injection is NaN, these won't progress LETID, and it'll make the calculations below run faster
@@ -201,7 +200,7 @@ timesteps = timesteps[timesteps["Injection"].notnull()]
 timesteps.reset_index(inplace=True, drop=True)
 
 
-# In[14]:
+# %%
 
 
 timesteps
@@ -210,7 +209,7 @@ timesteps
 # # Device parameters
 # To define a device, we need to define several important quantities about the device: wafer thickness (in $\mu m$), rear surface recombination velocity (in cm/s), and cell area (in cm<sup>2</sup>).
 
-# In[15]:
+# %%
 
 
 wafer_thickness = 180  # um
@@ -221,7 +220,7 @@ cell_area = 243  # cm^2
 #  <b> Other device parameters </b>
 # Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and optical generation profile, which allow us to estimate current collection in the device.
 
-# In[16]:
+# %%
 
 
 generation_df = pd.read_excel(
@@ -236,7 +235,7 @@ d_base = 27  # cm^2/s electron diffusivity. See https://www2.pvlighthouse.com.au
 # # Degradation parameters
 # To model the device's degradation, we need to define several more important quantities about the degradation the device will experience. These include undegraded and degraded lifetime (in $\mu s$).
 
-# In[17]:
+# %%
 
 
 tau_0 = 115  # us, carrier lifetime in non-degraded states, e.g. LETID/LID states A or C
@@ -249,7 +248,7 @@ tau_deg = 55  # us, carrier lifetime in fully-degraded state, e.g. LETID/LID sta
 #
 # In this example, we'll assume the device starts in the fully-undegraded state (100% state A), and we'll use the kinetic parameters for LETID degradation from Repins.
 
-# In[18]:
+# %%
 
 
 # starting defect state percentages
@@ -276,7 +275,7 @@ timesteps.loc[0, "tau"] = letid.tau_now(
 # # Run through timesteps
 # Since each timestep depends on the preceding timestep, we need to calculate in a loop. This will take a few minutes depending on the length of the timeseries.
 
-# In[19]:
+# %%
 
 
 for index, timestep in timesteps.iterrows():
@@ -377,7 +376,7 @@ for index, timestep in timesteps.iterrows():
 # # Finish calculating degraded device parameters.
 # Now that we have calculated defect states, we can calculate all the quantities that depend on defect states.
 
-# In[20]:
+# %%
 
 
 timesteps["tau"] = letid.tau_now(tau_0, tau_deg, timesteps["NB"])
@@ -393,7 +392,7 @@ for index, timestep in timesteps.iterrows():
     )
 
 
-# In[21]:
+# %%
 
 
 timesteps = letid.calc_device_params(
@@ -407,7 +406,7 @@ timesteps
 
 # # Plot the results
 
-# In[22]:
+# %%
 
 
 from cycler import cycler
@@ -445,7 +444,7 @@ plt.show()
 
 # # The function `calc_letid_outdoors` wraps all of the steps above into a single function:
 
-# In[23]:
+# %%
 
 
 nA_0 = 100
@@ -469,4 +468,4 @@ letid.calc_letid_outdoors(
 )
 
 
-# In[ ]:
+# %%

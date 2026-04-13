@@ -1,10 +1,9 @@
-#!/usr/bin/env python
-# coding: utf-8
+# %%
 
 # # Geospatial World Map (HPC)
 # M. Springer 2024-06-05
 
-# In[12]:
+# %%
 
 
 print("Importing libraries...")
@@ -20,14 +19,14 @@ print("Done!")
 
 # # Calculate Standoff
 
-# In[13]:
+# %%
 
 
 work_dir = "/projects/pvsoiling/pvdeg/analysis/world_map/standoff_fine"
 data_dir = "/projects/pvsoiling/pvdeg/analysis/world_map/data"
 
 
-# In[18]:
+# %%
 
 
 local = {
@@ -52,14 +51,14 @@ client = pvdeg.geospatial.start_dask(hpc=kestrel)
 print("Cluster ready!")
 
 
-# In[19]:
+# %%
 
 
 # Get weather data
 weather_db = "NSRDB"
 
 
-# In[20]:
+# %%
 
 
 weather_arg = {
@@ -81,7 +80,7 @@ weather_ds_himawari, meta_df_himawari = pvdeg.weather.get(
 )
 
 
-# In[ ]:
+# %%
 
 
 meta_df_himawari_sub, gids_meta_df_himawari = pvdeg.utilities.gid_downsampling(
@@ -90,7 +89,7 @@ meta_df_himawari_sub, gids_meta_df_himawari = pvdeg.utilities.gid_downsampling(
 weather_ds_himawari_sub = weather_ds_himawari.sel(gid=meta_df_himawari_sub.index)
 
 
-# In[ ]:
+# %%
 
 
 geo_himawari = {
@@ -106,7 +105,7 @@ standoff_res_himawari.to_dataframe().to_csv(
 )
 
 
-# In[ ]:
+# %%
 
 
 weather_arg = {
@@ -128,14 +127,14 @@ weather_ds_goes, meta_df_goes = pvdeg.weather.get(
 )
 
 
-# In[ ]:
+# %%
 
 
 meta_df_goes_sub, gids_meta_df_goes = pvdeg.utilities.gid_downsampling(meta_df_goes, 8)
 weather_ds_goes_sub = weather_ds_goes.sel(gid=meta_df_goes_sub.index)
 
 
-# In[ ]:
+# %%
 
 
 geo_goes = {
@@ -149,7 +148,7 @@ standoff_res_goes.to_netcdf(os.path.join(work_dir, "standoff_goes.nc"))
 standoff_res_goes.to_dataframe().to_csv(os.path.join(work_dir, "standoff_goes.csv"))
 
 
-# In[ ]:
+# %%
 
 
 weather_arg = {
@@ -171,7 +170,7 @@ weather_ds_meteosat, meta_df_meteosat = pvdeg.weather.get(
 )
 
 
-# In[ ]:
+# %%
 
 
 meta_df_meteosat_sub, gids_meta_df_meteosat = pvdeg.utilities.gid_downsampling(
@@ -180,7 +179,7 @@ meta_df_meteosat_sub, gids_meta_df_meteosat = pvdeg.utilities.gid_downsampling(
 weather_ds_meteosat_sub = weather_ds_meteosat.sel(gid=meta_df_meteosat_sub.index)
 
 
-# In[ ]:
+# %%
 
 
 geo_meteosat = {
@@ -196,7 +195,7 @@ standoff_res_meteosat.to_dataframe().to_csv(
 )
 
 
-# In[ ]:
+# %%
 
 
 # Auxillary data
@@ -298,7 +297,7 @@ standoff_res_aux.to_netcdf(os.path.join(work_dir, "standoff_aux.nc"))
 standoff_res_aux.to_dataframe().to_csv(os.path.join(work_dir, "standoff_aux.csv"))
 
 
-# In[ ]:
+# %%
 
 
 weather_db = "NSRDB"
@@ -462,7 +461,7 @@ standoff_res_pvgis.to_netcdf(os.path.join(work_dir, "standoff_pvgis.nc"))
 standoff_res_pvgis.to_dataframe().to_csv(os.path.join(work_dir, "standoff_pvgis.csv"))
 
 
-# In[ ]:
+# %%
 
 
 meta_north = pd.read_csv(f"{data_dir}/meta_pvgis_north_3300.csv", index_col=0)
@@ -489,7 +488,7 @@ standoff_res_pvgis.to_dataframe().to_csv(
 
 # # Post process
 
-# In[ ]:
+# %%
 
 
 import pvdeg
@@ -505,7 +504,7 @@ work_dir = "/projects/pvsoiling/pvdeg/analysis/world_map/standoff_fine"
 data_dir = "/projects/pvsoiling/pvdeg/analysis/world_map/data"
 
 
-# In[ ]:
+# %%
 
 
 # Create 0cm standoff locations
@@ -541,7 +540,7 @@ lon_asia = lon
 lat_asia = lat
 
 
-# In[ ]:
+# %%
 
 
 fig, ax = plt.subplots()
@@ -554,7 +553,7 @@ ax.set_ylim(-90, 90)
 ax.set_xlim(-180, 180)
 
 
-# In[ ]:
+# %%
 
 
 template_params = pvdeg.geospatial.template_parameters(pvdeg.standards.standoff)
@@ -569,7 +568,7 @@ standoff_zero_asia = pvdeg.geospatial.zero_template(
 )
 
 
-# In[ ]:
+# %%
 
 
 standoff_aux = xr.open_dataset(os.path.join(work_dir, "standoff_aux.nc"))
@@ -580,7 +579,7 @@ standoff_pvgis = xr.open_dataset(os.path.join(work_dir, "standoff_pvgis.nc"))
 standoff_goes = xr.open_dataset(os.path.join(work_dir, "standoff_goes.nc"))
 
 
-# In[ ]:
+# %%
 
 
 fig = plt.figure(figsize=(10, 5))
@@ -733,4 +732,4 @@ ax.set_ylabel("Latitude")
 plt.savefig(os.path.join(work_dir, "standoff_map.png"), dpi=1200, bbox_inches="tight")
 
 
-# In[ ]:
+# %%

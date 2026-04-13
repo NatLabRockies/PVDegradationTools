@@ -1,10 +1,9 @@
-#!/usr/bin/env python
-# coding: utf-8
+# %%
 
 # # NSRDB Distributed (API Key Required)
 #
 
-# In[1]:
+# %%
 
 
 from dask.distributed import LocalCluster, Client
@@ -19,7 +18,7 @@ import os
 #
 # We also need to initalize a dask client. `pvdeg.weather.weather_distributed` will not work without it. It will fail silently and not populate and of the results in the resulting `weather_ds` called `geo_weather` in the example below. It is hard to recognize that this has occured so be careful. Make sure to initialize a dask client first. Visiting the link takes you to a daskboard that shows what dask is doing.
 
-# In[2]:
+# %%
 
 
 load_dotenv()
@@ -55,7 +54,7 @@ print(client.dashboard_link)
 #
 # We will request "PSM4" data from the Physical Solar Model that represents a typical meteorological year (TMY) from the NSRDB. We will have to supply the api key and email from above here. Refer to the linked script to see this in further detail. The only difference between the scripts, lies in the NSRDB/PSM4 data requiring Api keys.
 
-# In[3]:
+# %%
 
 
 coords = [
@@ -74,13 +73,13 @@ geo_weather, geo_meta, failed = pvdeg.weather.weather_distributed(
 #
 # Click on the `Data variables` dropdown to expand the dataset viewer.
 
-# In[4]:
+# %%
 
 
 geo_weather
 
 
-# In[5]:
+# %%
 
 
 geo_weather.compute()
@@ -96,7 +95,7 @@ geo_weather.compute()
 #
 # This selects a single array from the dataset that is labeled as "temp_air". This array will be a dask array so the values will be stored out of memory, we would have to load it using `.compute()` to directly inspect it but when plotting with matplotlib it will load the array for us.
 
-# In[6]:
+# %%
 
 
 import matplotlib.pyplot as plt

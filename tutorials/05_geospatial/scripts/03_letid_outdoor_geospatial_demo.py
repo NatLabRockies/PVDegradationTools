@@ -1,11 +1,10 @@
-#!/usr/bin/env python
-# coding: utf-8
+# %%
 
 # # LETID Outdoor Geospatial Demo (HPC)
 #
 # ![PVDeg Logo](../images/pvdeg_logo.svg)
 
-# In[ ]:
+# %%
 
 
 import matplotlib.pyplot as plt
@@ -15,7 +14,7 @@ from pvdeg import DATA_DIR
 import os
 
 
-# In[ ]:
+# %%
 
 
 # This information helps with debugging and getting support :)
@@ -30,14 +29,14 @@ print("pvdeg version ", pvdeg.__version__)
 
 # # Single location example
 
-# In[ ]:
+# %%
 
 
 weather_file = os.path.join(DATA_DIR, "psm3_demo.csv")
 WEATHER, META = pvdeg.weather.read(weather_file, "psm")
 
 
-# In[ ]:
+# %%
 
 
 kwargs = {
@@ -53,7 +52,7 @@ kwargs = {
 }
 
 
-# In[ ]:
+# %%
 
 
 pvdeg.letid.calc_letid_outdoors(weather_df=WEATHER, meta=META, **kwargs)
@@ -61,7 +60,7 @@ pvdeg.letid.calc_letid_outdoors(weather_df=WEATHER, meta=META, **kwargs)
 
 # # Start distributed compute cluster - DASK
 
-# In[ ]:
+# %%
 
 
 local = {
@@ -85,7 +84,7 @@ kestrel = {
 pvdeg.geospatial.start_dask(hpc=kestrel)
 
 
-# In[ ]:
+# %%
 
 
 # Get weather data
@@ -114,19 +113,19 @@ meta_SW_sub, gids_SW_sub = pvdeg.utilities.gid_downsampling(meta_SW, 6)
 weather_SW_sub = weather_ds.sel(gid=meta_SW_sub.index)
 
 
-# In[ ]:
+# %%
 
 
 weather_SW_sub
 
 
-# In[ ]:
+# %%
 
 
 meta_df
 
 
-# In[ ]:
+# %%
 
 
 # Define desired analysis
@@ -148,13 +147,13 @@ geo = {
 letid_res = pvdeg.geospatial.analysis(**geo)
 
 
-# In[ ]:
+# %%
 
 
 letid_res
 
 
-# In[ ]:
+# %%
 
 
 import datetime
@@ -183,7 +182,7 @@ for n in range(1, 13):
 # imageio.mimwrite(f'./images/RH_animation.gif', ims, format='GIF', duration=1000, loop=10)
 
 
-# In[ ]:
+# %%
 
 
 import datetime
@@ -256,7 +255,7 @@ for n in range(1, 13):
                     plt.savefig(f"./images/LETID_plot_animation_{n}.png", dpi=600)
 
 
-# In[ ]:
+# %%
 
 
 import imageio

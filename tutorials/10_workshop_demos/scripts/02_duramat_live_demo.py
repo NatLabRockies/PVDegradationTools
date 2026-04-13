@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# %%
 
 # # DuraMAT Live Demo (HPC)
 #
@@ -15,14 +14,14 @@
 #
 # ![Xarray](../images/xarray.webp)
 
-# In[1]:
+# %%
 
 
 import pandas as pd
 import pvdeg
 
 
-# In[2]:
+# %%
 
 
 # This information helps with debugging and getting support :)
@@ -37,13 +36,13 @@ print("pvdeg version ", pvdeg.__version__)
 
 # # 1 Start distributed compute cluster - DASK
 
-# In[3]:
+# %%
 
 
 pvdeg.geospatial.start_dask()
 
 
-# In[ ]:
+# %%
 
 
 # Get weather data
@@ -66,26 +65,26 @@ weather_arg = {
 weather_ds, meta_df = pvdeg.weather.get(weather_db, geospatial=True, **weather_arg)
 
 
-# In[ ]:
+# %%
 
 
 weather_ds
 
 
-# In[ ]:
+# %%
 
 
 meta_NM = meta_df[meta_df["state"] == "New Mexico"]
 
 
-# In[ ]:
+# %%
 
 
 meta_NM_sub, gids_NM_sub = pvdeg.utilities.gid_downsampling(meta_NM, 4)
 weather_NM_sub = weather_ds.sel(gid=meta_NM_sub.index)
 
 
-# In[ ]:
+# %%
 
 
 geo = {
@@ -97,13 +96,13 @@ geo = {
 standoff_res = pvdeg.geospatial.analysis(**geo)
 
 
-# In[ ]:
+# %%
 
 
 standoff_res
 
 
-# In[ ]:
+# %%
 
 
 fig, ax = pvdeg.geospatial.plot_USA(
@@ -118,7 +117,7 @@ fig, ax = pvdeg.geospatial.plot_USA(
 
 # # Relative Humidity Example - Time dimension
 
-# In[ ]:
+# %%
 
 
 # State bar of new mexico: (35.16482, -106.58979)
@@ -144,25 +143,25 @@ weather_df, meta = pvdeg.weather.get(
 )
 
 
-# In[ ]:
+# %%
 
 
 RH_module = pvdeg.humidity.module(weather_df=weather_df, meta=meta)
 
 
-# In[ ]:
+# %%
 
 
 RH_module
 
 
-# In[ ]:
+# %%
 
 
 RH_module.plot(ls="--")
 
 
-# In[ ]:
+# %%
 
 
 geo = {
@@ -174,13 +173,13 @@ geo = {
 RH_module = pvdeg.geospatial.analysis(**geo)
 
 
-# In[ ]:
+# %%
 
 
 RH_module
 
 
-# In[ ]:
+# %%
 
 
 # from matplotlib.animation import FuncAnimation
@@ -209,4 +208,4 @@ RH_module
 
 # <!-- ![Animation](../images/RH_animation.gif) - Animation not available, see code above to generate -->
 
-# In[ ]:
+# %%

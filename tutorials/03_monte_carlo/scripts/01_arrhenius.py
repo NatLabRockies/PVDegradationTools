@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# %%
 
 # # Arrhenius Monte Carlo
 #
@@ -11,14 +10,14 @@
 # 2. Define process for creating and utilizing modeling constant correlation data
 # 3. Preform simple monte carlo simulation using arrhenius equation to calculate degredation and plot
 
-# In[1]:
+# %%
 
 
 # if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:
 # !pip install pvdeg
 
 
-# In[2]:
+# %%
 
 
 import pvlib
@@ -28,7 +27,7 @@ import pvdeg
 import matplotlib.pyplot as plt
 
 
-# In[3]:
+# %%
 
 
 # This information helps with debugging and getting support :)
@@ -65,7 +64,7 @@ print("pvdeg version ", pvdeg.__version__)
 #
 # After defining the all known correlations add them to a list which we will feed into our simulation later
 
-# In[4]:
+# %%
 
 
 corr_Ea_X = pvdeg.montecarlo.Corr("Ea", "X", 0.0269)
@@ -75,7 +74,7 @@ corr_X_LnR0 = pvdeg.montecarlo.Corr("X", "LnR0", -0.0400)
 corr_coeff = [corr_Ea_X, corr_Ea_LnR0, corr_X_LnR0]
 
 
-# In[5]:
+# %%
 
 
 type(corr_Ea_X)
@@ -84,7 +83,7 @@ type(corr_Ea_X)
 # # Defining Mean and Standard Deviation
 # We will store the mean and correlation for each variable, expressed when we defined the correlation cefficients. If a variable is left out at this stage, the monte carlo simulation will throw errors.
 
-# In[6]:
+# %%
 
 
 stats_dict = {
@@ -100,7 +99,7 @@ n = 20000
 # # Generating Monte Carlo Input Data
 # Next we will use the information collected above to generate correlated data from our modeling constant correlations, means and standard deviations.
 
-# In[7]:
+# %%
 
 
 np.random.seed(42)  # for reproducibility
@@ -115,7 +114,7 @@ print(mc_inputs)
 #
 # This also applies to the correlation coefficients originally inputted, they should be witin the same range as those orginally supplied.
 
-# In[8]:
+# %%
 
 
 # mean and standard deviation match inputs
@@ -138,7 +137,7 @@ print("X_lnR0", round(np.corrcoef(mc_inputs["X"], mc_inputs["LnR0"])[0][1], 3))
 # <b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data and then calculate cell temperature and global poa irradiance. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a> so register now.)
 # </div>
 
-# In[9]:
+# %%
 
 
 # Load pre-saved weather data for this tutorial
@@ -162,7 +161,7 @@ with open("../data/meta_miami.json", "r") as f:
 
 # Calculate the sun position, poa irradiance, and module temperature.
 
-# In[10]:
+# %%
 
 
 sol_pos = pvdeg.spectral.solar_position(weather_df, meta)
@@ -176,7 +175,7 @@ poa_global = poa_irradiance["poa_global"].to_numpy()
 cell_temperature = temp_mod.to_numpy()
 
 
-# In[11]:
+# %%
 
 
 # must already be numpy arrays
@@ -187,7 +186,7 @@ function_kwargs = {"poa_global": poa_global, "module_temp": cell_temperature}
 #
 # We can see the necessary inputs by using the help command:
 
-# In[12]:
+# %%
 
 
 # NBVAL_SKIP
@@ -201,7 +200,7 @@ help(pvdeg.montecarlo.simulate)
 #
 # (You can use any data you want here as long as the DataFrame's column names match the required target function's parameter names NOT included in the kwargs)
 
-# In[13]:
+# %%
 
 
 results = pvdeg.montecarlo.simulate(
@@ -212,7 +211,7 @@ results = pvdeg.montecarlo.simulate(
 # # Viewing Our Data
 # Let's plot the results using a histogram
 
-# In[14]:
+# %%
 
 
 lnDeg = np.log10(results)

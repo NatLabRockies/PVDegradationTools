@@ -1,19 +1,18 @@
-#!/usr/bin/env python
-# coding: utf-8
+# %%
 
 # # Standoff Monte Carlo
 #
 # See Monte Carlo - Arrhenius Degredation for a more in depth guide. Steps will be shortened for brevity.
 # This journal applies a Monte Carlo to the Standoff Calculation
 
-# In[1]:
+# %%
 
 
 # if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:
 # !pip install pvdeg
 
 
-# In[2]:
+# %%
 
 
 import pvlib
@@ -24,7 +23,7 @@ import pvdeg
 import matplotlib.pyplot as plt
 
 
-# In[3]:
+# %%
 
 
 # This information helps with debugging and getting support :)
@@ -46,7 +45,7 @@ print("Pvdeg version ", pvdeg.__version__)
 # <b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a> so register now.)
 # </div>
 
-# In[4]:
+# %%
 
 
 # Load weather data from locally saved files to avoid API rate limits
@@ -66,7 +65,7 @@ with open("../data/meta_nyc.json", "r") as f:
 # WEATHER, META = pvdeg.weather.get(weather_db, weather_id, **weather_arg)
 
 
-# In[5]:
+# %%
 
 
 # simple standoff calculation
@@ -94,7 +93,7 @@ print(height2)
 #
 # Mean and standard deviation must always be populated if being used to create a dataset. However, you can feed your own correlated or uncorrelated data into the simulate function but column names must be consistent.
 
-# In[6]:
+# %%
 
 
 # These numbers may not make sense in the context of the problem but work for demonstraiting the process
@@ -105,7 +104,7 @@ corr_coeff = []
 samples = pvdeg.montecarlo.generateCorrelatedSamples(corr_coeff, stats, 500)
 
 
-# In[7]:
+# %%
 
 
 print(samples)
@@ -115,7 +114,7 @@ print(samples)
 #
 # When using the pvdeg.montecarlo.simulate() function on a target function all of the target function's required arguments must still be given. Our non-changing arguments will be stored in a dictionary. The randomized monte carlo input data will also be passed to the target function via the simulate function. All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,
 
-# In[8]:
+# %%
 
 
 # defining arguments to pass to the target function, standoff() in this case
@@ -149,7 +148,7 @@ results = pvdeg.montecarlo.simulate(
 #
 # This means we have to do an extra step to view our results. Run the block below to confirm that our results are indeed contained in a series. And convert them into a simpler dataframe.
 
-# In[9]:
+# %%
 
 
 print(type(results))
@@ -158,7 +157,7 @@ print(type(results))
 results_df = pd.concat(results.tolist()).reset_index(drop=True)
 
 
-# In[10]:
+# %%
 
 
 print(results_df)
@@ -167,7 +166,7 @@ print(results_df)
 # # Viewing Our Data
 # Let's plot the results using a histogram
 
-# In[11]:
+# %%
 
 
 bin_edges = np.arange(results_df["x"].min(), results_df["x"].max() + 0.1, 0.05)

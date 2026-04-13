@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+# %%
 
 # # Single Location
 #
@@ -10,21 +9,21 @@
 #
 # A simple object orented workflow walkthrough using pvdeg.
 
-# In[1]:
+# %%
 
 
 # if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:
 # !pip install pvdeg
 
 
-# In[2]:
+# %%
 
 
 import pvdeg
 import os
 
 
-# In[3]:
+# %%
 
 
 # This information helps with debugging and getting support :)
@@ -45,7 +44,7 @@ print("pvdeg version ", pvdeg.__version__)
 # <b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a> so register now.)
 # </div>
 
-# In[4]:
+# %%
 
 
 simple_scenario = pvdeg.Scenario(
@@ -58,7 +57,7 @@ simple_scenario = pvdeg.Scenario(
 #
 # Attempting to add a second location by calling the method again with a different coordinate pair will overwrite the old location data stored in the class instance.
 
-# In[5]:
+# %%
 
 
 simple_scenario.addLocation(
@@ -66,7 +65,7 @@ simple_scenario.addLocation(
 )
 
 
-# In[6]:
+# %%
 
 
 simple_scenario.weather_data
@@ -82,7 +81,7 @@ simple_scenario.weather_data
 #
 # The simplest case of adding a job to the pipeline is when it only requires us to provide simple weather and metadata. In the function definition and docstring these appear as ``weather_df`` and ``meta``. Since these attributes are contained in our scenario class instance we do not have to worry about them. We can simply add the function as shown below.
 
-# In[7]:
+# %%
 
 
 simple_scenario.addJob(func=pvdeg.standards.standoff)
@@ -92,7 +91,7 @@ simple_scenario.addJob(func=pvdeg.standards.standoff)
 #
 # When adding a job that contains a function requiring other arguments such as ``solder_fatigue`` which requires a value for ``wind_factor``, we will need to provide it. The most straightforeward way to do this is using a kwargs dictionary and passing it to the function. We do not unpack the dictionary before passing it. This is done inside of the scenario at pipeline runtime (when ``runPipeline`` is called).
 
-# In[8]:
+# %%
 
 
 kwargs = {"wind_factor": 0.33}
@@ -107,7 +106,7 @@ simple_scenario.addJob(func=pvdeg.fatigue.solder_fatigue, func_kwarg=kwargs)
 #
 # Say local weather data is available or other, if we want to use this rather than the PSM3 data at a latitude and longitude we can also provide the weather and metadata in the function arguments. This is probably the best if avoided but follows the same syntax as providing other function arguments. See the example below.
 
-# In[9]:
+# %%
 
 
 PSM_FILE = os.path.join(pvdeg.DATA_DIR, "psm3_demo.csv")
@@ -125,7 +124,7 @@ simple_scenario.addJob(func=pvdeg.standards.standoff, func_kwarg=kwargs)
 #
 # The ``viewScenario`` method provides an overview of the information contained within your scenario object. Here you can see if it contains the location weather and metadata. As well as the jobs in the pipeline and their arguments.
 
-# In[10]:
+# %%
 
 
 simple_scenario.viewScenario()
@@ -141,7 +140,7 @@ simple_scenario.viewScenario()
 # or using the display function
 # `display(simple_scenario)`
 
-# In[11]:
+# %%
 
 
 simple_scenario
@@ -150,7 +149,7 @@ simple_scenario
 # # Executing Pipeline Jobs
 # To run the pipeline after we have populated it with the desired jobs call the ``runPipeline`` method on our scenario instance. This will run all of the jobs we have previously added. The functions that need weather and metadata will grab it from the scenario instance using the correct location added above. The pipeline jobs results will be saved to the scenario instance.
 
-# In[12]:
+# %%
 
 
 simple_scenario.run()
@@ -159,7 +158,7 @@ simple_scenario.run()
 # # Results Series ##
 # We will use a series to store the various return values of functions run in our pipeline. These can partially obfuscate the dataframes within them so to access the dataframes, use the function name to access it. To get one of the results we can index it using dictionary syntax. If the job was called `'KSDJQ'` do `'simple_scenario.results['KSDJQ']` to directly access the result for that job
 
-# In[13]:
+# %%
 
 
 print(simple_scenario.results)
@@ -180,7 +179,7 @@ for keys, results in simple_scenario.results.items():
 #
 # Each scenario object creates a directory named ``pvd_job_...`` that contains information about the scenario instance. To remove the directory and all of its information call ``clean`` on the scenario. This will permanently delete the directory created by the scenario.
 
-# In[14]:
+# %%
 
 
 simple_scenario.clean()
