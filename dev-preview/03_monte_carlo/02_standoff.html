@@ -585,9 +585,9 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1010-azure
 Python version  3.11.15 (main, Mar  3 2026, 16:10:12) [GCC 13.3.0]
-Pandas version  3.0.2
+Pandas version  2.3.3
 Pvlib version  0.15.0
-Pvdeg version  0.1.dev1+g9daee7523
+Pvdeg version  0.1.dev1+ga24d697b5
 </pre></div>
 </div>
 </div>
@@ -597,7 +597,7 @@ Pvdeg version  0.1.dev1+g9daee7523
 <h1>Simple Standoff Calculation<a class="headerlink" href="#simple-standoff-calculation" title="Link to this heading">#</a></h1>
 <p>This is copied from another tutorial called <code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">-</span> <span class="pre">Standards.ipynb</span></code>, please visit this page for a more in depth explanation of the process for a single standoff calculation.</p>
 <div class="alert alert-block alert-info">
-<b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a> so register now.)
+<b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a> so register now.)
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load weather data from locally saved files to avoid API rate limits</span>
@@ -606,7 +606,7 @@ Pvdeg version  0.1.dev1+g9daee7523
     <span class="n">META</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="c1"># To use the NSRDB API instead, uncomment the lines below and add your API key</span>
-<span class="c1"># Get your API key at: https://developer.nrel.gov/signup/</span>
+<span class="c1"># Get your API key at: https://developer.nlr.gov/signup/</span>
 <span class="c1"># weather_db = &quot;PSM4&quot;</span>
 <span class="c1"># weather_id = (40.633365593159226, -73.9945801019899)  # Manhattan, NYC</span>
 <span class="c1"># weather_arg = {</span>
@@ -679,18 +679,18 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          X_0  wind_factor
-0    2.289194     0.433618
-1    1.246772     0.786698
-2    2.808813    -0.188908
-3    3.255791     0.278301
-4    4.264008    -0.148385
-..        ...          ...
-495  1.907093    -0.250567
-496  4.211492     0.058597
-497  3.333690     0.502835
-498  7.186284     0.186014
-499  9.330805     0.114256
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
+0     2.333507     0.549310
+1     2.203198     0.554985
+2     2.843800     0.977797
+3     5.550294    -0.349964
+4     7.548570     1.290848
+..         ...          ...
+495   6.030169     1.393329
+496   3.782358    -0.209367
+497   3.295291     0.659204
+498  12.020156     0.744076
+499   2.318734     0.833759
 
 [500 rows x 2 columns]
 </pre></div>
@@ -746,7 +746,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.Series&#39;&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.series.Series&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -759,17 +759,17 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.000000  68.609604  47.225847
-1    0.000000  63.872208  43.879874
-2    0.534388  74.026005  50.787988
-3    0.035389  70.236579  48.352509
-4    0.769577  73.837460  50.598763
+0    0.000000  67.237708  46.135934
+1    0.000000  67.138158  46.079728
+2    0.000000  60.274091  41.700471
+3    1.275285  74.828333  51.307938
+4    0.000000  53.549857  38.277689
 ..        ...        ...        ...
-495  0.400776  74.436964  51.027539
-496  0.431139  72.181053  49.766743
-497  0.000000  67.819437  46.563861
-498  0.388664  71.169788  48.950604
-499  0.776020  71.785959  49.406360
+495  0.000000  50.882472  37.091943
+496  0.745926  74.166526  50.887687
+497  0.000000  65.716661  45.103836
+498  0.000000  64.665711  44.310260
+499  0.000000  62.998901  43.315985
 
 [500 rows x 3 columns]
 </pre></div>
@@ -804,7 +804,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d581b03a7aed59b4cd415872466e6e28a38f5c33271e963e3d840b86e5a25c1d.png" src="../_images/d581b03a7aed59b4cd415872466e6e28a38f5c33271e963e3d840b86e5a25c1d.png" />
+<img alt="../_images/00a96c0db9d1708b766afb693ceefbf35586358f08fcb3733144f240b7c0d846.png" src="../_images/00a96c0db9d1708b766afb693ceefbf35586358f08fcb3733144f240b7c0d846.png" />
 </div>
 </div>
 </section>
