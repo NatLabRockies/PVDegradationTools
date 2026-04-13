@@ -2,17 +2,17 @@
 # coding: utf-8
 
 # # LETID Outdoor
-# 
+#
 # This is an example on how to model LETID progression in outdoor environments
-# 
+#
 # We can use the equations in this library to model LETID progression in a simulated outdoor environment, given that we have weather and system data. This example makes use of tools from the fabulous [pvlib](https://pvlib-python.readthedocs.io/en/stable/) library to calculate system irradiance and temperature, which we use to calculate progression in LETID states.
-# 
+#
 # This will illustrate the potential of "Temporary Recovery", i.e., the backwards transition of the LETID defect B->A that can take place with carrier injection at lower temperatures.
-# 
-# 
+#
+#
 # **Requirements:**
 # - `pvlib`, `pandas`, `numpy`, `matplotlib`
-# 
+#
 # **Objectives:**
 # 1. Use `pvlib` and provided weather files to set up a temperature and injection timeseries
 # 2. Define necessary solar cell device parameters
@@ -173,7 +173,7 @@ mc.run_model(weather)
 
 # # Set up timeseries
 # In this example, injection is a function of both the operating point of the module (which we will assume is maximum power point) and irradiance. Maximum power point injection is equivalent to $(I_{sc}-I_{mp})/I_{sc}\times Ee$, where $Ee$ is effective irradiance, the irradiance absorbed by the module's cells. We normalize it to 1-sun irradiance, 1000 $W/m^2$.
-# 
+#
 # We will use the irradiance, DC operating point, and cell temperature from the pvlib modelchain results.
 
 # In[12]:
@@ -244,9 +244,9 @@ tau_deg = 55  # us, carrier lifetime in fully-degraded state, e.g. LETID/LID sta
 
 
 # <b>Remaining degradation parameters: </b>
-# 
+#
 # The rest of the quantities to define are: the initial percentage of defects in each state (A, B, and C), and the dictionary of mechanism parameters.
-# 
+#
 # In this example, we'll assume the device starts in the fully-undegraded state (100% state A), and we'll use the kinetic parameters for LETID degradation from Repins.
 
 # In[18]:
@@ -470,7 +470,3 @@ letid.calc_letid_outdoors(
 
 
 # In[ ]:
-
-
-
-

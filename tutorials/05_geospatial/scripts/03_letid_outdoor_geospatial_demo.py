@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # # LETID Outdoor Geospatial Demo (HPC)
-# 
+#
 # ![PVDeg Logo](../images/pvdeg_logo.svg)
 
 # In[ ]:
@@ -265,4 +265,3 @@ ims = [imageio.imread(f"./images/LETID_plot_animation_{n}.png") for n in range(1
 imageio.mimwrite(
     "./images/LETID_plot_animation.gif", ims, format="GIF", duration=1000, loop=10
 )
-

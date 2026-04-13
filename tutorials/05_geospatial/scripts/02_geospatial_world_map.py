@@ -734,7 +734,3 @@ plt.savefig(os.path.join(work_dir, "standoff_map.png"), dpi=1200, bbox_inches="t
 
 
 # In[ ]:
-
-
-
-

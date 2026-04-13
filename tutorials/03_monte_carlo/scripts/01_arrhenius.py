@@ -2,10 +2,10 @@
 # coding: utf-8
 
 # # Arrhenius Monte Carlo
-# 
-# 
+#
+#
 # A monte carlo simulation can be used to predict results of an event with a certain amount of uncertainty. This will be introduced to our use case via mean and standard deviation for each modeling constant. Correlated multivariate monte carlo simulations expand on this by linking the behavior of multiple input variables together with correlation data, in our case we will use correlation coefficients but
-# 
+#
 # **Objectives**
 # 1. Define necessary monte carlo simulation parameters : correlation coefficients, mean and standard standard deviation, number of trials, function to apply, requried function input
 # 2. Define process for creating and utilizing modeling constant correlation data
@@ -43,11 +43,11 @@ print("pvdeg version ", pvdeg.__version__)
 
 
 # # Correlated Monte Carlo Simulation (parameters)
-# 
+#
 # For this simulation we will be using an arrhenius equation to calculate degredation rate given by $R_D = R_0 * I ^ X * e ^ {\frac{-Ea}{kT}}$, where R0 is prefactor degredation, I is irradiance, X is the irridiance relation, Ea is activation energy and T is degrees K
-# 
+#
 # We will use R0, X and Ea to preform a 3 variable monte carlo simulation to calculate degredation.
-# 
+#
 # ## Required inputs
 # To run a monte carlo simulation with pvdeg.montecarlo the following inputs will be required
 # - function (currently only works with pvdeg.montecarlo.vecArrhenius() but will eventually work with most pvdeg calculation functions)
@@ -58,11 +58,11 @@ print("pvdeg version ", pvdeg.__version__)
 
 # # Defining Correlation Coefficients
 # pvdeg.montecarlo stores correlation coefficients in a ``Corr`` object. To represent a given correlation coefficient follow the given syntax below, replacing the values in the brackets with your correlation coefficients
-# 
+#
 #     {my_correlation_object} = Corr('{variable1}', '{variable2}', {correlation coefficient})
-# 
+#
 # note: ordering of `variable1` and `variable2` does not matter
-# 
+#
 # After defining the all known correlations add them to a list which we will feed into our simulation later
 
 # In[4]:
@@ -112,7 +112,7 @@ print(mc_inputs)
 
 # # Sanity Check
 # We can observe the mean and standard deviation of our newly correlated samples before using them for calculations to ensure that we have not incorrectly altered the data. The mean and standard deviation should be the similar (within a range) to your original input (the error comes from the standard distribution of generated random numbers)
-# 
+#
 # This also applies to the correlation coefficients originally inputted, they should be witin the same range as those orginally supplied.
 
 # In[8]:
@@ -133,7 +133,7 @@ print("X_lnR0", round(np.corrcoef(mc_inputs["X"], mc_inputs["LnR0"])[0][1], 3))
 
 # # Other Function Requirements
 # Based on the function chosen to run in the monte carlo simulation, various other data will be required. In this case we will need cell temperature and total plane of array irradiance.
-# 
+#
 # <div class="alert alert-block alert-info">
 # <b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data and then calculate cell temperature and global poa irradiance. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a> so register now.)
 # </div>
@@ -184,7 +184,7 @@ function_kwargs = {"poa_global": poa_global, "module_temp": cell_temperature}
 
 
 # Runs monte carlo simulation for the example `pvdeg.montecarlo.vecArrhenius` function, using the correlated data dataframe created above and the required function arguments.
-# 
+#
 # We can see the necessary inputs by using the help command:
 
 # In[12]:
@@ -196,9 +196,9 @@ help(pvdeg.montecarlo.simulate)
 
 # # Running the Monte Carlo Simulation
 # We will pass the target function, `pvdeg.degredation.vecArrhenius()`, its required arguments via the correlated_samples and func_kwargs. Our fixed arguments will be passed in the form of a dictionary while the randomized monte carlo input data will be contained in a DataFrame.
-# 
+#
 # All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,
-# 
+#
 # (You can use any data you want here as long as the DataFrame's column names match the required target function's parameter names NOT included in the kwargs)
 
 # In[13]:
@@ -240,4 +240,3 @@ plt.ylabel(f"Counts (out of {n})")
 plt.legend()
 plt.grid(True)
 plt.show()
-

@@ -2,17 +2,17 @@
 # coding: utf-8
 
 # # DuraMAT Live Demo (HPC)
-# 
+#
 # ![PVDeg Logo](../images/pvdeg_logo.svg)
-# 
-# 
+#
+#
 # **Steps:**
 # 1. Initialize weather data into xarray
 # 2. Calculate installation standoff for New Mexico
 # 3. Plot results
-# 
+#
 # **Xarray: multi-dimensional data frame**
-# 
+#
 # ![Xarray](../images/xarray.webp)
 
 # In[1]:
@@ -210,7 +210,3 @@ RH_module
 # <!-- ![Animation](../images/RH_animation.gif) - Animation not available, see code above to generate -->
 
 # In[ ]:
-
-
-
-
