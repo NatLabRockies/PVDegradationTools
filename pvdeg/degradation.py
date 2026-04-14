@@ -953,6 +953,7 @@ def perovskite_degradation(
     component: str = "total",
     I_in: float = 1.59e21,
     P_O2: float = 21.2,
+    P_H2O: pd.Series = None,
     parameters: dict = None,
 ) -> pd.Series:
     """Compute MAPbI3 perovskite degradation rate using the full kinetic model in [1].
@@ -1008,6 +1009,11 @@ def perovskite_degradation(
     P_O2 : float, default ``21.2``
         Oxygen partial pressure :math:`P_{O_2}` [kPa].
         Default value corresponds to ambient air at sea level.
+    P_H2O : pd.Series, optional
+        Water vapour partial pressure [kPa], time-indexed.  If provided it is
+        used directly and ``'relative_humidity'`` is not required in
+        ``weather_df``.  Compute with ``pvdeg.humidity.water_vapor_pressure``
+        for use as an upstream pipeline job.
     parameters : dict, optional
         Parameter overrides. Keys match ``DegradationDatabase.json`` entry D015
         (e.g. ``"k_0,WPO"``, ``"E_A,WPO"``, ``"K_2W"`` …). Any key present
@@ -1069,12 +1075,15 @@ def perovskite_degradation(
     n = I_in**0.7
 
     # Water-vapour partial pressure P_H2O [kPa] = (RH/100) × P_sat
-    if "relative_humidity" in weather_df.columns:
-        rh = weather_df["relative_humidity"]
-        P_sat, _ = humidity.water_saturation_pressure(weather_df["temp_air"])
-        P_H2O = (rh / 100.0) * P_sat
-    else:
-        raise ValueError("'relative_humidity' not found in weather_df")
+    if P_H2O is None:
+        if "relative_humidity" in weather_df.columns:
+            rh = weather_df["relative_humidity"]
+            P_sat, _ = humidity.water_saturation_pressure(weather_df["temp_air"])
+            P_H2O = (rh / 100.0) * P_sat
+        else:
+            raise ValueError(
+                "'relative_humidity' missing in weather_df and P_H2O not given"
+            )
 
     r_WPO = (
         k0_WPO
