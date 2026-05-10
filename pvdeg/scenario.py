@@ -135,13 +135,18 @@ class Scenario:
         self.name = name
 
         if path is None:
-            self.path = os.path.join(os.getcwd(), f"pvd_job_{self.name}")
-            if not os.path.exists(self.path):
-                os.makedirs(self.path)
+            from pvdeg import config as _cfg
+
+            _base = (
+                os.environ.get("PVDEG_JOB_PATH")
+                or _cfg.SCENARIO_OUTPUT_PATH
+                or os.getcwd()
+            )
+            self.path = os.path.join(_base, f"pvd_job_{self.name}")
         else:
             self.path = path
-            if not os.path.exists(self.path):
-                os.makedirs(self.path)
+
+        os.makedirs(self.path, exist_ok=True)
 
         # Only change directory if we're not in a test environment
         # or if the scenario actually needs to work with files
