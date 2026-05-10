@@ -1178,5 +1178,24 @@
         "srv_ab": {"value": 0, "units": ""},
         "srv_bc": {"value": 0, "units": ""},
         "comments": "Lit BO-LID + fit to Qcells destab"
+    },
+    "D046": {
+        "DataEntryPerson": "Rajiv (Dax) Daxini",
+        "DateEntered": "5/8/2026",
+        "doi": "10.1126/science.abn5679",
+        "SourceTitle": "Accelerated aging of all-inorganic, interface-stabilized perovskite solar cells",
+        "Authors": "Xiaoming Zhao, Tianran Liu, Quinn C. Burlingame, Tianjun Liu, Rudolph Holley III, Guangming Cheng, Nan Yao, Feng Gao, Yueh-Lin Loo",
+        "Material": "Halide Perovskite (CsPbI3, uncapped device)",
+        "EquationType": "Perovskite_biexponential",
+        "Comments": "Parameters for an uncapped CsPbI3 device from Zhao et al. 2022 (doi:10.1126/science.abn5679), as used in the degradation model of Orooji et al. 2026 (doi:10.1039/d6el00021e). Ea values were read from the Arrhenius plot (Fig. 3C of Zhao et al.). k0, A1, A2, B are the biexponential fit coefficients reported by Orooji et al. for the uncapped device; the Zhao supplementary does not tabulate these values. Users should re-fit k0, A1, A2, B to their own device data for more accurate quantitative predictions.",
+        "Ea_fast": {"value": 0.248, "units": "eV"},
+        "Ea_slow": {"value": 0.243, "units": "eV"},
+        "k0_fast": {"value": 0.56, "units": "h^-1 (pre-exponential at reference irradiance I_ref)"},
+        "k0_slow": {"value": 0.48, "units": "h^-1 (pre-exponential at reference irradiance I_ref)"},
+        "A1": {"value": 0.25, "units": "dimensionless (fast-process amplitude, A1+A2+B=1)"},
+        "A2": {"value": 0.70, "units": "dimensionless (slow-process amplitude)"},
+        "B": {"value": 0.05, "units": "dimensionless (residual stable fraction)"},
+        "gamma": {"value": 1.0, "units": "dimensionless (light-intensity exponent)"},
+        "I_ref": {"value": 1200.0, "units": "W/m^2 (reference irradiance used in Zhao experiments)"}
     }
 }
