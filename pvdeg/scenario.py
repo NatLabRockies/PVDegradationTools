@@ -135,10 +135,16 @@ class Scenario:
         self.name = name
 
         if path is None:
-            default_path = os.path.join(os.getcwd(), f"pvd_job_{self.name}")
-            self.path = os.path.abspath(default_path)
+            from pvdeg import config as _cfg
+
+            _base = (
+                os.environ.get("PVDEG_JOB_PATH")
+                or _cfg.SCENARIO_OUTPUT_PATH
+                or os.getcwd()
+            )
+            self.path = os.path.join(_base, f"pvd_job_{self.name}")
         else:
-            self.path = os.path.abspath(path)
+            self.path = path
 
         os.makedirs(self.path, exist_ok=True)
 
