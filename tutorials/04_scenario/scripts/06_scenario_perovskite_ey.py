@@ -395,8 +395,8 @@ fig.tight_layout()
 # ── Fetch lifetime data for all 50 US states via NSRDB PSM4 API ──────────────
 # Get a free key at https://developer.nrel.gov/signup/
 
-NREL_API_KEY = "145Kn2WkRxRa607BkOE9HDNgBXZ5OvcYR5X7BvxI"
-NREL_EMAIL = "rajiv.daxini@nlr.gov"
+NREL_API_KEY = "DEMO_API_KEY"
+NREL_EMAIL = "DEMO_EMAIL"
 
 # abbr: (api_lat, api_lon, label, centre_lat, centre_lon)
 STATES = {
