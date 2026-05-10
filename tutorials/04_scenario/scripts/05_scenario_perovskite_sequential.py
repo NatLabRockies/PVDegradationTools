@@ -1,10 +1,13 @@
 # %% [markdown]
-# # Sequential Scenario Analysis — Perovskite Degradation
+# # Sequential Scenario Analysis — Perovskite Degradation (Siegler Model)
 #
-# Demonstrates:
-# 1. **Multiple jobs in one pipeline** — module temperature, surface humidity, IWa, and perovskite degradation all in a single `run()` call.
+# Demonstrates the Scenario pipeline using the **Siegler et al. (2022)** material-level kinetic model for MAPbI₃ perovskite degradation.
+#
+# 1. **Multiple jobs in one pipeline** — module temperature, surface humidity, and perovskite degradation rate all in a single `run()` call.
 # 2. **Sequential job chaining (`depends_on`)** — downstream jobs receive the output of upstream jobs as named keyword arguments at run time.
-# 3. **Multi-material expansion** — how to bind different degradation functions to named material layers.
+# 3. **Four-pathway kinetic rate** [mol m⁻² s⁻¹] for MAPbI₃: WPO, DPO, humidity-driven, and thermal pathways.
+#
+# > **See also:** `06_scenario_perovskite_ey.ipynb` — device-level Zhao/Orooji model, CE degradation factor, and energy yield prediction with pvlib.
 
 # %% [markdown]
 # ## 1. Imports and data
@@ -21,20 +24,31 @@ REPO_ROOT = os.path.dirname(os.path.dirname(pvdeg.__file__))
 TUTORIALS_DATA = os.path.join(REPO_ROOT, "tutorials", "data")
 
 # %%
-weather_df = pd.read_csv(
-    os.path.join(TUTORIALS_DATA, "psm4_golden.csv"),
-    index_col=0,
-    parse_dates=True,
-)
-with open(os.path.join(TUTORIALS_DATA, "meta_golden.json")) as f:
-    meta = json.load(f)
+LOCATIONS = {
+    "Golden, CO": ("psm4_golden.csv", "meta_golden.json"),
+    "Miami, FL": ("psm4_miami.csv", "meta_miami.json"),
+    "New York, NY": ("psm4_nyc.csv", "meta_nyc.json"),
+}
 
+all_weather, all_meta = {}, {}
+for loc, (wf, mf) in LOCATIONS.items():
+    df = pd.read_csv(
+        os.path.join(TUTORIALS_DATA, wf),
+        index_col=0,
+        parse_dates=True,
+    )
+    df.index = df.index.map(lambda ts: ts.replace(year=2020))
+    df = df.sort_index()
+    with open(os.path.join(TUTORIALS_DATA, mf)) as _f:
+        mt = json.load(_f)
+    all_weather[loc], all_meta[loc] = df, mt
+    print(f"  {loc}: {len(df)} rows  ({mt['latitude']:.2f}°N, {mt['longitude']:.2f}°E)")
+
+# Single-location aliases used by demonstration cells below
+weather_df = all_weather["Golden, CO"]
+meta = all_meta["Golden, CO"]
 display_year = 2020
-weather_df.index = weather_df.index.map(lambda ts: ts.replace(year=display_year))
-weather_df = weather_df.sort_index()
-
-print(f"Using normalized display year: {display_year} ({len(weather_df)} rows)")
-print(f"Range: {weather_df.index.min()} -> {weather_df.index.max()}")
+print(f"\nDisplay year: {display_year}")
 
 # %% [markdown]
 # ---
@@ -82,12 +96,47 @@ s1.run()
 rate_default = s1.results["default_params"]
 rate_db = s1.results["db_params"]
 
-# Both should be numerically identical — the DB is the same source of truth
-print("Max absolute difference:", (rate_default - rate_db).abs().max())
-
-rate_default.plot(
-    title="Perovskite degradation rate — total [mol m⁻² s⁻¹]", figsize=(12, 3)
+print(
+    "Max abs difference (default vs DB params):", (rate_default - rate_db).abs().max()
 )
+
+# Run all locations using DB params and plot as weekly means for readability
+_all_rates = {}
+_colors = {
+    "Golden, CO": "steelblue",
+    "Miami, FL": "crimson",
+    "New York, NY": "seagreen",
+}
+for loc in LOCATIONS:
+    sc = pvdeg.Scenario(
+        name="rate-loc",
+        weather_data=all_weather[loc],
+        meta_data=all_meta[loc],
+    )
+    sc.addJob(
+        func=(pvdeg.degradation.perovskite_degradation, {"parameters": d015}),
+        name="rate",
+    )
+    sc.run()
+    _all_rates[loc] = sc.results["rate"]
+
+fig, axes = plt.subplots(2, 1, figsize=(12, 7))
+
+# Hourly rate — Golden, CO (raw; demonstrates signal structure)
+rate_default.plot(ax=axes[0], color="steelblue", alpha=0.7)
+axes[0].set_ylabel("mol m⁻² s⁻¹")
+axes[0].set_title("Perovskite degradation rate — total (Golden, CO, hourly)")
+
+# Weekly mean rate — all locations
+for loc, rate in _all_rates.items():
+    rate.resample("W").mean().plot(
+        ax=axes[1], label=loc, color=_colors[loc], alpha=0.85
+    )
+axes[1].set_ylabel("mol m⁻² s⁻¹")
+axes[1].set_title("Perovskite degradation rate — weekly mean, all locations")
+axes[1].legend()
+
+fig.tight_layout()
 
 # %% [markdown]
 # ---
