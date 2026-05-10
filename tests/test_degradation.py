@@ -377,3 +377,195 @@ def test_perovskite_components():
         assert result.name == f"perovskite_degradation_{comp}"
         assert not result.isna().any()
         assert (result > 0).all()
+
+
+# 1440-row constant ISOS-L2 DataFrame (T_air=50°C so NOCT gives T_cell≈85°C)
+_N_ISOS = 1440
+_ISOS_DF = pd.DataFrame(
+    {"temp_air": np.full(_N_ISOS, 50.0)},
+    index=pd.date_range("2023-01-01", periods=_N_ISOS, freq="h"),
+)
+_ISOS_POA = pd.Series(np.full(_N_ISOS, 1000.0), index=_ISOS_DF.index)
+
+# Short DataFrame for fast unit tests (no POA calculation needed)
+_FACTOR_DF = pd.DataFrame(
+    {"temp_air": [25.0, 25.0, 25.0, 25.0]},
+    index=pd.date_range("2023-01-01", periods=4, freq="h"),
+)
+_FACTOR_POA = pd.Series([1000.0, 1000.0, 1000.0, 1000.0], index=_FACTOR_DF.index)
+
+
+def test_degradation_factor_no_weather_df():
+    with pytest.raises(ValueError):
+        pvdeg.degradation.perovskite_degradation_factor(weather_df=None)
+
+
+def test_degradation_factor_returns_series():
+    result = pvdeg.degradation.perovskite_degradation_factor(
+        weather_df=_FACTOR_DF, poa=_FACTOR_POA
+    )
+    assert isinstance(result, pd.Series)
+    assert len(result) == 4
+    assert result.name == "perovskite_degradation_factor"
+    assert not result.isna().any()
+
+
+def test_degradation_factor_starts_below_one():
+    result = pvdeg.degradation.perovskite_degradation_factor(
+        weather_df=_FACTOR_DF, poa=_FACTOR_POA
+    )
+    # Every value should be ≤ 1.0 (degradation can only reduce CE)
+    assert (result <= 1.0).all()
+    # And strictly less than 1 once illuminated
+    assert (result < 1.0).all()
+
+
+def test_degradation_factor_monotonic():
+    result = pvdeg.degradation.perovskite_degradation_factor(
+        weather_df=_FACTOR_DF, poa=_FACTOR_POA
+    )
+    # Under constant illumination the factor must be non-increasing
+    assert (result.diff().dropna() <= 0).all()
+
+
+def test_degradation_factor_no_light_no_degradation():
+    """Zero irradiance (night) → DF per hour = 1 → DF_total stays at initial."""
+    dark_df = pd.DataFrame(
+        {"temp_air": [25.0, 25.0, 25.0]},
+        index=pd.date_range("2023-01-01", periods=3, freq="h"),
+    )
+    dark_poa = pd.Series([0.0, 0.0, 0.0], index=dark_df.index)
+    result = pvdeg.degradation.perovskite_degradation_factor(
+        weather_df=dark_df, poa=dark_poa
+    )
+    # With gamma=1 and I=0, k=0, DF per hour = A1+A2+B = 1.0, so DF_total = 1.0
+    assert result.values == pytest.approx(np.ones(len(result)), abs=1e-12)
+
+
+def test_degradation_factor_parameters_override():
+    """parameters dict should override keyword arguments."""
+    params = {
+        "Ea_fast": 0.100,
+        "Ea_slow": 0.100,
+        "k0_fast": 100.0,
+        "k0_slow": 100.0,
+        "A1": 0.5,
+        "A2": 0.45,
+        "B": 0.05,
+        "gamma": 1.0,
+        "I_ref": 1200.0,
+    }
+    result_kw = pvdeg.degradation.perovskite_degradation_factor(
+        weather_df=_FACTOR_DF,
+        poa=_FACTOR_POA,
+        Ea_fast=0.100,
+        Ea_slow=0.100,
+        k0_fast=100.0,
+        k0_slow=100.0,
+        A1=0.5,
+        A2=0.45,
+        B=0.05,
+    )
+    result_params = pvdeg.degradation.perovskite_degradation_factor(
+        weather_df=_FACTOR_DF, poa=_FACTOR_POA, parameters=params
+    )
+    pd.testing.assert_series_equal(result_kw, result_params)
+
+
+def test_degradation_factor_isos_l2_t90():
+    """Default Zhao parameters should give T90,Agg ≈ 1440 h at ISOS-L2.
+
+    We verify the CE factor at t=1440h is below 1 and above B (residual),
+    and that the irradiance-weighted average (PR_Agg proxy) is close to 0.90.
+    """
+    ce = pvdeg.degradation.perovskite_degradation_factor(
+        weather_df=_ISOS_DF, poa=_ISOS_POA
+    )
+    # CE factor after 1440h should be substantially below 1
+    assert ce.iloc[-1] < 0.99
+    # And above the residual B=0.05
+    assert ce.iloc[-1] > 0.04
+    # Simple irradiance-weighted PR_Agg proxy (linear approximation)
+    PR_Agg_proxy = ce.mean()
+    # Should be close to 0.90 (±0.05 tolerance to account for approximation)
+    assert PR_Agg_proxy == pytest.approx(0.90, abs=0.05)
+
+
+_PR_DF = pd.DataFrame(
+    {
+        "temp_air": np.full(_N_ISOS, 20.0),
+        "wind_speed": np.full(_N_ISOS, 2.0),
+        "ghi": np.full(_N_ISOS, 500.0),
+        "dhi": np.full(_N_ISOS, 100.0),
+        "dni": np.full(_N_ISOS, 500.0),
+    },
+    index=pd.date_range("2023-06-21", periods=_N_ISOS, freq="h"),
+)
+_PR_META = {
+    "latitude": 39.74,
+    "longitude": -105.18,
+    "altitude": 1829,
+    "timezone": "Etc/GMT+7",
+    "wind_height": 10,
+}
+# Pre-computed constant cell temperature to avoid meta-dependency in unit tests
+_PR_TEMP_CELL = pd.Series(np.full(_N_ISOS, 25.0), index=_PR_DF.index)
+_CE_ONE = pd.Series(np.ones(_N_ISOS), index=_PR_DF.index)
+_CE_FACTOR = pvdeg.degradation.perovskite_degradation_factor(
+    weather_df=_ISOS_DF, poa=_ISOS_POA
+)
+
+
+def test_degraded_power_ratio_no_degradation():
+    """When ce_factor=1, PR_Agg should be 1.0 everywhere."""
+    result = pvdeg.degradation.degraded_power_ratio(
+        weather_df=_PR_DF,
+        meta=_PR_META,
+        ce_factor=_CE_ONE,
+        poa=pd.DataFrame({"poa_global": np.full(_N_ISOS, 500.0)}, index=_PR_DF.index),
+        temp_cell=_PR_TEMP_CELL,
+    )
+    pr = result["PR_Agg"]
+    assert isinstance(pr, pd.Series)
+    assert pr.values == pytest.approx(np.ones(len(pr)), abs=1e-6)
+    assert result["T90_Agg_hours"] is None
+
+
+def test_degraded_power_ratio_keys():
+    result = pvdeg.degradation.degraded_power_ratio(
+        weather_df=_PR_DF,
+        meta=_PR_META,
+        ce_factor=_CE_ONE,
+        poa=pd.DataFrame({"poa_global": np.full(_N_ISOS, 500.0)}, index=_PR_DF.index),
+        temp_cell=_PR_TEMP_CELL,
+    )
+    assert set(result.keys()) == {
+        "PR_Agg",
+        "T90_Agg_hours",
+        "power_degraded",
+        "power_reference",
+    }
+
+
+def test_degraded_power_ratio_power_series_nonneg():
+    result = pvdeg.degradation.degraded_power_ratio(
+        weather_df=_PR_DF,
+        meta=_PR_META,
+        ce_factor=_CE_ONE,
+        poa=pd.DataFrame({"poa_global": np.full(_N_ISOS, 500.0)}, index=_PR_DF.index),
+        temp_cell=_PR_TEMP_CELL,
+    )
+    assert (result["power_reference"] >= 0).all()
+    assert (result["power_degraded"] >= 0).all()
+
+
+def test_degraded_power_ratio_degraded_le_reference():
+    """Degraded power should always be ≤ reference power at every hour."""
+    result = pvdeg.degradation.degraded_power_ratio(
+        weather_df=_PR_DF,
+        meta=_PR_META,
+        ce_factor=_CE_FACTOR,
+        poa=pd.DataFrame({"poa_global": np.full(_N_ISOS, 1000.0)}, index=_PR_DF.index),
+        temp_cell=_PR_TEMP_CELL,
+    )
+    assert (result["power_degraded"] <= result["power_reference"] + 1e-10).all()
