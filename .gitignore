@@ -121,3 +121,5 @@ tests/TEMP_test_addModule_materials.py
 /pipeline_results
 /tutorials/04_scenario/pvd_job_two-material-demo/pipeline_results
 /tutorials/04_scenario/pvd_job_two-material-demo
+/tutorials/04_scenario/pvd_job_stack
+/tutorials/04_scenario/pvd_job_perov-module-stack
