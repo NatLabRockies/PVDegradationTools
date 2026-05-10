@@ -30,6 +30,7 @@
 # ## 1. Imports and data
 
 # %%
+# NBVAL-IGNORE-OUTPUT
 import os
 import json
 import tempfile
@@ -163,6 +164,7 @@ def back_encap_job(weather_df, meta, temp_module, rh_surface):
 #
 
 # %%
+# NBVAL-IGNORE-OUTPUT
 s = pvdeg.Scenario(
     name="perov-module-stack",
     weather_data=weather_df,
@@ -229,18 +231,16 @@ print("Module layers:       ", list(s.modules[0]["material_params"].keys()))
 
 
 # %%
-# Show the material parameters loaded from H2Opermeation for each layer
-mat = s.modules[0]["material_params"]
-for layer, params in mat.items():
-    name = params.get("name", "?")
-    alias = params.get("alias", "?")
-    print(f"\n{layer.upper()} — {alias} ({name})")
-    skip = {"name", "alias", "contributor", "source", "Fickian"}
-    for k, v in params.items():
-        if k not in skip:
-            val = v["value"] if isinstance(v, dict) else v
-            units = v.get("units", "") if isinstance(v, dict) else ""
-            print(f"  {k:6s} = {val}  [{units}]")
+# NBVAL-IGNORE-OUTPUT
+s.run()
+
+res = s.results["glass-eva-perov-eva-pet"]
+named_keys = [k for k in res.keys() if isinstance(k, str) and not k[0].isdigit()]
+print("Named results (Golden, CO):")
+for k in named_keys:
+    v = res[k]
+    if hasattr(v, "shape"):
+        print(f"  {k}: {type(v).__name__}, shape={v.shape}")
 
 
 # %% [markdown]
