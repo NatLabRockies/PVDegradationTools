@@ -37,8 +37,6 @@ import numpy as np
 import pandas as pd
 import pvdeg
 import matplotlib.pyplot as plt
-import plotly.express as px
-import plotly.graph_objects as go
 
 REPO_ROOT = os.path.dirname(os.path.dirname(pvdeg.__file__))
 TUTORIALS_DATA = os.path.join(REPO_ROOT, "tutorials", "data")
