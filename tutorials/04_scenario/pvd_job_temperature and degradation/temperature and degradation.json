@@ -121,27 +121,27 @@
         -80.189029
     ],
     "pipeline": {
-        "BLHBO": {
+        "XGTJU": {
             "params": {
                 "cell_or_mod": "cell"
             },
             "qualified_function": "pvdeg.temperature.temperature"
         },
-        "PZCWQ": {
+        "YVDNH": {
             "params": {
                 "I_chamber": 1000,
                 "temp_chamber": 25
             },
             "qualified_function": "pvdeg.degradation.vantHoff_deg"
         },
-        "NDOMI": {
+        "FLTNZ": {
             "params": {
                 "I_chamber": 1000,
                 "temp_chamber": 30
             },
             "qualified_function": "pvdeg.degradation.vantHoff_deg"
         },
-        "RCRWT": {
+        "SYPXW": {
             "params": {},
             "qualified_function": "pvdeg.degradation.IwaVantHoff"
         }
