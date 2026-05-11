@@ -148,11 +148,6 @@ class Scenario:
 
         os.makedirs(self.path, exist_ok=True)
 
-        # Only change directory if we're not in a test environment
-        # or if the scenario actually needs to work with files
-        if not os.environ.get("PYTEST_CURRENT_TEST"):
-            os.chdir(self.path)
-
         if file:
             self.load_json(file_path=file, email=email, api_key=api_key)
 
@@ -207,7 +202,6 @@ class Scenario:
         to remove all pvd_job_* directories and children from a directory
         """
         if self.path:
-            os.chdir(os.pardir)
             rmtree(path=self.path)  # error when file is not found
         else:
             raise ValueError(f"{self.name} does not have a path attribute")
@@ -675,7 +669,7 @@ class Scenario:
             result of a previously-named job should be forwarded as a keyword
             argument to this job at run time.
         """
-        # --- Parse the spec into (func, func_kwarg, material_layer) ---
+        # Parse the spec into (func, func_kwarg, material_layer)
         if callable(job_spec):
             func, func_kwarg, material_layer = job_spec, {}, None
         elif isinstance(job_spec, tuple):
@@ -723,7 +717,7 @@ class Scenario:
                 f"got {type(job_spec)}"
             )
 
-        # --- Validate and insert into pipeline ---
+        # Validate and insert into pipeline
         try:
             if name is not None:
                 existing_names = {
@@ -828,19 +822,23 @@ class Scenario:
                     module_result[id] = res
                     if job_name:
                         completed[job_name] = res
+                        module_result[job_name] = res
 
                 results_dict[module["module_name"]] = module_result
 
             self.results = results_dict
 
             for module, pipeline_result in self.results.items():
-                module_dir = f"./pipeline_results/{module}_pipeline_results"
+                module_dir = os.path.join(
+                    self.path, "pipeline_results", f"{module}_pipeline_results"
+                )
                 os.makedirs(module_dir, exist_ok=True)
                 for function, result in pipeline_result.items():
                     if isinstance(result, (pd.Series, pd.DataFrame)):
-                        result.to_csv(f"{module_dir}/{function}.csv")
+                        result.to_csv(os.path.join(module_dir, f"{function}.csv"))
                     elif isinstance(result, (int, float)):
-                        with open(f"{module_dir}/{function}.csv", "w") as file:
+                        out_file = os.path.join(module_dir, f"{function}.csv")
+                        with open(out_file, "w") as file:
                             file.write(f"{result}\n")
 
         elif not self.modules:
@@ -875,12 +873,15 @@ class Scenario:
                 result = func(**final_args)
 
                 results_dict[id] = result
-                pipeline_results = results_dict
                 if job_name:
+                    results_dict[job_name] = result
                     completed[job_name] = result
+                pipeline_results = results_dict
 
             for key in pipeline_results.keys():
                 if isinstance(results_dict[key], pd.DataFrame):
+                    results_series[key] = results_dict[key]
+                elif isinstance(results_dict[key], pd.Series):
                     results_series[key] = results_dict[key]
                 elif isinstance(results_dict[key], (float, int)):
                     results_series[key] = pd.DataFrame(
@@ -1291,7 +1292,7 @@ class Scenario:
             <p><strong>self.api_key:</strong> {self.api_key}</p>
             <div>
                 <h3>self.results</h3>
-                {self.format_results() if self.results else None}
+                {self.format_results() if self.results is not None else None}
             </div>
             <div>
                 <h3>self.pipeline</h3>

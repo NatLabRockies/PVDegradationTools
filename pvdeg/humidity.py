@@ -147,6 +147,47 @@ def water_saturation_pressure(temp, average=True):
         return water_saturation_pressure
 
 
+def water_vapor_pressure(
+    weather_df,
+    meta=None,
+    temp_air=None,
+    relative_humidity=None,
+):
+    """Compute the water vapour partial pressure P_H2O.
+
+    Parameters
+    ----------
+    weather_df : pd.DataFrame
+        Fallback source for ``'temp_air'`` [°C] and ``'relative_humidity'``
+        [%] when the override arguments are not supplied.
+    meta : dict, optional
+        Location metadata. Not used; kept for pipeline compatibility.
+    temp_air : pd.Series, optional
+        Temperature [°C]. When provided, takes precedence over
+        ``weather_df['temp_air']``. Use to inject an upstream pipeline
+        result (e.g. module surface temperature from
+        ``pvdeg.temperature.module``).
+    relative_humidity : pd.Series, optional
+        Relative humidity [%]. When provided, takes precedence over
+        ``weather_df['relative_humidity']``. Use to inject an upstream
+        pipeline result (e.g. module-surface RH from
+        ``pvdeg.humidity.surface_relative``).
+
+    Returns
+    -------
+    pd.Series
+        Time-indexed water vapour partial pressure P_H2O [kPa].
+    """
+    t = temp_air if temp_air is not None else weather_df["temp_air"]
+    rh = (
+        relative_humidity
+        if relative_humidity is not None
+        else weather_df["relative_humidity"]
+    )
+    P_sat, _ = water_saturation_pressure(t)
+    return (rh / 100.0) * P_sat
+
+
 def surface_relative(rh_ambient, temp_ambient, temp_module):
     """Calculate the relative humidity on a solar panel surface at the module
     temperature.
