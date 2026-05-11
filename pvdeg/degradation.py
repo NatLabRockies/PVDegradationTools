@@ -1243,7 +1243,7 @@ def perovskite_degradation_factor(
 
     if abs(A1 + A2 + B - 1.0) > 1e-6:
         raise ValueError(
-            f"A1 + A2 + B must equal 1.0 (got {A1} + {A2} + {B} = {A1 + A2 + B:.6f})"
+            f"A1 + A2 + B must equal 1.0 (got {A1} + {A2} + {B} = {A1 + A2 + B:.6f})"  # noqa
         )
 
     # POA irradiance
