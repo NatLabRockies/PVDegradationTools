@@ -512,7 +512,8 @@ _PR_META = {
 _PR_TEMP_CELL = pd.Series(np.full(_N_ISOS, 25.0), index=_PR_DF.index)
 _CE_ONE = pd.Series(np.ones(_N_ISOS), index=_PR_DF.index)
 _CE_FACTOR = pvdeg.degradation.perovskite_degradation_factor(
-    weather_df=_ISOS_DF, poa=_ISOS_POA
+    weather_df=_PR_DF,
+    poa=pd.Series(np.full(_N_ISOS, 1000.0), index=_PR_DF.index),
 )
 
 
