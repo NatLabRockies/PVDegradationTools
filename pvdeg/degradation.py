@@ -1241,6 +1241,11 @@ def perovskite_degradation_factor(
         gamma = parameters.get("gamma", gamma)
         I_ref = parameters.get("I_ref", I_ref)
 
+    if abs(A1 + A2 + B - 1.0) > 1e-6:
+        raise ValueError(
+            f"A1 + A2 + B must equal 1.0 (got {A1} + {A2} + {B} = {A1 + A2 + B:.6f})"
+        )
+
     # POA irradiance
     if poa is None:
         poa_df = spectral.poa_irradiance(weather_df, meta)
@@ -1376,6 +1381,15 @@ def degraded_power_ratio(
     if ce_factor is None:
         raise ValueError("ce_factor is required")
 
+    # Align ce_factor to weather_df.index — raises if any timestamps are missing
+    if not ce_factor.index.equals(weather_df.index):
+        ce_factor = ce_factor.reindex(weather_df.index)
+        if ce_factor.isna().any():
+            raise ValueError(
+                "ce_factor is missing values for some timestamps in weather_df.index."
+                "Ensure ce_factor covers the full time range of weather_df."
+            )
+
     # POA irradiance
     if poa is None:
         poa_df = spectral.poa_irradiance(weather_df, meta)
@@ -1388,7 +1402,15 @@ def degraded_power_ratio(
 
     # Module / cell temperature [°C]
     if temp_cell is not None:
-        T_cell_C = temp_cell.values
+        if not temp_cell.index.equals(weather_df.index):
+            temp_cell = temp_cell.reindex(weather_df.index)
+            if temp_cell.isna().any():
+                raise ValueError(
+                    "temp_cell is missing values for some timestamps in"
+                    " weather_df.index. Ensure temp_cell covers the full time range of"
+                    " weather_df."
+                )
+        T_cell_C = temp_cell.to_numpy()
     else:
         T_mod = temperature.module(
             weather_df,
@@ -1409,7 +1431,7 @@ def degraded_power_ratio(
     I_L_ref = np.clip(
         I_sc_ref * (G.values / G_ref) * (1.0 + alpha_isc * T_delta), 0.0, None
     )
-    I_L_deg = np.clip(I_L_ref * ce_factor.values, 0.0, None)
+    I_L_deg = np.clip(I_L_ref * ce_factor.to_numpy(), 0.0, None)
 
     # Maximum power via pvlib single-diode (vectorised).
     # Suppress the scipy RuntimeWarning that arises when G=0.
