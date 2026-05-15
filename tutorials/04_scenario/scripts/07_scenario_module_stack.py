@@ -152,15 +152,6 @@ def back_encap_job(weather_df, meta, temp_module, rh_surface):
 #
 # - **`encapsulant`**: EVA W001 (Kempe 2006) — front and back encapsulant
 # - **`backsheet`**: PET W017 (Kempe, unpublished) — backsheet moisture barrier
-#
-# The pipeline data flow:
-#
-# ```
-# poa (1) ─┬─ temp_mod (2) ─┬─ rh_surface (3) ── back_encap (5)
-#         │              └─ front_encap (4)
-#         └─ ce_factor (6)
-# ```
-#
 
 # %%
 s = pvdeg.Scenario(
@@ -229,7 +220,14 @@ print("Module layers:", list(s.modules[0]["material_params"].keys()))
 
 # %%
 # Show the material parameters loaded from H2Opermeation for each layer
-mat = s.modules[0]["material_params"]
+if "s" in globals():
+    mat = s.modules[0]["material_params"]
+elif "all_scenarios" in globals() and len(all_scenarios) > 0:
+    sample_location = next(iter(all_scenarios.keys()))
+    mat = all_scenarios[sample_location].modules[0]["material_params"]
+else:
+    raise RuntimeError("Run the Scenario setup cell first.")
+
 for layer, params in mat.items():
     name = params.get("name", "?")
     alias = params.get("alias", "?")
@@ -246,19 +244,90 @@ for layer, params in mat.items():
 # ## 4. Run the pipeline
 
 # %%
-s.run()
+all_scenarios = {}
+all_results = {}
+module_name = "glass-eva-perov-eva-pet"
 
-res = s.results["glass-eva-perov-eva-pet"]
-_named = {j["name"] for j in s.pipeline.values() if j.get("name")}
-named_keys = [k for k in res.keys() if k in _named]
-print("Named results (Golden, CO):")
-for k in named_keys:
-    v = res[k]
-    if hasattr(v, "shape"):
-        print(f"  {k}: {type(v).__name__}, shape={v.shape}")
+for loc in LOCATIONS:
+    s_loc = pvdeg.Scenario(
+        name=f"perov-module-stack-{loc.replace(', ', '-').replace(' ', '_')}",
+        weather_data=all_weather[loc],
+        meta_data=all_meta[loc],
+    )
+
+    # Register the module with temperature model settings and material layers
+    s_loc.addModule(
+        module_name=module_name,
+        racking="open_rack_glass_polymer",
+        temperature_model="sapm",
+        materials={
+            "encapsulant": {
+                "material_file": "H2Opermeation",
+                "material_name": "W001",  # EVA (Kempe 2006)
+            },
+            "backsheet": {
+                "material_file": "H2Opermeation",
+                "material_name": "W017",  # PET (Kempe, unpublished)
+            },
+        },
+    )
+
+    # Job 1 — POA irradiance
+    s_loc.addJob(func=pvdeg.spectral.poa_irradiance, name="poa")
+
+    # Job 2 — module temperature
+    s_loc.addJob(
+        func=pvdeg.temperature.module,
+        name="temp_mod",
+        depends_on={"poa": "poa"},
+    )
+
+    # Job 3 — surface RH (moisture ingress branch)
+    s_loc.addJob(
+        func=rh_surface_job,
+        name="rh_surface",
+        depends_on={"temp_module": "temp_mod"},
+    )
+
+    # Job 4 — front encapsulant RH (EVA W001, glass side)
+    s_loc.addJob(
+        func=front_encap_job,
+        name="rh_front_encap",
+        depends_on={"temp_module": "temp_mod"},
+    )
+
+    # Job 5 — back encapsulant RH (PET W017 -> EVA W001, backsheet side)
+    s_loc.addJob(
+        func=back_encap_job,
+        name="rh_back_encap",
+        depends_on={"temp_module": "temp_mod", "rh_surface": "rh_surface"},
+    )
+
+    # Job 6 — absorber CE degradation factor (parallel to moisture chain)
+    s_loc.addJob(
+        func=(pvdeg.degradation.perovskite_degradation_factor, {"parameters": d046}),
+        name="ce_factor",
+        depends_on={"poa": "poa"},
+    )
+
+    s_loc.run()
+
+    res_loc = s_loc.results[module_name]
+    all_scenarios[loc] = s_loc
+    all_results[loc] = res_loc
+
+# Default selection for downstream cells (user can change this)
+selected_location = "Golden, CO"
+res = all_results[selected_location]
 
 # %% [markdown]
 # ## 5. Results
+#
+# This notebook now computes Scenario outputs for all three locations in `LOCATIONS`.
+# Use the variables in the next cell to choose a single location or overlay all locations:
+#
+# - `PLOT_LOCATION = "Golden, CO"` (or `"Miami, FL"`, `"New York, NY"`)
+# - `OVERLAY_LOCATIONS = False` (set `True` to compare all on one figure)
 #
 # | Panel | Quantity | Physical meaning |
 # |-------|----------|------------------|
@@ -266,45 +335,153 @@ for k in named_keys:
 # | 2 | Surface RH & front encapsulant RH [%] | Moisture at the glass/EVA interface |
 # | 3 | Back encapsulant RH [%] | Moisture arriving through the PET backsheet |
 #
-# Note that the front encapsulant RH is **lower** than the surface RH — the EVA
-# absorbs moisture but its temperature-dependent solubility limits equilibrium concentration.
-# The back encapsulant RH is **lower still** — the PET backsheet is an effective moisture barrier.
+# Note that the front encapsulant RH is lower than the surface RH because EVA moisture
+# solubility is temperature dependent. The back encapsulant RH is lower still due to the
+# PET backsheet moisture barrier.
 #
-# The CE degradation factor (absorber optical decay) is covered in **`06_scenario_perovskite_ey.ipynb`**.
+# The CE degradation factor (absorber optical decay) is covered in 06_scenario_perovskite_ey.ipynb.
 
 # %%
+# Choose plotting mode
+PLOT_LOCATION = "Golden, CO"
+OVERLAY_LOCATIONS = False  # True overlays all locations on each panel
+
+if OVERLAY_LOCATIONS:
+    fig, axes = plt.subplots(3, 1, figsize=(12, 10), sharex=True)
+
+    for loc, res_loc in all_results.items():
+        res_loc["temp_mod"].plot(ax=axes[0], linewidth=1.0, alpha=0.8, label=loc)
+        res_loc["rh_surface"].plot(
+            ax=axes[1],
+            linewidth=0.8,
+            alpha=0.45,
+            linestyle="--",
+            label=f"{loc} surface RH",
+        )
+        res_loc["rh_front_encap"].plot(
+            ax=axes[1], linewidth=1.2, alpha=0.9, label=f"{loc} front encap RH"
+        )
+        res_loc["rh_back_encap"].plot(ax=axes[2], linewidth=1.0, alpha=0.8, label=loc)
+
+    axes[0].set_ylabel("°C")
+    axes[0].set_title("Module temperature comparison")
+    axes[1].set_ylabel("RH [%]")
+    axes[1].set_title("Surface and front encapsulant RH comparison")
+    axes[2].set_ylabel("RH [%]")
+    axes[2].set_title("Back encapsulant RH comparison")
+    axes[2].set_xlabel("Time")
+
+    axes[0].legend(ncol=3, fontsize=8)
+    axes[1].legend(ncol=2, fontsize=7)
+    axes[2].legend(ncol=3, fontsize=8)
+
+    fig.tight_layout()
+    fig.suptitle(
+        "Multi-layer perovskite module stack - all locations (2020)",
+        y=1.01,
+        fontsize=12,
+    )
+else:
+    if PLOT_LOCATION not in all_results:
+        raise ValueError(f"PLOT_LOCATION must be one of {list(all_results.keys())}")
+
+    res = all_results[PLOT_LOCATION]
+    temp_mod = res["temp_mod"]
+    rh_surface = res["rh_surface"]
+    rh_front_encap = res["rh_front_encap"]
+    rh_back_encap = res["rh_back_encap"]
+
+    fig, axes = plt.subplots(3, 1, figsize=(12, 10), sharex=True)
+
+    # Panel 1: module temperature
+    temp_mod.plot(ax=axes[0], color="firebrick", alpha=0.7)
+    axes[0].set_ylabel("°C")
+    axes[0].set_title(f"Module temperature - {PLOT_LOCATION} (SAPM model)")
+
+    # Panel 2: surface RH and front encapsulant RH
+    rh_surface.plot(ax=axes[1], label="Surface RH", color="steelblue", alpha=0.6)
+    rh_front_encap.plot(
+        ax=axes[1], label="Front encapsulant RH (EVA W001)", color="navy", linewidth=1.2
+    )
+    axes[1].set_ylabel("RH [%]")
+    axes[1].set_title("Moisture - glass/EVA front interface")
+    axes[1].legend()
+
+    # Panel 3: back encapsulant RH
+    rh_back_encap.plot(ax=axes[2], color="seagreen")
+    axes[2].set_ylabel("RH [%]")
+    axes[2].set_title("Moisture - EVA/PET backsheet interface")
+    axes[2].set_xlabel("Time")
+
+    fig.tight_layout()
+    fig.suptitle(
+        f"Multi-layer perovskite module stack - {PLOT_LOCATION} 2020",
+        y=1.01,
+        fontsize=12,
+    )
+
+# %% [markdown]
+# ## 6. Acetic acid generation in EVA
+#
+# This section focuses on acetic acid (HAc) generation in EVA, derived from the module
+# temperature and moisture ingress results.
+#
+# - `acetic_acid_generation`: hourly HAc generation rate in EVA [ng/min/g]
+# - `acetic_acid_cumulative`: cumulative HAc produced in EVA [mg/g]
+
+# %%
+# Reuse selected location from results section
+PLOT_LOCATION = globals().get("PLOT_LOCATION", "Golden, CO")
+if PLOT_LOCATION not in all_results:
+    raise ValueError(f"PLOT_LOCATION must be one of {list(all_results.keys())}")
+
+res = all_results[PLOT_LOCATION]
 temp_mod = res["temp_mod"]
-rh_surface = res["rh_surface"]
-rh_front_encap = res["rh_front_encap"]
-rh_back_encap = res["rh_back_encap"]
 
-fig, axes = plt.subplots(3, 1, figsize=(12, 10), sharex=True)
-
-# Panel 1: module temperature
-temp_mod.plot(ax=axes[0], color="firebrick", alpha=0.7)
-axes[0].set_ylabel("°C")
-axes[0].set_title("Module temperature — Golden, CO (SAPM model)")
-
-# Panel 2: surface RH & front encapsulant RH
-rh_surface.plot(ax=axes[1], label="Surface RH", color="steelblue", alpha=0.6)
-rh_front_encap.plot(
-    ax=axes[1], label="Front encapsulant RH (EVA W001)", color="navy", linewidth=1.2
+# Acetic acid generation metrics in EVA
+hac_rate = pvdeg.degradation.acetic_acid_generation(
+    temp_module=temp_mod, encapsulant="AA002"
 )
-axes[1].set_ylabel("RH [%]")
-axes[1].set_title("Moisture — glass/EVA front interface")
-axes[1].legend()
+hac_cum = pvdeg.degradation.acetic_acid_cumulative(
+    temp_module=temp_mod, encapsulant="AA002"
+)
 
-# Panel 3: back encapsulant RH
-rh_back_encap.plot(ax=axes[2], color="seagreen")
-axes[2].set_ylabel("RH [%]")
-axes[2].set_title("Moisture — EVA/PET backsheet interface")
+print(f"Selected location: {PLOT_LOCATION}")
+print("HAc rate at start [ng/min/g]:", round(float(hac_rate.iloc[0]), 6))
+print("HAc cumulative at 1000 h [mg/g]:", round(float(hac_cum.iloc[999]), 6))
+print("HAc cumulative at 3000 h [mg/g]:", round(float(hac_cum.iloc[2999]), 6))
+
+# %%
+fig, axes = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
+
+for loc, res_loc in all_results.items():
+    temp_loc = res_loc["temp_mod"]
+
+    hac_rate_loc = pvdeg.degradation.acetic_acid_generation(
+        temp_module=temp_loc, encapsulant="AA002"
+    )
+    hac_cum_loc = pvdeg.degradation.acetic_acid_cumulative(
+        temp_module=temp_loc, encapsulant="AA002"
+    )
+
+    hac_rate_loc.plot(ax=axes[0], linewidth=0.9, alpha=0.8, label=loc)
+    hac_cum_loc.plot(ax=axes[1], linewidth=1.2, alpha=0.85, label=loc)
+
+axes[0].set_ylabel(
+    "Acetic acid generation rate (ng/min/g)"
+)  # nanograms of acetic acid produced per minute per gram of EVA
+axes[0].set_title("Acetic acid generation rate in EVA (AA002) by location")
+axes[1].set_ylabel("Cumulative acetic acid total (mg/g)")
+axes[1].set_title("Cumulative acetic acid generation in EVA (AA002) by location")
+axes[1].set_xlabel("Time")
+
+axes[0].legend(ncol=3, fontsize=8)
+axes[1].legend(ncol=3, fontsize=8)
+
+for ax in axes:
+    ax.grid(alpha=0.25)
 
 fig.tight_layout()
-fig.suptitle(
-    "Multi-layer perovskite module stack — Golden, CO 2020",
-    y=1.01,
-    fontsize=12,
-)
 
 # %% [markdown]
 # ---
