@@ -7,11 +7,7 @@ from typing import Union
 from pvdeg import humidity
 import pvlib
 
-from . import (
-    temperature,
-    spectral,
-    decorators,
-)
+from . import temperature, spectral, decorators, utilities
 
 R_GAS = 0.00831446261815324  # Gas Constant in [kJ/mol*K]
 kB_eV = 8.617333e-5  # eV/K
@@ -1474,3 +1470,214 @@ def degraded_power_ratio(
         "power_degraded": P_deg,
         "power_reference": P_ref,
     }
+
+
+def acetic_acid_generation(
+    temp_module: pd.Series,
+    Ro: float = 0.00331,
+    Ea_gen: float = 90.0,
+    T_ref: float = 27.0,
+    encapsulant: str = "AA002",
+) -> pd.Series:
+    """Calculate the acetic acid generation rate in EVA encapsulant.
+
+    Uses an Arrhenius model for the hydrolysis source term of ethylene-vinyl
+    acetate (EVA).  The rate at reference temperature ``T_ref`` is scaled to
+    each hourly module temperature via:
+
+    .. math::
+
+        R(T) = R_0 \\cdot \\exp\\!\\left[
+            \\frac{-E_a}{R}\\left(\\frac{1}{T} - \\frac{1}{T_{ref}}\\right)
+        \\right]
+
+    Parameters from Kempe et al. (2007) [1]_, validated against experimental
+    data by Gnocchi et al. (2018) [2]_.
+
+    Parameters
+    ----------
+    temp_module : pd.Series
+        Time-indexed module temperature [°C].
+    Ro : float, default 0.00331
+        Acetic acid source term at ``T_ref`` [ng/min/g].
+    Ea_gen : float, default 90.0
+        Activation energy for HAc generation [kJ/mol].
+    T_ref : float, default 27.0
+        Reference temperature for ``Ro`` [°C].
+    encapsulant : str, default ``"AA002"``
+        Key in ``AApermeation.json`` from which to load default parameters.
+        Set to ``None`` to use explicitly provided values only.
+
+    Returns
+    -------
+    generation_rate : pd.Series
+        Time-indexed acetic acid generation rate [ng/min/g].
+
+    References
+    ----------
+    .. [1] Kempe, M. D., et al. (2007). "Acetic acid production and glass
+       transition concerns with ethylene-vinyl acetate used in photovoltaic
+       devices." *Solar Energy Materials and Solar Cells* 91.4: 315-329.
+    .. [2] Gnocchi, L., et al. (2018). "Measuring and modelling the generation
+       of acetic acid in aged ethylene-vinyl acetate-based encapsulants used
+       in solar modules." EU PVSEC.
+    """
+
+    if encapsulant is not None:
+        params = utilities.read_material(
+            pvdeg_file="AApermeation",
+            key=encapsulant,
+            parameters=["Ro", "Ea_gen"],
+        )
+        Ro = params.get("Ro", Ro)
+        Ea_gen = params.get("Ea_gen", Ea_gen)
+
+        full_params = utilities.read_material(
+            pvdeg_file="AApermeation",
+            key=encapsulant,
+            parameters=["Ro"],
+            values_only=False,
+        )
+        ro_entry = full_params.get("Ro", {})
+        if isinstance(ro_entry, dict) and "ref_temp_C" in ro_entry:
+            T_ref = ro_entry["ref_temp_C"]
+
+    T_K = temp_module + 273.15
+    T_ref_K = T_ref + 273.15
+
+    generation_rate = Ro * np.exp((-Ea_gen / R_GAS) * (1.0 / T_K - 1.0 / T_ref_K))
+
+    return pd.Series(generation_rate, index=temp_module.index, name="HAc_rate_ng_min_g")
+
+
+def acetic_acid_cumulative(
+    temp_module: pd.Series,
+    Ro: float = 0.00331,
+    Ea_gen: float = 90.0,
+    T_ref: float = 27.0,
+    encapsulant: str = "AA002",
+) -> pd.Series:
+    """Calculate the cumulative acetic acid produced in EVA over time.
+
+    Integrates the hourly Arrhenius generation rate (assuming 1-hour time steps)
+    to produce cumulative HAc concentration in [mg/g], matching the units and
+    magnitude of experimental measurements from Gnocchi et al. (2018).
+
+    Parameters
+    ----------
+    temp_module : pd.Series
+        Time-indexed module temperature [°C].
+    Ro : float, default 0.00331
+        Acetic acid source term at ``T_ref`` [ng/min/g].
+    Ea_gen : float, default 90.0
+        Activation energy for HAc generation [kJ/mol].
+    T_ref : float, default 27.0
+        Reference temperature for ``Ro`` [°C].
+    encapsulant : str, default ``"AA002"``
+        Key in ``AApermeation.json``.  Set to ``None`` to use explicit values.
+
+    Returns
+    -------
+    cumulative_HAc : pd.Series
+        Time-indexed cumulative acetic acid concentration [mg/g].
+    """
+    rate = acetic_acid_generation(
+        temp_module, Ro=Ro, Ea_gen=Ea_gen, T_ref=T_ref, encapsulant=encapsulant
+    )
+
+    # rate is in [ng/min/g]; integrate over 60 min/h, convert ng → mg
+    hourly_production_mg = rate * 60.0 / 1e6  # [mg/g per hour]
+    cumulative_HAc = hourly_production_mg.cumsum()
+    cumulative_HAc.name = "HAc_cumulative_mg_g"
+    return cumulative_HAc
+
+
+def ff_degradation(
+    temp_module: pd.Series,
+    rh_back_encap: pd.Series,
+    FF_0: float = 80.0,
+    A: float = 0.073,
+    B1: float = 14.7,
+    B2: float = 76.22,
+    B3: float = -0.005,
+    parameters: str = "D016",
+) -> pd.Series:
+    """Calculate fill-factor degradation due to corrosion of metallization
+    contacts driven by moisture and acetic acid.
+
+    Implements the double-exponential Arrhenius model from Kempe & Jordan
+    (2017) [1]_:
+
+    .. math::
+
+        FF(t) = FF_0 \\cdot \\left(1 - A \\cdot
+            \\left\\langle 1 - \\exp\\!\\left[
+                -\\exp\\!\\left(B_1 - \\frac{B_2}{R\\,T_K}
+                - B_3 \\cdot RH\\right) \\cdot t
+            \\right] \\right\\rangle \\right)
+
+    This model is relevant to acetic-acid-driven corrosion because the
+    mechanism (moisture ingress → HAc production → metal contact corrosion
+    → series resistance increase → FF loss) is captured implicitly by the
+    temperature and humidity dependence.
+
+    Parameters
+    ----------
+    temp_module : pd.Series
+        Time-indexed module temperature [°C].
+    rh_back_encap : pd.Series
+        Time-indexed relative humidity at the back encapsulant [%].
+    FF_0 : float, default 80.0
+        Initial fill factor [%].
+    A : float, default 0.073
+        Area fraction of affected metallization (A_i / A_o).
+    B1 : float, default 14.7
+        Pre-exponential constant.
+    B2 : float, default 76.22
+        Activation energy parameter [kJ/mol].
+    B3 : float, default -0.005
+        Humidity coefficient [1/%].
+    parameters : str or None, default ``"D016"``
+        Key in ``DegradationDatabase.json`` to load default parameters.
+        Set to ``None`` to use explicitly provided values only.
+
+    Returns
+    -------
+    FF_t : pd.Series
+        Time-indexed fill factor [%].
+
+    References
+    ----------
+    .. [1] Kempe, M. D. and Jordan, D. C. (2017). "Evaluation and modeling of
+       the potential effects of a module manufacturing anomaly." *Prog.
+       Photovolt. Res. Appl.* doi:10.1002/pip.2908.
+    """
+
+    if parameters is not None:
+        params = utilities.get_kinetics(name=parameters)
+        A = params.get("A", A)
+        B1 = params.get("B_1", B1)
+        B2 = params.get("B_2", B2)
+        B3 = params.get("B_3", B3)
+
+    T_K = temp_module + 273.15
+
+    # time index in hours from start
+    if hasattr(temp_module.index, "to_series"):
+        dt = temp_module.index.to_series()
+        try:
+            t_hours = (dt - dt.iloc[0]).dt.total_seconds() / 3600.0
+        except AttributeError:
+            t_hours = pd.Series(np.arange(len(temp_module)), index=temp_module.index)
+    else:
+        t_hours = pd.Series(np.arange(len(temp_module)), index=temp_module.index)
+
+    # Instantaneous rate constant at each timestep
+    k = np.exp(B1 - B2 / (R_GAS * T_K) - B3 * rh_back_encap)
+
+    # Double exponential degradation
+    inner = 1.0 - np.exp(-k * t_hours.values)
+
+    FF_t = FF_0 * (1.0 - A * inner)
+
+    return pd.Series(FF_t, index=temp_module.index, name="FF_percent")
