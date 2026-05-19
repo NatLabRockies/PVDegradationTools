@@ -1,17 +1,9 @@
 # %% [markdown]
-# # Multi-Layer Module Stack — Scenario Pipeline Demo
+# # EVA/PET Encapsulant Stack — Scenario Pipeline Demo
 #
-# Demonstrates the **`Scenario`** class feature set using a hypothetical perovskite module stack:
+# Demonstrates the **`Scenario`** class pipeline flow for module temperature and moisture ingress in an EVA/PET stack, and using `temp_mod` with constant humidity for acetic acid (HAc) generation in EVA.
 #
-# > Glass / EVA front encapsulant / CsPbI₃ perovskite absorber / EVA back encapsulant / PET backsheet
-#
-# **Features demonstrated:**
-# 1. `addModule()` — module configuration (temperature model, racking) and named material layers
-# 2. Sequential job chaining with `depends_on` — upstream results forwarded as kwargs at run time
-# 3. Module-based results — accessed via `s.results[module_name][job_name]`
-# 4. Multi-location execution — same pipeline run for three climate zones
-#
-# **Pipeline (moisture transport chain):**
+# **Scenario Pipeline:**
 #
 # | Step | Function | Output | Depends on |
 # |------|----------|--------|------------|
@@ -20,11 +12,6 @@
 # | 3 | `rh_surface_job` | `rh_surface` | `temp_mod` |
 # | 4 | `front_encap_job` (EVA W001) | `rh_front_encap` | `temp_mod` |
 # | 5 | `back_encap_job` (EVA W001 + PET W017) | `rh_back_encap` | `temp_mod`, `rh_surface` |
-#
-# Steps 3–5 form a sequential moisture ingress chain from ambient air through the PET backsheet and into the EVA layers.
-#
-# **Post-processing (section 6):** `temp_mod` from the pipeline is used directly to compute acetic acid (HAc) generation and accumulation in the EVA encapsulant — a known corrosion precursor in aged PV modules.
-#
 
 # %% [markdown]
 # ## 1. Imports and data
@@ -72,61 +59,32 @@ meta = all_meta["Golden, CO"]
 
 
 # %% [markdown]
-# ## 2. Pipeline wrapper functions
+# ## 2. Job parameter setup
 #
-# The Scenario pipeline injects `weather_df` and `meta` into every function automatically.
-# Some `pvdeg.humidity` functions require individual weather columns (`rh_ambient`,
-# `temp_ambient`) rather than the full DataFrame. Three thin wrappers bridge this gap,
-# making those functions compatible with the pipeline while keeping the call site clean.
-#
+# PVDeg functions are added to the pipeline via `addJob()`. For humidity functions that expect
+# `rh_ambient` and `temp_ambient`, we pass those as explicit kwargs from the weather data once,
+# then use `depends_on` only for upstream pipeline outputs (`temp_mod`, `rh_surface`).
 
 
 # %%
-def rh_surface_job(weather_df, meta, temp_module):
-    """Surface RH: scales ambient RH to module temperature.
+# Shared kwargs for humidity jobs
+HUMIDITY_BASE_KWARGS = {
+    "rh_ambient": weather_df["relative_humidity"],
+    "temp_ambient": weather_df["temp_air"],
+}
 
-    temp_module is injected via depends_on from the temp_mod job.
-    """
-    return pvdeg.humidity.surface_relative(
-        rh_ambient=weather_df["relative_humidity"],
-        temp_ambient=weather_df["temp_air"],
-        temp_module=temp_module,
-    )
+FRONT_ENCAP_KWARGS = {
+    **HUMIDITY_BASE_KWARGS,
+    # encapsulant="W001" is default for front_encapsulant
+}
 
-
-def front_encap_job(weather_df, meta, temp_module):
-    """Front encapsulant (glass-side) RH.
-
-    Uses EVA W001 (Kempe 2006) defaults from pvdeg H2Opermeation database.
-    Returns the diffusivity-weighted average moisture in the front EVA layer.
-    """
-    return pvdeg.humidity.front_encapsulant(
-        rh_ambient=weather_df["relative_humidity"],
-        temp_ambient=weather_df["temp_air"],
-        temp_module=temp_module,
-        # encapsulant="W001" is the default
-    )
-
-
-def back_encap_job(weather_df, meta, temp_module, rh_surface):
-    """Back encapsulant (backsheet-side) RH.
-
-    Moisture diffuses through the PET backsheet (W017), then into EVA (W001).
-    Uses the quasi-steady-state permeation model (Kempe 2006).
-    rh_surface is injected via depends_on from the rh_surface job.
-    backsheet_thickness=0.3 mm and back_encap_thickness=0.46 mm are typical
-    values for PET and EVA respectively (not stored in the W017/W001 DB entries).
-    """
-    return pvdeg.humidity.back_encapsulant_water_concentration(
-        temp_module=temp_module,
-        rh_surface=rh_surface,
-        backsheet="W017",  # PET (Kempe, unpublished)
-        encapsulant="W001",  # EVA (Kempe 2006)
-        backsheet_thickness=0.3,  # mm — typical PET backsheet
-        back_encap_thickness=0.46,  # mm — typical EVA encapsulant
-        output="rh",
-    )
-
+BACK_ENCAP_KWARGS = {
+    "backsheet": "W017",  # PET (Kempe, unpublished)
+    "encapsulant": "W001",  # EVA (Kempe 2006)
+    "backsheet_thickness": 0.3,  # mm — typical PET backsheet
+    "back_encap_thickness": 0.46,  # mm — typical EVA encapsulant
+    "output": "rh",
+}
 
 # %% [markdown]
 # ## 3. Scenario: addModule and addJob
@@ -139,14 +97,14 @@ def back_encap_job(weather_df, meta, temp_module, rh_surface):
 
 # %%
 s = pvdeg.Scenario(
-    name="perov-module-stack",
+    name="eva-pet-module-stack",
     weather_data=weather_df,
     meta_data=meta,
 )
 
 # Register the module with temperature model settings and material layers
 s.addModule(
-    module_name="glass-eva-perov-eva-pet",
+    module_name="glass-eva-pet",
     racking="open_rack_glass_polymer",
     temperature_model="sapm",
     materials={
@@ -171,23 +129,23 @@ s.addJob(
     depends_on={"poa": "poa"},
 )
 
-# Job 3 — surface RH (moisture ingress branch)
+# Job 3 — surface RH (ambient RH mapped to module temperature)
 s.addJob(
-    func=rh_surface_job,
+    func=(pvdeg.humidity.surface_relative, HUMIDITY_BASE_KWARGS),
     name="rh_surface",
     depends_on={"temp_module": "temp_mod"},
 )
 
 # Job 4 — front encapsulant RH (EVA W001, glass side)
 s.addJob(
-    func=front_encap_job,
+    func=(pvdeg.humidity.front_encapsulant, FRONT_ENCAP_KWARGS),
     name="rh_front_encap",
     depends_on={"temp_module": "temp_mod"},
 )
 
-# Job 5 — back encapsulant RH (PET W017 → EVA W001, backsheet side)
+# Job 5 — back encapsulant RH (PET W017 -> EVA W001, backsheet side)
 s.addJob(
-    func=back_encap_job,
+    func=(pvdeg.humidity.back_encapsulant_water_concentration, BACK_ENCAP_KWARGS),
     name="rh_back_encap",
     depends_on={"temp_module": "temp_mod", "rh_surface": "rh_surface"},
 )
@@ -223,12 +181,30 @@ for layer, params in mat.items():
 # %%
 all_scenarios = {}
 all_results = {}
-module_name = "glass-eva-perov-eva-pet"
+module_name = "glass-eva-pet"
 
 for loc in LOCATIONS:
+    weather_loc = all_weather[loc]
+    humidity_base_kwargs_loc = {
+        "rh_ambient": weather_loc["relative_humidity"],
+        "temp_ambient": weather_loc["temp_air"],
+    }
+
+    front_encap_kwargs_loc = {
+        **humidity_base_kwargs_loc,
+    }
+
+    back_encap_kwargs_loc = {
+        "backsheet": "W017",  # PET (Kempe, unpublished)
+        "encapsulant": "W001",  # EVA (Kempe 2006)
+        "backsheet_thickness": 0.3,  # mm — typical PET backsheet
+        "back_encap_thickness": 0.46,  # mm — typical EVA encapsulant
+        "output": "rh",
+    }
+
     s_loc = pvdeg.Scenario(
-        name=f"perov-module-stack-{loc.replace(', ', '-').replace(' ', '_')}",
-        weather_data=all_weather[loc],
+        name=f"eva-pet-module-stack-{loc.replace(', ', '-').replace(' ', '_')}",
+        weather_data=weather_loc,
         meta_data=all_meta[loc],
     )
 
@@ -259,23 +235,26 @@ for loc in LOCATIONS:
         depends_on={"poa": "poa"},
     )
 
-    # Job 3 — surface RH (moisture ingress branch)
+    # Job 3 — surface RH (ambient RH mapped to module temperature)
     s_loc.addJob(
-        func=rh_surface_job,
+        func=(pvdeg.humidity.surface_relative, humidity_base_kwargs_loc),
         name="rh_surface",
         depends_on={"temp_module": "temp_mod"},
     )
 
     # Job 4 — front encapsulant RH (EVA W001, glass side)
     s_loc.addJob(
-        func=front_encap_job,
+        func=(pvdeg.humidity.front_encapsulant, front_encap_kwargs_loc),
         name="rh_front_encap",
         depends_on={"temp_module": "temp_mod"},
     )
 
     # Job 5 — back encapsulant RH (PET W017 -> EVA W001, backsheet side)
     s_loc.addJob(
-        func=back_encap_job,
+        func=(
+            pvdeg.humidity.back_encapsulant_water_concentration,
+            back_encap_kwargs_loc,
+        ),
         name="rh_back_encap",
         depends_on={"temp_module": "temp_mod", "rh_surface": "rh_surface"},
     )
@@ -296,7 +275,7 @@ print("Pipeline complete for:", list(all_results.keys()))
 #
 # | Panel | Quantity | Physical meaning |
 # |-------|----------|------------------|
-# | 1 | Module temperature [°C] | Thermal driver for all degradation mechanisms |
+# | 1 | Module temperature [°C] | Thermal driver for degradation mechanisms |
 # | 2 | Surface RH & front encapsulant RH [%] | Moisture at the glass/EVA interface |
 # | 3 | Back encapsulant RH [%] | Moisture arriving through the PET backsheet |
 #
@@ -344,37 +323,14 @@ fig.suptitle(
 # %% [markdown]
 # ## 6. Acetic acid generation in EVA
 #
-# Acetic acid (HAc) is produced by hydrolysis of the vinyl acetate groups in EVA, a
-# reaction that requires both heat and moisture. Its accumulation in the encapsulant
-# is a known precursor to corrosion of cell metallization and glass/EVA interface
-# degradation.
+# Acetic acid (HAc) is produced by hydrolysis of the vinyl acetate groups in EVA, a reaction that requires both heat and moisture. Its accumulation in the encapsulant is a known precursor to corrosion of cell metallization and glass/EVA interface degradation.
 #
-# Using `temp_mod` from the Scenario pipeline, two post-processing functions estimate
-# the HAc chemistry directly in the EVA layer:
+# In the current literature, only temperature-induced acetic acid generation data at constant (85%) relative humidity are available. Although the encapsulant RH values computed in Steps 3–5 (`rh_surface`, `rh_front_encap`, `rh_back_encap`) characterise the moisture environment through the stack, they are not used in the HAc calculations here. However, once a validated humidity-coupled HAc model is published, a new job can be implemented in PVDeg and the Scenario pipeline could easily integrate these outputs into the HAc calculation via the `depends_on` argument.
+#
+# Using `temp_mod` from the Scenario pipeline, two post-processing functions estimate the HAc chemistry directly in the EVA layer:
 #
 # - `acetic_acid_generation`: instantaneous HAc generation rate [ng/min/g] — nanograms of acetic acid produced per minute per gram of EVA
 # - `acetic_acid_cumulative`: cumulative HAc concentration [mg/g] integrated over the full year
-#
-# Both functions apply **Arrhenius kinetics driven by temperature only**. The
-# baseline `Ro` and activation energy `Ea` are derived from Kempe (2007), who
-# measured HAc generation at multiple temperatures under fixed 85% RH (damp-heat
-# conditions). Because all measurements were conducted at a single humidity level,
-# the humidity dependence of the hydrolysis rate is not characterised in the
-# literature reviewed; `Ro` therefore implicitly assumes the EVA is
-# moisture-saturated near 85% RH. An explicit humidity scaling is not applied, as
-# no multi-humidity experimental dataset exists to validate its functional form.
-#
-# > **Note:** The encapsulant RH values computed in Steps 3–5 (`rh_surface`,
-# > `rh_front_encap`, `rh_back_encap`) characterise the moisture environment through
-# > the stack and are visualised in Section 5, but are not consumed by this section.
-# > A humidity-coupled HAc model — once validated against multi-humidity experimental
-# > data — could use those pipeline outputs directly as an additional input here via
-# > `depends_on`.
-#
-# Parameters are loaded from the `AApermeation` database (entry AA002), based on
-# Kempe (2007) and validated against Gnocchi et al. (2018), who measured ~0.5–0.6 mg/g
-# after 3000 h of damp-heat exposure at 85 °C / 85 % RH.
-#
 
 # %%
 # Summary metrics for all locations
@@ -435,7 +391,7 @@ fig.tight_layout()
 # ## Summary and next steps
 #
 # This notebook demonstrates the **`Scenario` pipeline architecture** for encapsulant
-# degradation chemistry in a multi-layer perovskite module stack. The key features
+# degradation chemistry in a glass/EVA/PET module stack. The key features
 # demonstrated are `addModule()` (racking, temperature modeling, and named material
 # layers), sequential job chaining via `depends_on`, permeation database lookup, and
 # multi-location execution across three climate zones.
@@ -450,9 +406,3 @@ fig.tight_layout()
 # from delamination, or corrosion rate from HAc at metallization) requires additional
 # models not yet implemented in pvdeg. When available, they can be chained directly
 # via `depends_on`.
-#
-# ### See also
-#
-# For perovskite absorber CE degradation, lifetime projections, and US-wide choropleth maps,
-# see **`06_scenario_perovskite_ey.ipynb`**.
-#
