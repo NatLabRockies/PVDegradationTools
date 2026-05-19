@@ -27,7 +27,6 @@
 # ## 1. Setup
 
 # %%
-# NBVAL-IGNORE-OUTPUT
 import os
 import json
 import tempfile
@@ -132,7 +131,6 @@ SURFACE_RH_BASE_KWARGS_BY_LOC = {
 
 
 # %%
-# NBVAL-IGNORE-OUTPUT
 def build_scenario(loc_name):
     """Build and run a backsheet-comparison Scenario for one location."""
     weather_df = all_weather[loc_name]
