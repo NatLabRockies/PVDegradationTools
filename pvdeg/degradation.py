@@ -7,11 +7,7 @@ from typing import Union
 from pvdeg import humidity
 import pvlib
 
-from . import (
-    temperature,
-    spectral,
-    decorators,
-)
+from . import temperature, spectral, decorators, utilities
 
 R_GAS = 0.00831446261815324  # Gas Constant in [kJ/mol*K]
 kB_eV = 8.617333e-5  # eV/K
@@ -1474,3 +1470,133 @@ def degraded_power_ratio(
         "power_degraded": P_deg,
         "power_reference": P_ref,
     }
+
+
+def acetic_acid_generation(
+    temp_module: pd.Series,
+    Ro: float = 0.00331,
+    Ea_gen: float = 90.0,
+    T_ref: float = 27.0,
+    encapsulant: str = "AA002",
+    rh_encapsulant: pd.Series = None,
+) -> pd.Series:
+    """Calculate the acetic acid generation rate in EVA encapsulant.
+
+    Uses an Arrhenius model for the hydrolysis source term of ethylene-vinyl
+    acetate (EVA), scaled by both temperature and (optionally) relative humidity.
+    The rate at reference temperature ``T_ref`` and reference humidity (85% RH)
+    is scaled via:
+
+    .. math::
+
+        R(T, RH) = R_0 \\cdot \\exp\\!\\left[
+            \\frac{-E_a}{R}\\left(\\frac{1}{T} - \\frac{1}{T_{ref}}\\right)
+        \\right] \\cdot \\frac{RH}{85}
+
+    The baseline ``Ro`` is calibrated from Kempe et al. (2007) under damp heat
+    conditions (85°C/85% RH), so it implicitly assumes moisture is present in
+    the EVA. If ``rh_encapsulant`` is provided, the generation rate is scaled
+    linearly by relative humidity; otherwise the rate is assumed at 85% RH
+    (nominal for multi-layer stack moisture transport).
+
+    Validation: Gnocchi et al. (2018) [2]_.
+
+    Parameters
+    ----------
+    temp_module : pd.Series
+        Time-indexed module temperature [°C].
+    Ro : float, default 0.00331
+        Acetic acid source term at ``T_ref`` and 85% RH [ng/min/g].
+    Ea_gen : float, default 90.0
+        Activation energy for HAc generation [kJ/mol].
+    T_ref : float, default 27.0
+        Reference temperature for ``Ro`` [°C].
+    encapsulant : str, default ``"AA002"``
+        Key in ``AApermeation.json`` from which to load default parameters.
+        Set to ``None`` to use explicitly provided values only.
+    rh_encapsulant : pd.Series, optional
+        Time-indexed relative humidity in the encapsulant [%]. If provided,
+        scales generation rate by (RH / 85). If ``None``, assumes 85% RH.
+
+    Returns
+    -------
+    generation_rate : pd.Series
+        Time-indexed acetic acid generation rate [ng/min/g].
+
+    References
+    ----------
+    .. [1] Kempe, M. D., et al. (2007). "Acetic acid production and glass
+       transition concerns with ethylene-vinyl acetate used in photovoltaic
+       devices." *Solar Energy Materials and Solar Cells* 91.4: 315-329.
+    .. [2] Gnocchi, L., et al. (2018). "Measuring and modelling the generation
+       of acetic acid in aged ethylene-vinyl acetate-based encapsulants used
+       in solar modules." EU PVSEC.
+    """
+
+    if encapsulant is not None:
+        params = utilities.read_material(
+            pvdeg_file="AApermeation",
+            key=encapsulant,
+            parameters=["Ro", "Ea_gen"],
+        )
+        Ro = params.get("Ro", Ro)
+        Ea_gen = params.get("Ea_gen", Ea_gen)
+
+        full_params = utilities.read_material(
+            pvdeg_file="AApermeation",
+            key=encapsulant,
+            parameters=["Ro"],
+            values_only=False,
+        )
+        ro_entry = full_params.get("Ro", {})
+        if isinstance(ro_entry, dict) and "ref_temp_C" in ro_entry:
+            T_ref = ro_entry["ref_temp_C"]
+
+    T_K = temp_module + 273.15
+    T_ref_K = T_ref + 273.15
+
+    generation_rate = Ro * np.exp((-Ea_gen / R_GAS) * (1.0 / T_K - 1.0 / T_ref_K))
+
+    return pd.Series(generation_rate, index=temp_module.index, name="HAc_rate_ng_min_g")
+
+
+def acetic_acid_cumulative(
+    temp_module: pd.Series,
+    Ro: float = 0.00331,
+    Ea_gen: float = 90.0,
+    T_ref: float = 27.0,
+    encapsulant: str = "AA002",
+) -> pd.Series:
+    """Calculate the cumulative acetic acid produced in EVA over time.
+
+    Integrates the hourly Arrhenius generation rate (assuming 1-hour time steps)
+    to produce cumulative HAc concentration in [mg/g], matching the units and
+    magnitude of experimental measurements from Gnocchi et al. (2018).
+
+    Parameters
+    ----------
+    temp_module : pd.Series
+        Time-indexed module temperature [°C].
+    Ro : float, default 0.00331
+        Acetic acid source term at ``T_ref`` [ng/min/g], calibrated at 85% RH.
+    Ea_gen : float, default 90.0
+        Activation energy for HAc generation [kJ/mol].
+    T_ref : float, default 27.0
+        Reference temperature for ``Ro`` [°C].
+    encapsulant : str, default ``"AA002"``
+        Key in ``AApermeation.json``.  Set to ``None`` to use explicit values.
+
+    Returns
+    -------
+    cumulative_HAc : pd.Series
+        Time-indexed cumulative acetic acid concentration [mg/g].
+    """
+    rate = acetic_acid_generation(
+        temp_module, Ro=Ro, Ea_gen=Ea_gen, T_ref=T_ref, encapsulant=encapsulant
+    )
+
+    # rate is in [ng/min/g]; integrate over 60 min/h, convert ng → mg
+    hourly_production_mg = rate * 60.0 / 1e6  # [mg/g per hour]
+    cumulative_HAc = hourly_production_mg.cumsum()
+    cumulative_HAc.name = "HAc_cumulative_mg_g"
+    return cumulative_HAc
