@@ -570,3 +570,169 @@ def test_degraded_power_ratio_degraded_le_reference():
         temp_cell=_PR_TEMP_CELL,
     )
     assert (result["power_degraded"] <= result["power_reference"] + 1e-10).all()
+
+
+# Test data for acetic acid functions: 100-hour constant temperature profiles
+_HAC_CONST_TEMP_DF = pd.DataFrame(
+    {"temp_module": np.full(100, 85.0)},
+    index=pd.date_range("2023-01-01", periods=100, freq="h"),
+)
+_HAC_TEMP_RANGE_DF = pd.DataFrame(
+    {"temp_module": np.linspace(20.0, 80.0, 100)},
+    index=pd.date_range("2023-01-01", periods=100, freq="h"),
+)
+_HAC_TEMP_SERIES = _HAC_CONST_TEMP_DF["temp_module"]
+_HAC_TEMP_SERIES_RANGE = _HAC_TEMP_RANGE_DF["temp_module"]
+
+
+def test_acetic_acid_generation_returns_series():
+    """acetic_acid_generation should return a pd.Series with correct index."""
+    result = pvdeg.degradation.acetic_acid_generation(temp_module=_HAC_TEMP_SERIES)
+    assert isinstance(result, pd.Series)
+    assert len(result) == len(_HAC_TEMP_SERIES)
+    assert (result.index == _HAC_TEMP_SERIES.index).all()
+    assert result.name == "HAc_rate_ng_min_g"
+
+
+def test_acetic_acid_generation_positive_rates():
+    """All generation rates should be positive (exothermic process)."""
+    result = pvdeg.degradation.acetic_acid_generation(temp_module=_HAC_TEMP_SERIES)
+    assert (result > 0).all()
+    assert result.isna().sum() == 0
+
+
+def test_acetic_acid_generation_temp_dependence():
+    """Higher temperature should produce higher generation rate (Arrhenius)."""
+    rate_low = pvdeg.degradation.acetic_acid_generation(
+        temp_module=pd.Series([25.0], index=pd.date_range("2023-01-01", periods=1))
+    ).iloc[0]
+    rate_high = pvdeg.degradation.acetic_acid_generation(
+        temp_module=pd.Series([85.0], index=pd.date_range("2023-01-01", periods=1))
+    ).iloc[0]
+    assert rate_high > rate_low
+
+
+def test_acetic_acid_generation_database_params():
+    """Database lookup (encapsulant='AA002') should load Ro and Ea_gen."""
+    # Test with database lookup
+    result_db = pvdeg.degradation.acetic_acid_generation(
+        temp_module=_HAC_TEMP_SERIES, encapsulant="AA002"
+    )
+    # Test with explicit parameters matching AA002 defaults
+    result_explicit = pvdeg.degradation.acetic_acid_generation(
+        temp_module=_HAC_TEMP_SERIES,
+        Ro=0.00331,
+        Ea_gen=90.0,
+        T_ref=27.0,
+        encapsulant=None,
+    )
+    pd.testing.assert_series_equal(result_db, result_explicit, rtol=1e-6)
+
+
+def test_acetic_acid_generation_explicit_params():
+    """Explicit parameters should override defaults."""
+    result = pvdeg.degradation.acetic_acid_generation(
+        temp_module=_HAC_TEMP_SERIES,
+        Ro=0.001,
+        Ea_gen=85.0,
+        T_ref=30.0,
+        encapsulant=None,
+    )
+    assert isinstance(result, pd.Series)
+    assert (result > 0).all()
+    # Values should differ from database defaults
+    result_default = pvdeg.degradation.acetic_acid_generation(
+        temp_module=_HAC_TEMP_SERIES, encapsulant="AA002"
+    )
+    assert not np.allclose(result.values, result_default.values)
+
+
+def test_acetic_acid_cumulative_returns_series():
+    """acetic_acid_cumulative should return a pd.Series with correct index."""
+    result = pvdeg.degradation.acetic_acid_cumulative(temp_module=_HAC_TEMP_SERIES)
+    assert isinstance(result, pd.Series)
+    assert len(result) == len(_HAC_TEMP_SERIES)
+    assert (result.index == _HAC_TEMP_SERIES.index).all()
+    assert result.name == "HAc_cumulative_mg_g"
+
+
+def test_acetic_acid_cumulative_no_nans():
+    """Cumulative should have no NaN values."""
+    result = pvdeg.degradation.acetic_acid_cumulative(temp_module=_HAC_TEMP_SERIES)
+    assert result.isna().sum() == 0
+
+
+def test_acetic_acid_cumulative_monotonic_increasing():
+    """Cumulative HAc must be monotonically non-decreasing over time."""
+    result = pvdeg.degradation.acetic_acid_cumulative(temp_module=_HAC_TEMP_SERIES)
+    # Differences should be non-negative
+    diffs = result.diff().dropna()
+    assert (diffs >= 0).all()
+
+
+def test_acetic_acid_cumulative_starts_at_zero():
+    """First cumulative value should be very small (first hourly increment only)."""
+    result = pvdeg.degradation.acetic_acid_cumulative(temp_module=_HAC_TEMP_SERIES)
+    # First value should be approximately rate * 60 min/h / 1e6 (ng->mg)
+    rate = pvdeg.degradation.acetic_acid_generation(temp_module=_HAC_TEMP_SERIES)
+    expected_first = rate.iloc[0] * 60.0 / 1e6
+    assert result.iloc[0] == pytest.approx(expected_first, rel=1e-9)
+
+
+def test_acetic_acid_cumulative_integration():
+    """Cumulative should be hourly integration of rate with proper unit conversion."""
+    rate = pvdeg.degradation.acetic_acid_generation(
+        temp_module=_HAC_TEMP_SERIES, encapsulant="AA002"
+    )
+    cumulative = pvdeg.degradation.acetic_acid_cumulative(
+        temp_module=_HAC_TEMP_SERIES, encapsulant="AA002"
+    )
+
+    # Manual integration: hourly_production_mg = rate * 60 / 1e6
+    hourly_mg = rate * 60.0 / 1e6
+    manual_cumsum = hourly_mg.cumsum()
+    manual_cumsum.name = "HAc_cumulative_mg_g"
+
+    pd.testing.assert_series_equal(cumulative, manual_cumsum, rtol=1e-9)
+
+
+def test_acetic_acid_cumulative_database_params():
+    """Database lookup should produce consistent results."""
+    result_db = pvdeg.degradation.acetic_acid_cumulative(
+        temp_module=_HAC_TEMP_SERIES, encapsulant="AA002"
+    )
+    result_explicit = pvdeg.degradation.acetic_acid_cumulative(
+        temp_module=_HAC_TEMP_SERIES,
+        Ro=0.00331,
+        Ea_gen=90.0,
+        T_ref=27.0,
+        encapsulant=None,
+    )
+    pd.testing.assert_series_equal(result_db, result_explicit, rtol=1e-6)
+
+
+def test_acetic_acid_cumulative_magnitude():
+    """Cumulative HAc magnitude should be in reasonable range for literature comparison.
+
+    Gnocchi et al. (2018) reports ~0.5-0.6 mg/g at 3000h in damp heat.
+    Our constant 85°C over 100h should yield much lower values (~0.001-0.01 mg/g).
+    """
+    result = pvdeg.degradation.acetic_acid_cumulative(temp_module=_HAC_TEMP_SERIES)
+    # At 100h and 85°C, cumulative should be in micrograms to low milligrams
+    assert result.iloc[-1] > 0
+    assert result.iloc[-1] < 1.0  # Should be well below 1 mg/g for 100h
+
+
+def test_acetic_acid_generation_vs_cumulative_relationship():
+    """Cumulative increment should match generation rate (considers unit conversion)."""
+    rate = pvdeg.degradation.acetic_acid_generation(
+        temp_module=_HAC_TEMP_SERIES, encapsulant="AA002"
+    )
+    cumulative = pvdeg.degradation.acetic_acid_cumulative(
+        temp_module=_HAC_TEMP_SERIES, encapsulant="AA002"
+    )
+
+    # Verify first 10 values
+    for i in range(1, 11):
+        expected = (rate.iloc[: i + 1] * 60.0 / 1e6).sum()
+        assert cumulative.iloc[i] == pytest.approx(expected, rel=1e-9)
