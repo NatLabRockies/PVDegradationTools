@@ -1116,7 +1116,7 @@ def damp_heat_equivalent_hours(
     temp_ref_c=85.0,
     rh_ref=85.0,
 ):
-    """Compute annual Damp Heat Equivalent Hours (DHEH).
+    r"""Compute annual Damp Heat Equivalent Hours (DHEH).
 
     Maps real-world moisture stress onto IEC 61215 reference laboratory test
     conditions (85°C, 85% RH, 1000 h), enabling direct comparison across
