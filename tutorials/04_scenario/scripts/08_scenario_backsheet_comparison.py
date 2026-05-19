@@ -210,7 +210,6 @@ def build_scenario(loc_name):
 s_golden = build_scenario("Golden, CO")
 res_golden = s_golden.results["glass-eva-Si-eva-backsheet"]
 print("Pipeline complete — Golden, CO")
-print("  Named results:", [k for k in res_golden if isinstance(k, str)])
 
 # %% [markdown]
 # ### 3.1 Back-encapsulant RH time series — sample week
