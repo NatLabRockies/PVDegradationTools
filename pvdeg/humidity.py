@@ -1132,6 +1132,16 @@ def damp_heat_equivalent_hours(
           \cdot \left(\frac{RH_{back}(t)}{RH_{DH}}\right)^{n}
           \cdot \Delta t
 
+    where:
+    - :math:`E_a` is the activation energy [kJ/mol]
+    - :math:`R` is the universal gas constant [kJ/(mol·K)]
+    - :math:`T_{DH}` is the reference damp heat temperature [K] (default 85°C)
+    - :math:`T_{mod}(t)` is the module temperature at hour :math:`t` [K]
+    - :math:`RH_{back}(t)` is the backsheet relative humidity at hour :math:`t` [%]
+    - :math:`RH_{DH}` is the reference damp heat relative humidity [%] (default 85%)
+    - :math:`n` is the empirical relative humidity exponent (`rh_exponent`)
+    - :math:`\Delta t` is the time step size (assumed 1 hour)
+
     **Interpretation:** If DHEH = 100 h/year, then 1000 h of IEC damp-heat
     testing represents approximately 10 years of field exposure in that location.
     Lower DHEH indicates a milder climate with respect to moisture stress.
