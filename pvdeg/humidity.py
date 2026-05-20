@@ -1151,10 +1151,10 @@ def damp_heat_equivalent_hours(
     - Koehl, M., Heck, M., & Wiesmeier, S. (2012). Modelling of conditions for
       accelerated lifetime testing of humidity impact on PV-modules based on
       monitoring of climatic data. *Solar Energy Materials & Solar Cells*, 99,
-      282–291. https://doi.org/10.1016/j.solmat.2011.12.006
+      282–291. https://doi.org/10.1016/j.solmat.2011.12.011
     - Koehl, M., Hoffmann, S., & Wiesmeier, S. (2017). Evaluation of damp-heat
       testing of photovoltaic modules. *Progress in Photovoltaics: Research and
-      Applications*, 25(3), 175–183. https://doi.org/10.1002/pip.2836
+      Applications*, 25(3), 175–183. https://doi.org/10.1002/pip.2842
 
     Parameters
     ----------
