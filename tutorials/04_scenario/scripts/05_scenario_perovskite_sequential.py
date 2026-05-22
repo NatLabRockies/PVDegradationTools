@@ -1,5 +1,5 @@
 # %% [markdown]
-# # Sequential Scenario Analysis — Perovskite Degradation (Siegler Model)
+# # Perovskite Degradation Kinetics
 #
 # Demonstrates the Scenario pipeline using the **Siegler et al. (2022)** material-level kinetic model for MAPbI₃ perovskite degradation.
 #

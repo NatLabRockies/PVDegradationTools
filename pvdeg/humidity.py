@@ -1106,3 +1106,126 @@ def module(
     }
     results = pd.DataFrame(data=data)
     return results
+
+
+def damp_heat_equivalent_hours(
+    rh_back,
+    temp_mod,
+    activation_energy=40.0,
+    rh_exponent=1.0,
+    temp_ref_c=85.0,
+    rh_ref=85.0,
+):
+    r"""Compute annual Damp Heat Equivalent Hours (DHEH).
+
+    Maps real-world moisture stress onto IEC 61215 reference laboratory test
+    conditions (85°C, 85% RH, 1000 h), enabling direct comparison across
+    backsheet materials, encapsulants, and geographic locations.
+
+    The DHEH annual metric integrates moisture-stress acceleration factors over
+    all hourly time steps:
+
+    .. math::
+        DHEH_{annual}
+        = \sum_{t=1}^{8760}
+          \exp\!\left[\frac{E_a}{R}\!\left(\frac{1}{T_{DH}}-\frac{1}{T_{mod}(t)}\right)\right]
+          \cdot \left(\frac{RH_{back}(t)}{RH_{DH}}\right)^{n}
+          \cdot \Delta t
+
+    where:
+    - :math:`E_a` is the activation energy [kJ/mol]
+    - :math:`R` is the universal gas constant [kJ/(mol·K)]
+    - :math:`T_{DH}` is the reference damp heat temperature [K] (default 85°C)
+    - :math:`T_{mod}(t)` is the module temperature at hour :math:`t` [K]
+    - :math:`RH_{back}(t)` is the backsheet relative humidity at hour :math:`t` [%]
+    - :math:`RH_{DH}` is the reference damp heat relative humidity [%] (default 85%)
+    - :math:`n` is the empirical relative humidity exponent (`rh_exponent`)
+    - :math:`\Delta t` is the time step size (assumed 1 hour)
+
+    **Interpretation:** If DHEH = 100 h/year, then 1000 h of IEC damp-heat
+    testing represents approximately 10 years of field exposure in that location.
+    Lower DHEH indicates a milder climate with respect to moisture stress.
+
+    References
+    ----------
+    - Koehl, M., Heck, M., & Wiesmeier, S. (2012). Modelling of conditions for
+      accelerated lifetime testing of humidity impact on PV-modules based on
+      monitoring of climatic data. *Solar Energy Materials & Solar Cells*, 99,
+      282–291. https://doi.org/10.1016/j.solmat.2011.12.011
+    - Koehl, M., Hoffmann, S., & Wiesmeier, S. (2017). Evaluation of damp-heat
+      testing of photovoltaic modules. *Progress in Photovoltaics: Research and
+      Applications*, 25(3), 175–183. https://doi.org/10.1002/pip.2842
+
+    Parameters
+    ----------
+    rh_back : pd.Series or np.ndarray
+        Back encapsulant relative humidity [%], hourly time series.
+    temp_mod : pd.Series or np.ndarray
+        Module temperature [°C], hourly time series (must match length of rh_back).
+    activation_energy : float, optional
+        Thermal activation energy for moisture-driven degradation [kJ/mol].
+        Default is 40 kJ/mol, representative for EVA encapsulant and metallization
+        corrosion. Typical range: 30–55 kJ/mol depending on material and failure mode.
+    rh_exponent : float, optional
+        Relative humidity exponent in acceleration factor [dimensionless].
+        Default is 1.0 (linear RH dependence). Peck's model uses 2.7.
+    temp_ref_c : float, optional
+        Reference temperature for IEC 61215 damp-heat test [°C]. Default is 85°C.
+    rh_ref : float, optional
+        Reference relative humidity for IEC 61215 damp-heat test [%]. Default is 85%.
+
+    Returns
+    -------
+    float
+        Annual DHEH [h/year at reference conditions] equivalent stress index.
+
+    Raises
+    ------
+    ValueError
+        If rh_back and temp_mod have mismatched lengths.
+
+    See Also
+    --------
+    For a complete worked example with real climate data and material comparison,
+    see `tutorials/04_scenario/08_scenario_backsheet_comparison.ipynb`.
+
+    Notes
+    -----
+    - Time step (Δt) is assumed to be 1 hour; if data has different resolution,
+      results must be scaled accordingly.
+    - Negative or zero RH values are clipped to zero before processing.
+    - Module temperature is converted from°C to K internally.
+    """
+    # Convert to numpy arrays for consistent handling
+    if isinstance(rh_back, pd.Series):
+        rh_back_np = rh_back.to_numpy()
+    else:
+        rh_back_np = np.asarray(rh_back)
+
+    if isinstance(temp_mod, pd.Series):
+        temp_mod_np = temp_mod.to_numpy()
+    else:
+        temp_mod_np = np.asarray(temp_mod)
+
+    if len(rh_back_np) != len(temp_mod_np):
+        raise ValueError(
+            f"rh_back and temp_mod must have same length. "
+            f"Got {len(rh_back_np)} and {len(temp_mod_np)}."
+        )
+
+    # Convert temperatures to Kelvin
+    T_mod_K = temp_mod_np + 273.15
+    T_ref_K = temp_ref_c + 273.15
+
+    # Thermal acceleration factor (Arrhenius-like)
+    thermal_accel = np.exp(
+        (activation_energy / R_GAS) * (1.0 / T_ref_K - 1.0 / T_mod_K)
+    )
+
+    # Humidity acceleration factor
+    rh_factor = (np.clip(rh_back_np, 0.0, None) / rh_ref) ** rh_exponent
+
+    # Integrate over all time steps (assuming Δt = 1 h)
+    dheh_annual = float(np.sum(thermal_accel * rh_factor))
+
+    return dheh_annual

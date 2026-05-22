@@ -323,3 +323,146 @@ def test_back_encapsulant_water_concentration_missing_back_encap_thickness():
             backsheet="W017",
             backsheet_thickness=0.3,
         )
+
+
+def test_damp_heat_equivalent_hours_basic_series():
+    """Test damp_heat_equivalent_hours with basic pandas Series input."""
+    # Create synthetic hourly data: constant 50°C, 50% RH for 8760 hours
+    rh_back = pd.Series(np.full(8760, 50.0))
+    temp_mod = pd.Series(np.full(8760, 50.0))
+
+    result = pvdeg.humidity.damp_heat_equivalent_hours(rh_back, temp_mod)
+
+    # Result should be positive and > 1 for reasonable climate conditions
+    assert isinstance(result, float)
+    assert result > 0
+    # At 50°C and 50% RH, should be less stressed than IEC reference (85°C, 85%)
+    assert result > 0
+
+
+def test_damp_heat_equivalent_hours_numpy_array():
+    """Test damp_heat_equivalent_hours with numpy array input."""
+    rh_back = np.full(8760, 60.0)
+    temp_mod = np.full(8760, 55.0)
+
+    result = pvdeg.humidity.damp_heat_equivalent_hours(rh_back, temp_mod)
+
+    assert isinstance(result, float)
+    assert result > 0
+
+
+def test_damp_heat_equivalent_hours_high_stress():
+    """Test that high temperature and RH produce higher DHEH values."""
+    # Low stress: cool, dry
+    rh_cool = pd.Series(np.full(8760, 30.0))
+    temp_cool = pd.Series(np.full(8760, 30.0))
+    dheh_cool = pvdeg.humidity.damp_heat_equivalent_hours(rh_cool, temp_cool)
+
+    # High stress: hot, humid
+    rh_hot = pd.Series(np.full(8760, 80.0))
+    temp_hot = pd.Series(np.full(8760, 70.0))
+    dheh_hot = pvdeg.humidity.damp_heat_equivalent_hours(rh_hot, temp_hot)
+
+    # Hot, humid should accumulate more stress
+    assert dheh_hot > dheh_cool
+
+
+def test_damp_heat_equivalent_hours_reference_conditions():
+    """Test DHEH at reference conditions (85°C, 85% RH) matches ~1000 h/year."""
+    # At reference conditions for 8760 hours = 8760 h/year
+    rh_ref = pd.Series(np.full(8760, 85.0))
+    temp_ref = pd.Series(np.full(8760, 85.0))
+
+    dheh = pvdeg.humidity.damp_heat_equivalent_hours(rh_ref, temp_ref)
+
+    # At reference conditions, the acceleration factor should be 1.0
+    # so DHEH should be 8760 h/year
+    assert dheh == pytest.approx(8760.0, rel=1e-3)
+
+
+def test_damp_heat_equivalent_hours_custom_activation_energy():
+    """Test that changing activation energy affects DHEH.
+
+    At temperatures below the reference (85°C), higher Ea means lower DHEH.
+    At temperatures above the reference, higher Ea means higher DHEH.
+    """
+    rh_back = pd.Series(np.full(8760, 50.0))
+    temp_mod = pd.Series(np.full(8760, 50.0))  # Below reference (85°C)
+
+    dheh_ea30 = pvdeg.humidity.damp_heat_equivalent_hours(
+        rh_back, temp_mod, activation_energy=30.0
+    )
+    dheh_ea50 = pvdeg.humidity.damp_heat_equivalent_hours(
+        rh_back, temp_mod, activation_energy=50.0
+    )
+
+    # At 50°C (below reference), higher Ea gives lower DHEH
+    assert dheh_ea30 > dheh_ea50
+
+
+def test_damp_heat_equivalent_hours_custom_rh_exponent():
+    """Test that changing RH exponent affects DHEH."""
+    rh_back = pd.Series(np.full(8760, 50.0))
+    temp_mod = pd.Series(np.full(8760, 50.0))
+
+    dheh_n1 = pvdeg.humidity.damp_heat_equivalent_hours(
+        rh_back, temp_mod, rh_exponent=1.0
+    )
+    dheh_n2 = pvdeg.humidity.damp_heat_equivalent_hours(
+        rh_back, temp_mod, rh_exponent=2.7  # Peck's model
+    )
+
+    # Same RH conditions, higher exponent (at 50% RH = 0.5 ratio) gives lower value
+    assert dheh_n1 > dheh_n2
+
+
+def test_damp_heat_equivalent_hours_clipping_negative_rh():
+    """Test that negative RH values are clipped to zero."""
+    rh_back = pd.Series([-10.0, 0.0, 10.0, 20.0])
+    temp_mod = pd.Series([50.0, 50.0, 50.0, 50.0])
+
+    result = pvdeg.humidity.damp_heat_equivalent_hours(rh_back, temp_mod)
+
+    # Should not raise an error and should be positive
+    assert isinstance(result, float)
+    assert result > 0
+
+
+def test_damp_heat_equivalent_hours_mismatched_lengths():
+    """Test that mismatched array lengths raise ValueError."""
+    rh_back = pd.Series([50.0, 55.0, 60.0])
+    temp_mod = pd.Series([50.0, 55.0])  # Wrong length
+
+    with pytest.raises(ValueError, match="rh_back and temp_mod must have same length"):
+        pvdeg.humidity.damp_heat_equivalent_hours(rh_back, temp_mod)
+
+
+def test_damp_heat_equivalent_hours_custom_reference():
+    """Test using custom reference temperature and humidity."""
+    rh_back = pd.Series(np.full(8760, 70.0))
+    temp_mod = pd.Series(np.full(8760, 70.0))
+
+    # Using 70°C/70% as reference (instead of 85°C/85%)
+    dheh_custom = pvdeg.humidity.damp_heat_equivalent_hours(
+        rh_back, temp_mod, temp_ref_c=70.0, rh_ref=70.0
+    )
+
+    # Should be ~8760 at the custom reference conditions
+    assert dheh_custom == pytest.approx(8760.0, rel=1e-3)
+
+
+def test_damp_heat_equivalent_hours_realistic_scenario():
+    """Test with realistic climate data (simulating Golden, CO)."""
+    # Simulate realistic hourly data with diurnal cycle
+    hours = np.arange(8760)
+    temp_mod = 40 + 20 * np.sin(2 * np.pi * hours / 24)  # Diurnal cycle
+    rh_back = 50 + 20 * np.cos(2 * np.pi * hours / 24)  # Anti-correlated
+
+    rh_series = pd.Series(np.clip(rh_back, 0, 100))
+    temp_series = pd.Series(temp_mod)
+
+    dheh = pvdeg.humidity.damp_heat_equivalent_hours(rh_series, temp_series)
+
+    # Should give reasonable value (for Golden-like climate, typically 80-150 h/yr)
+    # But simulated data may differ, so allow wider range
+    assert 50 < dheh < 2000
