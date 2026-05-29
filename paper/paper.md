@@ -23,7 +23,7 @@ authors:
     orcid: 0000-0003-3312-0482
     affiliation: 1
 affiliations:
- - name: National Renewable Energy Laboratory (NREL)
+ - name: National Laboratory of the Rockies (NLR)
    index: 1
 date: 03 March 2026
 bibliography: paper.bib
