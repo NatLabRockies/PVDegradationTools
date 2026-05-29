@@ -35,6 +35,8 @@ PVDeg is an open-source Python package for modeling photovoltaic (PV) degradatio
 
 PVDeg is developed openly on GitHub and releases are distributed via the Python Package Index (PyPi). The source code is freely available under the BSD 3-Clause license, and copyrighted by the Alliance for Sustainable Energy allowing permissive use with attribution. PVDeg follows best practices for open-source python software, with a robust testing framework across Python 3.x environments, semantic versioning, and supporting documentation available at pvdegradationtools.readthedocs.io.
 
+As an open-source project, PVDeg welcomes community contributions through GitHub issues and pull requests that support improvements to the codebase, documentation, and material-property databases.
+
 # Statement of Need
 
 As PV deployment expands, especially into new and demanding operational environments, material degradation poses a challenge to the lifetime of PV modules. Modeling degradation is crucial for anticipating performance losses, guiding material selection, and enabling proactive maintenance strategies that extend the operational lifetime of PV modules in diverse environments. Currently, no open-source software combines physics-based degradation mechanism modeling with uncertainty quantification and geospatial scaling. This repository offers a powerful set of tools for PV reliability researchers, materials scientists, and engineers in both laboratories.
