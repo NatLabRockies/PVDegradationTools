@@ -41,30 +41,30 @@ import pvdeg
 # Keeps the repo working directory free of pvd_job_* clutter.
 pvdeg.config.SCENARIO_OUTPUT_PATH = tempfile.gettempdir()
 
-# ── Repository paths ─────────────────────────────────────────────────────────
+# Repository paths
 REPO_ROOT = os.path.dirname(os.path.dirname(pvdeg.__file__))
 TUTORIALS_DATA = os.path.join(REPO_ROOT, "tutorials", "data")
 
-# ── Backsheet materials to compare (all from H2Opermeation database) ─────────
+# Backsheet materials to compare (all from H2Opermeation database)
 BACKSHEETS = {
     "Vectran LCP (W021)": "W021",
     "PET-2 (ST504, W017)": "W017",
     "Tedlar PVF (W022)": "W022",
 }
 
-# ── Module stack physical parameters ─────────────────────────────────────────
+# Module stack physical parameters
 ENCAPSULANT = "W001"  # EVA (Kempe 2006) — front and back encapsulant
 BACKSHEET_THICK = 0.3  # mm — typical for PET/PVF backsheets
 BACK_ENCAP_THICK = 0.46  # mm — typical for EVA back encapsulant
 
-# ── IEC 61215 damp-heat reference conditions ──────────────────────────────────
+# IEC 61215 damp-heat reference conditions
 T_DH = 85.0  # °C
 RH_DH = 85.0  # %
 
-# ── Gas constant ──────────────────────────────────────────────────────────────
+# Gas constant
 R_GAS = 8.314e-3  # kJ / (mol · K)
 
-# ── DHEH model parameters (illustrative — see notebook header) ────────────────
+# DHEH model parameters (illustrative — see notebook header)
 EA_DEG = 40.0  # kJ/mol  activation energy for moisture-driven degradation
 N_RH = 1.0  # RH exponent (linear; Peck's model uses 2.7)
 
