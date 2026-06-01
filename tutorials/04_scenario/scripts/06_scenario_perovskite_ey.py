@@ -382,21 +382,22 @@ fig.tight_layout()
 # investment?" — the same metric reported by Orooji et al. (2026).
 #
 # > **Why not DF_total?**
-# > $DF_{total}$ is the *instantaneous* CE at a given hour (device-level metric).
-# > It crosses the threshold much earlier than $PR_{Agg}$ because it ignores all the energy
-# > already delivered when the device was at high efficiency.
-# > Phoenix example (T₉₀): $DF_{total}$ ≈ 7–8 months vs $PR_{Agg}$ ≈ 24–28 months.
-# > Both are stored in `df_map`; hover over a state to compare them.
+# >
+# >$DF_{total}$ is the *instantaneous* CE at a given hour, $PR_{Agg}$ is the averaged energy
+# yield over the whole operating period. $DF_{total}$ PR_agg T90 compares all energy actually
+# produced to all energy a non-degrading device would have produced over the same period
+# Phoenix example (T₉₀): $DF_{total}$ ≈ 7–8 months vs $PR_{Agg}$ ≈ 24–28 months.
+# Both are stored in `df_map`; hover over a state to compare them.
 #
 # **Colour scale:** green = long lifetime (good), red = short lifetime (bad).
 #
 
 # %%
-# ── Fetch lifetime data for all 50 US states via NSRDB PSM4 API ──────────────
+# Fetch lifetime data for all 50 US states via NSRDB PSM4 API
 # Get a free key at https://developer.nrel.gov/signup/
 
-NREL_API_KEY = "DEMO_API_KEY"
-NREL_EMAIL = "DEMO_EMAIL"
+API_KEY = "7SNYG6jZv3arhg1hKj1zWI0Y9gO1mXUBvhsK2b1J"
+EMAIL = "rajiv.daxini@nlr.gov"
 
 # abbr: (api_lat, api_lon, label, centre_lat, centre_lon)
 STATES = {
@@ -458,8 +459,8 @@ for abbr, (lat, lon, label, clat, clon) in STATES.items():
         wdf, mt = pvdeg.weather.get(
             database="PSM4",
             id=(lat, lon),
-            api_key=NREL_API_KEY,
-            email=NREL_EMAIL,
+            api_key=API_KEY,
+            email=EMAIL,
             year="tmy",
             map_variables=True,
         )

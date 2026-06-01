@@ -27,6 +27,7 @@
 # ## 1. Setup
 
 # %%
+# NBVAL_IGNORE_OUTPUT
 import os
 import json
 import tempfile

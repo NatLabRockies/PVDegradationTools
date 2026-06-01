@@ -152,7 +152,7 @@ fig.tight_layout()
 # |------|----------|-------------|------------|
 # | 1 | `temperature.module` | `"temp_mod"` | â€” |
 # | 2 | `humidity.surface_relative` | `"rh_surface"` | `temp_module` â† `"temp_mod"` |
-# | 3 | `humidity.water_vapor_pressure` | `"P_H2O"` | `temp_air` â† `"temp_mod"`, `relative_humidity` â† `"rh_surface"` |
+# | 3 | `humidity.water_vapor_pressure` | `"P_H2O"` | `temperature` â† `"temp_mod"`, `rh` â† `"rh_surface"` |
 # | 4 | `degradation.perovskite_degradation` | `"perov_rate"` | `P_H2O` â† `"P_H2O"` |
 #
 # Step 2 converts ambient RH to **module-surface RH** using the module temperature.
