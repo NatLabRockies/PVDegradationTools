@@ -150,8 +150,8 @@ def water_saturation_pressure(temp, average=True):
 def water_vapor_pressure(
     weather_df,
     meta=None,
-    temp_air=None,
-    relative_humidity=None,
+    temperature=None,
+    rh=None,
 ):
     """Compute the water vapour partial pressure P_H2O.
 
@@ -162,30 +162,22 @@ def water_vapor_pressure(
         [%] when the override arguments are not supplied.
     meta : dict, optional
         Location metadata. Not used; kept for pipeline compatibility.
-    temp_air : pd.Series, optional
-        Temperature [°C]. When provided, takes precedence over
-        ``weather_df['temp_air']``. Use to inject an upstream pipeline
-        result (e.g. module surface temperature from
-        ``pvdeg.temperature.module``).
-    relative_humidity : pd.Series, optional
-        Relative humidity [%]. When provided, takes precedence over
-        ``weather_df['relative_humidity']``. Use to inject an upstream
-        pipeline result (e.g. module-surface RH from
-        ``pvdeg.humidity.surface_relative``).
+    temperature : pd.Series, optional
+        Temperature [°C] at the location where vapour pressure is evaluated.
+        When provided, takes precedence over ``weather_df['temp_air']``.
+    rh : pd.Series, optional
+        Relative humidity [%] at the same location as ``temperature``.
+        When provided, takes precedence over ``weather_df['relative_humidity']``.
 
     Returns
     -------
     pd.Series
         Time-indexed water vapour partial pressure P_H2O [kPa].
     """
-    t = temp_air if temp_air is not None else weather_df["temp_air"]
-    rh = (
-        relative_humidity
-        if relative_humidity is not None
-        else weather_df["relative_humidity"]
-    )
+    t = temperature if temperature is not None else weather_df["temp_air"]
+    rh_input = rh if rh is not None else weather_df["relative_humidity"]
     P_sat, _ = water_saturation_pressure(t)
-    return (rh / 100.0) * P_sat
+    return (rh_input / 100.0) * P_sat
 
 
 def surface_relative(rh_ambient, temp_ambient, temp_module):

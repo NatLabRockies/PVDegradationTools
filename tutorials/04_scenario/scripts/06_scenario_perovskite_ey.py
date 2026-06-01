@@ -50,7 +50,7 @@ TUTORIALS_DATA = os.path.join(REPO_ROOT, "tutorials", "data")
 # Keeps the repo working directory free of pvd_job_* clutter.
 pvdeg.config.SCENARIO_OUTPUT_PATH = tempfile.gettempdir()
 
-# ── Lifetime threshold ────────────────────────────────────────────────────────
+# Lifetime threshold
 # Change this to analyse a different degradation endpoint. Plots, prints, map colors will correspond to this setting e.g. 0.90 for T90.
 T_THRESHOLD = 0.90
 T_LABEL = f"T{int(T_THRESHOLD * 100)}"  # e.g. "T90" or "T80"
