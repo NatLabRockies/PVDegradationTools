@@ -1478,26 +1478,21 @@ def acetic_acid_generation(
     Ea_gen: float = 90.0,
     T_ref: float = 27.0,
     encapsulant: str = "AA002",
-    rh_encapsulant: pd.Series = None,
 ) -> pd.Series:
     """Calculate the acetic acid generation rate in EVA encapsulant.
 
     Uses an Arrhenius model for the hydrolysis source term of ethylene-vinyl
-    acetate (EVA), scaled by both temperature and (optionally) relative humidity.
-    The rate at reference temperature ``T_ref`` and reference humidity (85% RH)
-    is scaled via:
+    acetate (EVA). The rate at reference temperature ``T_ref`` is scaled via:
 
     .. math::
 
-        R(T, RH) = R_0 \\cdot \\exp\\!\\left[
+        R(T) = R_0 \\cdot \\exp\\!\\left[
             \\frac{-E_a}{R}\\left(\\frac{1}{T} - \\frac{1}{T_{ref}}\\right)
-        \\right] \\cdot \\frac{RH}{85}
+        \\right]
 
-    The baseline ``Ro`` is calibrated from Kempe et al. (2007) under damp heat
-    conditions (85°C/85% RH), so it implicitly assumes moisture is present in
-    the EVA. If ``rh_encapsulant`` is provided, the generation rate is scaled
-    linearly by relative humidity; otherwise the rate is assumed at 85% RH
-    (nominal for multi-layer stack moisture transport).
+    The baseline ``Ro`` is calibrated from Kempe et al. (2007) under damp-heat
+    conditions (85°C/85% RH), so this implementation assumes that humidity basis
+    implicitly and models temperature dependence directly.
 
     Validation: Gnocchi et al. (2018) [2]_.
 
@@ -1506,7 +1501,8 @@ def acetic_acid_generation(
     temp_module : pd.Series
         Time-indexed module temperature [°C].
     Ro : float, default 0.00331
-        Acetic acid source term at ``T_ref`` and 85% RH [ng/min/g].
+        Acetic acid source term at ``T_ref`` under the 85% RH calibration
+        basis [ng/min/g].
     Ea_gen : float, default 90.0
         Activation energy for HAc generation [kJ/mol].
     T_ref : float, default 27.0
@@ -1514,9 +1510,6 @@ def acetic_acid_generation(
     encapsulant : str, default ``"AA002"``
         Key in ``AApermeation.json`` from which to load default parameters.
         Set to ``None`` to use explicitly provided values only.
-    rh_encapsulant : pd.Series, optional
-        Time-indexed relative humidity in the encapsulant [%]. If provided,
-        scales generation rate by (RH / 85). If ``None``, assumes 85% RH.
 
     Returns
     -------
