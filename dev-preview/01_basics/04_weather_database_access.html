@@ -185,6 +185,8 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Weather Database Access</a></li>
 
 
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">02 - Degradation Mechanisms</span></p>
 <ul class="nav bd-sidenav">
@@ -529,6 +531,8 @@
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Weather Database Access</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-location-example">Single location example</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nsrdb-hsds-on-kestrel">1. NSRDB - HSDS on Kestrel</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nsrdb-api">2. NSRDB - API</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pvgis">3. PVGIS</a></li>
 </ul>
 
             </nav>
@@ -569,8 +573,36 @@
 <h1>Single location example<a class="headerlink" href="#single-location-example" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
+<span class="c1"># !pip install pvdeg</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This information helps with debugging and getting support :)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1015-azure
+Python version  3.11.15 (main, Mar  3 2026, 16:10:12) [GCC 13.3.0]
+pvdeg version  0.1.dev1+g5731b63f7
 </pre></div>
 </div>
 </div>
@@ -582,8 +614,56 @@
 <p>In this step:</p>
 <p>First we select a database. Here, we will use the NSRDB. Since we are modeling a single location, we can pass the <code class="docutils literal notranslate"><span class="pre">weather_id</span></code> as tuple (lat, long). A location gid can be used as well. ‘gid’ is a unique identifier to a geographic location within the NSRDB. We’ll look at how to find gids later on.</p>
 <p>Next, we want to select a satellite, named dataset (year of data), and what weather attributes we want to fetch. For further options, see the documentation for <code class="docutils literal notranslate"><span class="pre">pvdeg.weather.get</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get weather data</span>
+<span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;NSRDB&quot;</span>
+
+<span class="c1"># Latitude and Longitude</span>
+<span class="n">weather_id</span> <span class="o">=</span> <span class="p">(</span><span class="mf">33.448376</span><span class="p">,</span> <span class="o">-</span><span class="mf">112.074036</span><span class="p">)</span>
+<span class="c1"># weather_id = 1933572</span>
+<span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="s2">&quot;GOES&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="mi">2021</span><span class="p">,</span>
+    <span class="s2">&quot;NREL_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;air_temperature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dhi&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ghi&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dni&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;relative_humidity&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+
+<span class="c1"># Uncomment the following when working on NREL Kestrel</span>
+
+<span class="c1"># weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)</span>
+
+<span class="c1"># res = pvdeg.standards.standoff(weather_df=weather_df, meta=meta, tilt=None, azimuth=180, sky_model=&#39;isotropic&#39;, temp_model=&#39;sapm&#39;,</span>
+<span class="c1">#     conf_0=&#39;insulated_back_glass_polymer&#39;, conf_inf=&#39;open_rack_glass_polymer&#39;, T98=70, x_0=6.5, wind_factor=0.33)</span>
+<span class="c1"># print(pvdeg.standards.interpret_standoff(res))</span>
+<span class="c1"># print(meta)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p><code class="docutils literal notranslate"><span class="pre">pvdeg.weather.get</span></code> returns the same variables as <code class="docutils literal notranslate"><span class="pre">weather.read</span></code> which we have used in each journal before this. We get a weather DataFrame and a meta-data dicitonary. Each contains a minimum of consistent fields, but may have additional fields based on the database accessed or the attributes requested.</p>
 <p>Lets verify the weather data we fetched by running a familiar calculation; standoff distance.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="nsrdb-api">
+<h1>2. NSRDB - API<a class="headerlink" href="#nsrdb-api" title="Link to this heading">#</a></h1>
+<p>To access the NREL NSRDB, you will need an API key. Key’s are free, but require you to set up an account. Without an API key, you can use a demonstration API which is severely limited. To set up an account and get your API key, visit <a class="reference external" href="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a></p>
+<p>Key Notes:</p>
+<ul class="simple">
+<li><p>set <code class="docutils literal notranslate"><span class="pre">attributes</span> <span class="pre">=</span> <span class="pre">[]</span></code> to return all possible attributes (weather fields)</p></li>
+<li><p>There are 2 major methods with the API</p>
+<ul>
+<li><p>names = ‘tmy’ : generate a TMY-like weather dataframe aggregate. This will calculate the relative humidity from temperature and dew point.</p></li>
+<li><p>names = ‘2019’ : collect a weather dataframe including measured relative humidity.</p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load pre-saved weather data for this tutorial</span>
@@ -641,35 +721,50 @@ Level 2 certification is never required for this temperature                    
 </div>
 </div>
 </div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pvgis">
+<h1>3. PVGIS<a class="headerlink" href="#pvgis" title="Link to this heading">#</a></h1>
+<p>This method uses the PVGIS database, a public resource. It requires no API key or user account.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># weather_db = &quot;PVGIS&quot;</span>
-<span class="c1"># # weather_id = (39.741931, -105.169891)</span>
-<span class="c1"># weather_id = (24.7136, 46.6753)  # Riyadh, Saudi Arabia</span>
-<span class="c1"># # weather_arg = {&#39;map_variables&#39;: True}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;PVGIS&quot;</span>
+<span class="c1"># weather_id = (39.741931, -105.169891)</span>
+<span class="n">weather_id</span> <span class="o">=</span> <span class="p">(</span><span class="mf">24.7136</span><span class="p">,</span> <span class="mf">46.6753</span><span class="p">)</span>  <span class="c1"># Riyadh, Saudi Arabia</span>
+<span class="c1"># weather_arg = {&#39;map_variables&#39;: True}</span>
 
-<span class="c1"># # TMY</span>
-<span class="c1"># weather_df, meta = pvdeg.weather.get(weather_db, weather_id)</span>
+<span class="c1"># TMY</span>
+<span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">weather_db</span><span class="p">,</span> <span class="n">weather_id</span><span class="p">)</span>
 
-<span class="c1"># # Perform calculation</span>
-<span class="c1"># res = pvdeg.standards.standoff(</span>
-<span class="c1">#     weather_df=weather_df,</span>
-<span class="c1">#     meta=meta,</span>
-<span class="c1">#     tilt=None,</span>
-<span class="c1">#     azimuth=180,</span>
-<span class="c1">#     sky_model=&quot;isotropic&quot;,</span>
-<span class="c1">#     temp_model=&quot;sapm&quot;,</span>
-<span class="c1">#     conf_0=&quot;insulated_back_glass_polymer&quot;,</span>
-<span class="c1">#     conf_inf=&quot;open_rack_glass_polymer&quot;,</span>
-<span class="c1">#     T98=70,</span>
-<span class="c1">#     x_0=6.5,</span>
-<span class="c1">#     wind_factor=0.33,</span>
-<span class="c1"># )</span>
-<span class="c1"># print(pvdeg.standards.interpret_standoff(res))</span>
+<span class="c1"># Perform calculation</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">(</span>
+    <span class="n">weather_df</span><span class="o">=</span><span class="n">weather_df</span><span class="p">,</span>
+    <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
+    <span class="n">tilt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">azimuth</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">T98</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span>
+    <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
+    <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">interpret_standoff</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
 
-<span class="c1"># # Clean metadata for consistent output (remove variable fields)</span>
-<span class="c1"># meta_clean = {k: v for k, v in meta.items() if k not in [&quot;irradiance_time_offset&quot;]}</span>
-<span class="c1"># print(meta_clean)</span>
+<span class="c1"># Clean metadata for consistent output (remove variable fields)</span>
+<span class="n">meta_clean</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">meta</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;irradiance_time_offset&quot;</span><span class="p">]}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">meta_clean</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  24.7 was used.
+The estimated T₉₈ of an insulated-back module is 89.6°C. 
+The estimated T₉₈ of an open-rack module is 63.9°C. 
+Level 0 certification is valid for a standoff greather than 9.3 cm. 
+Level 1 certification is required for a standoff between 9.3 cm, and 3.0 cm. 
+Level 2 certification is required for a standoff less than 3.0 cm.
+{&#39;latitude&#39;: 24.7136, &#39;longitude&#39;: 46.6753, &#39;altitude&#39;: 646.0, &#39;wind_height&#39;: 10, &#39;Source&#39;: &#39;PVGIS&#39;}
 </pre></div>
 </div>
 </div>
@@ -745,6 +840,8 @@ Level 2 certification is never required for this temperature                    
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Weather Database Access</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-location-example">Single location example</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nsrdb-hsds-on-kestrel">1. NSRDB - HSDS on Kestrel</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nsrdb-api">2. NSRDB - API</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pvgis">3. PVGIS</a></li>
 </ul>
 
   </nav></div>
