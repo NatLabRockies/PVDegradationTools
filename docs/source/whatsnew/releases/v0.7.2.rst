@@ -22,6 +22,7 @@ Dependencies
 - Move ``pre-commit`` from core install requirements to the optional development
   extras (``dev = ["pre-commit"]``), reducing runtime dependency footprint.
   (:issue:`341`, :pull:`347`)
+- Bump aiohttp from 3.13.3 to 3.14.0. (:pull:`344`)
 
 
 
