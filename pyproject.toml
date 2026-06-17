@@ -32,17 +32,9 @@ dependencies = [
     "numpy>=1.19.3",
     "pvlib>=0.12.0",
     "scipy>1.6.0",
-    "NREL-rex",
-    "cartopy",
-    "dask[dataframe]",
-    "dask-jobqueue",
     "bokeh",
-    "geopy",
-    "h5netcdf",
-    "h5py<=3.14.0",
     "jupyterlab",
     "matplotlib",
-    "netCDF4",
     "notebook",
     "numba",
     "openpyxl",
@@ -53,9 +45,7 @@ dependencies = [
     "seaborn",
     "tables",
     "tqdm",
-    "xarray",
     "sympy",
-    "zarr",
     "jupytext",
 ]
 dynamic = ["version"]
@@ -84,11 +74,23 @@ books = [
 sam = [
     "NREL-PySAM",
 ]
+geo = [
+    "NREL-rex",
+    "cartopy",
+    "dask[dataframe]",
+    "dask-jobqueue",
+    "geopy",
+    "h5netcdf",
+    "h5py<=3.14.0",
+    "netCDF4",
+    "xarray",
+    "zarr",
+]
 dev= [
     "pre-commit",
 ]
 all = [
-    "pvdeg[docs,test,books,sam]",
+    "pvdeg[docs,test,books,sam,geo]",
 ]
 
 [project.entry-points.pvdeg]
