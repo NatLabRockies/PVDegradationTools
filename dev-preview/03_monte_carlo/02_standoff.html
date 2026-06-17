@@ -587,7 +587,7 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 Python version  3.11.15 (main, Mar  3 2026, 16:10:12) [GCC 13.3.0]
 Pandas version  3.0.3
 Pvlib version  0.15.2
-Pvdeg version  0.1.dev1+g09ef6431c
+Pvdeg version  0.1.dev1+g7dfd275e6
 </pre></div>
 </div>
 </div>
@@ -644,10 +644,10 @@ Pvdeg version  0.1.dev1+g09ef6431c
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
+The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
-          x      T98_0    T98_inf
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          x      T98_0    T98_inf
 0  0.522443  71.778148  48.754265
           x      T98_0    T98_inf
 0  0.490293  71.778148  48.754265
@@ -680,17 +680,17 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
-0    -0.503351     0.817252
-1    11.496045     0.152405
-2     4.255621     0.349936
-3     2.799092     0.246282
-4     4.009002    -0.230121
+0     4.529214     0.840986
+1     7.370682     0.157543
+2     7.591277     0.416622
+3     8.570578     0.011020
+4    13.585720    -0.043358
 ..         ...          ...
-495   7.009921    -0.871364
-496   5.868218     0.199034
-497   2.105415     0.028144
-498   0.286889     0.861442
-499   1.350993     0.987924
+495   4.777572     0.330339
+496   3.392922    -0.523072
+497   0.661506     0.687775
+498   8.063381     0.392906
+499   8.602944     0.539403
 
 [500 rows x 2 columns]
 </pre></div>
@@ -730,6 +730,12 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/standards.py:367: RuntimeWarning: invalid value encountered in log
+  x = -x_0 * np.log(1 - (T98_0 - T98) / (T98_0 - T98_inf))
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="dealing-with-series">
@@ -759,17 +765,17 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.146845  63.300775  43.524306
-1    0.796229  71.495521  49.146627
-2    0.000000  69.460504  47.773967
-3    0.077530  70.601973  48.566355
-4    0.817135  74.304813  50.959197
+0    0.000000  62.876134  43.220943
+1    0.498223  71.460419  49.116627
+2    0.000000  68.730174  47.374090
+3    1.040865  72.579403  50.024572
+4    1.951157  73.060751  50.182034
 ..        ...        ...        ...
-495  2.164387  76.297333  52.591367
-496  0.285233  71.054150  48.835356
-497  0.238715  72.407963  49.943487
-498  0.000000  62.540190  43.017877
-499  0.000000  60.081870  41.555095
+495  0.000000  69.672796  47.942333
+496  0.891602  75.463086  51.822691
+497  0.000000  65.373093  44.866850
+498  0.000000  68.960286  47.536073
+499  0.000000  67.386762  46.238188
 
 [500 rows x 3 columns]
 </pre></div>
@@ -804,7 +810,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/73aeab1ac3757d5c05d28d42d078b9fe5c896a88ceb9bedc3ff9d179d80e6e5e.png" src="../_images/73aeab1ac3757d5c05d28d42d078b9fe5c896a88ceb9bedc3ff9d179d80e6e5e.png" />
+<img alt="../_images/b80b9664cc0eceb6c3ca6b1b8f6298d5d77ff8d73f4e90b1d08bbd0d6d67b90e.png" src="../_images/b80b9664cc0eceb6c3ca6b1b8f6298d5d77ff8d73f4e90b1d08bbd0d6d67b90e.png" />
 </div>
 </div>
 </section>
