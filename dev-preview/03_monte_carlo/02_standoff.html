@@ -183,8 +183,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../01_basics/04_weather_database_access.html">Weather Database Access</a></li>
 
 
-
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">02 - Degradation Mechanisms</span></p>
 <ul class="nav bd-sidenav">
@@ -587,7 +585,7 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 Python version  3.11.15 (main, Mar  3 2026, 16:10:12) [GCC 13.3.0]
 Pandas version  3.0.3
 Pvlib version  0.15.2
-Pvdeg version  0.1.dev1+g7dfd275e6
+Pvdeg version  0.1.dev1+g3517eebe5
 </pre></div>
 </div>
 </div>
@@ -644,10 +642,10 @@ Pvdeg version  0.1.dev1+g7dfd275e6
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
-The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          x      T98_0    T98_inf
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
+          x      T98_0    T98_inf
 0  0.522443  71.778148  48.754265
           x      T98_0    T98_inf
 0  0.490293  71.778148  48.754265
@@ -679,18 +677,18 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
-0     4.529214     0.840986
-1     7.370682     0.157543
-2     7.591277     0.416622
-3     8.570578     0.011020
-4    13.585720    -0.043358
-..         ...          ...
-495   4.777572     0.330339
-496   3.392922    -0.523072
-497   0.661506     0.687775
-498   8.063381     0.392906
-499   8.602944     0.539403
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          X_0  wind_factor
+0    4.958396     0.489394
+1    5.723094     0.373543
+2    5.532125     0.514025
+3    1.566016    -0.324496
+4    6.199383    -0.106801
+..        ...          ...
+495  5.068326     0.205461
+496  4.024858     0.417387
+497  4.166193     0.180788
+498  2.047064     0.734610
+499  3.183851     0.338619
 
 [500 rows x 2 columns]
 </pre></div>
@@ -703,7 +701,8 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 <p>When using the pvdeg.montecarlo.simulate() function on a target function all of the target function’s required arguments must still be given. Our non-changing arguments will be stored in a dictionary. The randomized monte carlo input data will also be passed to the target function via the simulate function. All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL-IGNORE-OUTPUT</span>
+<span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
 <span class="n">function_kwargs</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;weather_df&quot;</span><span class="p">:</span> <span class="n">WEATHER</span><span class="p">,</span>
     <span class="s2">&quot;meta&quot;</span><span class="p">:</span> <span class="n">META</span><span class="p">,</span>
@@ -727,12 +726,6 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
     <span class="n">correlated_samples</span><span class="o">=</span><span class="n">samples</span><span class="p">,</span>
     <span class="o">**</span><span class="n">function_kwargs</span><span class="p">,</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/standards.py:367: RuntimeWarning: invalid value encountered in log
-  x = -x_0 * np.log(1 - (T98_0 - T98) / (T98_0 - T98_inf))
 </pre></div>
 </div>
 </div>
@@ -765,17 +758,17 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.000000  62.876134  43.220943
-1    0.498223  71.460419  49.116627
-2    0.000000  68.730174  47.374090
-3    1.040865  72.579403  50.024572
-4    1.951157  73.060751  50.182034
+0    0.000000  67.986371  46.702809
+1    0.000000  69.201472  47.579802
+2    0.000000  67.722021  46.447388
+3    0.350041  74.698776  51.240499
+4    1.061325  73.648962  50.458233
 ..        ...        ...        ...
-495  0.000000  69.672796  47.942333
-496  0.891602  75.463086  51.822691
-497  0.000000  65.373093  44.866850
-498  0.000000  68.960286  47.536073
-499  0.000000  67.386762  46.238188
+495  0.232710  70.996289  48.795540
+496  0.000000  68.723267  47.367603
+497  0.234409  71.215624  48.996582
+498  0.000000  64.791752  44.391952
+499  0.000000  69.583413  47.871639
 
 [500 rows x 3 columns]
 </pre></div>
@@ -810,7 +803,7 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b80b9664cc0eceb6c3ca6b1b8f6298d5d77ff8d73f4e90b1d08bbd0d6d67b90e.png" src="../_images/b80b9664cc0eceb6c3ca6b1b8f6298d5d77ff8d73f4e90b1d08bbd0d6d67b90e.png" />
+<img alt="../_images/c9c1f362a76cbd9812a47ee5c2813c9c177b0dcb0fdbe15dcf5c10eae4f68ce1.png" src="../_images/c9c1f362a76cbd9812a47ee5c2813c9c177b0dcb0fdbe15dcf5c10eae4f68ce1.png" />
 </div>
 </div>
 </section>
