@@ -124,18 +124,18 @@ for loc in LOCATIONS:
 
 fig, axes = plt.subplots(2, 1, figsize=(12, 7))
 
-# Hourly rate â€” Golden, CO (raw; demonstrates signal structure)
+# Hourly rate - Golden, CO (raw; demonstrates signal structure)
 rate_default.plot(ax=axes[0], color="steelblue", alpha=0.7)
-axes[0].set_ylabel("molâ€¯mâ»Â²â€¯sâ»Â¹")
-axes[0].set_title("Perovskite degradation rate â€” total (Golden, CO, hourly)")
+axes[0].set_ylabel("mol m^-2 s^-1")
+axes[0].set_title("Perovskite degradation rate - total (Golden, CO, hourly)")
 
-# Weekly mean rate â€” all locations
+# Weekly mean rate - all locations
 for loc, rate in _all_rates.items():
     rate.resample("W").mean().plot(
         ax=axes[1], label=loc, color=_colors[loc], alpha=0.85
     )
-axes[1].set_ylabel("molâ€¯mâ»Â²â€¯sâ»Â¹")
-axes[1].set_title("Perovskite degradation rate â€” weekly mean, all locations")
+axes[1].set_ylabel("mol m^-2 s^-1")
+axes[1].set_title("Perovskite degradation rate - weekly mean, all locations")
 axes[1].legend()
 
 fig.tight_layout()
@@ -208,10 +208,10 @@ p_h2o = s2.results["P_H2O"]
 perov = s2.results["perov_rate"]
 
 fig, axes = plt.subplots(4, 1, figsize=(12, 10), sharex=True)
-temp_mod.plot(ax=axes[0], title="Module temperature [Â°C]")
+temp_mod.plot(ax=axes[0], title="Module temperature [degC]")
 rh_surf.plot(ax=axes[1], title="Module-surface relative humidity [%]")
 p_h2o.plot(ax=axes[2], title="Water vapour pressure P_H2O [kPa]")
-perov.plot(ax=axes[3], title="Perovskite degradation rate â€” total [mol mâ»Â² sâ»Â¹]")
+perov.plot(ax=axes[3], title="Perovskite degradation rate - total [mol m^-2 s^-1]")
 fig.tight_layout()
 
 # %% [markdown]
