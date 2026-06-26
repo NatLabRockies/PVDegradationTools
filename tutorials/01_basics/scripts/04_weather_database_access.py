@@ -175,7 +175,14 @@ res = pvdeg.standards.standoff(
     x_0=6.5,
     wind_factor=0.33,
 )
-print(pvdeg.standards.interpret_standoff(res))
+
+# Print rounded numeric outputs for testing
+res_clean = {
+    "x_cm": round(float(res["x"].iloc[0]), 1),
+    "T98_0_C": round(float(res["T98_0"].iloc[0]), 1),
+    "T98_inf_C": round(float(res["T98_inf"].iloc[0]), 1),
+}
+print(res_clean)
 
 # Clean metadata for consistent output (remove variable fields)
 meta_clean = {k: v for k, v in meta.items() if k not in ["irradiance_time_offset"]}
