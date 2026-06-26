@@ -43,7 +43,7 @@ Enhancements
       ``03_monte_carlo/02_standoff.ipynb`` (NYC).
     - Add jupytext configuration and Python script versions for all notebooks with
       pre-commit hook synchronization for version control.
-    - Update Eagle HPC references to Kestrel (NREL's current HPC system).
+    - Update Eagle HPC references to Kestrel (NLR's current HPC system).
     - Update all configuration files (``_toc.yml``, ``_config.yml``, ``myst.yml``),
       GitHub Actions workflows (``nbval.yaml``, ``testbook.yaml``,
       ``deploy-books.yml``), and CI/CD pipelines for new structure.

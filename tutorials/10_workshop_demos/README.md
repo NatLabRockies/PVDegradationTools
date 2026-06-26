@@ -5,7 +5,7 @@ Live demonstration materials from PVDeg workshops and conferences.
 ## Tutorials
 
 1. **01_astm_live_demo.ipynb** - ASTM workshop live demonstration
-2. **02_duramat_live_demo.ipynb** - DuraMAT workshop live demonstration ⚠️ **Requires NREL HPC**
+2. **02_duramat_live_demo.ipynb** - DuraMAT workshop live demonstration ⚠️ **Requires NLR HPC**
 
 ## Requirements
 
@@ -14,9 +14,9 @@ Live demonstration materials from PVDeg workshops and conferences.
 - Can run locally or in Google Colab
 
 ### DuraMAT Live Demo (02)
-⚠️ **NREL HPC Access Required**
-- Requires access to NREL's High Performance Computing resources
-- NREL network connectivity or VPN required
+⚠️ **NLR HPC Access Required**
+- Requires access to NLR's High Performance Computing resources
+- NLR network connectivity or VPN required
 - Appropriate computing allocations needed
 
 ## About These Demos
@@ -37,6 +37,6 @@ Demos without HPC requirements can be launched in Google Colab using the rocket 
 
 ### HPC Execution
 For demos requiring HPC (marked with ⚠️), you must:
-1. Have NREL HPC account and allocations
-2. Be on NREL network or connected via VPN
-3. Follow NREL HPC documentation for job submission
+1. Have NLR HPC account and allocations
+2. Be on NLR network or connected via VPN
+3. Follow NLR HPC documentation for job submission

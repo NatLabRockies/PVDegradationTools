@@ -13,10 +13,10 @@ project:
     - .ipynb_checkpoints
     - '*/scripts'
     - '*/scripts/*'
-  github: NREL/PVDegradationTools
+  github: NatLabRockies/PVDegradationTools
   thebe:
     binder:
-      repo: NREL/PVDegradationTools
+      repo: NatLabRockies/PVDegradationTools
       provider: github
       ref: main
   bibliography:

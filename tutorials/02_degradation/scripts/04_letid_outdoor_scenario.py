@@ -138,7 +138,7 @@ pmp_deg, df.query("Week == 4")["Pmp"].item()
 #
 # Great!
 #
-# The example proceeds below in similar fashion to the outdoor example, using a fixed latitude tilt system at NREL, in Golden, CO, USA, using [NSRDB](https://nsrdb.nrel.gov/) hourly PSM weather data, SAPM temperature models, and module and inverter models from the CEC database.
+# The example proceeds below in similar fashion to the outdoor example, using a fixed latitude tilt system at NLR, in Golden, CO, USA, using [NSRDB](https://nsrdb.nlr.gov/) hourly PSM weather data, SAPM temperature models, and module and inverter models from the CEC database.
 
 # %%
 # load weather and location data, use pvlib read_psm3 function

@@ -54,13 +54,13 @@ print("pvdeg version ", pvdeg.__version__)
 #
 # There are many different sources of solar irradiance data. For your projects, these are some of the most common:
 #
-# - [NSRDB](https://maps.nrel.gov/nsrdb-viewer/) - National Solar Radiation Database. You can access data through the website for many locations accross the world, or you can use their [web API](https://developer.nrel.gov/docs/solar/nsrdb/) to download data programmatically. An "API" is an ["application programming interface"](https://en.wikipedia.org/wiki/API), and a "web API" is a programming interface that allows you to write code to interact with web services like the NSRDB.
+# - [NSRDB](https://maps.nlr.gov/nsrdb-viewer/) - National Solar Radiation Database. You can access data through the website for many locations accross the world, or you can use their [web API](https://developer.nlr.gov/docs/solar/nsrdb/) to download data programmatically. An "API" is an ["application programming interface"](https://en.wikipedia.org/wiki/API), and a "web API" is a programming interface that allows you to write code to interact with web services like the NSRDB.
 #
 # - [EPW](https://www.energy.gov/eere/buildings/downloads/energyplus-0) - Energy Plus Weather data is available for many locations accross the world. It's in its own format file ('EPW') so you can't open it easily in a spreadsheet program like Excel, but you can use [`pvlib.iotools.read_epw()`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.iotools.read_epw.html) to get it into a dataframe and use it.
 #
 # - [PVGIS](https://re.jrc.ec.europa.eu/pvg_tools/en/) - Free global weather data provided by the European Union and derived from many govermental agencies including the NSRDB. PVGIS also provides a web API. You can get PVGIS TMY data using [`pvlib.iotools.get_pvgis_tmy()`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.iotools.get_pvgis_tmy.html).
 #
-# - Perhaps another useful link: https://sam.nrel.gov/weather-data.html
+# - Perhaps another useful link: https://sam.nlr.gov/weather-data.html
 #
 # ## Where else can you get historical irradiance data?
 #
@@ -78,36 +78,36 @@ print("pvdeg version ", pvdeg.__version__)
 #
 
 # %% [markdown]
-# # NREL API Key
-# At the [NREL Developer Network](https://developer.nrel.gov/), there are [APIs](https://en.wikipedia.org/wiki/API) to a lot of valuable [solar resources](https://developer.nrel.gov/docs/solar/) like [weather data from the NSRDB](https://developer.nrel.gov/docs/solar/nsrdb/), [operational data from PVDAQ](https://developer.nrel.gov/docs/solar/pvdaq-v3/), or indicative calculations using [PVWatts](https://developer.nrel.gov/docs/solar/pvwatts/). In order to use these resources from NREL, you need to [register for a free API key](https://developer.nrel.gov/signup/). You can test out the APIs using the `DEMO_KEY` but it has limited bandwidth compared to the [usage limit for registered users](https://developer.nrel.gov/docs/rate-limits/). NREL has some [API usage instructions](https://developer.nrel.gov/docs/api-key/), but pvlib has a few builtin functions, like [`pvlib.iotools.get_psm3()`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.iotools.get_psm3.html), that wrap the NREL API, and call them for you to make it much easier to use. Skip ahead to the next section to learn more. But before you do...
+# # NLR API Key
+# At the [NLR Developer Network](https://developer.nlr.gov/), there are [APIs](https://en.wikipedia.org/wiki/API) to a lot of valuable [solar resources](https://developer.nlr.gov/docs/solar/) like [weather data from the NSRDB](https://developer.nlr.gov/docs/solar/nsrdb/), [operational data from PVDAQ](https://developer.nlr.gov/docs/solar/pvdaq-v3/), or indicative calculations using [PVWatts](https://developer.nlr.gov/docs/solar/pvwatts/). In order to use these resources from NLR, you need to [register for a free API key](https://developer.nlr.gov/signup/). You can test out the APIs using the `DEMO_KEY` but it has limited bandwidth compared to the [usage limit for registered users](https://developer.nlr.gov/docs/rate-limits/). NLR has some [API usage instructions](https://developer.nlr.gov/docs/api-key/), but pvlib has a few builtin functions, like [`pvlib.iotools.get_psm3()`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.iotools.get_psm3.html), that wrap the NLR API, and call them for you to make it much easier to use. Skip ahead to the next section to learn more. But before you do...
 #
-# **Please pause now to visit https://developer.nrel.gov/signup/ and get an API key.**
+# **Please pause now to visit https://developer.nlr.gov/signup/ and get an API key.**
 #
 # ## Application Programming Interface (API)
 # What exactly is an API? Nowadays, the phrase is used interchangeably with a "web API" but in general an API is just a recipe for how to interface with a application programmatically, _IE_: in code. An API could be as simple as a function signature or its published documentation, _EG_: the API for the `solarposition` function is you give it an ISO8601 formatted date with a timezone, the latitude, longitude, and elevation as numbers, and it returns the zenith and azimuth as numbers.
 #
-# A web API is the same, except the application is a web service, that you access at its URL using web methods. We won't go into too much more detail here, but the most common web method is `GET` which is pretty self explanatory. Look over the [NREL web usage instructions](https://developer.nrel.gov/docs/api-key/) for some examples, but interacting with a web API can be as easy as entering a URL into a browser. Try the URL below to _get_ the PVWatts energy output for a fixed tilt site in [Broomfield, CO](https://goo.gl/maps/awkEcNGzSur9Has18).
+# A web API is the same, except the application is a web service, that you access at its URL using web methods. We won't go into too much more detail here, but the most common web method is `GET` which is pretty self explanatory. Look over the [NLR web usage instructions](https://developer.nlr.gov/docs/api-key/) for some examples, but interacting with a web API can be as easy as entering a URL into a browser. Try the URL below to _get_ the PVWatts energy output for a fixed tilt site in [Broomfield, CO](https://goo.gl/maps/awkEcNGzSur9Has18).
 #
-# https://developer.nrel.gov/api/pvwatts/v6.json?api_key=DEMO_KEY&lat=40&lon=-105&system_capacity=4&azimuth=180&tilt=40&array_type=1&module_type=1&losses=10
+# https://developer.nlr.gov/api/pvwatts/v6.json?api_key=DEMO_KEY&lat=40&lon=-105&system_capacity=4&azimuth=180&tilt=40&array_type=1&module_type=1&losses=10
 #
 # In addition to just using your browser, you can also access web APIs programmatically. The most popular Python package to interact with web APIs is [requests](https://docs.python-requests.org/en/master/). There's also free open source command-line tools like [cURL](https://curl.se/) and [HTTPie](https://httpie.io/), and a popular nagware/freemium GUI application called [Postman](https://www.postman.com/).
 #
-# **If you have an NREL API key please enter it in the next cell.**
+# **If you have an NLR API key please enter it in the next cell.**
 
 # %%
-NREL_API_KEY = None  # <-- please set your NREL API key here
+NLR_API_KEY = None  # <-- please set your NLR API key here
 
 # note you must use "quotes" around your key, for example:
-# NREL_API_KEY = 'DEMO_KEY'  # single or double both work fine
+# NLR_API_KEY = 'DEMO_KEY'  # single or double both work fine
 
 # during the live tutorial, we've stored a dedicated key on our server
-if NREL_API_KEY is None:
+if NLR_API_KEY is None:
     try:
-        NREL_API_KEY = os.environ[
-            "NREL_API_KEY"
+        NLR_API_KEY = os.environ[
+            "NLR_API_KEY"
         ]  # get dedicated key for tutorial from servier
     except KeyError:
-        NREL_API_KEY = "DEMO_KEY"  # OK for this demo, but better to get your own key
+        NLR_API_KEY = "DEMO_KEY"  # OK for this demo, but better to get your own key
 
 # %% [markdown]
 # # Fetching TMYs from the NSRDB
@@ -124,7 +124,7 @@ if NREL_API_KEY is None:
 """
 weather_db = 'PSM4'
 weather_id = (33.4484, -112.0740)
-weather_arg = {'api_key': NREL_API_KEY,
+weather_arg = {'api_key': NLR_API_KEY,
                'email': 'user@mail.com',
                'year': '2021',
                'map_variables': True,
@@ -137,8 +137,8 @@ weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)
 weather_df, meta = pvlib.iotools.get_nsrdb_psm4_tmy(
     latitude=33.4484,
     longitude=-112.0740,
-    api_key=NREL_API_KEY,
-    email="silvana.ovaitt@nrel.gov",  # <-- any email works here fine
+    api_key=NLR_API_KEY,
+    email="silvana.ovaitt@nlr.gov",  # <-- any email works here fine
     year="tmy",
     map_variables=True,
     leap_day=False,

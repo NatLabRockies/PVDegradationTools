@@ -7,6 +7,12 @@ Enhancements
 
 Documentation
 -------------
+- Comprehensive update of "NREL" and "National Renewable Laboratory"
+  with the new name National Laboratory of the Rockies (NatLabRockies or NLR) on
+  all files, including repositories, dependencies (i.e. NLR-rex), HPC settings,
+  tutorials, emails, and function names.
+- Please note NREL-pySAM has not migrated name and will not do so until ~April 2026.
+  updated as required. This includes an update to the CLA and its checksum (:pull:`XXX`).
 
 
 Deprecations
@@ -24,5 +30,7 @@ Dependencies
 
 Contributors
 ------------
+- Silvana Ovaitt (:ghuser:`shirubana`)
 - Rajiv Daxini (:ghuser:`rdaxini`)
+- Martin Springer (:ghuser:`martin-springer`)
 
