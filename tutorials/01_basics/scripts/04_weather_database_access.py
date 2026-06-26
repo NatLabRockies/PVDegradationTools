@@ -32,8 +32,21 @@
 # # Single location example
 
 # %%
+# if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:
+# # !pip install pvdeg
+
+# %%
 import pvdeg
 import pandas as pd
+
+# %%
+# This information helps with debugging and getting support :)
+import sys
+import platform
+
+print("Working on a ", platform.system(), platform.release())
+print("Python version ", sys.version)
+print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
 # # 1. NSRDB - HSDS on Kestrel
@@ -46,10 +59,51 @@ import pandas as pd
 #
 # Next, we want to select a satellite, named dataset (year of data), and what weather attributes we want to fetch. For further options, see the documentation for `pvdeg.weather.get`
 
+# %%
+# Get weather data
+weather_db = "NSRDB"
+
+# Latitude and Longitude
+weather_id = (33.448376, -112.074036)
+# weather_id = 1933572
+weather_arg = {
+    "satellite": "GOES",
+    "names": 2021,
+    "NREL_HPC": True,
+    "attributes": [
+        "air_temperature",
+        "wind_speed",
+        "dhi",
+        "ghi",
+        "dni",
+        "relative_humidity",
+    ],
+}
+
+# Uncomment the following when working on NREL Kestrel
+
+# weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)
+
+# res = pvdeg.standards.standoff(weather_df=weather_df, meta=meta, tilt=None, azimuth=180, sky_model='isotropic', temp_model='sapm',
+#     conf_0='insulated_back_glass_polymer', conf_inf='open_rack_glass_polymer', T98=70, x_0=6.5, wind_factor=0.33)
+# print(pvdeg.standards.interpret_standoff(res))
+# print(meta)
+
 # %% [markdown]
 # `pvdeg.weather.get` returns the same variables as `weather.read` which we have used in each journal before this. We get a weather DataFrame and a meta-data dicitonary. Each contains a minimum of consistent fields, but may have additional fields based on the database accessed or the attributes requested.
 #
 # Lets verify the weather data we fetched by running a familiar calculation; standoff distance.
+
+# %% [markdown]
+# # 2. NSRDB - API
+#
+# To access the NREL NSRDB, you will need an API key. Key's are free, but require you to set up an account. Without an API key, you can use a demonstration API which is severely limited. To set up an account and get your API key, visit https://developer.nrel.gov/signup/
+#
+# Key Notes:
+# - set `attributes = []` to return all possible attributes (weather fields)
+# - There are 2 major methods with the API
+#     - names = 'tmy' : generate a TMY-like weather dataframe aggregate. This will calculate the relative humidity from temperature and dew point.
+#     - names = '2019' : collect a weather dataframe including measured relative humidity.
 
 # %%
 # Load pre-saved weather data for this tutorial
@@ -93,31 +147,43 @@ print(pvdeg.standards.interpret_standoff(res))
 meta_clean = {k: v for k, v in meta.items() if k not in ["irradiance_time_offset"]}
 print(meta_clean)
 
+# %% [markdown]
+# # 3. PVGIS
+#
+# This method uses the PVGIS database, a public resource. It requires no API key or user account.
+
 # %%
-# weather_db = "PVGIS"
-# # weather_id = (39.741931, -105.169891)
-# weather_id = (24.7136, 46.6753)  # Riyadh, Saudi Arabia
-# # weather_arg = {'map_variables': True}
+weather_db = "PVGIS"
+# weather_id = (39.741931, -105.169891)
+weather_id = (24.7136, 46.6753)  # Riyadh, Saudi Arabia
+# weather_arg = {'map_variables': True}
 
-# # TMY
-# weather_df, meta = pvdeg.weather.get(weather_db, weather_id)
+# TMY
+weather_df, meta = pvdeg.weather.get(weather_db, weather_id)
 
-# # Perform calculation
-# res = pvdeg.standards.standoff(
-#     weather_df=weather_df,
-#     meta=meta,
-#     tilt=None,
-#     azimuth=180,
-#     sky_model="isotropic",
-#     temp_model="sapm",
-#     conf_0="insulated_back_glass_polymer",
-#     conf_inf="open_rack_glass_polymer",
-#     T98=70,
-#     x_0=6.5,
-#     wind_factor=0.33,
-# )
-# print(pvdeg.standards.interpret_standoff(res))
+# Perform calculation
+res = pvdeg.standards.standoff(
+    weather_df=weather_df,
+    meta=meta,
+    tilt=None,
+    azimuth=180,
+    sky_model="isotropic",
+    temp_model="sapm",
+    conf_0="insulated_back_glass_polymer",
+    conf_inf="open_rack_glass_polymer",
+    T98=70,
+    x_0=6.5,
+    wind_factor=0.33,
+)
 
-# # Clean metadata for consistent output (remove variable fields)
-# meta_clean = {k: v for k, v in meta.items() if k not in ["irradiance_time_offset"]}
-# print(meta_clean)
+# Print rounded numeric outputs for testing
+res_clean = {
+    "x_cm": round(float(res["x"].iloc[0]), 1),
+    "T98_0_C": round(float(res["T98_0"].iloc[0]), 1),
+    "T98_inf_C": round(float(res["T98_inf"].iloc[0]), 1),
+}
+print(res_clean)
+
+# Clean metadata for consistent output (remove variable fields)
+meta_clean = {k: v for k, v in meta.items() if k not in ["irradiance_time_offset"]}
+print(meta_clean)
