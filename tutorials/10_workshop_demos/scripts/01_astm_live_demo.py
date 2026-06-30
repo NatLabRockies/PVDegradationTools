@@ -134,15 +134,31 @@ weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)
 """
 
 # %%
-weather_df, meta = pvlib.iotools.get_nsrdb_psm4_tmy(
-    latitude=33.4484,
-    longitude=-112.0740,
-    api_key=NREL_API_KEY,
-    email="silvana.ovaitt@nrel.gov",  # <-- any email works here fine
-    year="tmy",
-    map_variables=True,
-    leap_day=False,
-)
+# For reproducible CI and offline use, default to cached weather data.
+# Set USE_LIVE_NSRDB=True during workshops to make the live API call.
+USE_LIVE_NSRDB = False
+
+if USE_LIVE_NSRDB:
+    weather_df, meta = pvlib.iotools.get_nsrdb_psm4_tmy(
+        latitude=33.4484,
+        longitude=-112.0740,
+        api_key=NREL_API_KEY,
+        email="silvana.ovaitt@nrel.gov",  # <-- any email works here fine
+        year="tmy",
+        map_variables=True,
+        leap_day=False,
+        timeout=60,
+    )
+else:
+    import json
+
+    repo_root = os.path.dirname(os.path.dirname(pvdeg.__file__))
+    weather_path = os.path.join(repo_root, "tutorials", "data", "psm4_golden.csv")
+    meta_path = os.path.join(repo_root, "tutorials", "data", "meta_golden.json")
+
+    weather_df = pd.read_csv(weather_path, index_col=0, parse_dates=True)
+    with open(meta_path, "r") as f:
+        meta = json.load(f)
 
 # %%
 weather_df
