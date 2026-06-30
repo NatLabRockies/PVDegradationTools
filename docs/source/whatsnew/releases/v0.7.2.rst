@@ -19,7 +19,11 @@ Bug Fixes
 
 Dependencies
 ------------
-- Bump aiohttp from 3.13.13 to 3.13.4 (:pull:`324`)
+- Move ``pre-commit`` from core install requirements to the optional development
+  extras (``dev = ["pre-commit"]``), reducing runtime dependency footprint.
+  (:issue:`341`, :pull:`347`)
+- Bump aiohttp from 3.13.3 to 3.14.1. (:pull:`344`)
+
 
 
 Contributors
