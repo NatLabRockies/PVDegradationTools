@@ -18,52 +18,90 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-import sympy as sp
-import matplotlib.pyplot as plt
-import pvdeg
+# For reproducible CI and offline use, default to cached weather data.
+# Set USE_LIVE_PVGIS=True to fetch live PVGIS TMY for Manhattan instead.
+USE_LIVE_PVGIS = False
+
+if USE_LIVE_PVGIS:
+    weather_df, meta_dict = pvdeg.weather.get(
+        database="PVGIS",
+        id=(40.776676, -73.971321),  # manhattan (latitude, longitude)
+    )
+else:
+    repo_root = os.path.dirname(os.path.dirname(pvdeg.__file__))
+    weather_path = os.path.join(repo_root, "tutorials", "data", "psm4_miami.csv")
+    meta_path = os.path.join(repo_root, "tutorials", "data", "meta_miami.json")
+
+    weather_df = pd.read_csv(weather_path, index_col=0, parse_dates=True)
+    with open(meta_path, "r") as f:
+        meta_dict = json.load(f)
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
-[31mModuleNotFoundError[39m                       Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 4[39m
-[32m      1[39m [38;5;28;01mimport[39;00m numpy [38;5;28;01mas[39;00m np
-[32m      2[39m [38;5;28;01mimport[39;00m sympy [38;5;28;01mas[39;00m sp
-[32m      3[39m [38;5;28;01mimport[39;00m matplotlib.pyplot [38;5;28;01mas[39;00m plt
-[32m----> [39m[32m4[39m [38;5;28;01mimport[39;00m pvdeg
+[31mFileNotFoundError[39m                         Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[2][39m[32m, line 15[39m
+[32m     11[39m     repo_root = os.path.dirname(os.path.dirname(pvdeg.__file__))
+[32m     12[39m     weather_path = os.path.join(repo_root, [33m"tutorials"[39m, [33m"data"[39m, [33m"psm4_miami.csv"[39m)
+[32m     13[39m     meta_path = os.path.join(repo_root, [33m"tutorials"[39m, [33m"data"[39m, [33m"meta_miami.json"[39m)
+[32m     14[39m 
+[32m---> [39m[32m15[39m     weather_df = pd.read_csv(weather_path, index_col=[32m0[39m, parse_dates=[38;5;28;01mTrue[39;00m)
+[32m     16[39m     [38;5;28;01mwith[39;00m open(meta_path, [33m"r"[39m) [38;5;28;01mas[39;00m f:
+[32m     17[39m         meta_dict = json.load(f)
 
-[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/__init__.py:11[39m
-[32m      9[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01m.[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m collection
-[32m     10[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01m.[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m decorators
-[32m---> [39m[32m11[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01m.[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m degradation
-[32m     12[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01m.[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m design
-[32m     13[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01m.[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m fatigue
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pandas/io/parsers/readers.py:873[39m, in [36mread_csv[39m[34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, skip_blank_lines, parse_dates, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, low_memory, memory_map, float_precision, storage_options, dtype_backend)[39m
+[32m    861[39m kwds_defaults = _refine_defaults_read(
+[32m    862[39m     dialect,
+[32m    863[39m     delimiter,
+[32m   (...)[39m[32m    869[39m     dtype_backend=dtype_backend,
+[32m    870[39m )
+[32m    871[39m kwds.update(kwds_defaults)
+[32m--> [39m[32m873[39m [38;5;28;01mreturn[39;00m [30;43m_read[39;49m[30;43m([39;49m[30;43mfilepath_or_buffer[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43mkwds[39;49m[30;43m)[39;49m
 
-[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/degradation.py:6[39m
-[32m      4[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpd[39;00m
-[32m      5[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mtyping[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Union
-[32m----> [39m[32m6[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mpvdeg[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m humidity
-[32m      8[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01m.[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
-[32m      9[39m     temperature,
-[32m     10[39m     spectral,
-[32m     11[39m     decorators,
-[32m     12[39m )
-[32m     14[39m R_GAS = [32m0.00831446261815324[39m  [38;5;66;03m# Gas Constant in [kJ/mol*K][39;00m
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pandas/io/parsers/readers.py:300[39m, in [36m_read[39m[34m(filepath_or_buffer, kwds)[39m
+[32m    297[39m _validate_names(kwds.get([33m"[39m[33mnames[39m[33m"[39m, [38;5;28;01mNone[39;00m))
+[32m    299[39m [38;5;66;03m# Create the parser.[39;00m
+[32m--> [39m[32m300[39m parser = [30;43mTextFileReader[39;49m[30;43m([39;49m[30;43mfilepath_or_buffer[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mkwds[39;49m[30;43m)[39;49m
+[32m    302[39m [38;5;28;01mif[39;00m chunksize [38;5;129;01mor[39;00m iterator:
+[32m    303[39m     [38;5;28;01mreturn[39;00m parser
 
-[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/humidity.py:8[39m
-[32m      5[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mnumba[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m jit
-[32m      6[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mwarnings[39;00m
-[32m----> [39m[32m8[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mpvdeg[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m temperature, spectral, decorators, utilities
-[32m     10[39m [38;5;66;03m# Constants[39;00m
-[32m     11[39m R_GAS = [32m0.00831446261815324[39m  [38;5;66;03m# Gas constant in kJ/(mol·K)[39;00m
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pandas/io/parsers/readers.py:1645[39m, in [36mTextFileReader.__init__[39m[34m(self, f, engine, **kwds)[39m
+[32m   1642[39m     [38;5;28mself[39m.options[[33m"[39m[33mhas_index_names[39m[33m"[39m] = kwds[[33m"[39m[33mhas_index_names[39m[33m"[39m]
+[32m   1644[39m [38;5;28mself[39m.handles: IOHandles | [38;5;28;01mNone[39;00m = [38;5;28;01mNone[39;00m
+[32m-> [39m[32m1645[39m [38;5;28mself[39m._engine = [30;43mself[39;49m[30;43m.[39;49m[30;43m_make_engine[39;49m[30;43m([39;49m[30;43mf[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43mself[39;49m[30;43m.[39;49m[30;43mengine[39;49m[30;43m)[39;49m
 
-[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/utilities.py:7[39m
-[32m      5[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mpd[39;00m
-[32m      6[39m [38;5;28;01mimport[39;00m[38;5;250m [39m[34;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[34;01mnp[39;00m
-[32m----> [39m[32m7[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mrex[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m NSRDBX, Outputs
-[32m      8[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mpvdeg[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m DATA_DIR
-[32m      9[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mtyping[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Callable
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pandas/io/parsers/readers.py:1904[39m, in [36mTextFileReader._make_engine[39m[34m(self, f, engine)[39m
+[32m   1902[39m     [38;5;28;01mif[39;00m [33m"[39m[33mb[39m[33m"[39m [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m mode:
+[32m   1903[39m         mode += [33m"[39m[33mb[39m[33m"[39m
+[32m-> [39m[32m1904[39m [38;5;28mself[39m.handles = [30;43mget_handle[39;49m[30;43m([39;49m
+[32m   1905[39m [30;43m    [39;49m[30;43mf[39;49m[30;43m,[39;49m
+[32m   1906[39m [30;43m    [39;49m[30;43mmode[39;49m[30;43m,[39;49m
+[32m   1907[39m [30;43m    [39;49m[30;43mencoding[39;49m[30;43m=[39;49m[30;43mself[39;49m[30;43m.[39;49m[30;43moptions[39;49m[30;43m.[39;49m[30;43mget[39;49m[30;43m([39;49m[30;43m"[39;49m[30;43mencoding[39;49m[30;43m"[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43;01mNone[39;49;00m[30;43m)[39;49m[30;43m,[39;49m
+[32m   1908[39m [30;43m    [39;49m[30;43mcompression[39;49m[30;43m=[39;49m[30;43mself[39;49m[30;43m.[39;49m[30;43moptions[39;49m[30;43m.[39;49m[30;43mget[39;49m[30;43m([39;49m[30;43m"[39;49m[30;43mcompression[39;49m[30;43m"[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43;01mNone[39;49;00m[30;43m)[39;49m[30;43m,[39;49m
+[32m   1909[39m [30;43m    [39;49m[30;43mmemory_map[39;49m[30;43m=[39;49m[30;43mself[39;49m[30;43m.[39;49m[30;43moptions[39;49m[30;43m.[39;49m[30;43mget[39;49m[30;43m([39;49m[30;43m"[39;49m[30;43mmemory_map[39;49m[30;43m"[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43;01mFalse[39;49;00m[30;43m)[39;49m[30;43m,[39;49m
+[32m   1910[39m [30;43m    [39;49m[30;43mis_text[39;49m[30;43m=[39;49m[30;43mis_text[39;49m[30;43m,[39;49m
+[32m   1911[39m [30;43m    [39;49m[30;43merrors[39;49m[30;43m=[39;49m[30;43mself[39;49m[30;43m.[39;49m[30;43moptions[39;49m[30;43m.[39;49m[30;43mget[39;49m[30;43m([39;49m[30;43m"[39;49m[30;43mencoding_errors[39;49m[30;43m"[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m"[39;49m[30;43mstrict[39;49m[30;43m"[39;49m[30;43m)[39;49m[30;43m,[39;49m
+[32m   1912[39m [30;43m    [39;49m[30;43mstorage_options[39;49m[30;43m=[39;49m[30;43mself[39;49m[30;43m.[39;49m[30;43moptions[39;49m[30;43m.[39;49m[30;43mget[39;49m[30;43m([39;49m[30;43m"[39;49m[30;43mstorage_options[39;49m[30;43m"[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43;01mNone[39;49;00m[30;43m)[39;49m[30;43m,[39;49m
+[32m   1913[39m [30;43m[39;49m[30;43m)[39;49m
+[32m   1914[39m [38;5;28;01massert[39;00m [38;5;28mself[39m.handles [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m
+[32m   1915[39m f = [38;5;28mself[39m.handles.handle
 
-[31mModuleNotFoundError[39m: No module named 'rex'
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pandas/io/common.py:930[39m, in [36mget_handle[39m[34m(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)[39m
+[32m    925[39m [38;5;28;01melif[39;00m [38;5;28misinstance[39m(handle, [38;5;28mstr[39m):
+[32m    926[39m     [38;5;66;03m# Check whether the filename is to be opened in binary mode.[39;00m
+[32m    927[39m     [38;5;66;03m# Binary mode does not support 'encoding' and 'newline'.[39;00m
+[32m    928[39m     [38;5;28;01mif[39;00m ioargs.encoding [38;5;129;01mand[39;00m [33m"[39m[33mb[39m[33m"[39m [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m ioargs.mode:
+[32m    929[39m         [38;5;66;03m# Encoding[39;00m
+[32m--> [39m[32m930[39m         handle = [30;43mopen[39;49m[30;43m([39;49m
+[32m    931[39m [30;43m            [39;49m[30;43mhandle[39;49m[30;43m,[39;49m
+[32m    932[39m [30;43m            [39;49m[30;43mioargs[39;49m[30;43m.[39;49m[30;43mmode[39;49m[30;43m,[39;49m
+[32m    933[39m [30;43m            [39;49m[30;43mencoding[39;49m[30;43m=[39;49m[30;43mioargs[39;49m[30;43m.[39;49m[30;43mencoding[39;49m[30;43m,[39;49m
+[32m    934[39m [30;43m            [39;49m[30;43merrors[39;49m[30;43m=[39;49m[30;43merrors[39;49m[30;43m,[39;49m
+[32m    935[39m [30;43m            [39;49m[30;43mnewline[39;49m[30;43m=[39;49m[30;43m"[39;49m[30;43m"[39;49m[30;43m,[39;49m
+[32m    936[39m [30;43m        [39;49m[30;43m)[39;49m
+[32m    937[39m     [38;5;28;01melse[39;00m:
+[32m    938[39m         [38;5;66;03m# Binary mode[39;00m
+[32m    939[39m         handle = [38;5;28mopen[39m(handle, ioargs.mode)
+
+[31mFileNotFoundError[39m: [Errno 2] No such file or directory: '/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/tutorials/data/psm4_miami.csv'
 
