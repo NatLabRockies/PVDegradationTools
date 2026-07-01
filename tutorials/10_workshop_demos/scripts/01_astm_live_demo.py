@@ -112,18 +112,19 @@ if NREL_API_KEY is None:
 # %% [markdown]
 # # Fetching TMYs from the NSRDB
 #
-# The NSRDB, one of many sources of weather data intended for PV modeling, is free and easy to access using pvlib. As an example, we'll fetch a TMY dataset for Phoenix, AZ at coordinates [(33.4484, -112.0740)](https://goo.gl/maps/hGV92QHCm5FHJKbf9).
+# The NSRDB, one of many sources of weather data intended for PV modeling, is free and easy to access using pvlib. As an example, we'll fetch a TMY dataset for Golden, CO at coordinates [(39.73, -105.18)](https://goo.gl/maps/hGV92QHCm5FHJKbf9).
 #
 # This function uses [`pvdeg.weather.get()`](https://pvdegradationtools.readthedocs.io/en/latest/_autosummary/pvdeg.weather.html#pvdeg.weather.get), which returns a Python dictionary of metadata and a Pandas dataframe of the timeseries weather data.
 #
 # This function internally leverages  [`pvlib.iotools.get_psm3()`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.iotools.get_psm3.html). However, for some of the NSRDB data relative humidity is not a given parameter, and `pvdeg` calculates  the values from the downloaded data as an internal processing step.
+#
 
 # %%
 # This cell is for documentation only and is not meant to be executed.
 # The next cell performs the same request directly with PVLib.
 """
 weather_db = 'PSM4'
-weather_id = (33.4484, -112.0740)
+weather_id = (39.73, -105.18)
 weather_arg = {'api_key': NREL_API_KEY,
                'email': 'user@mail.com',
                'year': '2021',
@@ -133,6 +134,7 @@ weather_arg = {'api_key': NREL_API_KEY,
 weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)
 """
 
+
 # %%
 # For reproducible CI and offline use, default to cached weather data.
 # Set USE_LIVE_NSRDB=True during workshops to make the live API call.
@@ -140,8 +142,8 @@ USE_LIVE_NSRDB = False
 
 if USE_LIVE_NSRDB:
     weather_df, meta = pvlib.iotools.get_nsrdb_psm4_tmy(
-        latitude=33.4484,
-        longitude=-112.0740,
+        latitude=39.73,
+        longitude=-105.18,
         api_key=NREL_API_KEY,
         email="silvana.ovaitt@nrel.gov",  # <-- any email works here fine
         year="tmy",
@@ -160,6 +162,7 @@ else:
     with open(meta_path, "r") as f:
         meta = json.load(f)
 
+
 # %%
 weather_df
 
@@ -170,8 +173,9 @@ meta
 weather_df.head()
 
 # %%
-# Choose the date you want to plot
-date = "2010-01-01"
+# Choose the date you want to plot.
+# Note: this TMY is stitched together from different years per month; July here is 2020.
+date = "2020-07-01"
 mask = weather_df.index.date == pd.to_datetime(date).date()
 day_df = weather_df.loc[mask]
 
@@ -185,6 +189,7 @@ ax1.set_ylabel("DNI")
 ax2.set_ylabel(r"Temperature $\degree$C")
 plt.title(f"Weather Data for {date}")
 plt.show()
+
 
 # %%
 print(weather_df.columns)
