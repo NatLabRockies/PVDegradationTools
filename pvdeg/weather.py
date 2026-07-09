@@ -1,7 +1,7 @@
 """Collection of classes and functions to obtain spectral parameters."""
 
 from pvdeg import humidity
-from pvdeg.utilities import nrel_kestrel_check
+from pvdeg.utilities import nlr_kestrel_check
 
 from typing import Union
 from pvlib import iotools
@@ -257,7 +257,7 @@ def get(
 
     elif geospatial:
         if database == "NSRDB":
-            nrel_kestrel_check()
+            nlr_kestrel_check()
 
             weather_ds, meta_df = get_NSRDB(geospatial=geospatial, **kwargs)
             meta_df["wind_height"] = 2

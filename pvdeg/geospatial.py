@@ -1,5 +1,7 @@
 """Collection of classes and functions for geospatial analysis."""
 
+import warnings
+
 from pvdeg import (
     utilities,
 )
@@ -202,6 +204,7 @@ def analysis(
     template: xr.Dataset = None,
     preserve_gid_dim: bool = False,
     compute: bool = True,
+    gid_chunk: int = None,
     **func_kwargs,
 ) -> Union[xr.Dataset, Delayed]:
     """
@@ -236,6 +239,16 @@ def analysis(
         Expert setting. If False, builds lazy computation graph without execution.
         This is useful for building into larger dask pipelines.
         Default is True: Values will be computed when this function is called.
+    gid_chunk : int, optional
+        Number of gids per dask chunk used to parallelize the analysis. The
+        analysis runs one task per chunk along the 'gid' dimension, so a
+        single-chunk ``weather_ds`` would otherwise execute serially on one
+        worker. If provided, ``weather_ds`` is rechunked to
+        ``{"time": -1, "gid": gid_chunk}`` ('time' is kept whole because each
+        location needs its full timeseries). If None (default) and
+        ``weather_ds`` has a single 'gid' chunk, it is auto-chunked to one gid
+        per task. Ignored, with a warning, when a custom ``template`` is
+        supplied, since rechunking would misalign it.
     func_kwargs : dict
         Keyword arguments to pass to func.
 
@@ -244,6 +257,40 @@ def analysis(
     ds_res : xarray.Dataset | dask.delayed.Delayed
         Dataset with results for a block of gids.
     """
+    # geospatial.analysis parallelizes by mapping calc_block over each dask
+    # chunk along 'gid'; a single 'gid' chunk runs every location serially on
+    # one worker. Ensure the dataset is chunked along 'gid' for parallelism.
+    gid_chunks = (weather_ds.chunks or {}).get("gid")
+    single_gid_chunk = gid_chunks is None or len(gid_chunks) <= 1
+
+    if template is not None:
+        if gid_chunk is not None:
+            warnings.warn(
+                "gid_chunk is ignored because a custom template was provided; "
+                "chunk weather_ds and template yourself to parallelize.",
+                stacklevel=2,
+            )
+        elif single_gid_chunk:
+            warnings.warn(
+                "weather_ds has a single 'gid' chunk, so analysis will run "
+                "serially on one worker. Chunk weather_ds (and template) along "
+                "'gid' to parallelize.",
+                stacklevel=2,
+            )
+    elif gid_chunk is not None or single_gid_chunk:
+        target = gid_chunk if gid_chunk is not None else 1
+        chunk_spec = {"gid": target}
+        if "time" in weather_ds.sizes:
+            chunk_spec["time"] = -1
+        weather_ds = weather_ds.chunk(chunk_spec)
+        if gid_chunk is None:
+            warnings.warn(
+                "weather_ds had a single 'gid' chunk; auto-chunked to one gid "
+                "per task for parallel execution. Pass gid_chunk=N to control "
+                "the chunk size.",
+                stacklevel=2,
+            )
+
     if template is None:
         template = auto_template(func=func, ds_gids=weather_ds)
 
