@@ -9,6 +9,14 @@ Documentation
 -------------
 
 
+Notebooks
+---------
+- Make the ASTM live demo and custom-functions tutorial notebooks reproducible
+  offline by loading cached NSRDB TMY data (with ``USE_LIVE_*`` toggle for the
+  live API path), fixing ``nbval`` failures caused by stale stored outputs and
+  the PVGIS API being unreachable from CI. (:issue:`342`, :pull:`350`)
+
+
 Deprecations
 -------------
 

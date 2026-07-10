@@ -32,15 +32,12 @@
 # # Single location example
 
 # %%
-# if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:
-# # !pip install pvdeg
-
-# %%
 import pvdeg
+import json
 import pandas as pd
 
 # %%
-# This information helps with debugging and getting support :)
+# This information helps with debugging and getting support
 import sys
 import platform
 
@@ -108,8 +105,6 @@ weather_arg = {
 # %%
 # Load pre-saved weather data for this tutorial
 # This avoids API rate limits during testing and builds
-import json
-
 weather_df = pd.read_csv("../data/psm4_golden.csv", index_col=0, parse_dates=True)
 with open("../data/meta_golden.json", "r") as f:
     meta = json.load(f)
@@ -158,8 +153,18 @@ weather_db = "PVGIS"
 weather_id = (24.7136, 46.6753)  # Riyadh, Saudi Arabia
 # weather_arg = {'map_variables': True}
 
-# TMY
-weather_df, meta = pvdeg.weather.get(weather_db, weather_id)
+# For reproducible notebook testing, default to cached local weather/meta.
+# Set USE_LIVE_PVGIS = True to fetch live PVGIS data.
+USE_LIVE_PVGIS = False
+
+if USE_LIVE_PVGIS:
+    # TMY from live PVGIS API
+    weather_df, meta = pvdeg.weather.get(weather_db, weather_id)
+else:
+    # Cached sample weather to avoid SSL/network flakiness in CI
+    weather_df = pd.read_csv("../data/psm4_golden.csv", index_col=0, parse_dates=True)
+    with open("../data/meta_golden.json", "r") as f:
+        meta = json.load(f)
 
 # Perform calculation
 res = pvdeg.standards.standoff(
