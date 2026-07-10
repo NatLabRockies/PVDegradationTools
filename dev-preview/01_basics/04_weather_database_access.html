@@ -573,8 +573,15 @@
 <h1>Single location example<a class="headerlink" href="#single-location-example" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
+<span class="c1"># !pip install pvdeg</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </pre></div>
 </div>
@@ -582,7 +589,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This information helps with debugging and getting support</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This information helps with debugging and getting support :)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 
@@ -595,7 +602,7 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1018-azure
 Python version  3.11.15 (main, Jun 16 2026, 21:41:52) [GCC 13.3.0]
-pvdeg version  0.1.dev1+g75cfd6be4
+pvdeg version  0.1.dev1+g85efda702
 </pre></div>
 </div>
 </div>
@@ -661,6 +668,8 @@ pvdeg version  0.1.dev1+g75cfd6be4
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load pre-saved weather data for this tutorial</span>
 <span class="c1"># This avoids API rate limits during testing and builds</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
 <span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/psm4_golden.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../data/meta_golden.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -723,18 +732,8 @@ Level 2 certification is never required for this temperature                    
 <span class="n">weather_id</span> <span class="o">=</span> <span class="p">(</span><span class="mf">24.7136</span><span class="p">,</span> <span class="mf">46.6753</span><span class="p">)</span>  <span class="c1"># Riyadh, Saudi Arabia</span>
 <span class="c1"># weather_arg = {&#39;map_variables&#39;: True}</span>
 
-<span class="c1"># For reproducible notebook testing, default to cached local weather/meta.</span>
-<span class="c1"># Set USE_LIVE_PVGIS = True to fetch live PVGIS data.</span>
-<span class="n">USE_LIVE_PVGIS</span> <span class="o">=</span> <span class="kc">False</span>
-
-<span class="k">if</span> <span class="n">USE_LIVE_PVGIS</span><span class="p">:</span>
-    <span class="c1"># TMY from live PVGIS API</span>
-    <span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">weather_db</span><span class="p">,</span> <span class="n">weather_id</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="c1"># Cached sample weather to avoid SSL/network flakiness in CI</span>
-    <span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/psm4_golden.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../data/meta_golden.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="c1"># TMY</span>
+<span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">weather_db</span><span class="p">,</span> <span class="n">weather_id</span><span class="p">)</span>
 
 <span class="c1"># Perform calculation</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">(</span>
@@ -750,14 +749,7 @@ Level 2 certification is never required for this temperature                    
     <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
     <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
 <span class="p">)</span>
-
-<span class="c1"># Print rounded numeric outputs for testing</span>
-<span class="n">res_clean</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;x_cm&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s2">&quot;T98_0_C&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;T98_0&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s2">&quot;T98_inf_C&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;T98_inf&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">),</span>
-<span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">res_clean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">interpret_standoff</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
 
 <span class="c1"># Clean metadata for consistent output (remove variable fields)</span>
 <span class="n">meta_clean</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">meta</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;irradiance_time_offset&quot;</span><span class="p">]}</span>
@@ -766,9 +758,13 @@ Level 2 certification is never required for this temperature                    
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  39.7 was used.
-{&#39;x_cm&#39;: 1.8, &#39;T98_0_C&#39;: 75.9, &#39;T98_inf_C&#39;: 51.6}
-{&#39;Source&#39;: &#39;NSRDB&#39;, &#39;Location ID&#39;: &#39;479494&#39;, &#39;City&#39;: &#39;-&#39;, &#39;State&#39;: &#39;-&#39;, &#39;Country&#39;: &#39;-&#39;, &#39;Clearsky DHI Units&#39;: &#39;w/m2&#39;, &#39;Clearsky DNI Units&#39;: &#39;w/m2&#39;, &#39;Clearsky GHI Units&#39;: &#39;w/m2&#39;, &#39;Dew Point Units&#39;: &#39;c&#39;, &#39;DHI Units&#39;: &#39;w/m2&#39;, &#39;DNI Units&#39;: &#39;w/m2&#39;, &#39;GHI Units&#39;: &#39;w/m2&#39;, &#39;Solar Zenith Angle Units&#39;: &#39;Degree&#39;, &#39;Temperature Units&#39;: &#39;c&#39;, &#39;Pressure Units&#39;: &#39;mbar&#39;, &#39;Relative Humidity Units&#39;: &#39;%&#39;, &#39;Precipitable Water Units&#39;: &#39;cm&#39;, &#39;Wind Direction Units&#39;: &#39;Degrees&#39;, &#39;Wind Speed Units&#39;: &#39;m/s&#39;, &#39;Cloud Type -15&#39;: &#39;N/A&#39;, &#39;Cloud Type 0&#39;: &#39;Clear&#39;, &#39;Cloud Type 1&#39;: &#39;Probably Clear&#39;, &#39;Cloud Type 2&#39;: &#39;Fog&#39;, &#39;Cloud Type 3&#39;: &#39;Water&#39;, &#39;Cloud Type 4&#39;: &#39;Super-Cooled Water&#39;, &#39;Cloud Type 5&#39;: &#39;Mixed&#39;, &#39;Cloud Type 6&#39;: &#39;Opaque Ice&#39;, &#39;Cloud Type 7&#39;: &#39;Cirrus&#39;, &#39;Cloud Type 8&#39;: &#39;Overlapping&#39;, &#39;Cloud Type 9&#39;: &#39;Overshooting&#39;, &#39;Cloud Type 10&#39;: &#39;Unknown&#39;, &#39;Cloud Type 11&#39;: &#39;Dust&#39;, &#39;Cloud Type 12&#39;: &#39;Smoke&#39;, &#39;Fill Flag 0&#39;: &#39;N/A&#39;, &#39;Fill Flag 1&#39;: &#39;Missing Image&#39;, &#39;Fill Flag 2&#39;: &#39;Low Irradiance&#39;, &#39;Fill Flag 3&#39;: &#39;Exceeds Clearsky&#39;, &#39;Fill Flag 4&#39;: &#39;Missing CLoud Properties&#39;, &#39;Fill Flag 5&#39;: &#39;Rayleigh Violation&#39;, &#39;Surface Albedo Units&#39;: &#39;N/A&#39;, &#39;Version&#39;: &#39;4.1.2.dev4+g3b38bc8.d20250228&#39;, &#39;latitude&#39;: 39.73, &#39;longitude&#39;: -105.18, &#39;altitude&#39;: 1876, &#39;tz&#39;: -7, &#39;wind_height&#39;: 2}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  24.7 was used.
+The estimated T₉₈ of an insulated-back module is 89.6°C. 
+The estimated T₉₈ of an open-rack module is 63.9°C. 
+Level 0 certification is valid for a standoff greather than 9.3 cm. 
+Level 1 certification is required for a standoff between 9.3 cm, and 3.0 cm. 
+Level 2 certification is required for a standoff less than 3.0 cm.
+{&#39;latitude&#39;: 24.7136, &#39;longitude&#39;: 46.6753, &#39;altitude&#39;: 646.0, &#39;wind_height&#39;: 10, &#39;Source&#39;: &#39;PVGIS&#39;}
 </pre></div>
 </div>
 </div>
