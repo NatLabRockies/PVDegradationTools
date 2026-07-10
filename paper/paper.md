@@ -78,7 +78,7 @@ Since its first release as PV Degradation Tools [@Holsapple2020pvdegtools], PVDe
 These applications highlight PVDeg’s versatility as the “PV Library of degradation phenomena” — an open, community-driven platform linking materials science, environmental modeling, and field performance.
 
 # Ongoing Development
-Version 0.7.1 is the latest stable release, incorporating support for NSRDB PSM v4 weather data and a major restructuring of the Jupyter notebook tutorials for improved usability and clarity.
+Version 0.7.2 is the latest stable release, incorporating support for NSRDB PSM v4 weather data and a major restructuring of the Jupyter notebook tutorials for improved usability and clarity.
 
 DuraMAT-funded projects will expand the degradation and material parameter databases using literature searches driven by large language models. In addition, the Scenario class is being developed to support multi-material modules and chained job dependencies, allowing coupled multiphysics modeling of interrelated degradation and transport mechanisms within a single reproducible workflow. This will mitigate the need for users to design and execute multiple individiual Scenarios for different degradation pathways and materials.
 
