@@ -522,7 +522,11 @@ def plot_USA(
     xr_res, cmap="viridis", vmin=None, vmax=None, title=None, cb_title=None, fp=None
 ):
     fig = plt.figure()
-    ax = fig.add_axes([0, 0, 1, 1], projection=ccrs.LambertConformal(), frameon=False)
+    ax = fig.add_axes(
+        [0, 0, 1, 1],
+        projection=ccrs.LambertConformal(central_longitude=-95, central_latitude=45),
+        frameon=False,
+    )
     ax.patch.set_visible(False)
     ax.set_extent([-120, -74, 22, 50], ccrs.Geodetic())
 
@@ -538,25 +542,21 @@ def plot_USA(
     )
 
     cm = xr_res.plot(
+        ax=ax,
         transform=ccrs.PlateCarree(),
         zorder=1,
         add_colorbar=False,
         cmap=cmap,
         vmin=vmin,
         vmax=vmax,
-        subplot_kws={
-            "projection": ccrs.LambertConformal(
-                central_longitude=-95, central_latitude=45
-            )
-        },
     )
 
-    cb = plt.colorbar(cm, shrink=0.5)
+    cb = plt.colorbar(cm, ax=ax, shrink=0.5)
     cb.set_label(cb_title)
     ax.set_title(title)
 
     if fp is not None:
-        plt.savefig(fp, dpi=1200)
+        fig.savefig(fp, dpi=1200)
 
     return fig, ax
 
@@ -581,6 +581,7 @@ def plot_Europe(
     )
 
     cm = xr_res.plot(
+        ax=ax,
         transform=ccrs.PlateCarree(),
         zorder=1,
         add_colorbar=False,
@@ -591,7 +592,7 @@ def plot_Europe(
         infer_intervals=False,
     )
 
-    cb = plt.colorbar(cm, shrink=0.5)
+    cb = plt.colorbar(cm, ax=ax, shrink=0.5)
     cb.set_label(cb_title)
     ax.set_title(title)
 
@@ -602,7 +603,7 @@ def plot_Europe(
     ax.set_ylabel("Latitude")
 
     if fp is not None:
-        plt.savefig(fp, dpi=1200)
+        fig.savefig(fp, dpi=1200)
 
     return fig, ax
 
