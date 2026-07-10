@@ -339,7 +339,7 @@ def test_get_NSRDB_ds_has_kestrel_nsrdb_fnames_tmy(monkeypatch):
         return SORTED_TMY_DIR, False
 
     # Fake ini_h5_geospatial to return an empty dataset/meta (no attrs set here)
-    def fake_ini_h5_geospatial(nsrdb_fnames):
+    def fake_ini_h5_geospatial(nsrdb_fnames, gids=None):
         # ensure get_NSRDB passes the sliced list in
         # (TMY → single last element from sorted list)
         assert nsrdb_fnames == [SORTED_TMY_DIR[-1]]
@@ -372,7 +372,7 @@ def test_get_NSRDB_ds_has_kestrel_nsrdb_fnames_year(monkeypatch):
         assert NREL_HPC is False
         return SORTED_TMY_DIR, True
 
-    def fake_ini_h5_geospatial(nsrdb_fnames):
+    def fake_ini_h5_geospatial(nsrdb_fnames, gids=None):
         # For year input, no slicing; expect the entire list (whatever order
         # get_NSRDB_fnames returned). The attribute stores exactly what
         # get_NSRDB passes in — the function under test does not re-sort here.

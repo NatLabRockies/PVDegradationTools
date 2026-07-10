@@ -1,7 +1,7 @@
 """Collection of classes and functions to obtain spectral parameters."""
 
 from pvdeg import humidity
-from pvdeg.utilities import nlr_kestrel_check
+from pvdeg.utilities import gid_downsampling, nlr_kestrel_check
 
 from typing import Union
 from pvlib import iotools
@@ -152,7 +152,7 @@ def get(
     Collecting geospatial data from NSRDB on Kestrel (NREL INTERNAL USERS ONLY)
 
     satellite options:
-        ``"GOES", "METEOSAT", "Himawari", "SUNY", "CONUS", "Americas"``
+        ``"GOES", "METEOSAT", "Himawari", "SUNY", "CONUS", "Americas", "Polar"``
 
 
     .. code-block:: python
@@ -507,51 +507,136 @@ def read_h5(gid, file, attributes=None, **_):
     return weather_df, meta.to_dict()
 
 
-def ini_h5_geospatial(fps):
+def _nsrdb_coords(fp):
+    """Read latitude/longitude (and ``offshore`` when present) from an NSRDB
+    ``meta`` compound dataset.
+
+    Uses an HDF5 field selection when available, which is far faster than reading
+    the full meta table (with its large string columns) for multi-million-site
+    grids -- e.g. ~1 s vs ~160 s for GOES full_disc (~9.5M sites). The NSRDB
+    ``offshore`` flag (1 = over water) is included when the dataset carries it so
+    callers can restrict to land.
     """
-    Initialize h5 weather file that follows NSRDB conventions for geospatial analyses.
+    with h5py.File(fp, "r") as hf:
+        meta = hf["meta"]
+        has_offshore = "offshore" in (meta.dtype.names or ())
+        try:
+            lat = meta.fields("latitude")[:]
+            lon = meta.fields("longitude")[:]
+            offshore = meta.fields("offshore")[:] if has_offshore else None
+        except (AttributeError, TypeError, ValueError):
+            rec = meta[:]
+            lat, lon = rec["latitude"], rec["longitude"]
+            offshore = rec["offshore"] if has_offshore else None
+    data = {"latitude": np.asarray(lat), "longitude": np.asarray(lon)}
+    if offshore is not None:
+        data["offshore"] = np.asarray(offshore)
+    return pd.DataFrame(data)
+
+
+def _nsrdb_meta_rows(fp, gids):
+    """Read the full ``meta`` table for only a subset of site gids."""
+    with h5py.File(fp, "r") as hf:
+        rec = hf["meta"][np.asarray(gids)]
+    meta_df = pd.DataFrame.from_records(rec)
+    for col in meta_df.columns:
+        if meta_df[col].dtype == object:
+            meta_df[col] = meta_df[col].str.decode("utf-8", errors="ignore")
+    meta_df.index = pd.Index(np.asarray(gids), name="gid")
+    return meta_df
+
+
+def nsrdb_gids(fps, bbox=None, downsample=0, land_only=False):
+    """Resolve target site gids for an NSRDB grid via a fast coordinate read.
+
+    Only the coordinates are read (not the full metadata or any weather), so a
+    spatial subset / downsampled selection can be computed for a huge grid
+    (e.g. GOES full_disc, ~9.5M sites) in seconds.
 
     Parameters
     ----------
-    file_path : (str)
-        file path and name of h5 file to be read
-    gid : (int)
-        gid for the desired location
-    attributes : (list)
-        List of weather attributes to extract from NSRDB
+    fps : list of str
+        NSRDB h5 file path(s); the first is used for the coordinate read.
+    bbox : dict, optional
+        Spatial clip ``{"lat": (lat_min, lat_max), "lon": (lon_min, lon_max)}``.
+    downsample : int, optional
+        Grid coarsening factor for ``utilities.gid_downsampling`` (0 = none).
+    land_only : bool, optional
+        Keep only land sites by dropping ``offshore == 1``. Uses the NSRDB
+        ``offshore`` meta flag; grids without it (every current grid except the
+        polar one) are already land-only, so this is a no-op for them.
 
     Returns
     -------
-    weather_df : (pd.DataFrame)
-        DataFrame of weather data
-    meta : (dict)
-        Dictionary of metadata for the weather data
+    numpy.ndarray
+        Sorted array of site gids (indices into the h5 site dimension).
     """
+
+    coords = _nsrdb_coords(fps[0])
+    if land_only and "offshore" in coords.columns:
+        coords = coords[coords["offshore"] == 0]
+    if bbox is not None:
+        lat0, lat1 = bbox["lat"]
+        lon0, lon1 = bbox["lon"]
+        coords = coords[
+            coords["latitude"].between(lat0, lat1) & coords["longitude"].between(lon0, lon1)
+        ]
+    if downsample:
+        coords, _ = gid_downsampling(coords, downsample)
+    return np.sort(coords.index.values.astype(int))
+
+
+def ini_h5_geospatial(fps, gids=None):
+    """Initialize NSRDB-convention h5 weather file(s) for geospatial analysis.
+
+    Parameters
+    ----------
+    fps : list of str
+        h5 file path(s) to read (NSRDB split files are merged on their vars).
+    gids : array-like, optional
+        Subset of site gids (indices into the h5 site dimension) to load. When
+        given, only these sites are read: the grid is subset *before* rechunking,
+        which avoids reading/rechunking the full grid and makes loading a small
+        region from a very large NSRDB grid fast. Resolve gids cheaply with
+        ``nsrdb_gids``. When None (default), the full grid is loaded.
+
+    Returns
+    -------
+    weather_ds : xarray.Dataset
+        Lazy (dask-backed) weather dataset with dims ("time", "gid").
+    meta_df : pandas.DataFrame
+        Metadata indexed by gid.
+    """
+    if gids is not None:
+        gids = np.sort(np.asarray(gids).astype(int))
+
     dss = []
     drop_variables = ["meta", "time_index", "tmy_year", "tmy_year_short", "coordinates"]
 
     for i, fp in enumerate(fps):
-        hf = h5py.File(fp, "r")
-        attr = list(hf)
-        attr_to_read = [elem for elem in attr if elem not in drop_variables]
-
-        chunks = []
-        shapes = []
-        for var in attr_to_read:
-            chunks.append(
-                hf[var].chunks if hf[var].chunks is not None else (np.nan, np.nan)
+        with h5py.File(fp, "r") as hf:
+            attr_to_read = [k for k in hf if k not in drop_variables]
+            chunks = min(
+                {
+                    hf[v].chunks if hf[v].chunks is not None else (np.nan, np.nan)
+                    for v in attr_to_read
+                }
             )
-            shapes.append(
-                hf[var].shape if hf[var].shape is not None else (np.nan, np.nan)
-            )
-        chunks = min(set(chunks))
-        shapes = min(set(shapes))
+            if i == 0:
+                time_index = pd.to_datetime(hf["time_index"][...].astype(str)).values
+                n_sites = hf["meta"].shape[0]
+                # native h5 site-chunk width (shared by all split files); used
+                # below to chunk a gid subset on native block boundaries.
+                site_chunk = int(chunks[1]) if np.isfinite(chunks[1]) else 500
 
         if i == 0:
-            time_index = pd.to_datetime(hf["time_index"][...].astype(str)).values
-            meta_df = pd.read_hdf(fp, key="meta")
-            coords = {"gid": meta_df.index.values, "time": time_index}
-            coords_len = {"time": time_index.shape[0], "gid": meta_df.shape[0]}
+            if gids is None:
+                meta_df = pd.read_hdf(fp, key="meta")
+                gid_coord = meta_df.index.values
+            else:
+                meta_df = _nsrdb_meta_rows(fp, gids)
+                gid_coord = gids
+            coords_len = {"time": time_index.shape[0], "gid": n_sites}
 
         ds = xr.open_dataset(
             fp,
@@ -565,50 +650,38 @@ def ini_h5_geospatial(fps):
 
         for var in ds.data_vars:
             if hasattr(getattr(ds, var), "psm_scale_factor"):
-                scale_factor = 1 / ds[var].psm_scale_factor
-                getattr(ds, var).attrs["scale_factor"] = scale_factor
+                getattr(ds, var).attrs["scale_factor"] = 1 / ds[var].psm_scale_factor
 
-        # TODO: delete
-        # if tuple(coords_len.values()) == (
-        #     ds.sizes["phony_dim_0"],
-        #     ds.sizes["phony_dim_1"],
-        # ):
-        #     rename = {"phony_dim_0": "time", "phony_dim_1": "gid"}
-        # elif tuple(coords_len.values()) == (
-        #     ds.sizes["phony_dim_1"],
-        #     ds.sizes["phony_dim_0"],
-        # ):
-        #     rename = {"phony_dim_0": "gid", "phony_dim_1": "time"}
-        # else:
-        #     raise ValueError("Dimensions do not match for {}".format(var))
         rename = {}
-        for (
-            phony,
-            length,
-        ) in ds.sizes.items():
+        for phony, length in ds.sizes.items():
             if length == coords_len["time"]:
                 rename[phony] = "time"
             elif length == coords_len["gid"]:
                 rename[phony] = "gid"
         ds = ds.rename(rename)
-        ds = ds.assign_coords(coords)
 
-        # TODO: In case re-chunking becomes necessary
-        # ax0 = list(ds.sizes.keys())[list(ds.sizes.values()).index(shapes[0])]
-        # ax1 = list(ds.sizes.keys())[list(ds.sizes.values()).index(shapes[1])]
-        # ds = ds.chunk(chunks={ax0:chunks[0], ax1:chunks[1]})
+        # Subset sites BEFORE rechunking so the full grid is never materialized.
+        if gids is not None:
+            ds = ds.isel(gid=gids)
+        ds = ds.assign_coords({"gid": gid_coord, "time": time_index})
+
         dss.append(ds)
 
     ds = xr.merge(dss)
     ds = xr.decode_cf(ds)
-
-    # Rechunk time axis
     ds = ds.unify_chunks()
-    ds = ds.chunk(chunks={"time": -1, "gid": ds.chunks["gid"]})
 
-    weather_ds = ds
+    if gids is None:
+        ds = ds.chunk({"time": -1, "gid": ds.chunks["gid"]})
+    else:
+        # Chunk gid so each dask chunk holds the sites sharing one native h5
+        # site-chunk: every native chunk is then read once (no read amplification)
+        # while still yielding many chunks for parallel reads/compute. gids are
+        # sorted above, so consecutive gids map to consecutive site-chunks.
+        sizes = pd.Series(gids).groupby(gids // site_chunk).size().to_numpy()
+        ds = ds.chunk({"time": -1, "gid": tuple(int(s) for s in sizes)})
 
-    return weather_ds, meta_df
+    return ds, meta_df
 
 
 def get_NSRDB_fnames(satellite, names, NREL_HPC=False, **_):
@@ -617,7 +690,7 @@ def get_NSRDB_fnames(satellite, names, NREL_HPC=False, **_):
     Parameters
     ----------
     satellite : (str)
-        'GOES', 'METEOSAT', 'Himawari', 'SUNY', 'CONUS', 'Americas'
+        'GOES', 'METEOSAT', 'Himawari', 'SUNY', 'CONUS', 'Americas', 'Polar'
     names : (int or str)
         PVLIB naming convention year or 'TMY':
         If int, year of desired data
@@ -634,6 +707,7 @@ def get_NSRDB_fnames(satellite, names, NREL_HPC=False, **_):
         If True, use h5pyd to access NSRDB files
         If False, use h5py to access NSRDB files
     """
+
     sat_map = {
         "GOES": "full_disc",
         "METEOSAT": "meteosat",
@@ -641,6 +715,7 @@ def get_NSRDB_fnames(satellite, names, NREL_HPC=False, **_):
         "SUNY": "india",
         "CONUS": "conus",
         "Americas": "current",
+        "Polar": "polar",
     }
     if NREL_HPC:
         hpc_fp = "/datasets/NSRDB/"
@@ -669,6 +744,37 @@ def get_NSRDB_fnames(satellite, names, NREL_HPC=False, **_):
     return nsrdb_fnames, hsds
 
 
+def _downsample_time(weather_ds, freq):
+    """Downsample the ``time`` axis to ``freq`` by block-averaging.
+
+    NSRDB series are regularly spaced, so ``freq`` is (almost) always an integer
+    multiple of the native step. In that case this block-averages with
+    ``coarsen``, whose dask graph is blockwise and tiny. ``resample(...).mean()``
+    would instead build a per-bin groupby graph that explodes to millions of
+    tasks on large grids (gigabyte-scale graphs that stall the scheduler). The
+    windows are left-labelled (bin start) to match ``resample`` defaults. Falls
+    back to ``resample`` for a non-integer ratio, and is a no-op when the data is
+    already at or coarser than ``freq``.
+    """
+    time = weather_ds["time"]
+    if time.size < 2:
+        return weather_ds
+    try:
+        target_ns = pd.Timedelta(freq).value
+    except (ValueError, TypeError):
+        return weather_ds.resample(time=freq).mean()
+    steps = np.diff(time.values).astype("timedelta64[ns]").astype("int64")
+    native_ns = float(np.median(steps))
+    if native_ns <= 0:
+        return weather_ds
+    factor = int(round(target_ns / native_ns))
+    if factor <= 1:
+        return weather_ds  # already at/above the requested resolution
+    if abs(target_ns - factor * native_ns) > 0.01 * native_ns:
+        return weather_ds.resample(time=freq).mean()  # not a clean multiple
+    return weather_ds.coarsen(time=factor, boundary="trim", coord_func={"time": "min"}).mean()
+
+
 def get_NSRDB(
     satellite=None,
     names="TMY",
@@ -677,6 +783,11 @@ def get_NSRDB(
     location=None,
     geospatial=False,
     attributes=None,
+    gids=None,
+    bbox=None,
+    downsample=0,
+    resample=None,
+    land_only=False,
     **_,
 ):
     """Get NSRDB weather data from different satellites and years.
@@ -686,7 +797,7 @@ def get_NSRDB(
     Parameters
     ----------
     satellite : (str)
-        'GOES', 'METEOSAT', 'Himawari', 'SUNY', 'CONUS', 'Americas'
+        'GOES', 'METEOSAT', 'Himawari', 'SUNY', 'CONUS', 'Americas', 'Polar'
     names : (int or str)
         If int, year of desired data
         If str, 'TMY' or 'TMY3'
@@ -699,6 +810,27 @@ def get_NSRDB(
         (latitude, longitude) for the desired location
     attributes : (list)
         List of weather attributes to extract from NSRDB
+    gids : (array-like, optional)
+        Explicit subset of site gids to load (geospatial only). Takes precedence
+        over ``bbox``/``downsample``.
+    bbox : (dict, optional)
+        Spatial clip ``{"lat": (min, max), "lon": (min, max)}`` resolved from a
+        fast coordinate read so only those sites are loaded (geospatial only).
+    downsample : (int, optional)
+        Grid coarsening factor for ``utilities.gid_downsampling`` (geospatial
+        only); 0 = no downsampling.
+    resample : (str, optional)
+        Downsample the timeseries to this pandas offset (e.g. ``"1h"``) by
+        block-averaging, applied after loading (geospatial only). ``None`` keeps
+        native resolution. Implemented with ``coarsen`` (blockwise, tiny dask
+        graph) when the offset is an integer multiple of the native step -- as it
+        is for regular NSRDB series -- else falls back to ``resample``. Native
+        resolution is still read (no I/O saving); this only reduces downstream
+        compute. Uses ``mean``, suited to the continuous met variables here.
+    land_only : (bool, optional)
+        Keep only land sites, dropping NSRDB ``offshore`` grid cells (geospatial
+        only). No-op for grids without an ``offshore`` flag -- every current grid
+        except the polar one is already land-only.
 
     Returns
     -------
@@ -774,7 +906,24 @@ def get_NSRDB(
             # maintain as list with last element of sorted list
             nsrdb_fnames = nsrdb_fnames[-1:]
 
-        weather_ds, meta_df = ini_h5_geospatial(nsrdb_fnames)
+        # Only read the split files that hold the requested attributes (NSRDB
+        # spreads variables across several files); avoids opening the rest.
+        read_fnames = nsrdb_fnames
+        if attributes is not None:
+            read_fnames = []
+            for fp in nsrdb_fnames:
+                with h5py.File(fp, "r") as hf:
+                    if set(attributes) & set(hf.keys()):
+                        read_fnames.append(fp)
+            read_fnames = read_fnames or nsrdb_fnames
+
+        # Optionally subset the grid (spatial clip, land-only, and/or downsample)
+        # up front so only the requested sites are read -- essential for very
+        # large grids.
+        if gids is None and (bbox is not None or downsample or land_only):
+            gids = nsrdb_gids(read_fnames, bbox=bbox, downsample=downsample, land_only=land_only)
+
+        weather_ds, meta_df = ini_h5_geospatial(read_fnames, gids=gids)
 
         weather_ds = weather_ds.assign_attrs({"kestrel_nsrdb_fnames": nsrdb_fnames})
 
@@ -789,6 +938,12 @@ def get_NSRDB(
         for mset in meta_df.columns:
             if mset in META_MAP.keys():
                 meta_df.rename(columns={mset: META_MAP[mset]}, inplace=True)
+
+        # Optionally downsample the timeseries (e.g. sub-hourly -> "1h") by
+        # block-averaging. Native resolution is still read; this reduces
+        # downstream compute. mean suits the continuous met variables here.
+        if resample is not None:
+            weather_ds = _downsample_time(weather_ds, resample)
 
         return weather_ds, meta_df
 
@@ -933,10 +1088,11 @@ def get_satellite(location):
     Returns:
     --------
     satellite : (str)
-        'GOES', 'METEOSAT', 'Himawari', 'SUNY', 'CONUS', 'Americas'
+        'GOES', 'METEOSAT', 'Himawari', 'SUNY', 'CONUS', 'Americas', 'Polar'
     gid : (int)
         gid for the desired location
     """
+
     # this is just a placeholder till the actual code gets programmed.
     satellite = "PSM4"
 
