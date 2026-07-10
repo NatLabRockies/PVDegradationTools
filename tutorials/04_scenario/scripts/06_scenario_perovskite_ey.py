@@ -393,6 +393,7 @@ fig.tight_layout()
 #
 
 # %%
+# NBVAL_IGNORE_OUTPUT
 # Fetch lifetime data for all 50 US states via NSRDB PSM4 API
 # Get a free key at https://developer.nrel.gov/signup/
 
@@ -538,6 +539,7 @@ print(
 
 # %%
 # ── Plot: PR_Agg lifetime choropleth with state abbreviation labels ───────────
+# NBVAL_IGNORE_OUTPUT
 # Re-run this cell freely to adjust styling without re-fetching API data.
 # Colour = PR_Agg threshold (T_THRESHOLD, set in the imports cell).
 # Hover also shows DF_total for comparison (device-level vs energy-yield metric).
