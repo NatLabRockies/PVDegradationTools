@@ -603,10 +603,10 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Windows 11
-Python version  3.13.11 | packaged by Anaconda, Inc. | (main, Dec 10 2025, 21:21:58) [MSC v.1929 64 bit (AMD64)]
-Pandas version  3.0.0
-pvlib version  0.14.0
-pvdeg version  0.7.1.dev27+gde5391d47
+Python version  3.13.13 | packaged by conda-forge | (main, Apr  8 2026, 01:56:49) [MSC v.1944 64 bit (AMD64)]
+Pandas version  3.0.3
+pvlib version  0.15.1
+pvdeg version  0.7.2.dev86+gbddb1bdbc.d20260519
 </pre></div>
 </div>
 </div>
@@ -676,7 +676,7 @@ pvdeg version  0.7.1.dev27+gde5391d47
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="fetching-tmys-from-the-nsrdb">
 <h1>Fetching TMYs from the NSRDB<a class="headerlink" href="#fetching-tmys-from-the-nsrdb" title="Link to this heading">#</a></h1>
-<p>The NSRDB, one of many sources of weather data intended for PV modeling, is free and easy to access using pvlib. As an example, we’ll fetch a TMY dataset for Phoenix, AZ at coordinates <a class="reference external" href="https://goo.gl/maps/hGV92QHCm5FHJKbf9">(33.4484, -112.0740)</a>.</p>
+<p>The NSRDB, one of many sources of weather data intended for PV modeling, is free and easy to access using pvlib. As an example, we’ll fetch a TMY dataset for Golden, CO at coordinates <a class="reference external" href="https://goo.gl/maps/hGV92QHCm5FHJKbf9">(39.73, -105.18)</a>.</p>
 <p>This function uses <a class="reference external" href="https://pvdegradationtools.readthedocs.io/en/latest/_autosummary/pvdeg.weather.html#pvdeg.weather.get"><code class="docutils literal notranslate"><span class="pre">pvdeg.weather.get()</span></code></a>, which returns a Python dictionary of metadata and a Pandas dataframe of the timeseries weather data.</p>
 <p>This function internally leverages  <a class="reference external" href="https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.iotools.get_psm3.html"><code class="docutils literal notranslate"><span class="pre">pvlib.iotools.get_psm3()</span></code></a>. However, for some of the NSRDB data relative humidity is not a given parameter, and <code class="docutils literal notranslate"><span class="pre">pvdeg</span></code> calculates  the values from the downloaded data as an internal processing step.</p>
 <div class="cell docutils container">
@@ -685,7 +685,7 @@ pvdeg version  0.7.1.dev27+gde5391d47
 <span class="c1"># The next cell performs the same request directly with PVLib.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">weather_db = &#39;PSM4&#39;</span>
-<span class="sd">weather_id = (33.4484, -112.0740)</span>
+<span class="sd">weather_id = (39.73, -105.18)</span>
 <span class="sd">weather_arg = {&#39;api_key&#39;: NREL_API_KEY,</span>
 <span class="sd">               &#39;email&#39;: &#39;user@mail.com&#39;,</span>
 <span class="sd">               &#39;year&#39;: &#39;2021&#39;,</span>
@@ -698,22 +698,38 @@ pvdeg version  0.7.1.dev27+gde5391d47
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;\nweather_db = &#39;PSM4&#39;\nweather_id = (33.4484, -112.0740)\nweather_arg = {&#39;api_key&#39;: NREL_API_KEY,\n               &#39;email&#39;: &#39;user@mail.com&#39;,\n               &#39;year&#39;: &#39;2021&#39;,\n               &#39;map_variables&#39;: True,\n               &#39;leap_day&#39;: False}\n\nweather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)\n&quot;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;\nweather_db = &#39;PSM4&#39;\nweather_id = (39.73, -105.18)\nweather_arg = {&#39;api_key&#39;: NREL_API_KEY,\n               &#39;email&#39;: &#39;user@mail.com&#39;,\n               &#39;year&#39;: &#39;2021&#39;,\n               &#39;map_variables&#39;: True,\n               &#39;leap_day&#39;: False}\n\nweather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)\n&quot;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">iotools</span><span class="o">.</span><span class="n">get_nsrdb_psm4_tmy</span><span class="p">(</span>
-    <span class="n">latitude</span><span class="o">=</span><span class="mf">33.4484</span><span class="p">,</span>
-    <span class="n">longitude</span><span class="o">=-</span><span class="mf">112.0740</span><span class="p">,</span>
-    <span class="n">api_key</span><span class="o">=</span><span class="n">NREL_API_KEY</span><span class="p">,</span>
-    <span class="n">email</span><span class="o">=</span><span class="s2">&quot;silvana.ovaitt@nrel.gov&quot;</span><span class="p">,</span>  <span class="c1"># &lt;-- any email works here fine</span>
-    <span class="n">year</span><span class="o">=</span><span class="s2">&quot;tmy&quot;</span><span class="p">,</span>
-    <span class="n">map_variables</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">leap_day</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For reproducible CI and offline use, default to cached weather data.</span>
+<span class="c1"># Set USE_LIVE_NSRDB=True during workshops to make the live API call.</span>
+<span class="n">USE_LIVE_NSRDB</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="n">USE_LIVE_NSRDB</span><span class="p">:</span>
+    <span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">iotools</span><span class="o">.</span><span class="n">get_nsrdb_psm4_tmy</span><span class="p">(</span>
+        <span class="n">latitude</span><span class="o">=</span><span class="mf">39.73</span><span class="p">,</span>
+        <span class="n">longitude</span><span class="o">=-</span><span class="mf">105.18</span><span class="p">,</span>
+        <span class="n">api_key</span><span class="o">=</span><span class="n">NREL_API_KEY</span><span class="p">,</span>
+        <span class="n">email</span><span class="o">=</span><span class="s2">&quot;silvana.ovaitt@nrel.gov&quot;</span><span class="p">,</span>  <span class="c1"># &lt;-- any email works here fine</span>
+        <span class="n">year</span><span class="o">=</span><span class="s2">&quot;tmy&quot;</span><span class="p">,</span>
+        <span class="n">map_variables</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">leap_day</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+    <span class="n">repo_root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="vm">__file__</span><span class="p">))</span>
+    <span class="n">weather_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repo_root</span><span class="p">,</span> <span class="s2">&quot;tutorials&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;psm4_golden.csv&quot;</span><span class="p">)</span>
+    <span class="n">meta_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repo_root</span><span class="p">,</span> <span class="s2">&quot;tutorials&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;meta_golden.json&quot;</span><span class="p">)</span>
+
+    <span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">weather_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">meta_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -749,7 +765,7 @@ pvdeg version  0.7.1.dev27+gde5391d47
       <th>Hour</th>
       <th>Minute</th>
       <th>temp_air</th>
-      <th>temp_dew</th>
+      <th>dew_point</th>
       <th>dhi</th>
       <th>dni</th>
       <th>ghi</th>
@@ -757,93 +773,99 @@ pvdeg version  0.7.1.dev27+gde5391d47
       <th>pressure</th>
       <th>wind_direction</th>
       <th>wind_speed</th>
+      <th>relative_humidity</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>2010-01-01 00:30:00-07:00</th>
-      <td>2010</td>
+      <th>2011-01-01 00:30:00-07:00</th>
+      <td>2011</td>
       <td>1</td>
       <td>1</td>
       <td>0</td>
       <td>30</td>
-      <td>3.9</td>
-      <td>-7.8</td>
+      <td>-16.0</td>
+      <td>-26.6</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>982.0</td>
-      <td>54.0</td>
-      <td>4.6</td>
+      <td>0.8</td>
+      <td>794.0</td>
+      <td>276.0</td>
+      <td>4.0</td>
+      <td>39.692741</td>
     </tr>
     <tr>
-      <th>2010-01-01 01:30:00-07:00</th>
-      <td>2010</td>
+      <th>2011-01-01 01:30:00-07:00</th>
+      <td>2011</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>30</td>
-      <td>3.8</td>
-      <td>-8.1</td>
+      <td>-16.0</td>
+      <td>-26.5</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>981.0</td>
-      <td>55.0</td>
-      <td>4.5</td>
+      <td>0.8</td>
+      <td>794.0</td>
+      <td>274.0</td>
+      <td>4.1</td>
+      <td>40.057183</td>
     </tr>
     <tr>
-      <th>2010-01-01 02:30:00-07:00</th>
-      <td>2010</td>
+      <th>2011-01-01 02:30:00-07:00</th>
+      <td>2011</td>
       <td>1</td>
       <td>1</td>
       <td>2</td>
       <td>30</td>
-      <td>3.9</td>
-      <td>-8.5</td>
+      <td>-15.9</td>
+      <td>-26.2</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>981.0</td>
-      <td>55.0</td>
-      <td>4.2</td>
+      <td>0.8</td>
+      <td>795.0</td>
+      <td>273.0</td>
+      <td>4.1</td>
+      <td>40.828082</td>
     </tr>
     <tr>
-      <th>2010-01-01 03:30:00-07:00</th>
-      <td>2010</td>
+      <th>2011-01-01 03:30:00-07:00</th>
+      <td>2011</td>
       <td>1</td>
       <td>1</td>
       <td>3</td>
       <td>30</td>
-      <td>3.9</td>
-      <td>-8.8</td>
+      <td>-15.8</td>
+      <td>-26.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>981.0</td>
-      <td>54.0</td>
-      <td>3.9</td>
+      <td>0.8</td>
+      <td>795.0</td>
+      <td>272.0</td>
+      <td>4.1</td>
+      <td>41.234476</td>
     </tr>
     <tr>
-      <th>2010-01-01 04:30:00-07:00</th>
-      <td>2010</td>
+      <th>2011-01-01 04:30:00-07:00</th>
+      <td>2011</td>
       <td>1</td>
       <td>1</td>
       <td>4</td>
       <td>30</td>
-      <td>3.8</td>
-      <td>-9.1</td>
+      <td>-15.7</td>
+      <td>-25.7</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>981.0</td>
-      <td>53.0</td>
-      <td>3.6</td>
+      <td>0.8</td>
+      <td>795.0</td>
+      <td>271.0</td>
+      <td>4.0</td>
+      <td>42.023356</td>
     </tr>
     <tr>
       <th>...</th>
@@ -861,95 +883,101 @@ pvdeg version  0.7.1.dev27+gde5391d47
       <td>...</td>
       <td>...</td>
       <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>2023-12-31 19:30:00-07:00</th>
-      <td>2023</td>
+      <th>2003-12-31 19:30:00-07:00</th>
+      <td>2003</td>
       <td>12</td>
       <td>31</td>
       <td>19</td>
       <td>30</td>
-      <td>6.8</td>
-      <td>-6.6</td>
+      <td>-15.7</td>
+      <td>-26.8</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>982.0</td>
-      <td>30.0</td>
-      <td>1.9</td>
+      <td>0.8</td>
+      <td>793.0</td>
+      <td>284.0</td>
+      <td>3.9</td>
+      <td>38.014453</td>
     </tr>
     <tr>
-      <th>2023-12-31 20:30:00-07:00</th>
-      <td>2023</td>
+      <th>2003-12-31 20:30:00-07:00</th>
+      <td>2003</td>
       <td>12</td>
       <td>31</td>
       <td>20</td>
       <td>30</td>
-      <td>6.2</td>
-      <td>-6.9</td>
+      <td>-15.6</td>
+      <td>-27.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>982.0</td>
-      <td>39.0</td>
-      <td>2.7</td>
+      <td>0.8</td>
+      <td>793.0</td>
+      <td>282.0</td>
+      <td>4.0</td>
+      <td>37.015745</td>
     </tr>
     <tr>
-      <th>2023-12-31 21:30:00-07:00</th>
-      <td>2023</td>
+      <th>2003-12-31 21:30:00-07:00</th>
+      <td>2003</td>
       <td>12</td>
       <td>31</td>
       <td>21</td>
       <td>30</td>
-      <td>5.8</td>
-      <td>-7.4</td>
+      <td>-15.5</td>
+      <td>-26.8</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>982.0</td>
-      <td>45.0</td>
-      <td>3.6</td>
+      <td>0.8</td>
+      <td>793.0</td>
+      <td>281.0</td>
+      <td>4.0</td>
+      <td>37.390056</td>
     </tr>
     <tr>
-      <th>2023-12-31 22:30:00-07:00</th>
-      <td>2023</td>
+      <th>2003-12-31 22:30:00-07:00</th>
+      <td>2003</td>
       <td>12</td>
       <td>31</td>
       <td>22</td>
       <td>30</td>
-      <td>5.0</td>
-      <td>-7.5</td>
+      <td>-15.5</td>
+      <td>-26.6</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>982.0</td>
-      <td>50.0</td>
-      <td>4.3</td>
+      <td>0.8</td>
+      <td>794.0</td>
+      <td>280.0</td>
+      <td>3.9</td>
+      <td>38.080774</td>
     </tr>
     <tr>
-      <th>2023-12-31 23:30:00-07:00</th>
-      <td>2023</td>
+      <th>2003-12-31 23:30:00-07:00</th>
+      <td>2003</td>
       <td>12</td>
       <td>31</td>
       <td>23</td>
       <td>30</td>
-      <td>4.3</td>
-      <td>-7.6</td>
+      <td>-15.8</td>
+      <td>-26.6</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>982.0</td>
-      <td>52.0</td>
-      <td>4.6</td>
+      <td>0.8</td>
+      <td>794.0</td>
+      <td>278.0</td>
+      <td>3.9</td>
+      <td>39.039069</td>
     </tr>
   </tbody>
 </table>
-<p>8760 rows × 14 columns</p>
+<p>8760 rows × 15 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
@@ -960,12 +988,10 @@ pvdeg version  0.7.1.dev27+gde5391d47
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Source&#39;: &#39;NSRDB&#39;,
- &#39;Location ID&#39;: &#39;323705&#39;,
+ &#39;Location ID&#39;: &#39;479494&#39;,
  &#39;City&#39;: &#39;-&#39;,
  &#39;State&#39;: &#39;-&#39;,
  &#39;Country&#39;: &#39;-&#39;,
- &#39;Time Zone&#39;: -7,
- &#39;Local Time Zone&#39;: -7,
  &#39;Clearsky DHI Units&#39;: &#39;w/m2&#39;,
  &#39;Clearsky DNI Units&#39;: &#39;w/m2&#39;,
  &#39;Clearsky GHI Units&#39;: &#39;w/m2&#39;,
@@ -1002,9 +1028,11 @@ pvdeg version  0.7.1.dev27+gde5391d47
  &#39;Fill Flag 5&#39;: &#39;Rayleigh Violation&#39;,
  &#39;Surface Albedo Units&#39;: &#39;N/A&#39;,
  &#39;Version&#39;: &#39;4.1.2.dev4+g3b38bc8.d20250228&#39;,
- &#39;latitude&#39;: 33.45,
- &#39;longitude&#39;: -112.06,
- &#39;altitude&#39;: 334}
+ &#39;latitude&#39;: 39.73,
+ &#39;longitude&#39;: -105.18,
+ &#39;altitude&#39;: 1876,
+ &#39;tz&#39;: -7,
+ &#39;wind_height&#39;: 2}
 </pre></div>
 </div>
 </div>
@@ -1040,7 +1068,7 @@ pvdeg version  0.7.1.dev27+gde5391d47
       <th>Hour</th>
       <th>Minute</th>
       <th>temp_air</th>
-      <th>temp_dew</th>
+      <th>dew_point</th>
       <th>dhi</th>
       <th>dni</th>
       <th>ghi</th>
@@ -1048,93 +1076,99 @@ pvdeg version  0.7.1.dev27+gde5391d47
       <th>pressure</th>
       <th>wind_direction</th>
       <th>wind_speed</th>
+      <th>relative_humidity</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>2010-01-01 00:30:00-07:00</th>
-      <td>2010</td>
+      <th>2011-01-01 00:30:00-07:00</th>
+      <td>2011</td>
       <td>1</td>
       <td>1</td>
       <td>0</td>
       <td>30</td>
-      <td>3.9</td>
-      <td>-7.8</td>
+      <td>-16.0</td>
+      <td>-26.6</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>982.0</td>
-      <td>54.0</td>
-      <td>4.6</td>
+      <td>0.8</td>
+      <td>794.0</td>
+      <td>276.0</td>
+      <td>4.0</td>
+      <td>39.692741</td>
     </tr>
     <tr>
-      <th>2010-01-01 01:30:00-07:00</th>
-      <td>2010</td>
+      <th>2011-01-01 01:30:00-07:00</th>
+      <td>2011</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
       <td>30</td>
-      <td>3.8</td>
-      <td>-8.1</td>
+      <td>-16.0</td>
+      <td>-26.5</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>981.0</td>
-      <td>55.0</td>
-      <td>4.5</td>
+      <td>0.8</td>
+      <td>794.0</td>
+      <td>274.0</td>
+      <td>4.1</td>
+      <td>40.057183</td>
     </tr>
     <tr>
-      <th>2010-01-01 02:30:00-07:00</th>
-      <td>2010</td>
+      <th>2011-01-01 02:30:00-07:00</th>
+      <td>2011</td>
       <td>1</td>
       <td>1</td>
       <td>2</td>
       <td>30</td>
-      <td>3.9</td>
-      <td>-8.5</td>
+      <td>-15.9</td>
+      <td>-26.2</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>981.0</td>
-      <td>55.0</td>
-      <td>4.2</td>
+      <td>0.8</td>
+      <td>795.0</td>
+      <td>273.0</td>
+      <td>4.1</td>
+      <td>40.828082</td>
     </tr>
     <tr>
-      <th>2010-01-01 03:30:00-07:00</th>
-      <td>2010</td>
+      <th>2011-01-01 03:30:00-07:00</th>
+      <td>2011</td>
       <td>1</td>
       <td>1</td>
       <td>3</td>
       <td>30</td>
-      <td>3.9</td>
-      <td>-8.8</td>
+      <td>-15.8</td>
+      <td>-26.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>981.0</td>
-      <td>54.0</td>
-      <td>3.9</td>
+      <td>0.8</td>
+      <td>795.0</td>
+      <td>272.0</td>
+      <td>4.1</td>
+      <td>41.234476</td>
     </tr>
     <tr>
-      <th>2010-01-01 04:30:00-07:00</th>
-      <td>2010</td>
+      <th>2011-01-01 04:30:00-07:00</th>
+      <td>2011</td>
       <td>1</td>
       <td>1</td>
       <td>4</td>
       <td>30</td>
-      <td>3.8</td>
-      <td>-9.1</td>
+      <td>-15.7</td>
+      <td>-25.7</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.18</td>
-      <td>981.0</td>
-      <td>53.0</td>
-      <td>3.6</td>
+      <td>0.8</td>
+      <td>795.0</td>
+      <td>271.0</td>
+      <td>4.0</td>
+      <td>42.023356</td>
     </tr>
   </tbody>
 </table>
@@ -1142,8 +1176,9 @@ pvdeg version  0.7.1.dev27+gde5391d47
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Choose the date you want to plot</span>
-<span class="n">date</span> <span class="o">=</span> <span class="s2">&quot;2010-01-01&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Choose the date you want to plot.</span>
+<span class="c1"># Note: this TMY is stitched together from different years per month; July here is 2020.</span>
+<span class="n">date</span> <span class="o">=</span> <span class="s2">&quot;2020-07-01&quot;</span>
 <span class="n">mask</span> <span class="o">=</span> <span class="n">weather_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">date</span> <span class="o">==</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">date</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
 <span class="n">day_df</span> <span class="o">=</span> <span class="n">weather_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 
@@ -1161,7 +1196,7 @@ pvdeg version  0.7.1.dev27+gde5391d47
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9dd4826840406e34262acacedd0eaf5e9b0e16e42f67ded8dd927f44b85e76fe.png" src="../_images/9dd4826840406e34262acacedd0eaf5e9b0e16e42f67ded8dd927f44b85e76fe.png" />
+<img alt="../_images/e0365d2626f9a8abe8650c80c21f2086b854952e4cd38ed6a76423eb4bb6b953.png" src="../_images/e0365d2626f9a8abe8650c80c21f2086b854952e4cd38ed6a76423eb4bb6b953.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1173,30 +1208,31 @@ pvdeg version  0.7.1.dev27+gde5391d47
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Year&#39;, &#39;Month&#39;, &#39;Day&#39;, &#39;Hour&#39;, &#39;Minute&#39;, &#39;temp_air&#39;, &#39;temp_dew&#39;, &#39;dhi&#39;,
-       &#39;dni&#39;, &#39;ghi&#39;, &#39;albedo&#39;, &#39;pressure&#39;, &#39;wind_direction&#39;, &#39;wind_speed&#39;],
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Year&#39;, &#39;Month&#39;, &#39;Day&#39;, &#39;Hour&#39;, &#39;Minute&#39;, &#39;temp_air&#39;, &#39;dew_point&#39;,
+       &#39;dhi&#39;, &#39;dni&#39;, &#39;ghi&#39;, &#39;albedo&#39;, &#39;pressure&#39;, &#39;wind_direction&#39;,
+       &#39;wind_speed&#39;, &#39;relative_humidity&#39;],
       dtype=&#39;str&#39;)
-2003-08-01 00:30:00-07:00 2023-12-31 23:30:00-07:00
-                           Year  Month  Day  Hour  Minute  temp_air  temp_dew  \
-2010-01-01 00:30:00-07:00  2010      1    1     0      30       3.9      -7.8   
-2010-01-01 01:30:00-07:00  2010      1    1     1      30       3.8      -8.1   
-2010-01-01 02:30:00-07:00  2010      1    1     2      30       3.9      -8.5   
-2010-01-01 03:30:00-07:00  2010      1    1     3      30       3.9      -8.8   
-2010-01-01 04:30:00-07:00  2010      1    1     4      30       3.8      -9.1   
+2001-04-01 00:30:00-07:00 2020-07-31 23:30:00-07:00
+                           Year  Month  Day  Hour  Minute  temp_air  \
+2011-01-01 00:30:00-07:00  2011      1    1     0      30     -16.0   
+2011-01-01 01:30:00-07:00  2011      1    1     1      30     -16.0   
+2011-01-01 02:30:00-07:00  2011      1    1     2      30     -15.9   
+2011-01-01 03:30:00-07:00  2011      1    1     3      30     -15.8   
+2011-01-01 04:30:00-07:00  2011      1    1     4      30     -15.7   
 
-                           dhi  dni  ghi  albedo  pressure  wind_direction  \
-2010-01-01 00:30:00-07:00  0.0  0.0  0.0    0.18     982.0            54.0   
-2010-01-01 01:30:00-07:00  0.0  0.0  0.0    0.18     981.0            55.0   
-2010-01-01 02:30:00-07:00  0.0  0.0  0.0    0.18     981.0            55.0   
-2010-01-01 03:30:00-07:00  0.0  0.0  0.0    0.18     981.0            54.0   
-2010-01-01 04:30:00-07:00  0.0  0.0  0.0    0.18     981.0            53.0   
+                           dew_point  dhi  dni  ghi  albedo  pressure  \
+2011-01-01 00:30:00-07:00      -26.6  0.0  0.0  0.0     0.8     794.0   
+2011-01-01 01:30:00-07:00      -26.5  0.0  0.0  0.0     0.8     794.0   
+2011-01-01 02:30:00-07:00      -26.2  0.0  0.0  0.0     0.8     795.0   
+2011-01-01 03:30:00-07:00      -26.0  0.0  0.0  0.0     0.8     795.0   
+2011-01-01 04:30:00-07:00      -25.7  0.0  0.0  0.0     0.8     795.0   
 
-                           wind_speed  
-2010-01-01 00:30:00-07:00         4.6  
-2010-01-01 01:30:00-07:00         4.5  
-2010-01-01 02:30:00-07:00         4.2  
-2010-01-01 03:30:00-07:00         3.9  
-2010-01-01 04:30:00-07:00         3.6  
+                           wind_direction  wind_speed  relative_humidity  
+2011-01-01 00:30:00-07:00           276.0         4.0          39.692741  
+2011-01-01 01:30:00-07:00           274.0         4.1          40.057183  
+2011-01-01 02:30:00-07:00           273.0         4.1          40.828082  
+2011-01-01 03:30:00-07:00           272.0         4.1          41.234476  
+2011-01-01 04:30:00-07:00           271.0         4.0          42.023356  
 </pre></div>
 </div>
 </div>
@@ -1212,7 +1248,7 @@ pvdeg version  0.7.1.dev27+gde5391d47
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  33.5 was used.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  39.7 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </pre></div>
 </div>
@@ -1225,7 +1261,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Minimum installation distance: 0    12.546771
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Minimum installation distance: 0    1.817747
 Name: x, dtype: float64
 </pre></div>
 </div>
@@ -1251,7 +1287,7 @@ Name: x, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  33.5 was used.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  39.7 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </pre></div>
 </div>
@@ -1264,7 +1300,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Minimum installation distance: 0    12.546771
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Minimum installation distance: 0    1.817747
 Name: x, dtype: float64
 </pre></div>
 </div>
