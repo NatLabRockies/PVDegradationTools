@@ -587,7 +587,7 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 Python version  3.11.15 (main, Jun 16 2026, 21:41:52) [GCC 13.3.0]
 Pandas version  3.0.3
 Pvlib version  0.15.2
-Pvdeg version  0.1.dev1+g85bb5d977
+Pvdeg version  0.1.dev1+ge4bf42ad1
 </pre></div>
 </div>
 </div>
@@ -680,17 +680,17 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
-0    -0.420801     0.900853
-1     4.842694     0.373485
-2    12.006326     0.544345
-3     0.720110     0.032378
-4     4.833765     0.319338
+0     4.710050     0.320854
+1     4.814653     0.520398
+2     5.901617     0.159259
+3     5.491161    -0.166055
+4     1.081612    -0.150691
 ..         ...          ...
-495   7.558986     1.048018
-496  11.133718     0.421205
-497   7.513855     0.620239
-498   4.135785    -0.385235
-499   9.474690     0.278025
+495  12.242558     0.537872
+496   6.423315    -0.232994
+497   2.513157     0.195031
+498  -3.892213    -0.300318
+499   2.646013     1.181881
 
 [500 rows x 2 columns]
 </pre></div>
@@ -703,8 +703,7 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 <p>When using the pvdeg.montecarlo.simulate() function on a target function all of the target function’s required arguments must still be given. Our non-changing arguments will be stored in a dictionary. The randomized monte carlo input data will also be passed to the target function via the simulate function. All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL-IGNORE-OUTPUT</span>
-<span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
 <span class="n">function_kwargs</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;weather_df&quot;</span><span class="p">:</span> <span class="n">WEATHER</span><span class="p">,</span>
     <span class="s2">&quot;meta&quot;</span><span class="p">:</span> <span class="n">META</span><span class="p">,</span>
@@ -760,17 +759,17 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.150846  61.744759  42.597394
-1    0.000000  69.202199  47.579919
-2    0.000000  67.308241  46.187309
-3    0.080397  72.371831  49.919432
-4    0.000000  69.826038  48.035258
+0    0.000000  69.800578  48.022517
+1    0.000000  67.651010  46.408839
+2    0.393200  71.439462  49.106565
+3    1.011830  73.909951  50.675836
+4    0.195771  73.846386  50.614368
 ..        ...        ...        ...
-495  0.000000  58.896209  41.001083
-496  0.000000  68.688684  47.335148
-497  0.000000  66.140925  45.474869
-498  0.981951  74.978109  51.423828
-499  0.104083  70.239095  48.354573
+495  0.000000  67.410988  46.253897
+496  1.315028  74.323625  50.969160
+497  0.126405  71.089929  48.870677
+498  0.000000  74.623197  51.175028
+499  0.000000  56.028243  39.564357
 
 [500 rows x 3 columns]
 </pre></div>
@@ -805,7 +804,7 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/83550a7fc081c5ea705ba4839351ef21e5f9c658c0192093855c4eb871f023d1.png" src="../_images/83550a7fc081c5ea705ba4839351ef21e5f9c658c0192093855c4eb871f023d1.png" />
+<img alt="../_images/40f4ba7c56076a67432bb2c18b520ec28c0d5108a7f04f9f51d632559470328c.png" src="../_images/40f4ba7c56076a67432bb2c18b520ec28c0d5108a7f04f9f51d632559470328c.png" />
 </div>
 </div>
 </section>
