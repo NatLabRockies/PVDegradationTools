@@ -97,7 +97,17 @@ def _df_from_arbitrary(res, func):
     if isinstance(res, pd.DataFrame):
         return res
     elif isinstance(res, pd.Series):
-        return pd.DataFrame(res, columns=[func.__name__])
+        # Name the single output column after the function's declared geospatial
+        # shape (from @geospatial_quick_shape) so it matches the auto-generated
+        # template's data variable; fall back to the function name when the
+        # function was not decorated. Use rename().to_frame() rather than
+        # pd.DataFrame(res, columns=[name]): the latter reindexes by label and
+        # silently yields an all-NaN column when the Series name differs.
+        shape_names = getattr(func, "shape_names", None)
+        name = (
+            shape_names[0] if shape_names and len(shape_names) == 1 else func.__name__
+        )
+        return res.rename(name).to_frame()
     elif isinstance(res, (int, float)):
         return pd.DataFrame([res], columns=[func.__name__])
     elif isinstance(res, tuple) and all(isinstance(item, numerics) for item in res):
@@ -149,7 +159,15 @@ def calc_gid(ds_gid, meta_gid, func, **kwargs):
     #     {col: np.asarray(df_weather[col]).dtype for col in df_weather.columns},
     #     copy=False
     # )
-    df_weather.index = np.asarray(df_weather.index.values, dtype="datetime64[ns]")
+    # Keep the index name ("time") when forcing the dtype: a bare np.asarray drops
+    # it, and timeseries funcs (e.g. temperature.cell) inherit that unnamed index,
+    # so from_dataframe below would label the dim "index" instead of "time" and the
+    # `if not df.index.name` branch would then collapse the whole series to a
+    # scalar -- dropping "time" and breaking geospatial.analysis map_blocks.
+    df_weather.index = pd.DatetimeIndex(
+        np.asarray(df_weather.index.values, dtype="datetime64[ns]"),
+        name=df_weather.index.name,
+    )
 
     res = func(weather_df=df_weather, meta=meta_gid, **kwargs)
     # res is of function return type, can be float, tuple, list, dataframe, dataset, etc
