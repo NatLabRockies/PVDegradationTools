@@ -579,7 +579,8 @@ def nsrdb_gids(fps, bbox=None, downsample=0, land_only=False):
         lat0, lat1 = bbox["lat"]
         lon0, lon1 = bbox["lon"]
         coords = coords[
-            coords["latitude"].between(lat0, lat1) & coords["longitude"].between(lon0, lon1)
+            coords["latitude"].between(lat0, lat1)
+            & coords["longitude"].between(lon0, lon1)
         ]
     if downsample:
         coords, _ = gid_downsampling(coords, downsample)
@@ -772,7 +773,9 @@ def _downsample_time(weather_ds, freq):
         return weather_ds  # already at/above the requested resolution
     if abs(target_ns - factor * native_ns) > 0.01 * native_ns:
         return weather_ds.resample(time=freq).mean()  # not a clean multiple
-    return weather_ds.coarsen(time=factor, boundary="trim", coord_func={"time": "min"}).mean()
+    return weather_ds.coarsen(
+        time=factor, boundary="trim", coord_func={"time": "min"}
+    ).mean()
 
 
 def get_NSRDB(
@@ -921,7 +924,9 @@ def get_NSRDB(
         # up front so only the requested sites are read -- essential for very
         # large grids.
         if gids is None and (bbox is not None or downsample or land_only):
-            gids = nsrdb_gids(read_fnames, bbox=bbox, downsample=downsample, land_only=land_only)
+            gids = nsrdb_gids(
+                read_fnames, bbox=bbox, downsample=downsample, land_only=land_only
+            )
 
         weather_ds, meta_df = ini_h5_geospatial(read_fnames, gids=gids)
 
