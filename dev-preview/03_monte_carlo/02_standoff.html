@@ -587,7 +587,7 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 Python version  3.11.15 (main, Jun 16 2026, 21:41:52) [GCC 13.3.0]
 Pandas version  3.0.3
 Pvlib version  0.15.2
-Pvdeg version  0.1.dev1+g2e84f7a40
+Pvdeg version  0.1.dev1+g78bf388de
 </pre></div>
 </div>
 </div>
@@ -644,7 +644,9 @@ Pvdeg version  0.1.dev1+g2e84f7a40
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
-The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
           x      T98_0    T98_inf
 0  0.522443  71.778148  48.754265
           x      T98_0    T98_inf
@@ -677,18 +679,18 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          X_0  wind_factor
-0    4.714064     1.232568
-1    3.160370    -0.377773
-2    5.658087    -0.026641
-3    6.588691     0.243026
-4    6.843648    -0.171871
-..        ...          ...
-495  5.424249     0.091562
-496  0.435014     0.308666
-497  2.110815    -0.100897
-498  7.728172    -0.388935
-499  4.882910     0.725921
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
+0     4.012287     1.076374
+1    -0.406827    -0.835644
+2    10.584207     0.461122
+3     5.781332     0.260016
+4     7.052984    -0.582210
+..         ...          ...
+495   5.055732     0.128627
+496   9.082942     0.584282
+497   5.517273     0.538287
+498   9.748652     0.623458
+499  10.603586    -0.020852
 
 [500 rows x 2 columns]
 </pre></div>
@@ -701,8 +703,7 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 <p>When using the pvdeg.montecarlo.simulate() function on a target function all of the target function’s required arguments must still be given. Our non-changing arguments will be stored in a dictionary. The randomized monte carlo input data will also be passed to the target function via the simulate function. All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL-IGNORE-OUTPUT</span>
-<span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
 <span class="n">function_kwargs</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;weather_df&quot;</span><span class="p">:</span> <span class="n">WEATHER</span><span class="p">,</span>
     <span class="s2">&quot;meta&quot;</span><span class="p">:</span> <span class="n">META</span><span class="p">,</span>
@@ -758,17 +759,17 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.000000  54.796160  38.994116
-1    0.746226  74.951043  51.409847
-2    0.773296  72.909034  50.136438
-3    0.196230  70.647707  48.574541
-4    1.272184  73.941103  50.708576
+0    0.000000  58.438613  40.718751
+1    0.000000  76.234083  52.523090
+2    0.000000  68.315915  46.963916
+3    0.112836  70.423827  48.495830
+4    1.914687  75.622119  51.974267
 ..        ...        ...        ...
-495  0.497752  71.966279  49.540614
-496  0.000000  69.921034  48.113559
-497  0.357756  73.614557  50.429826
-498  1.839007  74.988834  51.430703
-499  0.000000  64.835493  44.487208
+495  0.390850  71.664884  49.286053
+496  0.000000  66.605037  45.789811
+497  0.000000  67.404418  46.249637
+498  0.000000  66.109506  45.436585
+499  1.426034  72.861644  50.120385
 
 [500 rows x 3 columns]
 </pre></div>
@@ -803,7 +804,7 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bcd6dcdabd5b915e27c360dc468819f52aafc611dc9f83f258095349021877f0.png" src="../_images/bcd6dcdabd5b915e27c360dc468819f52aafc611dc9f83f258095349021877f0.png" />
+<img alt="../_images/1e13966c054274cadfa37bef023d9b7cffe9305428441bfdf8179155d2f631fb.png" src="../_images/1e13966c054274cadfa37bef023d9b7cffe9305428441bfdf8179155d2f631fb.png" />
 </div>
 </div>
 </section>
