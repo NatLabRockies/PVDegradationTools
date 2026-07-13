@@ -11,6 +11,7 @@ For information on contributing to future releases, see :ref:`contributing`.
 Release Notes
 -------------
 
+.. include:: releases/pending.rst
 .. include:: releases/v0.7.0.rst
 .. include:: releases/v0.6.1.rst
 .. include:: releases/v0.6.0.rst
