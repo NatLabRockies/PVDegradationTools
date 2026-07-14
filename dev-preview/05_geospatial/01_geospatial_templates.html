@@ -1160,7 +1160,9 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">module_temps</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">geo_temperature_res</span><span class="p">[</span><span class="s2">&quot;module&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mf">39.89</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="s2">&quot;-106.42&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">geo_temperature_res</span><span class="p">[</span><span class="s2">&quot;module_temperature&quot;</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mf">39.89</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=-</span><span class="mf">106.42</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">values</span>
 <span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">module_temps</span><span class="p">)</span>
