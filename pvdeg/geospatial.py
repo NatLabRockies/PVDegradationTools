@@ -312,7 +312,28 @@ def analysis(
     if template is None:
         template = auto_template(func=func, ds_gids=weather_ds)
 
-    kwargs = {"func": func, "future_meta_df": meta_df, "func_kwargs": func_kwargs}
+    # calc_block only reads one row per gid (future_meta_df.loc[gid]), but
+    # map_blocks embeds whatever we pass here into EVERY per-gid task. Passing
+    # the raw meta_df therefore copies the whole frame into all N tasks and
+    # inflates the task graph to GiBs (e.g. ~470 KB x ~14k gids ~= 6.6 GiB),
+    # which stalls the distributed scheduler (unresponsive event loop, no
+    # progress). Scatter it once instead -- broadcast a single copy to every
+    # worker -- and embed the resulting Future so each task references it by key.
+    # Fall back to the raw frame when no distributed client is running (e.g. the
+    # synchronous/local scheduler used in tests).
+    meta_for_calc = meta_df
+    try:
+        from distributed import get_client
+
+        meta_for_calc = get_client().scatter(meta_df, broadcast=True)
+    except (ValueError, ImportError):
+        pass
+
+    kwargs = {
+        "func": func,
+        "future_meta_df": meta_for_calc,
+        "func_kwargs": func_kwargs,
+    }
 
     stacked = weather_ds.map_blocks(calc_block, kwargs=kwargs, template=template)
 
