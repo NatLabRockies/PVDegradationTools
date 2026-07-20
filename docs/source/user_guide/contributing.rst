@@ -306,7 +306,9 @@ Documentation
 * Include markdown cells explaining concepts
 * Use local data files when possible (avoid API dependencies for reproducibility)
 * Keep execution time under 5 minutes
-* Clear outputs before committing (pre-commit will help)
+* Commit notebooks with their executed outputs (run them with
+  ``jupyter nbconvert --to notebook --execute --inplace``); do not clear outputs, as
+  ``nbval`` validates them in CI
 
 Notebook Validation
 -------------------
@@ -371,8 +373,16 @@ but you still want to verify the notebook executes without errors.
 
 **Best practices for notebook contributions**:
 
-1. **Clear outputs before committing**: Use ``jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace notebook.ipynb``
-   or let pre-commit hooks handle it automatically
+1. **Commit notebooks with their outputs**: Execute the notebook top-to-bottom with a
+   fresh kernel before committing, so stored outputs and execution counts stay current
+   and consistent:
+
+   .. code-block:: bash
+
+       jupyter nbconvert --to notebook --execute --inplace notebook.ipynb
+
+   Replace ``notebook.ipynb`` with the path to your notebook (e.g.,
+   ``tutorials/04_scenario/01_scenario_temperature.ipynb``).
 
 2. **Test locally first**: Always run notebooks locally before pushing to verify they work
 
@@ -387,7 +397,13 @@ but you still want to verify the notebook executes without errors.
 6. **Keep execution time reasonable**: Aim for under 5 minutes per notebook. For longer analyses,
    consider pre-computing results or creating separate demo notebooks
 
-7. **Version control friendly**: Clear all outputs before committing (jupytext and pre-commit help with this)
+7. **Mark non-reproducible cells**: For a cell whose output cannot be reproduced exactly
+   (live API calls, Plotly/Matplotlib figures, timestamps, random draws), add a
+   ``# NBVAL_IGNORE_OUTPUT`` comment on its own line inside the cell; ``nbval`` then
+   executes the cell but skips comparing its output. Always re-run the notebook after
+   editing such a cell — a cell with modified source but stale stored outputs (execution
+   count ``null`` with outputs present) makes ``nbval`` fail with
+   ``Unrun reference cell has outputs``.
 
 **Troubleshooting notebook validation failures**:
 
@@ -513,7 +529,7 @@ Before submitting your pull request, verify:
 - [ ] Pre-commit hooks pass (``pre-commit run --all-files``)
 - [ ] Documentation updated if adding features
 - [ ] What's new entry added if significant change
-- [ ] Notebooks clear outputs and sync with ``.py`` scripts
+- [ ] Notebooks re-run with outputs committed (not cleared) and synced with ``.py`` scripts
 - [ ] Database entries include proper citations and metadata
 
 Code Review Process
