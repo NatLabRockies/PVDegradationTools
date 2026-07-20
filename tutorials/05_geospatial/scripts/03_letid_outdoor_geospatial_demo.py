@@ -75,7 +75,7 @@ kestrel = {
     "walltime": "1:00:00",
     "interface": "hsn0",
     "processes": 100,  # workers per node; 104 single-thread procs overwhelm startup
-    "local_directory": "/scratch/mspringe/",  # node-local scratch for fast worker startup
+    "local_directory": os.environ.get("TMPDIR") or f"/scratch/{os.environ.get('USER', '')}",```
     "death_timeout": 600,  # secs a worker waits to reach the scheduler before exiting
     "job_extra_directives": ["-o ./logs/slurm-%j.out"],
 }
