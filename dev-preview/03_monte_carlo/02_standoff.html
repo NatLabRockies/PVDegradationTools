@@ -638,7 +638,7 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 Python version  3.11.15 (main, Jun 16 2026, 21:41:52) [GCC 13.3.0]
 Pandas version  3.0.3
 Pvlib version  0.15.2
-Pvdeg version  0.1.dev1+ga58c24c6a
+Pvdeg version  0.1.dev1+gcb2c3227e
 </pre></div>
 </div>
 </div>
@@ -730,18 +730,18 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
-0     6.706244     0.329124
-1     7.755613    -0.640521
-2     2.042880     0.592172
-3     8.299819    -0.674791
-4     6.189385    -0.971817
-..         ...          ...
-495   8.407487     0.488676
-496  11.094660     0.051992
-497   3.239102    -0.577339
-498   1.463148     0.772348
-499   7.539088     0.453168
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          X_0  wind_factor
+0    6.905693     0.742611
+1    7.839891    -0.086769
+2    6.011015     0.390357
+3    4.137969    -0.327414
+4   -0.956897     0.981504
+..        ...          ...
+495 -1.699970     0.365091
+496  7.339247    -0.062911
+497  5.795025     0.298220
+498  2.164468    -0.593553
+499  4.858183     0.355499
 
 [500 rows x 2 columns]
 </pre></div>
@@ -754,7 +754,8 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <p>When using the pvdeg.montecarlo.simulate() function on a target function all of the target function’s required arguments must still be given. Our non-changing arguments will be stored in a dictionary. The randomized monte carlo input data will also be passed to the target function via the simulate function. All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL-IGNORE-OUTPUT</span>
+<span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
 <span class="n">function_kwargs</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;weather_df&quot;</span><span class="p">:</span> <span class="n">WEATHER</span><span class="p">,</span>
     <span class="s2">&quot;meta&quot;</span><span class="p">:</span> <span class="n">META</span><span class="p">,</span>
@@ -810,17 +811,17 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.000000  69.685831  47.952654
-1    2.185416  75.835655  52.071377
-2    0.000000  66.512998  45.723027
-3    2.380979  75.926551  52.162517
-4    1.961603  76.448852  52.706529
+0    0.000000  64.690477  44.322956
+1    1.280283  73.484644  50.356488
+2    0.000000  68.980828  47.545541
+3    0.926499  74.705723  51.248239
+4    0.405934  60.197336  41.645583
 ..        ...        ...        ...
-495  0.000000  67.993429  46.710184
-496  1.161253  72.228217  49.806191
-497  0.878022  75.614701  51.967532
-498  0.000000  64.149428  44.053426
-499  0.000000  68.393979  47.016744
+495  0.054586  69.293482  47.641747
+496  1.106856  73.214763  50.250819
+497  0.010456  70.039373  48.197960
+498  0.591757  75.662798  51.989758
+499  0.000000  69.399583  47.725502
 
 [500 rows x 3 columns]
 </pre></div>
@@ -855,7 +856,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bdcc8f038b2742e1e33e884ed84c3ffe60d550d80766fa3719c10c73a9ec665d.png" src="../_images/bdcc8f038b2742e1e33e884ed84c3ffe60d550d80766fa3719c10c73a9ec665d.png" />
+<img alt="../_images/c6bc5140b27404c75f700b7ed6a24116417bdd2b380fd1942347e47d90e06317.png" src="../_images/c6bc5140b27404c75f700b7ed6a24116417bdd2b380fd1942347e47d90e06317.png" />
 </div>
 </div>
 </section>
