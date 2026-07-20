@@ -18,36 +18,43 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-scene_temp.run()
+from pathlib import Path
 
-scene_temp
+parent_dir = Path(pvdeg.PVDEG_DIR).parent
+new_path = parent_dir / "tutorials" / "data" / "temperature_and_degradation.json"
+
+copy = pvdeg.scenario.Scenario.load_json(
+    file_path=str(new_path),
+    email="user@mail.com",
+    api_key="DEMO_KEY",
+)
+
+copy
 ------------------
 
 
 [31m---------------------------------------------------------------------------[39m
-[31mAttributeError[39m                            Traceback (most recent call last)
-[36mCell[39m[36m [39m[32mIn[5][39m[32m, line 1[39m
-[32m----> [39m[32m1[39m scene_temp.run()
+[31mFileNotFoundError[39m                         Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[9][39m[32m, line 6[39m
 [32m      2[39m 
-[32m      3[39m scene_temp
+[32m      3[39m parent_dir = Path(pvdeg.PVDEG_DIR).parent
+[32m      4[39m new_path = parent_dir / [33m"tutorials"[39m / [33m"data"[39m / [33m"temperature_and_degradation.json"[39m
+[32m      5[39m 
+[32m----> [39m[32m6[39m copy = pvdeg.scenario.Scenario.load_json(
+[32m      7[39m     file_path=str(new_path),
+[32m      8[39m     email=[33m"user@mail.com"[39m,
+[32m      9[39m     api_key=[33m"DEMO_KEY"[39m,
 
-[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/scenario.py:821[39m, in [36mScenario.run[39m[34m(self)[39m
-[32m    818[39m func_params = signature(func).parameters
-[32m    819[39m func_args = {k: v [38;5;28;01mfor[39;00m k, v [38;5;129;01min[39;00m combined.items() [38;5;28;01mif[39;00m k [38;5;129;01min[39;00m func_params}
-[32m--> [39m[32m821[39m res = [30;43mfunc[39;49m[30;43m([39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mparams[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m*[39;49m[30;43m*[39;49m[30;43mfunc_args[39;49m[30;43m)[39;49m
-[32m    822[39m module_result[[38;5;28mid[39m] = res
-[32m    823[39m [38;5;28;01mif[39;00m job_name:
+[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/scenario.py:668[39m, in [36mScenario.load_json[39m[34m(cls, file_path, email, api_key)[39m
+[32m    660[39m [38;5;129m@classmethod[39m
+[32m    661[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mload_json[39m(
+[32m    662[39m     [38;5;28mcls[39m,
+[32m   (...)[39m[32m    665[39m     api_key: Optional[[38;5;28mstr[39m] = [38;5;28;01mNone[39;00m,
+[32m    666[39m ):
+[32m    667[39m [38;5;250m    [39m[33;03m"""Import scenario dictionaries from existing 'scenario.json' file."""[39;00m
+[32m--> [39m[32m668[39m     [38;5;28;01mwith[39;00m [30;43mopen[39;49m[30;43m([39;49m[30;43mfile_path[39;49m[30;43m,[39;49m[30;43m [39;49m[30;43m"[39;49m[30;43mr[39;49m[30;43m"[39;49m[30;43m)[39;49m [38;5;28;01mas[39;00m f:
+[32m    669[39m         data = json.load(f)
+[32m    670[39m     name = data[[33m"[39m[33mname[39m[33m"[39m]
 
-[36mFile [39m[32m/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/temperature.py:375[39m, in [36mtemperature[39m[34m(weather_df, meta, poa, temp_model, cell_or_mod, conf, wind_factor, irradiance_kwarg, model_kwarg)[39m
-[32m    310[39m [38;5;250m[39m[33;03m"""[39;00m
-[32m    311[39m [33;03mCalculate the PV cell or module temperature using PVLIB.[39;00m
-[32m    312[39m 
-[32m   (...)[39m[32m    371[39m [33;03massessment for selected sites in Pakistan", Renewable Energy 154 (2020) 1240-1251.[39;00m
-[32m    372[39m [33;03m"""[39;00m
-[32m    373[39m cell_or_mod = [33m"[39m[33mmodule[39m[33m"[39m [38;5;28;01mif[39;00m cell_or_mod == [33m"[39m[33mmod[39m[33m"[39m [38;5;28;01melse[39;00m cell_or_mod  [38;5;66;03m# mod->module[39;00m
-[32m--> [39m[32m375[39m [38;5;28;01mif[39;00m [33m"[39m[33mwind_height[39m[33m"[39m [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m [30;43mmeta[39;49m[30;43m.[39;49m[30;43mkeys[39;49m():
-[32m    376[39m     wind_speed_factor = [32m1[39m
-[32m    377[39m [38;5;28;01melse[39;00m:
-
-[31mAttributeError[39m: 'NoneType' object has no attribute 'keys'
+[31mFileNotFoundError[39m: [Errno 2] No such file or directory: '/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/tutorials/data/temperature_and_degradation.json'
 

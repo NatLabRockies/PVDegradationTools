@@ -627,7 +627,7 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1020-azure
 Python version  3.11.15 (main, Jun 16 2026, 21:41:52) [GCC 13.3.0]
-pvdeg version  0.1.dev1+gcb2c3227e
+pvdeg version  0.1.dev1+g67f313104
 </pre></div>
 </div>
 </div>
@@ -695,15 +695,18 @@ pvdeg version  0.1.dev1+gcb2c3227e
 <span class="p">)</span>
 
 <span class="n">scene_temp</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span>
-    <span class="n">func</span><span class="o">=</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;cell_or_mod&quot;</span><span class="p">:</span> <span class="s2">&quot;cell&quot;</span><span class="p">}),</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span>
+    <span class="n">func_kwarg</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;cell_or_mod&quot;</span><span class="p">:</span> <span class="s2">&quot;cell&quot;</span><span class="p">},</span>
 <span class="p">)</span>
 
 <span class="n">scene_temp</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span>
-    <span class="n">func</span><span class="o">=</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">degradation</span><span class="o">.</span><span class="n">vantHoff_deg</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;I_chamber&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;temp_chamber&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">}),</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">degradation</span><span class="o">.</span><span class="n">vantHoff_deg</span><span class="p">,</span>
+    <span class="n">func_kwarg</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;I_chamber&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;temp_chamber&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span>
 <span class="p">)</span>
 
 <span class="n">scene_temp</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span>
-    <span class="n">func</span><span class="o">=</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">degradation</span><span class="o">.</span><span class="n">vantHoff_deg</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;I_chamber&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;temp_chamber&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">}),</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">degradation</span><span class="o">.</span><span class="n">vantHoff_deg</span><span class="p">,</span>
+    <span class="n">func_kwarg</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;I_chamber&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;temp_chamber&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">},</span>
 <span class="p">)</span>
 
 <span class="n">scene_temp</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span>
@@ -713,15 +716,14 @@ pvdeg version  0.1.dev1+gcb2c3227e
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/scenario.py:282: UserWarning: Failed to add location: [&#39;Data processing failure.&#39;]
-  warnings.warn(f&quot;Failed to add location: {e}&quot;)
-/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/scenario.py:416: UserWarning: WARNING - Module already found by name &quot;sapm_1&quot;
-  warnings.warn(f&#39;WARNING - Module already found by name &quot;{module_name}&quot;&#39;)
-/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/scenario.py:417: UserWarning: Module will be replaced with new instance.
-  warnings.warn(&quot;Module will be replaced with new instance.&quot;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Column &quot;relative_humidity&quot; not found in DataFrame. Calculating...
+                                                                     
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;CVSXD&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/scenario.py:367: UserWarning: WARNING - Module already found by name &quot;sapm_1&quot;
+  warnings.warn(f&#39;WARNING - Module already found by name &quot;{module_name}&quot;&#39;)
+/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/scenario.py:368: UserWarning: Module will be replaced with new instance.
+  warnings.warn(&quot;Module will be replaced with new instance.&quot;)
 </pre></div>
 </div>
 </div>
@@ -738,35 +740,1259 @@ pvdeg version  0.1.dev1+gcb2c3227e
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">scene_temp</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">scene_temp</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/scenario.py:821,</span> in <span class="ni">Scenario.run</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">818</span> <span class="n">func_params</span> <span class="o">=</span> <span class="n">signature</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span>
-<span class="g g-Whitespace">    </span><span class="mi">819</span> <span class="n">func_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">combined</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">func_params</span><span class="p">}</span>
-<span class="ne">--&gt; </span><span class="mi">821</span> <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">func_args</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">822</span> <span class="n">module_result</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
-<span class="g g-Whitespace">    </span><span class="mi">823</span> <span class="k">if</span> <span class="n">job_name</span><span class="p">:</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/temperature.py:375,</span> in <span class="ni">temperature</span><span class="nt">(weather_df, meta, poa, temp_model, cell_or_mod, conf, wind_factor, irradiance_kwarg, model_kwarg)</span>
-<span class="g g-Whitespace">    </span><span class="mi">310</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">311</span><span class="sd"> Calculate the PV cell or module temperature using PVLIB.</span>
-<span class="g g-Whitespace">    </span><span class="mi">312</span><span class="sd"> </span>
-<span class="sd">   (...)    371 assessment for selected sites in Pakistan&quot;, Renewable Energy 154 (2020) 1240-1251.</span>
-<span class="g g-Whitespace">    </span><span class="mi">372</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">373</span> <span class="n">cell_or_mod</span> <span class="o">=</span> <span class="s2">&quot;module&quot;</span> <span class="k">if</span> <span class="n">cell_or_mod</span> <span class="o">==</span> <span class="s2">&quot;mod&quot;</span> <span class="k">else</span> <span class="n">cell_or_mod</span>  <span class="c1"># mod-&gt;module</span>
-<span class="ne">--&gt; </span><span class="mi">375</span> <span class="k">if</span> <span class="s2">&quot;wind_height&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">meta</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-<span class="g g-Whitespace">    </span><span class="mi">376</span>     <span class="n">wind_speed_factor</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="g g-Whitespace">    </span><span class="mi">377</span> <span class="k">else</span><span class="p">:</span>
-
-<span class="ne">AttributeError</span>: &#39;NoneType&#39; object has no attribute &#39;keys&#39;
-</pre></div>
-</div>
-</div>
+<div class="output text_html">
+        <div style="border: 1px solid #ddd; border-radius: 5px; padding: 3px; margin-top: 5px;">  # noqa
+            <h2>self.name: temperature and degradation</h2>
+            <p><strong>self.path:</strong> <a href="file:////home/runner/work/PVDegradationTools/PVDegradationTools/tutorials/04_scenario/pvd_job_temperature and degradation" target="_blank">/home/runner/work/PVDegradationTools/PVDegradationTools/tutorials/04_scenario/pvd_job_temperature and degradation</a></p>  # noqa
+            <p><strong>self.gids:</strong> [1060499]</p>
+            <p><strong>self.email:</strong> user@mail.com</p>
+            <p><strong>self.api_key:</strong> DEMO_KEY</p>
+            <div>
+                <h3>self.results</h3>
+                <div>
+            <div onclick="toggleVisibility('result_module_pvsyst_1')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_result_module_pvsyst_1" style="color: #E6E6FA;">►</span>
+                    pvsyst_1
+                </h4>
+            </div>
+            <div id="result_module_pvsyst_1" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+            
+                <div onclick="toggleVisibility('result_module_pvsyst_1_MBYMV')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_pvsyst_1_MBYMV" style="color: #E6E6FA;">►</span>
+                        MBYMV
+                    </h5>
+                </div>
+                <div id="result_module_pvsyst_1_MBYMV" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-01-01 00:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 01:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 02:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 03:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 04:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 05:30:00-05:00</th>
+      <td>23.900000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 06:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 07:30:00-05:00</th>
+      <td>25.680763</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 08:30:00-05:00</th>
+      <td>29.424296</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 09:30:00-05:00</th>
+      <td>35.939976</td>
+    </tr>
+  </tbody>
+</table><br>...<br><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2024-12-31 14:30:00-05:00</th>
+      <td>36.511124</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 15:30:00-05:00</th>
+      <td>31.824380</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 16:30:00-05:00</th>
+      <td>28.748224</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 17:30:00-05:00</th>
+      <td>25.271637</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 18:30:00-05:00</th>
+      <td>24.800000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 19:30:00-05:00</th>
+      <td>24.400000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 20:30:00-05:00</th>
+      <td>24.300000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 21:30:00-05:00</th>
+      <td>24.200000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 22:30:00-05:00</th>
+      <td>24.200000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 23:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_pvsyst_1_UGWMY')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_pvsyst_1_UGWMY" style="color: #E6E6FA;">►</span>
+                        UGWMY
+                    </h5>
+                </div>
+                <div id="result_module_pvsyst_1_UGWMY" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    1.7797620916454424
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_pvsyst_1_ZWUJC')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_pvsyst_1_ZWUJC" style="color: #E6E6FA;">►</span>
+                        ZWUJC
+                    </h5>
+                </div>
+                <div id="result_module_pvsyst_1_ZWUJC" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    2.1133503909740115
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_pvsyst_1_EMGLJ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_pvsyst_1_EMGLJ" style="color: #E6E6FA;">►</span>
+                        EMGLJ
+                    </h5>
+                </div>
+                <div id="result_module_pvsyst_1_EMGLJ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    181.36876147726755
+                </div>
+                </div>
+            <div onclick="toggleVisibility('result_module_pvsyst_2')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_result_module_pvsyst_2" style="color: #E6E6FA;">►</span>
+                    pvsyst_2
+                </h4>
+            </div>
+            <div id="result_module_pvsyst_2" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+            
+                <div onclick="toggleVisibility('result_module_pvsyst_2_MBYMV')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_pvsyst_2_MBYMV" style="color: #E6E6FA;">►</span>
+                        MBYMV
+                    </h5>
+                </div>
+                <div id="result_module_pvsyst_2_MBYMV" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-01-01 00:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 01:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 02:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 03:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 04:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 05:30:00-05:00</th>
+      <td>23.900000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 06:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 07:30:00-05:00</th>
+      <td>25.611306</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 08:30:00-05:00</th>
+      <td>29.169925</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 09:30:00-05:00</th>
+      <td>35.319977</td>
+    </tr>
+  </tbody>
+</table><br>...<br><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2024-12-31 14:30:00-05:00</th>
+      <td>35.904587</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 15:30:00-05:00</th>
+      <td>31.481770</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 16:30:00-05:00</th>
+      <td>28.563034</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 17:30:00-05:00</th>
+      <td>25.255659</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 18:30:00-05:00</th>
+      <td>24.800000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 19:30:00-05:00</th>
+      <td>24.400000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 20:30:00-05:00</th>
+      <td>24.300000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 21:30:00-05:00</th>
+      <td>24.200000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 22:30:00-05:00</th>
+      <td>24.200000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 23:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_pvsyst_2_UGWMY')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_pvsyst_2_UGWMY" style="color: #E6E6FA;">►</span>
+                        UGWMY
+                    </h5>
+                </div>
+                <div id="result_module_pvsyst_2_UGWMY" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    1.840043320722344
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_pvsyst_2_ZWUJC')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_pvsyst_2_ZWUJC" style="color: #E6E6FA;">►</span>
+                        ZWUJC
+                    </h5>
+                </div>
+                <div id="result_module_pvsyst_2_ZWUJC" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    2.1849303845226333
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_pvsyst_2_EMGLJ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_pvsyst_2_EMGLJ" style="color: #E6E6FA;">►</span>
+                        EMGLJ
+                    </h5>
+                </div>
+                <div id="result_module_pvsyst_2_EMGLJ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    175.64812142660637
+                </div>
+                </div>
+            <div onclick="toggleVisibility('result_module_sapm_1')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_result_module_sapm_1" style="color: #E6E6FA;">►</span>
+                    sapm_1
+                </h4>
+            </div>
+            <div id="result_module_sapm_1" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+            
+                <div onclick="toggleVisibility('result_module_sapm_1_MBYMV')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_sapm_1_MBYMV" style="color: #E6E6FA;">►</span>
+                        MBYMV
+                    </h5>
+                </div>
+                <div id="result_module_sapm_1_MBYMV" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-01-01 00:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 01:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 02:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 03:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 04:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 05:30:00-05:00</th>
+      <td>23.900000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 06:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 07:30:00-05:00</th>
+      <td>27.565173</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 08:30:00-05:00</th>
+      <td>30.664107</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 09:30:00-05:00</th>
+      <td>37.165736</td>
+    </tr>
+  </tbody>
+</table><br>...<br><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2024-12-31 14:30:00-05:00</th>
+      <td>33.869692</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 15:30:00-05:00</th>
+      <td>30.076087</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 16:30:00-05:00</th>
+      <td>27.520365</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 17:30:00-05:00</th>
+      <td>25.203202</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 18:30:00-05:00</th>
+      <td>24.800000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 19:30:00-05:00</th>
+      <td>24.400000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 20:30:00-05:00</th>
+      <td>24.300000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 21:30:00-05:00</th>
+      <td>24.200000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 22:30:00-05:00</th>
+      <td>24.200000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 23:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_sapm_1_UGWMY')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_sapm_1_UGWMY" style="color: #E6E6FA;">►</span>
+                        UGWMY
+                    </h5>
+                </div>
+                <div id="result_module_sapm_1_UGWMY" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    2.0142546357216835
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_sapm_1_ZWUJC')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_sapm_1_ZWUJC" style="color: #E6E6FA;">►</span>
+                        ZWUJC
+                    </h5>
+                </div>
+                <div id="result_module_sapm_1_ZWUJC" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    2.3917948594961214
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_sapm_1_EMGLJ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_sapm_1_EMGLJ" style="color: #E6E6FA;">►</span>
+                        EMGLJ
+                    </h5>
+                </div>
+                <div id="result_module_sapm_1_EMGLJ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    160.47622912413382
+                </div>
+                </div>
+            <div onclick="toggleVisibility('result_module_sapm_2')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_result_module_sapm_2" style="color: #E6E6FA;">►</span>
+                    sapm_2
+                </h4>
+            </div>
+            <div id="result_module_sapm_2" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+            
+                <div onclick="toggleVisibility('result_module_sapm_2_MBYMV')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_sapm_2_MBYMV" style="color: #E6E6FA;">►</span>
+                        MBYMV
+                    </h5>
+                </div>
+                <div id="result_module_sapm_2_MBYMV" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-01-01 00:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 01:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 02:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 03:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 04:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 05:30:00-05:00</th>
+      <td>23.900000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 06:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 07:30:00-05:00</th>
+      <td>27.609768</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 08:30:00-05:00</th>
+      <td>30.749572</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 09:30:00-05:00</th>
+      <td>37.348417</td>
+    </tr>
+  </tbody>
+</table><br>...<br><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2024-12-31 14:30:00-05:00</th>
+      <td>33.965303</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 15:30:00-05:00</th>
+      <td>30.127470</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 16:30:00-05:00</th>
+      <td>27.544574</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 17:30:00-05:00</th>
+      <td>25.205792</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 18:30:00-05:00</th>
+      <td>24.800000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 19:30:00-05:00</th>
+      <td>24.400000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 20:30:00-05:00</th>
+      <td>24.300000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 21:30:00-05:00</th>
+      <td>24.200000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 22:30:00-05:00</th>
+      <td>24.200000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 23:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_sapm_2_UGWMY')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_sapm_2_UGWMY" style="color: #E6E6FA;">►</span>
+                        UGWMY
+                    </h5>
+                </div>
+                <div id="result_module_sapm_2_UGWMY" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    2.0023991429855146
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_sapm_2_ZWUJC')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_sapm_2_ZWUJC" style="color: #E6E6FA;">►</span>
+                        ZWUJC
+                    </h5>
+                </div>
+                <div id="result_module_sapm_2_ZWUJC" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    2.377717241860155
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_sapm_2_EMGLJ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_sapm_2_EMGLJ" style="color: #E6E6FA;">►</span>
+                        EMGLJ
+                    </h5>
+                </div>
+                <div id="result_module_sapm_2_EMGLJ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    161.44741645625862
+                </div>
+                </div>
+            <div onclick="toggleVisibility('result_module_sapm_3')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_result_module_sapm_3" style="color: #E6E6FA;">►</span>
+                    sapm_3
+                </h4>
+            </div>
+            <div id="result_module_sapm_3" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+            
+                <div onclick="toggleVisibility('result_module_sapm_3_MBYMV')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_sapm_3_MBYMV" style="color: #E6E6FA;">►</span>
+                        MBYMV
+                    </h5>
+                </div>
+                <div id="result_module_sapm_3_MBYMV" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2019-01-01 00:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 01:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 02:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 03:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 04:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 05:30:00-05:00</th>
+      <td>23.900000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 06:30:00-05:00</th>
+      <td>24.000000</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 07:30:00-05:00</th>
+      <td>25.351273</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 08:30:00-05:00</th>
+      <td>28.055360</td>
+    </tr>
+    <tr>
+      <th>2019-01-01 09:30:00-05:00</th>
+      <td>32.527241</td>
+    </tr>
+  </tbody>
+</table><br>...<br><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2024-12-31 14:30:00-05:00</th>
+      <td>34.858051</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 15:30:00-05:00</th>
+      <td>30.837026</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 16:30:00-05:00</th>
+      <td>28.214534</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 17:30:00-05:00</th>
+      <td>25.223121</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 18:30:00-05:00</th>
+      <td>24.800000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 19:30:00-05:00</th>
+      <td>24.400000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 20:30:00-05:00</th>
+      <td>24.300000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 21:30:00-05:00</th>
+      <td>24.200000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 22:30:00-05:00</th>
+      <td>24.200000</td>
+    </tr>
+    <tr>
+      <th>2024-12-31 23:30:00-05:00</th>
+      <td>24.100000</td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_sapm_3_UGWMY')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_sapm_3_UGWMY" style="color: #E6E6FA;">►</span>
+                        UGWMY
+                    </h5>
+                </div>
+                <div id="result_module_sapm_3_UGWMY" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    1.997598191951332
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_sapm_3_ZWUJC')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_sapm_3_ZWUJC" style="color: #E6E6FA;">►</span>
+                        ZWUJC
+                    </h5>
+                </div>
+                <div id="result_module_sapm_3_ZWUJC" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    2.372016428367855
+                </div>
+                
+                <div onclick="toggleVisibility('result_module_sapm_3_EMGLJ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                    <h5 style="font-family: monospace; margin: 0;">
+                        <span id="arrow_result_module_sapm_3_EMGLJ" style="color: #E6E6FA;">►</span>
+                        EMGLJ
+                    </h5>
+                </div>
+                <div id="result_module_sapm_3_EMGLJ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                    162.29122696129738
+                </div>
+                </div></div>
+            </div>
+            <div>
+                <h3>self.pipeline</h3>
+                <div>
+            <div id="MBYMV" onclick="toggleVisibility('pipeline_MBYMV')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_pipeline_MBYMV" style="color: #b676c2;">►</span>  # noqa
+                    temperature, <span style="color: #b676c2;">#MBYMV</span>  # noqa
+                </h4>
+            </div>
+            <div id="pipeline_MBYMV" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <p>Job: temperature</p>
+                <p>Parameters:</p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "cell_or_mod": "cell"
+}</pre>
+                </div>
+            </div>
+            
+            <div id="UGWMY" onclick="toggleVisibility('pipeline_UGWMY')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_pipeline_UGWMY" style="color: #b676c2;">►</span>  # noqa
+                    vantHoff_deg, <span style="color: #b676c2;">#UGWMY</span>  # noqa
+                </h4>
+            </div>
+            <div id="pipeline_UGWMY" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <p>Job: vantHoff_deg</p>
+                <p>Parameters:</p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "I_chamber": 1000,
+  "temp_chamber": 25
+}</pre>
+                </div>
+            </div>
+            
+            <div id="ZWUJC" onclick="toggleVisibility('pipeline_ZWUJC')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_pipeline_ZWUJC" style="color: #b676c2;">►</span>  # noqa
+                    vantHoff_deg, <span style="color: #b676c2;">#ZWUJC</span>  # noqa
+                </h4>
+            </div>
+            <div id="pipeline_ZWUJC" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <p>Job: vantHoff_deg</p>
+                <p>Parameters:</p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "I_chamber": 1000,
+  "temp_chamber": 30
+}</pre>
+                </div>
+            </div>
+            
+            <div id="EMGLJ" onclick="toggleVisibility('pipeline_EMGLJ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_pipeline_EMGLJ" style="color: #b676c2;">►</span>  # noqa
+                    IwaVantHoff, <span style="color: #b676c2;">#EMGLJ</span>  # noqa
+                </h4>
+            </div>
+            <div id="pipeline_EMGLJ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <p>Job: IwaVantHoff</p>
+                <p>Parameters:</p>
+                <div style="margin-left: 20px;">
+                    <pre>{}</pre>
+                </div>
+            </div>
+            </div>
+            </div>
+            <div>
+                <h3>self.modules</h3>
+                <div>
+            <div onclick="toggleVisibility('module_0')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_module_0" style="color: #E6E6FA;">►</span>
+                    sapm_1
+                </h4>
+            </div>
+            <div id="module_0" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <p><strong>Racking:</strong> open_rack_glass_polymer</p>
+                <p><strong>Temperature Model:</strong> sapm</p>
+                <p><strong>Material Parameters:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "alias": "EVA-1",
+  "Fickian": true,
+  "Ead": 29.43112031,
+  "Do": 0.129061678,
+  "Eas": 16.6314948252219,
+  "So": 0.136034525059804,
+  "Eap": 49.1083457348515,
+  "Po": 528718258.338532
+}</pre>
+                </div>
+                <p><strong>Model Arguments:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "irrad_ref": 1100
+}</pre>
+                </div>
+                <p><strong>Irradiance Arguments:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "azimuth": 120,
+  "tilt": 30
+}</pre>
+                </div>
+            </div>
+            
+            <div onclick="toggleVisibility('module_1')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_module_1" style="color: #E6E6FA;">►</span>
+                    pvsyst_1
+                </h4>
+            </div>
+            <div id="module_1" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <p><strong>Racking:</strong> freestanding</p>
+                <p><strong>Temperature Model:</strong> pvsyst</p>
+                <p><strong>Material Parameters:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "alias": "EVA-1",
+  "Fickian": true,
+  "Ead": 29.43112031,
+  "Do": 0.129061678,
+  "Eas": 16.6314948252219,
+  "So": 0.136034525059804,
+  "Eap": 49.1083457348515,
+  "Po": 528718258.338532
+}</pre>
+                </div>
+                <p><strong>Model Arguments:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "module_efficiency": 0.15
+}</pre>
+                </div>
+                <p><strong>Irradiance Arguments:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "azimuth": 180,
+  "tilt": 0
+}</pre>
+                </div>
+            </div>
+            
+            <div onclick="toggleVisibility('module_2')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_module_2" style="color: #E6E6FA;">►</span>
+                    sapm_2
+                </h4>
+            </div>
+            <div id="module_2" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <p><strong>Racking:</strong> open_rack_glass_polymer</p>
+                <p><strong>Temperature Model:</strong> sapm</p>
+                <p><strong>Material Parameters:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "alias": "EVA-1",
+  "Fickian": true,
+  "Ead": 29.43112031,
+  "Do": 0.129061678,
+  "Eas": 16.6314948252219,
+  "So": 0.136034525059804,
+  "Eap": 49.1083457348515,
+  "Po": 528718258.338532
+}</pre>
+                </div>
+                <p><strong>Model Arguments:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "irrad_ref": 1000
+}</pre>
+                </div>
+                <p><strong>Irradiance Arguments:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "azimuth": 120,
+  "tilt": 30
+}</pre>
+                </div>
+            </div>
+            
+            <div onclick="toggleVisibility('module_3')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_module_3" style="color: #E6E6FA;">►</span>
+                    sapm_3
+                </h4>
+            </div>
+            <div id="module_3" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <p><strong>Racking:</strong> open_rack_glass_polymer</p>
+                <p><strong>Temperature Model:</strong> sapm</p>
+                <p><strong>Material Parameters:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "alias": "EVA-1",
+  "Fickian": true,
+  "Ead": 29.43112031,
+  "Do": 0.129061678,
+  "Eas": 16.6314948252219,
+  "So": 0.136034525059804,
+  "Eap": 49.1083457348515,
+  "Po": 528718258.338532
+}</pre>
+                </div>
+                <p><strong>Model Arguments:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "irrad_ref": 1000
+}</pre>
+                </div>
+                <p><strong>Irradiance Arguments:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "azimuth": 180,
+  "tilt": 0
+}</pre>
+                </div>
+            </div>
+            
+            <div onclick="toggleVisibility('module_4')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_module_4" style="color: #E6E6FA;">►</span>
+                    pvsyst_2
+                </h4>
+            </div>
+            <div id="module_4" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <p><strong>Racking:</strong> freestanding</p>
+                <p><strong>Temperature Model:</strong> pvsyst</p>
+                <p><strong>Material Parameters:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "alias": "EVA-1",
+  "Fickian": true,
+  "Ead": 29.43112031,
+  "Do": 0.129061678,
+  "Eas": 16.6314948252219,
+  "So": 0.136034525059804,
+  "Eap": 49.1083457348515,
+  "Po": 528718258.338532
+}</pre>
+                </div>
+                <p><strong>Model Arguments:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "module_efficiency": 0.2
+}</pre>
+                </div>
+                <p><strong>Irradiance Arguments:</strong></p>
+                <div style="margin-left: 20px;">
+                    <pre>{
+  "azimuth": 180,
+  "tilt": 0
+}</pre>
+                </div>
+            </div>
+            </div>
+            </div>
+            <div>
+                <h3>self.weather_data</h3>
+                
+            <div id="weather_data" onclick="toggleVisibility('content_weather_data')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+                <h4 style="font-family: monospace; margin: 0;">
+                    <span id="arrow_content_weather_data" style="color: #E6E6FA;">►</span>  # noqa
+                    Weather Data
+                </h4>
+            </div>
+            <div id="content_weather_data" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+                <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Day</th>
+      <th>Hour</th>
+      <th>Minute</th>
+      <th>temp_air</th>
+      <th>dew_point</th>
+      <th>dhi</th>
+      <th>dni</th>
+      <th>ghi</th>
+      <th>albedo</th>
+      <th>pressure</th>
+      <th>wind_direction</th>
+      <th>wind_speed</th>
+      <th>relative_humidity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2019</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>30</td>
+      <td>24.1</td>
+      <td>21.8</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1019.0</td>
+      <td>128.0</td>
+      <td>3.6</td>
+      <td>87.000575</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>30</td>
+      <td>24.1</td>
+      <td>21.7</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1019.0</td>
+      <td>126.0</td>
+      <td>3.5</td>
+      <td>86.470668</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>30</td>
+      <td>24.0</td>
+      <td>21.5</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1019.0</td>
+      <td>124.0</td>
+      <td>3.4</td>
+      <td>85.933794</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2019</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>30</td>
+      <td>24.0</td>
+      <td>21.1</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1019.0</td>
+      <td>122.0</td>
+      <td>3.4</td>
+      <td>83.852221</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>30</td>
+      <td>24.0</td>
+      <td>20.9</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1019.0</td>
+      <td>121.0</td>
+      <td>3.5</td>
+      <td>82.828112</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>8755</th>
+      <td>2024</td>
+      <td>12</td>
+      <td>31</td>
+      <td>19</td>
+      <td>30</td>
+      <td>24.4</td>
+      <td>21.7</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1020.0</td>
+      <td>128.0</td>
+      <td>4.3</td>
+      <td>84.92921</td>
+    </tr>
+    <tr>
+      <th>8756</th>
+      <td>2024</td>
+      <td>12</td>
+      <td>31</td>
+      <td>20</td>
+      <td>30</td>
+      <td>24.3</td>
+      <td>21.8</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1020.0</td>
+      <td>128.0</td>
+      <td>4.2</td>
+      <td>85.963157</td>
+    </tr>
+    <tr>
+      <th>8757</th>
+      <td>2024</td>
+      <td>12</td>
+      <td>31</td>
+      <td>21</td>
+      <td>30</td>
+      <td>24.2</td>
+      <td>21.8</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1020.0</td>
+      <td>128.0</td>
+      <td>4.0</td>
+      <td>86.480116</td>
+    </tr>
+    <tr>
+      <th>8758</th>
+      <td>2024</td>
+      <td>12</td>
+      <td>31</td>
+      <td>22</td>
+      <td>30</td>
+      <td>24.2</td>
+      <td>21.9</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1019.0</td>
+      <td>128.0</td>
+      <td>3.9</td>
+      <td>87.00968</td>
+    </tr>
+    <tr>
+      <th>8759</th>
+      <td>2024</td>
+      <td>12</td>
+      <td>31</td>
+      <td>23</td>
+      <td>30</td>
+      <td>24.1</td>
+      <td>21.9</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1019.0</td>
+      <td>128.0</td>
+      <td>3.8</td>
+      <td>87.533326</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+            
+            </div>
+            <div>
+                <h3>self.meta_data</h3>
+                {'Source': 'NSRDB', 'Location ID': '1060499', 'City': '-', 'State': '-', 'Country': '-', 'Clearsky DHI Units': 'w/m2', 'Clearsky DNI Units': 'w/m2', 'Clearsky GHI Units': 'w/m2', 'Dew Point Units': 'c', 'DHI Units': 'w/m2', 'DNI Units': 'w/m2', 'GHI Units': 'w/m2', 'Solar Zenith Angle Units': 'Degree', 'Temperature Units': 'c', 'Pressure Units': 'mbar', 'Relative Humidity Units': '%', 'Precipitable Water Units': 'cm', 'Wind Direction Units': 'Degrees', 'Wind Speed Units': 'm/s', 'Cloud Type -15': 'N/A', 'Cloud Type 0': 'Clear', 'Cloud Type 1': 'Probably Clear', 'Cloud Type 2': 'Fog', 'Cloud Type 3': 'Water', 'Cloud Type 4': 'Super-Cooled Water', 'Cloud Type 5': 'Mixed', 'Cloud Type 6': 'Opaque Ice', 'Cloud Type 7': 'Cirrus', 'Cloud Type 8': 'Overlapping', 'Cloud Type 9': 'Overshooting', 'Cloud Type 10': 'Unknown', 'Cloud Type 11': 'Dust', 'Cloud Type 12': 'Smoke', 'Fill Flag 0': 'N/A', 'Fill Flag 1': 'Missing Image', 'Fill Flag 2': 'Low Irradiance', 'Fill Flag 3': 'Exceeds Clearsky', 'Fill Flag 4': 'Missing CLoud Properties', 'Fill Flag 5': 'Rayleigh Violation', 'Surface Albedo Units': 'N/A', 'Version': '4.1.4.dev4+g4fed29ccf.d20260425', 'latitude': 25.77, 'longitude': -80.18, 'altitude': 7, 'tz': -5, 'wind_height': 2}
+            </div>
+        </div>
+        <p><i>All attributes can be accessed by the names shown above.</i></p>
+        <script>
+            function toggleVisibility(id) {
+                var content = document.getElementById(id);
+                var arrow = document.getElementById('arrow_' + id);
+                if (content.style.display === 'none') {
+                    content.style.display = 'block';
+                    arrow.innerHTML = '▼';
+                } else {
+                    content.style.display = 'none';
+                    arrow.innerHTML = '►';
+                }
+            }
+        </script>
+        </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1035,7 +2261,7 @@ pvdeg version  0.1.dev1+gcb2c3227e
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/232930c48677483d92cfd60f2dc778e4cb403b1ed952e829b25b9c5f2283573a.png" src="../_images/232930c48677483d92cfd60f2dc778e4cb403b1ed952e829b25b9c5f2283573a.png" />
+<img alt="../_images/6f84d958e6ee5c57acc0b55f32b92c364e743faaced5cadb2c8150cceb47c45e.png" src="../_images/6f84d958e6ee5c57acc0b55f32b92c364e743faaced5cadb2c8150cceb47c45e.png" />
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 1 Axes&gt;,
  &lt;Axes: title={&#39;center&#39;: &#39;temperature and degradation : single day cell temperature&#39;}&gt;)
 </pre></div>
@@ -1063,536 +2289,33 @@ pvdeg version  0.1.dev1+gcb2c3227e
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>credentials not in json file using arguments
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">parent_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">PVDEG_DIR</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">new_path</span> <span class="o">=</span> <span class="n">parent_dir</span> <span class="o">/</span> <span class="s2">&quot;tutorials&quot;</span> <span class="o">/</span> <span class="s2">&quot;data&quot;</span> <span class="o">/</span> <span class="s2">&quot;temperature_and_degradation.json&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">copy</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">scenario</span><span class="o">.</span><span class="n">Scenario</span><span class="o">.</span><span class="n">load_json</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">file_path</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">new_path</span><span class="p">),</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">email</span><span class="o">=</span><span class="s2">&quot;user@mail.com&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;DEMO_KEY&quot;</span><span class="p">,</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pvdeg/scenario.py:668,</span> in <span class="ni">Scenario.load_json</span><span class="nt">(cls, file_path, email, api_key)</span>
+<span class="g g-Whitespace">    </span><span class="mi">660</span> <span class="nd">@classmethod</span>
+<span class="g g-Whitespace">    </span><span class="mi">661</span> <span class="k">def</span><span class="w"> </span><span class="nf">load_json</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">662</span>     <span class="bp">cls</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>    <span class="mi">665</span>     <span class="n">api_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">666</span> <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">667</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Import scenario dictionaries from existing &#39;scenario.json&#39; file.&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">668</span>     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">669</span>         <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">670</span>     <span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/tutorials/data/temperature_and_degradation.json&#39;
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Column &quot;relative_humidity&quot; not found in DataFrame. Calculating...
-                                                                     
-</pre></div>
 </div>
-<div class="output text_html">
-        <div style="border: 1px solid #ddd; border-radius: 5px; padding: 3px; margin-top: 5px;">  # noqa
-            <h2>self.name: temperature and degradation</h2>
-            <p><strong>self.path:</strong> <a href="file:///c:/Users/tford/dev/PVDegradationTools/tutorials_and_tools/tutorials_and_tools/pvd_job_temperature and degradation" target="_blank">c:\Users\tford\dev\PVDegradationTools\tutorials_and_tools\tutorials_and_tools\pvd_job_temperature and degradation</a></p>  # noqa
-            <p><strong>self.gids:</strong> [1060499]</p>
-            <p><strong>self.email:</strong> user@mail.com</p>
-            <p><strong>self.api_key:</strong> DEMO_KEY</p>
-            <div>
-                <h3>self.results</h3>
-                None
-            </div>
-            <div>
-                <h3>self.pipeline</h3>
-                <div>
-            <div id="HKXVD" onclick="toggleVisibility('pipeline_HKXVD')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
-                <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_pipeline_HKXVD" style="color: #b676c2;">►</span>  # noqa
-                    temperature, <span style="color: #b676c2;">#HKXVD</span>  # noqa
-                </h4>
-            </div>
-            <div id="pipeline_HKXVD" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
-                <p>Job: temperature</p>
-                <p>Parameters:</p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "cell_or_mod": "cell"
-}</pre>
-                </div>
-            </div>
-            
-            <div id="JUBNK" onclick="toggleVisibility('pipeline_JUBNK')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
-                <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_pipeline_JUBNK" style="color: #b676c2;">►</span>  # noqa
-                    vantHoff_deg, <span style="color: #b676c2;">#JUBNK</span>  # noqa
-                </h4>
-            </div>
-            <div id="pipeline_JUBNK" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
-                <p>Job: vantHoff_deg</p>
-                <p>Parameters:</p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "I_chamber": 1000,
-  "temp_chamber": 25
-}</pre>
-                </div>
-            </div>
-            
-            <div id="GLDTX" onclick="toggleVisibility('pipeline_GLDTX')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
-                <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_pipeline_GLDTX" style="color: #b676c2;">►</span>  # noqa
-                    vantHoff_deg, <span style="color: #b676c2;">#GLDTX</span>  # noqa
-                </h4>
-            </div>
-            <div id="pipeline_GLDTX" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
-                <p>Job: vantHoff_deg</p>
-                <p>Parameters:</p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "I_chamber": 1000,
-  "temp_chamber": 30
-}</pre>
-                </div>
-            </div>
-            
-            <div id="DJFXB" onclick="toggleVisibility('pipeline_DJFXB')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
-                <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_pipeline_DJFXB" style="color: #b676c2;">►</span>  # noqa
-                    IwaVantHoff, <span style="color: #b676c2;">#DJFXB</span>  # noqa
-                </h4>
-            </div>
-            <div id="pipeline_DJFXB" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
-                <p>Job: IwaVantHoff</p>
-                <p>Parameters:</p>
-                <div style="margin-left: 20px;">
-                    <pre>{}</pre>
-                </div>
-            </div>
-            </div>
-            </div>
-            <div>
-                <h3>self.modules</h3>
-                <div>
-            <div onclick="toggleVisibility('module_0')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
-                <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_module_0" style="color: #E6E6FA;">►</span>
-                    sapm_1
-                </h4>
-            </div>
-            <div id="module_0" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
-                <p><strong>Racking:</strong> open_rack_glass_polymer</p>
-                <p><strong>Temperature Model:</strong> sapm</p>
-                <p><strong>Material Parameters:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "alias": "EVA",
-  "Fickian": true,
-  "Ead": 29.43,
-  "Do": 0.13,
-  "Eas": 32.31,
-  "So": 87.8,
-  "Eap": 61.74,
-  "Po": 97900000000.0
-}</pre>
-                </div>
-                <p><strong>Model Arguments:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "irrad_ref": 1100
-}</pre>
-                </div>
-                <p><strong>Irradiance Arguments:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "azimuth": 120,
-  "tilt": 30
-}</pre>
-                </div>
-            </div>
-            
-            <div onclick="toggleVisibility('module_1')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
-                <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_module_1" style="color: #E6E6FA;">►</span>
-                    pvsyst_1
-                </h4>
-            </div>
-            <div id="module_1" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
-                <p><strong>Racking:</strong> freestanding</p>
-                <p><strong>Temperature Model:</strong> pvsyst</p>
-                <p><strong>Material Parameters:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "alias": "EVA",
-  "Fickian": true,
-  "Ead": 29.43,
-  "Do": 0.13,
-  "Eas": 32.31,
-  "So": 87.8,
-  "Eap": 61.74,
-  "Po": 97900000000.0
-}</pre>
-                </div>
-                <p><strong>Model Arguments:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "module_efficiency": 0.15
-}</pre>
-                </div>
-                <p><strong>Irradiance Arguments:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "azimuth": 180,
-  "tilt": 0
-}</pre>
-                </div>
-            </div>
-            
-            <div onclick="toggleVisibility('module_2')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
-                <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_module_2" style="color: #E6E6FA;">►</span>
-                    sapm_2
-                </h4>
-            </div>
-            <div id="module_2" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
-                <p><strong>Racking:</strong> open_rack_glass_polymer</p>
-                <p><strong>Temperature Model:</strong> sapm</p>
-                <p><strong>Material Parameters:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "alias": "EVA",
-  "Fickian": true,
-  "Ead": 29.43,
-  "Do": 0.13,
-  "Eas": 32.31,
-  "So": 87.8,
-  "Eap": 61.74,
-  "Po": 97900000000.0
-}</pre>
-                </div>
-                <p><strong>Model Arguments:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "irrad_ref": 1000
-}</pre>
-                </div>
-                <p><strong>Irradiance Arguments:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "azimuth": 120,
-  "tilt": 30
-}</pre>
-                </div>
-            </div>
-            
-            <div onclick="toggleVisibility('module_3')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
-                <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_module_3" style="color: #E6E6FA;">►</span>
-                    sapm_3
-                </h4>
-            </div>
-            <div id="module_3" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
-                <p><strong>Racking:</strong> open_rack_glass_polymer</p>
-                <p><strong>Temperature Model:</strong> sapm</p>
-                <p><strong>Material Parameters:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "alias": "EVA",
-  "Fickian": true,
-  "Ead": 29.43,
-  "Do": 0.13,
-  "Eas": 32.31,
-  "So": 87.8,
-  "Eap": 61.74,
-  "Po": 97900000000.0
-}</pre>
-                </div>
-                <p><strong>Model Arguments:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "irrad_ref": 1000
-}</pre>
-                </div>
-                <p><strong>Irradiance Arguments:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "azimuth": 180,
-  "tilt": 0
-}</pre>
-                </div>
-            </div>
-            
-            <div onclick="toggleVisibility('module_4')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
-                <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_module_4" style="color: #E6E6FA;">►</span>
-                    pvsyst_2
-                </h4>
-            </div>
-            <div id="module_4" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
-                <p><strong>Racking:</strong> freestanding</p>
-                <p><strong>Temperature Model:</strong> pvsyst</p>
-                <p><strong>Material Parameters:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "alias": "EVA",
-  "Fickian": true,
-  "Ead": 29.43,
-  "Do": 0.13,
-  "Eas": 32.31,
-  "So": 87.8,
-  "Eap": 61.74,
-  "Po": 97900000000.0
-}</pre>
-                </div>
-                <p><strong>Model Arguments:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "module_efficiency": 0.2
-}</pre>
-                </div>
-                <p><strong>Irradiance Arguments:</strong></p>
-                <div style="margin-left: 20px;">
-                    <pre>{
-  "azimuth": 180,
-  "tilt": 0
-}</pre>
-                </div>
-            </div>
-            </div>
-            </div>
-            <div>
-                <h3>self.weather_data</h3>
-                
-            <div id="weather_data" onclick="toggleVisibility('content_weather_data')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
-                <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_content_weather_data" style="color: #E6E6FA;">►</span>  # noqa
-                    Weather Data
-                </h4>
-            </div>
-            <div id="content_weather_data" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
-                <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Year</th>
-      <th>Month</th>
-      <th>Day</th>
-      <th>Hour</th>
-      <th>Minute</th>
-      <th>temp_air</th>
-      <th>dew_point</th>
-      <th>dhi</th>
-      <th>dni</th>
-      <th>ghi</th>
-      <th>albedo</th>
-      <th>pressure</th>
-      <th>wind_direction</th>
-      <th>wind_speed</th>
-      <th>relative_humidity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2019</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>30</td>
-      <td>24.1</td>
-      <td>21.8</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1019.0</td>
-      <td>128.0</td>
-      <td>3.6</td>
-      <td>87.000575</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2019</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>30</td>
-      <td>24.1</td>
-      <td>21.7</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1019.0</td>
-      <td>126.0</td>
-      <td>3.5</td>
-      <td>86.470668</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2019</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>30</td>
-      <td>24.0</td>
-      <td>21.5</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1019.0</td>
-      <td>124.0</td>
-      <td>3.4</td>
-      <td>85.933794</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2019</td>
-      <td>1</td>
-      <td>1</td>
-      <td>3</td>
-      <td>30</td>
-      <td>24.0</td>
-      <td>21.1</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1019.0</td>
-      <td>122.0</td>
-      <td>3.4</td>
-      <td>83.852221</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2019</td>
-      <td>1</td>
-      <td>1</td>
-      <td>4</td>
-      <td>30</td>
-      <td>24.0</td>
-      <td>20.9</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1019.0</td>
-      <td>121.0</td>
-      <td>3.5</td>
-      <td>82.828112</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>8755</th>
-      <td>2024</td>
-      <td>12</td>
-      <td>31</td>
-      <td>19</td>
-      <td>30</td>
-      <td>24.4</td>
-      <td>21.7</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1020.0</td>
-      <td>128.0</td>
-      <td>4.3</td>
-      <td>84.92921</td>
-    </tr>
-    <tr>
-      <th>8756</th>
-      <td>2024</td>
-      <td>12</td>
-      <td>31</td>
-      <td>20</td>
-      <td>30</td>
-      <td>24.3</td>
-      <td>21.8</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1020.0</td>
-      <td>128.0</td>
-      <td>4.2</td>
-      <td>85.963157</td>
-    </tr>
-    <tr>
-      <th>8757</th>
-      <td>2024</td>
-      <td>12</td>
-      <td>31</td>
-      <td>21</td>
-      <td>30</td>
-      <td>24.2</td>
-      <td>21.8</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1020.0</td>
-      <td>128.0</td>
-      <td>4.0</td>
-      <td>86.480116</td>
-    </tr>
-    <tr>
-      <th>8758</th>
-      <td>2024</td>
-      <td>12</td>
-      <td>31</td>
-      <td>22</td>
-      <td>30</td>
-      <td>24.2</td>
-      <td>21.9</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1019.0</td>
-      <td>128.0</td>
-      <td>3.9</td>
-      <td>87.00968</td>
-    </tr>
-    <tr>
-      <th>8759</th>
-      <td>2024</td>
-      <td>12</td>
-      <td>31</td>
-      <td>23</td>
-      <td>30</td>
-      <td>24.1</td>
-      <td>21.9</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1019.0</td>
-      <td>128.0</td>
-      <td>3.8</td>
-      <td>87.533326</td>
-    </tr>
-  </tbody>
-</table>
-            </div>
-            
-            </div>
-            <div>
-                <h3>self.meta_data</h3>
-                {'Source': 'NSRDB', 'Location ID': '1060499', 'City': '-', 'State': '-', 'Country': '-', 'Clearsky DHI Units': 'w/m2', 'Clearsky DNI Units': 'w/m2', 'Clearsky GHI Units': 'w/m2', 'Dew Point Units': 'c', 'DHI Units': 'w/m2', 'DNI Units': 'w/m2', 'GHI Units': 'w/m2', 'Solar Zenith Angle Units': 'Degree', 'Temperature Units': 'c', 'Pressure Units': 'mbar', 'Relative Humidity Units': '%', 'Precipitable Water Units': 'cm', 'Wind Direction Units': 'Degrees', 'Wind Speed Units': 'm/s', 'Cloud Type -15': 'N/A', 'Cloud Type 0': 'Clear', 'Cloud Type 1': 'Probably Clear', 'Cloud Type 2': 'Fog', 'Cloud Type 3': 'Water', 'Cloud Type 4': 'Super-Cooled Water', 'Cloud Type 5': 'Mixed', 'Cloud Type 6': 'Opaque Ice', 'Cloud Type 7': 'Cirrus', 'Cloud Type 8': 'Overlapping', 'Cloud Type 9': 'Overshooting', 'Cloud Type 10': 'Unknown', 'Cloud Type 11': 'Dust', 'Cloud Type 12': 'Smoke', 'Fill Flag 0': 'N/A', 'Fill Flag 1': 'Missing Image', 'Fill Flag 2': 'Low Irradiance', 'Fill Flag 3': 'Exceeds Clearsky', 'Fill Flag 4': 'Missing CLoud Properties', 'Fill Flag 5': 'Rayleigh Violation', 'Surface Albedo Units': 'N/A', 'Version': '4.1.2.dev4+g3b38bc8.d20250228', 'latitude': 25.77, 'longitude': -80.18, 'altitude': 7, 'tz': -5, 'wind_height': 2}
-            </div>
-        </div>
-        <p><i>All attributes can be accessed by the names shown above.</i></p>
-        <script>
-            function toggleVisibility(id) {
-                var content = document.getElementById(id);
-                var arrow = document.getElementById('arrow_' + id);
-                if (content.style.display === 'none') {
-                    content.style.display = 'block';
-                    arrow.innerHTML = '▼';
-                } else {
-                    content.style.display = 'none';
-                    arrow.innerHTML = '►';
-                }
-            }
-        </script>
-        </div></div>
 </div>
 </section>
 
