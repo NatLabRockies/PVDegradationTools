@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
@@ -39,10 +39,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -61,6 +61,7 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '03_monte_carlo/02_standoff';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Temperature Scenario" href="../04_scenario/01_scenario_temperature.html" />
@@ -68,20 +69,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -107,7 +114,51 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
     </header>
   
 
@@ -525,7 +576,7 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Standoff Monte Carlo</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-standoff-calculation">Simple Standoff Calculation</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-correlation-coefficients-mean-and-standard-deviation-for-monte-carlo-simulation">Defining Correlation Coefficients, Mean and Standard Deviation For Monte Carlo Simulation</a></li>
@@ -583,11 +634,11 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1018-azure
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1020-azure
 Python version  3.11.15 (main, Jun 16 2026, 21:41:52) [GCC 13.3.0]
 Pandas version  3.0.3
 Pvlib version  0.15.2
-Pvdeg version  0.1.dev1+g67d6ab4be
+Pvdeg version  0.1.dev1+ga58c24c6a
 </pre></div>
 </div>
 </div>
@@ -679,18 +730,18 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          X_0  wind_factor
-0    7.515086    -0.035142
-1    4.253109     0.409058
-2    8.640274     0.225710
-3    5.855369     0.401458
-4    3.667022    -0.387680
-..        ...          ...
-495  3.149746    -0.388488
-496  7.024552     0.133609
-497  2.789530     1.670099
-498  5.588745     0.924548
-499  3.218557     0.631015
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
+0     6.706244     0.329124
+1     7.755613    -0.640521
+2     2.042880     0.592172
+3     8.299819    -0.674791
+4     6.189385    -0.971817
+..         ...          ...
+495   8.407487     0.488676
+496  11.094660     0.051992
+497   3.239102    -0.577339
+498   1.463148     0.772348
+499   7.539088     0.453168
 
 [500 rows x 2 columns]
 </pre></div>
@@ -759,17 +810,17 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    1.053024  72.984237  50.159765
-1    0.000000  68.799750  47.425244
-2    0.322590  70.810628  48.690876
-3    0.000000  68.879328  47.464228
-4    0.871947  74.985202  51.428374
+0    0.000000  69.685831  47.952654
+1    2.185416  75.835655  52.071377
+2    0.000000  66.512998  45.723027
+3    2.380979  75.926551  52.162517
+4    1.961603  76.448852  52.706529
 ..        ...        ...        ...
-495  0.749316  74.987542  51.429874
-496  0.528666  71.622351  49.244301
-497  0.000000  43.544015  34.033412
-498  0.000000  61.304319  42.335210
-499  0.000000  66.020041  45.365181
+495  0.000000  67.993429  46.710184
+496  1.161253  72.228217  49.806191
+497  0.878022  75.614701  51.967532
+498  0.000000  64.149428  44.053426
+499  0.000000  68.393979  47.016744
 
 [500 rows x 3 columns]
 </pre></div>
@@ -804,7 +855,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/547988e3f4d118e1340e36ae40011edfdc5d7af329aec02fdd170a0823d82842.png" src="../_images/547988e3f4d118e1340e36ae40011edfdc5d7af329aec02fdd170a0823d82842.png" />
+<img alt="../_images/bdcc8f038b2742e1e33e884ed84c3ffe60d550d80766fa3719c10c73a9ec665d.png" src="../_images/bdcc8f038b2742e1e33e884ed84c3ffe60d550d80766fa3719c10c73a9ec665d.png" />
 </div>
 </div>
 </section>
@@ -874,7 +925,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Standoff Monte Carlo</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-standoff-calculation">Simple Standoff Calculation</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-correlation-coefficients-mean-and-standard-deviation-for-monte-carlo-simulation">Defining Correlation Coefficients, Mean and Standard Deviation For Monte Carlo Simulation</a></li>
@@ -930,8 +981,8 @@ By Martin Springer, Matthew Brown, Silvana Ovaitt, Tobin Ford, Joseph Karas, Mic
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
 
   <footer class="bd-footer">
   </footer>
