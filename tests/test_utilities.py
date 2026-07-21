@@ -229,8 +229,19 @@ def test_add_material(tmp_path):
     assert data["tmat"] == new_mat
 
 
-# this only works because we are not running on kestrel
-def test_nlr_kestrel_check_bad():
+def test_nlr_kestrel_check_bad(monkeypatch):
+    # Force a non-Kestrel hostname so this deterministically exercises the
+    # "not on Kestrel" path regardless of where the suite runs. Calling the real
+    # ``hostname -f`` makes this test fail when executed on an actual Kestrel node.
+    from subprocess import CompletedProcess
+
+    monkeypatch.setattr(
+        pvdeg.utilities,
+        "run",
+        lambda *args, **kwargs: CompletedProcess(
+            args=[], returncode=0, stdout="host.example.com\n"
+        ),
+    )
     with pytest.raises(ConnectionError):
         pvdeg.utilities.nlr_kestrel_check()
 

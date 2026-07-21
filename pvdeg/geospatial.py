@@ -192,8 +192,10 @@ def calc_block(weather_ds_block, future_meta_df, func, func_kwargs):
     ----------
     weather_ds_block : xarray.Dataset
         Dataset containing weather data for a block of gids.
-    future_meta_df : pandas.DataFrame
-        DataFrame containing meta data for a block of gids.
+    future_meta_df : pandas.DataFrame or distributed.Future
+        DataFrame containing meta data for a block of gids. May also be a
+        scattered ``distributed.Future`` wrapping that DataFrame (see
+        ``analysis``); it is materialized before use.
     func : function
         Function to apply to weather data.
     func_kwargs : dict
@@ -204,6 +206,18 @@ def calc_block(weather_ds_block, future_meta_df, func, func_kwargs):
     ds_res : xarray.Dataset
         Dataset with results for a block of gids.
     """
+    # ``analysis`` scatters ``meta_df`` to a broadcast Future to keep the task
+    # graph small. xarray's ``map_blocks`` does not auto-resolve Futures nested
+    # in kwargs, so materialize it here. A scattered/broadcast Future already
+    # holds concrete data, so ``result()`` returns the local copy immediately.
+    try:
+        from distributed import Future
+
+        if isinstance(future_meta_df, Future):
+            future_meta_df = future_meta_df.result()
+    except ImportError:
+        pass
+
     res = weather_ds_block.groupby("gid", squeeze=False).map(
         lambda ds_gid: calc_gid(
             ds_gid=ds_gid.squeeze(),

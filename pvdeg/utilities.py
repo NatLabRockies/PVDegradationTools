@@ -568,7 +568,10 @@ def _add_material(
     data.update({name: material_dict})
 
     with open(fpath, "w") as f:
-        json.dump(data, f, indent=4)
+        # Match the repo's data-file convention (raw UTF-8, trailing newline) so
+        # re-serializing an existing database file produces no spurious diff.
+        json.dump(data, f, indent=4, ensure_ascii=False)
+        f.write("\n")
 
 
 def quantile_df(file, q):
