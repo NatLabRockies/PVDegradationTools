@@ -888,6 +888,9 @@ class Scenario:
                         [results_dict[key]],
                         columns=[key],
                     )
+                else:
+                    # Preserve any other return type (e.g. a dict of series/scalars)
+                    results_series[key] = results_dict[key]
 
             self.results = results_series
 
