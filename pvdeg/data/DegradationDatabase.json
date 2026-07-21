@@ -1188,7 +1188,7 @@
         "Reference": "Science 377, 307-310 (2022)",
         "Material": "Halide Perovskite (CsPbI3, uncapped device)",
         "EquationType": "Perovskite_biexponential",
-        "Comments": "Parameters for the uncapped CsPbI3 device from Zhao et al. 2022. Ea values read directly from the Arrhenius plot (Fig. 3C, uncapped fast/slow dashed lines). k0 values are calibrated to reproduce T90,Agg ~ 1440 h under ISOS-L2 (85 C, 1000 W/m^2) as reported by Orooji et al. 2026 (doi:10.1039/d6el00021e) using the same Zhao parameters. A1, A2, B are estimated from the biexponential shape in Fig. 3A (uncapped). Exact fitted coefficients are in the Zhao supplementary (doi:10.1126/science.abn5679); users should re-fit k0, A1, A2, B to their own device data for quantitative predictions.",
+        "Comments": "Parameters for the uncapped CsPbI3 device from Zhao et al. 2022. Ea values read directly from the Arrhenius plot (Fig. 3C, uncapped fast/slow dashed lines). k0 values are calibrated to reproduce T90,Agg ~ 1440 h under ISOS-L2 (85 C, 1200 W/m^2; ISOS-L-3 in Zhao) as reported by Orooji et al. 2026 (doi:10.1039/d6el00021e) using the same Zhao parameters. A1, A2, B are estimated from the biexponential decay shape in Fig. 3A (uncapped). NOTE: Zhao does not tabulate A1/A2/B/k_fast/k_slow anywhere in the paper or SI. These values appear only as fitted curves in Fig. 3A/3C, so these are derived from AI-digitization of the plots.",
         "Ea_fast": {"value": 0.248, "units": "eV"},
         "Ea_slow": {"value": 0.243, "units": "eV"},
         "k0_fast": {"value": 0.56, "units": "h^-1 (pre-exponential at reference irradiance I_ref)"},
