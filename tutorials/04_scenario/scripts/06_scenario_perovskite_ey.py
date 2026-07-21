@@ -613,7 +613,7 @@ if df_map.empty:
     print("df_map is empty - run the US-map fetch cell first.")
 else:
     # T90,Agg by location
-    # PSM4 is used for the 6-location view (more leniant rate limits)
+    # PSM4 is used for the 6-location view)
     cmp = df_map.copy()
     cmp["orooji_T90"] = cmp["state"].map(OROOJI_T90)
     cmp["climate"] = cmp["state"].map(CLIMATE)
