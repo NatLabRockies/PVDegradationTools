@@ -1166,7 +1166,8 @@ def perovskite_degradation_factor(
     .. note::
 
         The default ``k0_fast`` / ``k0_slow`` values are calibrated to reproduce
-        ``T90,Agg`` ≈ 1440 h under ISOS-L2 (85 °C, 1000 W m⁻²) as reported by
+        ``T90,Agg`` ≈ 1440 h under ISOS-L2 (85 °C, 1200 W m⁻², the Zhao
+        reference intensity ``I_ref``) as reported by
         [1].  ``A1``, ``A2``, ``B`` are estimated from the biexponential fit
         shape in Fig. 3A of [2].  Exact fitted coefficients appear in the Zhao
         supplementary; re-fit these parameters to your own device data for
