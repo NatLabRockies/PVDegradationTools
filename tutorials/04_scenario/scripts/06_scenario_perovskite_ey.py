@@ -132,17 +132,29 @@ for k, v in d046.items():
 
 # %% [markdown]
 # ---
-# ## 3. Scenario pipeline — CE factor and module temperature
+# ## 3. Scenario pipeline — chained, converging jobs
 #
-# Three jobs run inside the Scenario pipeline. `degraded_power_ratio()` returns a `dict`
-# (which the Scenario pipeline does not store), so it is called directly afterwards with
-# the pipeline outputs.
+# Four jobs run inside a single Scenario pipeline. The graph **fans out** from `poa` to the
+# module-temperature and CE-factor jobs, then **converges**: the energy-yield job depends on
+# three upstream outputs at once (`poa`, `temp_mod`, `ce_factor`).
+#
+# `degraded_power_ratio()` returns a `dict`; the Scenario stores it under `sc.results["ey"]`,
+# from which we read `PR_Agg`, `power_degraded`, and `power_reference`.
 #
 # | Step | Function | Output name | Depends on |
 # |------|----------|-------------|------------|
 # | 1 | `spectral.poa_irradiance` | `"poa"` | — |
 # | 2 | `temperature.module` | `"temp_mod"` | `poa` ← `"poa"` |
 # | 3 | `degradation.perovskite_degradation_factor` (D046) | `"ce_factor"` | `poa` ← `"poa"` |
+# | 4 | `degradation.degraded_power_ratio` | `"ey"` | `poa` ← `"poa"`, `temp_cell` ← `"temp_mod"`, `ce_factor` ← `"ce_factor"` |
+#
+# Directed Acyclic Graphs (DAG) mapping out dependencies:
+# ```
+#         ┌──> temp_mod ──┐
+# poa ────┤               ├──> ey   (degraded_power_ratio)
+#         └──> ce_factor ─┘
+# ```
+#
 
 # %%
 scenarios = {}
@@ -172,6 +184,14 @@ for loc in LOCATIONS:
         name="ce_factor",
         depends_on={"poa": "poa"},
     )
+    # Converging job: energy yield consumes three upstream outputs at once.
+    # weather_df and meta are injected by the Scenario; TOP_CELL_PARAM supplies
+    # the diode parameters. degraded_power_ratio returns a dict
+    sc.addJob(
+        func=(pvdeg.degradation.degraded_power_ratio, TOP_CELL_PARAM),
+        name="ey",
+        depends_on={"poa": "poa", "temp_cell": "temp_mod", "ce_factor": "ce_factor"},
+    )
     sc.run()
     scenarios[loc] = sc
     print(f"  {loc}: CE@year-end = {sc.results['ce_factor'].iloc[-1]:.4f}")
@@ -181,115 +201,33 @@ s = scenarios["Golden, CO"]
 ce_factor = s.results["ce_factor"]
 poa_df = s.results["poa"]
 temp_mod = s.results["temp_mod"]
+ey = s.results["ey"]  # dict: PR_Agg, T90_Agg_hours, power_degraded, power_reference
 
 
 # %% [markdown]
 # ---
-# ## 4. Energy yield with a single-diode model
+# ## 4. Energy yield and lifetime over multiple years
 #
-# `degraded_power_ratio()` calls `pvlib.pvsystem.singlediode()` at each hourly timestep.
-# The photocurrent is scaled by the CE factor:
+# A single meteorological year rarely crosses `T_THRESHOLD`, so we **tile** the TMY across
+# `N_YEARS` and run the full converging pipeline on the tiled series. The running product
+# in `perovskite_degradation_factor()` accumulates continuously, so the whole multi-year
+# series is passed as one input.
+#
+# `ey_pipeline()` builds the same four-job DAG as Section 3 and returns the CE factor
+# ($DF_{total}$) plus the complete `degraded_power_ratio` dict (`PR_Agg`, `power_degraded`,
+# `power_reference`), from which every visual below is drawn:
+#
+# - **CE factor** $DF_{total}(t)$ — device-level degradation, all locations, with the $T_{90}$ crossing;
+# - **Aggregated power ratio** $PR_{Agg}(t)$ — cumulative energy-yield metric, with the $T_{90,Agg}$ crossing;
+# - **Hourly $P_{mp}$** — degraded vs reference cell (first year, Golden).
+#
+# The photocurrent is scaled by the CE factor inside `degraded_power_ratio()`:
 #
 # $$I_L^{deg}(t) = I_{sc,ref} \cdot \frac{G(t)}{G_{ref}} \cdot [1 + \alpha_{ISC}(T_{cell}(t) - T_{ref})] \cdot CE_{factor}(t)$$
 #
-# Diode parameters are defined in `TOP_CELL_PARAM`. While the original reference models
-# the energy yield of a tandem architecture with degradation experienced in this top cell only, for simplicity we model only the energy yield of this top cell as a single junction device with the degradation calculated in the same way.
-
-# %%
-ce_factor = s.results["ce_factor"]
-poa_df = s.results["poa"]
-temp_mod = s.results["temp_mod"]
-
-ey = pvdeg.degradation.degraded_power_ratio(
-    weather_df=weather_df,
-    meta=meta,
-    ce_factor=ce_factor,
-    poa=poa_df,
-    temp_cell=temp_mod,
-    **TOP_CELL_PARAM,
-)
-
-PR_Agg = ey["PR_Agg"]
-power_degraded = ey["power_degraded"]
-power_reference = ey["power_reference"]
-
-# Compute threshold crossing using T_THRESHOLD (set in the imports cell)
-t_agg_idx = PR_Agg[PR_Agg <= T_THRESHOLD].index
-if len(t_agg_idx):
-    T_Agg_months = (
-        (t_agg_idx[0] - PR_Agg.index[0]).total_seconds() / 3600 / (24 * 365.25 / 12)
-    )
-    print(f"{T_LABEL},Agg = {T_Agg_months:.1f} months")
-else:
-    end_pr = PR_Agg.iloc[-1]
-    print(f"{T_LABEL},Agg not reached in 1 year  (PR_Agg at year-end = {end_pr:.4f})")
-    print(f"CE factor at year-end = {ce_factor.iloc[-1]:.4f}")
-    print(
-        "Consistent with the paper's prediction of ~26–42 months depending on climate."
-    )
-
-
-# %%
-_colors = {
-    "Golden, CO": "steelblue",
-    "Miami, FL": "crimson",
-    "New York, NY": "seagreen",
-}
-
-fig, axes = plt.subplots(3, 1, figsize=(12, 10), sharex=True)
-
-# Panel 1: CE degradation factor — all locations + threshold line
-for loc, sc in scenarios.items():
-    sc.results["ce_factor"].plot(ax=axes[0], label=loc, color=_colors[loc])
-axes[0].axhline(
-    T_THRESHOLD,
-    color="red",
-    linestyle="--",
-    linewidth=0.9,
-    label=f"{T_LABEL} ({T_THRESHOLD})",
-)
-axes[0].set_ylabel("CE factor (–)")
-axes[0].set_title(
-    f"CE degradation factor $DF_{{total}}(t)$ — Zhao/Orooji D046 (CsPbI₃), all locations"
-)
-axes[0].legend(fontsize=9, loc="upper right")
-
-# Panel 2: Aggregated power ratio — Golden, CO
-PR_Agg.plot(ax=axes[1], color="steelblue")
-axes[1].axhline(
-    T_THRESHOLD,
-    color="red",
-    linestyle="--",
-    linewidth=0.9,
-    label=f"{T_LABEL} ({T_THRESHOLD})",
-)
-axes[1].set_ylabel("$PR_{Agg}$ (–)")
-axes[1].set_title(f"Aggregated power ratio $PR_{{Agg}}(t)$ — Golden, CO")
-axes[1].legend(fontsize=9)
-
-# Panel 3: Hourly power — degraded vs reference, Golden, CO
-power_reference.plot(ax=axes[2], label="Reference (no degradation)", alpha=0.5)
-power_degraded.plot(ax=axes[2], label="Degraded (Golden, CO)", alpha=0.8)
-axes[2].set_ylabel("Power (W)")
-axes[2].set_title("Hourly $P_{mp}$ — degraded vs reference cell (Golden, CO)")
-axes[2].legend()
-
-fig.tight_layout()
-plt.suptitle(
-    f"Zhao/Orooji D046  |  Golden PR_Agg = {PR_Agg.iloc[-1]:.4f} at year-end",
-    y=1.01,
-    fontsize=11,
-)
-
-
-# %% [markdown]
-# ---
-# ## 5. Multi-year lifetime projection — finding the threshold crossing
-#
-# One year of data is not enough to cross the `T_THRESHOLD` at any location. The standard approach
-# is to **tile** the same meteorological year across N years, which matches the methodology of
-# Orooji et al. (2026). The running product in `perovskite_degradation_factor()` accumulates
-# continuously, so the full N-year series is passed as a single concatenated input.
+# Diode parameters are defined in `TOP_CELL_PARAM`. The original reference models a tandem
+# architecture with degradation in the top cell only; for simplicity we model that same
+# top cell but as a single-junction device with the degradation calculated the same way.
 #
 
 # %%
@@ -307,81 +245,119 @@ def make_multiyear(df, n_years, start_year=2020):
     return pd.concat(frames).sort_index()
 
 
-def run_ce_multiyear(wdf, mt, n_years=N_YEARS):
-    """Run POA → CE factor on tiled N-year weather (no EY calculation).
+def ey_pipeline(wdf, mt, n_years=N_YEARS):
+    """Full converging pipeline (POA -> temp + CE -> energy yield) on tiled weather.
 
-    Passes explicit tilt (|latitude|) and south-facing azimuth (180°) to suppress
-    the poa_irradiance default-assumption warning.
+    Builds the same four jobs as Section 3 and reads the results straight from the
+    Scenario (degraded_power_ratio's dict lands in sc.results["ey"]).
+    Returns (CE_series, ey_dict), where ey_dict holds PR_Agg, power_degraded,
+    power_reference and T90_Agg_hours.
     Job folders go to pvdeg.config.SCENARIO_OUTPUT_PATH (set in the imports cell).
     """
     wdf_ny = make_multiyear(wdf, n_years)
     tilt = abs(mt["latitude"])
-    sc = pvdeg.Scenario(name="ce-multiyear", weather_data=wdf_ny, meta_data=mt)
+    sc = pvdeg.Scenario(name="ey-multiyear", weather_data=wdf_ny, meta_data=mt)
     sc.addJob(
         func=(
             pvdeg.spectral.poa_irradiance,
-            {
-                "surface_tilt": tilt,
-                "surface_azimuth": 180.0,
-            },
+            {"surface_tilt": tilt, "surface_azimuth": 180.0},
         ),
         name="poa",
     )
+    sc.addJob(func=pvdeg.temperature.module, name="temp_mod", depends_on={"poa": "poa"})
     sc.addJob(
         func=(pvdeg.degradation.perovskite_degradation_factor, {"parameters": d046}),
         name="ce_factor",
         depends_on={"poa": "poa"},
     )
+    sc.addJob(
+        func=(pvdeg.degradation.degraded_power_ratio, TOP_CELL_PARAM),
+        name="ey",
+        depends_on={"poa": "poa", "temp_cell": "temp_mod", "ce_factor": "ce_factor"},
+    )
     sc.run()
-    return sc.results["ce_factor"]
-
-
-print(
-    f"Running {N_YEARS}-year CE projection for all locations  (threshold = {T_LABEL})..."
-)
-ce_multiyear = {}
-for loc in LOCATIONS:
-    print(f"  {loc}...", end="  ")
-    ce_multiyear[loc] = run_ce_multiyear(all_weather[loc], all_meta[loc])
-    t_idx = ce_multiyear[loc][ce_multiyear[loc] <= T_THRESHOLD].index
-    if len(t_idx):
-        t_months = (t_idx[0] - ce_multiyear[loc].index[0]).days / 30.44
-        print(f"{T_LABEL} at {t_months:.1f} months")
-    else:
-        print(f"{T_LABEL} not reached in {N_YEARS} years")
+    return sc.results["ce_factor"], sc.results["ey"]
 
 
 # %%
-fig, ax = plt.subplots(figsize=(12, 5))
+_colors = {
+    "Golden, CO": "steelblue",
+    "Miami, FL": "crimson",
+    "New York, NY": "seagreen",
+}
 
-for loc, ce in ce_multiyear.items():
-    ce.plot(ax=ax, label=loc, color=_colors[loc])
-    # Mark the first threshold crossing with a dotted vertical line
-    t_idx = ce[ce <= T_THRESHOLD].index
+# Run the full converging pipeline on N-year tiled weather for every local location.
+# ey_pipeline returns (CE_series, ey_dict); we keep CE, PR_Agg, and the full dict
+# (the dict carries power_degraded / power_reference for the hourly panel).
+print(
+    f"Running {N_YEARS}-year projection for all locations  (threshold = {T_LABEL})..."
+)
+ce_multiyear, pr_multiyear, ey_local = {}, {}, {}
+for loc in LOCATIONS:
+    ce, ey_d = ey_pipeline(all_weather[loc], all_meta[loc])
+    ce_multiyear[loc] = ce
+    pr_multiyear[loc] = ey_d["PR_Agg"]
+    ey_local[loc] = ey_d
+
+    pr = pr_multiyear[loc]
+    t_idx = pr[pr <= T_THRESHOLD].index
     if len(t_idx):
-        ax.axvline(
-            t_idx[0], color=_colors[loc], linestyle=":", alpha=0.6, linewidth=1.2
+        t_months = (t_idx[0] - pr.index[0]).days / 30.44
+        print(f"  {loc}: {T_LABEL},Agg at {t_months:.1f} months")
+    else:
+        print(
+            f"  {loc}: {T_LABEL},Agg not reached in {N_YEARS} years "
+            f"(PR_Agg end = {pr.iloc[-1]:.3f})"
         )
 
-ax.axhline(
-    T_THRESHOLD,
-    color="red",
-    linestyle="--",
-    linewidth=0.9,
-    label=f"{T_LABEL} ({T_THRESHOLD})",
+
+# %%
+fig, axes = plt.subplots(3, 1, figsize=(12, 11))
+
+# Panel 1: CE degradation factor DF_total(t) — all locations + T90 crossings
+for loc, ce in ce_multiyear.items():
+    ce.plot(ax=axes[0], label=loc, color=_colors[loc])
+    t_idx = ce[ce <= T_THRESHOLD].index
+    if len(t_idx):
+        axes[0].axvline(t_idx[0], color=_colors[loc], ls=":", alpha=0.6, lw=1.2)
+axes[0].axhline(
+    T_THRESHOLD, color="red", ls="--", lw=0.9, label=f"{T_LABEL} ({T_THRESHOLD})"
 )
-ax.set_ylabel("CE factor (–)")
-ax.set_title(
-    f"CE degradation factor — {N_YEARS}-year projection, all locations (D046, CsPbI₃)\n"
-    f"Dotted vertical lines mark the {T_LABEL} crossing for each location"
+axes[0].set_ylabel("CE factor (–)")
+axes[0].set_title(
+    f"CE degradation factor $DF_{{total}}(t)$ — {N_YEARS}-year projection (D046, CsPbI₃)"
 )
-ax.legend(fontsize=9)
+axes[0].legend(fontsize=9, loc="upper right")
+
+# Panel 2: Aggregated power ratio PR_Agg(t) — all locations + T90,Agg crossings
+for loc, pr in pr_multiyear.items():
+    pr.plot(ax=axes[1], label=loc, color=_colors[loc])
+    t_idx = pr[pr <= T_THRESHOLD].index
+    if len(t_idx):
+        axes[1].axvline(t_idx[0], color=_colors[loc], ls=":", alpha=0.6, lw=1.2)
+axes[1].axhline(
+    T_THRESHOLD, color="red", ls="--", lw=0.9, label=f"{T_LABEL} ({T_THRESHOLD})"
+)
+axes[1].set_ylabel("$PR_{Agg}$ (–)")
+axes[1].set_title(f"Aggregated power ratio $PR_{{Agg}}(t)$ — {N_YEARS}-year projection")
+axes[1].legend(fontsize=9, loc="upper right")
+
+# Panel 3: Hourly power — degraded vs reference (Golden, first year for readability)
+_gold = ey_local["Golden, CO"]
+_p_ref, _p_deg = _gold["power_reference"], _gold["power_degraded"]
+_first_year = _p_ref.index < _p_ref.index[0] + pd.DateOffset(years=1)
+_p_ref[_first_year].plot(ax=axes[2], label="Reference (no degradation)", alpha=0.5)
+_p_deg[_first_year].plot(ax=axes[2], label="Degraded (Golden, CO)", alpha=0.8)
+axes[2].set_ylabel("Power (W)")
+axes[2].set_title("Hourly $P_{mp}$ — degraded vs reference (Golden, CO, first year)")
+axes[2].legend(fontsize=9)
+
 fig.tight_layout()
 
 
 # %% [markdown]
 # ---
-# ## 6. Lifetime map — US state choropleth via NSRDB PSM4
+# ## 5. Lifetime map — US state choropleth via NSRDB PSM4
 #
 # Each state is coloured by how many months it takes until the **cumulative energy yield**
 # (`PR_Agg`) falls below `T_THRESHOLD`using a 3-year tiled PSM4 TMY. Colour scale: green = long lifetime (good), red = short lifetime (bad).
@@ -393,6 +369,7 @@ fig.tight_layout()
 # **Note on DF_total**
 # $DF_{total}$ is the *instantaneous* CE at a given hour, $PR_{Agg}$ is the averaged energy
 # yield over the whole operating period.
+#
 
 # %%
 # Fetch lifetime data for all 50 US states via NSRDB PSM4 API
@@ -471,52 +448,16 @@ for abbr, (lat, lon, label, clat, clon) in STATES.items():
         )
         wdf.index = wdf.index.map(lambda ts: ts.replace(year=2020))
         wdf = wdf.sort_index()
-        tilt = abs(mt["latitude"])  # latitude-tilt, south-facing — passed explicitly
 
-        # CE factor (DF_total) threshold crossing — device-level
-        ce = run_ce_multiyear(wdf, mt)
+        # One converging pipeline returns the device-level CE (DF_total) and the full
+        # energy-yield dict; we take PR_Agg from it (ey_pipeline is defined in Section 4).
+        ce, ey_d = ey_pipeline(wdf, mt)
         ce_series[abbr] = ce
+        pr_s = ey_d["PR_Agg"]
+        pr_series[abbr] = pr_s
+
         t_df_idx = ce[ce <= T_THRESHOLD].index
         t_df_m = (t_df_idx[0] - ce.index[0]).days / 30.44 if len(t_df_idx) else None
-
-        # PR_Agg threshold crossing — cumulative energy-yield metric
-        wdf_ny = make_multiyear(wdf, N_YEARS)
-        sc_s = pvdeg.Scenario(name=f"ey-{abbr}", weather_data=wdf_ny, meta_data=mt)
-        sc_s.addJob(
-            func=(
-                pvdeg.spectral.poa_irradiance,
-                {
-                    "surface_tilt": tilt,
-                    "surface_azimuth": 180.0,
-                },
-            ),
-            name="poa",
-        )
-        sc_s.addJob(
-            func=pvdeg.temperature.module, name="temp_mod", depends_on={"poa": "poa"}
-        )
-        sc_s.addJob(
-            func=(
-                pvdeg.degradation.perovskite_degradation_factor,
-                {"parameters": d046},
-            ),
-            name="ce_factor",
-            depends_on={"poa": "poa"},
-        )
-        sc_s.run()
-        ey_s = pvdeg.degradation.degraded_power_ratio(
-            weather_df=wdf_ny,
-            meta=mt,
-            ce_factor=sc_s.results["ce_factor"],
-            poa=sc_s.results["poa"],
-            temp_cell=sc_s.results["temp_mod"],
-            **TOP_CELL_PARAM,
-        )
-        pr_s = ey_s[
-            "PR_Agg"
-        ]  # degraded_power_ratio returns a dict; take the PR_Agg series
-        pr_series[abbr] = pr_s
-        cum_poa = float(sc_s.results["poa"]["poa_global"].sum()) / 1000.0 / N_YEARS
         t_pr_idx = pr_s[pr_s <= T_THRESHOLD].index
         t_pr_m = (t_pr_idx[0] - pr_s.index[0]).days / 30.44 if len(t_pr_idx) else None
 
@@ -528,7 +469,6 @@ for abbr, (lat, lon, label, clat, clon) in STATES.items():
                 "centre_lon": clon,
                 "T_months": t_pr_m,
                 "T_DF_months": t_df_m,
-                "cum_poa_kwh": round(cum_poa, 0),
             }
         )
         t_str = (
@@ -597,7 +537,7 @@ else:
     fig_map.show()
 
 # %% [markdown]
-# ## 7. Comparison with the original publication
+# ## 6. Comparison with the original publication
 #
 # Comparison between reference publication and this worklfow.
 #
@@ -605,15 +545,16 @@ else:
 # - **Weather:** pvdeg uses NSRDB PSM4 `"tmy"` and PVGIS TMY; Orooji used NREL/NLR TMY3.
 # - **Device:** single-junction perovskite cell here vs Orooji's two-diode Si/Perovskite tandem.
 #
-# If at least the CE can be reproduced for this top cell, independent of total degradation,
-# this suggests that the workflow is succesfully validating the published results. Further
-# differences in the T90_Agg may be attributed to the different device architectures. While
-# this example considers single-junction performance from a single perovskite cell, which
+# If at least the CE can be reproduced for this top cell, independent of total device
+# degradation, this suggests that the workflow is succesfully validating the published results.
+# Further differences in the T90_Agg may be attributed to the different device architectures.
+# While this example considers single-junction performance from a single perovskite cell, which
 # exhibits degradation, the reference publication uses a tandem Si/Pk configuration. In
 # the tandem architecture, the Si cell exhibits less degradation, which will mask performance
 # loss due to top cell (perovskite) degradation when the Si cell is limiting in the field.
 # Therefore, the tandem is likely to exhibit a longer T90_Agg, but overall the location
 # ranking should be the same.
+#
 
 # %%
 # Publication comparison: data prep
@@ -629,11 +570,11 @@ OROOJI_T90 = {
     "FL": 35,
     "ME": 40,
     "WA": 42,
-}  # Fig 5 / abstract
+}
 OROOJI_FIG4 = {
     "AZ": (0.83, 0.95),
     "WA": (0.90, 0.97),
-}  # (CE, PR_Agg) at 12 months, Fig 4
+}
 CLIMATE = {
     "AZ": "arid",
     "TX": "arid",
@@ -650,41 +591,8 @@ def _at_one_year(series):
     return float(series.asof(series.index[0] + pd.DateOffset(years=1)))
 
 
-def ey_pipeline(wdf, mt):
-    """POA -> module temp -> CE (DF_total) -> PR_Agg on an N_YEARS tiling.
-
-    CE is computed once in the Scenario and reused for the power step.
-    Returns (CE_series, PR_Agg_series).
-    """
-    wdf_ny = make_multiyear(wdf, N_YEARS)
-    sc = pvdeg.Scenario(name="ey-cmp", weather_data=wdf_ny, meta_data=mt)
-    sc.addJob(
-        func=(
-            pvdeg.spectral.poa_irradiance,
-            {"surface_tilt": abs(mt["latitude"]), "surface_azimuth": 180.0},
-        ),
-        name="poa",
-    )
-    sc.addJob(func=pvdeg.temperature.module, name="temp_mod", depends_on={"poa": "poa"})
-    sc.addJob(
-        func=(pvdeg.degradation.perovskite_degradation_factor, {"parameters": d046}),
-        name="ce_factor",
-        depends_on={"poa": "poa"},
-    )
-    sc.run()
-    ce = sc.results["ce_factor"]
-    pr = pvdeg.degradation.degraded_power_ratio(
-        weather_df=wdf_ny,
-        meta=mt,
-        ce_factor=ce,
-        poa=sc.results["poa"],
-        temp_cell=sc.results["temp_mod"],
-        **TOP_CELL_PARAM,
-    )["PR_Agg"]
-    return ce, pr
-
-
-# PVGIS TMY for the two Fig-4 sites (PSM4 for these is already in ce_series / pr_series)
+# PVGIS TMY for the two Fig-4 sites (PSM4 for these is already in ce_series / pr_series).
+# ey_pipeline is defined in Section 4 and reused here unchanged.
 pvgis_ce, pvgis_pr = {}, {}
 for st, (lat, lon) in {"AZ": (33.45, -112.07), "WA": (47.61, -122.33)}.items():
     data, _ = pvlib.iotools.get_pvgis_tmy(
@@ -694,8 +602,10 @@ for st, (lat, lon) in {"AZ": (33.45, -112.07), "WA": (47.61, -122.33)}.items():
     wdf.index = wdf.index.map(lambda ts: ts.replace(year=2020))
     wdf = wdf.sort_index()
     mt = {"latitude": lat, "longitude": lon, "altitude": 0, "wind_height": 10}
-    pvgis_ce[st], pvgis_pr[st] = ey_pipeline(wdf, mt)
+    pvgis_ce[st], _ey_d = ey_pipeline(wdf, mt)
+    pvgis_pr[st] = _ey_d["PR_Agg"]
     print(f"  {st}: PVGIS TMY fetched ({len(wdf)} rows)")
+
 
 # %%
 # Publication comparison: plots + 12-month table
