@@ -27,6 +27,14 @@ Documentation
 - Updated the geospatial tutorials (``tutorials/05_geospatial``) so the
   templates and outdoor LETID demonstrations run against the current API.
   (:pull:`351`)
+- Reorganized the tutorials into numbered categories (``01_basics`` through
+  ``06_advanced``, plus ``10_workshop_demos`` and ``tools``). Removed leftover
+  duplicate notebooks and orphaned scripts left by the geospatial/scenario
+  split, fixed the internal cross-reference links between tutorials, and
+  updated the tutorial listing in the README and docs. (:pull:`351`)
+- Added a ``tutorials/06_advanced/02_pysam_single_location`` tutorial
+  demonstrating a single-location PySAM ``pvsamv1`` simulation from PVGIS
+  weather. (:pull:`351`)
 
 
 Deprecations

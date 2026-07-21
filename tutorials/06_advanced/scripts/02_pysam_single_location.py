@@ -1,3 +1,10 @@
+# %% [markdown]
+# # PySAM for a Single Location
+#
+# Run a PySAM `pvsamv1` simulation for a single location using PVGIS weather
+# (no API key required), inspect the model output dictionary, and visualize the
+# spatial rear-side ground irradiance as a heatmap.
+
 # %%
 import pvdeg
 import matplotlib.pyplot as plt
