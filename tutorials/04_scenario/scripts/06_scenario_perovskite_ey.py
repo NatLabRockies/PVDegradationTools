@@ -8,8 +8,7 @@
 # 1. **Device-level CE degradation factor** — `perovskite_degradation_factor()` (D046, CsPbI₃)
 # 2. **Energy yield with pvlib single-diode model** — `degraded_power_ratio()` computes hourly $P_{mp}$,
 #    aggregated power ratio $PR_{Agg}(t)$, and $T_{90,Agg}$.
-# 3. **Multi-location comparison** — Golden CO, Miami FL, New York NY, with T₈₀ and T₉₀ thresholds.
-# 4. **Multi-year projection** — tiling the meteorological year to find the T₈₀ crossing date.
+# 3. **Multi-location comparison** — Assess multiple locations with T₈₀ and T₉₀ thresholds.
 #
 # **Key equations:**
 #
@@ -20,10 +19,6 @@
 # DF_{total}(t) = \prod_{i=1}^{t} DF(i)$$
 #
 # $$PR_{Agg}(t) = \frac{\sum_{i=1}^{t} P_{deg}(i)}{\sum_{i=1}^{t} P_{ref}(i)}$$
-#
-# > **See also:** `05_scenario_perovskite_sequential.ipynb` — Siegler MAPbI₃ chemistry model
-# > and Scenario sequential job chaining.
-# > **See also:** `07_scenario_module_stack.ipynb` — full multi-layer module stack with moisture ingress.
 #
 # **References:**
 # - Orooji et al. (2026) *EES Solar*. doi: 10.1039/d6el00021e
@@ -36,10 +31,12 @@
 import os
 import json
 import tempfile
+import pvlib
 import numpy as np
 import pandas as pd
 import pvdeg
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 import plotly.express as px
 import plotly.graph_objects as go
 
@@ -50,13 +47,25 @@ TUTORIALS_DATA = os.path.join(REPO_ROOT, "tutorials", "data")
 # Keeps the repo working directory free of pvd_job_* clutter.
 pvdeg.config.SCENARIO_OUTPUT_PATH = tempfile.gettempdir()
 
-# Lifetime threshold
-# Change this to analyse a different degradation endpoint. Plots, prints, map colors will correspond to this setting e.g. 0.90 for T90.
+# Lifetime threshold e.g. 0.90 for T90
 T_THRESHOLD = 0.90
 T_LABEL = f"T{int(T_THRESHOLD * 100)}"  # e.g. "T90" or "T80"
 
+# Note: Orooji et al. (2026) model the energy yield of a Perovskite/Si tandem device
+# using LTspice and EYCalc, including only degradation of the top cell. For simplicity,
+# this example models the degradation and subsequent energy yield of a single-junction
+# perovskite top cell, using the same published perovskite top cell parameters.
+TOP_CELL_PARAM = {
+    "I_sc_ref": 0.02076,  # A   (Jsc 20.76 mA/cm^2 for 1 cm^2; tandem current-matched)
+    "I_0_ref": 2.6e-18,  # A   (J0 = 2.6e-18 A/cm^2)
+    "R_s": 1.4,  # Ohm (1.4 Ohm.cm^2)
+    "R_sh": 1300.0,  # Ohm (1300 Ohm.cm^2)
+    "n_diode": 1.3,  # ideality factor
+}
+
 
 # %%
+# Use some local data shipped with pvdeg first to avoid API calls
 LOCATIONS = {
     "Golden, CO": ("psm4_golden.csv", "meta_golden.json"),
     "Miami, FL": ("psm4_miami.csv", "meta_miami.json"),
@@ -176,28 +185,28 @@ temp_mod = s.results["temp_mod"]
 
 # %% [markdown]
 # ---
-# ## 4. Energy yield with pvlib single-diode model
+# ## 4. Energy yield with a single-diode model
 #
 # `degraded_power_ratio()` calls `pvlib.pvsystem.singlediode()` at each hourly timestep.
 # The photocurrent is scaled by the CE factor:
 #
 # $$I_L^{deg}(t) = I_{sc,ref} \cdot \frac{G(t)}{G_{ref}} \cdot [1 + \alpha_{ISC}(T_{cell}(t) - T_{ref})] \cdot CE_{factor}(t)$$
 #
-# Default diode parameters correspond to a generic ~20% PCE single-junction perovskite cell
-# (1 cm² area). Pass your own `I_sc_ref`, `I_0_ref`, `R_s`, `R_sh`, `n_diode` for a specific device.
+# Diode parameters are defined in `TOP_CELL_PARAM`. While the original reference models
+# the energy yield of a tandem architecture with degradation experienced in this top cell only, for simplicity we model only the energy yield of this top cell as a single junction device with the degradation calculated in the same way.
 
 # %%
 ce_factor = s.results["ce_factor"]
 poa_df = s.results["poa"]
 temp_mod = s.results["temp_mod"]
 
-# Call directly — degraded_power_ratio returns a dict, not a Series/DataFrame
 ey = pvdeg.degradation.degraded_power_ratio(
     weather_df=weather_df,
     meta=meta,
     ce_factor=ce_factor,
     poa=poa_df,
     temp_cell=temp_mod,
+    **TOP_CELL_PARAM,
 )
 
 PR_Agg = ey["PR_Agg"]
@@ -375,25 +384,17 @@ fig.tight_layout()
 # ## 6. Lifetime map — US state choropleth via NSRDB PSM4
 #
 # Each state is coloured by how many months it takes until the **cumulative energy yield**
-# (`PR_Agg`) falls below `T_THRESHOLD` (default 0.90 → T₉₀), under the D046 (CsPbI₃)
-# Zhao/Orooji kinetics using a 3-year tiled PSM4 TMY.
+# (`PR_Agg`) falls below `T_THRESHOLD`using a 3-year tiled PSM4 TMY. Colour scale: green = long lifetime (good), red = short lifetime (bad).
 #
 # This is the energy-yield answer to "when have I lost `(1 − T_THRESHOLD) × 100 %` of my
-# investment?" — the same metric reported by Orooji et al. (2026).
+# investment?".
 #
-# > **Why not DF_total?**
-# >
-# >$DF_{total}$ is the *instantaneous* CE at a given hour, $PR_{Agg}$ is the averaged energy
-# yield over the whole operating period. $DF_{total}$ PR_agg T90 compares all energy actually
-# produced to all energy a non-degrading device would have produced over the same period
-# Phoenix example (T₉₀): $DF_{total}$ ≈ 7–8 months vs $PR_{Agg}$ ≈ 24–28 months.
-# Both are stored in `df_map`; hover over a state to compare them.
 #
-# **Colour scale:** green = long lifetime (good), red = short lifetime (bad).
-#
+# **Note on DF_total**
+# $DF_{total}$ is the *instantaneous* CE at a given hour, $PR_{Agg}$ is the averaged energy
+# yield over the whole operating period.
 
 # %%
-# NBVAL_IGNORE_OUTPUT
 # Fetch lifetime data for all 50 US states via NSRDB PSM4 API
 # Get a free key at https://developer.nrel.gov/signup/
 
@@ -403,17 +404,17 @@ EMAIL = "rajiv.daxini@nlr.gov"
 # abbr: (api_lat, api_lon, label, centre_lat, centre_lon)
 # (UN)COMMENT whichever states you want
 STATES = {
-    "AL": (32.36, -86.30, "Montgomery, AL", 32.8, -86.8),
-    "AK": (61.22, -149.90, "Anchorage, AK", 64.2, -153.0),
-    # "AZ": (33.45, -112.07, "Phoenix, AZ", 34.3, -111.1),
+    # "AL": (32.36, -86.30, "Montgomery, AL", 32.8, -86.8),
+    # "AK": (61.22, -149.90, "Anchorage, AK", 64.2, -153.0),
+    "AZ": (33.45, -112.07, "Phoenix, AZ", 34.3, -111.1),
     # "AR": (34.74, -92.33, "Little Rock, AR", 34.8, -92.2),
     # "CA": (34.05, -118.24, "Los Angeles, CA", 37.2, -119.5),
     # "CO": (39.73, -104.98, "Denver, CO", 39.0, -105.5),
     # "CT": (41.76, -72.68, "Hartford, CT", 41.6, -72.7),
     # "DE": (39.16, -75.52, "Dover, DE", 39.0, -75.5),
-    # "FL": (25.77, -80.19, "Miami, FL", 27.8, -81.6),
+    "FL": (25.77, -80.19, "Miami, FL", 27.8, -81.6),
     # "GA": (33.75, -84.39, "Atlanta, GA", 32.7, -83.4),
-    # "HI": (21.31, -157.86, "Honolulu, HI", 20.5, -157.3),
+    "HI": (21.31, -157.86, "Honolulu, HI", 20.5, -157.3),
     # "ID": (43.61, -116.20, "Boise, ID", 44.4, -114.6),
     # "IL": (41.88, -87.63, "Chicago, IL", 40.0, -89.2),
     # "IN": (39.77, -86.16, "Indianapolis, IN", 40.3, -86.1),
@@ -421,7 +422,7 @@ STATES = {
     # "KS": (39.05, -95.69, "Topeka, KS", 38.5, -98.4),
     # "KY": (38.25, -85.76, "Louisville, KY", 37.5, -85.3),
     # "LA": (29.95, -90.07, "New Orleans, LA", 31.1, -91.8),
-    # "ME": (44.32, -69.77, "Augusta, ME", 45.4, -69.2),
+    "ME": (43.66, -70.26, "Portland, ME", 45.4, -69.2),
     # "MD": (38.97, -76.49, "Annapolis, MD", 39.0, -76.7),
     # "MA": (42.36, -71.06, "Boston, MA", 42.3, -71.8),
     # "MI": (42.73, -84.56, "Lansing, MI", 44.3, -85.4),
@@ -445,17 +446,19 @@ STATES = {
     # "SC": (34.00, -81.03, "Columbia, SC", 33.9, -80.9),
     # "SD": (44.37, -100.35, "Pierre, SD", 44.4, -100.2),
     # "TN": (36.16, -86.78, "Nashville, TN", 35.9, -86.4),
-    # "TX": (30.27, -97.74, "Austin, TX", 31.5, -99.3),
+    "TX": (31.76, -106.49, "El Paso, TX", 31.5, -99.3),
     # "UT": (40.76, -111.89, "Salt Lake City, UT", 39.4, -111.1),
     # "VT": (44.26, -72.58, "Montpelier, VT", 44.0, -72.7),
     # "VA": (37.54, -77.43, "Richmond, VA", 37.5, -78.9),
-    # "WA": (47.04, -122.90, "Olympia, WA", 47.4, -120.6),
+    "WA": (47.61, -122.33, "Seattle, WA", 47.4, -120.6),
     # "WV": (38.35, -81.63, "Charleston, WV", 38.6, -80.6),
     # "WI": (43.07, -89.40, "Madison, WI", 44.3, -89.8),
     # "WY": (41.14, -104.82, "Cheyenne, WY", 43.0, -107.6),
 }
 
 map_data = []
+pr_series = {}  # PR_Agg(t) trajectory per location (for the over-time plot)
+ce_series = {}  # CE(t) = DF_total trajectory per location (for the Fig 4 CE check)
 for abbr, (lat, lon, label, clat, clon) in STATES.items():
     try:
         wdf, mt = pvdeg.weather.get(
@@ -470,12 +473,13 @@ for abbr, (lat, lon, label, clat, clon) in STATES.items():
         wdf = wdf.sort_index()
         tilt = abs(mt["latitude"])  # latitude-tilt, south-facing — passed explicitly
 
-        # ── CE factor (DF_total) threshold crossing — device-level ───────────
+        # CE factor (DF_total) threshold crossing — device-level
         ce = run_ce_multiyear(wdf, mt)
+        ce_series[abbr] = ce
         t_df_idx = ce[ce <= T_THRESHOLD].index
         t_df_m = (t_df_idx[0] - ce.index[0]).days / 30.44 if len(t_df_idx) else None
 
-        # ── PR_Agg threshold crossing — cumulative energy-yield metric ────────
+        # PR_Agg threshold crossing — cumulative energy-yield metric
         wdf_ny = make_multiyear(wdf, N_YEARS)
         sc_s = pvdeg.Scenario(name=f"ey-{abbr}", weather_data=wdf_ny, meta_data=mt)
         sc_s.addJob(
@@ -506,8 +510,13 @@ for abbr, (lat, lon, label, clat, clon) in STATES.items():
             ce_factor=sc_s.results["ce_factor"],
             poa=sc_s.results["poa"],
             temp_cell=sc_s.results["temp_mod"],
+            **TOP_CELL_PARAM,
         )
-        pr_s = ey_s["PR_Agg"]
+        pr_s = ey_s[
+            "PR_Agg"
+        ]  # degraded_power_ratio returns a dict; take the PR_Agg series
+        pr_series[abbr] = pr_s
+        cum_poa = float(sc_s.results["poa"]["poa_global"].sum()) / 1000.0 / N_YEARS
         t_pr_idx = pr_s[pr_s <= T_THRESHOLD].index
         t_pr_m = (t_pr_idx[0] - pr_s.index[0]).days / 30.44 if len(t_pr_idx) else None
 
@@ -517,8 +526,9 @@ for abbr, (lat, lon, label, clat, clon) in STATES.items():
                 "location": label,
                 "centre_lat": clat,
                 "centre_lon": clon,
-                "T_months": round(t_pr_m, 1) if t_pr_m is not None else None,
-                "T_DF_months": round(t_df_m, 1) if t_df_m is not None else None,
+                "T_months": t_pr_m,
+                "T_DF_months": t_df_m,
+                "cum_poa_kwh": round(cum_poa, 0),
             }
         )
         t_str = (
@@ -538,11 +548,8 @@ print(
 
 
 # %%
-# ── Plot: PR_Agg lifetime choropleth with state abbreviation labels ───────────
-# NBVAL_IGNORE_OUTPUT
-# Re-run this cell freely to adjust styling without re-fetching API data.
-# Colour = PR_Agg threshold (T_THRESHOLD, set in the imports cell).
-# Hover also shows DF_total for comparison (device-level vs energy-yield metric).
+# Plot: PR_Agg lifetime choropleth with state abbreviation labels
+# This cell can be re-run with adjusted formatting without re-fetching API data.
 
 if df_map.empty:
     print("No data in df_map — run the cell above first with valid API credentials.")
@@ -588,3 +595,190 @@ else:
         coloraxis_colorbar=dict(title=f"PR_Agg {T_LABEL}<br>(months)")
     )
     fig_map.show()
+
+# %% [markdown]
+# ## 7. Comparison with the original publication
+#
+# Comparison between reference publication and this worklfow.
+#
+# Note on differences:
+# - **Weather:** pvdeg uses NSRDB PSM4 `"tmy"` and PVGIS TMY; Orooji used NREL/NLR TMY3.
+# - **Device:** single-junction perovskite cell here vs Orooji's two-diode Si/Perovskite tandem.
+#
+# If at least the CE can be reproduced for this top cell, independent of total degradation,
+# this suggests that the workflow is succesfully validating the published results. Further
+# differences in the T90_Agg may be attributed to the different device architectures. While
+# this example considers single-junction performance from a single perovskite cell, which
+# exhibits degradation, the reference publication uses a tandem Si/Pk configuration. In
+# the tandem architecture, the Si cell exhibits less degradation, which will mask performance
+# loss due to top cell (perovskite) degradation when the Si cell is limiting in the field.
+# Therefore, the tandem is likely to exhibit a longer T90_Agg, but overall the location
+# ranking should be the same.
+
+# %%
+# Publication comparison: data prep
+# PSM4 for all six states is already computed in the US-map fetch cell, this is used for
+# T_90_Agg, CE, and PR_Agg comparison. PVGIS TMY is added for the two locations plotted
+# in the reference publication (Phoenix and Seattle) to compare CE and PR_Agg.
+
+# Orooji published reference values
+OROOJI_T90 = {
+    "AZ": 26,
+    "TX": 29,
+    "HI": 32,
+    "FL": 35,
+    "ME": 40,
+    "WA": 42,
+}  # Fig 5 / abstract
+OROOJI_FIG4 = {
+    "AZ": (0.83, 0.95),
+    "WA": (0.90, 0.97),
+}  # (CE, PR_Agg) at 12 months, Fig 4
+CLIMATE = {
+    "AZ": "arid",
+    "TX": "arid",
+    "FL": "tropical",
+    "HI": "tropical",
+    "WA": "temperate",
+    "ME": "temperate",
+}
+_ccolor = {"arid": "#d95f02", "temperate": "#1b9e77", "tropical": "#7570b3"}
+
+
+def _at_one_year(series):
+    """Value of a tiled multi-year series at the 12-month mark."""
+    return float(series.asof(series.index[0] + pd.DateOffset(years=1)))
+
+
+def ey_pipeline(wdf, mt):
+    """POA -> module temp -> CE (DF_total) -> PR_Agg on an N_YEARS tiling.
+
+    CE is computed once in the Scenario and reused for the power step.
+    Returns (CE_series, PR_Agg_series).
+    """
+    wdf_ny = make_multiyear(wdf, N_YEARS)
+    sc = pvdeg.Scenario(name="ey-cmp", weather_data=wdf_ny, meta_data=mt)
+    sc.addJob(
+        func=(
+            pvdeg.spectral.poa_irradiance,
+            {"surface_tilt": abs(mt["latitude"]), "surface_azimuth": 180.0},
+        ),
+        name="poa",
+    )
+    sc.addJob(func=pvdeg.temperature.module, name="temp_mod", depends_on={"poa": "poa"})
+    sc.addJob(
+        func=(pvdeg.degradation.perovskite_degradation_factor, {"parameters": d046}),
+        name="ce_factor",
+        depends_on={"poa": "poa"},
+    )
+    sc.run()
+    ce = sc.results["ce_factor"]
+    pr = pvdeg.degradation.degraded_power_ratio(
+        weather_df=wdf_ny,
+        meta=mt,
+        ce_factor=ce,
+        poa=sc.results["poa"],
+        temp_cell=sc.results["temp_mod"],
+        **TOP_CELL_PARAM,
+    )["PR_Agg"]
+    return ce, pr
+
+
+# PVGIS TMY for the two Fig-4 sites (PSM4 for these is already in ce_series / pr_series)
+pvgis_ce, pvgis_pr = {}, {}
+for st, (lat, lon) in {"AZ": (33.45, -112.07), "WA": (47.61, -122.33)}.items():
+    data, _ = pvlib.iotools.get_pvgis_tmy(
+        latitude=lat, longitude=lon, map_variables=True
+    )
+    wdf = data.copy()
+    wdf.index = wdf.index.map(lambda ts: ts.replace(year=2020))
+    wdf = wdf.sort_index()
+    mt = {"latitude": lat, "longitude": lon, "altitude": 0, "wind_height": 10}
+    pvgis_ce[st], pvgis_pr[st] = ey_pipeline(wdf, mt)
+    print(f"  {st}: PVGIS TMY fetched ({len(wdf)} rows)")
+
+# %%
+# Publication comparison: plots + 12-month table
+if df_map.empty:
+    print("df_map is empty - run the US-map fetch cell first.")
+else:
+    # T90,Agg by location
+    # PSM4 is used for the 6-location view (more leniant rate limits)
+    cmp = df_map.copy()
+    cmp["orooji_T90"] = cmp["state"].map(OROOJI_T90)
+    cmp["climate"] = cmp["state"].map(CLIMATE)
+    cmp = cmp.dropna(subset=["T_months", "orooji_T90"]).sort_values("orooji_T90")
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5))
+    xpos, w = np.arange(len(cmp)), 0.4
+    ax1.bar(xpos - w / 2, cmp["orooji_T90"], w, label="Orooji 2026", color="0.6")
+    ax1.bar(
+        xpos + w / 2,
+        cmp["T_months"],
+        w,
+        label="pvdeg (PSM4)",
+        color=[_ccolor[c] for c in cmp["climate"]],
+    )
+    ax1.set_xticks(xpos)
+    ax1.set_xticklabels(cmp["location"], rotation=30, ha="right", fontsize=8)
+    ax1.set_ylabel(f"{T_LABEL},Agg (months)")
+    ax1.set_title(f"{T_LABEL},Agg by location")
+    ax1.legend(fontsize=8)
+
+    lim = max(cmp["orooji_T90"].max(), cmp["T_months"].max()) * 1.15
+    ax2.plot([0, lim], [0, lim], "k--", lw=1, label="1:1")
+    for _, r in cmp.iterrows():
+        ax2.scatter(
+            r["orooji_T90"],
+            r["T_months"],
+            s=70,
+            color=_ccolor[r["climate"]],
+            edgecolor="k",
+            zorder=3,
+        )
+        ax2.annotate(
+            r["state"],
+            (r["orooji_T90"], r["T_months"]),
+            xytext=(4, 4),
+            textcoords="offset points",
+            fontsize=8,
+        )
+    ax2.set_xlim(0, lim)
+    ax2.set_ylim(0, lim)
+    ax2.set_xlabel(f"Orooji {T_LABEL},Agg (months)")
+    ax2.set_ylabel(f"pvdeg {T_LABEL},Agg (months)")
+    ax2.set_title("Reproduction parity (1:1 = match)")
+    ax2.legend(
+        handles=[
+            Line2D(
+                [0],
+                [0],
+                marker="o",
+                ls="",
+                color=c,
+                label=k.title(),
+                markeredgecolor="k",
+            )
+            for k, c in _ccolor.items()
+        ],
+        fontsize=8,
+        title="Climate",
+    )
+    fig.tight_layout()
+
+    # CE & PR_Agg at 12 months - only the two sites Orooji plots in Fig 4 (AZ, WA).
+    rows = []
+    for st in OROOJI_FIG4:
+        rows.append(
+            {
+                "loc": st,
+                "CE_PSM4": round(_at_one_year(ce_series[st]), 3),
+                "CE_PVGIS": round(_at_one_year(pvgis_ce[st]), 3),
+                "CE_Orooji": OROOJI_FIG4[st][0],
+                "PRagg_PSM4": round(_at_one_year(pr_series[st]), 3),
+                "PRagg_PVGIS": round(_at_one_year(pvgis_pr[st]), 3),
+                "PRagg_Orooji": OROOJI_FIG4[st][1],
+            }
+        )
+    print("CE & PR_Agg at 12 months  (PSM4 / PVGIS / Orooji Fig 4):")
+    print(pd.DataFrame(rows).to_string(index=False))
