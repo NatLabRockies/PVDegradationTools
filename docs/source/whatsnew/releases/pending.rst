@@ -56,6 +56,17 @@ Bug Fixes
 - Continued the NREL to NLR migration: renamed the internal
   ``pvdeg.utilities.nrel_kestrel_check`` to ``pvdeg.utilities.nlr_kestrel_check``
   and updated the Kestrel hostname to the ``nlr.gov`` domain. (:pull:`351`)
+- Fixed ``pvdeg.geospatial.analysis`` raising
+  ``AttributeError: 'Future' object has no attribute 'loc'`` whenever a Dask
+  client was active. ``analysis`` scatters ``meta_df`` to a broadcast
+  ``distributed.Future`` to keep the task graph small, but xarray's
+  ``map_blocks`` does not auto-resolve Futures passed through ``kwargs``;
+  ``calc_block`` now materializes the Future before use. (:pull:`351`)
+- Fixed ``pvdeg.utilities._add_material`` re-serializing the material database
+  JSON files with escaped non-ASCII characters and no trailing newline, which
+  produced spurious diffs in the packaged data files (for example
+  ``pvdeg/data/O2permeation.json``). It now writes UTF-8 with a trailing
+  newline. (:pull:`351`)
 
 
 Dependencies
