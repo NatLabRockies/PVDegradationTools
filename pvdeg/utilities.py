@@ -568,7 +568,10 @@ def _add_material(
     data.update({name: material_dict})
 
     with open(fpath, "w") as f:
-        json.dump(data, f, indent=4)
+        # Match the repo's data-file convention (raw UTF-8, trailing newline) so
+        # re-serializing an existing database file produces no spurious diff.
+        json.dump(data, f, indent=4, ensure_ascii=False)
+        f.write("\n")
 
 
 def quantile_df(file, q):
@@ -1110,7 +1113,7 @@ def fix_metadata(meta):
 
 
 # we want this to only exist for things that can be run on kestrel
-def nrel_kestrel_check():
+def nlr_kestrel_check():
     """Check if the user is on Kestrel HPC environment.
 
     Passes silently or raises a
@@ -1126,7 +1129,7 @@ def nrel_kestrel_check():
     Kestrel Documentation : https://nrel.github.io/HPC/Documentation/
     """
 
-    KESTREL_HOSTNAME = "kestrel.hpc.nrel.gov"
+    KESTREL_HOSTNAME = "kestrel.hpc.nlr.gov"
 
     host = run(args=["hostname", "-f"], shell=False, capture_output=True, text=True)
     device_domain = ".".join(host.stdout.split(".")[-4:])[:-1]
