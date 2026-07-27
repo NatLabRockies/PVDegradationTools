@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import pvdeg
 from pvdeg import DATA_DIR
+import getpass
 import os
 
 # %%
@@ -37,7 +38,7 @@ kwargs = {
     "na_0": 100,
     "nb_0": 0,
     "nc_0": 0,
-    "mechanism_params": "repins",
+    "mechanism_params": "D037",
 }
 
 # %%
@@ -53,15 +54,30 @@ local = {
     "threads_per_worker": 8,  # Number of CPUs
 }
 
+# kestrel = {
+#     "manager": "slurm",
+#     "n_jobs": 1,  # Number of nodes used for parallel processing
+#     "cores": 104,
+#     "memory": "230GB",
+#     "account": "pvdeg",
+#     "queue": "debug",
+#     "walltime": "1:00:00",
+#     "processes": 104,
+#     "job_extra_directives": ["-o ./logs/slurm-%j.out"],
+# }
+
 kestrel = {
     "manager": "slurm",
     "n_jobs": 1,  # Number of nodes used for parallel processing
-    "cores": 104,
-    "memory": "256GB",
-    "account": "pvsoiling",
+    "cores": 100,
+    "memory": "230GB",
+    "account": "pvdeg",
     "queue": "debug",
     "walltime": "1:00:00",
-    "processes": 104,
+    "interface": "hsn0",
+    "processes": 100,  # workers per node; 104 single-thread procs overwhelm startup
+    "local_directory": f"/scratch/{getpass.getuser()}/",  # node-local scratch for fast worker startup
+    "death_timeout": 600,  # secs a worker waits to reach the scheduler before exiting
     "job_extra_directives": ["-o ./logs/slurm-%j.out"],
 }
 
@@ -88,10 +104,13 @@ weather_arg = {
 weather_ds, meta_df = pvdeg.weather.get(weather_db, geospatial=True, **weather_arg)
 
 # Define geographical region
-meta_SW = meta_df[meta_df["state"].isin(["Colorado", "New Mexico", "Utah", "Arizona"])]
+meta_SW = meta_df[meta_df["State"].isin(["Colorado", "New Mexico", "Utah", "Arizona"])]
 meta_SW_sub, gids_SW_sub = pvdeg.utilities.gid_downsampling(meta_SW, 6)
 
-weather_SW_sub = weather_ds.sel(gid=meta_SW_sub.index)
+# Chunk along gid so geospatial.analysis (weather_ds.map_blocks) emits one task per
+# location instead of a single serial block. time stays one chunk (-1) because each
+# location needs its full timeseries.
+weather_SW_sub = weather_ds.sel(gid=meta_SW_sub.index).chunk({"time": -1, "gid": 1})
 
 # %%
 weather_SW_sub
@@ -113,7 +132,7 @@ geo = {
     "na_0": 100,
     "nb_0": 0,
     "nc_0": 0,
-    "mechanism_params": "repins",
+    "mechanism_params": "D037",
 }
 
 letid_res = pvdeg.geospatial.analysis(**geo)
@@ -141,11 +160,11 @@ for n in range(1, 13):
                         title=f"Normalized Power  - 2022-{m}-{d} 12:00",
                         cb_title="Normalized Power",
                     )
-                    # plt.savefig(f'./images/RH_animation_{n}.png', dpi=600)
+                    plt.savefig(f"../../TEMP/RH_animation_{n}.png", dpi=600)
 
 # import imageio
-# ims = [imageio.imread(f'./images/RH_animation_{n}.png') for n in range(1, 13)]
-# imageio.mimwrite(f'./images/RH_animation.gif', ims, format='GIF', duration=1000, loop=10)
+# ims = [imageio.imread(f'../../TEMP/RH_animation_{n}.png') for n in range(1, 13)]
+# imageio.mimwrite('../../TEMP/RH_animation.gif', ims, format='GIF', duration=1000, loop=10)
 
 # %%
 import datetime
@@ -215,12 +234,14 @@ for n in range(1, 13):
                     ax.set_ylim([0.945, 1.005])
                     ax.set_ylabel("Normalized Power")
 
-                    plt.savefig(f"./images/LETID_plot_animation_{n}.png", dpi=600)
+                    plt.savefig(f"../../TEMP/LETID_plot_animation_{n}.png", dpi=600)
 
 # %%
-import imageio
+# import imageio
 
-ims = [imageio.imread(f"./images/LETID_plot_animation_{n}.png") for n in range(1, 13)]
-imageio.mimwrite(
-    "./images/LETID_plot_animation.gif", ims, format="GIF", duration=1000, loop=10
-)
+# ims = [imageio.imread(f"../../TEMP/LETID_plot_animation_{n}.png") for n in range(1, 13)]
+# imageio.mimwrite(
+#     "../../TEMP/LETID_plot_animation.gif", ims, format="GIF", duration=1000, loop=10
+# )
+
+# %%

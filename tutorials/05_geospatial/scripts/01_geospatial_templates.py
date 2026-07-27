@@ -118,7 +118,9 @@ geo_temperature_res = pvdeg.geospatial.analysis(
 import matplotlib.pyplot as plt
 
 module_temps = (
-    geo_temperature_res["module"].sel(latitude=39.89, longitude="-106.42").values
+    geo_temperature_res["module_temperature"]
+    .sel(latitude=39.89, longitude=-106.42, method="nearest")
+    .values
 )
 
 plt.plot(module_temps)
