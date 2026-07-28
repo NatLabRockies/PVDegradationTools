@@ -13,6 +13,7 @@ Documentation
   ``jupyter nbconvert --to notebook --execute --inplace`` and marking non-reproducible
   cells (live API calls, figures, timestamps) with ``# NBVAL_IGNORE_OUTPUT``.
   (:issue:`352`, :pull:`353`)
+- Add introductory paragraph to :doc:`api.rst </api>` (:issue:`358`, :pull:`359`)
 
 
 Notebooks
