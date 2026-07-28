@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Custom Functions with Numba &#8212; PVDEG Tutorials</title>
+    <title>PySAM for a Single Location &#8212; PVDEG Tutorials</title>
   
   
   
@@ -60,14 +60,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '06_advanced/01_custom_functions_nopython';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06_advanced/02_pysam_single_location';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="PySAM for a Single Location" href="02_pysam_single_location.html" />
-    <link rel="prev" title="Scenario Geospatial (HPC)" href="../05_geospatial/05_scenario_geospatial.html" />
+    <link rel="next" title="PySAM: Single Location &amp; Geospatial" href="03_pysam_api.html" />
+    <link rel="prev" title="Custom Functions with Numba" href="01_custom_functions_nopython.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -382,7 +380,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">06 - Advanced Topics</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Custom Functions with Numba</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_custom_functions_nopython.html">Custom Functions with Numba</a></li>
 
 
 
@@ -391,7 +389,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="02_pysam_single_location.html">PySAM for a Single Location</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">PySAM for a Single Location</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_pysam_api.html">PySAM: Single Location &amp; Geospatial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_nsrdb_distributed_api.html">NSRDB Distributed (API Key Required)</a></li>
 
@@ -488,7 +486,7 @@
       
       
       
-      <li><a href="../_sources/06_advanced/01_custom_functions_nopython.ipynb" target="_blank"
+      <li><a href="../_sources/06_advanced/02_pysam_single_location.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -564,7 +562,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Custom Functions with Numba</h1>
+    <h1>PySAM for a Single Location</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -574,17 +572,8 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Custom Functions with Numba</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grabbing-weather-data">Grabbing Weather Data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-temperature-and-irradiance">Calculating Temperature and Irradiance</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#define-custom-expressions-from-latex-or">Define Custom Expressions from Latex or</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-degradation-expression">Calculating Degradation Expression</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#this-is-quite-slow">This is quite slow</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#total-degradation">Total degradation</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-single-values">Example with Single Values</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-values-in-a-dataframe-using-a-symbolic-expression">Calculate Values in a Dataframe using a symbolic expression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-ground-irradiance">Spatial ground irradiance</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -595,60 +584,56 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="custom-functions-with-numba">
-<h1>Custom Functions with Numba<a class="headerlink" href="#custom-functions-with-numba" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="pysam-for-a-single-location">
+<h1>PySAM for a Single Location<a class="headerlink" href="#pysam-for-a-single-location" title="Link to this heading">#</a></h1>
+<p>Run a PySAM <code class="docutils literal notranslate"><span class="pre">pvsamv1</span></code> simulation for a single location, inspect the model output
+dictionary, and visualize the spatial rear-side <strong>ground irradiance</strong> profile
+beneath a bifacial array.</p>
+<p>This notebook uses a cached NSRDB weather file for New York City that ships with
+the repository, so it runs fully offline with no API key or network access
+required.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="grabbing-weather-data">
-<h1>Grabbing Weather Data<a class="headerlink" href="#grabbing-weather-data" title="Link to this heading">#</a></h1>
-<p>We need a timeseries of weather data to feed into the symbolic degradation expression below.</p>
-<p>By default this notebook loads a cached NSRDB TMY for Miami, FL that ships with the repo (<code class="docutils literal notranslate"><span class="pre">tutorials/data/psm4_miami.csv</span></code>). This keeps the notebook reproducible in CI and works offline. Set <code class="docutils literal notranslate"><span class="pre">USE_LIVE_PVGIS</span> <span class="pre">=</span> <span class="pre">True</span></code> in the next cell to make a live PVGIS API call for Manhattan, NYC instead.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For reproducible CI and offline use, default to cached weather data.</span>
-<span class="c1"># Set USE_LIVE_PVGIS=True to fetch live PVGIS TMY for Manhattan instead.</span>
-<span class="n">USE_LIVE_PVGIS</span> <span class="o">=</span> <span class="kc">False</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load cached NSRDB weather for New York City that ships with the repo.</span>
+<span class="c1"># This keeps the notebook reproducible and fully offline (no API key or network).</span>
+<span class="n">repo_root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="n">weather_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repo_root</span><span class="p">,</span> <span class="s2">&quot;tutorials&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;psm4_nyc.csv&quot;</span><span class="p">)</span>
+<span class="n">meta_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repo_root</span><span class="p">,</span> <span class="s2">&quot;tutorials&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;meta_nyc.json&quot;</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">USE_LIVE_PVGIS</span><span class="p">:</span>
-    <span class="n">weather_df</span><span class="p">,</span> <span class="n">meta_dict</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-        <span class="n">database</span><span class="o">=</span><span class="s2">&quot;PVGIS&quot;</span><span class="p">,</span>
-        <span class="nb">id</span><span class="o">=</span><span class="p">(</span><span class="mf">40.776676</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.971321</span><span class="p">),</span>  <span class="c1"># manhattan (latitude, longitude)</span>
-    <span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">repo_root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="vm">__file__</span><span class="p">))</span>
-    <span class="n">weather_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repo_root</span><span class="p">,</span> <span class="s2">&quot;tutorials&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;psm4_miami.csv&quot;</span><span class="p">)</span>
-    <span class="n">meta_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repo_root</span><span class="p">,</span> <span class="s2">&quot;tutorials&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;meta_miami.json&quot;</span><span class="p">)</span>
+<span class="n">weather</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">weather_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">meta_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
-    <span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">weather_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">meta_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">meta_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">meta</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">15</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">repo_root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="vm">__file__</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">weather_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repo_root</span><span class="p">,</span> <span class="s2">&quot;tutorials&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;psm4_miami.csv&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">meta_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repo_root</span><span class="p">,</span> <span class="s2">&quot;tutorials&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;meta_miami.json&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> 
-<span class="ne">---&gt; </span><span class="mi">15</span>     <span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">weather_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">meta_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>         <span class="n">meta_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">repo_root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">weather_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repo_root</span><span class="p">,</span> <span class="s2">&quot;tutorials&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;psm4_nyc.csv&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">meta_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repo_root</span><span class="p">,</span> <span class="s2">&quot;tutorials&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;meta_nyc.json&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> 
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">weather</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">weather_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">meta_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> 
 
 <span class="nn">File /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pandas/io/parsers/readers.py:873,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, skip_blank_lines, parse_dates, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
 <span class="g g-Whitespace">    </span><span class="mi">861</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
@@ -704,188 +689,311 @@
 <span class="g g-Whitespace">    </span><span class="mi">938</span>         <span class="c1"># Binary mode</span>
 <span class="g g-Whitespace">    </span><span class="mi">939</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
 
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/tutorials/data/psm4_miami.csv&#39;
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/tutorials/data/psm4_nyc.csv&#39;
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="calculating-temperature-and-irradiance">
-<h1>Calculating Temperature and Irradiance<a class="headerlink" href="#calculating-temperature-and-irradiance" title="Link to this heading">#</a></h1>
-<p>Use pvdeg to calculate timeseries temperature for a theoretical module from the previous metorological data.</p>
-<p><em>Update this call after scenario has been merged: dev_scenario_geospatial-&gt;development-&gt;dev_symbolic</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">module_temps</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">module</span><span class="p">(</span>
-    <span class="n">weather_df</span><span class="o">=</span><span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="n">meta_dict</span><span class="p">,</span> <span class="n">conf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_glass&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out_dict</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">pysam</span><span class="o">.</span><span class="n">pysam</span><span class="p">(</span>
+    <span class="n">weather_df</span><span class="o">=</span><span class="n">weather</span><span class="p">,</span>
+    <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
+    <span class="n">pv_model</span><span class="o">=</span><span class="s2">&quot;pvsamv1&quot;</span><span class="p">,</span>
+    <span class="n">pv_model_default</span><span class="o">=</span><span class="s2">&quot;FlatPlatePVCommercial&quot;</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">out_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ac_gross
+ac_lifetime_loss
+ac_perf_adj_loss
+ac_transmission_loss
+ac_wiring_loss
+airmass
+alb
+annual_ac_gross
+annual_ac_inv_clip_loss_percent
+annual_ac_inv_eff_loss_percent
+annual_ac_inv_pnt_loss_percent
+annual_ac_inv_pso_loss_percent
+annual_ac_lifetime_loss_percent
+annual_ac_loss_ond
+annual_ac_perf_adj_loss_percent
+annual_ac_wiring_loss
+annual_ac_wiring_loss_percent
+annual_bifacial_electrical_mismatch
+annual_bifacial_electrical_mismatch_percent
+annual_dc_diodes_loss
+annual_dc_diodes_loss_percent
+annual_dc_gross
+annual_dc_inv_tdc_loss_percent
+annual_dc_invmppt_loss
+annual_dc_lifetime_loss_percent
+annual_dc_loss_ond
+annual_dc_mismatch_loss
+annual_dc_mismatch_loss_percent
+annual_dc_module_loss_percent
+annual_dc_mppt_clip_loss_percent
+annual_dc_nameplate_loss
+annual_dc_nameplate_loss_percent
+annual_dc_net
+annual_dc_nominal
+annual_dc_optimizer_loss
+annual_dc_optimizer_loss_percent
+annual_dc_perf_adj_loss_percent
+annual_dc_snow_loss_percent
+annual_dc_tracking_loss
+annual_dc_tracking_loss_percent
+annual_dc_wiring_loss
+annual_dc_wiring_loss_percent
+annual_energy
+annual_energy_distribution_time
+annual_gh
+annual_ground_absorbed
+annual_ground_absorbed_percent
+annual_ground_incident
+annual_ground_incident_percent
+annual_inv_cliploss
+annual_inv_pntloss
+annual_inv_psoloss
+annual_inv_tdcloss
+annual_poa_beam_eff
+annual_poa_beam_nom
+annual_poa_cover_loss_percent
+annual_poa_eff
+annual_poa_front
+annual_poa_nom
+annual_poa_rear
+annual_poa_rear_direct_diffuse
+annual_poa_rear_gain_percent
+annual_poa_rear_ground_reflected
+annual_poa_rear_rack_shaded
+annual_poa_rear_row_reflections
+annual_poa_rear_self_shaded
+annual_poa_rear_soiled
+annual_poa_shaded
+annual_poa_shaded_soiled
+annual_poa_shading_loss_percent
+annual_poa_soiling_loss_percent
+annual_rack_shaded_percent
+annual_rear_direct_diffuse_percent
+annual_rear_ground_reflected_percent
+annual_rear_row_reflections_percent
+annual_rear_self_shaded_percent
+annual_rear_soiled_percent
+annual_subarray1_dc_diodes_loss
+annual_subarray1_dc_gross
+annual_subarray1_dc_mismatch_loss
+annual_subarray1_dc_nameplate_loss
+annual_subarray1_dc_tracking_loss
+annual_subarray1_dc_wiring_loss
+annual_total_loss_percent
+annual_transmission_loss
+annual_transmission_loss_percent
+annual_xfmr_loss_percent
+bifacial_electrical_mismatch
+capacity_factor
+capacity_factor_ac
+dc_degrade_factor
+dc_invmppt_loss
+dc_lifetime_loss
+dc_net
+dc_snow_loss
+df
+dn
+elev
+gen
+gh
+gh_calc
+ground_absorbed
+ground_incident
+inv_cliploss
+inv_eff
+inv_pntloss
+inv_psoloss
+inv_tdcloss
+inv_total_loss
+inverterMPPT1_DCVoltage
+kwh_per_kw
+lat
+lon
+monthly_dc
+monthly_energy
+monthly_poa_beam_eff
+monthly_poa_beam_nom
+monthly_poa_eff
+monthly_poa_front
+monthly_poa_nom
+monthly_poa_rear
+nameplate_dc_rating
+performance_ratio
+poa_beam_eff
+poa_beam_nom
+poa_eff
+poa_front
+poa_nom
+poa_rear
+poa_rear_direct_diffuse
+poa_rear_ground_reflected
+poa_rear_rack_shaded
+poa_rear_row_reflections
+poa_rear_self_shaded
+poa_rear_soiled
+poa_shaded
+poa_shaded_soiled
+shadedb_subarray1_shade_frac
+sixpar_Adj
+sixpar_Il
+sixpar_Io
+sixpar_Rs
+sixpar_Rsh
+sixpar_a
+snowdepth
+sol_alt
+sol_azi
+sol_zen
+subarray1_aoi
+subarray1_aoi_modifier
+subarray1_axisrot
+subarray1_beam_shading_factor
+subarray1_celltemp
+subarray1_celltempSS
+subarray1_dc_gross
+subarray1_dc_voltage
+subarray1_dcloss
+subarray1_ground_rear_spatial
+subarray1_idealrot
+subarray1_isc
+subarray1_linear_derate
+subarray1_modeff
+subarray1_poa_beam_front_cs
+subarray1_poa_diffuse_front_cs
+subarray1_poa_eff
+subarray1_poa_eff_beam
+subarray1_poa_eff_diff
+subarray1_poa_front
+subarray1_poa_ground_front_cs
+subarray1_poa_nom
+subarray1_poa_rear
+subarray1_poa_rear_cs
+subarray1_poa_rear_spatial
+subarray1_poa_shaded
+subarray1_poa_shaded_soiled
+subarray1_soiling_derate
+subarray1_ss_derate
+subarray1_ss_diffuse_derate
+subarray1_ss_reflected_derate
+subarray1_surf_azi
+subarray1_surf_tilt
+subarray1_voc
+sunpos_hour
+sunup
+system_capacity_ac
+tdry
+ts_shift_hours
+tz
+wfpoa
+wspd
+xfmr_ll_ts
+xfmr_ll_year1
+xfmr_loss_ts
+xfmr_loss_year1
+xfmr_nll_ts
+xfmr_nll_year1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Most outputs are scalars or 1-D time series. A few are 2-D matrices, returned</span>
+<span class="c1"># as a tuple whose entries are themselves tuples (rows). Find those.</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">out_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="n">item</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>annual_energy_distribution_time
+subarray1_ground_rear_spatial
+subarray1_poa_rear_spatial
+</pre></div>
+</div>
+</div>
+</div>
+<section id="spatial-ground-irradiance">
+<h2>Spatial ground irradiance<a class="headerlink" href="#spatial-ground-irradiance" title="Link to this heading">#</a></h2>
+<p>A few outputs describe irradiance that varies <em>across</em> the ground between module
+rows and are returned as 2-D matrices (a tuple of row tuples):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">subarray1_ground_rear_spatial</span></code> — rear-side irradiance reaching the ground.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">subarray1_poa_rear_spatial</span></code> — rear-side plane-of-array irradiance.</p></li>
+</ul>
+<p>We visualize <code class="docutils literal notranslate"><span class="pre">subarray1_ground_rear_spatial</span></code>, which matters for agrivoltaics: it
+tells us how much light reaches the ground beneath a bifacial array. Its layout is:</p>
+<ul class="simple">
+<li><p><strong>Row <code class="docutils literal notranslate"><span class="pre">0</span></code></strong> — the ground positions (in metres) where irradiance is
+evaluated. The leading value is a <code class="docutils literal notranslate"><span class="pre">0</span></code> placeholder.</p></li>
+<li><p><strong>Rows <code class="docutils literal notranslate"><span class="pre">1:</span></code></strong> — one row per hourly timestep. The leading value is the
+timestep index; the remaining values are the irradiance at each position.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spatial</span> <span class="o">=</span> <span class="n">out_dict</span><span class="p">[</span><span class="s2">&quot;subarray1_ground_rear_spatial&quot;</span><span class="p">]</span>
 
-<span class="n">poa_irradiance</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">spectral</span><span class="o">.</span><span class="n">poa_irradiance</span><span class="p">(</span><span class="n">weather_df</span><span class="o">=</span><span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="n">meta_dict</span><span class="p">)</span>
+<span class="c1"># Row 0 holds the ground positions (drop the leading placeholder).</span>
+<span class="c1"># In every data row, column 0 is the timestep index, so drop it too.</span>
+<span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">spatial</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="n">ground_irradiance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">spatial</span><span class="p">[</span><span class="mi">1</span><span class="p">:])[:,</span> <span class="mi">1</span><span class="p">:]</span>  <span class="c1"># shape: (hours, positions)</span>
 
-<span class="n">location_label</span> <span class="o">=</span> <span class="s2">&quot;Manhattan&quot;</span> <span class="k">if</span> <span class="n">USE_LIVE_PVGIS</span> <span class="k">else</span> <span class="s2">&quot;Miami&quot;</span>
+<span class="c1"># Pick the sunniest day (greatest total rear ground irradiance) to visualize.</span>
+<span class="n">daily_total</span> <span class="o">=</span> <span class="n">ground_irradiance</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="n">distances</span><span class="o">.</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">best_day</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">daily_total</span><span class="o">.</span><span class="n">argmax</span><span class="p">())</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">module_temps</span><span class="o">.</span><span class="n">values</span>
-<span class="p">)</span>  <span class="c1"># plotting the values in order because we are using tmy data so the years are not consistent within our data</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TMY Module Temperature, </span><span class="si">{</span><span class="n">location_label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">poa_irradiance</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">poa_irradiance</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TMY Module Irradiance, </span><span class="si">{</span><span class="n">location_label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">day_slice</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">best_day</span> <span class="o">*</span> <span class="mi">24</span><span class="p">,</span> <span class="n">best_day</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">+</span> <span class="mi">24</span><span class="p">)</span>
+<span class="n">day_index</span> <span class="o">=</span> <span class="n">weather</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">day_slice</span><span class="p">]</span>
+<span class="n">day_irradiance</span> <span class="o">=</span> <span class="n">ground_irradiance</span><span class="p">[</span><span class="n">day_slice</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ground irradiance varies across the pitch because the module rows cast a moving</span>
+<span class="c1"># shadow. Plot the spatial profile at a few hours to see the shading band shift.</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">hour</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">distances</span><span class="p">,</span>
+        <span class="n">day_irradiance</span><span class="p">[</span><span class="n">hour</span><span class="p">],</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="n">day_index</span><span class="p">[</span><span class="n">hour</span><span class="p">]</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Ground position between module rows [m]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Rear ground irradiance [W/m$^2$]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+    <span class="s2">&quot;Rear-side ground irradiance beneath a bifacial array</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;New York City </span><span class="se">\u2014</span><span class="s2"> </span><span class="si">{</span><span class="n">day_index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%B&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">day_index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">day</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Hour of day&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  25.8 was used.
-The array azimuth was not provided, therefore an azimuth of  180.0 was used.
-The array surface_tilt angle was not provided, therefore the latitude of  25.8 was used.
-The array azimuth was not provided, therefore an azimuth of  180.0 was used.
-</pre></div>
-</div>
-<img alt="../_images/12d1da8a1e5f7abe5c31368b6f3c8a890f5e8fde0b8c30f674b4f66df1e00a10.png" src="../_images/12d1da8a1e5f7abe5c31368b6f3c8a890f5e8fde0b8c30f674b4f66df1e00a10.png" />
+<img alt="../_images/4e73bd75b5548b5833032dccedea3a1ac5f34c58ea9fa43a7ac90f26c9281564.png" src="../_images/4e73bd75b5548b5833032dccedea3a1ac5f34c58ea9fa43a7ac90f26c9281564.png" />
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="define-custom-expressions-from-latex-or">
-<h1>Define Custom Expressions from Latex or<a class="headerlink" href="#define-custom-expressions-from-latex-or" title="Link to this heading">#</a></h1>
-<p>We will use an altered arrhenius equation with an irrandiance relation (ignore the fact that this exists in pvdeg already).</p>
-<p><span class="math notranslate nohighlight">\(R_{D} = R_{0}I^{X}  e^{\frac{-{Ea}}{kT}}\)</span> <em>ea is one variable so this may present some issues</em>
-the raw latex looks like this <code class="docutils literal notranslate"><span class="pre">R_{0}I^{X}</span>&#160; <span class="pre">e^{\frac{-{Ea}}{kT}}</span></code></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lnR_0</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Ea</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;lnR_0 I X Ea k T&quot;</span><span class="p">)</span>
-
-<span class="n">ln_R_D_expr</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">lnR_0</span> <span class="o">*</span> <span class="n">I</span><span class="o">**</span><span class="n">X</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="o">-</span><span class="n">Ea</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span>
-<span class="p">)</span>  <span class="c1"># python exponentiation is ** rather than ^</span>
-
-<span class="c1"># viewing output</span>
-<span class="n">ln_R_D_expr</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle I^{X} lnR_{0} e^{- \frac{Ea}{T k}}\]</div>
-</div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="calculating-degradation-expression">
-<h1>Calculating Degradation Expression<a class="headerlink" href="#calculating-degradation-expression" title="Link to this heading">#</a></h1>
-<p>Generally more processing will have to happen outside of these functions than built in pvdeg functions.
-Here we are defining our arguments and correcting units. When trying to calculate using timeseries we will pass <code class="docutils literal notranslate"><span class="pre">pandas.Series</span></code> objects to the arguments.</p>
-<p>Results should be strictly scrutinized to make sure the calculation is iterating over your series correctly. It will generally be easier to write python code
-for more complex functions. This is about as complex as we will be able to get using arbitrary symbolic expressions if looping over timeseries data is required.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">module_temps_k</span> <span class="o">=</span> <span class="n">module_temps</span> <span class="o">+</span> <span class="mf">273.15</span>  <span class="c1"># convert C -&gt; K</span>
-
-<span class="n">poa_global</span> <span class="o">=</span> <span class="n">poa_irradiance</span><span class="p">[</span>
-    <span class="s2">&quot;poa_global&quot;</span>
-<span class="p">]</span>  <span class="c1"># take only the global irradiance series from the total irradiance dataframe</span>
-<span class="n">poa_global_kw</span> <span class="o">=</span> <span class="n">poa_global</span> <span class="o">/</span> <span class="mi">1000</span>  <span class="c1"># [W/m^2] -&gt; [kW/m^2]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="this-is-quite-slow">
-<h1>This is quite slow<a class="headerlink" href="#this-is-quite-slow" title="Link to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values_kwarg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;Ea&quot;</span><span class="p">:</span> <span class="mf">62.08</span><span class="p">,</span>  <span class="c1"># activation energy, [kJ/mol]</span>
-    <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="mf">8.31446e-3</span><span class="p">,</span>  <span class="c1"># boltzmans constant, [kJ/(mol * K)]</span>
-    <span class="s2">&quot;T&quot;</span><span class="p">:</span> <span class="n">module_temps_k</span><span class="p">,</span>  <span class="c1"># module temperature, [K]</span>
-    <span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="n">poa_global_kw</span><span class="p">,</span>  <span class="c1"># module plane of array irradiance, [W/m2]</span>
-    <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="mf">0.0341</span><span class="p">,</span>  <span class="c1"># irradiance relation, [unitless]</span>
-    <span class="s2">&quot;lnR_0&quot;</span><span class="p">:</span> <span class="mf">13.72</span><span class="p">,</span>  <span class="c1"># prefactor degradation [ln(%/h)]</span>
-<span class="p">}</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">symbolic</span><span class="o">.</span><span class="n">calc_kwarg_timeseries</span><span class="p">(</span><span class="n">expr</span><span class="o">=</span><span class="n">ln_R_D_expr</span><span class="p">,</span> <span class="n">kwarg</span><span class="o">=</span><span class="n">values_kwarg</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="total-degradation">
-<h1>Total degradation<a class="headerlink" href="#total-degradation" title="Link to this heading">#</a></h1>
-<p>To calculate accumulated degradation, we can sum each of the substep values and convert to log scale (need to do this because prefactor was in log scale).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-5.637887238640398)
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="example-with-single-values">
-<h1>Example with Single Values<a class="headerlink" href="#example-with-single-values" title="Link to this heading">#</a></h1>
-<p>leakage current
-<span class="math notranslate nohighlight">\(I_{leak} = \frac{V_{bias}}{R_{enc}}\)</span></p>
-<p><span class="math notranslate nohighlight">\(I_{leak}\)</span>, leakage current
-<span class="math notranslate nohighlight">\({V_{bias}}\)</span>, potential difference between cells and frame
-<span class="math notranslate nohighlight">\({R_{enc}}\)</span>, resistance of the encapsulant</p>
-<p>electric field
-<span class="math notranslate nohighlight">\(E = \frac{V_{bias}}{d}\)</span></p>
-<p><span class="math notranslate nohighlight">\(E\)</span>, electric field
-<span class="math notranslate nohighlight">\(d\)</span>, thickness of encapsulant</p>
-<p>degradation rage
-<span class="math notranslate nohighlight">\(D = k_{D} * E * I{leak}\)</span></p>
-<p><span class="math notranslate nohighlight">\(D\)</span>, degradation rate
-<span class="math notranslate nohighlight">\(k_D\)</span>, degradation constant</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_d</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">Vbias</span><span class="p">,</span> <span class="n">Rencap</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;k_d E Vbias Rencap d&quot;</span><span class="p">)</span>
-
-<span class="n">pid</span> <span class="o">=</span> <span class="n">k_d</span> <span class="o">*</span> <span class="p">(</span><span class="n">Vbias</span> <span class="o">/</span> <span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">Vbias</span> <span class="o">/</span> <span class="n">Rencap</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
-
-<span class="n">pid_kwarg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;Vbias&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
-    <span class="s2">&quot;Rencap&quot;</span><span class="p">:</span> <span class="mf">1e9</span><span class="p">,</span>
-    <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mf">0.0005</span><span class="p">,</span>
-    <span class="s2">&quot;k_d&quot;</span><span class="p">:</span> <span class="mf">1e-9</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">symbolic</span><span class="o">.</span><span class="n">calc_kwarg_floats</span><span class="p">(</span><span class="n">expr</span><span class="o">=</span><span class="n">pid</span><span class="p">,</span> <span class="n">kwarg</span><span class="o">=</span><span class="n">pid_kwarg</span><span class="p">)</span>
-
-<span class="n">res</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle 2.0 \cdot 10^{-9}\]</div>
-</div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="calculate-values-in-a-dataframe-using-a-symbolic-expression">
-<h1>Calculate Values in a Dataframe using a symbolic expression<a class="headerlink" href="#calculate-values-in-a-dataframe-using-a-symbolic-expression" title="Link to this heading">#</a></h1>
-<p>After creating the symbolic expression in using latex with <code class="docutils literal notranslate"><span class="pre">pvdeg.symbolic.symbolic_from_latex</span></code>, feed it to the function to calculate the leakage current at each row in the dataframe.
-This expression calculation only accesses one dataframe row at a time so we cannot do any summations or windowed timeseries averiging within the call. At this point, write your own python function. If you create functions that would be useful, please email us your source code or create an issue and copy and paste your code there. If it is relevant it may be added to the package (credit will be given).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># I_leak_expr = pid_kwarg[&quot;Vbias&quot;] / pid_kwarg[&quot;Rencap&quot;]</span>
-<span class="c1"># pvdeg.symbolic.calc_df_symbolic(expr=I_leak_expr, df=values_df)</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -919,20 +1027,20 @@ This expression calculation only accesses one dataframe row at a time so we cann
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../05_geospatial/05_scenario_geospatial.html"
+       href="01_custom_functions_nopython.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Scenario Geospatial (HPC)</p>
+        <p class="prev-next-title">Custom Functions with Numba</p>
       </div>
     </a>
     <a class="right-next"
-       href="02_pysam_single_location.html"
+       href="03_pysam_api.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">PySAM for a Single Location</p>
+        <p class="prev-next-title">PySAM: Single Location &amp; Geospatial</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -954,17 +1062,8 @@ This expression calculation only accesses one dataframe row at a time so we cann
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Custom Functions with Numba</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grabbing-weather-data">Grabbing Weather Data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-temperature-and-irradiance">Calculating Temperature and Irradiance</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#define-custom-expressions-from-latex-or">Define Custom Expressions from Latex or</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-degradation-expression">Calculating Degradation Expression</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#this-is-quite-slow">This is quite slow</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#total-degradation">Total degradation</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-single-values">Example with Single Values</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-values-in-a-dataframe-using-a-symbolic-expression">Calculate Values in a Dataframe using a symbolic expression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-ground-irradiance">Spatial ground irradiance</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
