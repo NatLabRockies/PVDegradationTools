@@ -709,8 +709,10 @@ the scalar we want to map — <code class="docutils literal notranslate"><span c
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># PySAM runs one full simulation per location, so use a subset to keep runtime modest.</span>
-<span class="n">subset_gids</span> <span class="o">=</span> <span class="n">GEO_META</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># PySAM runs one full pvsamv1 simulation per location (~10 s each), so use a small</span>
+<span class="c1"># subset. Keep this well under the 60 s per-cell timeout enforced by the testbook CI</span>
+<span class="c1"># (tutorials/../scripts/run_all_testbook.py) — a handful of sites is plenty to demo.</span>
+<span class="n">subset_gids</span> <span class="o">=</span> <span class="n">GEO_META</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
 <span class="n">GEO_META_SUB</span> <span class="o">=</span> <span class="n">GEO_META</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">subset_gids</span><span class="p">]</span>
 
 <span class="c1"># Chunk along &#39;gid&#39; (one location per task) so the sites run in parallel instead of</span>
