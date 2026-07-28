@@ -3,21 +3,43 @@
 #
 
 # %%
+import json
+import os
+
 import numpy as np
+import pandas as pd
 import sympy as sp
 import matplotlib.pyplot as plt
 import pvdeg
 
+
 # %% [markdown]
-# # Grabbing Weather Data from PVGIS
+# # Grabbing Weather Data
 #
-# Use pvdeg to make an API call to PVGIS to collect location and weather data for Manhattan, NYC.
+# We need a timeseries of weather data to feed into the symbolic degradation expression below.
+#
+# By default this notebook loads a cached NSRDB TMY for Miami, FL that ships with the repo (`tutorials/data/psm4_miami.csv`). This keeps the notebook reproducible in CI and works offline. Set `USE_LIVE_PVGIS = True` in the next cell to make a live PVGIS API call for Manhattan, NYC instead.
+#
 
 # %%
-weather_df, meta_dict = pvdeg.weather.get(
-    database="PVGIS",
-    id=(40.776676, -73.971321),  # manhattan (latitude, longitude)
-)
+# For reproducible CI and offline use, default to cached weather data.
+# Set USE_LIVE_PVGIS=True to fetch live PVGIS TMY for Manhattan instead.
+USE_LIVE_PVGIS = False
+
+if USE_LIVE_PVGIS:
+    weather_df, meta_dict = pvdeg.weather.get(
+        database="PVGIS",
+        id=(40.776676, -73.971321),  # manhattan (latitude, longitude)
+    )
+else:
+    repo_root = os.path.dirname(os.path.dirname(pvdeg.__file__))
+    weather_path = os.path.join(repo_root, "tutorials", "data", "psm4_miami.csv")
+    meta_path = os.path.join(repo_root, "tutorials", "data", "meta_miami.json")
+
+    weather_df = pd.read_csv(weather_path, index_col=0, parse_dates=True)
+    with open(meta_path, "r") as f:
+        meta_dict = json.load(f)
+
 
 # %% [markdown]
 # # Calculating Temperature and Irradiance
@@ -33,17 +55,20 @@ module_temps = pvdeg.temperature.module(
 
 poa_irradiance = pvdeg.spectral.poa_irradiance(weather_df=weather_df, meta=meta_dict)
 
+location_label = "Manhattan" if USE_LIVE_PVGIS else "Miami"
+
 plt.figure(figsize=(10, 6))
 plt.subplot(1, 2, 1)
 plt.plot(
     module_temps.values
 )  # plotting the values in order because we are using tmy data so the years are not consistent within our data
-plt.title("TMY Module Temperature, Manhattan")
+plt.title(f"TMY Module Temperature, {location_label}")
 plt.subplot(1, 2, 2)
 plt.plot(poa_irradiance.values)
 plt.legend(poa_irradiance.columns)
-plt.title("TML Module Irradiance, Manhattan")
+plt.title(f"TMY Module Irradiance, {location_label}")
 plt.show()
+
 
 # %% [markdown]
 # # Define Custom Expressions from Latex or

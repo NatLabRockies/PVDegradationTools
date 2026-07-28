@@ -1,0 +1,47 @@
+v0.7.2 (2026-XX-XX)
+===================
+
+Enhancements
+------------
+
+
+Documentation
+-------------
+- Correct notebook contribution guidelines. Tutorial notebooks are committed **with**
+  their executed outputs (validated by ``nbval``) rather than cleared, and no pre-commit
+  hook strips outputs. Document running notebooks with
+  ``jupyter nbconvert --to notebook --execute --inplace`` and marking non-reproducible
+  cells (live API calls, figures, timestamps) with ``# NBVAL_IGNORE_OUTPUT``.
+  (:issue:`352`, :pull:`353`)
+- Add introductory paragraph to :doc:`api.rst </api>` (:issue:`358`, :pull:`359`)
+
+
+Notebooks
+---------
+- Make the ASTM live demo and custom-functions tutorial notebooks reproducible
+  offline by loading cached NSRDB TMY data (with ``USE_LIVE_*`` toggle for the
+  live API path), fixing ``nbval`` failures caused by stale stored outputs and
+  the PVGIS API being unreachable from CI. (:issue:`342`, :pull:`350`)
+
+
+Deprecations
+-------------
+
+
+Bug Fixes
+---------
+
+
+Dependencies
+------------
+- Move ``pre-commit`` from core install requirements to the optional development
+  extras (``dev = ["pre-commit"]``), reducing runtime dependency footprint.
+  (:issue:`341`, :pull:`347`)
+- Bump aiohttp from 3.13.3 to 3.14.1. (:pull:`344`)
+
+
+
+Contributors
+------------
+- Rajiv Daxini (:ghuser:`rdaxini`)
+
