@@ -46,8 +46,9 @@ Local Installation
    - ``01_basics/`` - Introduction to PVDeg fundamentals
    - ``02_degradation/`` - Degradation mechanism modeling
    - ``03_monte_carlo/`` - Monte Carlo uncertainty analysis
-   - ``04_geospatial/`` - Geospatial and HPC scenarios
-   - ``05_advanced/`` - Advanced topics and API access
+   - ``04_scenario/`` - Scenario-based modeling workflows
+   - ``05_geospatial/`` - Geospatial and HPC scenarios
+   - ``06_advanced/`` - Advanced topics and API access
    - ``10_workshop_demos/`` - Workshop demonstrations
    - ``tools/`` - Standalone analysis tools
 
