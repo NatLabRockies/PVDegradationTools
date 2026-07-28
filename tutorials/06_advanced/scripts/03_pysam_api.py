@@ -100,8 +100,10 @@ def pysam_annual_energy(
 
 
 # %%
-# PySAM runs one full simulation per location, so use a subset to keep runtime modest.
-subset_gids = GEO_META.index[:6]
+# PySAM runs one full pvsamv1 simulation per location (~10 s each), so use a small
+# subset. Keep this well under the 60 s per-cell timeout enforced by the testbook CI
+# (tutorials/../scripts/run_all_testbook.py) — a handful of sites is plenty to demo.
+subset_gids = GEO_META.index[:3]
 GEO_META_SUB = GEO_META.loc[subset_gids]
 
 # Chunk along 'gid' (one location per task) so the sites run in parallel instead of
