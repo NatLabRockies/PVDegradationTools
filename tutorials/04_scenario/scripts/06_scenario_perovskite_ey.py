@@ -488,6 +488,8 @@ print(
 
 
 # %%
+# NBVAL_IGNORE_OUTPUT
+
 # Plot: PR_Agg lifetime choropleth with state abbreviation labels
 # This cell can be re-run with adjusted formatting without re-fetching API data.
 
