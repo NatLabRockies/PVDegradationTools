@@ -372,6 +372,7 @@ fig.tight_layout()
 #
 
 # %%
+# NBVAL_IGNORE_OUTPUT
 # Fetch lifetime data for all 50 US states via NSRDB PSM4 API
 # Get a free key at https://developer.nrel.gov/signup/
 
