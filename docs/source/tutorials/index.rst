@@ -9,7 +9,7 @@ PVDeg provides comprehensive tutorials organized by topic. Choose your preferred
 Jupyter Book (Recommended)
 ---------------------------
 
-Interactive tutorials with live execution: `PVDeg Jupyter Book <https://nrel.github.io/PVDegradationTools/intro.html>`_
+Interactive tutorials with live execution: `PVDeg Jupyter Book <https://natlabrockies.github.io/PVDegradationTools/intro.html>`_
 
 - Click the 🚀 rocket icon to launch notebooks in `Google Colab <https://colab.research.google.com/>`_
 - **Development Preview:** See latest changes at `dev-preview <https://natlabrockies.github.io/PVDegradationTools/dev-preview/intro.html>`_
@@ -46,15 +46,16 @@ Local Installation
    - ``01_basics/`` - Introduction to PVDeg fundamentals
    - ``02_degradation/`` - Degradation mechanism modeling
    - ``03_monte_carlo/`` - Monte Carlo uncertainty analysis
-   - ``04_geospatial/`` - Geospatial and HPC scenarios
-   - ``05_advanced/`` - Advanced topics and API access
+   - ``04_scenario/`` - Scenario-based modeling workflows
+   - ``05_geospatial/`` - Geospatial and HPC scenarios
+   - ``06_advanced/`` - Advanced topics and API access
    - ``10_workshop_demos/`` - Workshop demonstrations
    - ``tools/`` - Standalone analysis tools
 
 NREL HPC (Kestrel)
 ------------------
 
-Running notebooks on Kestrel is documented on the `NREL HPC Documentation <https://natlabrockies.github.io/HPC/Documentation/Development/Jupyter/>`_.
+Running notebooks on Kestrel is documented on the `NLR HPC Documentation <https://natlabrockies.github.io/HPC/Documentation/Development/Jupyter/>`_.
 
 **Important:** Register a custom iPykernel before running notebooks on Kestrel:
 

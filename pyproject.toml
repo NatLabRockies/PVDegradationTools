@@ -28,7 +28,7 @@ keywords = [
     "PV",
 ]
 dependencies = [
-    "aiohttp==3.13.4",
+    "aiohttp==3.14.1",
     "numpy>=1.19.3",
     "pvlib>=0.12.0",
     "scipy>1.6.0",
@@ -54,7 +54,6 @@ dependencies = [
     "tables",
     "tqdm",
     "xarray",
-    "pre-commit",
     "sympy",
     "zarr",
     "jupytext",
@@ -84,6 +83,9 @@ books = [
 ]
 sam = [
     "NREL-PySAM",
+]
+dev= [
+    "pre-commit",
 ]
 all = [
     "pvdeg[docs,test,books,sam]",
