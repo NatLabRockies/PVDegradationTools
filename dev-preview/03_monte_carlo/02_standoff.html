@@ -389,8 +389,13 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../06_advanced/02_pysam_single_location.html">PySAM for a Single Location</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_advanced/03_pysam_api.html">PySAM: Single Location &amp; Geospatial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_advanced/03_pysam_api.html">PySAM with API (API Key Required)</a></li>
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="../06_advanced/04_nsrdb_distributed_api.html">NSRDB Distributed (API Key Required)</a></li>
 
 
@@ -633,7 +638,7 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 Python version  3.11.15 (main, Jun 16 2026, 21:41:52) [GCC 13.3.0]
 Pandas version  3.0.5
 Pvlib version  0.15.2
-Pvdeg version  0.1.dev1+g518525c74
+Pvdeg version  0.1.dev1+gce9f6e6d1
 </pre></div>
 </div>
 </div>
@@ -690,10 +695,10 @@ Pvdeg version  0.1.dev1+g518525c74
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
+The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
-          x      T98_0    T98_inf
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          x      T98_0    T98_inf
 0  0.522443  71.778148  48.754265
           x      T98_0    T98_inf
 0  0.490293  71.778148  48.754265
@@ -725,18 +730,18 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
-0     5.768722     0.528302
-1     3.094504     0.237285
-2    10.613436     0.294194
-3     6.498627     1.849172
-4     3.908672     0.194226
-..         ...          ...
-495   6.028905     0.065799
-496  10.736817    -0.075833
-497   4.762324     0.519198
-498   3.907215     0.483014
-499   4.656523    -0.545626
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          X_0  wind_factor
+0    8.348838    -0.564988
+1    6.157910     0.807058
+2    6.565930     0.097527
+3    5.027802     0.595773
+4    5.995816     1.096146
+..        ...          ...
+495  1.808975     0.123524
+496  9.344928     1.249563
+497  6.692452     0.561897
+498  8.310828    -0.383535
+499  3.286515     0.115219
 
 [500 rows x 2 columns]
 </pre></div>
@@ -749,8 +754,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <p>When using the pvdeg.montecarlo.simulate() function on a target function all of the target function’s required arguments must still be given. Our non-changing arguments will be stored in a dictionary. The randomized monte carlo input data will also be passed to the target function via the simulate function. All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL-IGNORE-OUTPUT</span>
-<span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
 <span class="n">function_kwargs</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;weather_df&quot;</span><span class="p">:</span> <span class="n">WEATHER</span><span class="p">,</span>
     <span class="s2">&quot;meta&quot;</span><span class="p">:</span> <span class="n">META</span><span class="p">,</span>
@@ -806,17 +810,17 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.000000  67.559942  46.351531
-1    0.099909  70.702147  48.601431
-2    0.049249  70.101252  48.230201
-3    0.000000  39.413001  32.681658
-4    0.197921  71.097091  48.877837
+0    2.246442  75.572866  51.950223
+1    0.000000  63.476517  43.660167
+2    0.586932  71.915258  49.517642
+3    0.000000  66.448518  45.691021
+4    0.000000  57.973727  40.492896
 ..        ...        ...        ...
-495  0.600726  72.125594  49.712607
-496  1.687074  73.350666  50.307281
-497  0.000000  67.664831  46.415842
-498  0.000000  68.057778  46.768151
-499  1.238801  75.519188  51.891332
+495  0.143660  71.708155  49.333581
+496  0.000000  54.448893  38.724797
+497  0.000000  67.005561  46.023991
+498  1.971177  74.973163  51.420657
+499  0.272068  71.777921  49.399881
 
 [500 rows x 3 columns]
 </pre></div>
@@ -851,7 +855,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b781ed340df3d18553e071ad843ef3b8ace680c1c01c118a7cd0cd4ffc42cf64.png" src="../_images/b781ed340df3d18553e071ad843ef3b8ace680c1c01c118a7cd0cd4ffc42cf64.png" />
+<img alt="../_images/5f4c2cd784e68db2a5c43c0211dd9a9c575f314f930d4e2d6e766c9e325a5dbc.png" src="../_images/5f4c2cd784e68db2a5c43c0211dd9a9c575f314f930d4e2d6e766c9e325a5dbc.png" />
 </div>
 </div>
 </section>
