@@ -5,7 +5,6 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pvdeg"
-version = "0.7.2"
 description = "Pvdeg is a python library that supports the calculation of degradation related parameters for photovoltaic (PV) modules."
 authors = [
     { name = "Rajiv Daxini", email = "Rajiv.Daxini@nlr.gov"},
