@@ -54,7 +54,6 @@ dependencies = [
     "tables",
     "tqdm",
     "xarray",
-    "pre-commit",
     "sympy",
     "zarr",
     "jupytext",
@@ -84,6 +83,9 @@ books = [
 ]
 sam = [
     "NREL-PySAM",
+]
+dev = [
+    "pre-commit",
 ]
 all = [
     "pvdeg[docs,test,books,sam]",
