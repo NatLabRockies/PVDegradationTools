@@ -9,14 +9,14 @@ import warnings
 
 sys.path.insert(0, os.path.abspath("../../"))
 
+import pvdeg  # noqa: E402
+
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "pvdeg"
 copyright = "2026, NLR"
 author = "Alliance for Energy Innovation LLC"
-
-import pvdeg
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
