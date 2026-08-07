@@ -12,7 +12,7 @@ authors = [
     { name = "Martin Springer", email = "Martin.Springer@nlr.gov"},
     { name = "Tobin Ford" },
     { name = "Silvana Ovaitt", email = "Silvana.Ovaitt@nlr.gov"},
-    { name = Michael Kempe", email = "Michael.Kempe@nlr.gov"}
+    { name = "Michael Kempe", email = "Michael.Kempe@nlr.gov"}
 ]
 license = {text = "BSD-3"}
 readme = "README.md"
