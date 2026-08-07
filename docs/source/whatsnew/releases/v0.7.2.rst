@@ -52,7 +52,7 @@ Dependencies
   (:issue:`341`, :pull:`347`)
 - Move ``jupytext`` from core install requirements to the ``dev`` extras, and
   remove the unused ``bokeh`` and ``tables`` dependencies. (:pull:`364`)
-- Bump aiohttp from 3.13.3 to 3.14.1. (:pull:`344`)
+- Bump aiohttp from 3.13.3 to 3.14.3. (:pull:`344`, :pull:`363`)
 
 
 
