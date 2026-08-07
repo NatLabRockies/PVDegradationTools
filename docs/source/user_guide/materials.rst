@@ -1,4 +1,4 @@
-.. materials::
+.. _materials:
 
 Materials Storage and Access
 ============================
@@ -6,7 +6,7 @@ Materials Storage and Access
 PVDeg contains a library of material parameters suitable for estimating the durability of materials and components.
 
 
-These material parameters and other relevant information sit in a directiory at ``PVDegradationTools/pvdeg/data``. 
+These material parameters and other relevant information sit in a directiory at ``PVDegradationTools/pvdeg/data``.
 
 This location can be quickly accessed through a special variable as shown below.
 
@@ -48,6 +48,7 @@ Accessing Material Parameters
 PVDeg provides convenience methods/functions to access material parameters. ``pvdeg.utilities.read_material`` is the simplest way to access material parameters. We will also show a sample use.
 
 .. autofunction:: pvdeg.utilities.read_material
+   :no-index:
 
 .. code-block:: Python
 
@@ -79,7 +80,7 @@ The result of both of these functions will be a dictionary that looks like the f
 		"Eas": numeric,
 		"So": numeric,
 		"Eap": numeric,
-		"Po": numeric 
+		"Po": numeric
     }
 
 There are also convenience functions to view and search jsons in jupyter notebooks called ``pvdeg.utilities.display_json`` and ``pvdeg.utilities.search_json``.
@@ -95,7 +96,7 @@ AApermeation
 .. _H2Opermeation:
 
 H2Opermeation
-~~~~~~~~~~~~
+~~~~~~~~~~~~~
 .. literalinclude:: ../../../pvdeg/data/H2Opermeation.json
     :language: json
 

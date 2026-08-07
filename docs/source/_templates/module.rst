@@ -6,71 +6,32 @@
 
 .. automodule:: {{ fullname }}
 
-   .. this is crazy  
-
    {% block function_overview %}
    {% if functions %}
-
-   Function Overview
-   -----------------
+   .. rubric:: Function Overview
 
    .. autosummary::
       :toctree:
       :nosignatures:
-
-      {% for item in functions %}
-      {{ fullname }}.{{ item }}
-      {%- endfor %}
-
-   {% endif %}
-   {% endblock %}
-   
-   .. this is crazy  
-
-   {% block functions %}
-   {% if functions %}
-
-.. 
-   Functions
-   ---------
-
    {% for item in functions %}
-
-   .. autofunction:: {{ item }}
-
-   .. _sphx_glr_backref_{{fullname}}.{{item}}:
-
-   .. minigallery:: {{fullname}}.{{item}}
-       :add-heading:
-
+      {{ item }}
    {%- endfor %}
    {% endif %}
    {% endblock %}
 
    {% block classes %}
    {% if classes %}
-
-   Classes
-   -------
-
+   .. rubric:: Classes
    {% for item in classes %}
    .. autoclass:: {{ item }}
       :members:
-
-   .. _sphx_glr_backref_{{fullname}}.{{item}}:
-
-   .. minigallery:: {{fullname}}.{{item}}
-       :add-heading:
-
-   {%- endfor %}
+   {% endfor %}
    {% endif %}
    {% endblock %}
 
    {% block exceptions %}
    {% if exceptions %}
-
-   Exceptions
-   ----------
+   .. rubric:: Exceptions
 
    .. autosummary::
    {% for item in exceptions %}
