@@ -1107,7 +1107,7 @@ def get_satellite(location):
 
 
 def write(data_df, metadata, savefile="WeatherFile.csv"):
-    """Save dataframe with weather data and any associated meta data in an *.csv format.
+    """Save dataframe with weather data and metadata in a ``.csv`` format.
 
     The metadata will be formatted on the first two lines with the first being
     the descriptor and the second line being the value. Then the meterological, time and
@@ -1123,7 +1123,6 @@ def write(data_df, metadata, savefile="WeatherFile.csv"):
         'tz' for timezone, and other meta data.
     savefile : str
         Name of file to save output as.
-        Name of file to save output as.
     standardSAM : boolean
         This checks the dataframe to avoid having a leap day, then averages it
         to SAM style (closed to the right),
@@ -1132,20 +1131,7 @@ def write(data_df, metadata, savefile="WeatherFile.csv"):
     includeminute ; Bool
         For hourly data, if SAM input does not have Minutes, it calculates the
         sun position 30 minutes prior to the hour (i.e. 12 timestamp means sun
-         position at 11:30).
-        If minutes are included, it will calculate the sun position at the time
-        of the timestamp (12:00 at 12:00)
-        Set to true if resolution of data is sub-hourly.
-        Name of file to save output as.
-    standardSAM : boolean
-        This checks the dataframe to avoid having a leap day, then averages it
-        to SAM style (closed to the right),
-        and fills the years so it starst on YEAR/1/1 0:0 and ends on
-        YEAR/12/31 23:00.
-    includeminute ; Bool
-        For hourly data, if SAM input does not have Minutes, it calculates the
-        sun position 30 minutes prior to the hour (i.e. 12 timestamp means sun
-         position at 11:30).
+        position at 11:30).
         If minutes are included, it will calculate the sun position at the time
         of the timestamp (12:00 at 12:00)
         Set to true if resolution of data is sub-hourly.
@@ -1196,7 +1182,7 @@ def get_anywhere(database="PSM4", id=None, **kwargs):
     API_KEY : (str)
         This is used to access the NSRDB without limitation if a custom key
         is supplied.
-    **kwargs :
+    ``**kwargs`` :
         Additional keyword arguments to pass to the get_weather function
         (see pvlib.iotools.get_pvgis_tmy for PVGIS, and get_NSRDB for NSRDB)
 
@@ -1253,7 +1239,7 @@ def roll_tmy(weather_df: pd.DataFrame, meta: dict) -> pd.DataFrame:
     Aligns with local time based on timezone offset.
 
     Parameters:
-    ----------
+    -----------
     weather_df : pd.DataFrame
         The input DataFrame containing TMY data with a UTC datetime index.
     meta : dict
@@ -1261,13 +1247,13 @@ def roll_tmy(weather_df: pd.DataFrame, meta: dict) -> pd.DataFrame:
         timezone offset in hours (e.g., -8 for UTC-8).
 
     Returns:
-    -------
+    --------
     pd.DataFrame
         The rolled DataFrame aligned to local times with a new datetime index
         spanning a typical year.
 
     Raises:
-    ------
+    -------
     ValueError
         If the timezone offset is not a multiple of the data frequency or if
         the frequency cannot be inferred.
@@ -1427,13 +1413,14 @@ def empty_weather_ds(gids_size, periodicity, database) -> xr.Dataset:
     Create an empty weather dataframe for generalized input.
 
     Parameters
-    ---------
+    ----------
     gids_size: int
         number of entries to create along gid axis
     periodicity: str
         freqency, pandas `freq` string arg from `pd.date_range`.
 
         .. code-block:: python
+
             "1h"
             "30min"
             "15min"
