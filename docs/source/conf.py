@@ -83,8 +83,14 @@ pygments_style = "sphinx"
 
 # List of external link aliases.  Allows use of :pull:`123` to autolink that PR
 extlinks = {
-    "issue": ("https://github.com/NREL/PVDegradationTools/issues/%s", "issue %s"),
-    "pull": ("https://github.com/NREL/PVDegradationTools/pull/%s", "pull %s"),
+    "issue": (
+        "https://github.com/NatLabRockies/PVDegradationTools/issues/%s",
+        "issue %s",
+    ),
+    "pull": (
+        "https://github.com/NatLabRockies/PVDegradationTools/pull/%s",
+        "pull %s",
+    ),
     "ghuser": ("https://github.com/%s", "ghuser %s"),
 }
 
@@ -103,7 +109,7 @@ html_theme = "pydata_sphinx_theme"
 
 html_theme_options = {
     "navigation_depth": 4,
-    "github_url": "https://github.com/NREL/PVDegradationTools",
+    "github_url": "https://github.com/NatLabRockies/PVDegradationTools",
     "show_toc_level": 1,
 }
 
