@@ -135,9 +135,10 @@ def carrier_factor(
     References
     ----------
     .. [1] A. N. McPherson, J. F. Karas, D. L. Young, and I. L. Repins,
-    “Excess carrier concentration in silicon devices and wafers: How bulk properties are
-    expected to accelerate light and elevated temperature degradation,”
-    MRS Advances, vol. 7, pp. 438–443, 2022, doi: 10.1557/s43580-022-00222-5.
+       "Excess carrier concentration in silicon devices and wafers: How bulk
+       properties are expected to accelerate light and elevated temperature
+       degradation," MRS Advances, vol. 7, pp. 438-443, 2022,
+       doi: 10.1557/s43580-022-00222-5.
     """
     q = elementary_charge
 
@@ -274,9 +275,10 @@ def carrier_factor_wafer(
     References
     ----------
     .. [1] A. N. McPherson, J. F. Karas, D. L. Young, and I. L. Repins,
-    “Excess carrier concentration in silicon devices and wafers: How bulk properties are
-    expected to accelerate light and elevated temperature degradation,”
-    MRS Advances, vol. 7, pp. 438–443, 2022, doi: 10.1557/s43580-022-00222-5.
+       "Excess carrier concentration in silicon devices and wafers: How bulk
+       properties are expected to accelerate light and elevated temperature
+       degradation," MRS Advances, vol. 7, pp. 438-443, 2022,
+       doi: 10.1557/s43580-022-00222-5.
     """
     q = elementary_charge
 
@@ -569,10 +571,10 @@ def j0_gray(ni2, diffusivity, na, diffusion_length, arg, srv):
 
     References
     ----------
-    .. [1] J. L. Gray, “The Physics of the Solar Cell,”
-    in Handbook of Photovoltaic Science and Engineering,
-    A. Luque and S. Hegedus, Eds. Chichester, UK: John Wiley & Sons, Ltd,
-    2011, pp. 82–129. doi: 10.1002/9780470974704.ch3.
+    .. [1] J. L. Gray, "The Physics of the Solar Cell,"
+       in Handbook of Photovoltaic Science and Engineering,
+       A. Luque and S. Hegedus, Eds. Chichester, UK: John Wiley & Sons, Ltd,
+       2011, pp. 82-129. doi: 10.1002/9780470974704.ch3.
     """
     q = elementary_charge
 
@@ -665,7 +667,7 @@ def calc_energy_loss(timesteps):
 
         Column names must include:
             - ``'Pmp_norm'``, a column of normalized (0-1) maximum power such as
-            returned by letid.calc_device_params
+              returned by letid.calc_device_params
 
     Returns
     -------
@@ -696,6 +698,7 @@ def calc_regeneration_time(timesteps, x=80, rtol=1e-05):
     timesteps : Dataframe
         timesteps.index must be DatetimeIndex OR timesteps must include ``'Datetime'``
         column with dtype datetime
+
         Column names must include:
             - ``'NC'``, the percentage of defects in state C
 
@@ -836,9 +839,9 @@ def ff_green(voltage, temperature=298.15):
 
     References
     ----------
-    .. [1] M. A. Green, “Solar cell fill factors: General graph and empirical
-    expressions”, Solid-State Electronics, vol. 24, pp. 788 - 789, 1981.
-    https://doi.org/10.1016/0038-1101(81)90062-9
+    .. [1] M. A. Green, "Solar cell fill factors: General graph and empirical
+       expressions", Solid-State Electronics, vol. 24, pp. 788 - 789, 1981.
+       https://doi.org/10.1016/0038-1101(81)90062-9
     """
     k = Boltzmann
     q = elementary_charge

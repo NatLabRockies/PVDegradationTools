@@ -67,6 +67,8 @@ instance/
 
 # Sphinx documentation
 docs/sphinx/_build/
+docs/_build/
+docs/source/_autosummary/
 
 # tutorial jupyter-book
 _build/

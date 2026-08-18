@@ -1105,6 +1105,7 @@ def fix_metadata(meta):
         dictionary of metadata with key : dict pairs
 
     Returns
+    -------
     fixed_meta : dict
         dictionary of metadata with key : value pairs
     """
@@ -1596,7 +1597,7 @@ def _load_gcr_from_config(config_files: dict):
 def optimal_gcr_pitch_bifacial_fixed_tilt(
     latitude: float, cw: float = 2
 ) -> tuple[float, float]:
-    """
+    r"""
     Compute the optimal ground coverage ratio (GCR) and row pitch for
     fixed-tilt bifacial PV systems as a function of latitude.
 
@@ -1611,14 +1612,14 @@ def optimal_gcr_pitch_bifacial_fixed_tilt(
     Inter-row energy-yield loss 5% bifacial fixed-tilt parameters,
     as reported in Table 1 of Tonita et al. (2023):
 
-    +-----------+--------+-----------+
-    | Parameter | Value  | Units     |
-    +===========+========+===========+
-    | P         | -0.560  | unitless  |
-    | K         | 0.133  | 1/°       |
-    | α₀        | 40.2   | °         |
-    | GCR₀      | 0.70   | unitless  |
-    +-----------+--------+-----------+
+    =========  ======  =========
+    Parameter  Value   Units
+    =========  ======  =========
+    P          -0.560  unitless
+    K          0.133   1/deg
+    alpha_0    40.2    deg
+    GCR_0      0.70    unitless
+    =========  ======  =========
 
     Parameters
     ------------

@@ -14,6 +14,19 @@ Documentation
   cells (live API calls, figures, timestamps) with ``# NBVAL_IGNORE_OUTPUT``.
   (:issue:`352`, :pull:`353`)
 - Add introductory paragraph to :doc:`api.rst </api>` (:issue:`358`, :pull:`359`)
+- Rewrap module docstrings and comments to satisfy ``flake8``'s
+  88-character line-length limit. (:pull:`364`)
+- Fix Sphinx build warnings: correct short/mismatched heading underlines,
+  remove duplicate ``autofunction`` object descriptions with ``:no-index:``,
+  and clean up trailing whitespace across the user guide and API reference.
+  (:pull:`364`)
+- Exclude ``whatsnew/releases/*.rst`` from Sphinx source discovery, since
+  these files are only meant to be pulled in via ``.. include::`` in
+  ``whatsnew/index.rst`` and not built as standalone pages, fixing duplicate
+  label and "not in any toctree" warnings. (:pull:`364`)
+- Remove a large amount of dead/commented-out configuration from ``conf.py``
+  (leftover boilerplate, disabled ``sphinx_gallery`` config, unused theme
+  options) and update the copyright/organization info. (:pull:`364`)
 
 
 Notebooks
@@ -37,6 +50,8 @@ Dependencies
 - Move ``pre-commit`` from core install requirements to the optional development
   extras (``dev = ["pre-commit"]``), reducing runtime dependency footprint.
   (:issue:`341`, :pull:`347`)
+- Move ``jupytext`` from core install requirements to the ``dev`` extras, and
+  remove the unused ``bokeh`` and ``tables`` dependencies. (:pull:`364`)
 - Bump aiohttp from 3.13.3 to 3.14.3. (:pull:`344`, :pull:`363`)
 
 
@@ -44,4 +59,6 @@ Dependencies
 Contributors
 ------------
 - Rajiv Daxini (:ghuser:`rdaxini`)
+- Kevin Anderson (:ghuser:`kandersolar`)
+- Florian Kotthhoff (:ghuser:`FlorianK13`)
 

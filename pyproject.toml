@@ -6,8 +6,13 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pvdeg"
 description = "Pvdeg is a python library that supports the calculation of degradation related parameters for photovoltaic (PV) modules."
-authors = [{name = "Pvdeg Python Developers", email = "Michael.Kempe@nrel.gov"}]
-maintainers = [{email = "Silvana.Ovaitt@nrel.gov"}]
+authors = [
+    { name = "Rajiv Daxini", email = "Rajiv.Daxini@nlr.gov"},
+    { name = "Martin Springer", email = "Martin.Springer@nlr.gov"},
+    { name = "Tobin Ford" },
+    { name = "Silvana Ovaitt", email = "Silvana.Ovaitt@nlr.gov"},
+    { name = "Michael Kempe", email = "Michael.Kempe@nlr.gov"}
+]
 license = {text = "BSD-3"}
 readme = "README.md"
 requires-python = ">=3.10.0"
@@ -36,7 +41,6 @@ dependencies = [
     "cartopy",
     "dask[dataframe]",
     "dask-jobqueue",
-    "bokeh",
     "geopy",
     "h5netcdf",
     "h5py<=3.14.0",
@@ -51,12 +55,10 @@ dependencies = [
     "python-dateutil",
     "pytz",
     "seaborn",
-    "tables",
     "tqdm",
     "xarray",
     "sympy",
     "zarr",
-    "jupytext",
 ]
 dynamic = ["version"]
 
@@ -86,6 +88,8 @@ sam = [
 ]
 dev = [
     "pre-commit",
+    "jupytext",
+
 ]
 all = [
     "pvdeg[docs,test,books,sam]",
@@ -95,10 +99,10 @@ all = [
 console_scripts = "pvdeg.cli:cli"
 
 [project.urls]
-Homepage = "https://github.com/NREL/PVDegradationTools"
-"Bug Tracker" = "https://github.com/NREL/PVDegradationTools/issues"
+Homepage = "https://github.com/NatLabRockies/PVDegradationTools"
+"Bug Tracker" = "https://github.com/NatLabRockies/PVDegradationTools/issues"
 Documentation = "https://pvdegradationtools.readthedocs.io/"
-"Source Code" = "https://github.com/NREL/PVDegradationTools"
+"Source Code" = "https://github.com/NatLabRockies/PVDegradationTools"
 
 [tool.setuptools.packages.find]
 include = ["pvdeg"]
