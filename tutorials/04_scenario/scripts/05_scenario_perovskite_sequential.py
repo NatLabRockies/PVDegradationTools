@@ -19,8 +19,13 @@ import pandas as pd
 import pvdeg
 import matplotlib.pyplot as plt
 
-# Anchor the tutorials data directory before Scenario changes cwd
-REPO_ROOT = os.path.dirname(os.path.dirname(pvdeg.__file__))
+# Tutorial assumption: run from repo root or tutorials/04_scenario
+_cwd = os.getcwd()
+if os.path.isdir(os.path.join(_cwd, "tutorials", "data")):
+    REPO_ROOT = _cwd
+else:
+    REPO_ROOT = os.path.abspath(os.path.join(_cwd, "..", ".."))
+
 TUTORIALS_DATA = os.path.join(REPO_ROOT, "tutorials", "data")
 
 # %%
