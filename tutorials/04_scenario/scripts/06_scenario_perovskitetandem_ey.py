@@ -24,6 +24,20 @@
 # - Zhao et al. (2022) Science 377, 307-310. doi: 10.1126/science.abn5679
 
 # %% [markdown]
+# ## Executive summary (what matches, what does not)
+#
+# This notebook reproduces the Orooji et al. tandem degradation workflow with pvdeg + PVCircuit and compares it against the published outcomes.
+#
+# Key outcomes:
+# - WA (temperate) is reproduced closely for $T_{90,Agg}$ (about 42 months).
+# - AZ (hot/arid) degrades substantially faster in pvdeg than published (about 16.7 vs 26 months).
+# - 12-month CE values for AZ/WA are close to Orooji Fig. 4 values.
+# - Weather severity is not the cause of the AZ gap in this workflow: pvdeg's reconstructed $T_{cell}$ and POA for AZ are not harsher than the digitized paper curves.
+#
+# Takeaway:
+# - The major unresolved issue is the AZ long-horizon $T_{90,Agg}$ gap, not a broad failure across all sites.
+
+# %% [markdown]
 # ## 1. Imports and data
 
 # %%
@@ -38,7 +52,13 @@ import plotly.express as px
 import plotly.graph_objects as go
 import pvcircuit as pvc
 
-REPO_ROOT = os.path.dirname(os.path.dirname(pvdeg.__file__))
+# Tutorial assumption: run from repo root or tutorials/04_scenario
+_cwd = os.getcwd()
+if os.path.isdir(os.path.join(_cwd, "tutorials", "data")):
+    REPO_ROOT = _cwd
+else:
+    REPO_ROOT = os.path.abspath(os.path.join(_cwd, "..", ".."))
+
 TUTORIALS_DATA = os.path.join(REPO_ROOT, "tutorials", "data")
 
 # Redirect all Scenario job folders to the system temp directory.
@@ -60,10 +80,10 @@ N_YEARS = 4  # covers Orooji's published T90 range (26-42 months) for all locati
 
 # Top/bottom cell parameters
 Eg_top, Eg_bot = 1.68, 1.12  # eV
-J01_top, J01_bot = 2.6e-18, 5.7e-15  # A/cm^2  (n=1 diode, 25 °C)
+J01_top, J01_bot = 2.6e-18, 5.7e-15  # A/cm^2  (n=1 diode, 25 C)
 n_top, n_bot = 1.3, 1.0
-Rser_top, Rser_bot = 1.4, 1.0  # Ω·cm²
-Rsh_top, Rsh_bot = 1300, 2800  # Ω·cm²
+Rser_top, Rser_bot = 1.4, 1.0  # ohm*cm^2
+Rsh_top, Rsh_bot = 1300, 2800  # ohm*cm^2
 
 
 # %%
@@ -595,11 +615,7 @@ else:
         print("No Fig-4 sites (AZ, WA) in LOCATIONS_TO_RUN - skipping 12-month table.")
 
 # %%
-## --- Diagnostic: why does the temperate match hold up but arid/tropical don't? ---
-# Compare annual weather stats (GHI, T_air, wind speed) and the resulting mean
-# stress terms (I/Iref, T_cell) actually seen by the degradation kinetics per
-# location - this isolates whether the mismatch is a *weather-source* effect
-# (PSM4 vs Orooji's NREL/NLR TMY3) vs a *model* effect (NOCT temp model, tilt).
+# Meteorological comparison
 I_REF = d046.get("Iref", 1200.0)
 
 diag_rows = []
@@ -612,9 +628,14 @@ for loc in LOCATIONS_TO_RUN:
     t_air_max = wdf["temp_air"].max()
     wind_mean = wdf["wind_speed"].mean() if "wind_speed" in wdf else float("nan")
 
+    # Make this diagnostic independent of earlier execution order.
+    lat_here = float(mt.get("latitude", STATES[loc][0]))
+    tilt_here = float(mt.get("tilt", abs(lat_here)))
+    az_here = float(mt.get("azimuth", 180.0))
+
     # Recompute POA + NOCT cell temp for this single TMY year (fixed-tilt,
     # tilt=latitude) exactly as ey_pipeline() does, to get the realized stress.
-    poa = pvdeg.spectral.poa_irradiance(wdf, mt, tilt=mt["tilt"], azimuth=mt["azimuth"])
+    poa = pvdeg.spectral.poa_irradiance(wdf, mt, tilt=tilt_here, azimuth=az_here)
     t_cell = orooji_noct_cell_temp(wdf, poa)
     mean_I_over_Iref = (poa["poa_global"] / I_REF).mean()
     frac_hours_stressed = (poa["poa_global"] > 0).mean()
@@ -642,38 +663,6 @@ for loc in LOCATIONS_TO_RUN:
 diag_df = pd.DataFrame(diag_rows).sort_values("T_air mean (C)")
 print("Per-location weather/stress diagnostic (single TMY year, fixed-tilt):")
 print(diag_df.to_string(index=False))
-
-
-# %%
-## --- Direct visual comparison against Orooji Fig. 4 (Phoenix/Seattle T_cell) ---
-# Reproduces the Fig. 4 layout (Daily Peak / Daily Average cell temperature vs.
-# month) using our own NOCT-model output, for AZ and WA side by side, so the
-# comparison is against the paper's own plotted data rather than a guess.
-_fig4_locs = [loc for loc in ["AZ", "WA"] if loc in tcell_by_loc]
-
-fig, axes = plt.subplots(
-    1, len(_fig4_locs), figsize=(6 * len(_fig4_locs), 4), squeeze=False
-)
-axes = axes[0]
-for ax, loc in zip(axes, _fig4_locs):
-    t_cell = tcell_by_loc[loc]
-    daily_peak = t_cell.resample("D").max()
-    daily_mean = t_cell.resample("D").mean()
-    month = (daily_peak.index - daily_peak.index[0]).days / 30.44
-    ax.plot(month, daily_peak.values, color="black", lw=0.8, label="Daily Peak")
-    ax.plot(month, daily_mean.values, color="darkorange", lw=0.8, label="Daily Average")
-    ax.set_ylim(0, 100)
-    ax.set_xlim(0, 12)
-    ax.set_xticks([0, 3, 6, 9, 12])
-    ax.set_xlabel("Month")
-    ax.set_ylabel("Cell Temperature (°C)")
-    ax.set_title(f"{STATES[loc][2]}  (pvdeg NOCT, PSM4)")
-    ax.legend(fontsize=8)
-fig.tight_layout()
-print(
-    "Compare directly against Orooji Fig. 4 (page 792): Phoenix daily-average "
-    "~20-55°C (annual mean ~35-38°C), daily-peak ~35-73°C."
-)
 
 
 # %%
@@ -746,15 +735,47 @@ for ax, loc in zip(axes_flat, LOCATIONS_TO_RUN):
     ax.set_xlabel("Month")
     ax.set_ylabel("Cell Temperature (°C)")
     ax.set_title(f"{STATES[loc][2]}")
-    ax.legend(fontsize=7, loc="lower center")
 
 for ax in axes_flat[_n:]:
     ax.set_visible(False)
 
-fig.suptitle(
-    "Solid = pvdeg NOCT/PSM4 reproduction   |   Dashed = digitized from Orooji et al. Fig. 4 (AZ/WA only)"
+_legend_handles = [
+    Line2D([0], [0], color="black", lw=1.0, label="Daily Peak (pvdeg, NOCT/PSM4)"),
+    Line2D(
+        [0], [0], color="darkorange", lw=1.0, label="Daily Average (pvdeg, NOCT/PSM4)"
+    ),
+    Line2D(
+        [0],
+        [0],
+        color="black",
+        lw=1.0,
+        ls="--",
+        alpha=0.6,
+        label="Daily Peak (Orooji Fig. 4, digitized)",
+    ),
+    Line2D(
+        [0],
+        [0],
+        color="darkorange",
+        lw=1.0,
+        ls="--",
+        alpha=0.6,
+        label="Daily Average (Orooji Fig. 4, digitized)",
+    ),
+]
+fig.legend(
+    handles=_legend_handles,
+    loc="upper center",
+    ncol=2,
+    fontsize=9,
+    bbox_to_anchor=(0.5, 1.06),
+    frameon=False,
 )
-fig.tight_layout()
+fig.suptitle(
+    "Solid = pvdeg NOCT/PSM4 reproduction   |   Dashed = digitized from Orooji et al. Fig. 4 (AZ/WA only)",
+    y=1.12,
+)
+fig.tight_layout(rect=[0, 0, 1, 0.92])
 
 
 # %%
@@ -829,12 +850,89 @@ for ax, loc in zip(axes_flat, LOCATIONS_TO_RUN):
     ax.set_xlabel("Month")
     ax.set_ylabel("Light Intensity (W/m$^2$)")
     ax.set_title(f"{STATES[loc][2]}")
-    ax.legend(fontsize=7, loc="lower center")
 
 for ax in axes_flat[_n:]:
     ax.set_visible(False)
 
-fig.suptitle(
-    "Solid = pvdeg PSM4 POA reproduction   |   Dashed = digitized from Orooji et al. Fig. 4 (AZ/WA only)"
+_legend_handles = [
+    Line2D([0], [0], color="black", lw=1.0, label="Daily Peak (pvdeg, PSM4 POA)"),
+    Line2D(
+        [0], [0], color="darkorange", lw=1.0, label="Daily Average (pvdeg, PSM4 POA)"
+    ),
+    Line2D(
+        [0],
+        [0],
+        color="black",
+        lw=1.0,
+        ls="--",
+        alpha=0.6,
+        label="Daily Peak (Orooji Fig. 4, digitized)",
+    ),
+    Line2D(
+        [0],
+        [0],
+        color="darkorange",
+        lw=1.0,
+        ls="--",
+        alpha=0.6,
+        label="Daily Average (Orooji Fig. 4, digitized)",
+    ),
+]
+fig.legend(
+    handles=_legend_handles,
+    loc="upper center",
+    ncol=2,
+    fontsize=9,
+    bbox_to_anchor=(0.5, 1.06),
+    frameon=False,
 )
-fig.tight_layout()
+fig.suptitle(
+    "Solid = pvdeg PSM4 POA reproduction   |   Dashed = digitized from Orooji et al. Fig. 4 (AZ/WA only)",
+    y=1.12,
+)
+fig.tight_layout(rect=[0, 0, 1, 0.92])
+
+
+# %%
+# Quantitative pvdeg-vs-digitized-Orooji-Fig.4 gap check (AZ, WA), for both
+# T_cell and POA "Light Intensity" panels -- annual mean of the daily-peak curve
+# and annual mean of the daily-average curve, each compared directly (not just
+# eyeballed off the plots above).
+_rows = []
+for loc in ["AZ", "WA"]:
+    t_cell = tcell_by_loc[loc]
+    poa_global = poa_by_loc[loc]["poa_global"]
+    d_tc = fig4_digitized[fig4_digitized["location"] == loc]
+    d_irr = fig4_irr_digitized[fig4_irr_digitized["location"] == loc]
+
+    _rows.append(
+        {
+            "location": loc,
+            "Tcell peak: pvdeg": t_cell.resample("D").max().mean(),
+            "Tcell peak: Orooji": d_tc["daily_peak_C"].mean(),
+            "Tcell avg: pvdeg": t_cell.resample("D").mean().mean(),
+            "Tcell avg: Orooji": d_tc["daily_avg_C"].mean(),
+            "POA peak: pvdeg": poa_global.resample("D").max().mean(),
+            "POA peak: Orooji": d_irr["daily_peak_Wm2"].mean(),
+            "POA avg: pvdeg": poa_global.resample("D").mean().mean(),
+            "POA avg: Orooji": d_irr["daily_avg_Wm2"].mean(),
+        }
+    )
+
+gap_df = pd.DataFrame(_rows).set_index("location")
+pd.set_option("display.width", 160)
+print(gap_df.T.round(1))
+
+
+# %% [markdown]
+# ## 7. Conclusions and next step
+#
+# Conclusions from this notebook and controlled tests:
+# - D046 activation energies used here are consistent with the uncapped-device interpretation.
+# - WA is reproduced well for $T_{90,Agg}$.
+# - AZ remains substantially faster than published in long-horizon $PR_{Agg}$ decline.
+# - The mismatch is not explained by hotter/brighter weather in this workflow.
+# - The tandem mismatch hypothesis was tested directly and did not close the AZ gap.
+#
+# Most useful next step:
+# - Compare the full AZ $CE(t)$ trajectory shape against Orooji's digitized curve (not only the 12-month point), then re-check how that trajectory propagates into $PR_{Agg}(t)$.

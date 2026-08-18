@@ -15,18 +15,18 @@
 # %%
 import os
 import json
+from pathlib import Path
 import pandas as pd
 import pvdeg
 import matplotlib.pyplot as plt
 
-# Tutorial assumption: run from repo root or tutorials/04_scenario
-_cwd = os.getcwd()
-if os.path.isdir(os.path.join(_cwd, "tutorials", "data")):
-    REPO_ROOT = _cwd
-else:
-    REPO_ROOT = os.path.abspath(os.path.join(_cwd, "..", ".."))
-
+# Anchor tutorials/data before Scenario changes cwd
+cwd = Path.cwd().resolve()
+REPO_ROOT = cwd if (cwd / "tutorials" / "data").is_dir() else cwd.parents[1]
 TUTORIALS_DATA = os.path.join(REPO_ROOT, "tutorials", "data")
+
+print(REPO_ROOT)
+print(TUTORIALS_DATA)
 
 # %%
 LOCATIONS = {
