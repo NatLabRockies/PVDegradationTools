@@ -612,7 +612,7 @@
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:</span>
 <span class="c1"># !pip install pvdeg</span>
 </pre></div>
 </div>
@@ -635,18 +635,18 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas version &quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Working on a "</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Python version "</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pandas version "</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"pvdeg version "</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1020-azure
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1022-azure
 Python version  3.11.15 (main, Jun 16 2026, 21:41:52) [GCC 13.3.0]
 Pandas version  3.0.5
-pvdeg version  0.1.dev1+g77aa2cd8b
+pvdeg version  0.1.dev1+ga6dab63d6
 </pre></div>
 </div>
 </div>
@@ -674,9 +674,9 @@ pvdeg version  0.1.dev1+g77aa2cd8b
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PSM_FILE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;psm3_demo.csv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PSM_FILE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"psm3_demo.csv"</span><span class="p">)</span>
 
-<span class="n">WEATHER</span><span class="p">,</span> <span class="n">META</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">PSM_FILE</span><span class="p">,</span> <span class="s2">&quot;psm&quot;</span><span class="p">)</span>
+<span class="n">WEATHER</span><span class="p">,</span> <span class="n">META</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">PSM_FILE</span><span class="p">,</span> <span class="s2">"psm"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -809,51 +809,51 @@ pvdeg version  0.1.dev1+g77aa2cd8b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Source&#39;: &#39;NSRDB&#39;,
- &#39;Location ID&#39;: 145809.0,
- &#39;City&#39;: &#39;-&#39;,
- &#39;State&#39;: &#39;-&#39;,
- &#39;Country&#39;: &#39;-&#39;,
- &#39;Clearsky DHI Units&#39;: &#39;w/m2&#39;,
- &#39;Clearsky DNI Units&#39;: &#39;w/m2&#39;,
- &#39;Clearsky GHI Units&#39;: &#39;w/m2&#39;,
- &#39;Dew Point Units&#39;: &#39;c&#39;,
- &#39;DHI Units&#39;: &#39;w/m2&#39;,
- &#39;DNI Units&#39;: &#39;w/m2&#39;,
- &#39;GHI Units&#39;: &#39;w/m2&#39;,
- &#39;Solar Zenith Angle Units&#39;: &#39;Degree&#39;,
- &#39;Temperature Units&#39;: &#39;c&#39;,
- &#39;Pressure Units&#39;: &#39;mbar&#39;,
- &#39;Relative Humidity Units&#39;: &#39;%&#39;,
- &#39;Precipitable Water Units&#39;: &#39;cm&#39;,
- &#39;Wind Direction Units&#39;: &#39;Degrees&#39;,
- &#39;Wind Speed Units&#39;: &#39;m/s&#39;,
- &#39;Cloud Type -15&#39;: &#39;N/A&#39;,
- &#39;Cloud Type 0&#39;: &#39;Clear&#39;,
- &#39;Cloud Type 1&#39;: &#39;Probably Clear&#39;,
- &#39;Cloud Type 2&#39;: &#39;Fog&#39;,
- &#39;Cloud Type 3&#39;: &#39;Water&#39;,
- &#39;Cloud Type 4&#39;: &#39;Super-Cooled Water&#39;,
- &#39;Cloud Type 5&#39;: &#39;Mixed&#39;,
- &#39;Cloud Type 6&#39;: &#39;Opaque Ice&#39;,
- &#39;Cloud Type 7&#39;: &#39;Cirrus&#39;,
- &#39;Cloud Type 8&#39;: &#39;Overlapping&#39;,
- &#39;Cloud Type 9&#39;: &#39;Overshooting&#39;,
- &#39;Cloud Type 10&#39;: &#39;Unknown&#39;,
- &#39;Cloud Type 11&#39;: &#39;Dust&#39;,
- &#39;Cloud Type 12&#39;: &#39;Smoke&#39;,
- &#39;Fill Flag 0&#39;: &#39;N/A&#39;,
- &#39;Fill Flag 1&#39;: &#39;Missing Image&#39;,
- &#39;Fill Flag 2&#39;: &#39;Low Irradiance&#39;,
- &#39;Fill Flag 3&#39;: &#39;Exceeds Clearsky&#39;,
- &#39;Fill Flag 4&#39;: &#39;Missing CLoud Properties&#39;,
- &#39;Fill Flag 5&#39;: &#39;Rayleigh Violation&#39;,
- &#39;Surface Albedo Units&#39;: &#39;N/A&#39;,
- &#39;Version&#39;: &#39;3.0.6&#39;,
- &#39;latitude&#39;: 39.73,
- &#39;longitude&#39;: -105.18,
- &#39;tz&#39;: -7.0,
- &#39;altitude&#39;: 1820.0}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'Source': 'NSRDB',
+ 'Location ID': 145809.0,
+ 'City': '-',
+ 'State': '-',
+ 'Country': '-',
+ 'Clearsky DHI Units': 'w/m2',
+ 'Clearsky DNI Units': 'w/m2',
+ 'Clearsky GHI Units': 'w/m2',
+ 'Dew Point Units': 'c',
+ 'DHI Units': 'w/m2',
+ 'DNI Units': 'w/m2',
+ 'GHI Units': 'w/m2',
+ 'Solar Zenith Angle Units': 'Degree',
+ 'Temperature Units': 'c',
+ 'Pressure Units': 'mbar',
+ 'Relative Humidity Units': '%',
+ 'Precipitable Water Units': 'cm',
+ 'Wind Direction Units': 'Degrees',
+ 'Wind Speed Units': 'm/s',
+ 'Cloud Type -15': 'N/A',
+ 'Cloud Type 0': 'Clear',
+ 'Cloud Type 1': 'Probably Clear',
+ 'Cloud Type 2': 'Fog',
+ 'Cloud Type 3': 'Water',
+ 'Cloud Type 4': 'Super-Cooled Water',
+ 'Cloud Type 5': 'Mixed',
+ 'Cloud Type 6': 'Opaque Ice',
+ 'Cloud Type 7': 'Cirrus',
+ 'Cloud Type 8': 'Overlapping',
+ 'Cloud Type 9': 'Overshooting',
+ 'Cloud Type 10': 'Unknown',
+ 'Cloud Type 11': 'Dust',
+ 'Cloud Type 12': 'Smoke',
+ 'Fill Flag 0': 'N/A',
+ 'Fill Flag 1': 'Missing Image',
+ 'Fill Flag 2': 'Low Irradiance',
+ 'Fill Flag 3': 'Exceeds Clearsky',
+ 'Fill Flag 4': 'Missing CLoud Properties',
+ 'Fill Flag 5': 'Rayleigh Violation',
+ 'Surface Albedo Units': 'N/A',
+ 'Version': '3.0.6',
+ 'latitude': 39.73,
+ 'longitude': -105.18,
+ 'tz': -7.0,
+ 'altitude': 1820.0}
 </pre></div>
 </div>
 </div>
@@ -872,7 +872,7 @@ to filter the data by a few different criteria. Below are some common examples.<
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s select the month of June</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let's select the month of June</span>
 <span class="n">june_weather</span> <span class="o">=</span> <span class="n">WEATHER</span><span class="p">[</span><span class="n">WEATHER</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="mi">6</span><span class="p">]</span>
 <span class="n">june_weather</span>
 </pre></div>
@@ -1084,7 +1084,7 @@ to filter the data by a few different criteria. Below are some common examples.<
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s filter the summer months for the northern hemisphere</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let's filter the summer months for the northern hemisphere</span>
 <span class="n">summer_months</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
 <span class="n">summer_weather</span> <span class="o">=</span> <span class="n">WEATHER</span><span class="p">[</span><span class="n">WEATHER</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">summer_months</span><span class="p">)]</span>
 <span class="n">summer_weather</span>
@@ -1298,7 +1298,7 @@ to filter the data by a few different criteria. Below are some common examples.<
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># lets just select hours from the year where the sun is above the horizon</span>
-<span class="n">sunup_weather</span> <span class="o">=</span> <span class="n">WEATHER</span><span class="p">[</span><span class="n">WEATHER</span><span class="p">[</span><span class="s2">&quot;ghi&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">sunup_weather</span> <span class="o">=</span> <span class="n">WEATHER</span><span class="p">[</span><span class="n">WEATHER</span><span class="p">[</span><span class="s2">"ghi"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">sunup_weather</span>
 </pre></div>
 </div>
@@ -1526,9 +1526,7 @@ to filter the data by a few different criteria. Below are some common examples.<
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  39.7 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  39.7 was used.
+The array surface_tilt angle was not provided, therefore the latitude of  39.7 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </pre></div>
 </div>
@@ -1678,7 +1676,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <p><code class="docutils literal notranslate"><span class="pre">poa_irradiance</span></code> returns a datetime-indexed dataframe as well. Each column contains either the global plane of array irradiance or a particular contribition. Lets look at a time in the index we expect to have daylight.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poa_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;1999-01-01 13:30:00-07:00&quot;</span><span class="p">:</span><span class="s2">&quot;1999-01-01 17:30:00-07:00&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poa_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"1999-01-01 13:30:00-07:00"</span><span class="p">:</span><span class="s2">"1999-01-01 17:30:00-07:00"</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1768,11 +1766,11 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
     <span class="n">weather_df</span><span class="o">=</span><span class="n">WEATHER</span><span class="p">,</span>
     <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">,</span>
     <span class="n">poa</span><span class="o">=</span><span class="n">poa_df</span><span class="p">,</span>
-    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
-    <span class="n">conf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">"sapm"</span><span class="p">,</span>
+    <span class="n">conf</span><span class="o">=</span><span class="s2">"open_rack_glass_polymer"</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">temp_mod</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;1999-01-01 13:30:00-07:00&quot;</span><span class="p">:</span><span class="s2">&quot;1999-01-01 17:30:00-07:00&quot;</span><span class="p">]</span>
+<span class="n">temp_mod</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"1999-01-01 13:30:00-07:00"</span><span class="p">:</span><span class="s2">"1999-01-01 17:30:00-07:00"</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1890,8 +1888,8 @@ dtype: float64
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surface_relative_humidity</span> <span class="o">=</span> <span class="n">WEATHER</span><span class="p">[</span><span class="s2">&quot;relative_humidity&quot;</span><span class="p">]</span>
-<span class="n">temperature_ambient</span> <span class="o">=</span> <span class="n">WEATHER</span><span class="p">[</span><span class="s2">&quot;temp_air&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surface_relative_humidity</span> <span class="o">=</span> <span class="n">WEATHER</span><span class="p">[</span><span class="s2">"relative_humidity"</span><span class="p">]</span>
+<span class="n">temperature_ambient</span> <span class="o">=</span> <span class="n">WEATHER</span><span class="p">[</span><span class="s2">"temp_air"</span><span class="p">]</span>
 
 <span class="n">rh_surface_relative</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">humidity</span><span class="o">.</span><span class="n">surface_relative</span><span class="p">(</span>
     <span class="n">rh_ambient</span><span class="o">=</span><span class="n">surface_relative_humidity</span><span class="p">,</span>
@@ -1943,7 +1941,7 @@ dtype: float64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">water_saturation_pressure</span><span class="p">,</span> <span class="n">avg_water_saturation_pressure</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">pvdeg</span><span class="o">.</span><span class="n">humidity</span><span class="o">.</span><span class="n">water_saturation_pressure</span><span class="p">(</span><span class="n">WEATHER</span><span class="p">[</span><span class="s2">&quot;temp_air&quot;</span><span class="p">])</span>
+    <span class="n">pvdeg</span><span class="o">.</span><span class="n">humidity</span><span class="o">.</span><span class="n">water_saturation_pressure</span><span class="p">(</span><span class="n">WEATHER</span><span class="p">[</span><span class="s2">"temp_air"</span><span class="p">])</span>
 <span class="p">)</span>
 
 <span class="n">k</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">design</span><span class="o">.</span><span class="n">edge_seal_ingress_rate</span><span class="p">(</span><span class="n">avg_water_saturation_pressure</span><span class="p">)</span>

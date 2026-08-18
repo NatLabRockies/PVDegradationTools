@@ -608,7 +608,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">GeospatialScenario</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;standoff geospatial&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"standoff geospatial"</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -621,7 +621,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">addLocation</span><span class="p">(</span>
-    <span class="n">state</span><span class="o">=</span><span class="s2">&quot;Colorado&quot;</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="s2">&quot;Summit&quot;</span><span class="p">,</span> <span class="n">see_added</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">downsample_factor</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">state</span><span class="o">=</span><span class="s2">"Colorado"</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="s2">"Summit"</span><span class="p">,</span> <span class="n">see_added</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">downsample_factor</span><span class="o">=</span><span class="mi">3</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -692,20 +692,20 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_humidity_scenario</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">GeospatialScenario</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;humidity scenario&quot;</span><span class="p">,</span> <span class="n">geospatial</span><span class="o">=</span><span class="kc">True</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"humidity scenario"</span><span class="p">,</span> <span class="n">geospatial</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 
 <span class="n">geospatial_humidity_scenario</span><span class="o">.</span><span class="n">addLocation</span><span class="p">(</span>
-    <span class="n">state</span><span class="o">=</span><span class="s2">&quot;Colorado&quot;</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="s2">&quot;Jefferson&quot;</span><span class="p">,</span> <span class="n">see_added</span><span class="o">=</span><span class="kc">True</span>
+    <span class="n">state</span><span class="o">=</span><span class="s2">"Colorado"</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="s2">"Jefferson"</span><span class="p">,</span> <span class="n">see_added</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 
 <span class="n">geospatial_humidity_scenario</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span>
     <span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">humidity</span><span class="o">.</span><span class="n">module</span><span class="p">,</span>
     <span class="n">func_params</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;backsheet_thickness&quot;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span>  <span class="c1"># mm, thickness of PET backsheet</span>
-        <span class="s2">&quot;back_encap_thickness&quot;</span><span class="p">:</span> <span class="mf">0.46</span><span class="p">,</span>  <span class="c1"># mm, thickness of EVA backside encapsulant</span>
-        <span class="s2">&quot;encapsulant&quot;</span><span class="p">:</span> <span class="s2">&quot;W001&quot;</span><span class="p">,</span>  <span class="c1"># EVA encapsulant</span>
-        <span class="s2">&quot;backsheet&quot;</span><span class="p">:</span> <span class="s2">&quot;W017&quot;</span><span class="p">,</span>  <span class="c1"># PET backsheet</span>
+        <span class="s2">"backsheet_thickness"</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span>  <span class="c1"># mm, thickness of PET backsheet</span>
+        <span class="s2">"back_encap_thickness"</span><span class="p">:</span> <span class="mf">0.46</span><span class="p">,</span>  <span class="c1"># mm, thickness of EVA backside encapsulant</span>
+        <span class="s2">"encapsulant"</span><span class="p">:</span> <span class="s2">"W001"</span><span class="p">,</span>  <span class="c1"># EVA encapsulant</span>
+        <span class="s2">"backsheet"</span><span class="p">:</span> <span class="s2">"W017"</span><span class="p">,</span>  <span class="c1"># PET backsheet</span>
     <span class="p">},</span>
     <span class="n">see_added</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>

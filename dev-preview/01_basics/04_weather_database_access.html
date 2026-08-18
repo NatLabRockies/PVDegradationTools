@@ -632,16 +632,16 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Working on a "</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Python version "</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"pvdeg version "</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1020-azure
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1022-azure
 Python version  3.11.15 (main, Jun 16 2026, 21:41:52) [GCC 13.3.0]
-pvdeg version  0.1.dev1+g77aa2cd8b
+pvdeg version  0.1.dev1+ga6dab63d6
 </pre></div>
 </div>
 </div>
@@ -656,22 +656,22 @@ pvdeg version  0.1.dev1+g77aa2cd8b
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get weather data</span>
-<span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;NSRDB&quot;</span>
+<span class="n">weather_db</span> <span class="o">=</span> <span class="s2">"NSRDB"</span>
 
 <span class="c1"># Latitude and Longitude</span>
 <span class="n">weather_id</span> <span class="o">=</span> <span class="p">(</span><span class="mf">33.448376</span><span class="p">,</span> <span class="o">-</span><span class="mf">112.074036</span><span class="p">)</span>
 <span class="c1"># weather_id = 1933572</span>
 <span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="s2">&quot;GOES&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="mi">2021</span><span class="p">,</span>
-    <span class="s2">&quot;NREL_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;air_temperature&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dhi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ghi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dni&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;relative_humidity&quot;</span><span class="p">,</span>
+    <span class="s2">"satellite"</span><span class="p">:</span> <span class="s2">"GOES"</span><span class="p">,</span>
+    <span class="s2">"names"</span><span class="p">:</span> <span class="mi">2021</span><span class="p">,</span>
+    <span class="s2">"NREL_HPC"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"air_temperature"</span><span class="p">,</span>
+        <span class="s2">"wind_speed"</span><span class="p">,</span>
+        <span class="s2">"dhi"</span><span class="p">,</span>
+        <span class="s2">"ghi"</span><span class="p">,</span>
+        <span class="s2">"dni"</span><span class="p">,</span>
+        <span class="s2">"relative_humidity"</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">}</span>
 
@@ -679,8 +679,8 @@ pvdeg version  0.1.dev1+g77aa2cd8b
 
 <span class="c1"># weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)</span>
 
-<span class="c1"># res = pvdeg.standards.standoff(weather_df=weather_df, meta=meta, tilt=None, azimuth=180, sky_model=&#39;isotropic&#39;, temp_model=&#39;sapm&#39;,</span>
-<span class="c1">#     conf_0=&#39;insulated_back_glass_polymer&#39;, conf_inf=&#39;open_rack_glass_polymer&#39;, T98=70, x_0=6.5, wind_factor=0.33)</span>
+<span class="c1"># res = pvdeg.standards.standoff(weather_df=weather_df, meta=meta, tilt=None, azimuth=180, sky_model='isotropic', temp_model='sapm',</span>
+<span class="c1">#     conf_0='insulated_back_glass_polymer', conf_inf='open_rack_glass_polymer', T98=70, x_0=6.5, wind_factor=0.33)</span>
 <span class="c1"># print(pvdeg.standards.interpret_standoff(res))</span>
 <span class="c1"># print(meta)</span>
 </pre></div>
@@ -707,20 +707,20 @@ pvdeg version  0.1.dev1+g77aa2cd8b
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load pre-saved weather data for this tutorial</span>
 <span class="c1"># This avoids API rate limits during testing and builds</span>
-<span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/psm4_golden.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../data/meta_golden.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/psm4_golden.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"../data/meta_golden.json"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="c1"># Uncomment below to fetch fresh data with your own API key:</span>
-<span class="c1"># API_KEY = &quot;your_api_key_here&quot;</span>
+<span class="c1"># API_KEY = "your_api_key_here"</span>
 <span class="c1"># # The example API key here is for demonstation and is rate-limited per IP.</span>
 <span class="c1"># # To get your own API key, visit https://developer.nrel.gov/signup/</span>
-<span class="c1"># weather_db = &quot;PSM4&quot;</span>
+<span class="c1"># weather_db = "PSM4"</span>
 <span class="c1"># weather_id = (39.741931, -105.169891)</span>
 <span class="c1"># weather_arg = {</span>
-<span class="c1">#     &quot;api_key&quot;: &quot;DEMO_KEY&quot;,</span>
-<span class="c1">#     &quot;email&quot;: &quot;user@mail.com&quot;,</span>
-<span class="c1">#     &quot;map_variables&quot;: True,</span>
+<span class="c1">#     "api_key": "DEMO_KEY",</span>
+<span class="c1">#     "email": "user@mail.com",</span>
+<span class="c1">#     "map_variables": True,</span>
 <span class="c1"># }</span>
 <span class="c1"># weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)</span>
 
@@ -730,10 +730,10 @@ pvdeg version  0.1.dev1+g77aa2cd8b
     <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
     <span class="n">tilt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">azimuth</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span>
-    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
-    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
-    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
-    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">"isotropic"</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">"sapm"</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">"insulated_back_glass_polymer"</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">"open_rack_glass_polymer"</span><span class="p">,</span>
     <span class="n">T98</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span>
     <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
     <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
@@ -741,7 +741,7 @@ pvdeg version  0.1.dev1+g77aa2cd8b
 <span class="nb">print</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">interpret_standoff</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
 
 <span class="c1"># Clean metadata for consistent output</span>
-<span class="n">meta_clean</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">meta</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;irradiance_time_offset&quot;</span><span class="p">]}</span>
+<span class="n">meta_clean</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">meta</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"irradiance_time_offset"</span><span class="p">]}</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">meta_clean</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -753,7 +753,7 @@ The estimated T₉₈ of an open-rack module is 51.6°C.
 Level 0 certification is valid for a standoff greather than 1.8 cm. 
 Level 1 certification is required for a standoff less than 1.8 cm. 
 Level 2 certification is never required for this temperature                            profile.
-{&#39;Source&#39;: &#39;NSRDB&#39;, &#39;Location ID&#39;: &#39;479494&#39;, &#39;City&#39;: &#39;-&#39;, &#39;State&#39;: &#39;-&#39;, &#39;Country&#39;: &#39;-&#39;, &#39;Clearsky DHI Units&#39;: &#39;w/m2&#39;, &#39;Clearsky DNI Units&#39;: &#39;w/m2&#39;, &#39;Clearsky GHI Units&#39;: &#39;w/m2&#39;, &#39;Dew Point Units&#39;: &#39;c&#39;, &#39;DHI Units&#39;: &#39;w/m2&#39;, &#39;DNI Units&#39;: &#39;w/m2&#39;, &#39;GHI Units&#39;: &#39;w/m2&#39;, &#39;Solar Zenith Angle Units&#39;: &#39;Degree&#39;, &#39;Temperature Units&#39;: &#39;c&#39;, &#39;Pressure Units&#39;: &#39;mbar&#39;, &#39;Relative Humidity Units&#39;: &#39;%&#39;, &#39;Precipitable Water Units&#39;: &#39;cm&#39;, &#39;Wind Direction Units&#39;: &#39;Degrees&#39;, &#39;Wind Speed Units&#39;: &#39;m/s&#39;, &#39;Cloud Type -15&#39;: &#39;N/A&#39;, &#39;Cloud Type 0&#39;: &#39;Clear&#39;, &#39;Cloud Type 1&#39;: &#39;Probably Clear&#39;, &#39;Cloud Type 2&#39;: &#39;Fog&#39;, &#39;Cloud Type 3&#39;: &#39;Water&#39;, &#39;Cloud Type 4&#39;: &#39;Super-Cooled Water&#39;, &#39;Cloud Type 5&#39;: &#39;Mixed&#39;, &#39;Cloud Type 6&#39;: &#39;Opaque Ice&#39;, &#39;Cloud Type 7&#39;: &#39;Cirrus&#39;, &#39;Cloud Type 8&#39;: &#39;Overlapping&#39;, &#39;Cloud Type 9&#39;: &#39;Overshooting&#39;, &#39;Cloud Type 10&#39;: &#39;Unknown&#39;, &#39;Cloud Type 11&#39;: &#39;Dust&#39;, &#39;Cloud Type 12&#39;: &#39;Smoke&#39;, &#39;Fill Flag 0&#39;: &#39;N/A&#39;, &#39;Fill Flag 1&#39;: &#39;Missing Image&#39;, &#39;Fill Flag 2&#39;: &#39;Low Irradiance&#39;, &#39;Fill Flag 3&#39;: &#39;Exceeds Clearsky&#39;, &#39;Fill Flag 4&#39;: &#39;Missing CLoud Properties&#39;, &#39;Fill Flag 5&#39;: &#39;Rayleigh Violation&#39;, &#39;Surface Albedo Units&#39;: &#39;N/A&#39;, &#39;Version&#39;: &#39;4.1.2.dev4+g3b38bc8.d20250228&#39;, &#39;latitude&#39;: 39.73, &#39;longitude&#39;: -105.18, &#39;altitude&#39;: 1876, &#39;tz&#39;: -7, &#39;wind_height&#39;: 2}
+{'Source': 'NSRDB', 'Location ID': '479494', 'City': '-', 'State': '-', 'Country': '-', 'Clearsky DHI Units': 'w/m2', 'Clearsky DNI Units': 'w/m2', 'Clearsky GHI Units': 'w/m2', 'Dew Point Units': 'c', 'DHI Units': 'w/m2', 'DNI Units': 'w/m2', 'GHI Units': 'w/m2', 'Solar Zenith Angle Units': 'Degree', 'Temperature Units': 'c', 'Pressure Units': 'mbar', 'Relative Humidity Units': '%', 'Precipitable Water Units': 'cm', 'Wind Direction Units': 'Degrees', 'Wind Speed Units': 'm/s', 'Cloud Type -15': 'N/A', 'Cloud Type 0': 'Clear', 'Cloud Type 1': 'Probably Clear', 'Cloud Type 2': 'Fog', 'Cloud Type 3': 'Water', 'Cloud Type 4': 'Super-Cooled Water', 'Cloud Type 5': 'Mixed', 'Cloud Type 6': 'Opaque Ice', 'Cloud Type 7': 'Cirrus', 'Cloud Type 8': 'Overlapping', 'Cloud Type 9': 'Overshooting', 'Cloud Type 10': 'Unknown', 'Cloud Type 11': 'Dust', 'Cloud Type 12': 'Smoke', 'Fill Flag 0': 'N/A', 'Fill Flag 1': 'Missing Image', 'Fill Flag 2': 'Low Irradiance', 'Fill Flag 3': 'Exceeds Clearsky', 'Fill Flag 4': 'Missing CLoud Properties', 'Fill Flag 5': 'Rayleigh Violation', 'Surface Albedo Units': 'N/A', 'Version': '4.1.2.dev4+g3b38bc8.d20250228', 'latitude': 39.73, 'longitude': -105.18, 'altitude': 1876, 'tz': -7, 'wind_height': 2}
 </pre></div>
 </div>
 </div>
@@ -764,10 +764,10 @@ Level 2 certification is never required for this temperature                    
 <p>This method uses the PVGIS database, a public resource. It requires no API key or user account.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;PVGIS&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_db</span> <span class="o">=</span> <span class="s2">"PVGIS"</span>
 <span class="c1"># weather_id = (39.741931, -105.169891)</span>
 <span class="n">weather_id</span> <span class="o">=</span> <span class="p">(</span><span class="mf">24.7136</span><span class="p">,</span> <span class="mf">46.6753</span><span class="p">)</span>  <span class="c1"># Riyadh, Saudi Arabia</span>
-<span class="c1"># weather_arg = {&#39;map_variables&#39;: True}</span>
+<span class="c1"># weather_arg = {'map_variables': True}</span>
 
 <span class="c1"># For reproducible notebook testing, default to cached local weather/meta.</span>
 <span class="c1"># Set USE_LIVE_PVGIS = True to fetch live PVGIS data.</span>
@@ -778,8 +778,8 @@ Level 2 certification is never required for this temperature                    
     <span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">weather_db</span><span class="p">,</span> <span class="n">weather_id</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="c1"># Cached sample weather to avoid SSL/network flakiness in CI</span>
-    <span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/psm4_golden.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../data/meta_golden.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/psm4_golden.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"../data/meta_golden.json"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="c1"># Perform calculation</span>
@@ -788,10 +788,10 @@ Level 2 certification is never required for this temperature                    
     <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
     <span class="n">tilt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">azimuth</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span>
-    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
-    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
-    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
-    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">"isotropic"</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">"sapm"</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">"insulated_back_glass_polymer"</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">"open_rack_glass_polymer"</span><span class="p">,</span>
     <span class="n">T98</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span>
     <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
     <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
@@ -799,22 +799,22 @@ Level 2 certification is never required for this temperature                    
 
 <span class="c1"># Print rounded numeric outputs for testing</span>
 <span class="n">res_clean</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;x_cm&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s2">&quot;T98_0_C&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;T98_0&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s2">&quot;T98_inf_C&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;T98_inf&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s2">"x_cm"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">"x"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s2">"T98_0_C"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">"T98_0"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s2">"T98_inf_C"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">"T98_inf"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">),</span>
 <span class="p">}</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">res_clean</span><span class="p">)</span>
 
 <span class="c1"># Clean metadata for consistent output (remove variable fields)</span>
-<span class="n">meta_clean</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">meta</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;irradiance_time_offset&quot;</span><span class="p">]}</span>
+<span class="n">meta_clean</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">meta</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"irradiance_time_offset"</span><span class="p">]}</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">meta_clean</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  39.7 was used.
-{&#39;x_cm&#39;: 1.8, &#39;T98_0_C&#39;: 75.9, &#39;T98_inf_C&#39;: 51.6}
-{&#39;Source&#39;: &#39;NSRDB&#39;, &#39;Location ID&#39;: &#39;479494&#39;, &#39;City&#39;: &#39;-&#39;, &#39;State&#39;: &#39;-&#39;, &#39;Country&#39;: &#39;-&#39;, &#39;Clearsky DHI Units&#39;: &#39;w/m2&#39;, &#39;Clearsky DNI Units&#39;: &#39;w/m2&#39;, &#39;Clearsky GHI Units&#39;: &#39;w/m2&#39;, &#39;Dew Point Units&#39;: &#39;c&#39;, &#39;DHI Units&#39;: &#39;w/m2&#39;, &#39;DNI Units&#39;: &#39;w/m2&#39;, &#39;GHI Units&#39;: &#39;w/m2&#39;, &#39;Solar Zenith Angle Units&#39;: &#39;Degree&#39;, &#39;Temperature Units&#39;: &#39;c&#39;, &#39;Pressure Units&#39;: &#39;mbar&#39;, &#39;Relative Humidity Units&#39;: &#39;%&#39;, &#39;Precipitable Water Units&#39;: &#39;cm&#39;, &#39;Wind Direction Units&#39;: &#39;Degrees&#39;, &#39;Wind Speed Units&#39;: &#39;m/s&#39;, &#39;Cloud Type -15&#39;: &#39;N/A&#39;, &#39;Cloud Type 0&#39;: &#39;Clear&#39;, &#39;Cloud Type 1&#39;: &#39;Probably Clear&#39;, &#39;Cloud Type 2&#39;: &#39;Fog&#39;, &#39;Cloud Type 3&#39;: &#39;Water&#39;, &#39;Cloud Type 4&#39;: &#39;Super-Cooled Water&#39;, &#39;Cloud Type 5&#39;: &#39;Mixed&#39;, &#39;Cloud Type 6&#39;: &#39;Opaque Ice&#39;, &#39;Cloud Type 7&#39;: &#39;Cirrus&#39;, &#39;Cloud Type 8&#39;: &#39;Overlapping&#39;, &#39;Cloud Type 9&#39;: &#39;Overshooting&#39;, &#39;Cloud Type 10&#39;: &#39;Unknown&#39;, &#39;Cloud Type 11&#39;: &#39;Dust&#39;, &#39;Cloud Type 12&#39;: &#39;Smoke&#39;, &#39;Fill Flag 0&#39;: &#39;N/A&#39;, &#39;Fill Flag 1&#39;: &#39;Missing Image&#39;, &#39;Fill Flag 2&#39;: &#39;Low Irradiance&#39;, &#39;Fill Flag 3&#39;: &#39;Exceeds Clearsky&#39;, &#39;Fill Flag 4&#39;: &#39;Missing CLoud Properties&#39;, &#39;Fill Flag 5&#39;: &#39;Rayleigh Violation&#39;, &#39;Surface Albedo Units&#39;: &#39;N/A&#39;, &#39;Version&#39;: &#39;4.1.2.dev4+g3b38bc8.d20250228&#39;, &#39;latitude&#39;: 39.73, &#39;longitude&#39;: -105.18, &#39;altitude&#39;: 1876, &#39;tz&#39;: -7, &#39;wind_height&#39;: 2}
+{'x_cm': 1.8, 'T98_0_C': 75.9, 'T98_inf_C': 51.6}
+{'Source': 'NSRDB', 'Location ID': '479494', 'City': '-', 'State': '-', 'Country': '-', 'Clearsky DHI Units': 'w/m2', 'Clearsky DNI Units': 'w/m2', 'Clearsky GHI Units': 'w/m2', 'Dew Point Units': 'c', 'DHI Units': 'w/m2', 'DNI Units': 'w/m2', 'GHI Units': 'w/m2', 'Solar Zenith Angle Units': 'Degree', 'Temperature Units': 'c', 'Pressure Units': 'mbar', 'Relative Humidity Units': '%', 'Precipitable Water Units': 'cm', 'Wind Direction Units': 'Degrees', 'Wind Speed Units': 'm/s', 'Cloud Type -15': 'N/A', 'Cloud Type 0': 'Clear', 'Cloud Type 1': 'Probably Clear', 'Cloud Type 2': 'Fog', 'Cloud Type 3': 'Water', 'Cloud Type 4': 'Super-Cooled Water', 'Cloud Type 5': 'Mixed', 'Cloud Type 6': 'Opaque Ice', 'Cloud Type 7': 'Cirrus', 'Cloud Type 8': 'Overlapping', 'Cloud Type 9': 'Overshooting', 'Cloud Type 10': 'Unknown', 'Cloud Type 11': 'Dust', 'Cloud Type 12': 'Smoke', 'Fill Flag 0': 'N/A', 'Fill Flag 1': 'Missing Image', 'Fill Flag 2': 'Low Irradiance', 'Fill Flag 3': 'Exceeds Clearsky', 'Fill Flag 4': 'Missing CLoud Properties', 'Fill Flag 5': 'Rayleigh Violation', 'Surface Albedo Units': 'N/A', 'Version': '4.1.2.dev4+g3b38bc8.d20250228', 'latitude': 39.73, 'longitude': -105.18, 'altitude': 1876, 'tz': -7, 'wind_height': 2}
 </pre></div>
 </div>
 </div>

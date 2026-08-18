@@ -613,7 +613,7 @@
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:</span>
 <span class="c1"># !pip install pvdeg</span>
 </pre></div>
 </div>
@@ -639,20 +639,20 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas version &quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvlib version &quot;</span><span class="p">,</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Working on a "</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Python version "</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pandas version "</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"pvlib version "</span><span class="p">,</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"pvdeg version "</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1020-azure
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1022-azure
 Python version  3.11.15 (main, Jun 16 2026, 21:41:52) [GCC 13.3.0]
 Pandas version  3.0.5
 pvlib version  0.15.2
-pvdeg version  0.1.dev1+g77aa2cd8b
+pvdeg version  0.1.dev1+ga6dab63d6
 </pre></div>
 </div>
 </div>
@@ -663,9 +663,9 @@ For this example, we’ll model a fixed latitude tilt system at NREL, in Golden,
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load weather and location data, use pvlib read_psm3 function with map_variables = True</span>
 
-<span class="n">sam_file</span> <span class="o">=</span> <span class="s2">&quot;psm3.csv&quot;</span>
+<span class="n">sam_file</span> <span class="o">=</span> <span class="s2">"psm3.csv"</span>
 <span class="n">weather</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="n">sam_file</span><span class="p">),</span> <span class="n">file_type</span><span class="o">=</span><span class="s2">&quot;PSM3&quot;</span><span class="p">,</span> <span class="n">map_variables</span><span class="o">=</span><span class="kc">True</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="n">sam_file</span><span class="p">),</span> <span class="n">file_type</span><span class="o">=</span><span class="s2">"PSM3"</span><span class="p">,</span> <span class="n">map_variables</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -919,10 +919,10 @@ For this example, we’ll model a fixed latitude tilt system at NREL, in Golden,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if our weather file doesn&#39;t have precipitable water, calculate it with pvlib</span>
-<span class="k">if</span> <span class="s2">&quot;precipitable_water&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">weather</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-    <span class="n">weather</span><span class="p">[</span><span class="s2">&quot;precipitable_water&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">atmosphere</span><span class="o">.</span><span class="n">gueymard94_pw</span><span class="p">(</span>
-        <span class="n">weather</span><span class="p">[</span><span class="s2">&quot;temp_air&quot;</span><span class="p">],</span> <span class="n">weather</span><span class="p">[</span><span class="s2">&quot;relative_humidity&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if our weather file doesn't have precipitable water, calculate it with pvlib</span>
+<span class="k">if</span> <span class="s2">"precipitable_water"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">weather</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">weather</span><span class="p">[</span><span class="s2">"precipitable_water"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">atmosphere</span><span class="o">.</span><span class="n">gueymard94_pw</span><span class="p">(</span>
+        <span class="n">weather</span><span class="p">[</span><span class="s2">"temp_air"</span><span class="p">],</span> <span class="n">weather</span><span class="p">[</span><span class="s2">"relative_humidity"</span><span class="p">]</span>
     <span class="p">)</span>
 </pre></div>
 </div>
@@ -930,28 +930,28 @@ For this example, we’ll model a fixed latitude tilt system at NREL, in Golden,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># rename some columns for pvlib if they haven&#39;t been already</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># rename some columns for pvlib if they haven't been already</span>
 <span class="n">weather</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
     <span class="n">columns</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;GHI&quot;</span><span class="p">:</span> <span class="s2">&quot;ghi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;DNI&quot;</span><span class="p">:</span> <span class="s2">&quot;dni&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;DHI&quot;</span><span class="p">:</span> <span class="s2">&quot;dhi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Temperature&quot;</span><span class="p">:</span> <span class="s2">&quot;temp_air&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Wind Speed&quot;</span><span class="p">:</span> <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Relative Humidity&quot;</span><span class="p">:</span> <span class="s2">&quot;relative_humidity&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Precipitable Water&quot;</span><span class="p">:</span> <span class="s2">&quot;precipitable_water&quot;</span><span class="p">,</span>
+        <span class="s2">"GHI"</span><span class="p">:</span> <span class="s2">"ghi"</span><span class="p">,</span>
+        <span class="s2">"DNI"</span><span class="p">:</span> <span class="s2">"dni"</span><span class="p">,</span>
+        <span class="s2">"DHI"</span><span class="p">:</span> <span class="s2">"dhi"</span><span class="p">,</span>
+        <span class="s2">"Temperature"</span><span class="p">:</span> <span class="s2">"temp_air"</span><span class="p">,</span>
+        <span class="s2">"Wind Speed"</span><span class="p">:</span> <span class="s2">"wind_speed"</span><span class="p">,</span>
+        <span class="s2">"Relative Humidity"</span><span class="p">:</span> <span class="s2">"relative_humidity"</span><span class="p">,</span>
+        <span class="s2">"Precipitable Water"</span><span class="p">:</span> <span class="s2">"precipitable_water"</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">weather</span> <span class="o">=</span> <span class="n">weather</span><span class="p">[</span>
     <span class="p">[</span>
-        <span class="s2">&quot;ghi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dni&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dhi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;temp_air&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;relative_humidity&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;precipitable_water&quot;</span><span class="p">,</span>
+        <span class="s2">"ghi"</span><span class="p">,</span>
+        <span class="s2">"dni"</span><span class="p">,</span>
+        <span class="s2">"dhi"</span><span class="p">,</span>
+        <span class="s2">"temp_air"</span><span class="p">,</span>
+        <span class="s2">"wind_speed"</span><span class="p">,</span>
+        <span class="s2">"relative_humidity"</span><span class="p">,</span>
+        <span class="s2">"precipitable_water"</span><span class="p">,</span>
     <span class="p">]</span>
 <span class="p">]</span>
 </pre></div>
@@ -1111,21 +1111,21 @@ For this example, we’ll model a fixed latitude tilt system at NREL, in Golden,
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import pvlib stuff and pick a module and inverter. Choice of these things will slightly affect the pvlib results which we later use to calculate injection.</span>
-<span class="c1"># we&#39;ll use the SAPM temperature model open-rack glass/polymer coeffecients.</span>
+<span class="c1"># we'll use the SAPM temperature model open-rack glass/polymer coeffecients.</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pvlib.temperature</span><span class="w"> </span><span class="kn">import</span> <span class="n">TEMPERATURE_MODEL_PARAMETERS</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pvlib.location</span><span class="w"> </span><span class="kn">import</span> <span class="n">Location</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pvlib.pvsystem</span><span class="w"> </span><span class="kn">import</span> <span class="n">PVSystem</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pvlib.modelchain</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelChain</span>
 
-<span class="n">cec_modules</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">pvsystem</span><span class="o">.</span><span class="n">retrieve_sam</span><span class="p">(</span><span class="s2">&quot;CECMod&quot;</span><span class="p">)</span>
-<span class="n">cec_inverters</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">pvsystem</span><span class="o">.</span><span class="n">retrieve_sam</span><span class="p">(</span><span class="s2">&quot;cecinverter&quot;</span><span class="p">)</span>
+<span class="n">cec_modules</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">pvsystem</span><span class="o">.</span><span class="n">retrieve_sam</span><span class="p">(</span><span class="s2">"CECMod"</span><span class="p">)</span>
+<span class="n">cec_inverters</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">pvsystem</span><span class="o">.</span><span class="n">retrieve_sam</span><span class="p">(</span><span class="s2">"cecinverter"</span><span class="p">)</span>
 
-<span class="n">cec_module</span> <span class="o">=</span> <span class="n">cec_modules</span><span class="p">[</span><span class="s2">&quot;Jinko_Solar_Co___Ltd_JKM260P_60&quot;</span><span class="p">]</span>
-<span class="n">cec_inverter</span> <span class="o">=</span> <span class="n">cec_inverters</span><span class="p">[</span><span class="s2">&quot;ABB__ULTRA_750_TL_OUTD_1_US_690_x_y_z__690V_&quot;</span><span class="p">]</span>
+<span class="n">cec_module</span> <span class="o">=</span> <span class="n">cec_modules</span><span class="p">[</span><span class="s2">"Jinko_Solar_Co___Ltd_JKM260P_60"</span><span class="p">]</span>
+<span class="n">cec_inverter</span> <span class="o">=</span> <span class="n">cec_inverters</span><span class="p">[</span><span class="s2">"ABB__ULTRA_750_TL_OUTD_1_US_690_x_y_z__690V_"</span><span class="p">]</span>
 
-<span class="n">temperature_model_parameters</span> <span class="o">=</span> <span class="n">TEMPERATURE_MODEL_PARAMETERS</span><span class="p">[</span><span class="s2">&quot;sapm&quot;</span><span class="p">][</span>
-    <span class="s2">&quot;open_rack_glass_polymer&quot;</span>
+<span class="n">temperature_model_parameters</span> <span class="o">=</span> <span class="n">TEMPERATURE_MODEL_PARAMETERS</span><span class="p">[</span><span class="s2">"sapm"</span><span class="p">][</span>
+    <span class="s2">"open_rack_glass_polymer"</span>
 <span class="p">]</span>
 </pre></div>
 </div>
@@ -1134,14 +1134,14 @@ For this example, we’ll model a fixed latitude tilt system at NREL, in Golden,
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set up system in pvlib</span>
-<span class="n">lat</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">]</span>
-<span class="n">lon</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]</span>
-<span class="n">tz</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;tz&quot;</span><span class="p">]</span>
-<span class="n">elevation</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;altitude&quot;</span><span class="p">]</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">"latitude"</span><span class="p">]</span>
+<span class="n">lon</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">"longitude"</span><span class="p">]</span>
+<span class="n">tz</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">"tz"</span><span class="p">]</span>
+<span class="n">elevation</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">"altitude"</span><span class="p">]</span>
 <span class="n">surface_tilt</span> <span class="o">=</span> <span class="n">lat</span>  <span class="c1"># fixed, latitude tilt</span>
 <span class="n">surface_azimuth</span> <span class="o">=</span> <span class="mi">180</span>  <span class="c1"># south-facing</span>
 
-<span class="n">location</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">tz</span><span class="p">,</span> <span class="n">elevation</span><span class="p">,</span> <span class="s2">&quot;Golden, CO, USA&quot;</span><span class="p">)</span>
+<span class="n">location</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">tz</span><span class="p">,</span> <span class="n">elevation</span><span class="p">,</span> <span class="s2">"Golden, CO, USA"</span><span class="p">)</span>
 
 <span class="n">system</span> <span class="o">=</span> <span class="n">PVSystem</span><span class="p">(</span>
     <span class="n">surface_tilt</span><span class="o">=</span><span class="n">surface_tilt</span><span class="p">,</span>
@@ -1157,7 +1157,7 @@ For this example, we’ll model a fixed latitude tilt system at NREL, in Golden,
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create and run pvlib modelchain</span>
-<span class="n">mc</span> <span class="o">=</span> <span class="n">ModelChain</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">aoi_model</span><span class="o">=</span><span class="s2">&quot;physical&quot;</span><span class="p">)</span>
+<span class="n">mc</span> <span class="o">=</span> <span class="n">ModelChain</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">aoi_model</span><span class="o">=</span><span class="s2">"physical"</span><span class="p">)</span>
 <span class="n">mc</span><span class="o">.</span><span class="n">run_model</span><span class="p">(</span><span class="n">weather</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1191,25 +1191,25 @@ For this example, we’ll model a fixed latitude tilt system at NREL, in Golden,
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ee</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">effective_irradiance</span>
-<span class="c1"># injection = (mc.results.dc[&#39;i_sc&#39;]-mc.results.dc[&#39;i_mp&#39;])/(mc.results.dc[&#39;i_sc&#39;])*(ee/1000)</span>
+<span class="c1"># injection = (mc.results.dc['i_sc']-mc.results.dc['i_mp'])/(mc.results.dc['i_sc'])*(ee/1000)</span>
 <span class="n">injection</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_injection_outdoors</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">results</span><span class="p">)</span>
 <span class="n">temperature</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">cell_temperature</span>
 
 <span class="n">timesteps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;Temperature&quot;</span><span class="p">:</span> <span class="n">temperature</span><span class="p">,</span> <span class="s2">&quot;Injection&quot;</span><span class="p">:</span> <span class="n">injection</span><span class="p">}</span>
+    <span class="p">{</span><span class="s2">"Temperature"</span><span class="p">:</span> <span class="n">temperature</span><span class="p">,</span> <span class="s2">"Injection"</span><span class="p">:</span> <span class="n">injection</span><span class="p">}</span>
 <span class="p">)</span>  <span class="c1"># create a DataFrame with cell temperature and injection</span>
 <span class="n">timesteps</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span>
     <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>  <span class="c1"># reset the index so datetime is a column. I prefer integer indexing.</span>
-<span class="n">timesteps</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;Datetime&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">timesteps</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"index"</span><span class="p">:</span> <span class="s2">"Datetime"</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># filter out times when injection is NaN, these won&#39;t progress LETID, and it&#39;ll make the calculations below run faster</span>
-<span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="p">[</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Injection&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># filter out times when injection is NaN, these won't progress LETID, and it'll make the calculations below run faster</span>
+<span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="p">[</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"Injection"</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span>
 <span class="n">timesteps</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1335,10 +1335,10 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generation_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;PVL_GenProfile.xlsx&quot;</span><span class="p">),</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span>
-<span class="p">)</span>  <span class="c1"># this is an optical generation profile generated by PVLighthouse&#39;s OPAL2 default model for 1-sun, normal incident AM1.5 sunlight on a 180-um thick SiNx-coated, pyramid-textured wafer.</span>
-<span class="n">generation</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span><span class="s2">&quot;Generation (cm-3s-1)&quot;</span><span class="p">]</span>
-<span class="n">depth</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span><span class="s2">&quot;Depth (um)&quot;</span><span class="p">]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"PVL_GenProfile.xlsx"</span><span class="p">),</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>  <span class="c1"># this is an optical generation profile generated by PVLighthouse's OPAL2 default model for 1-sun, normal incident AM1.5 sunlight on a 180-um thick SiNx-coated, pyramid-textured wafer.</span>
+<span class="n">generation</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span><span class="s2">"Generation (cm-3s-1)"</span><span class="p">]</span>
+<span class="n">depth</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span><span class="s2">"Depth (um)"</span><span class="p">]</span>
 
 <span class="n">d_base</span> <span class="o">=</span> <span class="mi">27</span>  <span class="c1"># cm^2/s electron diffusivity. See https://www2.pvlighthouse.com.au/calculators/mobility%20calculator/mobility%20calculator.aspx for details</span>
 </pre></div>
@@ -1367,18 +1367,18 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 <span class="n">nB_0</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">nC_0</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="n">mechanism_params</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_kinetics</span><span class="p">(</span><span class="s2">&quot;D037&quot;</span><span class="p">)</span>
+<span class="n">mechanism_params</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_kinetics</span><span class="p">(</span><span class="s2">"D037"</span><span class="p">)</span>
 
-<span class="n">timesteps</span><span class="p">[[</span><span class="s2">&quot;NA&quot;</span><span class="p">,</span> <span class="s2">&quot;NB&quot;</span><span class="p">,</span> <span class="s2">&quot;NC&quot;</span><span class="p">,</span> <span class="s2">&quot;tau&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
+<span class="n">timesteps</span><span class="p">[[</span><span class="s2">"NA"</span><span class="p">,</span> <span class="s2">"NB"</span><span class="p">,</span> <span class="s2">"NC"</span><span class="p">,</span> <span class="s2">"tau"</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 <span class="p">)</span>  <span class="c1"># create columns for defect state percentages and lifetime, fill with NaNs for now, to fill iteratively below</span>
 
-<span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;NA&quot;</span><span class="p">,</span> <span class="s2">&quot;NB&quot;</span><span class="p">,</span> <span class="s2">&quot;NC&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
+<span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="s2">"NA"</span><span class="p">,</span> <span class="s2">"NB"</span><span class="p">,</span> <span class="s2">"NC"</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">nA_0</span><span class="p">,</span>
     <span class="n">nB_0</span><span class="p">,</span>
     <span class="n">nC_0</span><span class="p">,</span>
 <span class="p">)</span>  <span class="c1"># assign first timestep defect state percentages</span>
-<span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;tau&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">tau_now</span><span class="p">(</span>
+<span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"tau"</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">tau_now</span><span class="p">(</span>
     <span class="n">tau_0</span><span class="p">,</span> <span class="n">tau_deg</span><span class="p">,</span> <span class="n">nB_0</span>
 <span class="p">)</span>  <span class="c1"># calculate tau for the first timestep</span>
 </pre></div>
@@ -1400,40 +1400,40 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
             <span class="n">tau</span><span class="p">,</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">d_base</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">generation</span><span class="p">,</span> <span class="n">depth</span>
         <span class="p">)</span>
         <span class="n">voc</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">jsc</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Jsc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsc</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Voc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">voc</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Jsc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsc</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Voc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">voc</span>
 
     <span class="c1"># loop through rows, new tau calculated based on previous NB. Reaction proceeds based on new tau.</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">n_A</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;NA&quot;</span><span class="p">]</span>
-        <span class="n">n_B</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;NB&quot;</span><span class="p">]</span>
-        <span class="n">n_C</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;NC&quot;</span><span class="p">]</span>
+        <span class="n">n_A</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"NA"</span><span class="p">]</span>
+        <span class="n">n_B</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"NB"</span><span class="p">]</span>
+        <span class="n">n_C</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"NC"</span><span class="p">]</span>
 
         <span class="n">tau</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">tau_now</span><span class="p">(</span><span class="n">tau_0</span><span class="p">,</span> <span class="n">tau_deg</span><span class="p">,</span> <span class="n">n_B</span><span class="p">)</span>
         <span class="n">jsc</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">calculate_jsc_from_tau_cp</span><span class="p">(</span>
             <span class="n">tau</span><span class="p">,</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">d_base</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">generation</span><span class="p">,</span> <span class="n">depth</span>
         <span class="p">)</span>
 
-        <span class="n">temperature</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Temperature&quot;</span><span class="p">]</span>
-        <span class="n">injection</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Injection&quot;</span><span class="p">]</span>
+        <span class="n">temperature</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Temperature"</span><span class="p">]</span>
+        <span class="n">injection</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Injection"</span><span class="p">]</span>
 
         <span class="c1"># calculate defect reaction kinetics: reaction constant and carrier concentration factor.</span>
         <span class="n">k_AB</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">k_ij</span><span class="p">(</span>
-            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;v_ab&quot;</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;ea_ab&quot;</span><span class="p">],</span> <span class="n">temperature</span>
+            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"v_ab"</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"ea_ab"</span><span class="p">],</span> <span class="n">temperature</span>
         <span class="p">)</span>
         <span class="n">k_BA</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">k_ij</span><span class="p">(</span>
-            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;v_ba&quot;</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;ea_ba&quot;</span><span class="p">],</span> <span class="n">temperature</span>
+            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"v_ba"</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"ea_ba"</span><span class="p">],</span> <span class="n">temperature</span>
         <span class="p">)</span>
         <span class="n">k_BC</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">k_ij</span><span class="p">(</span>
-            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;v_bc&quot;</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;ea_bc&quot;</span><span class="p">],</span> <span class="n">temperature</span>
+            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"v_bc"</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"ea_bc"</span><span class="p">],</span> <span class="n">temperature</span>
         <span class="p">)</span>
         <span class="n">k_CB</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">k_ij</span><span class="p">(</span>
-            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;v_cb&quot;</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;ea_cb&quot;</span><span class="p">],</span> <span class="n">temperature</span>
+            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"v_cb"</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"ea_cb"</span><span class="p">],</span> <span class="n">temperature</span>
         <span class="p">)</span>
 
         <span class="n">x_ab</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">carrier_factor</span><span class="p">(</span>
             <span class="n">tau</span><span class="p">,</span>
-            <span class="s2">&quot;ab&quot;</span><span class="p">,</span>
+            <span class="s2">"ab"</span><span class="p">,</span>
             <span class="n">temperature</span><span class="p">,</span>
             <span class="n">injection</span><span class="p">,</span>
             <span class="n">jsc</span><span class="p">,</span>
@@ -1443,7 +1443,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
         <span class="p">)</span>
         <span class="n">x_ba</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">carrier_factor</span><span class="p">(</span>
             <span class="n">tau</span><span class="p">,</span>
-            <span class="s2">&quot;ba&quot;</span><span class="p">,</span>
+            <span class="s2">"ba"</span><span class="p">,</span>
             <span class="n">temperature</span><span class="p">,</span>
             <span class="n">injection</span><span class="p">,</span>
             <span class="n">jsc</span><span class="p">,</span>
@@ -1453,7 +1453,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
         <span class="p">)</span>
         <span class="n">x_bc</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">carrier_factor</span><span class="p">(</span>
             <span class="n">tau</span><span class="p">,</span>
-            <span class="s2">&quot;bc&quot;</span><span class="p">,</span>
+            <span class="s2">"bc"</span><span class="p">,</span>
             <span class="n">temperature</span><span class="p">,</span>
             <span class="n">injection</span><span class="p">,</span>
             <span class="n">jsc</span><span class="p">,</span>
@@ -1470,18 +1470,18 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
         <span class="n">dN_Cdt</span> <span class="o">=</span> <span class="p">(</span><span class="n">k_BC</span> <span class="o">*</span> <span class="n">n_B</span> <span class="o">*</span> <span class="n">x_bc</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">k_CB</span> <span class="o">*</span> <span class="n">n_C</span><span class="p">)</span>
 
         <span class="n">t_step</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Datetime&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Datetime&quot;</span><span class="p">]</span>
+            <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Datetime"</span><span class="p">]</span> <span class="o">-</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"Datetime"</span><span class="p">]</span>
         <span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
 
         <span class="c1"># assign new defect state percentages</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;NA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_A</span> <span class="o">+</span> <span class="n">dN_Adt</span> <span class="o">*</span> <span class="n">t_step</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;NB&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_B</span> <span class="o">+</span> <span class="n">dN_Bdt</span> <span class="o">*</span> <span class="n">t_step</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;NC&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_C</span> <span class="o">+</span> <span class="n">dN_Cdt</span> <span class="o">*</span> <span class="n">t_step</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"NA"</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_A</span> <span class="o">+</span> <span class="n">dN_Adt</span> <span class="o">*</span> <span class="n">t_step</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"NB"</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_B</span> <span class="o">+</span> <span class="n">dN_Bdt</span> <span class="o">*</span> <span class="n">t_step</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"NC"</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_C</span> <span class="o">+</span> <span class="n">dN_Cdt</span> <span class="o">*</span> <span class="n">t_step</span>
 
         <span class="c1"># calculate device parameters</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;tau&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tau</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Jsc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsc</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Voc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"tau"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tau</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Jsc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsc</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Voc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span>
             <span class="n">tau</span><span class="p">,</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">jsc</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">25</span>
         <span class="p">)</span>
 </pre></div>
@@ -1494,16 +1494,16 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 <p>Now that we have calculated defect states, we can calculate all the quantities that depend on defect states.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;tau&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">tau_now</span><span class="p">(</span><span class="n">tau_0</span><span class="p">,</span> <span class="n">tau_deg</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;NB&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"tau"</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">tau_now</span><span class="p">(</span><span class="n">tau_0</span><span class="p">,</span> <span class="n">tau_deg</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"NB"</span><span class="p">])</span>
 
 <span class="c1"># calculate device Jsc for every timestep. Unfortunately this requires an integration so I think we have to run through a loop. Device Jsc allows calculation of device Voc.</span>
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">timestep</span> <span class="ow">in</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
     <span class="n">jsc_now</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">calculate_jsc_from_tau_cp</span><span class="p">(</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;tau&quot;</span><span class="p">],</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">d_base</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">generation</span><span class="p">,</span> <span class="n">depth</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"tau"</span><span class="p">],</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">d_base</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">generation</span><span class="p">,</span> <span class="n">depth</span>
     <span class="p">)</span>
-    <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Jsc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsc_now</span>
-    <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Voc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;tau&quot;</span><span class="p">],</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">jsc_now</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">25</span>
+    <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Jsc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsc_now</span>
+    <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Voc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"tau"</span><span class="p">],</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">jsc_now</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">25</span>
     <span class="p">)</span>
 </pre></div>
 </div>
@@ -1743,38 +1743,38 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cycler</span><span class="w"> </span><span class="kn">import</span> <span class="n">cycler</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">"default"</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span>
-    <span class="n">cycler</span><span class="p">(</span><span class="s2">&quot;color&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;tab:blue&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:orange&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:green&quot;</span><span class="p">])</span>
-    <span class="o">+</span> <span class="n">cycler</span><span class="p">(</span><span class="s2">&quot;linestyle&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="s2">&quot;-.&quot;</span><span class="p">])</span>
+    <span class="n">cycler</span><span class="p">(</span><span class="s2">"color"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"tab:blue"</span><span class="p">,</span> <span class="s2">"tab:orange"</span><span class="p">,</span> <span class="s2">"tab:green"</span><span class="p">])</span>
+    <span class="o">+</span> <span class="n">cycler</span><span class="p">(</span><span class="s2">"linestyle"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"-"</span><span class="p">,</span> <span class="s2">"--"</span><span class="p">,</span> <span class="s2">"-."</span><span class="p">])</span>
 <span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[[</span><span class="s2">&quot;NA&quot;</span><span class="p">,</span> <span class="s2">&quot;NB&quot;</span><span class="p">,</span> <span class="s2">&quot;NC&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;$N_A$&quot;</span><span class="p">,</span> <span class="s2">&quot;$N_B$&quot;</span><span class="p">,</span> <span class="s2">&quot;$N_C$&quot;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Defect state percentages [%]&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Datetime&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[[</span><span class="s2">"NA"</span><span class="p">,</span> <span class="s2">"NB"</span><span class="p">,</span> <span class="s2">"NC"</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"$N_A$"</span><span class="p">,</span> <span class="s2">"$N_B$"</span><span class="p">,</span> <span class="s2">"$N_C$"</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"upper left"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Defect state percentages [%]"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Datetime"</span><span class="p">)</span>
 
 <span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">],</span>
-    <span class="n">c</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Normalized STC $P_</span><span class="si">{MP}</span><span class="s2">$&quot;</span><span class="p">,</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">],</span>
+    <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">"Normalized STC $P_</span><span class="si">{MP}</span><span class="s2">$"</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Normalized STC $P_</span><span class="si">{MP}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">"upper right"</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Normalized STC $P_</span><span class="si">{MP}</span><span class="s2">$"</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Outdoor LETID </span><span class="se">\n</span><span class="si">{</span><span class="n">location</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Outdoor LETID </span><span class="se">\n</span><span class="si">{</span><span class="n">location</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f024df5a140c64dd1c7b58e6c5a7fbd190954d9903b585db69edb82604b6afeb.png" src="../_images/f024df5a140c64dd1c7b58e6c5a7fbd190954d9903b585db69edb82604b6afeb.png" />
+<img alt="../_images/16740f4dcfda708ea516051bd5cc5bd1d18708c50101644861463d185a1a4121.png" src="../_images/16740f4dcfda708ea516051bd5cc5bd1d18708c50101644861463d185a1a4121.png" />
 </div>
 </div>
 <p>The example data provided for Golden, CO, shows how <span class="math notranslate nohighlight">\(N_A\)</span> increases in cold weather, and power temporarily recovers, due to temporary recovery of LETID (B-&gt;A).</p>
@@ -1786,7 +1786,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nA_0</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">nB_0</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">nC_0</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">mechanism_params</span> <span class="o">=</span> <span class="s2">&quot;D037&quot;</span>
+<span class="n">mechanism_params</span> <span class="o">=</span> <span class="s2">"D037"</span>
 
 <span class="n">letid</span><span class="o">.</span><span class="n">calc_letid_outdoors</span><span class="p">(</span>
     <span class="n">tau_0</span><span class="p">,</span>

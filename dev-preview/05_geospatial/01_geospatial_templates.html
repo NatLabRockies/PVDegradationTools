@@ -639,10 +639,10 @@
 <p><em>The cell below loads a pickled xarray object, this is not the best way to do this. xarray datasets should be stored as <code class="docutils literal notranslate"><span class="pre">.nc</span></code> - netcdf files</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_meta</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TEST_DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;summit-meta.csv&quot;</span><span class="p">),</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_meta</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TEST_DATA_DIR</span><span class="p">,</span> <span class="s2">"summit-meta.csv"</span><span class="p">),</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Use xarray to open NetCDF file instead of pickle</span>
-<span class="n">geo_weather</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TEST_DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;summit-weather.nc&quot;</span><span class="p">))</span>
+<span class="n">geo_weather</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TEST_DATA_DIR</span><span class="p">,</span> <span class="s2">"summit-weather.nc"</span><span class="p">))</span>
 
 <span class="n">geo_weather</span>
 </pre></div>
@@ -1070,8 +1070,8 @@ From the docstring we can see that <code class="docutils literal notranslate"><s
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define output shape</span>
 <span class="n">shapes</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;T98&quot;</span><span class="p">:</span> <span class="p">(</span>
-        <span class="s2">&quot;gid&quot;</span><span class="p">,</span>
+    <span class="s2">"T98"</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">"gid"</span><span class="p">,</span>
     <span class="p">)</span>  <span class="c1"># one return value at each datapoint, only dependent on datapoint, not time</span>
 <span class="p">}</span>
 
@@ -1136,9 +1136,9 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define output shape</span>
 <span class="n">shapes</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;module_temperature&quot;</span><span class="p">:</span> <span class="p">(</span>
-        <span class="s2">&quot;gid&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="s2">"module_temperature"</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">"gid"</span><span class="p">,</span>
+        <span class="s2">"time"</span><span class="p">,</span>
     <span class="p">)</span>  <span class="c1"># one return value at each datapoint, only dependent on datapoint, not time</span>
 <span class="p">}</span>
 
@@ -1158,7 +1158,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
     <span class="n">meta_df</span><span class="o">=</span><span class="n">geo_meta</span><span class="p">,</span>
     <span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">module</span><span class="p">,</span>
     <span class="n">template</span><span class="o">=</span><span class="n">temperature_template</span><span class="p">,</span>  <span class="c1"># use the template we created</span>
-    <span class="n">conf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_glass&quot;</span><span class="p">,</span>  <span class="c1"># provide kwargs for function here</span>
+    <span class="n">conf</span><span class="o">=</span><span class="s2">"open_rack_glass_glass"</span><span class="p">,</span>  <span class="c1"># provide kwargs for function here</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1206,8 +1206,8 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">module_temps</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">geo_temperature_res</span><span class="p">[</span><span class="s2">&quot;module_temperature&quot;</span><span class="p">]</span>
-    <span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mf">39.89</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=-</span><span class="mf">106.42</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+    <span class="n">geo_temperature_res</span><span class="p">[</span><span class="s2">"module_temperature"</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mf">39.89</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=-</span><span class="mf">106.42</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"nearest"</span><span class="p">)</span>
     <span class="o">.</span><span class="n">values</span>
 <span class="p">)</span>
 

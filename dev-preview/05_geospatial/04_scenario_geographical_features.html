@@ -611,7 +611,7 @@
 To speed up calculations we will downsample to get coarser data. The downsampling function is not linear. A downsample factor of 10 takes us from 2018267 entries to only 5109.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">GeospatialScenario</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;finding-features&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">GeospatialScenario</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"finding-features"</span><span class="p">)</span>
 
 <span class="n">features</span><span class="o">.</span><span class="n">addLocation</span><span class="p">(</span><span class="n">downsample_factor</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
@@ -674,7 +674,7 @@ GeospatialScenario will create a kdtree internally for us. So the method can sim
 <p>the <code class="docutils literal notranslate"><span class="pre">plot_meta_classification</span></code> method allows you to plot your data with respect to a boolean classifier present in the <code class="docutils literal notranslate"><span class="pre">scenario.meta_data</span></code> dataframe columns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">plot_meta_classification</span><span class="p">(</span><span class="n">col_name</span><span class="o">=</span><span class="s2">&quot;mountain&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">plot_meta_classification</span><span class="p">(</span><span class="n">col_name</span><span class="o">=</span><span class="s2">"mountain"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -690,7 +690,7 @@ Either provide the top left and bottom right (latitude-longitude) pairs or a 2d 
     <span class="n">kdtree</span><span class="o">=</span><span class="n">tree</span><span class="p">,</span>
     <span class="n">elevation_floor</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">bbox_kwarg</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;coords&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="s2">"coords"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
             <span class="p">[</span>
                 <span class="p">[</span><span class="mf">47.960502</span><span class="p">,</span> <span class="o">-</span><span class="mf">115.048828</span><span class="p">],</span>
                 <span class="p">[</span><span class="mf">47.842658</span><span class="p">,</span> <span class="o">-</span><span class="mf">101.118164</span><span class="p">],</span>
@@ -706,7 +706,7 @@ Either provide the top left and bottom right (latitude-longitude) pairs or a 2d 
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">plot_meta_classification</span><span class="p">(</span><span class="n">col_name</span><span class="o">=</span><span class="s2">&quot;mountain&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">plot_meta_classification</span><span class="p">(</span><span class="n">col_name</span><span class="o">=</span><span class="s2">"mountain"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -719,8 +719,8 @@ Either provide the top left and bottom right (latitude-longitude) pairs or a 2d 
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">classify_feature</span><span class="p">(</span>
     <span class="n">kdtree</span><span class="o">=</span><span class="n">tree</span><span class="p">,</span>
-    <span class="n">feature_name</span><span class="o">=</span><span class="s2">&quot;coastline&quot;</span><span class="p">,</span>
-    <span class="n">resolution</span><span class="o">=</span><span class="s2">&quot;10m&quot;</span><span class="p">,</span>
+    <span class="n">feature_name</span><span class="o">=</span><span class="s2">"coastline"</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="s2">"10m"</span><span class="p">,</span>
     <span class="n">radius</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># change this to get a wider band of selected data near the coastline</span>
 <span class="p">)</span>
 </pre></div>
@@ -729,7 +729,7 @@ Either provide the top left and bottom right (latitude-longitude) pairs or a 2d 
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">plot_meta_classification</span><span class="p">(</span><span class="n">col_name</span><span class="o">=</span><span class="s2">&quot;coastline&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">plot_meta_classification</span><span class="p">(</span><span class="n">col_name</span><span class="o">=</span><span class="s2">"coastline"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -741,7 +741,7 @@ Either provide the top left and bottom right (latitude-longitude) pairs or a 2d 
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">classify_feature</span><span class="p">(</span>
-    <span class="n">kdtree</span><span class="o">=</span><span class="n">tree</span><span class="p">,</span> <span class="n">feature_name</span><span class="o">=</span><span class="s2">&quot;rivers_lake_centerlines&quot;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="s2">&quot;10m&quot;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.2</span>
+    <span class="n">kdtree</span><span class="o">=</span><span class="n">tree</span><span class="p">,</span> <span class="n">feature_name</span><span class="o">=</span><span class="s2">"rivers_lake_centerlines"</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="s2">"10m"</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.2</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -749,7 +749,7 @@ Either provide the top left and bottom right (latitude-longitude) pairs or a 2d 
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">plot_meta_classification</span><span class="p">(</span><span class="n">col_name</span><span class="o">=</span><span class="s2">&quot;rivers_lake_centerlines&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span><span class="o">.</span><span class="n">plot_meta_classification</span><span class="p">(</span><span class="n">col_name</span><span class="o">=</span><span class="s2">"rivers_lake_centerlines"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

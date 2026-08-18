@@ -609,7 +609,7 @@
 <p>This performs a 1-D finite difference model for oxygen ingress through an edge seal and into an encapsulant. This is effectively an infinitely long module with a prescribed width.The output is then displayed graphically.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:</span>
 <span class="c1"># !pip install pvdeg</span>
 </pre></div>
 </div>
@@ -633,18 +633,18 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This information helps with debugging and getting support :)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">platform</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas version &quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Working on a "</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Python version "</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pandas version "</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"pvdeg version "</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1020-azure
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1022-azure
 Python version  3.11.15 (main, Jun 16 2026, 21:41:52) [GCC 13.3.0]
 Pandas version  3.0.5
-pvdeg version  0.1.dev1+g77aa2cd8b
+pvdeg version  0.1.dev1+ga6dab63d6
 </pre></div>
 </div>
 </div>
@@ -661,14 +661,14 @@ pvdeg version  0.1.dev1+g77aa2cd8b
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get data from a supplied data file (Do not use the next box of code if using your own file)</span>
-<span class="n">weather_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;psm3_demo.csv&quot;</span><span class="p">)</span>
-<span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">weather_file</span><span class="p">,</span> <span class="s2">&quot;psm&quot;</span><span class="p">)</span>
+<span class="n">weather_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"psm3_demo.csv"</span><span class="p">)</span>
+<span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">weather_file</span><span class="p">,</span> <span class="s2">"psm"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;City&#39;, &#39;Clearsky DHI Units&#39;, &#39;Clearsky DNI Units&#39;, &#39;Clearsky GHI Units&#39;, &#39;Cloud Type -15&#39;, &#39;Cloud Type 0&#39;, &#39;Cloud Type 1&#39;, &#39;Cloud Type 10&#39;, &#39;Cloud Type 11&#39;, &#39;Cloud Type 12&#39;, &#39;Cloud Type 2&#39;, &#39;Cloud Type 3&#39;, &#39;Cloud Type 4&#39;, &#39;Cloud Type 5&#39;, &#39;Cloud Type 6&#39;, &#39;Cloud Type 7&#39;, &#39;Cloud Type 8&#39;, &#39;Cloud Type 9&#39;, &#39;Country&#39;, &#39;DHI Units&#39;, &#39;DNI Units&#39;, &#39;Dew Point Units&#39;, &#39;Fill Flag 0&#39;, &#39;Fill Flag 1&#39;, &#39;Fill Flag 2&#39;, &#39;Fill Flag 3&#39;, &#39;Fill Flag 4&#39;, &#39;Fill Flag 5&#39;, &#39;GHI Units&#39;, &#39;Location ID&#39;, &#39;Precipitable Water Units&#39;, &#39;Pressure Units&#39;, &#39;Relative Humidity Units&#39;, &#39;Solar Zenith Angle Units&#39;, &#39;Source&#39;, &#39;State&#39;, &#39;Surface Albedo Units&#39;, &#39;Temperature Units&#39;, &#39;Version&#39;, &#39;Wind Direction Units&#39;, &#39;Wind Speed Units&#39;, &#39;altitude&#39;, &#39;latitude&#39;, &#39;longitude&#39;, &#39;tz&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['City', 'Clearsky DHI Units', 'Clearsky DNI Units', 'Clearsky GHI Units', 'Cloud Type -15', 'Cloud Type 0', 'Cloud Type 1', 'Cloud Type 10', 'Cloud Type 11', 'Cloud Type 12', 'Cloud Type 2', 'Cloud Type 3', 'Cloud Type 4', 'Cloud Type 5', 'Cloud Type 6', 'Cloud Type 7', 'Cloud Type 8', 'Cloud Type 9', 'Country', 'DHI Units', 'DNI Units', 'Dew Point Units', 'Fill Flag 0', 'Fill Flag 1', 'Fill Flag 2', 'Fill Flag 3', 'Fill Flag 4', 'Fill Flag 5', 'GHI Units', 'Location ID', 'Precipitable Water Units', 'Pressure Units', 'Relative Humidity Units', 'Solar Zenith Angle Units', 'Source', 'State', 'Surface Albedo Units', 'Temperature Units', 'Version', 'Wind Direction Units', 'Wind Speed Units', 'altitude', 'latitude', 'longitude', 'tz']
 </pre></div>
 </div>
 </div>
@@ -682,13 +682,13 @@ pvdeg version  0.1.dev1+g77aa2cd8b
 <span class="c1"># weather_id = (64.84031, -147.73836) #Fairbanks, Alaska</span>
 <span class="c1"># weather_id = (65.14037, -21.91633) #Reykjavik, Iceland</span>
 <span class="n">weather_id</span> <span class="o">=</span> <span class="p">(</span><span class="mf">33.4152</span><span class="p">,</span> <span class="o">-</span><span class="mf">111.8315</span><span class="p">)</span>  <span class="c1"># Mesa, Arizona</span>
-<span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get_anywhere</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">weather_id</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">&quot;PVGIS&quot;</span><span class="p">)</span>
+<span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get_anywhere</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">weather_id</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s2">"PVGIS"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;latitude&#39;: 33.4152, &#39;longitude&#39;: -111.8315, &#39;irradiance_time_offset&#39;: 0.0, &#39;altitude&#39;: 381.0, &#39;wind_height&#39;: 10, &#39;Source&#39;: &#39;PVGIS&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'latitude': 33.4152, 'longitude': -111.8315, 'irradiance_time_offset': 0.0, 'altitude': 381.0, 'wind_height': 10, 'Source': 'PVGIS'}
 </pre></div>
 </div>
 </div>
@@ -696,20 +696,20 @@ pvdeg version  0.1.dev1+g77aa2cd8b
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This computes a module temperature. Here the default is an open rack system, but other options include:</span>
-<span class="c1">#       &#39;open_rack_glass_glass&#39;,</span>
-<span class="c1">#       &#39;close_mount_glass_glass&#39;,</span>
-<span class="c1">#       &#39;insulated_back_glass_polymer&#39;</span>
+<span class="c1">#       'open_rack_glass_glass',</span>
+<span class="c1">#       'close_mount_glass_glass',</span>
+<span class="c1">#       'insulated_back_glass_polymer'</span>
 
 <span class="n">temperature</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">temperature</span><span class="p">(</span>
     <span class="n">weather_df</span><span class="o">=</span><span class="n">weather_df</span><span class="p">,</span>
     <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
-    <span class="n">cell_or_mod</span><span class="o">=</span><span class="s2">&quot;module&quot;</span><span class="p">,</span>
-    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
-    <span class="n">conf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">cell_or_mod</span><span class="o">=</span><span class="s2">"module"</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">"sapm"</span><span class="p">,</span>
+    <span class="n">conf</span><span class="o">=</span><span class="s2">"open_rack_glass_polymer"</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">temperature</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;module_temperature&quot;</span><span class="p">])</span>
-<span class="n">temperature</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8760</span><span class="p">))</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"module_temperature"</span><span class="p">])</span>
+<span class="n">temperature</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8760</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -726,29 +726,29 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <p>There is a library of some materials and the relevant oxygen ingress parameters that can be used.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">es</span> <span class="o">=</span> <span class="s2">&quot;OX005&quot;</span>  <span class="c1"># This is the number for the edge seal in the json file</span>
-<span class="n">enc</span> <span class="o">=</span> <span class="s2">&quot;OX003&quot;</span>  <span class="c1"># This is the number for the encapsulant in the json file</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">es</span> <span class="o">=</span> <span class="s2">"OX005"</span>  <span class="c1"># This is the number for the edge seal in the json file</span>
+<span class="n">enc</span> <span class="o">=</span> <span class="s2">"OX003"</span>  <span class="c1"># This is the number for the encapsulant in the json file</span>
 <span class="n">esw</span> <span class="o">=</span> <span class="mf">1.5</span>  <span class="c1"># This is the edge seal width in [cm]</span>
 <span class="n">encw</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># This is the encapsulant width in [cm]</span>
 <span class="n">sn</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># This is the number of edge seal nodes to use</span>
 <span class="n">en</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># This is the number of encapsulant nodes to use</span>
-<span class="n">pressure</span> <span class="o">=</span> <span class="mf">0.2109</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.0065</span> <span class="o">*</span> <span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;altitude&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="mf">288.15</span><span class="p">)</span> <span class="o">**</span> <span class="mf">5.25588</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="mf">0.2109</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.0065</span> <span class="o">*</span> <span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"altitude"</span><span class="p">)</span> <span class="o">/</span> <span class="mf">288.15</span><span class="p">)</span> <span class="o">**</span> <span class="mf">5.25588</span>
 <span class="nb">print</span><span class="p">(</span>
     <span class="n">pvdeg</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">read_material</span><span class="p">(</span>
-        <span class="n">pvdeg_file</span><span class="o">=</span><span class="s2">&quot;O2permeation&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;OX003&quot;</span><span class="p">,</span> <span class="n">values_only</span><span class="o">=</span><span class="kc">True</span>
+        <span class="n">pvdeg_file</span><span class="o">=</span><span class="s2">"O2permeation"</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">"OX003"</span><span class="p">,</span> <span class="n">values_only</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">)</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span>
     <span class="n">pvdeg</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">read_material</span><span class="p">(</span>
-        <span class="n">pvdeg_file</span><span class="o">=</span><span class="s2">&quot;H2Opermeation&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;W003&quot;</span><span class="p">,</span> <span class="n">values_only</span><span class="o">=</span><span class="kc">True</span>
+        <span class="n">pvdeg_file</span><span class="o">=</span><span class="s2">"H2Opermeation"</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">"W003"</span><span class="p">,</span> <span class="n">values_only</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;alias&#39;: &#39;EVA-1&#39;, &#39;Fickian&#39;: True, &#39;Ead&#39;: 29.43112031, &#39;Do&#39;: 0.129061678, &#39;Eas&#39;: 16.6314948252219, &#39;So&#39;: 0.136034525059804, &#39;Eap&#39;: 49.1083457348515, &#39;Po&#39;: 528718258.338532}
-{&#39;name&#39;: &#39;Coveme&#39;, &#39;alias&#39;: &#39;Stabilized PET&#39;, &#39;contributor&#39;: &#39;Michael Kempe&#39;, &#39;source&#39;: &#39;unpublished measurements&#39;, &#39;Fickian&#39;: True, &#39;Ead&#39;: 47.5191721120378, &#39;Do&#39;: 1.31884541208636, &#39;Eas&#39;: 11.3377908247284, &#39;So&#39;: 0.53540550732342, &#39;Eap&#39;: 58.8569629367662, &#39;Po&#39;: 6100851717.55522}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'alias': 'EVA-1', 'Fickian': True, 'Ead': 29.43112031, 'Do': 0.129061678, 'Eas': 16.6314948252219, 'So': 0.136034525059804, 'Eap': 49.1083457348515, 'Po': 528718258.338532}
+{'name': 'Coveme', 'alias': 'Stabilized PET', 'contributor': 'Michael Kempe', 'source': 'unpublished measurements', 'Fickian': True, 'Ead': 47.5191721120378, 'Do': 1.31884541208636, 'Eas': 11.3377908247284, 'So': 0.53540550732342, 'Eap': 58.8569629367662, 'Po': 6100851717.55522}
 </pre></div>
 </div>
 </div>
@@ -786,11 +786,11 @@ The encapsulant is Unknown .
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This sets up an a variable with the output folder information.</span>
 <span class="n">output_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())),</span> <span class="s2">&quot;TEMP&quot;</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())),</span> <span class="s2">"TEMP"</span><span class="p">,</span> <span class="s2">"results"</span>
 <span class="p">)</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_folder</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created directory: </span><span class="si">{</span><span class="n">output_folder</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Created directory: </span><span class="si">{</span><span class="n">output_folder</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 </pre></div>
@@ -818,13 +818,13 @@ The encapsulant is Unknown .
             <span class="mi">2</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Time [year]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Oxygen Concentration [g/cm³]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Distance From Edge [cm]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;plain&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Time [year]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Oxygen Concentration [g/cm³]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Distance From Edge [cm]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"plain"</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;Edge_Seal_O2_ingress.png&quot;</span><span class="p">),</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">"Edge_Seal_O2_ingress.png"</span><span class="p">),</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span>
 <span class="p">)</span>  <span class="c1"># Creates an image file of the standoff plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -840,15 +840,15 @@ The encapsulant is Unknown .
 <p>This cell contains a number of pre-scripted commands for exporting and saving data. The code to save plots is located after the plot creation. First check that the output folder exists.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;O2permeation.json&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"O2permeation.json"</span><span class="p">)</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<span class="n">material_list</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">material_list</span> <span class="o">=</span> <span class="s2">""</span>
 <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-    <span class="k">if</span> <span class="s2">&quot;name&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="n">material_list</span> <span class="o">=</span> <span class="n">material_list</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="s2">"name"</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">material_list</span> <span class="o">=</span> <span class="n">material_list</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
 <span class="n">material_list</span> <span class="o">=</span> <span class="n">material_list</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">material_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">material_list</span><span class="p">)</span>
 </pre></div>
@@ -873,24 +873,24 @@ OX013=polyolefin elastomer (POE)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your results will be stored in </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">output_folder</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The folder must already exist or the file will not be created&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Your results will be stored in </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">output_folder</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The folder must already exist or the file will not be created"</span><span class="p">)</span>
 
 <span class="c1"># Writes the meterological data to an *.csv file.</span>
 <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
     <span class="n">data_df</span><span class="o">=</span><span class="n">weather_df</span><span class="p">,</span>
     <span class="n">metadata</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
-    <span class="n">savefile</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;WeatherFile.csv&quot;</span><span class="p">),</span>
+    <span class="n">savefile</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">"WeatherFile.csv"</span><span class="p">),</span>
 <span class="p">)</span>
 
 <span class="c1"># Writes a file with the edge seal oxygen profile calculations.</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">oxygen_profile</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;ES_Oxygen_profile.csv&quot;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">"ES_Oxygen_profile.csv"</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1"># Writes a file with temperature data used in the model calculations.</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;ES_Temperature_profile.csv&quot;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">"ES_Temperature_profile.csv"</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>

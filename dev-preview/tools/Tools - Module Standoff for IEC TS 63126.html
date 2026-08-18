@@ -622,7 +622,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies</span>
-<span class="c1"># and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
+<span class="c1"># and prevent "ModuleNotFoundError" in later cells:</span>
 <span class="c1">#!pip install pvdeg</span>
 </pre></div>
 </div>
@@ -649,11 +649,11 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas version &quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dask version&quot;</span><span class="p">,</span> <span class="n">dask</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Working on a "</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Python version "</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pandas version "</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"pvdeg version "</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"dask version"</span><span class="p">,</span> <span class="n">dask</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -671,8 +671,8 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get data from a supplied data file (Do not use the next box of code if using your own file)</span>
-<span class="n">weather_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;psm3_demo.csv&quot;</span><span class="p">)</span>
-<span class="n">WEATHER_df</span><span class="p">,</span> <span class="n">META</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">weather_file</span><span class="p">,</span> <span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+<span class="n">weather_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"psm3_demo.csv"</span><span class="p">)</span>
+<span class="n">WEATHER_df</span><span class="p">,</span> <span class="n">META</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">weather_file</span><span class="p">,</span> <span class="s2">"csv"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">META</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -728,30 +728,30 @@
     <span class="n">weather_df</span><span class="o">=</span><span class="n">WEATHER_df</span><span class="p">,</span>
     <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">,</span>
     <span class="n">T98</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span>
-    <span class="n">tilt</span><span class="o">=</span><span class="n">META</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span>
+    <span class="n">tilt</span><span class="o">=</span><span class="n">META</span><span class="p">[</span><span class="s2">"latitude"</span><span class="p">],</span>
     <span class="n">azimuth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
-    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
-    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
-    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">"isotropic"</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">"sapm"</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">"insulated_back_glass_polymer"</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">"open_rack_glass_polymer"</span><span class="p">,</span>
     <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
     <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First calculation standoff = &quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">standoff_1</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot; cm.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"First calculation standoff = "</span><span class="p">,</span> <span class="s2">"</span><span class="si">%.1f</span><span class="s2">"</span> <span class="o">%</span> <span class="n">standoff_1</span><span class="p">[</span><span class="s2">"x"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">" cm."</span><span class="p">)</span>
 <span class="n">standoff_2</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">(</span>
     <span class="n">weather_df</span><span class="o">=</span><span class="n">WEATHER_df</span><span class="p">,</span>
     <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">,</span>
     <span class="n">T98</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
-    <span class="n">tilt</span><span class="o">=</span><span class="n">META</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span>
+    <span class="n">tilt</span><span class="o">=</span><span class="n">META</span><span class="p">[</span><span class="s2">"latitude"</span><span class="p">],</span>
     <span class="n">azimuth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
-    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
-    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
-    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">"isotropic"</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">"sapm"</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">"insulated_back_glass_polymer"</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">"open_rack_glass_polymer"</span><span class="p">,</span>
     <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
     <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Second calculation standoff = &quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">standoff_2</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot; cm.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Second calculation standoff = "</span><span class="p">,</span> <span class="s2">"</span><span class="si">%.1f</span><span class="s2">"</span> <span class="o">%</span> <span class="n">standoff_2</span><span class="p">[</span><span class="s2">"x"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">" cm."</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">interpret_standoff</span><span class="p">(</span><span class="n">standoff_1</span><span class="o">=</span><span class="n">standoff_1</span><span class="p">,</span> <span class="n">standoff_2</span><span class="o">=</span><span class="n">standoff_2</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -773,30 +773,30 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the weather file</span>
-<span class="n">weather_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;xeff_demo.csv&quot;</span><span class="p">)</span>
-<span class="n">xeff_weather</span><span class="p">,</span> <span class="n">xeff_meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">weather_file</span><span class="p">,</span> <span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+<span class="n">weather_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"xeff_demo.csv"</span><span class="p">)</span>
+<span class="n">xeff_weather</span><span class="p">,</span> <span class="n">xeff_meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">weather_file</span><span class="p">,</span> <span class="s2">"csv"</span><span class="p">)</span>
 <span class="c1"># Pull measured temperature and calculate theoretical insulated back module temperature and open rack module temperature</span>
 <span class="n">T_0</span><span class="p">,</span> <span class="n">T_inf</span><span class="p">,</span> <span class="n">xeff_poa</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">eff_gap_parameters</span><span class="p">(</span>
     <span class="n">weather_df</span><span class="o">=</span><span class="n">xeff_weather</span><span class="p">,</span>
     <span class="n">meta</span><span class="o">=</span><span class="n">xeff_meta</span><span class="p">,</span>
-    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
-    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
-    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
-    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">"isotropic"</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">"sapm"</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">"insulated_back_glass_polymer"</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">"open_rack_glass_polymer"</span><span class="p">,</span>
     <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="c1"># Now calculate X_eff.</span>
 <span class="n">x_eff</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">eff_gap</span><span class="p">(</span>
     <span class="n">T_0</span><span class="p">,</span>
     <span class="n">T_inf</span><span class="p">,</span>
-    <span class="n">xeff_weather</span><span class="p">[</span><span class="s2">&quot;module_temperature&quot;</span><span class="p">],</span>
-    <span class="n">xeff_weather</span><span class="p">[</span><span class="s2">&quot;temp_air&quot;</span><span class="p">],</span>
-    <span class="n">xeff_poa</span><span class="p">[</span><span class="s2">&quot;poa_global&quot;</span><span class="p">],</span>
+    <span class="n">xeff_weather</span><span class="p">[</span><span class="s2">"module_temperature"</span><span class="p">],</span>
+    <span class="n">xeff_weather</span><span class="p">[</span><span class="s2">"temp_air"</span><span class="p">],</span>
+    <span class="n">xeff_poa</span><span class="p">[</span><span class="s2">"poa_global"</span><span class="p">],</span>
     <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
     <span class="n">poa_min</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
     <span class="n">t_amb_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The effective standoff for this system is&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">x_eff</span><span class="p">,</span> <span class="s2">&quot;cm.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The effective standoff for this system is"</span><span class="p">,</span> <span class="s2">"</span><span class="si">%.1f</span><span class="s2">"</span> <span class="o">%</span> <span class="n">x_eff</span><span class="p">,</span> <span class="s2">"cm."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -812,9 +812,9 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is the minimal function call using the common default settings to estimate T₉₈.</span>
 <span class="n">T_98</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">T98_estimate</span><span class="p">(</span>
-    <span class="n">weather_df</span><span class="o">=</span><span class="n">WEATHER_df</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">,</span> <span class="n">tilt</span><span class="o">=-</span><span class="n">META</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span> <span class="n">azimuth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_eff</span><span class="o">=</span><span class="mi">10</span>
+    <span class="n">weather_df</span><span class="o">=</span><span class="n">WEATHER_df</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">,</span> <span class="n">tilt</span><span class="o">=-</span><span class="n">META</span><span class="p">[</span><span class="s2">"latitude"</span><span class="p">],</span> <span class="n">azimuth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_eff</span><span class="o">=</span><span class="mi">10</span>
 <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The 98ᵗʰ percential temperature is estimated to be&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">T_98</span><span class="p">,</span> <span class="s2">&quot;°C.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The 98ᵗʰ percential temperature is estimated to be"</span><span class="p">,</span> <span class="s2">"</span><span class="si">%.1f</span><span class="s2">"</span> <span class="o">%</span> <span class="n">T_98</span><span class="p">,</span> <span class="s2">"°C."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -823,15 +823,15 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This code will calculate the temperature for an arbitrary x_eff distance. Either set of kwargs can be modified and use.</span>
 <span class="c1"># irradiance_kwarg ={</span>
-<span class="c1">#    &quot;axis_tilt&quot;: None,</span>
-<span class="c1">#    &quot;axis_azimuth&quot;: None,</span>
-<span class="c1">#    &quot;x_eff&quot;: 10,</span>
-<span class="c1">#    &quot;module_mount&quot;: &#39;1_axis&#39;}</span>
+<span class="c1">#    "axis_tilt": None,</span>
+<span class="c1">#    "axis_azimuth": None,</span>
+<span class="c1">#    "x_eff": 10,</span>
+<span class="c1">#    "module_mount": '1_axis'}</span>
 <span class="n">irradiance_kwarg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;tilt&quot;</span><span class="p">:</span> <span class="n">META</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span>
-    <span class="s2">&quot;azimuth&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s2">&quot;x_eff&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s2">&quot;module_mount&quot;</span><span class="p">:</span> <span class="s2">&quot;fixed&quot;</span><span class="p">,</span>
+    <span class="s2">"tilt"</span><span class="p">:</span> <span class="n">META</span><span class="p">[</span><span class="s2">"latitude"</span><span class="p">],</span>
+    <span class="s2">"azimuth"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">"x_eff"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">"module_mount"</span><span class="p">:</span> <span class="s2">"fixed"</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">T_xeff</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">x_eff_temperature_estimate</span><span class="p">(</span>
@@ -839,9 +839,9 @@
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span>
-    <span class="s2">&quot;The 98ᵗʰ percential temperature is estimated to be&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">T_xeff</span><span class="p">,</span> <span class="mi">98</span><span class="p">),</span>
-    <span class="s2">&quot;°C.&quot;</span><span class="p">,</span>
+    <span class="s2">"The 98ᵗʰ percential temperature is estimated to be"</span><span class="p">,</span>
+    <span class="s2">"</span><span class="si">%.1f</span><span class="s2">"</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">T_xeff</span><span class="p">,</span> <span class="mi">98</span><span class="p">),</span>
+    <span class="s2">"°C."</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -859,10 +859,10 @@
 <span class="c1"># Set up keyword parameters for the calculation</span>
 
 <span class="n">kwarg_x</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
-    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
-    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
-    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">"isotropic"</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">"sapm"</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">"insulated_back_glass_polymer"</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">"open_rack_glass_polymer"</span><span class="p">,</span>
     <span class="n">T98</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span>
     <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
     <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
@@ -897,23 +897,23 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">standoff_series_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">&quot;Tilt&quot;</span><span class="p">:</span> <span class="n">standoff_series</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="s2">&quot;Azimuth&quot;</span><span class="p">:</span> <span class="n">standoff_series</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="s2">&quot;Xₘᵢₙ&quot;</span><span class="p">:</span> <span class="n">standoff_series</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span>
+        <span class="s2">"Tilt"</span><span class="p">:</span> <span class="n">standoff_series</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="s2">"Azimuth"</span><span class="p">:</span> <span class="n">standoff_series</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="s2">"Xₘᵢₙ"</span><span class="p">:</span> <span class="n">standoff_series</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span>
     <span class="p">}</span>
 <span class="p">)</span>
 <span class="n">x_fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-    <span class="sa">r</span><span class="s2">&quot;Plot of $\it</span><span class="si">{Xₘᵢₙ}</span><span class="s2">$ for all orientations for $\it</span><span class="si">{T₉₈}</span><span class="s2">$=&quot;</span>
-    <span class="o">+</span> <span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">kwarg_x</span><span class="p">[</span><span class="s2">&quot;T98&quot;</span><span class="p">]</span>
-    <span class="o">+</span> <span class="s2">&quot;°C.&quot;</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s2">"Plot of $\it</span><span class="si">{Xₘᵢₙ}</span><span class="s2">$ for all orientations for $\it</span><span class="si">{T₉₈}</span><span class="s2">$="</span>
+    <span class="o">+</span> <span class="s2">"</span><span class="si">%.0f</span><span class="s2">"</span> <span class="o">%</span> <span class="n">kwarg_x</span><span class="p">[</span><span class="s2">"T98"</span><span class="p">]</span>
+    <span class="o">+</span> <span class="s2">"°C."</span><span class="p">,</span>
     <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
     <span class="n">y</span><span class="o">=</span><span class="mf">1.08</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">x_fig</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
-    <span class="n">standoff_series_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;Tilt&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;Azimuth&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;Xₘᵢₙ&quot;</span><span class="p">),</span>
-    <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Xₘᵢₙ&quot;</span><span class="p">,</span> <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;pad&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">},</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Spectral_r&quot;</span><span class="p">,</span>
+    <span class="n">standoff_series_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">"Tilt"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"Azimuth"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"Xₘᵢₙ"</span><span class="p">),</span>
+    <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">"label"</span><span class="p">:</span> <span class="s2">"Xₘᵢₙ"</span><span class="p">,</span> <span class="s2">"format"</span><span class="p">:</span> <span class="s2">"</span><span class="si">%.0f</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"pad"</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">},</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">"Spectral_r"</span><span class="p">,</span>
     <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span>
@@ -923,7 +923,7 @@
 <span class="n">x_ticks</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">360</span> <span class="o">/</span> <span class="p">(</span><span class="n">h_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">x_azimuth_step</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 <span class="p">]</span>
-<span class="n">x_labels</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">360</span> <span class="o">/</span> <span class="p">(</span><span class="n">h_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h_ticks</span><span class="p">)]</span>
+<span class="n">x_labels</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"</span><span class="si">%.0f</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="mi">360</span> <span class="o">/</span> <span class="p">(</span><span class="n">h_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h_ticks</span><span class="p">)]</span>
 <span class="n">x_ticks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_number</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="n">x_fig</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x_ticks</span><span class="p">)</span>
 <span class="n">x_fig</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">x_labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
@@ -931,18 +931,18 @@
 <span class="n">v_ticks</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">y_number</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mi">90</span> <span class="o">/</span> <span class="n">x_tilt_step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">y_ticks</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">90</span> <span class="o">/</span> <span class="p">(</span><span class="n">v_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">x_tilt_step</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">v_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
-<span class="n">y_labels</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">90</span> <span class="o">/</span> <span class="p">(</span><span class="n">v_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">v_ticks</span><span class="p">)]</span>
+<span class="n">y_labels</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"</span><span class="si">%.0f</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="mi">90</span> <span class="o">/</span> <span class="p">(</span><span class="n">v_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">v_ticks</span><span class="p">)]</span>
 <span class="n">y_ticks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_number</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="n">x_fig</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">y_ticks</span><span class="p">)</span>
 <span class="n">x_fig</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">y_labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="n">x_fig</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Azimuth [°]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">x_fig</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Tilt [°]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">x_fig</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\it</span><span class="si">{Xₘᵢₙ}</span><span class="s2">$ [cm]&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">x_fig</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Azimuth [°]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">x_fig</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Tilt [°]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">x_fig</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\it</span><span class="si">{Xₘᵢₙ}</span><span class="s2">$ [cm]"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">x_fig</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
 
 <span class="n">output_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())),</span> <span class="s2">&quot;TEMP&quot;</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())),</span> <span class="s2">"TEMP"</span><span class="p">,</span> <span class="s2">"results"</span>
 <span class="p">)</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_folder</span><span class="p">)</span>
@@ -950,7 +950,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;Standoff_Scan.png&quot;</span><span class="p">),</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">"Standoff_Scan.png"</span><span class="p">),</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span>
 <span class="p">)</span>  <span class="c1"># Creates an image file of the standoff plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -966,10 +966,10 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scans through all the azimuth and tilt running the 98ᵗʰ percentile temperature calculation.</span>
 <span class="c1"># Set up keyword parameters for the calculation</span>
 <span class="n">kwarg_T</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
-    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
-    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
-    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">"isotropic"</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">"sapm"</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">"insulated_back_glass_polymer"</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">"open_rack_glass_polymer"</span><span class="p">,</span>
     <span class="n">x_eff</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
     <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
     <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
@@ -1004,27 +1004,27 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This produces the plot of the data</span>
 <span class="n">T98_series_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;Tilt&quot;</span><span class="p">:</span> <span class="n">T98_series</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Azimuth&quot;</span><span class="p">:</span> <span class="n">T98_series</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;T₉₈&quot;</span><span class="p">:</span> <span class="n">T98_series</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]}</span>
+    <span class="p">{</span><span class="s2">"Tilt"</span><span class="p">:</span> <span class="n">T98_series</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">"Azimuth"</span><span class="p">:</span> <span class="n">T98_series</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">"T₉₈"</span><span class="p">:</span> <span class="n">T98_series</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]}</span>
 <span class="p">)</span>
 <span class="n">T98_fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="k">if</span> <span class="n">kwarg_T</span><span class="p">[</span><span class="s2">&quot;x_eff&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">kwarg_T</span><span class="p">[</span><span class="s2">"x_eff"</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-        <span class="sa">r</span><span class="s2">&quot;Plot of $\it</span><span class="si">{T₉₈}</span><span class="s2">$ for all orientations for an open-rack mounting.&quot;</span><span class="p">,</span>
+        <span class="sa">r</span><span class="s2">"Plot of $\it</span><span class="si">{T₉₈}</span><span class="s2">$ for all orientations for an open-rack mounting."</span><span class="p">,</span>
         <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
         <span class="n">y</span><span class="o">=</span><span class="mf">1.08</span><span class="p">,</span>
     <span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-        <span class="sa">r</span><span class="s2">&quot;Plot of $\it</span><span class="si">{T₉₈}</span><span class="s2">$ for all orientations for $X_</span><span class="si">{eff}</span><span class="s2">$=&quot;</span>
-        <span class="o">+</span> <span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">kwarg_T</span><span class="p">[</span><span class="s2">&quot;x_eff&quot;</span><span class="p">]</span>
-        <span class="o">+</span> <span class="s2">&quot; cm.&quot;</span><span class="p">,</span>
+        <span class="sa">r</span><span class="s2">"Plot of $\it</span><span class="si">{T₉₈}</span><span class="s2">$ for all orientations for $X_</span><span class="si">{eff}</span><span class="s2">$="</span>
+        <span class="o">+</span> <span class="s2">"</span><span class="si">%.0f</span><span class="s2">"</span> <span class="o">%</span> <span class="n">kwarg_T</span><span class="p">[</span><span class="s2">"x_eff"</span><span class="p">]</span>
+        <span class="o">+</span> <span class="s2">" cm."</span><span class="p">,</span>
         <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
         <span class="n">y</span><span class="o">=</span><span class="mf">1.08</span><span class="p">,</span>
     <span class="p">)</span>
 <span class="n">T98_fig</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
-    <span class="n">T98_series_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;Tilt&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;Azimuth&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;T₉₈&quot;</span><span class="p">),</span>
-    <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Xₘᵢₙ&quot;</span><span class="p">,</span> <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;pad&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">},</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Spectral_r&quot;</span><span class="p">,</span>
+    <span class="n">T98_series_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">"Tilt"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"Azimuth"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"T₉₈"</span><span class="p">),</span>
+    <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">"label"</span><span class="p">:</span> <span class="s2">"Xₘᵢₙ"</span><span class="p">,</span> <span class="s2">"format"</span><span class="p">:</span> <span class="s2">"</span><span class="si">%.0f</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"pad"</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">},</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">"Spectral_r"</span><span class="p">,</span>
     <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span>
@@ -1034,7 +1034,7 @@
 <span class="n">x_ticks</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">360</span> <span class="o">/</span> <span class="p">(</span><span class="n">h_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">T_azimuth_step</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 <span class="p">]</span>
-<span class="n">x_labels</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">360</span> <span class="o">/</span> <span class="p">(</span><span class="n">h_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h_ticks</span><span class="p">)]</span>
+<span class="n">x_labels</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"</span><span class="si">%.0f</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="mi">360</span> <span class="o">/</span> <span class="p">(</span><span class="n">h_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h_ticks</span><span class="p">)]</span>
 <span class="n">x_ticks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_number</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="n">T98_fig</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x_ticks</span><span class="p">)</span>
 <span class="n">T98_fig</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">x_labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
@@ -1042,18 +1042,18 @@
 <span class="n">v_ticks</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">y_number</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mi">90</span> <span class="o">/</span> <span class="n">T_tilt_step</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">y_ticks</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">90</span> <span class="o">/</span> <span class="p">(</span><span class="n">v_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">T_tilt_step</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">v_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
-<span class="n">y_labels</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;</span><span class="si">%.0f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">90</span> <span class="o">/</span> <span class="p">(</span><span class="n">v_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">v_ticks</span><span class="p">)]</span>
+<span class="n">y_labels</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"</span><span class="si">%.0f</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="mi">90</span> <span class="o">/</span> <span class="p">(</span><span class="n">v_ticks</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">v_ticks</span><span class="p">)]</span>
 <span class="n">y_ticks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_number</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="n">T98_fig</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">y_ticks</span><span class="p">)</span>
 <span class="n">T98_fig</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">y_labels</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="n">T98_fig</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Azimuth [°]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">T98_fig</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Tilt [°]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">T98_fig</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\it</span><span class="si">{T₉₈}</span><span class="s2">$ [°C]&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">T98_fig</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Azimuth [°]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">T98_fig</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Tilt [°]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">T98_fig</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\it</span><span class="si">{T₉₈}</span><span class="s2">$ [°C]"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">T98_fig</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;T98_Scan.png&quot;</span><span class="p">),</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">"T98_Scan.png"</span><span class="p">),</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span>
 <span class="p">)</span>  <span class="c1"># Creates an image file of the standoff plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">T98_fig</span><span class="p">)</span>
 </pre></div>
@@ -1069,7 +1069,7 @@ For more in-depth instructions on doing this, look at the tutorial “04_scenari
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">GeospatialScenario</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;standoff geospatial&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"standoff geospatial"</span><span class="p">,</span>
     <span class="n">geospatial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
@@ -1081,7 +1081,7 @@ Specifically all are from the NSRDB.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">addLocation</span><span class="p">(</span>
-    <span class="n">state</span><span class="o">=</span><span class="s2">&quot;Colorado&quot;</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="s2">&quot;Summit&quot;</span>
+    <span class="n">state</span><span class="o">=</span><span class="s2">"Colorado"</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="s2">"Summit"</span>
 <span class="p">)</span>  <span class="c1"># Identifies a subset of locations from the database to run the computations. Specifically all are from the NSRDB.</span>
 </pre></div>
 </div>
@@ -1092,7 +1092,7 @@ Here the 98th percential temperature is defined as 70C, but any arbitrary value 
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span>
-    <span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span> <span class="n">func_params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;T98&quot;</span><span class="p">:</span> <span class="mi">70</span><span class="p">}</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span> <span class="n">func_params</span><span class="o">=</span><span class="p">{</span><span class="s2">"T98"</span><span class="p">:</span> <span class="mi">70</span><span class="p">}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1109,14 +1109,14 @@ Here the 98th percential temperature is defined as 70C, but any arbitrary value 
 <p>Step #5: Create a plot of the standoff calculation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">plot_world</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">plot_world</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">plot_world</span><span class="p">(</span><span class="s2">&quot;T98_inf&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geospatial_standoff_scenario</span><span class="o">.</span><span class="n">plot_world</span><span class="p">(</span><span class="s2">"T98_inf"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1127,21 +1127,21 @@ Here the 98th percential temperature is defined as 70C, but any arbitrary value 
 <p>This cell contains a number of pre-scripted commands for exporting and saving data. The code to save plots is located after the plot creation and is blocked by default. First check that the output folder exists, then unblock the code for data you would like to save.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your results will be stored in </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">output_folder</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The folder must already exist or the file will not be created&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Your results will be stored in </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">output_folder</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The folder must already exist or the file will not be created"</span><span class="p">)</span>
 
 <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
     <span class="n">data_df</span><span class="o">=</span><span class="n">WEATHER_df</span><span class="p">,</span>
     <span class="n">metadata</span><span class="o">=</span><span class="n">META</span><span class="p">,</span>
-    <span class="n">savefile</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;WeatherFile.csv&quot;</span><span class="p">),</span>
+    <span class="n">savefile</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">"WeatherFile.csv"</span><span class="p">),</span>
 <span class="p">)</span>  <span class="c1"># Writes the meterological data to an *.csv file.</span>
 
 <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">standoff_series_df</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;Standoff_Scan.csv&quot;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">"Standoff_Scan.csv"</span><span class="p">)</span>
 <span class="p">)</span>  <span class="c1"># Writes a file with the Tilt and Azimuth scan calculations of standoff.</span>
 
 <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">T98_series_df</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">&quot;T98_Scan.csv&quot;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_folder</span><span class="p">,</span> <span class="s2">"T98_Scan.csv"</span><span class="p">)</span>
 <span class="p">)</span>  <span class="c1"># Writes a file with the Tilt and Azimuth scan calculations of T98.</span>
 </pre></div>
 </div>

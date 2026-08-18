@@ -608,10 +608,10 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas version &quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Working on a "</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Python version "</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pandas version "</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"pvdeg version "</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -629,8 +629,8 @@ pvdeg version  0.7.2.dev4+g321beb370
 <h1>Single location example<a class="headerlink" href="#single-location-example" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;psm3_demo.csv&quot;</span><span class="p">)</span>
-<span class="n">WEATHER</span><span class="p">,</span> <span class="n">META</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">weather_file</span><span class="p">,</span> <span class="s2">&quot;psm&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"psm3_demo.csv"</span><span class="p">)</span>
+<span class="n">WEATHER</span><span class="p">,</span> <span class="n">META</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">weather_file</span><span class="p">,</span> <span class="s2">"psm"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -638,15 +638,15 @@ pvdeg version  0.7.2.dev4+g321beb370
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;tau_0&quot;</span><span class="p">:</span> <span class="mi">115</span><span class="p">,</span>  <span class="c1"># us, carrier lifetime in non-degraded states, e.g. LETID/LID states A or C</span>
-    <span class="s2">&quot;tau_deg&quot;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span>  <span class="c1"># us, carrier lifetime in fully-degraded state, e.g. LETID/LID state B</span>
-    <span class="s2">&quot;wafer_thickness&quot;</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span>  <span class="c1"># um</span>
-    <span class="s2">&quot;s_rear&quot;</span><span class="p">:</span> <span class="mi">46</span><span class="p">,</span>  <span class="c1"># cm/s</span>
-    <span class="s2">&quot;cell_area&quot;</span><span class="p">:</span> <span class="mi">243</span><span class="p">,</span>  <span class="c1"># cm^2</span>
-    <span class="s2">&quot;na_0&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">&quot;nb_0&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;nc_0&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;mechanism_params&quot;</span><span class="p">:</span> <span class="s2">&quot;D037&quot;</span><span class="p">,</span>
+    <span class="s2">"tau_0"</span><span class="p">:</span> <span class="mi">115</span><span class="p">,</span>  <span class="c1"># us, carrier lifetime in non-degraded states, e.g. LETID/LID states A or C</span>
+    <span class="s2">"tau_deg"</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span>  <span class="c1"># us, carrier lifetime in fully-degraded state, e.g. LETID/LID state B</span>
+    <span class="s2">"wafer_thickness"</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span>  <span class="c1"># um</span>
+    <span class="s2">"s_rear"</span><span class="p">:</span> <span class="mi">46</span><span class="p">,</span>  <span class="c1"># cm/s</span>
+    <span class="s2">"cell_area"</span><span class="p">:</span> <span class="mi">243</span><span class="p">,</span>  <span class="c1"># cm^2</span>
+    <span class="s2">"na_0"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"nb_0"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"nc_0"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"mechanism_params"</span><span class="p">:</span> <span class="s2">"D037"</span><span class="p">,</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -887,36 +887,36 @@ pvdeg version  0.7.2.dev4+g321beb370
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">local</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;manager&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;n_workers&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;threads_per_worker&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>  <span class="c1"># Number of CPUs</span>
+    <span class="s2">"manager"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"n_workers"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"threads_per_worker"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>  <span class="c1"># Number of CPUs</span>
 <span class="p">}</span>
 
 <span class="c1"># kestrel = {</span>
-<span class="c1">#     &quot;manager&quot;: &quot;slurm&quot;,</span>
-<span class="c1">#     &quot;n_jobs&quot;: 1,  # Number of nodes used for parallel processing</span>
-<span class="c1">#     &quot;cores&quot;: 104,</span>
-<span class="c1">#     &quot;memory&quot;: &quot;230GB&quot;,</span>
-<span class="c1">#     &quot;account&quot;: &quot;pvdeg&quot;,</span>
-<span class="c1">#     &quot;queue&quot;: &quot;debug&quot;,</span>
-<span class="c1">#     &quot;walltime&quot;: &quot;1:00:00&quot;,</span>
-<span class="c1">#     &quot;processes&quot;: 104,</span>
-<span class="c1">#     &quot;job_extra_directives&quot;: [&quot;-o ./logs/slurm-%j.out&quot;],</span>
+<span class="c1">#     "manager": "slurm",</span>
+<span class="c1">#     "n_jobs": 1,  # Number of nodes used for parallel processing</span>
+<span class="c1">#     "cores": 104,</span>
+<span class="c1">#     "memory": "230GB",</span>
+<span class="c1">#     "account": "pvdeg",</span>
+<span class="c1">#     "queue": "debug",</span>
+<span class="c1">#     "walltime": "1:00:00",</span>
+<span class="c1">#     "processes": 104,</span>
+<span class="c1">#     "job_extra_directives": ["-o ./logs/slurm-%j.out"],</span>
 <span class="c1"># }</span>
 
 <span class="n">kestrel</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;manager&quot;</span><span class="p">:</span> <span class="s2">&quot;slurm&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;n_jobs&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1"># Number of nodes used for parallel processing</span>
-    <span class="s2">&quot;cores&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">&quot;memory&quot;</span><span class="p">:</span> <span class="s2">&quot;230GB&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;account&quot;</span><span class="p">:</span> <span class="s2">&quot;pvdeg&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;queue&quot;</span><span class="p">:</span> <span class="s2">&quot;debug&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;walltime&quot;</span><span class="p">:</span> <span class="s2">&quot;1:00:00&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;interface&quot;</span><span class="p">:</span> <span class="s2">&quot;hsn0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;processes&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># workers per node; 104 single-thread procs overwhelm startup</span>
-    <span class="s2">&quot;local_directory&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;/scratch/</span><span class="si">{</span><span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">,</span>  <span class="c1"># node-local scratch for fast worker startup</span>
-    <span class="s2">&quot;death_timeout&quot;</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span>  <span class="c1"># secs a worker waits to reach the scheduler before exiting</span>
-    <span class="s2">&quot;job_extra_directives&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;-o ./logs/slurm-%j.out&quot;</span><span class="p">],</span>
+    <span class="s2">"manager"</span><span class="p">:</span> <span class="s2">"slurm"</span><span class="p">,</span>
+    <span class="s2">"n_jobs"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1"># Number of nodes used for parallel processing</span>
+    <span class="s2">"cores"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"memory"</span><span class="p">:</span> <span class="s2">"230GB"</span><span class="p">,</span>
+    <span class="s2">"account"</span><span class="p">:</span> <span class="s2">"pvdeg"</span><span class="p">,</span>
+    <span class="s2">"queue"</span><span class="p">:</span> <span class="s2">"debug"</span><span class="p">,</span>
+    <span class="s2">"walltime"</span><span class="p">:</span> <span class="s2">"1:00:00"</span><span class="p">,</span>
+    <span class="s2">"interface"</span><span class="p">:</span> <span class="s2">"hsn0"</span><span class="p">,</span>
+    <span class="s2">"processes"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># workers per node; 104 single-thread procs overwhelm startup</span>
+    <span class="s2">"local_directory"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"/scratch/</span><span class="si">{</span><span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span><span class="si">}</span><span class="s2">/"</span><span class="p">,</span>  <span class="c1"># node-local scratch for fast worker startup</span>
+    <span class="s2">"death_timeout"</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span>  <span class="c1"># secs a worker waits to reach the scheduler before exiting</span>
+    <span class="s2">"job_extra_directives"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"-o ./logs/slurm-%j.out"</span><span class="p">],</span>
 <span class="p">}</span>
 
 <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">start_dask</span><span class="p">(</span><span class="n">hpc</span><span class="o">=</span><span class="n">kestrel</span><span class="p">)</span>
@@ -1045,37 +1045,37 @@ pvdeg version  0.7.2.dev4+g321beb370
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get weather data</span>
-<span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;NSRDB&quot;</span>
+<span class="n">weather_db</span> <span class="o">=</span> <span class="s2">"NSRDB"</span>
 
 <span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="s2">&quot;Americas&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="mi">2022</span><span class="p">,</span>
-    <span class="s2">&quot;NREL_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;air_temperature&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dhi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ghi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dni&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;relative_humidity&quot;</span><span class="p">,</span>
+    <span class="s2">"satellite"</span><span class="p">:</span> <span class="s2">"Americas"</span><span class="p">,</span>
+    <span class="s2">"names"</span><span class="p">:</span> <span class="mi">2022</span><span class="p">,</span>
+    <span class="s2">"NREL_HPC"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"air_temperature"</span><span class="p">,</span>
+        <span class="s2">"wind_speed"</span><span class="p">,</span>
+        <span class="s2">"dhi"</span><span class="p">,</span>
+        <span class="s2">"ghi"</span><span class="p">,</span>
+        <span class="s2">"dni"</span><span class="p">,</span>
+        <span class="s2">"relative_humidity"</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">}</span>
 
 <span class="n">weather_ds</span><span class="p">,</span> <span class="n">meta_df</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">weather_db</span><span class="p">,</span> <span class="n">geospatial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">weather_arg</span><span class="p">)</span>
 
 <span class="c1"># Define geographical region</span>
-<span class="n">meta_SW</span> <span class="o">=</span> <span class="n">meta_df</span><span class="p">[</span><span class="n">meta_df</span><span class="p">[</span><span class="s2">&quot;State&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;Colorado&quot;</span><span class="p">,</span> <span class="s2">&quot;New Mexico&quot;</span><span class="p">,</span> <span class="s2">&quot;Utah&quot;</span><span class="p">,</span> <span class="s2">&quot;Arizona&quot;</span><span class="p">])]</span>
+<span class="n">meta_SW</span> <span class="o">=</span> <span class="n">meta_df</span><span class="p">[</span><span class="n">meta_df</span><span class="p">[</span><span class="s2">"State"</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">"Colorado"</span><span class="p">,</span> <span class="s2">"New Mexico"</span><span class="p">,</span> <span class="s2">"Utah"</span><span class="p">,</span> <span class="s2">"Arizona"</span><span class="p">])]</span>
 <span class="n">meta_SW_sub</span><span class="p">,</span> <span class="n">gids_SW_sub</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">gid_downsampling</span><span class="p">(</span><span class="n">meta_SW</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 
 <span class="c1"># Chunk along gid so geospatial.analysis (weather_ds.map_blocks) emits one task per</span>
 <span class="c1"># location instead of a single serial block. time stays one chunk (-1) because each</span>
 <span class="c1"># location needs its full timeseries.</span>
-<span class="n">weather_SW_sub</span> <span class="o">=</span> <span class="n">weather_ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="n">meta_SW_sub</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">chunk</span><span class="p">({</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;gid&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="n">weather_SW_sub</span> <span class="o">=</span> <span class="n">weather_ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">gid</span><span class="o">=</span><span class="n">meta_SW_sub</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">chunk</span><span class="p">({</span><span class="s2">"time"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"gid"</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/kfs2/projects/pvdeg/mspringe/repos/PVDegradationTools/pvdeg/weather.py:642: UserWarning: The specified chunks separate the stored chunks along dimension &quot;phony_dim_1&quot; starting at index 500. This could degrade performance. Instead, consider rechunking after loading.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/kfs2/projects/pvdeg/mspringe/repos/PVDegradationTools/pvdeg/weather.py:642: UserWarning: The specified chunks separate the stored chunks along dimension "phony_dim_1" starting at index 500. This could degrade performance. Instead, consider rechunking after loading.
   ds = xr.open_dataset(
 </pre></div>
 </div>
@@ -2255,18 +2255,18 @@ Attributes:
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define desired analysis</span>
 <span class="n">geo</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">letid</span><span class="o">.</span><span class="n">calc_letid_outdoors</span><span class="p">,</span>
-    <span class="s2">&quot;weather_ds&quot;</span><span class="p">:</span> <span class="n">weather_SW_sub</span><span class="p">,</span>
-    <span class="s2">&quot;meta_df&quot;</span><span class="p">:</span> <span class="n">meta_SW_sub</span><span class="p">,</span>
-    <span class="s2">&quot;tau_0&quot;</span><span class="p">:</span> <span class="mi">115</span><span class="p">,</span>  <span class="c1"># us, carrier lifetime in non-degraded states, e.g. LETID/LID states A or C</span>
-    <span class="s2">&quot;tau_deg&quot;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span>  <span class="c1"># us, carrier lifetime in fully-degraded state, e.g. LETID/LID state B</span>
-    <span class="s2">&quot;wafer_thickness&quot;</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span>  <span class="c1"># um</span>
-    <span class="s2">&quot;s_rear&quot;</span><span class="p">:</span> <span class="mi">46</span><span class="p">,</span>  <span class="c1"># cm/s</span>
-    <span class="s2">&quot;cell_area&quot;</span><span class="p">:</span> <span class="mi">243</span><span class="p">,</span>  <span class="c1"># cm^2</span>
-    <span class="s2">&quot;na_0&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">&quot;nb_0&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;nc_0&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;mechanism_params&quot;</span><span class="p">:</span> <span class="s2">&quot;D037&quot;</span><span class="p">,</span>
+    <span class="s2">"func"</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">letid</span><span class="o">.</span><span class="n">calc_letid_outdoors</span><span class="p">,</span>
+    <span class="s2">"weather_ds"</span><span class="p">:</span> <span class="n">weather_SW_sub</span><span class="p">,</span>
+    <span class="s2">"meta_df"</span><span class="p">:</span> <span class="n">meta_SW_sub</span><span class="p">,</span>
+    <span class="s2">"tau_0"</span><span class="p">:</span> <span class="mi">115</span><span class="p">,</span>  <span class="c1"># us, carrier lifetime in non-degraded states, e.g. LETID/LID states A or C</span>
+    <span class="s2">"tau_deg"</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span>  <span class="c1"># us, carrier lifetime in fully-degraded state, e.g. LETID/LID state B</span>
+    <span class="s2">"wafer_thickness"</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span>  <span class="c1"># um</span>
+    <span class="s2">"s_rear"</span><span class="p">:</span> <span class="mi">46</span><span class="p">,</span>  <span class="c1"># cm/s</span>
+    <span class="s2">"cell_area"</span><span class="p">:</span> <span class="mi">243</span><span class="p">,</span>  <span class="c1"># cm^2</span>
+    <span class="s2">"na_0"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"nb_0"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"nc_0"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"mechanism_params"</span><span class="p">:</span> <span class="s2">"D037"</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">letid_res</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">analysis</span><span class="p">(</span><span class="o">**</span><span class="n">geo</span><span class="p">)</span>
@@ -2281,7 +2281,7 @@ Consider loading the data with Dask directly
 See also https://docs.dask.org/en/stable/best-practices.html#load-data-with-dask for more information.
   warnings.warn(
 /kfs2/projects/pvdeg/mspringe/repos/PVDegradationTools/pvdeg/utilities.py:1567: FutureWarning: dropping variables using `drop` is deprecated; use drop_vars.
-  stacked = ds_gids.drop([&quot;gid&quot;])
+  stacked = ds_gids.drop(["gid"])
 </pre></div>
 </div>
 </div>
@@ -3357,18 +3357,18 @@ Data variables:
             <span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">15</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
                     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">plot_USA</span><span class="p">(</span>
-                        <span class="n">letid_res</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">np_t</span><span class="p">),</span>
-                        <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+                        <span class="n">letid_res</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">]</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">np_t</span><span class="p">),</span>
+                        <span class="n">cmap</span><span class="o">=</span><span class="s2">"viridis"</span><span class="p">,</span>
                         <span class="n">vmin</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
                         <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                        <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Normalized Power  - 2022-</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2"> 12:00&quot;</span><span class="p">,</span>
-                        <span class="n">cb_title</span><span class="o">=</span><span class="s2">&quot;Normalized Power&quot;</span><span class="p">,</span>
+                        <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Normalized Power  - 2022-</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2"> 12:00"</span><span class="p">,</span>
+                        <span class="n">cb_title</span><span class="o">=</span><span class="s2">"Normalized Power"</span><span class="p">,</span>
                     <span class="p">)</span>
-                    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../../TEMP/RH_animation_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">"../../TEMP/RH_animation_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 
 <span class="c1"># import imageio</span>
-<span class="c1"># ims = [imageio.imread(f&#39;../../TEMP/RH_animation_{n}.png&#39;) for n in range(1, 13)]</span>
-<span class="c1"># imageio.mimwrite(&#39;../../TEMP/RH_animation.gif&#39;, ims, format=&#39;GIF&#39;, duration=1000, loop=10)</span>
+<span class="c1"># ims = [imageio.imread(f'../../TEMP/RH_animation_{n}.png') for n in range(1, 13)]</span>
+<span class="c1"># imageio.mimwrite('../../TEMP/RH_animation.gif', ims, format='GIF', duration=1000, loop=10)</span>
 </pre></div>
 </div>
 </div>
@@ -3414,49 +3414,49 @@ Data variables:
                     <span class="n">subarctic</span> <span class="o">=</span> <span class="n">letid_res</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
                         <span class="n">time</span><span class="o">=</span><span class="n">np_t</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="mf">39.01</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=-</span><span class="mf">107.1</span>
                     <span class="p">)</span>
-                    <span class="n">subarctics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subarctic</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">])</span>
+                    <span class="n">subarctics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subarctic</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">])</span>
 
                     <span class="n">coldsemiarid</span> <span class="o">=</span> <span class="n">letid_res</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
                         <span class="n">time</span><span class="o">=</span><span class="n">np_t</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="mf">37.57</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=-</span><span class="mf">102.3</span>
                     <span class="p">)</span>
-                    <span class="n">coldsemiarids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coldsemiarid</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">])</span>
+                    <span class="n">coldsemiarids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coldsemiarid</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">])</span>
 
                     <span class="n">hotdesert</span> <span class="o">=</span> <span class="n">letid_res</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
                         <span class="n">time</span><span class="o">=</span><span class="n">np_t</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="mf">32.77</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=-</span><span class="mf">114.3</span>
                     <span class="p">)</span>
-                    <span class="n">hotdeserts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hotdesert</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">])</span>
+                    <span class="n">hotdeserts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hotdesert</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">])</span>
 
                     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
                     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
                         <span class="n">dates</span><span class="p">,</span>
                         <span class="n">subarctics</span><span class="p">,</span>
-                        <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
-                        <span class="n">c</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span>
-                        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Central CO - Subarctic Dfc&quot;</span><span class="p">,</span>
+                        <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span>
+                        <span class="n">c</span><span class="o">=</span><span class="s2">"C0"</span><span class="p">,</span>
+                        <span class="n">label</span><span class="o">=</span><span class="s2">"Central CO - Subarctic Dfc"</span><span class="p">,</span>
                     <span class="p">)</span>
                     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
                         <span class="n">dates</span><span class="p">,</span>
                         <span class="n">coldsemiarids</span><span class="p">,</span>
-                        <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
-                        <span class="n">c</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span>
-                        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Southeast CO - Cold Semi-Arid BSk&quot;</span><span class="p">,</span>
+                        <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span>
+                        <span class="n">c</span><span class="o">=</span><span class="s2">"C1"</span><span class="p">,</span>
+                        <span class="n">label</span><span class="o">=</span><span class="s2">"Southeast CO - Cold Semi-Arid BSk"</span><span class="p">,</span>
                     <span class="p">)</span>
                     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
                         <span class="n">dates</span><span class="p">,</span>
                         <span class="n">hotdeserts</span><span class="p">,</span>
-                        <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
-                        <span class="n">c</span><span class="o">=</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span>
-                        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Southwest AZ - Hot Desert BWh&quot;</span><span class="p">,</span>
+                        <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span>
+                        <span class="n">c</span><span class="o">=</span><span class="s2">"C2"</span><span class="p">,</span>
+                        <span class="n">label</span><span class="o">=</span><span class="s2">"Southwest AZ - Hot Desert BWh"</span><span class="p">,</span>
                     <span class="p">)</span>
 
-                    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">"upper right"</span><span class="p">)</span>
 
                     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
 
                     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mf">0.945</span><span class="p">,</span> <span class="mf">1.005</span><span class="p">])</span>
-                    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Normalized Power&quot;</span><span class="p">)</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Normalized Power"</span><span class="p">)</span>
 
-                    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../../TEMP/LETID_plot_animation_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+                    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">"../../TEMP/LETID_plot_animation_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3479,9 +3479,9 @@ Data variables:
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import imageio</span>
 
-<span class="c1"># ims = [imageio.imread(f&quot;../../TEMP/LETID_plot_animation_{n}.png&quot;) for n in range(1, 13)]</span>
+<span class="c1"># ims = [imageio.imread(f"../../TEMP/LETID_plot_animation_{n}.png") for n in range(1, 13)]</span>
 <span class="c1"># imageio.mimwrite(</span>
-<span class="c1">#     &quot;../../TEMP/LETID_plot_animation.gif&quot;, ims, format=&quot;GIF&quot;, duration=1000, loop=10</span>
+<span class="c1">#     "../../TEMP/LETID_plot_animation.gif", ims, format="GIF", duration=1000, loop=10</span>
 <span class="c1"># )</span>
 </pre></div>
 </div>

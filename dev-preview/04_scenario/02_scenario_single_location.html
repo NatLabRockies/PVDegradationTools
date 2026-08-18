@@ -607,7 +607,7 @@
 <p>A simple object orented workflow walkthrough using pvdeg.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:</span>
 <span class="c1"># !pip install pvdeg</span>
 </pre></div>
 </div>
@@ -627,9 +627,9 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Working on a "</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Python version "</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"pvdeg version "</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -651,7 +651,7 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple_scenario</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">Scenario</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Point Minimum Standoff&quot;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;user@mail.com&quot;</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;DEMO_KEY&quot;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"Point Minimum Standoff"</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">"user@mail.com"</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="s2">"DEMO_KEY"</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -671,7 +671,7 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Column &quot;relative_humidity&quot; not found in DataFrame. Calculating...
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Column "relative_humidity" not found in DataFrame. Calculating...
                                                                      
 </pre></div>
 </div>
@@ -945,7 +945,7 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 <p>When adding a job that contains a function requiring other arguments such as <code class="docutils literal notranslate"><span class="pre">solder_fatigue</span></code> which requires a value for <code class="docutils literal notranslate"><span class="pre">wind_factor</span></code>, we will need to provide it. The most straightforeward way to do this is using a kwargs dictionary and passing it to the function. We do not unpack the dictionary before passing it. This is done inside of the scenario at pipeline runtime (when <code class="docutils literal notranslate"><span class="pre">runPipeline</span></code> is called).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;wind_factor&quot;</span><span class="p">:</span> <span class="mf">0.33</span><span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"wind_factor"</span><span class="p">:</span> <span class="mf">0.33</span><span class="p">}</span>
 
 <span class="n">simple_scenario</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">fatigue</span><span class="o">.</span><span class="n">solder_fatigue</span><span class="p">,</span> <span class="n">func_kwarg</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div>
@@ -961,15 +961,15 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 <p>Say local weather data is available or other, if we want to use this rather than the PSM3 data at a latitude and longitude we can also provide the weather and metadata in the function arguments. This is probably the best if avoided but follows the same syntax as providing other function arguments. See the example below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PSM_FILE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;psm3_demo.csv&quot;</span><span class="p">)</span>
-<span class="n">weather</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">PSM_FILE</span><span class="p">,</span> <span class="s2">&quot;psm&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PSM_FILE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"psm3_demo.csv"</span><span class="p">)</span>
+<span class="n">weather</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">PSM_FILE</span><span class="p">,</span> <span class="s2">"psm"</span><span class="p">)</span>
 
-<span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;weather_df&quot;</span><span class="p">:</span> <span class="n">weather</span><span class="p">,</span> <span class="s2">&quot;meta&quot;</span><span class="p">:</span> <span class="n">meta</span><span class="p">}</span>
+<span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"weather_df"</span><span class="p">:</span> <span class="n">weather</span><span class="p">,</span> <span class="s2">"meta"</span><span class="p">:</span> <span class="n">meta</span><span class="p">}</span>
 
 <span class="n">simple_scenario</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span> <span class="n">func_kwarg</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="c1"># FIX THIS CASE IN SCENARIO CLASS</span>
-<span class="c1"># (simple_scenario.pipeline[1][&#39;job&#39;])(**simple_scenario.pipeline[1][&#39;params&#39;])</span>
+<span class="c1"># (simple_scenario.pipeline[1]['job'])(**simple_scenario.pipeline[1]['params'])</span>
 </pre></div>
 </div>
 </div>
@@ -1018,8 +1018,8 @@ Pipeline :
 [8760 rows x 12 columns]                    NSRDB                       145809.0                      -                       -                         -                                 w/m2                                 w/m2                                 w/m2                                 c                        w/m2                        w/m2                        w/m2                                     Degree                                   c                             mbar                                         %                                         cm                                Degrees                                m/s                              N/A                          Clear                 Probably Clear                            Fog                          Water             Super-Cooled Water                          Mixed                     Opaque Ice                         Cirrus                    Overlapping                   Overshooting                         Unknown                            Dust                           Smoke                           N/A                 Missing Image                Low Irradiance              Exceeds Clearsky      Missing CLoud Properties            Rayleigh Violation                                    N/A                     3.0.6                       39.73                      -105.18                  -7.0                      1820.0
 Results : Pipeline results : 
 Pipeline has not been run
-&#39;gids : [1060499]&#39;
-&#39;test modules :&#39;
+'gids : [1060499]'
+'test modules :'
 scenario weather :                            Year  Month  Day  Hour  Minute  temp_air  \
 2019-01-01 00:30:00-05:00  2019      1    1     0      30      24.1   
 2019-01-01 01:30:00-05:00  2019      1    1     1      30      24.1   
@@ -1426,11 +1426,11 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">simple_scenario</span><span class="o">.</span><span class="n">results</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We can&#39;t see out data in here so we need to do another step&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"We can't see out data in here so we need to do another step"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># to see all available ouputs of results do</span>
 <span class="nb">print</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">&quot;this is the list of all available frames in results : </span><span class="si">{</span><span class="n">simple_scenario</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">index</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">"this is the list of all available frames in results : </span><span class="si">{</span><span class="n">simple_scenario</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">index</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
 <span class="p">)</span>
 
 <span class="c1"># loop over all results and display</span>
@@ -1448,9 +1448,9 @@ IRORP                                    IRORP
 GIOFQ              x      T98_0    T98_inf
 0  2.008636 ...
 dtype: object
-We can&#39;t see out data in here so we need to do another step
+We can't see out data in here so we need to do another step
 
-this is the list of all available frames in results : Index([&#39;OMWGH&#39;, &#39;IRORP&#39;, &#39;GIOFQ&#39;], dtype=&#39;object&#39;)
+this is the list of all available frames in results : Index(['OMWGH', 'IRORP', 'GIOFQ'], dtype='object')
 
 OMWGH
 </pre></div>

@@ -609,7 +609,7 @@
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:</span>
 <span class="c1"># !pip install pvdeg</span>
 </pre></div>
 </div>
@@ -632,11 +632,11 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas version &quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pvlib version &quot;</span><span class="p">,</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Working on a "</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Python version "</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pandas version "</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pvlib version "</span><span class="p">,</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"pvdeg version "</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -670,16 +670,16 @@ pvdeg version  0.7.1.dev27+gde5391d47
 <section class="tex2jax_ignore mathjax_ignore" id="defining-correlation-coefficients">
 <h1>Defining Correlation Coefficients<a class="headerlink" href="#defining-correlation-coefficients" title="Link to this heading">#</a></h1>
 <p>pvdeg.montecarlo stores correlation coefficients in a <code class="docutils literal notranslate"><span class="pre">Corr</span></code> object. To represent a given correlation coefficient follow the given syntax below, replacing the values in the brackets with your correlation coefficients</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{my_correlation_object} = Corr(&#39;{variable1}&#39;, &#39;{variable2}&#39;, {correlation coefficient})
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{my_correlation_object} = Corr('{variable1}', '{variable2}', {correlation coefficient})
 </pre></div>
 </div>
 <p>note: ordering of <code class="docutils literal notranslate"><span class="pre">variable1</span></code> and <code class="docutils literal notranslate"><span class="pre">variable2</span></code> does not matter</p>
 <p>After defining the all known correlations add them to a list which we will feed into our simulation later</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_Ea_X</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="s2">&quot;Ea&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="mf">0.0269</span><span class="p">)</span>
-<span class="n">corr_Ea_LnR0</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="s2">&quot;Ea&quot;</span><span class="p">,</span> <span class="s2">&quot;LnR0&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9995</span><span class="p">)</span>
-<span class="n">corr_X_LnR0</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;LnR0&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0400</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_Ea_X</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="s2">"Ea"</span><span class="p">,</span> <span class="s2">"X"</span><span class="p">,</span> <span class="mf">0.0269</span><span class="p">)</span>
+<span class="n">corr_Ea_LnR0</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="s2">"Ea"</span><span class="p">,</span> <span class="s2">"LnR0"</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9995</span><span class="p">)</span>
+<span class="n">corr_X_LnR0</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">montecarlo</span><span class="o">.</span><span class="n">Corr</span><span class="p">(</span><span class="s2">"X"</span><span class="p">,</span> <span class="s2">"LnR0"</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0400</span><span class="p">)</span>
 
 <span class="n">corr_coeff</span> <span class="o">=</span> <span class="p">[</span><span class="n">corr_Ea_X</span><span class="p">,</span> <span class="n">corr_Ea_LnR0</span><span class="p">,</span> <span class="n">corr_X_LnR0</span><span class="p">]</span>
 </pre></div>
@@ -705,9 +705,9 @@ pvdeg version  0.7.1.dev27+gde5391d47
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stats_dict</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;Ea&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="mf">62.08</span><span class="p">,</span> <span class="s2">&quot;stdev&quot;</span><span class="p">:</span> <span class="mf">7.3858</span><span class="p">},</span>
-    <span class="s2">&quot;LnR0&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="mf">13.7223084</span><span class="p">,</span> <span class="s2">&quot;stdev&quot;</span><span class="p">:</span> <span class="mf">2.47334772</span><span class="p">},</span>
-    <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="mf">0.0341</span><span class="p">,</span> <span class="s2">&quot;stdev&quot;</span><span class="p">:</span> <span class="mf">0.0992757</span><span class="p">},</span>
+    <span class="s2">"Ea"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"mean"</span><span class="p">:</span> <span class="mf">62.08</span><span class="p">,</span> <span class="s2">"stdev"</span><span class="p">:</span> <span class="mf">7.3858</span><span class="p">},</span>
+    <span class="s2">"LnR0"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"mean"</span><span class="p">:</span> <span class="mf">13.7223084</span><span class="p">,</span> <span class="s2">"stdev"</span><span class="p">:</span> <span class="mf">2.47334772</span><span class="p">},</span>
+    <span class="s2">"X"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"mean"</span><span class="p">:</span> <span class="mf">0.0341</span><span class="p">,</span> <span class="s2">"stdev"</span><span class="p">:</span> <span class="mf">0.0992757</span><span class="p">},</span>
 <span class="p">}</span>
 
 <span class="c1"># and number of monte carlo trials to run</span>
@@ -759,14 +759,14 @@ pvdeg version  0.7.1.dev27+gde5391d47
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mean and standard deviation match inputs</span>
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">mc_inputs</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> : mean </span><span class="si">{</span><span class="n">mc_inputs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">, stdev </span><span class="si">{</span><span class="n">mc_inputs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> : mean </span><span class="si">{</span><span class="n">mc_inputs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">, stdev </span><span class="si">{</span><span class="n">mc_inputs</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">"</span>
     <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ea_X&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">mc_inputs</span><span class="p">[</span><span class="s2">&quot;Ea&quot;</span><span class="p">],</span> <span class="n">mc_inputs</span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ea_lnR0&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">mc_inputs</span><span class="p">[</span><span class="s2">&quot;Ea&quot;</span><span class="p">],</span> <span class="n">mc_inputs</span><span class="p">[</span><span class="s2">&quot;LnR0&quot;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X_lnR0&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">mc_inputs</span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">],</span> <span class="n">mc_inputs</span><span class="p">[</span><span class="s2">&quot;LnR0&quot;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ea_X"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">mc_inputs</span><span class="p">[</span><span class="s2">"Ea"</span><span class="p">],</span> <span class="n">mc_inputs</span><span class="p">[</span><span class="s2">"X"</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ea_lnR0"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">mc_inputs</span><span class="p">[</span><span class="s2">"Ea"</span><span class="p">],</span> <span class="n">mc_inputs</span><span class="p">[</span><span class="s2">"LnR0"</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"X_lnR0"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">mc_inputs</span><span class="p">[</span><span class="s2">"X"</span><span class="p">],</span> <span class="n">mc_inputs</span><span class="p">[</span><span class="s2">"LnR0"</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -794,17 +794,17 @@ X_lnR0 -0.026
 <span class="c1"># This avoids API rate limits during testing and builds</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
-<span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/psm4_miami.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../data/meta_miami.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/psm4_miami.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"../data/meta_miami.json"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="c1"># Uncomment below to fetch fresh data with your own API key:</span>
-<span class="c1"># weather_db = &quot;PSM4&quot;</span>
+<span class="c1"># weather_db = "PSM4"</span>
 <span class="c1"># weather_id = (25.783388, -80.189029)</span>
 <span class="c1"># weather_arg = {</span>
-<span class="c1">#     &quot;api_key&quot;: &quot;YOUR_API_KEY&quot;,  # Get your key at https://developer.nrel.gov/signup/</span>
-<span class="c1">#     &quot;email&quot;: &quot;your.email@example.com&quot;,</span>
-<span class="c1">#     &quot;map_variables&quot;: True,</span>
+<span class="c1">#     "api_key": "YOUR_API_KEY",  # Get your key at https://developer.nrel.gov/signup/</span>
+<span class="c1">#     "email": "your.email@example.com",</span>
+<span class="c1">#     "map_variables": True,</span>
 <span class="c1"># }</span>
 <span class="c1"># weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)</span>
 </pre></div>
@@ -817,11 +817,11 @@ X_lnR0 -0.026
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sol_pos</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">spectral</span><span class="o">.</span><span class="n">solar_position</span><span class="p">(</span><span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span><span class="p">)</span>
 <span class="n">poa_irradiance</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">spectral</span><span class="o">.</span><span class="n">poa_irradiance</span><span class="p">(</span><span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span><span class="p">)</span>
 <span class="n">temp_mod</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">module</span><span class="p">(</span>
-    <span class="n">weather_df</span><span class="o">=</span><span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span> <span class="n">poa</span><span class="o">=</span><span class="n">poa_irradiance</span><span class="p">,</span> <span class="n">conf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span>
+    <span class="n">weather_df</span><span class="o">=</span><span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span> <span class="n">poa</span><span class="o">=</span><span class="n">poa_irradiance</span><span class="p">,</span> <span class="n">conf</span><span class="o">=</span><span class="s2">"open_rack_glass_polymer"</span>
 <span class="p">)</span>
 
 <span class="c1"># the function being used in the monte carlo simulation takes numpy arrays so we need to convert from pd.DataFrame to np.ndarray with .tonumpy()</span>
-<span class="n">poa_global</span> <span class="o">=</span> <span class="n">poa_irradiance</span><span class="p">[</span><span class="s2">&quot;poa_global&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">poa_global</span> <span class="o">=</span> <span class="n">poa_irradiance</span><span class="p">[</span><span class="s2">"poa_global"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 <span class="n">cell_temperature</span> <span class="o">=</span> <span class="n">temp_mod</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -836,7 +836,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># must already be numpy arrays</span>
-<span class="n">function_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;poa_global&quot;</span><span class="p">:</span> <span class="n">poa_global</span><span class="p">,</span> <span class="s2">&quot;module_temp&quot;</span><span class="p">:</span> <span class="n">cell_temperature</span><span class="p">}</span>
+<span class="n">function_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"poa_global"</span><span class="p">:</span> <span class="n">poa_global</span><span class="p">,</span> <span class="s2">"module_temp"</span><span class="p">:</span> <span class="n">cell_temperature</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -914,18 +914,18 @@ simulate(
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
     <span class="n">lnDeg</span><span class="p">,</span>
     <span class="n">bins</span><span class="o">=</span><span class="n">bin_edges</span><span class="p">,</span>
-    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
-    <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">,</span>
+    <span class="n">histtype</span><span class="o">=</span><span class="s2">"step"</span><span class="p">,</span>
     <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Degradation in Miami&quot;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">"Degradation in Miami"</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">percentile_2p5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;2.5th percentile&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">percentile_97p5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;purple&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;97.5th percentile&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">lnDeg</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;cyan&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">lnDeg</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;log(Degredation) [log(%/h)]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Counts (out of </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">percentile_2p5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"green"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"2.5th percentile"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">percentile_97p5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"purple"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"97.5th percentile"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">lnDeg</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">"cyan"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">lnDeg</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"median"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"log(Degredation) [log(%/h)]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Counts (out of </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>

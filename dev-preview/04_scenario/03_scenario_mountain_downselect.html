@@ -614,10 +614,10 @@
 <p>We are going to add all of the points in the American West to the scenario and downsample by a factor of 1. This will include only half of the points in the latitude axis and half in the longitude axis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dynamic_points</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">GeospatialScenario</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;dynamic-selection&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dynamic_points</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">GeospatialScenario</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"dynamic-selection"</span><span class="p">)</span>
 
 <span class="n">dynamic_points</span><span class="o">.</span><span class="n">addLocation</span><span class="p">(</span>
-    <span class="n">state</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;CO&quot;</span><span class="p">,</span> <span class="s2">&quot;UT&quot;</span><span class="p">],</span>  <span class="c1"># , &#39;NM&#39;, &#39;NV&#39;, &#39;ID&#39;, &#39;WY&#39;, &#39;AZ&#39;, &#39;CA&#39;, &#39;OR&#39;, &#39;WA&#39;],</span>
+    <span class="n">state</span><span class="o">=</span><span class="p">[</span><span class="s2">"CO"</span><span class="p">,</span> <span class="s2">"UT"</span><span class="p">],</span>  <span class="c1"># , 'NM', 'NV', 'ID', 'WY', 'AZ', 'CA', 'OR', 'WA'],</span>
     <span class="n">downsample_factor</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
@@ -670,7 +670,7 @@
 <span class="n">dynamic_points</span><span class="o">.</span><span class="n">downselect_elevation_stochastic</span><span class="p">(</span>
     <span class="c1"># kdtree=west_tree,</span>
     <span class="n">downselect_prop</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">normalization</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+    <span class="n">normalization</span><span class="o">=</span><span class="s2">"linear"</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -709,9 +709,9 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># geospatial analysis now</span>
 
 <span class="n">geo</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span>
-    <span class="s2">&quot;weather_ds&quot;</span><span class="p">:</span> <span class="n">sub_weather</span><span class="p">,</span>
-    <span class="s2">&quot;meta_df&quot;</span><span class="p">:</span> <span class="n">dynamic_points</span><span class="o">.</span><span class="n">meta_data</span><span class="p">,</span>
+    <span class="s2">"func"</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span>
+    <span class="s2">"weather_ds"</span><span class="p">:</span> <span class="n">sub_weather</span><span class="p">,</span>
+    <span class="s2">"meta_df"</span><span class="p">:</span> <span class="n">dynamic_points</span><span class="o">.</span><span class="n">meta_data</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">analysis_result</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">analysis</span><span class="p">(</span><span class="o">**</span><span class="n">geo</span><span class="p">)</span>
@@ -737,19 +737,19 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This cell demonstrates the issue with plotting sparse data directly</span>
-<span class="c1"># It will raise a TypeError because there&#39;s no numeric data to plot</span>
+<span class="c1"># It will raise a TypeError because there's no numeric data to plot</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">plot_USA</span><span class="p">(</span><span class="n">analysis_result</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">])</span>
+    <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">plot_USA</span><span class="p">(</span><span class="n">analysis_result</span><span class="p">[</span><span class="s2">"x"</span><span class="p">])</span>
 <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected error when plotting sparse data: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is why we need to use plot_sparse_analysis() instead (see next cell)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Expected error when plotting sparse data: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"This is why we need to use plot_sparse_analysis() instead (see next cell)"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">plot_sparse_analysis</span><span class="p">(</span><span class="n">analysis_result</span><span class="p">,</span> <span class="n">data_var</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">plot_sparse_analysis</span><span class="p">(</span><span class="n">analysis_result</span><span class="p">,</span> <span class="n">data_var</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"linear"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

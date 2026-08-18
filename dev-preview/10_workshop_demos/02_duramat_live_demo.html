@@ -612,10 +612,10 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas version &quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Working on a "</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Python version "</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pandas version "</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"pvdeg version "</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -646,19 +646,19 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get weather data</span>
-<span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;NSRDB&quot;</span>
+<span class="n">weather_db</span> <span class="o">=</span> <span class="s2">"NSRDB"</span>
 
 <span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="s2">&quot;Americas&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="mi">2022</span><span class="p">,</span>
-    <span class="s2">&quot;NREL_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;air_temperature&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dhi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ghi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dni&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;relative_humidity&quot;</span><span class="p">,</span>
+    <span class="s2">"satellite"</span><span class="p">:</span> <span class="s2">"Americas"</span><span class="p">,</span>
+    <span class="s2">"names"</span><span class="p">:</span> <span class="mi">2022</span><span class="p">,</span>
+    <span class="s2">"NREL_HPC"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"air_temperature"</span><span class="p">,</span>
+        <span class="s2">"wind_speed"</span><span class="p">,</span>
+        <span class="s2">"dhi"</span><span class="p">,</span>
+        <span class="s2">"ghi"</span><span class="p">,</span>
+        <span class="s2">"dni"</span><span class="p">,</span>
+        <span class="s2">"relative_humidity"</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">}</span>
 
@@ -670,10 +670,10 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ConnectionError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">18</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;NSRDB&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">weather_db</span> <span class="o">=</span> <span class="s2">"NSRDB"</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="s2">&quot;Americas&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="mi">2022</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="s2">"satellite"</span><span class="p">:</span> <span class="s2">"Americas"</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="s2">"names"</span><span class="p">:</span> <span class="mi">2022</span><span class="p">,</span>
    <span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="p">],</span>
 <span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="p">}</span>
@@ -681,22 +681,22 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 
 <span class="nn">File ~\Documents\GitHub\PVDegradationTools_NREL\pvdeg\weather.py:255,</span> in <span class="ni">get</span><span class="nt">(database, id, geospatial, find_meta, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">253</span> <span class="k">elif</span> <span class="n">geospatial</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">254</span>     <span class="k">if</span> <span class="n">database</span> <span class="o">==</span> <span class="s2">&quot;NSRDB&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">254</span>     <span class="k">if</span> <span class="n">database</span> <span class="o">==</span> <span class="s2">"NSRDB"</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">255</span>         <span class="n">nrel_kestrel_check</span><span class="p">()</span>
 <span class="g g-Whitespace">    </span><span class="mi">257</span>         <span class="n">weather_ds</span><span class="p">,</span> <span class="n">meta_df</span> <span class="o">=</span> <span class="n">get_NSRDB</span><span class="p">(</span><span class="n">geospatial</span><span class="o">=</span><span class="n">geospatial</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">258</span>         <span class="n">meta_df</span><span class="p">[</span><span class="s2">&quot;wind_height&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="g g-Whitespace">    </span><span class="mi">258</span>         <span class="n">meta_df</span><span class="p">[</span><span class="s2">"wind_height"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
 
 <span class="nn">File ~\Documents\GitHub\PVDegradationTools_NREL\pvdeg\utilities.py:1227,</span> in <span class="ni">nrel_kestrel_check</span><span class="nt">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1224</span> <span class="n">device_domain</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">host</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">4</span><span class="p">:])[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1224</span> <span class="n">device_domain</span> <span class="o">=</span> <span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">host</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="o">-</span><span class="mi">4</span><span class="p">:])[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="g g-Whitespace">   </span><span class="mi">1226</span> <span class="k">if</span> <span class="n">kestrel_hostname</span> <span class="o">!=</span> <span class="n">device_domain</span><span class="p">:</span>
 <span class="ne">-&gt; </span><span class="mi">1227</span>     <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1228</span>         <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1229</span><span class="s2">         connected to </span><span class="si">{</span><span class="n">device_domain</span><span class="si">}</span><span class="s2"> not a node of </span><span class="si">{</span><span class="n">kestrel_hostname</span><span class="si">}</span><span class="s2">&quot;)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1230</span><span class="s2">         &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1228</span>         <span class="sa">f</span><span class="s2">"""</span>
+<span class="g g-Whitespace">   </span><span class="mi">1229</span><span class="s2">         connected to </span><span class="si">{</span><span class="n">device_domain</span><span class="si">}</span><span class="s2"> not a node of </span><span class="si">{</span><span class="n">kestrel_hostname</span><span class="si">}</span><span class="s2">")</span>
+<span class="g g-Whitespace">   </span><span class="mi">1230</span><span class="s2">         """</span>
 <span class="g g-Whitespace">   </span><span class="mi">1231</span>     <span class="p">)</span>
 
 <span class="ne">ConnectionError</span>: 
-            <span class="n">connected</span> <span class="n">to</span>  <span class="ow">not</span> <span class="n">a</span> <span class="n">node</span> <span class="n">of</span> <span class="n">kestrel</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">nrel</span><span class="o">.</span><span class="n">gov</span><span class="s2">&quot;)</span>
+            <span class="n">connected</span> <span class="n">to</span>  <span class="ow">not</span> <span class="n">a</span> <span class="n">node</span> <span class="n">of</span> <span class="n">kestrel</span><span class="o">.</span><span class="n">hpc</span><span class="o">.</span><span class="n">nrel</span><span class="o">.</span><span class="n">gov</span><span class="s2">")</span>
             
 </pre></div>
 </div>
@@ -711,7 +711,7 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meta_NM</span> <span class="o">=</span> <span class="n">meta_df</span><span class="p">[</span><span class="n">meta_df</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;New Mexico&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meta_NM</span> <span class="o">=</span> <span class="n">meta_df</span><span class="p">[</span><span class="n">meta_df</span><span class="p">[</span><span class="s2">"state"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"New Mexico"</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -727,9 +727,9 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span>
-    <span class="s2">&quot;weather_ds&quot;</span><span class="p">:</span> <span class="n">weather_NM_sub</span><span class="p">,</span>
-    <span class="s2">&quot;meta_df&quot;</span><span class="p">:</span> <span class="n">meta_NM_sub</span><span class="p">,</span>
+    <span class="s2">"func"</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span>
+    <span class="s2">"weather_ds"</span><span class="p">:</span> <span class="n">weather_NM_sub</span><span class="p">,</span>
+    <span class="s2">"meta_df"</span><span class="p">:</span> <span class="n">meta_NM_sub</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">standoff_res</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">analysis</span><span class="p">(</span><span class="o">**</span><span class="n">geo</span><span class="p">)</span>
@@ -747,12 +747,12 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">plot_USA</span><span class="p">(</span>
-    <span class="n">standoff_res</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span>
-    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+    <span class="n">standoff_res</span><span class="p">[</span><span class="s2">"x"</span><span class="p">],</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">"viridis"</span><span class="p">,</span>
     <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Minimum estimated air standoff to qualify as level 1 system&quot;</span><span class="p">,</span>
-    <span class="n">cb_title</span><span class="o">=</span><span class="s2">&quot;Standoff (cm)&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">"Minimum estimated air standoff to qualify as level 1 system"</span><span class="p">,</span>
+    <span class="n">cb_title</span><span class="o">=</span><span class="s2">"Standoff (cm)"</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -765,19 +765,19 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># State bar of new mexico: (35.16482, -106.58979)</span>
 
-<span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;NSRDB&quot;</span>
+<span class="n">weather_db</span> <span class="o">=</span> <span class="s2">"NSRDB"</span>
 <span class="n">weather_id</span> <span class="o">=</span> <span class="p">(</span><span class="mf">35.16482</span><span class="p">,</span> <span class="o">-</span><span class="mf">106.58979</span><span class="p">)</span>  <span class="c1"># NREL (39.741931, -105.169891)</span>
 <span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="s2">&quot;Americas&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="mi">2022</span><span class="p">,</span>
-    <span class="s2">&quot;NREL_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;air_temperature&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dhi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ghi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dni&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;relative_humidity&quot;</span><span class="p">,</span>
+    <span class="s2">"satellite"</span><span class="p">:</span> <span class="s2">"Americas"</span><span class="p">,</span>
+    <span class="s2">"names"</span><span class="p">:</span> <span class="mi">2022</span><span class="p">,</span>
+    <span class="s2">"NREL_HPC"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"air_temperature"</span><span class="p">,</span>
+        <span class="s2">"wind_speed"</span><span class="p">,</span>
+        <span class="s2">"dhi"</span><span class="p">,</span>
+        <span class="s2">"ghi"</span><span class="p">,</span>
+        <span class="s2">"dni"</span><span class="p">,</span>
+        <span class="s2">"relative_humidity"</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">}</span>
 
@@ -804,7 +804,7 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RH_module</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RH_module</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -812,9 +812,9 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;func&quot;</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">humidity</span><span class="o">.</span><span class="n">module</span><span class="p">,</span>
-    <span class="s2">&quot;weather_ds&quot;</span><span class="p">:</span> <span class="n">weather_NM_sub</span><span class="p">,</span>
-    <span class="s2">&quot;meta_df&quot;</span><span class="p">:</span> <span class="n">meta_NM_sub</span><span class="p">,</span>
+    <span class="s2">"func"</span><span class="p">:</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">humidity</span><span class="o">.</span><span class="n">module</span><span class="p">,</span>
+    <span class="s2">"weather_ds"</span><span class="p">:</span> <span class="n">weather_NM_sub</span><span class="p">,</span>
+    <span class="s2">"meta_df"</span><span class="p">:</span> <span class="n">meta_NM_sub</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">RH_module</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">geospatial</span><span class="o">.</span><span class="n">analysis</span><span class="p">(</span><span class="o">**</span><span class="n">geo</span><span class="p">)</span>
@@ -844,15 +844,15 @@ pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 <span class="c1">#         if m == n:</span>
 <span class="c1">#             if d == 15:</span>
 <span class="c1">#                 if t == datetime.time(12):</span>
-<span class="c1">#                     fig, ax = pvdeg.geospatial.plot_USA(RH_module[&#39;RH_surface_outside&#39;].sel(time=np_t),</span>
-<span class="c1">#                             cmap=&#39;viridis&#39;, vmin=0, vmax=100,</span>
-<span class="c1">#                             title=f&#39;RH_surface_outside  - 2022-{m}-{d} 12:00&#39;,</span>
-<span class="c1">#                             cb_title=&#39;Relative humidity (%)&#39;)</span>
-<span class="c1">#                     plt.savefig(f&#39;./images/RH_animation_{n}.png&#39;, dpi=600)</span>
+<span class="c1">#                     fig, ax = pvdeg.geospatial.plot_USA(RH_module['RH_surface_outside'].sel(time=np_t),</span>
+<span class="c1">#                             cmap='viridis', vmin=0, vmax=100,</span>
+<span class="c1">#                             title=f'RH_surface_outside  - 2022-{m}-{d} 12:00',</span>
+<span class="c1">#                             cb_title='Relative humidity (%)')</span>
+<span class="c1">#                     plt.savefig(f'./images/RH_animation_{n}.png', dpi=600)</span>
 
 <span class="c1"># import imageio</span>
-<span class="c1"># ims = [imageio.imread(f&#39;./images/RH_animation_{n}.png&#39;) for n in range(1, 13)]</span>
-<span class="c1"># imageio.mimwrite(f&#39;../images/RH_animation.gif&#39;, ims, format=&#39;GIF&#39;, duration=1000, loop=10)</span>
+<span class="c1"># ims = [imageio.imread(f'./images/RH_animation_{n}.png') for n in range(1, 13)]</span>
+<span class="c1"># imageio.mimwrite(f'../images/RH_animation.gif', ims, format='GIF', duration=1000, loop=10)</span>
 </pre></div>
 </div>
 </div>
