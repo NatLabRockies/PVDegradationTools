@@ -80,10 +80,10 @@ N_YEARS = 4  # covers Orooji's published T90 range (26-42 months) for all locati
 
 # Top/bottom cell parameters
 Eg_top, Eg_bot = 1.68, 1.12  # eV
-J01_top, J01_bot = 2.6e-18, 5.7e-15  # A/cm^2  (n=1 diode, 25 C)
+J01_top, J01_bot = 2.6e-18, 5.7e-15  # A/cm^2  (n=1 diode, 25 °C)
 n_top, n_bot = 1.3, 1.0
-Rser_top, Rser_bot = 1.4, 1.0  # ohm*cm^2
-Rsh_top, Rsh_bot = 1300, 2800  # ohm*cm^2
+Rser_top, Rser_bot = 1.4, 1.0  # Ω·cm²
+Rsh_top, Rsh_bot = 1300, 2800  # Ω·cm²
 
 
 # %%
@@ -343,7 +343,7 @@ def ey_pipeline(
 #
 # Runs are additive: ce_multiyear/pr_multiyear/ey_local persist across repeat
 # runs of this cell, so you can run one now and the remainder later
-LOCATIONS_TO_RUN = LOCATIONS
+LOCATIONS_TO_RUN = ["AZ", "WA"]
 
 if "ce_multiyear" not in globals():
     ce_multiyear, pr_multiyear, ey_local = {}, {}, {}
@@ -666,31 +666,44 @@ print(diag_df.to_string(index=False))
 
 
 # %%
-## --- Overlay: pvdeg NOCT/PSM4 T_cell vs. digitized Orooji Fig. 4 (all locations; paper data only for AZ/WA) ---
-# Orooji Fig. 4 only publishes Daily Peak / Daily Average cell-temperature curves for
-# two representative locations (Phoenix AZ = hot/arid, Seattle WA = mild/cloudy), so
-# the digitized paper overlay (dashed) is only available for those two - digitized
-# directly from the published figure (page 9/14) via pixel-color tracking (black ->
-# Daily Peak, orange -> Daily Average), calibrated against the axes (0-12 months,
-# 0-100 degC). See tutorials/data/orooji_fig4_celltemp_digitized.csv.
-# The other four locations show pvdeg's own reproduction (solid) only, with no
-# paper ground-truth available, but are included for a complete cross-climate picture.
+## --- Overlay: pvdeg NOCT/PSM4 T_cell vs. digitized Orooji Fig. 4 (AZ/WA) ---
+# Daily average is computed from daytime-only hours (POA > 0) to match
+# the likely convention in Orooji's Fig. 4 and avoid nighttime dilution.
+# The daily peak uses all hours since T_cell peak always occurs during daylight.
 digitized_path = os.path.join(TUTORIALS_DATA, "orooji_fig4_celltemp_digitized.csv")
 fig4_digitized = pd.read_csv(digitized_path)
 _fig4_locs = set(fig4_digitized["location"].unique())
 
+# Build poa_by_loc (single TMY year) for the locations being plotted
+poa_by_loc = {}
+tcell_by_loc = {}
+for loc in LOCATIONS_TO_RUN:
+    wdf = all_weather[loc]
+    mt = all_meta[loc]
+    lat_here = float(mt.get("latitude", STATES[loc][0]))
+    tilt_here = float(mt.get("tilt", abs(lat_here)))
+    az_here = float(mt.get("azimuth", 180.0))
+    _poa = pvdeg.spectral.poa_irradiance(wdf, mt, tilt=tilt_here, azimuth=az_here)
+    poa_by_loc[loc] = _poa
+    tcell_by_loc[loc] = orooji_noct_cell_temp(wdf, _poa)
+
 _n = len(LOCATIONS_TO_RUN)
-_ncols = 3
-_nrows = -(-_n // _ncols)  # ceil
+_ncols = min(_n, 3)
+_nrows = -(-_n // _ncols)
 fig, axes = plt.subplots(
     _nrows, _ncols, figsize=(5 * _ncols, 4 * _nrows), squeeze=False
 )
 axes_flat = axes.flatten()
+
 for ax, loc in zip(axes_flat, LOCATIONS_TO_RUN):
-    # pvdeg reproduction: full 24h daily peak/average of T_cell (NOCT model, PSM4 weather)
     t_cell = tcell_by_loc[loc]
+    poa_g = poa_by_loc[loc]["poa_global"]
+    daytime = poa_g > 0
+
+    # Daily peak: max over all hours (always occurs in daylight anyway)
     daily_peak = t_cell.resample("D").max()
-    daily_mean = t_cell.resample("D").mean()
+    # Daily average: mean of daytime-only hours, then daily
+    daily_mean = t_cell[daytime].resample("D").mean()
     month_pvdeg = (daily_peak.index - daily_peak.index[0]).days / 30.44
 
     ax.plot(
@@ -698,14 +711,18 @@ for ax, loc in zip(axes_flat, LOCATIONS_TO_RUN):
         daily_peak.values,
         color="black",
         lw=1.0,
-        label="Daily Peak (pvdeg, NOCT/PSM4)",
+        ls="--",
+        alpha=0.8,
+        label="Daily Peak (pvdeg, daytime)",
     )
     ax.plot(
-        month_pvdeg,
+        daily_mean.index.map(lambda x: (x - daily_peak.index[0]).days / 30.44),
         daily_mean.values,
         color="darkorange",
         lw=1.0,
-        label="Daily Average (pvdeg, NOCT/PSM4)",
+        ls="--",
+        alpha=0.8,
+        label="Daily Avg, daytime only (pvdeg)",
     )
 
     if loc in _fig4_locs:
@@ -714,19 +731,15 @@ for ax, loc in zip(axes_flat, LOCATIONS_TO_RUN):
             d["month"],
             d["daily_peak_C"],
             color="black",
-            lw=1.0,
-            ls="--",
-            alpha=0.6,
-            label="Daily Peak (Orooji Fig. 4, digitized)",
+            lw=1.5,
+            label="Daily Peak (Orooji Fig. 4)",
         )
         ax.plot(
             d["month"],
             d["daily_avg_C"],
             color="darkorange",
-            lw=1.0,
-            ls="--",
-            alpha=0.6,
-            label="Daily Average (Orooji Fig. 4, digitized)",
+            lw=1.5,
+            label="Daily Avg (Orooji Fig. 4)",
         )
 
     ax.set_ylim(0, 100)
@@ -740,18 +753,16 @@ for ax in axes_flat[_n:]:
     ax.set_visible(False)
 
 _legend_handles = [
-    Line2D([0], [0], color="black", lw=1.0, label="Daily Peak (pvdeg, NOCT/PSM4)"),
-    Line2D(
-        [0], [0], color="darkorange", lw=1.0, label="Daily Average (pvdeg, NOCT/PSM4)"
-    ),
+    Line2D([0], [0], color="black", lw=1.5, label="Daily Peak (Orooji Fig. 4)"),
+    Line2D([0], [0], color="darkorange", lw=1.5, label="Daily Avg (Orooji Fig. 4)"),
     Line2D(
         [0],
         [0],
         color="black",
         lw=1.0,
         ls="--",
-        alpha=0.6,
-        label="Daily Peak (Orooji Fig. 4, digitized)",
+        alpha=0.8,
+        label="Daily Peak (pvdeg, daytime)",
     ),
     Line2D(
         [0],
@@ -759,8 +770,8 @@ _legend_handles = [
         color="darkorange",
         lw=1.0,
         ls="--",
-        alpha=0.6,
-        label="Daily Average (Orooji Fig. 4, digitized)",
+        alpha=0.8,
+        label="Daily Avg, daytime only (pvdeg)",
     ),
 ]
 fig.legend(
@@ -772,22 +783,16 @@ fig.legend(
     frameon=False,
 )
 fig.suptitle(
-    "Solid = pvdeg NOCT/PSM4 reproduction   |   Dashed = digitized from Orooji et al. Fig. 4 (AZ/WA only)",
+    "Cell temperature: solid = Orooji Fig. 4 (AZ/WA)   |   Dashed = pvdeg (daytime-only daily avg)",
     y=1.12,
 )
 fig.tight_layout(rect=[0, 0, 1, 0.92])
 
-
 # %%
-## --- Overlay: pvdeg PSM4 POA irradiance vs. digitized Orooji Fig. 4 "Light Intensity" (all locations; paper data only for AZ/WA) ---
-# Orooji Fig. 4 only publishes Daily Peak / Daily Average "Light Intensity" curves
-# (the panel directly below the cell-temperature panel, y-axis 0-1500 W/m^2) for the
-# same two representative locations (AZ, WA), digitized the same way as the
-# temperature curves: pixel-color tracking (black -> Daily Peak, orange -> Daily
-# Average), calibrated against the axes (0-12 months, 0-1500 W/m^2). See
-# tutorials/data/orooji_fig4_irradiance_digitized.csv.
-# The other four locations show pvdeg's own POA reproduction (solid) only, with no
-# paper ground-truth available, but are included for a complete cross-climate picture.
+## --- Overlay: pvdeg PSM4 POA irradiance vs. digitized Orooji Fig. 4 (AZ/WA) ---
+# Daily average is computed from daytime-only hours (POA > 0), matching the
+# likely convention in Orooji's Fig. 4. Including nighttime zeroes would
+# substantially suppress the daily average and make pvdeg look artificially milder.
 irr_digitized_path = os.path.join(
     TUTORIALS_DATA, "orooji_fig4_irradiance_digitized.csv"
 )
@@ -795,17 +800,19 @@ fig4_irr_digitized = pd.read_csv(irr_digitized_path)
 _fig4_irr_locs = set(fig4_irr_digitized["location"].unique())
 
 _n = len(LOCATIONS_TO_RUN)
-_ncols = 3
-_nrows = -(-_n // _ncols)  # ceil
+_ncols = min(_n, 3)
+_nrows = -(-_n // _ncols)
 fig, axes = plt.subplots(
     _nrows, _ncols, figsize=(5 * _ncols, 4 * _nrows), squeeze=False
 )
 axes_flat = axes.flatten()
+
 for ax, loc in zip(axes_flat, LOCATIONS_TO_RUN):
-    # pvdeg reproduction: daily peak/average of POA global irradiance (PSM4 weather)
     poa_global = poa_by_loc[loc]["poa_global"]
+    daytime = poa_global > 0
+
     daily_peak_poa = poa_global.resample("D").max()
-    daily_mean_poa = poa_global.resample("D").mean()
+    daily_mean_poa = poa_global[daytime].resample("D").mean()
     month_pvdeg = (daily_peak_poa.index - daily_peak_poa.index[0]).days / 30.44
 
     ax.plot(
@@ -813,14 +820,18 @@ for ax, loc in zip(axes_flat, LOCATIONS_TO_RUN):
         daily_peak_poa.values,
         color="black",
         lw=1.0,
-        label="Daily Peak (pvdeg, PSM4 POA)",
+        ls="--",
+        alpha=0.8,
+        label="Daily Peak (pvdeg, PSM4)",
     )
     ax.plot(
-        month_pvdeg,
+        daily_mean_poa.index.map(lambda x: (x - daily_peak_poa.index[0]).days / 30.44),
         daily_mean_poa.values,
         color="darkorange",
         lw=1.0,
-        label="Daily Average (pvdeg, PSM4 POA)",
+        ls="--",
+        alpha=0.8,
+        label="Daily Avg, daytime only (pvdeg)",
     )
 
     if loc in _fig4_irr_locs:
@@ -829,44 +840,38 @@ for ax, loc in zip(axes_flat, LOCATIONS_TO_RUN):
             d["month"],
             d["daily_peak_Wm2"],
             color="black",
-            lw=1.0,
-            ls="--",
-            alpha=0.6,
-            label="Daily Peak (Orooji Fig. 4, digitized)",
+            lw=1.5,
+            label="Daily Peak (Orooji Fig. 4)",
         )
         ax.plot(
             d["month"],
             d["daily_avg_Wm2"],
             color="darkorange",
-            lw=1.0,
-            ls="--",
-            alpha=0.6,
-            label="Daily Average (Orooji Fig. 4, digitized)",
+            lw=1.5,
+            label="Daily Avg (Orooji Fig. 4)",
         )
 
     ax.set_ylim(0, 1500)
     ax.set_xlim(0, 12)
     ax.set_xticks([0, 3, 6, 9, 12])
     ax.set_xlabel("Month")
-    ax.set_ylabel("Light Intensity (W/m$^2$)")
+    ax.set_ylabel("Light Intensity (W/m²)")
     ax.set_title(f"{STATES[loc][2]}")
 
 for ax in axes_flat[_n:]:
     ax.set_visible(False)
 
 _legend_handles = [
-    Line2D([0], [0], color="black", lw=1.0, label="Daily Peak (pvdeg, PSM4 POA)"),
-    Line2D(
-        [0], [0], color="darkorange", lw=1.0, label="Daily Average (pvdeg, PSM4 POA)"
-    ),
+    Line2D([0], [0], color="black", lw=1.5, label="Daily Peak (Orooji Fig. 4)"),
+    Line2D([0], [0], color="darkorange", lw=1.5, label="Daily Avg (Orooji Fig. 4)"),
     Line2D(
         [0],
         [0],
         color="black",
         lw=1.0,
         ls="--",
-        alpha=0.6,
-        label="Daily Peak (Orooji Fig. 4, digitized)",
+        alpha=0.8,
+        label="Daily Peak (pvdeg, PSM4)",
     ),
     Line2D(
         [0],
@@ -874,8 +879,8 @@ _legend_handles = [
         color="darkorange",
         lw=1.0,
         ls="--",
-        alpha=0.6,
-        label="Daily Average (Orooji Fig. 4, digitized)",
+        alpha=0.8,
+        label="Daily Avg, daytime only (pvdeg)",
     ),
 ]
 fig.legend(
@@ -887,21 +892,21 @@ fig.legend(
     frameon=False,
 )
 fig.suptitle(
-    "Solid = pvdeg PSM4 POA reproduction   |   Dashed = digitized from Orooji et al. Fig. 4 (AZ/WA only)",
+    "POA irradiance: solid = Orooji Fig. 4 (AZ/WA)   |   Dashed = pvdeg (daytime-only daily avg)",
     y=1.12,
 )
 fig.tight_layout(rect=[0, 0, 1, 0.92])
 
-
 # %%
-# Quantitative pvdeg-vs-digitized-Orooji-Fig.4 gap check (AZ, WA), for both
-# T_cell and POA "Light Intensity" panels -- annual mean of the daily-peak curve
-# and annual mean of the daily-average curve, each compared directly (not just
-# eyeballed off the plots above).
+# Quantitative gap check: pvdeg (daytime-only daily avg) vs digitized Orooji Fig. 4
+# Both T_cell and POA "Light Intensity" panels use daytime-only (POA > 0) daily averages
+# for pvdeg, matching the likely convention in the paper. Compare against previous
+# (24h average) values to quantify how much the nighttime-inclusion artifact matters.
 _rows = []
-for loc in ["AZ", "WA"]:
+for loc in [l for l in ["AZ", "WA"] if l in tcell_by_loc]:
     t_cell = tcell_by_loc[loc]
     poa_global = poa_by_loc[loc]["poa_global"]
+    daytime = poa_global > 0
     d_tc = fig4_digitized[fig4_digitized["location"] == loc]
     d_irr = fig4_irr_digitized[fig4_irr_digitized["location"] == loc]
 
@@ -910,29 +915,113 @@ for loc in ["AZ", "WA"]:
             "location": loc,
             "Tcell peak: pvdeg": t_cell.resample("D").max().mean(),
             "Tcell peak: Orooji": d_tc["daily_peak_C"].mean(),
-            "Tcell avg: pvdeg": t_cell.resample("D").mean().mean(),
+            "Tcell avg (daytime): pvdeg": t_cell[daytime].resample("D").mean().mean(),
+            "Tcell avg (24h): pvdeg": t_cell.resample("D").mean().mean(),
             "Tcell avg: Orooji": d_tc["daily_avg_C"].mean(),
             "POA peak: pvdeg": poa_global.resample("D").max().mean(),
             "POA peak: Orooji": d_irr["daily_peak_Wm2"].mean(),
-            "POA avg: pvdeg": poa_global.resample("D").mean().mean(),
+            "POA avg (daytime): pvdeg": poa_global[daytime].resample("D").mean().mean(),
+            "POA avg (24h): pvdeg": poa_global.resample("D").mean().mean(),
             "POA avg: Orooji": d_irr["daily_avg_Wm2"].mean(),
         }
     )
 
 gap_df = pd.DataFrame(_rows).set_index("location")
-pd.set_option("display.width", 160)
+pd.set_option("display.width", 200)
 print(gap_df.T.round(1))
+print()
+print(
+    "Note: 'daytime' = hours with POA > 0. The 24h average includes cold/dark nights."
+)
+print(
+    "If daytime pvdeg values match or exceed Orooji, weather inputs are not the cause of faster T90,Agg."
+)
 
+# %%
+_colors = {
+    "AZ": "#d95f02",
+    "TX": "#e6ab02",
+    "HI": "#7570b3",
+    "FL": "#66a61e",
+    "ME": "#1b9e77",
+    "WA": "steelblue",
+}
 
-# %% [markdown]
-# ## 7. Conclusions and next step
-#
-# Conclusions from this notebook and controlled tests:
-# - D046 activation energies used here are consistent with the uncapped-device interpretation.
-# - WA is reproduced well for $T_{90,Agg}$.
-# - AZ remains substantially faster than published in long-horizon $PR_{Agg}$ decline.
-# - The mismatch is not explained by hotter/brighter weather in this workflow.
-# - The tandem mismatch hypothesis was tested directly and did not close the AZ gap.
-#
-# Most useful next step:
-# - Compare the full AZ $CE(t)$ trajectory shape against Orooji's digitized curve (not only the 12-month point), then re-check how that trajectory propagates into $PR_{Agg}(t)$.
+linear_t90 = {}
+rows_lin = []
+
+for loc in LOCATIONS_TO_RUN:
+    ce = ce_multiyear[loc]
+    p_ref = ey_local[loc]["power_reference"]
+
+    # Irradiance-weighted cumulative CE (Orooji's presumed simple model)
+    cum_ce_pref = (ce * p_ref).cumsum()
+    cum_pref = p_ref.cumsum()
+    pr_linear = cum_ce_pref / cum_pref.where(cum_pref > 0)
+
+    below = pr_linear[pr_linear <= T_THRESHOLD]
+    if len(below):
+        linear_t90[loc] = (below.index[0] - pr_linear.index[0]).days / 30.44
+    else:
+        linear_t90[loc] = None
+
+    rows_lin.append(
+        {
+            "loc": loc,
+            f"{T_LABEL},Agg pvdeg nonlinear (mo)": round(
+                t90_months.get(loc) or float("nan"), 1
+            ),
+            f"{T_LABEL},Agg linear CE (mo)": (
+                round(linear_t90[loc], 1) if linear_t90[loc] else None
+            ),
+            f"{T_LABEL},Agg Orooji (mo)": OROOJI_T90.get(loc),
+        }
+    )
+
+lin_df = pd.DataFrame(rows_lin).sort_values(f"{T_LABEL},Agg Orooji (mo)")
+print("PR_Agg model comparison:")
+print(lin_df.to_string(index=False))
+
+# Plot: nonlinear vs linear PR_Agg for AZ and WA
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+for ax, loc in zip(axes, ["AZ", "WA"]):
+    ce = ce_multiyear[loc]
+    p_ref = ey_local[loc]["power_reference"]
+    pr_nl = pr_multiyear[loc]
+    pr_lin = (ce * p_ref).cumsum() / p_ref.cumsum().where(p_ref.cumsum() > 0)
+    months = (pr_nl.index - pr_nl.index[0]).days / 30.44
+
+    ax.plot(
+        months,
+        pr_nl.values,
+        color=_colors[loc],
+        lw=1.5,
+        label="pvdeg nonlinear (PVCircuit)",
+    )
+    ax.plot(
+        months,
+        pr_lin.values,
+        color=_colors[loc],
+        lw=1.5,
+        ls="--",
+        alpha=0.7,
+        label="linear CE model",
+    )
+    ax.axhline(
+        T_THRESHOLD, color="red", ls=":", lw=0.9, label=f"{T_LABEL} ({T_THRESHOLD})"
+    )
+    if OROOJI_T90.get(loc):
+        ax.axvline(
+            OROOJI_T90[loc],
+            color="gray",
+            ls=":",
+            lw=1.0,
+            label=f"Orooji {T_LABEL} ({OROOJI_T90[loc]} mo)",
+        )
+    ax.set_xlim(0, N_YEARS * 12)
+    ax.set_xlabel("Month")
+    ax.set_ylabel("$PR_{Agg}$")
+    ax.set_title(loc)
+    ax.legend(fontsize=8)
+fig.suptitle("Nonlinear PVCircuit tandem vs. linear CE scaling — PR$_{Agg}$(t)")
+fig.tight_layout()
