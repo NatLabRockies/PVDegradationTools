@@ -572,6 +572,50 @@ def test_degraded_power_ratio_degraded_le_reference():
     assert (result["power_degraded"] <= result["power_reference"] + 1e-10).all()
 
 
+def _build_test_tandem_template():
+    pvc = pytest.importorskip("pvcircuit")
+    dev = pvc.Multi2T(name="pytest_tandem", Eg_list=[1.68, 1.12])
+    return dev
+
+
+def test_degraded_power_ratio_tandem_no_degradation():
+    """When ce_factor=1, tandem PR_Agg should be 1.0 everywhere."""
+    tandem = _build_test_tandem_template()
+    result = pvdeg.degradation.degraded_power_ratio_tandem(
+        weather_df=_PR_DF,
+        meta=_PR_META,
+        ce_factor=_CE_ONE,
+        tandem_template=tandem,
+        poa=pd.DataFrame({"poa_global": np.full(_N_ISOS, 500.0)}, index=_PR_DF.index),
+        temp_cell=_PR_TEMP_CELL,
+    )
+    pr = result["PR_Agg"]
+    assert isinstance(pr, pd.Series)
+    assert pr.values == pytest.approx(np.ones(len(pr)), abs=1e-6)
+    assert result["T90_Agg_hours"] is None
+
+
+def test_degraded_power_ratio_tandem_degraded_le_reference():
+    """Tandem degraded power should always be <= reference power."""
+    tandem = _build_test_tandem_template()
+    ce_08 = pd.Series(np.full(_N_ISOS, 0.8), index=_PR_DF.index)
+    result = pvdeg.degradation.degraded_power_ratio_tandem(
+        weather_df=_PR_DF,
+        meta=_PR_META,
+        ce_factor=ce_08,
+        tandem_template=tandem,
+        poa=pd.DataFrame({"poa_global": np.full(_N_ISOS, 1000.0)}, index=_PR_DF.index),
+        temp_cell=_PR_TEMP_CELL,
+    )
+    assert (result["power_degraded"] <= result["power_reference"] + 1e-10).all()
+    assert set(result.keys()) == {
+        "PR_Agg",
+        "T90_Agg_hours",
+        "power_degraded",
+        "power_reference",
+    }
+
+
 # Test data for acetic acid functions: 100-hour constant temperature profiles
 _HAC_CONST_TEMP_DF = pd.DataFrame(
     {"temp_module": np.full(100, 85.0)},

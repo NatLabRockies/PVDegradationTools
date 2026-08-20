@@ -1009,7 +1009,7 @@ def repeat_annual_time_series(time_series, start_year, n_years):
                                     year=year, month=2, day=29, minute=start.minute
                                 ),
                                 end=datetime.datetime(year=year, month=3, day=1),
-                                freq="H",
+                                freq="h",
                             ),
                             columns=time_series.columns,
                         ),
@@ -1041,7 +1041,7 @@ def repeat_annual_time_series(time_series, start_year, n_years):
                                     year=year, month=2, day=29, minute=start.minute
                                 ),
                                 end=datetime.datetime(year=year, month=3, day=1),
-                                freq="H",
+                                freq="h",
                             ),
                             columns=time_series.columns,
                         ),

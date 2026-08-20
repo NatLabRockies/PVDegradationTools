@@ -1,9 +1,10 @@
 """Collection of functions for degradation calculations."""
 
 import warnings
+import copy
 import numpy as np
 import pandas as pd
-from typing import Union
+from typing import Union, Optional
 from pvdeg import humidity
 import pvlib
 
@@ -1461,6 +1462,218 @@ def degraded_power_ratio(
             T90_Agg_hours = (below_90[0] - PR_Agg.index[0]).total_seconds() / 3600.0
         except AttributeError:
             # Non-datetime index: fall back to positional count (assumes hourly)
+            T90_Agg_hours = float(PR_Agg.index.get_loc(below_90[0]))
+    else:
+        T90_Agg_hours = None
+
+    return {
+        "PR_Agg": PR_Agg,
+        "T90_Agg_hours": T90_Agg_hours,
+        "power_degraded": P_deg,
+        "power_reference": P_ref,
+    }
+
+
+def degraded_power_ratio_tandem(
+    weather_df: pd.DataFrame,
+    meta: dict,
+    ce_factor: pd.Series,
+    tandem_template,
+    jsc_top_ref: float = 20.76,
+    jsc_bot_ref: float = 20.76,
+    alpha_isc_top: float = 5e-4,
+    alpha_isc_bot: float = 5e-4,
+    G_ref: float = 1000.0,
+    T_ref: float = 25.0,
+    poa=None,
+    temp_cell: pd.Series = None,
+    temp_model: str = "sapm",
+    conf: str = "open_rack_glass_polymer",
+    wind_factor: float = 0.33,
+    jsc_top_ref_ma: Optional[float] = None,
+    jsc_bot_ref_ma: Optional[float] = None,
+) -> dict:
+    """Compute PR_Agg and T90,Agg for a degrading perovskite/Si tandem device
+    using PVCircuit.
+
+    This function is the tandem counterpart to :func:`degraded_power_ratio`.
+    The collection-efficiency degradation factor is applied to the top-cell
+    photocurrent only, while the bottom-cell photocurrent remains undegraded by
+    CE (both still scale with irradiance and temperature):
+
+    .. math::
+
+        J_{top,deg}(t) = J_{top,ref}(t) \\cdot CE_{factor}(t)
+
+    Inputs ``jsc_*_ref`` are in mA/cm² and internally converted to A/cm²
+    before assignment to PVCircuit junction ``Jext``.
+
+    Parameters
+    ----------
+    weather_df : pd.DataFrame
+        Weather data with a DateTimeIndex.
+    meta : dict
+        Location metadata used when ``poa`` or ``temp_cell`` are not provided.
+    ce_factor : pd.Series
+        Time-indexed CE degradation factor (0-1), typically from
+        :func:`perovskite_degradation_factor`.
+    tandem_template : pvcircuit.Multi2T
+        PVCircuit tandem template device (copied internally for reference and
+        degraded simulations).
+    jsc_top_ref : float, default 20.76
+        Top-cell reference short-circuit current density [mA/cm²] at
+        ``G_ref`` and ``T_ref``.
+    jsc_bot_ref : float, default 20.76
+        Bottom-cell reference short-circuit current density [mA/cm²] at
+        ``G_ref`` and ``T_ref``.
+    alpha_isc_top : float, default 5e-4
+        Top-cell temperature coefficient of Jsc [1/K].
+    alpha_isc_bot : float, default 5e-4
+        Bottom-cell temperature coefficient of Jsc [1/K].
+    G_ref : float, default 1000.0
+        Reference irradiance [W/m²].
+    T_ref : float, default 25.0
+        Reference cell temperature [°C].
+    poa : pd.Series or pd.DataFrame, optional
+        Plane-of-array irradiance [W/m²]. If omitted, computed with
+        :func:`pvdeg.spectral.poa_irradiance`.
+    temp_cell : pd.Series, optional
+        Pre-computed cell temperature [°C]. If omitted, computed with
+        :func:`pvdeg.temperature.module`.
+    temp_model : str, default ``"sapm"``
+        pvlib temperature model used when ``temp_cell`` is not provided.
+    conf : str, default ``"open_rack_glass_polymer"``
+        Module mounting configuration used when ``temp_cell`` is not provided.
+    wind_factor : float, default 0.33
+        Wind-speed correction exponent used when ``temp_cell`` is not provided.
+
+    Returns
+    -------
+    dict
+        Dictionary with keys:
+
+        - ``"PR_Agg"``: cumulative aggregated power ratio [pd.Series]
+        - ``"T90_Agg_hours"``: first hour where ``PR_Agg < 0.90`` [float|None]
+        - ``"power_degraded"``: degraded tandem hourly MPP power [pd.Series]
+        - ``"power_reference"``: reference tandem hourly MPP power [pd.Series]
+    """
+    if weather_df is None:
+        raise ValueError("weather_df is required")
+    if ce_factor is None:
+        raise ValueError("ce_factor is required")
+    if tandem_template is None:
+        raise ValueError("tandem_template is required")
+
+    # Backward-compatible aliases for older notebooks/scripts.
+    if jsc_top_ref_ma is not None:
+        warnings.warn(
+            "'jsc_top_ref_ma' is deprecated; use 'jsc_top_ref' instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        jsc_top_ref = jsc_top_ref_ma
+    if jsc_bot_ref_ma is not None:
+        warnings.warn(
+            "'jsc_bot_ref_ma' is deprecated; use 'jsc_bot_ref' instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        jsc_bot_ref = jsc_bot_ref_ma
+
+    # Import here so non-tandem workflows do not require pvcircuit.
+    try:
+        import pvcircuit as pvc  # noqa: F401
+    except ImportError as exc:
+        raise ImportError(
+            "degraded_power_ratio_tandem requires pvcircuit. "
+            "Install pvcircuit to use tandem energy-yield modeling."
+        ) from exc
+
+    if not ce_factor.index.equals(weather_df.index):
+        ce_factor = ce_factor.reindex(weather_df.index)
+        if ce_factor.isna().any():
+            raise ValueError(
+                "ce_factor is missing values for some timestamps in weather_df.index."
+                "Ensure ce_factor covers the full time range of weather_df."
+            )
+
+    # POA irradiance
+    if poa is None:
+        poa_df = spectral.poa_irradiance(weather_df, meta)
+    elif isinstance(poa, pd.Series):
+        poa_df = pd.DataFrame({"poa_global": poa}, index=poa.index)
+    else:
+        poa_df = poa
+    G = poa_df["poa_global"].clip(lower=0.0)
+
+    # Module / cell temperature [°C]
+    if temp_cell is not None:
+        if not temp_cell.index.equals(weather_df.index):
+            temp_cell = temp_cell.reindex(weather_df.index)
+            if temp_cell.isna().any():
+                raise ValueError(
+                    "temp_cell is missing values for some timestamps in"
+                    " weather_df.index. Ensure temp_cell covers the full time range of"
+                    " weather_df."
+                )
+        T_cell_C = temp_cell
+    else:
+        T_mod = temperature.module(
+            weather_df,
+            meta,
+            poa=poa_df,
+            temp_model=temp_model,
+            conf=conf,
+            wind_factor=wind_factor,
+        )
+        T_cell_C = T_mod
+
+    # Use independent copies so degraded and reference states do not interfere.
+    try:
+        dev_ref = tandem_template.copy()
+        dev_deg = tandem_template.copy()
+    except AttributeError:
+        dev_ref = copy.deepcopy(tandem_template)
+        dev_deg = copy.deepcopy(tandem_template)
+
+    p_ref = np.zeros(len(weather_df), dtype=float)
+    p_deg = np.zeros(len(weather_df), dtype=float)
+
+    for i, ts in enumerate(weather_df.index):
+        g_scale = max(float(G.iloc[i]) / G_ref, 0.0)
+        t_top = 1.0 + alpha_isc_top * (float(T_cell_C.iloc[i]) - T_ref)
+        t_bot = 1.0 + alpha_isc_bot * (float(T_cell_C.iloc[i]) - T_ref)
+
+        # mA/cm² -> A/cm² conversion for PVCircuit Junction.Jext
+        j_top_ref_acm2 = max(jsc_top_ref * g_scale * t_top, 0.0) / 1000.0
+        j_bot_ref_acm2 = max(jsc_bot_ref * g_scale * t_bot, 0.0) / 1000.0
+        j_top_deg_acm2 = max(j_top_ref_acm2 * float(ce_factor.loc[ts]), 0.0)
+
+        # Reference tandem (no CE degradation)
+        dev_ref.j[0].set(Jext=j_top_ref_acm2, TC=float(T_cell_C.iloc[i]))
+        dev_ref.j[1].set(Jext=j_bot_ref_acm2, TC=float(T_cell_C.iloc[i]))
+        p_ref[i] = float(dev_ref.MPP()["Pmp"])
+
+        # Degraded tandem (top-cell CE degradation only)
+        dev_deg.j[0].set(Jext=j_top_deg_acm2, TC=float(T_cell_C.iloc[i]))
+        dev_deg.j[1].set(Jext=j_bot_ref_acm2, TC=float(T_cell_C.iloc[i]))
+        p_deg[i] = float(dev_deg.MPP()["Pmp"])
+
+    P_ref = pd.Series(p_ref, index=weather_df.index, name="power_reference")
+    P_deg = pd.Series(p_deg, index=weather_df.index, name="power_degraded")
+
+    # Cumulative aggregated power ratio
+    cum_ref = P_ref.cumsum()
+    cum_deg = P_deg.cumsum()
+    PR_Agg = cum_deg / cum_ref.where(cum_ref > 0)
+    PR_Agg.name = "PR_Agg"
+
+    # T90,Agg: first timestep where PR_Agg < 0.90
+    below_90 = PR_Agg.index[PR_Agg < 0.90]
+    if len(below_90) > 0:
+        try:
+            T90_Agg_hours = (below_90[0] - PR_Agg.index[0]).total_seconds() / 3600.0
+        except AttributeError:
             T90_Agg_hours = float(PR_Agg.index.get_loc(below_90[0]))
     else:
         T90_Agg_hours = None
