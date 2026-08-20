@@ -633,7 +633,7 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 Python version  3.11.16 (main, Aug 13 2026, 02:46:14) [GCC 13.3.0]
 Pandas version  3.0.5
 Pvlib version  0.15.2
-Pvdeg version  0.1.dev1+g56fa8d7c3
+Pvdeg version  0.1.dev1+g6837cac14
 </pre></div>
 </div>
 </div>
@@ -690,9 +690,7 @@ Pvdeg version  0.1.dev1+g56fa8d7c3
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
+The array surface_tilt angle was not provided, therefore the latitude of  40.6 was used.
           x      T98_0    T98_inf
 0  0.522443  71.778148  48.754265
           x      T98_0    T98_inf
@@ -726,17 +724,17 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          X_0  wind_factor
-0    6.080723     0.413036
-1    7.736185     0.972686
-2    4.887103     1.395753
-3    7.235205     0.331079
-4    1.797957     0.310995
+0    2.274534     0.892669
+1    6.227894     0.137557
+2    6.506798    -0.114638
+3    4.088453    -0.464185
+4    4.773303     0.765669
 ..        ...          ...
-495  6.286094     0.317966
-496 -0.914274     0.628566
-497  1.060865    -0.040676
-498  5.469786    -0.353183
-499  5.075169     1.133379
+495  5.569938     0.365077
+496  5.714671     0.375543
+497  6.828618    -0.116881
+498  7.786256     0.341651
+499  3.129397     1.155066
 
 [500 rows x 2 columns]
 </pre></div>
@@ -749,7 +747,8 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <p>When using the pvdeg.montecarlo.simulate() function on a target function all of the target function’s required arguments must still be given. Our non-changing arguments will be stored in a dictionary. The randomized monte carlo input data will also be passed to the target function via the simulate function. All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL-IGNORE-OUTPUT</span>
+<span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
 <span class="n">function_kwargs</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"weather_df"</span><span class="p">:</span> <span class="n">WEATHER</span><span class="p">,</span>
     <span class="s2">"meta"</span><span class="p">:</span> <span class="n">META</span><span class="p">,</span>
@@ -805,17 +804,17 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.000000  68.762460  47.404426
-1    0.000000  60.372818  41.772645
-2    0.000000  50.815920  37.061369
-3    0.000000  69.664847  47.936040
-4    0.000000  69.904068  48.094598
+0    0.000000  61.922649  42.701550
+1    0.458772  71.588426  49.221380
+2    1.127669  73.691228  50.493464
+3    1.032591  75.266903  51.668887
+4    0.000000  64.268298  44.115284
 ..        ...        ...        ...
-495  0.000000  69.849024  48.046762
-496  0.159562  66.059350  45.392862
-497  0.151055  73.033749  50.174795
-498  1.261342  74.845400  51.317685
-499  0.000000  56.964229  40.066206
+495  0.000000  69.293642  47.641861
+496  0.000000  69.174068  47.575771
+497  1.187095  73.701132  50.506670
+498  0.000000  69.550439  47.845594
+499  0.000000  56.560122  39.843704
 
 [500 rows x 3 columns]
 </pre></div>
@@ -850,7 +849,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ccedb1ef541f0d484f93ff97bb7f02bbad9b52964fdb115d6e7781582353345a.png" src="../_images/ccedb1ef541f0d484f93ff97bb7f02bbad9b52964fdb115d6e7781582353345a.png" />
+<img alt="../_images/2fa299068f2a658affc612fb31780588e51601bf70848b73f5990242166ed53e.png" src="../_images/2fa299068f2a658affc612fb31780588e51601bf70848b73f5990242166ed53e.png" />
 </div>
 </div>
 </section>
