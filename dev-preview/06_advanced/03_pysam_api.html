@@ -606,7 +606,7 @@ runs fully offline with no API key or network access required.</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pvdeg</span><span class="w"> </span><span class="kn">import</span> <span class="n">TEST_DATA_DIR</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pvdeg</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATA_DIR</span><span class="p">,</span> <span class="n">TEST_DATA_DIR</span>
 </pre></div>
 </div>
 </div>
@@ -625,10 +625,9 @@ for the available configurations.</p>
 model for that one site.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cached NSRDB weather for Miami, FL (ships with the repo) — fully offline.</span>
-<span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">"tutorials"</span><span class="p">,</span> <span class="s2">"data"</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cached NSRDB weather for Miami, FL, shipped with the pvdeg package -- fully</span>
+<span class="c1"># offline, and resolves from a pip install as well as a repo clone.</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">DATA_DIR</span>
 
 <span class="n">weather_miami</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s2">"psm4_miami.csv"</span><span class="p">),</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span>

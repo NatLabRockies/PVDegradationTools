@@ -605,7 +605,7 @@
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="setting-up">
 <h1>Setting Up<a class="headerlink" href="#setting-up" title="Link to this heading">#</a></h1>
-<p>As in <a class="reference internal" href="05_pvgis_distributed.html"><span class="std std-doc">05_pvgis_distributed.ipynb</span></a> we need to get ready to make our parallelized API calls. The notebook linked here goes through the process in more detail but we need to import our API key and email. This cell will not work for you unless you replace the <code class="docutils literal notranslate"><span class="pre">api_key</span></code> and <code class="docutils literal notranslate"><span class="pre">email</span></code> with your personal NSRDB api keys. <a class="reference external" href="https://developer.nrel.gov/signup/">REQUEST A KEY</a>.</p>
+<p>As in <a class="reference internal" href="05_pvgis_distributed.html"><span class="std std-doc">05_pvgis_distributed.ipynb</span></a> we need to get ready to make our parallelized API calls. The notebook linked here goes through the process in more detail but we need to import our API key and email. This cell will not work for you unless you replace the <code class="docutils literal notranslate"><span class="pre">api_key</span></code> and <code class="docutils literal notranslate"><span class="pre">email</span></code> with your personal NSRDB api keys. <a class="reference external" href="https://developer.nlr.gov/signup/">REQUEST A KEY</a>.</p>
 <p>We also need to initalize a dask client. <code class="docutils literal notranslate"><span class="pre">pvdeg.weather.weather_distributed</span></code> will not work without it. It will fail silently and not populate and of the results in the resulting <code class="docutils literal notranslate"><span class="pre">weather_ds</span></code> called <code class="docutils literal notranslate"><span class="pre">geo_weather</span></code> in the example below. It is hard to recognize that this has occured so be careful. Make sure to initialize a dask client first. Visiting the link takes you to a daskboard that shows what dask is doing.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -637,12 +637,12 @@ http://127.0.0.1:8787/status
 </div>
 </div>
 </div>
-<p><strong>Note on .env file:</strong> Create a file named <code class="docutils literal notranslate"><span class="pre">.env</span></code> in your project root directory (<code class="docutils literal notranslate"><span class="pre">c:\Users\rdaxini\Documents\GitHub\PVDegradationTools_NREL\</span></code>) with the following content:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api_key</span><span class="o">=</span><span class="n">YOUR_NREL_API_KEY</span>
+<p><strong>Note on .env file:</strong> Create a file named <code class="docutils literal notranslate"><span class="pre">.env</span></code> in the root of your local clone of this repository, with the following content:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api_key</span><span class="o">=</span><span class="n">YOUR_NLR_API_KEY</span>
 <span class="n">email</span><span class="o">=</span><span class="n">YOUR_EMAIL_ADDRESS</span>
 </pre></div>
 </div>
-<p>Replace <code class="docutils literal notranslate"><span class="pre">YOUR_NREL_API_KEY</span></code> and <code class="docutils literal notranslate"><span class="pre">YOUR_EMAIL_ADDRESS</span></code> with your actual NREL developer credentials.</p>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">YOUR_NLR_API_KEY</span></code> and <code class="docutils literal notranslate"><span class="pre">YOUR_EMAIL_ADDRESS</span></code> with your actual NLR developer credentials.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="requesting-weather">
 <h1>Requesting Weather<a class="headerlink" href="#requesting-weather" title="Link to this heading">#</a></h1>
