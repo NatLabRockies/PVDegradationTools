@@ -63,6 +63,11 @@ Notebooks
 - Added a ``tutorials/06_advanced/02_pysam_single_location`` tutorial
   demonstrating a single-location PySAM ``pvsamv1`` simulation from PVGIS
   weather. (:pull:`351`)
+- The cached weather and scenario fixtures used by the tutorials now ship inside
+  the package, in ``pvdeg/data/`` rather than ``tutorials/data/``, and the
+  tutorials load them through ``pvdeg.DATA_DIR``. The previous paths resolved
+  only from a repository clone, so the affected notebooks could not run against
+  an installed ``pvdeg``. (:pull:`365`)
 
 
 Deprecations
@@ -103,6 +108,21 @@ Bug Fixes
   produced spurious diffs in the packaged data files (for example
   ``pvdeg/data/O2permeation.json``). It now writes UTF-8 with a trailing
   newline. (:pull:`351`)
+- Hardened the NSRDB geospatial subset loader. ``pvdeg.weather.ini_h5_geospatial``
+  now derives its dask chunk spec per axis from the 2-D variables, where it was
+  previously order-dependent and raised ``IndexError`` for any 1-D variable; site
+  GIDs are de-duplicated before the h5 read, which otherwise failed h5py's
+  strictly-increasing selection requirement; and an empty site selection raises a
+  clear error from ``pvdeg.weather.nsrdb_gids`` rather than failing later inside
+  the chunk arithmetic. (:pull:`365`)
+- ``pvdeg.geospatial.analysis`` no longer warns when it successfully auto-chunks
+  along ``gid``. The two warnings that call for user action -- a custom
+  ``template`` supplied alongside ``gid_chunk``, and a custom ``template`` with a
+  single ``gid`` chunk -- are unchanged. (:pull:`365`)
+- Completed the NREL to NLR migration across documentation, metadata and service
+  URLs: the ``developer``, ``nsrdb``, ``sam`` and ``maps`` hosts, the project's
+  own repository links (``.zenodo.json``, ``CITATION.cff``, the Sphinx docs and
+  ``tutorials/_config.yml``), and the HPC documentation links. (:pull:`365`)
 
 
 Dependencies
@@ -115,6 +135,10 @@ Dependencies
   the documented ``pip install -e .[all]`` contributor setup still provides the
   pre-commit tooling. (:pull:`364`, :pull:`365`)
 - Bump aiohttp from 3.13.3 to 3.14.3. (:pull:`344`, :pull:`363`)
+- Declare packaged data explicitly as ``"pvdeg" = ["data/*"]``, so the non-JSON
+  data files are included in built distributions by declaration rather than as a
+  side effect of ``MANIFEST.in``. Restrict ``authors`` to currently active
+  maintainers. (:pull:`365`)
 
 
 
