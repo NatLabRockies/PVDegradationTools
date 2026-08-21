@@ -45,7 +45,7 @@ print("pvdeg version ", pvdeg.__version__)
 
 # %% [markdown]
 # First, we'll use pvlib to create and run a model system, and use the irradiance, temperature, and operating point of that model to set up our LETID model
-# For this example, we'll model a fixed latitude tilt system at NREL, in Golden, CO, USA, using [NSRDB](https://nsrdb.nrel.gov/) hourly PSM weather data, SAPM temperature models, and module and inverter models from the CEC database.
+# For this example, we'll model a fixed latitude tilt system at NREL, in Golden, CO, USA, using [NSRDB](https://nsrdb.nlr.gov/) hourly PSM weather data, SAPM temperature models, and module and inverter models from the CEC database.
 
 # %%
 # load weather and location data, use pvlib read_psm3 function with map_variables = True

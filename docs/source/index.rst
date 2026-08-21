@@ -14,7 +14,7 @@ Welcome to PVDeg!
 
 PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation, developed at the National Renewable Energy Laboratory (NREL) and supported by the Durable Module Materials (DuraMAT) consortium. It provides modular functions, materials databases, and calculation workflows for simulating degradation mechanisms (e.g., LeTID, hydrolysis, UV exposure) using weather data from the National Solar Radiation Database (NSRDB) and the Photovoltaic Geographical Information System (PVGIS). By integrating Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables field-relevant predictions and uncertainty quantification of module reliability and lifetime.
 
-The source code for PVDeg is hosted on `github <https://github.com/NREL/pvdeg>`_. Please see the :ref:`installation` page for installation help.
+The source code for PVDeg is hosted on `github <https://github.com/NatLabRockies/PVDegradationTools>`_. Please see the :ref:`installation` page for installation help.
 
 See :ref:`tutorials` to learn how to use and experiment with various functionalities
 
@@ -52,7 +52,7 @@ If you use PVDeg in a published work, please cite both the software and the pape
 
 **Software Citation:**
 
-Click the "Cite this repository" button on the `GitHub repository <https://github.com/NREL/PVDegradationTools>`_, or visit `Zenodo <https://zenodo.org/records/8088578/latest>`_ for the DOI corresponding to your specific version. On the Zenodo page, use the "Cite as" section in the right sidebar to copy the citation in your preferred format (BibTeX, APA, etc.).
+Click the "Cite this repository" button on the `GitHub repository <https://github.com/NatLabRockies/PVDegradationTools>`_, or visit `Zenodo <https://zenodo.org/records/8088578/latest>`_ for the DOI corresponding to your specific version. On the Zenodo page, use the "Cite as" section in the right sidebar to copy the citation in your preferred format (BibTeX, APA, etc.).
 
 **JOSS Paper (In Review):**
 

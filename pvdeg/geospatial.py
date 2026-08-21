@@ -310,18 +310,14 @@ def analysis(
                 stacklevel=2,
             )
     elif gid_chunk is not None or single_gid_chunk:
+        # Auto-chunking here is the documented default and produces a correct,
+        # parallel result, so it is deliberately silent -- warning on the success
+        # path would fire for every single-chunk caller with nothing to act on.
         target = gid_chunk if gid_chunk is not None else 1
         chunk_spec = {"gid": target}
         if "time" in weather_ds.sizes:
             chunk_spec["time"] = -1
         weather_ds = weather_ds.chunk(chunk_spec)
-        if gid_chunk is None:
-            warnings.warn(
-                "weather_ds had a single 'gid' chunk; auto-chunked to one gid "
-                "per task for parallel execution. Pass gid_chunk=N to control "
-                "the chunk size.",
-                stacklevel=2,
-            )
 
     if template is None:
         template = auto_template(func=func, ds_gids=weather_ds)

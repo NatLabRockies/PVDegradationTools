@@ -9,7 +9,6 @@ description = "Pvdeg is a python library that supports the calculation of degrad
 authors = [
     { name = "Rajiv Daxini", email = "Rajiv.Daxini@nlr.gov"},
     { name = "Martin Springer", email = "Martin.Springer@nlr.gov"},
-    { name = "Tobin Ford" },
     { name = "Silvana Ovaitt", email = "Silvana.Ovaitt@nlr.gov"},
     { name = "Michael Kempe", email = "Michael.Kempe@nlr.gov"}
 ]
@@ -55,6 +54,7 @@ dependencies = [
     "python-dateutil",
     "pytz",
     "seaborn",
+    "tables",
     "tqdm",
     "xarray",
     "sympy",
@@ -89,10 +89,9 @@ sam = [
 dev = [
     "pre-commit",
     "jupytext",
-
 ]
 all = [
-    "pvdeg[docs,test,books,sam]",
+    "pvdeg[docs,test,books,sam,dev]",
 ]
 
 [project.entry-points.pvdeg]
@@ -108,7 +107,7 @@ Documentation = "https://pvdegradationtools.readthedocs.io/"
 include = ["pvdeg"]
 
 [tool.setuptools.package-data]
-"pvdeg.data" = ["*.json"]
+"pvdeg" = ["data/*"]
 
 [tool.setuptools_scm]
 

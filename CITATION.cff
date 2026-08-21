@@ -43,7 +43,7 @@ keywords:
   - PVGIS
   - DuraMAT
 license: BSD-3-Clause
-repository-code: "https://github.com/NREL/PVDegradationTools"
+repository-code: "https://github.com/NatLabRockies/PVDegradationTools"
 url: "https://pvdegradationtools.readthedocs.io"
 type: software
 version: 0.7.1

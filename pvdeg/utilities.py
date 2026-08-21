@@ -832,7 +832,7 @@ def geospatial_from_csv(
     Creates an xarray dataset contaning aeospatial weather data and a pandas dataframe
     containing geospatial metadata from a list of local csv files.
 
-    Useful for importing data from NSRDB api viewer https://nsrdb.nrel.gov/data-viewer
+    Useful for importing data from NSRDB api viewer https://nsrdb.nlr.gov/data-viewer
     when downloaded locally as csv
 
     Parameters
@@ -1126,8 +1126,8 @@ def nlr_kestrel_check():
 
     See Also
     --------
-    NREL HPC : https://www.nrel.gov/hpc/
-    Kestrel Documentation : https://nrel.github.io/HPC/Documentation/
+    NLR HPC : https://www.nlr.gov/hpc/
+    Kestrel Documentation : https://natlabrockies.github.io/HPC/Documentation/
     """
 
     KESTREL_HOSTNAME = "kestrel.hpc.nlr.gov"

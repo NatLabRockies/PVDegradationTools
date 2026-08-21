@@ -32,7 +32,7 @@ Local Installation
 
    .. code-block:: bash
 
-      git clone https://github.com/NREL/PVDegradationTools.git
+      git clone https://github.com/NatLabRockies/PVDegradationTools.git
       cd PVDegradationTools
 
 3. **Start Jupyter:**

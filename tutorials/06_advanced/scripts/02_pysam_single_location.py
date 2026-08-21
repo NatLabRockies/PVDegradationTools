@@ -18,13 +18,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 import pvdeg
+from pvdeg import DATA_DIR
 
 # %%
-# Load cached NSRDB weather for New York City that ships with the repo.
-# This keeps the notebook reproducible and fully offline (no API key or network).
-repo_root = os.path.dirname(os.path.dirname(pvdeg.__file__))
-weather_path = os.path.join(repo_root, "tutorials", "data", "psm4_nyc.csv")
-meta_path = os.path.join(repo_root, "tutorials", "data", "meta_nyc.json")
+# Load cached NSRDB weather for New York City, shipped with the pvdeg package.
+# Reproducible and fully offline (no API key or network), and resolves from a pip
+# install as well as a repo clone.
+weather_path = os.path.join(DATA_DIR, "psm4_nyc.csv")
+meta_path = os.path.join(DATA_DIR, "meta_nyc.json")
 
 weather = pd.read_csv(weather_path, index_col=0, parse_dates=True)
 with open(meta_path, "r") as f:

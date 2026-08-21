@@ -7,7 +7,7 @@ We welcome contributions to PVDeg! Whether you're fixing bugs, adding features,
 improving documentation, or contributing to our material property databases, your
 help is valuable to the PV community.
 
-For a quick overview, see `CONTRIBUTING.md <https://github.com/NREL/PVDegradationTools/blob/main/CONTRIBUTING.md>`_ on GitHub.
+For a quick overview, see `CONTRIBUTING.md <https://github.com/NatLabRockies/PVDegradationTools/blob/main/CONTRIBUTING.md>`_ on GitHub.
 
 This guide provides comprehensive details for contributors.
 
@@ -17,13 +17,13 @@ Easy Ways to Contribute
 
 Here are ways to contribute, even if you're new to PVDeg, git, or Python:
 
-* **Report bugs or request features** via `GitHub issues <https://github.com/NREL/PVDegradationTools/issues>`_
+* **Report bugs or request features** via `GitHub issues <https://github.com/NatLabRockies/PVDegradationTools/issues>`_
 * **Join discussions** on existing issues and pull requests
 * **Improve documentation** - fix typos, clarify explanations, add examples
 * **Enhance unit tests** - increase coverage or improve test quality
 * **Create or improve tutorials** - demonstrate PVDeg in your area of expertise
 * **Contribute to material databases** - add validated degradation parameters and properties
-* **Share your work** - add your project to our `wiki <https://github.com/NREL/PVDegradationTools/wiki>`_
+* **Share your work** - add your project to our `wiki <https://github.com/NatLabRockies/PVDegradationTools/wiki>`_
 * **Spread the word** - tell colleagues about PVDeg
 
 Getting Started
@@ -553,7 +553,7 @@ Contributor License Agreement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First-time contributors must sign the `Contributor License Agreement (CLA)
-<https://github.com/NREL/PVDegradationTools/blob/main/cla-1.0.md>`_.
+<https://github.com/NatLabRockies/PVDegradationTools/blob/main/cla-1.0.md>`_.
 This protects both you and the project.
 
 When you submit your first pull request, a bot will comment with instructions
@@ -589,7 +589,7 @@ Getting Help
 
 If you have questions or need help:
 
-* **Ask on GitHub Discussions**: `<https://github.com/NREL/PVDegradationTools/discussions>`_
+* **Ask on GitHub Discussions**: `<https://github.com/NatLabRockies/PVDegradationTools/discussions>`_
 * **Open an issue**: For bugs or feature requests
 * **Check the documentation**: `<https://pvdegradationtools.readthedocs.io/>`_
 * **Review existing PRs**: See how others approached similar problems

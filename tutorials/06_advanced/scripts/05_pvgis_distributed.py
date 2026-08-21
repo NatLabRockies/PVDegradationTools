@@ -90,7 +90,7 @@ weather_ds.compute()
 # %% [markdown]
 # # Saving Geospatial Data Locally
 #
-# The goal of `pvdeg.store` is to create a living local database of meteoroligical data that grows overtime as your geospatial data needs grow. To do this `PVDeg` will save to a folder called `PVDeg-Meteorological` your user home directory. For me this is located at `C:\Users\tford\PVDeg-Meteorological`. This directory will contain a `zarr` store, this is a popular format for storing multi-dimensional array data, not dissimilar to `h5` files. It was chosen over `h5` because `zarr` stores arrays in chunked compressed files that make access very easy without opening an entire file like `h5`. This is an oversimplification of the design process but we felt `zarr` was a better fit.
+# The goal of `pvdeg.store` is to create a living local database of meteoroligical data that grows overtime as your geospatial data needs grow. To do this `PVDeg` will save to a folder called `PVDeg-Meteorological` in your user home directory, i.e. `Path.home() / "PVDeg-Meteorological"` (exposed as `pvdeg.METOROLOGICAL_DOWNLOAD_PATH`). This directory will contain a `zarr` store, this is a popular format for storing multi-dimensional array data, not dissimilar to `h5` files. It was chosen over `h5` because `zarr` stores arrays in chunked compressed files that make access very easy without opening an entire file like `h5`. This is an oversimplification of the design process but we felt `zarr` was a better fit.
 #
 # ## Store
 #

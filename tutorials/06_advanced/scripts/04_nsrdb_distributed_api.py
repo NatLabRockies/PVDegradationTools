@@ -11,7 +11,7 @@ import os
 # %% [markdown]
 # # Setting Up
 #
-# As in [05_pvgis_distributed.ipynb](./05_pvgis_distributed.ipynb) we need to get ready to make our parallelized API calls. The notebook linked here goes through the process in more detail but we need to import our API key and email. This cell will not work for you unless you replace the `api_key` and `email` with your personal NSRDB api keys. [REQUEST A KEY](https://developer.nrel.gov/signup/).
+# As in [05_pvgis_distributed.ipynb](./05_pvgis_distributed.ipynb) we need to get ready to make our parallelized API calls. The notebook linked here goes through the process in more detail but we need to import our API key and email. This cell will not work for you unless you replace the `api_key` and `email` with your personal NSRDB api keys. [REQUEST A KEY](https://developer.nlr.gov/signup/).
 #
 # We also need to initalize a dask client. `pvdeg.weather.weather_distributed` will not work without it. It will fail silently and not populate and of the results in the resulting `weather_ds` called `geo_weather` in the example below. It is hard to recognize that this has occured so be careful. Make sure to initialize a dask client first. Visiting the link takes you to a daskboard that shows what dask is doing.
 
@@ -36,12 +36,12 @@ print("Daskboard link")
 print(client.dashboard_link)
 
 # %% [markdown]
-# **Note on .env file:** Create a file named `.env` in your project root directory (`c:\Users\rdaxini\Documents\GitHub\PVDegradationTools_NREL\`) with the following content:
+# **Note on .env file:** Create a file named `.env` in the root of your local clone of this repository, with the following content:
 # ```
-# api_key=YOUR_NREL_API_KEY
+# api_key=YOUR_NLR_API_KEY
 # email=YOUR_EMAIL_ADDRESS
 # ```
-# Replace `YOUR_NREL_API_KEY` and `YOUR_EMAIL_ADDRESS` with your actual NREL developer credentials.
+# Replace `YOUR_NLR_API_KEY` and `YOUR_EMAIL_ADDRESS` with your actual NLR developer credentials.
 
 # %% [markdown]
 # # Requesting Weather

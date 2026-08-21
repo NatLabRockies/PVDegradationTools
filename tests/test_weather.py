@@ -392,3 +392,199 @@ def test_get_NSRDB_ds_has_kestrel_nsrdb_fnames_year(monkeypatch):
     assert "kestrel_nsrdb_fnames" in ds.attrs
     assert ds.attrs["kestrel_nsrdb_fnames"] == SORTED_TMY_DIR
     assert isinstance(meta, pd.DataFrame)
+
+
+# ---------------------------------------------------------------------------
+# NSRDB geospatial gid selection / subset loading
+# ---------------------------------------------------------------------------
+
+
+def _write_nsrdb_h5(path, n_sites=8, n_times=6, site_chunk=3, with_offshore=True):
+    """Write a minimal NSRDB-convention h5 file for gid-selection tests.
+
+    Mirrors the parts ``ini_h5_geospatial`` and ``nsrdb_gids`` rely on: a compound
+    ``meta`` dataset, a bytes ``time_index``, and chunked 2-D ``(time, site)``
+    variables carrying ``psm_scale_factor``.
+    """
+    import h5py
+    import numpy as np
+
+    fields = [("latitude", "f4"), ("longitude", "f4"), ("state", "S12")]
+    if with_offshore:
+        fields.insert(2, ("offshore", "i1"))
+    meta = np.zeros(n_sites, dtype=np.dtype(fields))
+    meta["latitude"] = np.linspace(35.0, 42.0, n_sites)
+    meta["longitude"] = np.linspace(-110.0, -103.0, n_sites)
+    meta["state"] = [b"Colorado"] * n_sites
+    if with_offshore:
+        # make the last two sites offshore
+        meta["offshore"][-2:] = 1
+
+    times = pd.date_range("2020-01-01", periods=n_times, freq="1h")
+    with h5py.File(path, "w") as hf:
+        hf.create_dataset("meta", data=meta)
+        hf.create_dataset(
+            "time_index",
+            data=np.array([t.isoformat().encode() for t in times]),
+        )
+        for var in ("temp_air", "ghi"):
+            dset = hf.create_dataset(
+                var,
+                data=np.arange(n_times * n_sites, dtype="i2").reshape(n_times, n_sites),
+                chunks=(n_times, site_chunk),
+            )
+            dset.attrs["psm_scale_factor"] = 1.0
+    return str(path)
+
+
+def test_nsrdb_gids_bbox_and_land_only(tmp_path):
+    fp = _write_nsrdb_h5(tmp_path / "nsrdb.h5")
+
+    all_gids = pvdeg.weather.nsrdb_gids([fp])
+    assert list(all_gids) == list(range(8))
+
+    # the two offshore sites are the last two
+    land = pvdeg.weather.nsrdb_gids([fp], land_only=True)
+    assert list(land) == list(range(6))
+
+    # bbox is inclusive and ordered (min, max)
+    clipped = pvdeg.weather.nsrdb_gids(
+        [fp], bbox={"lat": (35.0, 38.0), "lon": (-111.0, -100.0)}
+    )
+    assert clipped.min() == 0
+    assert clipped.max() < 8
+    assert (clipped == sorted(set(clipped))).all()
+
+
+def test_nsrdb_gids_empty_selection_raises(tmp_path):
+    """An out-of-range bbox should say so, not return an empty array that blows up
+    later inside the chunking logic."""
+    fp = _write_nsrdb_h5(tmp_path / "nsrdb.h5")
+    with pytest.raises(ValueError, match="No NSRDB sites matched"):
+        pvdeg.weather.nsrdb_gids([fp], bbox={"lat": (80.0, 85.0), "lon": (0.0, 5.0)})
+
+
+def test_ini_h5_geospatial_empty_gids_raises(tmp_path):
+    fp = _write_nsrdb_h5(tmp_path / "nsrdb.h5")
+    with pytest.raises(ValueError, match="`gids` is empty"):
+        pvdeg.weather.ini_h5_geospatial([fp], gids=[])
+
+
+def test_nsrdb_meta_rows_sorts_and_dedupes(tmp_path):
+    """h5py fancy indexing needs a strictly increasing selection, so unsorted or
+    duplicated gids must be normalized rather than raising from the h5py layer."""
+    fp = _write_nsrdb_h5(tmp_path / "nsrdb.h5")
+    meta_df = pvdeg.weather._nsrdb_meta_rows(fp, [5, 1, 5, 3])
+    assert list(meta_df.index) == [1, 3, 5]
+    assert meta_df.index.name == "gid"
+    # byte string columns are decoded
+    assert meta_df["state"].iloc[0] == "Colorado"
+
+
+def test_ini_h5_geospatial_gid_subset_chunks_on_native_boundaries(tmp_path):
+    fp = _write_nsrdb_h5(tmp_path / "nsrdb.h5", site_chunk=3)
+    gids = [0, 1, 4, 7]
+    ds, meta_df = pvdeg.weather.ini_h5_geospatial([fp], gids=gids)
+
+    assert list(ds.gid.values) == gids
+    assert list(meta_df.index) == gids
+    assert ds.sizes["time"] == 6
+    # native site chunks are width 3 -> gids group as {0,1}, {4}, {7}
+    assert ds.chunks["gid"] == (2, 1, 1)
+    # time is kept whole so each location has its full series in one chunk
+    assert ds.chunks["time"] == (6,)
+
+
+def test_ini_h5_geospatial_gid_subset_is_deduped(tmp_path):
+    fp = _write_nsrdb_h5(tmp_path / "nsrdb.h5")
+    ds, meta_df = pvdeg.weather.ini_h5_geospatial([fp], gids=[4, 2, 4, 2])
+    assert list(ds.gid.values) == [2, 4]
+    assert list(meta_df.index) == [2, 4]
+
+
+def test_ini_h5_geospatial_tolerates_1d_and_unchunked_vars(tmp_path):
+    """site_chunk is derived only from 2-D chunked datasets. A 1-D or unchunked
+    variable previously made the result order-dependent, or raised IndexError."""
+    import h5py
+    import numpy as np
+
+    fp = _write_nsrdb_h5(tmp_path / "nsrdb.h5", site_chunk=3)
+    with h5py.File(fp, "a") as hf:
+        # 1-D chunked dataset: indexing chunks[1] on this used to raise IndexError
+        hf.create_dataset("elevation_1d", data=np.arange(8, dtype="i2"), chunks=(4,))
+
+    ds, _ = pvdeg.weather.ini_h5_geospatial([fp], gids=[0, 1, 4, 7])
+    # unchanged from the run without the 1-D variable -> site_chunk still 3
+    assert ds.chunks["gid"] == (2, 1, 1)
+
+
+# ---------------------------------------------------------------------------
+# _downsample_time
+# ---------------------------------------------------------------------------
+
+
+def _hourly_ds(n_times=8, n_gids=2, freq="30min"):
+    """Small regular (time, gid) dataset for time-downsampling tests."""
+    import numpy as np
+
+    times = pd.date_range("2020-01-01", periods=n_times, freq=freq)
+    data = np.arange(n_times * n_gids, dtype="f8").reshape(n_times, n_gids)
+    return xr.Dataset(
+        {"temp_air": (("time", "gid"), data)},
+        coords={"time": times, "gid": np.arange(n_gids)},
+    )
+
+
+def test_downsample_time_integer_multiple_uses_coarsen():
+    """30min -> 1h is a clean 2x, so it must block-average and label bins left."""
+    ds = _hourly_ds(n_times=8, freq="30min")
+    out = pvdeg.weather._downsample_time(ds, "1h")
+
+    assert out.sizes["time"] == 4
+    # left-labelled windows (bin start), matching resample's default
+    assert list(out.time.values) == list(ds.time.values[::2])
+    # block mean of each consecutive pair, per gid
+    expected = (ds["temp_air"].values[0::2] + ds["temp_air"].values[1::2]) / 2
+    assert (out["temp_air"].values == expected).all()
+
+
+def test_downsample_time_noop_when_already_coarser():
+    """Asking for a resolution at or below the native step must not change data."""
+    ds = _hourly_ds(n_times=6, freq="1h")
+    same = pvdeg.weather._downsample_time(ds, "1h")  # factor == 1
+    finer = pvdeg.weather._downsample_time(ds, "30min")  # factor == 0
+    for out in (same, finer):
+        assert out.sizes["time"] == ds.sizes["time"]
+        assert (out["temp_air"].values == ds["temp_air"].values).all()
+
+
+def test_downsample_time_trims_partial_trailing_window():
+    """coarsen uses boundary='trim', so an incomplete final window is dropped
+    rather than averaged over fewer samples."""
+    ds = _hourly_ds(n_times=7, freq="30min")  # 3 full pairs + 1 leftover
+    out = pvdeg.weather._downsample_time(ds, "1h")
+    assert out.sizes["time"] == 3
+
+
+def test_downsample_time_non_integer_ratio_falls_back_to_resample():
+    """45min is not a whole multiple of a 30min step, so coarsen cannot express it
+    and the resample path must be used instead."""
+    ds = _hourly_ds(n_times=8, freq="30min")
+    out = pvdeg.weather._downsample_time(ds, "45min")
+    expected = ds.resample(time="45min").mean()
+    assert out.sizes["time"] == expected.sizes["time"]
+    assert list(out.time.values) == list(expected.time.values)
+
+
+def test_downsample_time_calendar_offset_falls_back_to_resample():
+    """A non-fixed offset like month-start is not a pd.Timedelta, so the
+    try/except must route it to resample rather than raising."""
+    ds = _hourly_ds(n_times=8, freq="1h")
+    out = pvdeg.weather._downsample_time(ds, "MS")
+    assert out.sizes["time"] == ds.resample(time="MS").mean().sizes["time"]
+
+
+def test_downsample_time_single_timestep_is_returned_unchanged():
+    ds = _hourly_ds(n_times=1, freq="1h")
+    out = pvdeg.weather._downsample_time(ds, "1h")
+    assert out is ds

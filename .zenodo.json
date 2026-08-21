@@ -73,7 +73,7 @@
   "access_right": "open",
   "related_identifiers": [
     {
-      "identifier": "https://github.com/NREL/PVDegradationTools",
+      "identifier": "https://github.com/NatLabRockies/PVDegradationTools",
       "relation": "isSupplementTo",
       "scheme": "url"
     }
