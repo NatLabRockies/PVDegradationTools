@@ -7,7 +7,7 @@ We welcome contributions to PVDeg! Whether you're fixing bugs, adding features,
 improving documentation, or contributing to our material property databases, your
 help is valuable to the PV community.
 
-For a quick overview, see `CONTRIBUTING.md <https://github.com/NREL/PVDegradationTools/blob/main/CONTRIBUTING.md>`_ on GitHub.
+For a quick overview, see `CONTRIBUTING.md <https://github.com/NatLabRockies/PVDegradationTools/blob/main/CONTRIBUTING.md>`_ on GitHub.
 
 This guide provides comprehensive details for contributors.
 
@@ -17,13 +17,13 @@ Easy Ways to Contribute
 
 Here are ways to contribute, even if you're new to PVDeg, git, or Python:
 
-* **Report bugs or request features** via `GitHub issues <https://github.com/NREL/PVDegradationTools/issues>`_
+* **Report bugs or request features** via `GitHub issues <https://github.com/NatLabRockies/PVDegradationTools/issues>`_
 * **Join discussions** on existing issues and pull requests
 * **Improve documentation** - fix typos, clarify explanations, add examples
 * **Enhance unit tests** - increase coverage or improve test quality
 * **Create or improve tutorials** - demonstrate PVDeg in your area of expertise
 * **Contribute to material databases** - add validated degradation parameters and properties
-* **Share your work** - add your project to our `wiki <https://github.com/NREL/PVDegradationTools/wiki>`_
+* **Share your work** - add your project to our `wiki <https://github.com/NatLabRockies/PVDegradationTools/wiki>`_
 * **Spread the word** - tell colleagues about PVDeg
 
 Getting Started
@@ -306,7 +306,9 @@ Documentation
 * Include markdown cells explaining concepts
 * Use local data files when possible (avoid API dependencies for reproducibility)
 * Keep execution time under 5 minutes
-* Clear outputs before committing (pre-commit will help)
+* Commit notebooks with their executed outputs (run them with
+  ``jupyter nbconvert --to notebook --execute --inplace``); do not clear outputs, as
+  ``nbval`` validates them in CI
 
 Notebook Validation
 -------------------
@@ -371,8 +373,16 @@ but you still want to verify the notebook executes without errors.
 
 **Best practices for notebook contributions**:
 
-1. **Clear outputs before committing**: Use ``jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace notebook.ipynb``
-   or let pre-commit hooks handle it automatically
+1. **Commit notebooks with their outputs**: Execute the notebook top-to-bottom with a
+   fresh kernel before committing, so stored outputs and execution counts stay current
+   and consistent:
+
+   .. code-block:: bash
+
+       jupyter nbconvert --to notebook --execute --inplace notebook.ipynb
+
+   Replace ``notebook.ipynb`` with the path to your notebook (e.g.,
+   ``tutorials/04_scenario/01_scenario_temperature.ipynb``).
 
 2. **Test locally first**: Always run notebooks locally before pushing to verify they work
 
@@ -387,7 +397,13 @@ but you still want to verify the notebook executes without errors.
 6. **Keep execution time reasonable**: Aim for under 5 minutes per notebook. For longer analyses,
    consider pre-computing results or creating separate demo notebooks
 
-7. **Version control friendly**: Clear all outputs before committing (jupytext and pre-commit help with this)
+7. **Mark non-reproducible cells**: For a cell whose output cannot be reproduced exactly
+   (live API calls, Plotly/Matplotlib figures, timestamps, random draws), add a
+   ``# NBVAL_IGNORE_OUTPUT`` comment on its own line inside the cell; ``nbval`` then
+   executes the cell but skips comparing its output. Always re-run the notebook after
+   editing such a cell — a cell with modified source but stale stored outputs (execution
+   count ``null`` with outputs present) makes ``nbval`` fail with
+   ``Unrun reference cell has outputs``.
 
 **Troubleshooting notebook validation failures**:
 
@@ -513,7 +529,7 @@ Before submitting your pull request, verify:
 - [ ] Pre-commit hooks pass (``pre-commit run --all-files``)
 - [ ] Documentation updated if adding features
 - [ ] What's new entry added if significant change
-- [ ] Notebooks clear outputs and sync with ``.py`` scripts
+- [ ] Notebooks re-run with outputs committed (not cleared) and synced with ``.py`` scripts
 - [ ] Database entries include proper citations and metadata
 
 Code Review Process
@@ -537,7 +553,7 @@ Contributor License Agreement
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First-time contributors must sign the `Contributor License Agreement (CLA)
-<https://github.com/NREL/PVDegradationTools/blob/main/cla-1.0.md>`_.
+<https://github.com/NatLabRockies/PVDegradationTools/blob/main/cla-1.0.md>`_.
 This protects both you and the project.
 
 When you submit your first pull request, a bot will comment with instructions
@@ -568,12 +584,46 @@ For maintainers and contributors interested in the release workflow:
 * Dependency updates
 * Issue references (#123)
 
+**Release checklist**: the order matters, because pushing a tag immediately publishes
+to PyPI and a released version number can never be reused.
+
+1. On ``development``, finalise ``docs/source/whatsnew/releases/vX.Y.Z.rst``: set the
+   real release date in the heading, and confirm every entry actually ships in this
+   release rather than sitting on a future-work branch.
+2. Bump the citation metadata **before tagging**, so the tag carries correct
+   information:
+
+   * ``CITATION.cff`` -- ``version`` and ``date-released``.
+   * ``.zenodo.json`` -- only if the author list or affiliations changed.
+
+   The ``update-citation`` workflow skips its commit when ``CITATION.cff`` already
+   matches the tag, so doing this by hand here leaves nothing for it to do. Skipping
+   this step is not fatal, but see step 5.
+3. Open the release pull request (``development`` into ``main``), get an approving
+   review, and let CI finish.
+4. Tag ``development`` and push the tag::
+
+       git tag -a vX.Y.Z -m "<short release description>"
+       git push origin vX.Y.Z
+
+   Tag ``development``, not the merge commit on ``main``: ``update-citation`` pushes to
+   ``development`` explicitly, so tagging elsewhere sends a commit to the wrong branch.
+   Pushing the tag triggers the PyPI publish, which is irreversible.
+5. If ``CITATION.cff`` was not bumped in step 2, ``update-citation`` now pushes a commit
+   to ``development``. **Wait for it before merging**, or ``main`` ships a citation file
+   naming the previous version.
+6. Merge the release pull request into ``main``.
+7. Publish a **GitHub Release** for the tag. Nothing automates this, and Zenodo mints the
+   DOI from the Release rather than from the tag, so the DOI referenced in the docs will
+   not appear until this is done. The ``vX.Y.Z.rst`` changelog entry works as the release
+   notes.
+
 Getting Help
 ~~~~~~~~~~~~
 
 If you have questions or need help:
 
-* **Ask on GitHub Discussions**: `<https://github.com/NREL/PVDegradationTools/discussions>`_
+* **Ask on GitHub Discussions**: `<https://github.com/NatLabRockies/PVDegradationTools/discussions>`_
 * **Open an issue**: For bugs or feature requests
 * **Check the documentation**: `<https://pvdegradationtools.readthedocs.io/>`_
 * **Review existing PRs**: See how others approached similar problems

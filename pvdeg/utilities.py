@@ -568,7 +568,10 @@ def _add_material(
     data.update({name: material_dict})
 
     with open(fpath, "w") as f:
-        json.dump(data, f, indent=4)
+        # Match the repo's data-file convention (raw UTF-8, trailing newline) so
+        # re-serializing an existing database file produces no spurious diff.
+        json.dump(data, f, indent=4, ensure_ascii=False)
+        f.write("\n")
 
 
 def quantile_df(file, q):
@@ -829,7 +832,7 @@ def geospatial_from_csv(
     Creates an xarray dataset contaning aeospatial weather data and a pandas dataframe
     containing geospatial metadata from a list of local csv files.
 
-    Useful for importing data from NSRDB api viewer https://nsrdb.nrel.gov/data-viewer
+    Useful for importing data from NSRDB api viewer https://nsrdb.nlr.gov/data-viewer
     when downloaded locally as csv
 
     Parameters
@@ -1102,6 +1105,7 @@ def fix_metadata(meta):
         dictionary of metadata with key : dict pairs
 
     Returns
+    -------
     fixed_meta : dict
         dictionary of metadata with key : value pairs
     """
@@ -1110,7 +1114,7 @@ def fix_metadata(meta):
 
 
 # we want this to only exist for things that can be run on kestrel
-def nrel_kestrel_check():
+def nlr_kestrel_check():
     """Check if the user is on Kestrel HPC environment.
 
     Passes silently or raises a
@@ -1122,11 +1126,11 @@ def nrel_kestrel_check():
 
     See Also
     --------
-    NREL HPC : https://www.nrel.gov/hpc/
-    Kestrel Documentation : https://nrel.github.io/HPC/Documentation/
+    NLR HPC : https://www.nlr.gov/hpc/
+    Kestrel Documentation : https://natlabrockies.github.io/HPC/Documentation/
     """
 
-    KESTREL_HOSTNAME = "kestrel.hpc.nrel.gov"
+    KESTREL_HOSTNAME = "kestrel.hpc.nlr.gov"
 
     host = run(args=["hostname", "-f"], shell=False, capture_output=True, text=True)
     device_domain = ".".join(host.stdout.split(".")[-4:])[:-1]
@@ -1593,7 +1597,7 @@ def _load_gcr_from_config(config_files: dict):
 def optimal_gcr_pitch_bifacial_fixed_tilt(
     latitude: float, cw: float = 2
 ) -> tuple[float, float]:
-    """
+    r"""
     Compute the optimal ground coverage ratio (GCR) and row pitch for
     fixed-tilt bifacial PV systems as a function of latitude.
 
@@ -1608,14 +1612,14 @@ def optimal_gcr_pitch_bifacial_fixed_tilt(
     Inter-row energy-yield loss 5% bifacial fixed-tilt parameters,
     as reported in Table 1 of Tonita et al. (2023):
 
-    +-----------+--------+-----------+
-    | Parameter | Value  | Units     |
-    +===========+========+===========+
-    | P         | -0.560  | unitless  |
-    | K         | 0.133  | 1/°       |
-    | α₀        | 40.2   | °         |
-    | GCR₀      | 0.70   | unitless  |
-    +-----------+--------+-----------+
+    =========  ======  =========
+    Parameter  Value   Units
+    =========  ======  =========
+    P          -0.560  unitless
+    K          0.133   1/deg
+    alpha_0    40.2    deg
+    GCR_0      0.70    unitless
+    =========  ======  =========
 
     Parameters
     ------------
