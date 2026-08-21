@@ -49,6 +49,14 @@ Documentation
   duplicate notebooks and orphaned scripts left by the geospatial/scenario
   split, fixed the internal cross-reference links between tutorials, and
   updated the tutorial listing in the README and docs. (:pull:`351`)
+- Added an ordered release checklist to :ref:`contributing`, covering the tag-on-
+  ``development`` ordering the ``update-citation`` workflow depends on, bumping the
+  citation metadata before tagging, and publishing the GitHub Release that Zenodo
+  needs to mint the DOI. (:pull:`365`)
+- Completed the organisation rename in the citation and description metadata:
+  ``CITATION.cff``, ``.zenodo.json`` and the package summary on the docs landing
+  page now say National Laboratory of the Rockies rather than National Renewable
+  Energy Laboratory, matching the README. (:pull:`365`)
 
 
 Notebooks

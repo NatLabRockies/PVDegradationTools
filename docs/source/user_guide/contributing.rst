@@ -584,6 +584,40 @@ For maintainers and contributors interested in the release workflow:
 * Dependency updates
 * Issue references (#123)
 
+**Release checklist**: the order matters, because pushing a tag immediately publishes
+to PyPI and a released version number can never be reused.
+
+1. On ``development``, finalise ``docs/source/whatsnew/releases/vX.Y.Z.rst``: set the
+   real release date in the heading, and confirm every entry actually ships in this
+   release rather than sitting on a future-work branch.
+2. Bump the citation metadata **before tagging**, so the tag carries correct
+   information:
+
+   * ``CITATION.cff`` -- ``version`` and ``date-released``.
+   * ``.zenodo.json`` -- only if the author list or affiliations changed.
+
+   The ``update-citation`` workflow skips its commit when ``CITATION.cff`` already
+   matches the tag, so doing this by hand here leaves nothing for it to do. Skipping
+   this step is not fatal, but see step 5.
+3. Open the release pull request (``development`` into ``main``), get an approving
+   review, and let CI finish.
+4. Tag ``development`` and push the tag::
+
+       git tag -a vX.Y.Z -m "<short release description>"
+       git push origin vX.Y.Z
+
+   Tag ``development``, not the merge commit on ``main``: ``update-citation`` pushes to
+   ``development`` explicitly, so tagging elsewhere sends a commit to the wrong branch.
+   Pushing the tag triggers the PyPI publish, which is irreversible.
+5. If ``CITATION.cff`` was not bumped in step 2, ``update-citation`` now pushes a commit
+   to ``development``. **Wait for it before merging**, or ``main`` ships a citation file
+   naming the previous version.
+6. Merge the release pull request into ``main``.
+7. Publish a **GitHub Release** for the tag. Nothing automates this, and Zenodo mints the
+   DOI from the Release rather than from the tag, so the DOI referenced in the docs will
+   not appear until this is done. The ``vX.Y.Z.rst`` changelog entry works as the release
+   notes.
+
 Getting Help
 ~~~~~~~~~~~~
 
