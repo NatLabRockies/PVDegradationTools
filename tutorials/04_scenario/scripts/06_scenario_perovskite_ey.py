@@ -40,9 +40,6 @@ from matplotlib.lines import Line2D
 import plotly.express as px
 import plotly.graph_objects as go
 
-REPO_ROOT = os.path.dirname(os.path.dirname(pvdeg.__file__))
-TUTORIALS_DATA = os.path.join(REPO_ROOT, "tutorials", "data")
-
 # Redirect all Scenario job folders to the system temp directory.
 # Keeps the repo working directory free of pvd_job_* clutter.
 pvdeg.config.SCENARIO_OUTPUT_PATH = tempfile.gettempdir()
@@ -75,13 +72,13 @@ LOCATIONS = {
 all_weather, all_meta = {}, {}
 for loc, (wf, mf) in LOCATIONS.items():
     df = pd.read_csv(
-        os.path.join(TUTORIALS_DATA, wf),
+        os.path.join(pvdeg.DATA_DIR, wf),
         index_col=0,
         parse_dates=True,
     )
     df.index = df.index.map(lambda ts: ts.replace(year=2020))
     df = df.sort_index()
-    with open(os.path.join(TUTORIALS_DATA, mf)) as _f:
+    with open(os.path.join(pvdeg.DATA_DIR, mf)) as _f:
         mt = json.load(_f)
     all_weather[loc], all_meta[loc] = df, mt
     print(f"  {loc}: {len(df)} rows  ({mt['latitude']:.2f}°N, {mt['longitude']:.2f}°E)")

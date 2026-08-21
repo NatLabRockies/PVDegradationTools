@@ -52,14 +52,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 import pvcircuit as pvc
 
-# Tutorial assumption: run from repo root or tutorials/04_scenario
-_cwd = os.getcwd()
-if os.path.isdir(os.path.join(_cwd, "tutorials", "data")):
-    REPO_ROOT = _cwd
-else:
-    REPO_ROOT = os.path.abspath(os.path.join(_cwd, "..", ".."))
-
-TUTORIALS_DATA = os.path.join(REPO_ROOT, "tutorials", "data")
+# Data files are read from pvdeg.DATA_DIR (the packaged data directory).
+# This is robust regardless of os.getcwd(), which Scenario.__init__
+# changes by calling os.chdir() into the job folder.
 
 # Redirect all Scenario job folders to the system temp directory.
 # Keeps the repo working directory free of pvd_job_* clutter.
@@ -138,10 +133,10 @@ tandem.j[1].set(Eg=Eg_bot, n=[n_bot], J0ratio=[jr_bot], Gsh=1 / Rsh_bot)
 tandem.set(Rs2T=Rser_top + Rser_bot)
 
 # Reference subcell currents from AM1.5G, using measured EQE from
-# tutorials/data/orooji_liu_eqe.csv (columns: wavelength_nm, eqe_top,
+# pvdeg/data/orooji_liu_eqe.csv (columns: wavelength_nm, eqe_top,
 # eqe_bot), digitized from the Liu et al. 2024 Nature 635, 596-603
 # reference device that Orooji et al. parameterize against.
-EQE_CSV_PATH = os.path.join(TUTORIALS_DATA, "orooji_liu_eqe.csv")
+EQE_CSV_PATH = os.path.join(pvdeg.DATA_DIR, "orooji_liu_eqe.csv")
 _eqe_top_arr, _eqe_bot_arr = load_measured_eqe(EQE_CSV_PATH, pvc.qe.wvl)
 print(f"Using measured EQE from {EQE_CSV_PATH}")
 
@@ -479,7 +474,7 @@ fig.tight_layout()
 # - Array orientation: fixed-tilt, equator-facing, tilt = site latitude (a standard annual-optimal
 #   assumption). Tilt is not specified in the Orooji methodology.
 # - Reference Jsc: `reference_jsc_from_spectrum()` uses measured perovskite/Si EQE curves
-#   (`tutorials/data/orooji_liu_eqe.csv`, digitized from the Liu et al. 2024 Nature 635, 596-603
+#   (`pvdeg/data/orooji_liu_eqe.csv`, digitized from the Liu et al. 2024 Nature 635, 596-603
 #   reference device that Orooji parameterizes against)
 
 # %%
@@ -670,7 +665,7 @@ print(diag_df.to_string(index=False))
 # Daily average is computed from daytime-only hours (POA > 0) to match
 # the likely convention in Orooji's Fig. 4 and avoid nighttime dilution.
 # The daily peak uses all hours since T_cell peak always occurs during daylight.
-digitized_path = os.path.join(TUTORIALS_DATA, "orooji_fig4_celltemp_digitized.csv")
+digitized_path = os.path.join(pvdeg.DATA_DIR, "orooji_fig4_celltemp_digitized.csv")
 fig4_digitized = pd.read_csv(digitized_path)
 _fig4_locs = set(fig4_digitized["location"].unique())
 
@@ -794,7 +789,7 @@ fig.tight_layout(rect=[0, 0, 1, 0.92])
 # likely convention in Orooji's Fig. 4. Including nighttime zeroes would
 # substantially suppress the daily average and make pvdeg look artificially milder.
 irr_digitized_path = os.path.join(
-    TUTORIALS_DATA, "orooji_fig4_irradiance_digitized.csv"
+    pvdeg.DATA_DIR, "orooji_fig4_irradiance_digitized.csv"
 )
 fig4_irr_digitized = pd.read_csv(irr_digitized_path)
 _fig4_irr_locs = set(fig4_irr_digitized["location"].unique())

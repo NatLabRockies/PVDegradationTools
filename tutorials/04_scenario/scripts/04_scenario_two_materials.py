@@ -12,11 +12,9 @@ import pandas as pd
 import json
 import numpy as np
 
-# Derive the repo root from the pvdeg package location.
+# Data files are read from pvdeg.DATA_DIR (the packaged data directory).
 # This is robust regardless of os.getcwd(), which Scenario.__init__
 # changes by calling os.chdir() into the job folder.
-REPO_ROOT = os.path.dirname(os.path.dirname(pvdeg.__file__))
-TUTORIALS_DATA = os.path.join(REPO_ROOT, "tutorials", "data")
 
 # %% [markdown]
 # ## Load weather data
@@ -25,18 +23,15 @@ TUTORIALS_DATA = os.path.join(REPO_ROOT, "tutorials", "data")
 
 # %%
 weather_df = pd.read_csv(
-    os.path.join(TUTORIALS_DATA, "psm4_golden.csv"),
+    os.path.join(pvdeg.DATA_DIR, "psm4_golden.csv"),
     index_col=0,
     parse_dates=True,
 )
-with open(os.path.join(TUTORIALS_DATA, "meta_golden.json"), "r") as f:
+with open(os.path.join(pvdeg.DATA_DIR, "meta_golden.json"), "r") as f:
     meta = json.load(f)
 
-# pvdeg ships a spectra.csv in its package data directory
-DATA_DIR = os.path.join(os.path.dirname(pvdeg.__file__), "data")
-
 wavelengths = np.array(range(280, 420, 20))
-SPECTRA = pd.read_csv(os.path.join(DATA_DIR, "spectra.csv"), header=0, index_col=0)
+SPECTRA = pd.read_csv(os.path.join(pvdeg.DATA_DIR, "spectra.csv"), header=0, index_col=0)
 
 # %% [markdown]
 # ## Create the scenario and load two materials

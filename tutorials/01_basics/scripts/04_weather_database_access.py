@@ -3,7 +3,7 @@
 #
 # **Requirements:**
 # - Internet access
-# - NSRDB API key. API keys are free. You can request and obtain an API key in about 5 minutes. To get your own key, visit https://developer.nrel.gov/signup/
+# - NSRDB API key. API keys are free. You can request and obtain an API key in about 5 minutes. To get your own key, visit https://developer.nlr.gov/signup/
 # - Step **1.** is for Kestrel HPC users. You will need an account with NREL's Kestrel computer for this method.
 #
 # **Objectives:**
@@ -32,7 +32,13 @@
 # # Single location example
 
 # %%
+# if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:
+# # !pip install pvdeg
+
+# %%
+import os
 import pvdeg
+from pvdeg import DATA_DIR
 import json
 import pandas as pd
 
@@ -94,7 +100,7 @@ weather_arg = {
 # %% [markdown]
 # # 2. NSRDB - API
 #
-# To access the NREL NSRDB, you will need an API key. Key's are free, but require you to set up an account. Without an API key, you can use a demonstration API which is severely limited. To set up an account and get your API key, visit https://developer.nrel.gov/signup/
+# To access the NREL NSRDB, you will need an API key. Key's are free, but require you to set up an account. Without an API key, you can use a demonstration API which is severely limited. To set up an account and get your API key, visit https://developer.nlr.gov/signup/
 #
 # Key Notes:
 # - set `attributes = []` to return all possible attributes (weather fields)
@@ -105,14 +111,16 @@ weather_arg = {
 # %%
 # Load pre-saved weather data for this tutorial
 # This avoids API rate limits during testing and builds
-weather_df = pd.read_csv("../data/psm4_golden.csv", index_col=0, parse_dates=True)
-with open("../data/meta_golden.json", "r") as f:
+weather_df = pd.read_csv(
+    os.path.join(DATA_DIR, "psm4_golden.csv"), index_col=0, parse_dates=True
+)
+with open(os.path.join(DATA_DIR, "meta_golden.json"), "r") as f:
     meta = json.load(f)
 
 # Uncomment below to fetch fresh data with your own API key:
 # API_KEY = "your_api_key_here"
 # # The example API key here is for demonstation and is rate-limited per IP.
-# # To get your own API key, visit https://developer.nrel.gov/signup/
+# # To get your own API key, visit https://developer.nlr.gov/signup/
 # weather_db = "PSM4"
 # weather_id = (39.741931, -105.169891)
 # weather_arg = {
@@ -146,24 +154,27 @@ print(meta_clean)
 # # 3. PVGIS
 #
 # This method uses the PVGIS database, a public resource. It requires no API key or user account.
+#
+# We use Golden, CO here so that this section matches the cached weather that ships with the repo. With `USE_LIVE_PVGIS = False` (the default) the notebook reads that cached TMY instead of calling the API, which keeps the results reproducible offline and in CI -- so the numbers below match section 2, which reads the same file. Set `USE_LIVE_PVGIS = True` to fetch the same location live from PVGIS.
 
 # %%
 weather_db = "PVGIS"
-# weather_id = (39.741931, -105.169891)
-weather_id = (24.7136, 46.6753)  # Riyadh, Saudi Arabia
+weather_id = (39.73, -105.18)  # Golden, CO
 # weather_arg = {'map_variables': True}
 
 # For reproducible notebook testing, default to cached local weather/meta.
-# Set USE_LIVE_PVGIS = True to fetch live PVGIS data.
+# Set USE_LIVE_PVGIS = True to fetch live PVGIS data for the same location.
 USE_LIVE_PVGIS = False
 
 if USE_LIVE_PVGIS:
     # TMY from live PVGIS API
     weather_df, meta = pvdeg.weather.get(weather_db, weather_id)
 else:
-    # Cached sample weather to avoid SSL/network flakiness in CI
-    weather_df = pd.read_csv("../data/psm4_golden.csv", index_col=0, parse_dates=True)
-    with open("../data/meta_golden.json", "r") as f:
+    # Cached NSRDB TMY for Golden, CO -- avoids SSL/network flakiness in CI
+    weather_df = pd.read_csv(
+        os.path.join(DATA_DIR, "psm4_golden.csv"), index_col=0, parse_dates=True
+    )
+    with open(os.path.join(DATA_DIR, "meta_golden.json"), "r") as f:
         meta = json.load(f)
 
 # Perform calculation

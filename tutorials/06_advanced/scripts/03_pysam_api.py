@@ -16,7 +16,7 @@ import xarray as xr
 import matplotlib.pyplot as plt
 
 import pvdeg
-from pvdeg import TEST_DATA_DIR
+from pvdeg import DATA_DIR, TEST_DATA_DIR
 
 # %% [markdown]
 # ## About PySAM
@@ -35,10 +35,9 @@ from pvdeg import TEST_DATA_DIR
 # model for that one site.
 
 # %%
-# Cached NSRDB weather for Miami, FL (ships with the repo) — fully offline.
-data_dir = os.path.join(
-    os.path.dirname(os.path.dirname(pvdeg.__file__)), "tutorials", "data"
-)
+# Cached NSRDB weather for Miami, FL, shipped with the pvdeg package -- fully
+# offline, and resolves from a pip install as well as a repo clone.
+data_dir = DATA_DIR
 
 weather_miami = pd.read_csv(
     os.path.join(data_dir, "psm4_miami.csv"), index_col=0, parse_dates=True

@@ -160,7 +160,7 @@ for n in range(1, 13):
                         title=f"Normalized Power  - 2022-{m}-{d} 12:00",
                         cb_title="Normalized Power",
                     )
-                    plt.savefig(f"../../TEMP/RH_animation_{n}.png", dpi=600)
+                    # plt.savefig(f"../../TEMP/RH_animation_{n}.png", dpi=600)
 
 # import imageio
 # ims = [imageio.imread(f'../../TEMP/RH_animation_{n}.png') for n in range(1, 13)]
@@ -234,7 +234,7 @@ for n in range(1, 13):
                     ax.set_ylim([0.945, 1.005])
                     ax.set_ylabel("Normalized Power")
 
-                    plt.savefig(f"../../TEMP/LETID_plot_animation_{n}.png", dpi=600)
+                    # plt.savefig(f"../../TEMP/LETID_plot_animation_{n}.png", dpi=600)
 
 # %%
 # import imageio

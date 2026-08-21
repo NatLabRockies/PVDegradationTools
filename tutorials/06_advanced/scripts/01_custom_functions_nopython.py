@@ -11,6 +11,7 @@ import pandas as pd
 import sympy as sp
 import matplotlib.pyplot as plt
 import pvdeg
+from pvdeg import DATA_DIR
 
 
 # %% [markdown]
@@ -18,7 +19,7 @@ import pvdeg
 #
 # We need a timeseries of weather data to feed into the symbolic degradation expression below.
 #
-# By default this notebook loads a cached NSRDB TMY for Miami, FL that ships with the repo (`tutorials/data/psm4_miami.csv`). This keeps the notebook reproducible in CI and works offline. Set `USE_LIVE_PVGIS = True` in the next cell to make a live PVGIS API call for Manhattan, NYC instead.
+# By default this notebook loads a cached NSRDB TMY for Miami, FL that ships with the pvdeg package (`psm4_miami.csv` in `pvdeg.DATA_DIR`). This keeps the notebook reproducible in CI and works offline. Set `USE_LIVE_PVGIS = True` in the next cell to make a live PVGIS API call for Manhattan, NYC instead.
 #
 
 # %%
@@ -32,9 +33,8 @@ if USE_LIVE_PVGIS:
         id=(40.776676, -73.971321),  # manhattan (latitude, longitude)
     )
 else:
-    repo_root = os.path.dirname(os.path.dirname(pvdeg.__file__))
-    weather_path = os.path.join(repo_root, "tutorials", "data", "psm4_miami.csv")
-    meta_path = os.path.join(repo_root, "tutorials", "data", "meta_miami.json")
+    weather_path = os.path.join(DATA_DIR, "psm4_miami.csv")
+    meta_path = os.path.join(DATA_DIR, "meta_miami.json")
 
     weather_df = pd.read_csv(weather_path, index_col=0, parse_dates=True)
     with open(meta_path, "r") as f:

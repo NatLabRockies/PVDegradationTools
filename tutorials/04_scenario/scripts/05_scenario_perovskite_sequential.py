@@ -15,18 +15,13 @@
 # %%
 import os
 import json
-from pathlib import Path
 import pandas as pd
 import pvdeg
 import matplotlib.pyplot as plt
 
-# Anchor tutorials/data before Scenario changes cwd
-cwd = Path.cwd().resolve()
-REPO_ROOT = cwd if (cwd / "tutorials" / "data").is_dir() else cwd.parents[1]
-TUTORIALS_DATA = os.path.join(REPO_ROOT, "tutorials", "data")
-
-print(REPO_ROOT)
-print(TUTORIALS_DATA)
+# Data files are read from pvdeg.DATA_DIR (the packaged data directory),
+# which is robust to Scenario.__init__ calling os.chdir() into the job folder.
+print(pvdeg.DATA_DIR)
 
 # %%
 LOCATIONS = {
@@ -38,13 +33,13 @@ LOCATIONS = {
 all_weather, all_meta = {}, {}
 for loc, (wf, mf) in LOCATIONS.items():
     df = pd.read_csv(
-        os.path.join(TUTORIALS_DATA, wf),
+        os.path.join(pvdeg.DATA_DIR, wf),
         index_col=0,
         parse_dates=True,
     )
     df.index = df.index.map(lambda ts: ts.replace(year=2020))
     df = df.sort_index()
-    with open(os.path.join(TUTORIALS_DATA, mf)) as _f:
+    with open(os.path.join(pvdeg.DATA_DIR, mf)) as _f:
         mt = json.load(_f)
     all_weather[loc], all_meta[loc] = df, mt
     print(

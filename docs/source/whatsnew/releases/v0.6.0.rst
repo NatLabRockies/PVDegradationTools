@@ -19,6 +19,7 @@ Breaking Changes
 - Refactored and cleaned up `:py:mod:pvdeg.humiditiy` by removing unused functions,
   improving docstrings, and standardizing physical constants. Full details are as
   follows:
+
     - Remove unused helper function `_ambient()`
     - Remove `_diffusivity_numerator()` and `_diffusivity_denominator()` helper
       functionsby refactoring them into `_diffusivity_weighted_water()`
@@ -35,6 +36,7 @@ Breaking Changes
       `Ead`. (:issue:`202`, :pull:`212`)
 - Rename several variable and function names in :py:mod:`pvdeg.humidity` to improve
   code clarity and maintainability. Full details are as follows:
+
     - Variable `psat` and function `psat()` to `water_saturation_pressure`
     - Variable `avg_psat` to `avg_water_saturation_pressure`
     - Variable `surface_outside` to `surface_relative`
@@ -43,15 +45,16 @@ Breaking Changes
     - Function `front_encap()` to `front_encapsulant`
     - Function `Ce()` to `back_encapsulant_water_concentration`
     - Function `back_encap` to `back_encapsulant`
+
   (:issue:`213`, :issue:`233`, :pull:`224`, :pull:`236`)
 
 
 Enhancements
 ------------
 - Change ``GeospatialScenario.get_geospatial_data()`` to a ``@property``, now use
-``GeospatialScenario.geospatial_data``
+  ``GeospatialScenario.geospatial_data``
 - Change ``GeospatialScenario.coords_tonumpy()`` to a ``@property``, now use
-``GeospatialScenario.coords``
+  ``GeospatialScenario.coords``
 - Refactor ``META_MAP`` in :py:mod:`pvdeg.weather` to module-level constant (:pull:`182`)
 - Update pytest workflow to cancel in-progress runs for the same branch in favour of
   running on the latest commit. (:pull:`191`)
@@ -77,10 +80,12 @@ Enhancements
   API clarity and maintainability. (:issue:`256`, :pull:`257`)
 - Refactor material database access: separate functionality into two distinct public
   functions:
+
     - :py:func:`pvdeg.utilities.read_material` returns the full material dictionary,
       including metadata
     - :py:func:`pvdeg.utilities.read_material_property` returns a flattened dictionary
       of parameter values for computation.
+
   This change clarifies the distinction between retrieving raw material data and
   extracting parameter values for use in calculations. (:issue:`256`, :pull:`257`)
 - Update pre-commit hooks and add github workflow (:pull:`267`)

@@ -125,6 +125,7 @@ def water_saturation_pressure(temp, average=True):
     average : boolean, default = True
         If true, return both water saturation pressure serires and the average water
         saturation pressure (used for certain calcs)
+
     Returns:
     --------
     water_saturation_pressure : array, float
@@ -816,10 +817,10 @@ def backsheet_from_encap(rh_back_encap, rh_surface_outside):
     Parameters
     ----------
     rh_back_encap : pandas series (float)
-        Relative Humidity of Frontside Solar module Encapsulant. *See rh_back_encap()
+        Relative Humidity of Frontside Solar module Encapsulant. See rh_back_encap()
     rh_surface_outside : pandas series (float)
         The relative humidity of the surface of a solar module.
-        *See surface_relative()
+        See surface_relative()
 
     Returns
     -------

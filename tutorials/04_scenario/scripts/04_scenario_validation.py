@@ -12,21 +12,17 @@ import subprocess
 import numpy as np
 import pandas as pd
 
-REPO_ROOT = os.path.dirname(os.path.dirname(pvdeg.__file__))
-TUTORIALS_DATA = os.path.join(REPO_ROOT, "tutorials", "data")
-DATA_DIR = os.path.join(os.path.dirname(pvdeg.__file__), "data")
-
 # %%
 weather_df = pd.read_csv(
-    os.path.join(TUTORIALS_DATA, "psm4_golden.csv"),
+    os.path.join(pvdeg.DATA_DIR, "psm4_golden.csv"),
     index_col=0,
     parse_dates=True,
 )
-with open(os.path.join(TUTORIALS_DATA, "meta_golden.json"), "r") as f:
+with open(os.path.join(pvdeg.DATA_DIR, "meta_golden.json"), "r") as f:
     meta = json.load(f)
 
 wavelengths = np.array(range(280, 420, 20))
-SPECTRA = pd.read_csv(os.path.join(DATA_DIR, "spectra.csv"), header=0, index_col=0)
+SPECTRA = pd.read_csv(os.path.join(pvdeg.DATA_DIR, "spectra.csv"), header=0, index_col=0)
 
 # %%
 # Reference result 1: degradation_spectral called directly
