@@ -16,41 +16,44 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -58,40 +61,37 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '03_monte_carlo/02_standoff';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Temperature Scenario" href="../04_scenario/01_scenario_temperature.html" />
     <link rel="prev" title="Arrhenius Monte Carlo" href="01_arrhenius.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -99,7 +99,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -107,15 +106,59 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
     </header>
   
 
@@ -124,7 +167,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -154,21 +198,17 @@
     
     
     <img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-light" alt="PVDEG Tutorials - Home"/>
-    <script>document.write(`<img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-dark" alt="PVDEG Tutorials - Home"/>`);</script>
+    <img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-dark pst-js-only" alt="PVDEG Tutorials - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">01 - Basics</span></p>
@@ -349,13 +389,8 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../06_advanced/03_pysam_api.html">PySAM with API (API Key Required)</a></li>
-
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../06_advanced/02_pysam_single_location.html">PySAM for a Single Location</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_advanced/03_pysam_api.html">PySAM: Single Location &amp; Geospatial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06_advanced/04_nsrdb_distributed_api.html">NSRDB Distributed (API Key Required)</a></li>
 
 
@@ -400,9 +435,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -485,7 +525,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -499,25 +539,17 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
 </div></div>
@@ -539,7 +571,7 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Standoff Monte Carlo</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-standoff-calculation">Simple Standoff Calculation</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-correlation-coefficients-mean-and-standard-deviation-for-monte-carlo-simulation">Defining Correlation Coefficients, Mean and Standard Deviation For Monte Carlo Simulation</a></li>
@@ -564,7 +596,7 @@ document.write(`
 This journal applies a Monte Carlo to the Standoff Calculation</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:</span>
 <span class="c1"># !pip install pvdeg</span>
 </pre></div>
 </div>
@@ -576,7 +608,9 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pvdeg</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATA_DIR</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </pre></div>
 </div>
@@ -588,20 +622,20 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas version &quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pvlib version &quot;</span><span class="p">,</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Working on a "</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Python version "</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pandas version "</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pvlib version "</span><span class="p">,</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pvdeg version "</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.14.0-1017-azure
-Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
-Pandas version  3.0.1
-Pvlib version  0.15.0
-Pvdeg version  0.1.dev1+g321beb370
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1022-azure
+Python version  3.11.16 (main, Aug 13 2026, 02:46:14) [GCC 13.3.0]
+Pandas version  3.0.5
+Pvlib version  0.15.2
+Pvdeg version  0.1.dev1+g4c40f950e
 </pre></div>
 </div>
 </div>
@@ -611,22 +645,24 @@ Pvdeg version  0.1.dev1+g321beb370
 <h1>Simple Standoff Calculation<a class="headerlink" href="#simple-standoff-calculation" title="Link to this heading">#</a></h1>
 <p>This is copied from another tutorial called <code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">-</span> <span class="pre">Standards.ipynb</span></code>, please visit this page for a more in depth explanation of the process for a single standoff calculation.</p>
 <div class="alert alert-block alert-info">
-<b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a> so register now.)
+<b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a> so register now.)
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load weather data from locally saved files to avoid API rate limits</span>
-<span class="n">WEATHER</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/psm4_nyc.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../data/meta_nyc.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="n">WEATHER</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"psm4_nyc.csv"</span><span class="p">),</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"meta_nyc.json"</span><span class="p">),</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">META</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="c1"># To use the NSRDB API instead, uncomment the lines below and add your API key</span>
-<span class="c1"># Get your API key at: https://developer.nrel.gov/signup/</span>
-<span class="c1"># weather_db = &quot;PSM4&quot;</span>
+<span class="c1"># Get your API key at: https://developer.nlr.gov/signup/</span>
+<span class="c1"># weather_db = "PSM4"</span>
 <span class="c1"># weather_id = (40.633365593159226, -73.9945801019899)  # Manhattan, NYC</span>
 <span class="c1"># weather_arg = {</span>
-<span class="c1">#     &quot;api_key&quot;: &quot;YOUR_API_KEY&quot;,</span>
-<span class="c1">#     &quot;email&quot;: &quot;user@mail.com&quot;,</span>
-<span class="c1">#     &quot;map_variables&quot;: True,</span>
+<span class="c1">#     "api_key": "YOUR_API_KEY",</span>
+<span class="c1">#     "email": "user@mail.com",</span>
+<span class="c1">#     "map_variables": True,</span>
 <span class="c1"># }</span>
 <span class="c1"># WEATHER, META = pvdeg.weather.get(weather_db, weather_id, **weather_arg)</span>
 </pre></div>
@@ -644,8 +680,8 @@ Pvdeg version  0.1.dev1+g321beb370
     <span class="n">meta</span><span class="o">=</span><span class="n">META</span><span class="p">,</span>
     <span class="n">tilt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">azimuth</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span>
-    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
-    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">"isotropic"</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">"sapm"</span><span class="p">,</span>
     <span class="n">x_0</span><span class="o">=</span><span class="mf">6.1</span><span class="p">,</span>
     <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>  <span class="c1"># default</span>
 <span class="p">)</span>
@@ -677,7 +713,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># These numbers may not make sense in the context of the problem but work for demonstraiting the process</span>
-<span class="n">stats</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;X_0&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;stdev&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span> <span class="s2">&quot;wind_factor&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="mf">0.33</span><span class="p">,</span> <span class="s2">&quot;stdev&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}}</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"X_0"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"mean"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">"stdev"</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span> <span class="s2">"wind_factor"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"mean"</span><span class="p">:</span> <span class="mf">0.33</span><span class="p">,</span> <span class="s2">"stdev"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}}</span>
 
 <span class="n">corr_coeff</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -694,17 +730,17 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          X_0  wind_factor
-0    3.977938     1.207495
-1    4.038910     0.653209
-2    6.000398    -0.506262
-3    6.045305    -0.581809
-4    5.286980     0.509969
+0    8.136213     1.137420
+1    4.484416     0.118050
+2    5.258351     0.412063
+3    7.589103     0.736953
+4    5.140422     0.454285
 ..        ...          ...
-495  8.202841    -0.221403
-496  3.327368     0.432303
-497  7.176124     0.230867
-498  6.146188     0.233399
-499  2.202867     0.436108
+495  4.964491    -0.011197
+496 -2.351732     0.436994
+497  6.710006     0.262155
+498  1.550555     0.298044
+499  7.703670    -0.679873
 
 [500 rows x 2 columns]
 </pre></div>
@@ -719,19 +755,19 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
 <span class="n">function_kwargs</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;weather_df&quot;</span><span class="p">:</span> <span class="n">WEATHER</span><span class="p">,</span>
-    <span class="s2">&quot;meta&quot;</span><span class="p">:</span> <span class="n">META</span><span class="p">,</span>
-    <span class="s2">&quot;azimuth&quot;</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span>
-    <span class="s2">&quot;tilt&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;temp_model&quot;</span><span class="p">:</span> <span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sky_model&quot;</span><span class="p">:</span> <span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;conf_0&quot;</span><span class="p">:</span> <span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;conf_inf&quot;</span><span class="p">:</span> <span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;T98&quot;</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span>
-    <span class="s2">&quot;irradiance_kwarg&quot;</span><span class="p">:</span> <span class="p">{},</span>
-    <span class="s2">&quot;conf_0_kwarg&quot;</span><span class="p">:</span> <span class="p">{},</span>
-    <span class="s2">&quot;conf_inf_kwarg&quot;</span><span class="p">:</span> <span class="p">{},</span>
-    <span class="s2">&quot;model_kwarg&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">"weather_df"</span><span class="p">:</span> <span class="n">WEATHER</span><span class="p">,</span>
+    <span class="s2">"meta"</span><span class="p">:</span> <span class="n">META</span><span class="p">,</span>
+    <span class="s2">"azimuth"</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span>
+    <span class="s2">"tilt"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"temp_model"</span><span class="p">:</span> <span class="s2">"sapm"</span><span class="p">,</span>
+    <span class="s2">"sky_model"</span><span class="p">:</span> <span class="s2">"isotropic"</span><span class="p">,</span>
+    <span class="s2">"conf_0"</span><span class="p">:</span> <span class="s2">"insulated_back_glass_polymer"</span><span class="p">,</span>
+    <span class="s2">"conf_inf"</span><span class="p">:</span> <span class="s2">"open_rack_glass_polymer"</span><span class="p">,</span>
+    <span class="s2">"T98"</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span>
+    <span class="s2">"irradiance_kwarg"</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">"conf_0_kwarg"</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">"conf_inf_kwarg"</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">"model_kwarg"</span><span class="p">:</span> <span class="p">{},</span>
 <span class="p">}</span>
 
 <span class="c1"># notice how we left off parts we want to use in the monte carlo simulation because they are already contained in the dataframe</span>
@@ -760,7 +796,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.Series&#39;&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class 'pandas.Series'&gt;
 </pre></div>
 </div>
 </div>
@@ -773,17 +809,17 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.000000  55.358424  39.273293
-1    0.000000  65.780835  45.151035
-2    1.564531  75.424438  51.790305
-3    1.640931  75.621511  51.973715
-4    0.000000  67.757503  46.489081
+0    0.000000  56.889908  40.030578
+1    0.366159  71.754230  49.380792
+2    0.000000  68.771452  47.409746
+3    0.000000  64.762664  44.371809
+4    0.000000  68.382836  47.005146
 ..        ...        ...        ...
-495  1.649297  74.247236  50.928711
-496  0.000000  68.624823  47.238174
-497  0.251805  70.762509  48.648478
-498  0.208875  70.738760  48.629167
-499  0.000000  68.580716  47.202461
+495  0.648383  72.777313  50.093310
+496  0.152239  68.570411  47.193769
+497  0.123428  70.399536  48.478836
+498  0.002990  70.042080  48.199371
+499  2.214892  75.937252  52.176066
 
 [500 rows x 3 columns]
 </pre></div>
@@ -796,20 +832,20 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 <p>Let’s plot the results using a histogram</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bin_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">results_df</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">results_df</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bin_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">results_df</span><span class="p">[</span><span class="s2">"x"</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">results_df</span><span class="p">[</span><span class="s2">"x"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
-    <span class="n">results_df</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span>
+    <span class="n">results_df</span><span class="p">[</span><span class="s2">"x"</span><span class="p">],</span>
     <span class="n">bins</span><span class="o">=</span><span class="n">bin_edges</span><span class="p">,</span>
-    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
-    <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">,</span>
+    <span class="n">histtype</span><span class="o">=</span><span class="s2">"step"</span><span class="p">,</span>
     <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Standoff Distance&quot;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">"Standoff Distance"</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Counts (out of n trials)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;standoff distance [m]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">results_df</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">results_df</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Counts (out of n trials)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"standoff distance [m]"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">results_df</span><span class="p">[</span><span class="s2">"x"</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">results_df</span><span class="p">[</span><span class="s2">"x"</span><span class="p">]),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"median"</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
@@ -818,7 +854,7 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/751198858838ed7114556307019dfbd4e10e7e670902c95bfcc9381cfb5e64d8.png" src="../_images/751198858838ed7114556307019dfbd4e10e7e670902c95bfcc9381cfb5e64d8.png" />
+<img alt="../_images/e5613d892ee5a766f7b34d63ac1f1653e2131dfdf7c45c7a9a9a3cb34630ef62.png" src="../_images/e5613d892ee5a766f7b34d63ac1f1653e2131dfdf7c45c7a9a9a3cb34630ef62.png" />
 </div>
 </div>
 </section>
@@ -878,15 +914,17 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Standoff Monte Carlo</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-standoff-calculation">Simple Standoff Calculation</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-correlation-coefficients-mean-and-standard-deviation-for-monte-carlo-simulation">Defining Correlation Coefficients, Mean and Standard Deviation For Monte Carlo Simulation</a></li>
@@ -942,8 +980,8 @@ By Martin Springer, Matthew Brown, Silvana Ovaitt, Tobin Ford, Joseph Karas, Mic
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
 
   <footer class="bd-footer">
   </footer>

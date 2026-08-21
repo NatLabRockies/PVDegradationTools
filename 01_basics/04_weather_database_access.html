@@ -16,41 +16,44 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -60,40 +63,37 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '01_basics/04_weather_database_access';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="B-O LID Accelerated Test" href="../02_degradation/01_bo_lid_accelerated_test.html" />
     <link rel="prev" title="Spectral Degradation" href="03_spectral_degradation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -101,7 +101,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -109,15 +108,59 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
     </header>
   
 
@@ -126,7 +169,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -156,21 +200,17 @@
     
     
     <img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-light" alt="PVDEG Tutorials - Home"/>
-    <script>document.write(`<img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-dark" alt="PVDEG Tutorials - Home"/>`);</script>
+    <img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-dark pst-js-only" alt="PVDEG Tutorials - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">01 - Basics</span></p>
@@ -351,13 +391,8 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../06_advanced/03_pysam_api.html">PySAM with API (API Key Required)</a></li>
-
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../06_advanced/02_pysam_single_location.html">PySAM for a Single Location</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_advanced/03_pysam_api.html">PySAM: Single Location &amp; Geospatial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06_advanced/04_nsrdb_distributed_api.html">NSRDB Distributed (API Key Required)</a></li>
 
 
@@ -402,9 +437,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -487,7 +527,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -501,25 +541,17 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
 </div></div>
@@ -541,7 +573,7 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Weather Database Access</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-location-example">Single location example</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nsrdb-hsds-on-kestrel">1. NSRDB - HSDS on Kestrel</a></li>
@@ -564,7 +596,7 @@ document.write(`
 <p><strong>Requirements:</strong></p>
 <ul class="simple">
 <li><p>Internet access</p></li>
-<li><p>NSRDB API key. API keys are free. You can request and obtain an API key in about 5 minutes. To get your own key, visit <a class="reference external" href="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a></p></li>
+<li><p>NSRDB API key. API keys are free. You can request and obtain an API key in about 5 minutes. To get your own key, visit <a class="reference external" href="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a></p></li>
 <li><p>Step <strong>1.</strong> is for Kestrel HPC users. You will need an account with NREL’s Kestrel computer for this method.</p></li>
 </ul>
 <p><strong>Objectives:</strong></p>
@@ -587,7 +619,7 @@ document.write(`
 <h1>Single location example<a class="headerlink" href="#single-location-example" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:</span>
 <span class="c1"># !pip install pvdeg</span>
 </pre></div>
 </div>
@@ -595,7 +627,10 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pvdeg</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pvdeg</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATA_DIR</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </pre></div>
 </div>
@@ -603,20 +638,20 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This information helps with debugging and getting support :)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This information helps with debugging and getting support</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Working on a "</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Python version "</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"pvdeg version "</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.14.0-1017-azure
-Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
-pvdeg version  0.1.dev1+g321beb370
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1022-azure
+Python version  3.11.16 (main, Aug 13 2026, 02:46:14) [GCC 13.3.0]
+pvdeg version  0.1.dev1+g4c40f950e
 </pre></div>
 </div>
 </div>
@@ -631,22 +666,22 @@ pvdeg version  0.1.dev1+g321beb370
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get weather data</span>
-<span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;NSRDB&quot;</span>
+<span class="n">weather_db</span> <span class="o">=</span> <span class="s2">"NSRDB"</span>
 
 <span class="c1"># Latitude and Longitude</span>
 <span class="n">weather_id</span> <span class="o">=</span> <span class="p">(</span><span class="mf">33.448376</span><span class="p">,</span> <span class="o">-</span><span class="mf">112.074036</span><span class="p">)</span>
 <span class="c1"># weather_id = 1933572</span>
 <span class="n">weather_arg</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;satellite&quot;</span><span class="p">:</span> <span class="s2">&quot;GOES&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="mi">2021</span><span class="p">,</span>
-    <span class="s2">&quot;NREL_HPC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;air_temperature&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dhi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ghi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dni&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;relative_humidity&quot;</span><span class="p">,</span>
+    <span class="s2">"satellite"</span><span class="p">:</span> <span class="s2">"GOES"</span><span class="p">,</span>
+    <span class="s2">"names"</span><span class="p">:</span> <span class="mi">2021</span><span class="p">,</span>
+    <span class="s2">"NREL_HPC"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"air_temperature"</span><span class="p">,</span>
+        <span class="s2">"wind_speed"</span><span class="p">,</span>
+        <span class="s2">"dhi"</span><span class="p">,</span>
+        <span class="s2">"ghi"</span><span class="p">,</span>
+        <span class="s2">"dni"</span><span class="p">,</span>
+        <span class="s2">"relative_humidity"</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">}</span>
 
@@ -654,8 +689,8 @@ pvdeg version  0.1.dev1+g321beb370
 
 <span class="c1"># weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)</span>
 
-<span class="c1"># res = pvdeg.standards.standoff(weather_df=weather_df, meta=meta, tilt=None, azimuth=180, sky_model=&#39;isotropic&#39;, temp_model=&#39;sapm&#39;,</span>
-<span class="c1">#     conf_0=&#39;insulated_back_glass_polymer&#39;, conf_inf=&#39;open_rack_glass_polymer&#39;, T98=70, x_0=6.5, wind_factor=0.33)</span>
+<span class="c1"># res = pvdeg.standards.standoff(weather_df=weather_df, meta=meta, tilt=None, azimuth=180, sky_model='isotropic', temp_model='sapm',</span>
+<span class="c1">#     conf_0='insulated_back_glass_polymer', conf_inf='open_rack_glass_polymer', T98=70, x_0=6.5, wind_factor=0.33)</span>
 <span class="c1"># print(pvdeg.standards.interpret_standoff(res))</span>
 <span class="c1"># print(meta)</span>
 </pre></div>
@@ -667,7 +702,7 @@ pvdeg version  0.1.dev1+g321beb370
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="nsrdb-api">
 <h1>2. NSRDB - API<a class="headerlink" href="#nsrdb-api" title="Link to this heading">#</a></h1>
-<p>To access the NREL NSRDB, you will need an API key. Key’s are free, but require you to set up an account. Without an API key, you can use a demonstration API which is severely limited. To set up an account and get your API key, visit <a class="reference external" href="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a></p>
+<p>To access the NREL NSRDB, you will need an API key. Key’s are free, but require you to set up an account. Without an API key, you can use a demonstration API which is severely limited. To set up an account and get your API key, visit <a class="reference external" href="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a></p>
 <p>Key Notes:</p>
 <ul class="simple">
 <li><p>set <code class="docutils literal notranslate"><span class="pre">attributes</span> <span class="pre">=</span> <span class="pre">[]</span></code> to return all possible attributes (weather fields)</p></li>
@@ -682,22 +717,22 @@ pvdeg version  0.1.dev1+g321beb370
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load pre-saved weather data for this tutorial</span>
 <span class="c1"># This avoids API rate limits during testing and builds</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-
-<span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/psm4_golden.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;../data/meta_golden.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"psm4_golden.csv"</span><span class="p">),</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"meta_golden.json"</span><span class="p">),</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="c1"># Uncomment below to fetch fresh data with your own API key:</span>
-<span class="c1"># API_KEY = &quot;your_api_key_here&quot;</span>
+<span class="c1"># API_KEY = "your_api_key_here"</span>
 <span class="c1"># # The example API key here is for demonstation and is rate-limited per IP.</span>
-<span class="c1"># # To get your own API key, visit https://developer.nrel.gov/signup/</span>
-<span class="c1"># weather_db = &quot;PSM4&quot;</span>
+<span class="c1"># # To get your own API key, visit https://developer.nlr.gov/signup/</span>
+<span class="c1"># weather_db = "PSM4"</span>
 <span class="c1"># weather_id = (39.741931, -105.169891)</span>
 <span class="c1"># weather_arg = {</span>
-<span class="c1">#     &quot;api_key&quot;: &quot;DEMO_KEY&quot;,</span>
-<span class="c1">#     &quot;email&quot;: &quot;user@mail.com&quot;,</span>
-<span class="c1">#     &quot;map_variables&quot;: True,</span>
+<span class="c1">#     "api_key": "DEMO_KEY",</span>
+<span class="c1">#     "email": "user@mail.com",</span>
+<span class="c1">#     "map_variables": True,</span>
 <span class="c1"># }</span>
 <span class="c1"># weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)</span>
 
@@ -707,10 +742,10 @@ pvdeg version  0.1.dev1+g321beb370
     <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
     <span class="n">tilt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">azimuth</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span>
-    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
-    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
-    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
-    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">"isotropic"</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">"sapm"</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">"insulated_back_glass_polymer"</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">"open_rack_glass_polymer"</span><span class="p">,</span>
     <span class="n">T98</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span>
     <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
     <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
@@ -718,7 +753,7 @@ pvdeg version  0.1.dev1+g321beb370
 <span class="nb">print</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">interpret_standoff</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
 
 <span class="c1"># Clean metadata for consistent output</span>
-<span class="n">meta_clean</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">meta</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;irradiance_time_offset&quot;</span><span class="p">]}</span>
+<span class="n">meta_clean</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">meta</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"irradiance_time_offset"</span><span class="p">]}</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">meta_clean</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -730,7 +765,7 @@ The estimated T₉₈ of an open-rack module is 51.6°C.
 Level 0 certification is valid for a standoff greather than 1.8 cm. 
 Level 1 certification is required for a standoff less than 1.8 cm. 
 Level 2 certification is never required for this temperature                            profile.
-{&#39;Source&#39;: &#39;NSRDB&#39;, &#39;Location ID&#39;: &#39;479494&#39;, &#39;City&#39;: &#39;-&#39;, &#39;State&#39;: &#39;-&#39;, &#39;Country&#39;: &#39;-&#39;, &#39;Clearsky DHI Units&#39;: &#39;w/m2&#39;, &#39;Clearsky DNI Units&#39;: &#39;w/m2&#39;, &#39;Clearsky GHI Units&#39;: &#39;w/m2&#39;, &#39;Dew Point Units&#39;: &#39;c&#39;, &#39;DHI Units&#39;: &#39;w/m2&#39;, &#39;DNI Units&#39;: &#39;w/m2&#39;, &#39;GHI Units&#39;: &#39;w/m2&#39;, &#39;Solar Zenith Angle Units&#39;: &#39;Degree&#39;, &#39;Temperature Units&#39;: &#39;c&#39;, &#39;Pressure Units&#39;: &#39;mbar&#39;, &#39;Relative Humidity Units&#39;: &#39;%&#39;, &#39;Precipitable Water Units&#39;: &#39;cm&#39;, &#39;Wind Direction Units&#39;: &#39;Degrees&#39;, &#39;Wind Speed Units&#39;: &#39;m/s&#39;, &#39;Cloud Type -15&#39;: &#39;N/A&#39;, &#39;Cloud Type 0&#39;: &#39;Clear&#39;, &#39;Cloud Type 1&#39;: &#39;Probably Clear&#39;, &#39;Cloud Type 2&#39;: &#39;Fog&#39;, &#39;Cloud Type 3&#39;: &#39;Water&#39;, &#39;Cloud Type 4&#39;: &#39;Super-Cooled Water&#39;, &#39;Cloud Type 5&#39;: &#39;Mixed&#39;, &#39;Cloud Type 6&#39;: &#39;Opaque Ice&#39;, &#39;Cloud Type 7&#39;: &#39;Cirrus&#39;, &#39;Cloud Type 8&#39;: &#39;Overlapping&#39;, &#39;Cloud Type 9&#39;: &#39;Overshooting&#39;, &#39;Cloud Type 10&#39;: &#39;Unknown&#39;, &#39;Cloud Type 11&#39;: &#39;Dust&#39;, &#39;Cloud Type 12&#39;: &#39;Smoke&#39;, &#39;Fill Flag 0&#39;: &#39;N/A&#39;, &#39;Fill Flag 1&#39;: &#39;Missing Image&#39;, &#39;Fill Flag 2&#39;: &#39;Low Irradiance&#39;, &#39;Fill Flag 3&#39;: &#39;Exceeds Clearsky&#39;, &#39;Fill Flag 4&#39;: &#39;Missing CLoud Properties&#39;, &#39;Fill Flag 5&#39;: &#39;Rayleigh Violation&#39;, &#39;Surface Albedo Units&#39;: &#39;N/A&#39;, &#39;Version&#39;: &#39;4.1.2.dev4+g3b38bc8.d20250228&#39;, &#39;latitude&#39;: 39.73, &#39;longitude&#39;: -105.18, &#39;altitude&#39;: 1876, &#39;tz&#39;: -7, &#39;wind_height&#39;: 2}
+{'Source': 'NSRDB', 'Location ID': '479494', 'City': '-', 'State': '-', 'Country': '-', 'Clearsky DHI Units': 'w/m2', 'Clearsky DNI Units': 'w/m2', 'Clearsky GHI Units': 'w/m2', 'Dew Point Units': 'c', 'DHI Units': 'w/m2', 'DNI Units': 'w/m2', 'GHI Units': 'w/m2', 'Solar Zenith Angle Units': 'Degree', 'Temperature Units': 'c', 'Pressure Units': 'mbar', 'Relative Humidity Units': '%', 'Precipitable Water Units': 'cm', 'Wind Direction Units': 'Degrees', 'Wind Speed Units': 'm/s', 'Cloud Type -15': 'N/A', 'Cloud Type 0': 'Clear', 'Cloud Type 1': 'Probably Clear', 'Cloud Type 2': 'Fog', 'Cloud Type 3': 'Water', 'Cloud Type 4': 'Super-Cooled Water', 'Cloud Type 5': 'Mixed', 'Cloud Type 6': 'Opaque Ice', 'Cloud Type 7': 'Cirrus', 'Cloud Type 8': 'Overlapping', 'Cloud Type 9': 'Overshooting', 'Cloud Type 10': 'Unknown', 'Cloud Type 11': 'Dust', 'Cloud Type 12': 'Smoke', 'Fill Flag 0': 'N/A', 'Fill Flag 1': 'Missing Image', 'Fill Flag 2': 'Low Irradiance', 'Fill Flag 3': 'Exceeds Clearsky', 'Fill Flag 4': 'Missing CLoud Properties', 'Fill Flag 5': 'Rayleigh Violation', 'Surface Albedo Units': 'N/A', 'Version': '4.1.2.dev4+g3b38bc8.d20250228', 'latitude': 39.73, 'longitude': -105.18, 'altitude': 1876, 'tz': -7, 'wind_height': 2}
 </pre></div>
 </div>
 </div>
@@ -739,15 +774,27 @@ Level 2 certification is never required for this temperature                    
 <section class="tex2jax_ignore mathjax_ignore" id="pvgis">
 <h1>3. PVGIS<a class="headerlink" href="#pvgis" title="Link to this heading">#</a></h1>
 <p>This method uses the PVGIS database, a public resource. It requires no API key or user account.</p>
+<p>We use Golden, CO here so that this section matches the cached weather that ships with the repo. With <code class="docutils literal notranslate"><span class="pre">USE_LIVE_PVGIS</span> <span class="pre">=</span> <span class="pre">False</span></code> (the default) the notebook reads that cached TMY instead of calling the API, which keeps the results reproducible offline and in CI – so the numbers below match section 2, which reads the same file. Set <code class="docutils literal notranslate"><span class="pre">USE_LIVE_PVGIS</span> <span class="pre">=</span> <span class="pre">True</span></code> to fetch the same location live from PVGIS.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_db</span> <span class="o">=</span> <span class="s2">&quot;PVGIS&quot;</span>
-<span class="c1"># weather_id = (39.741931, -105.169891)</span>
-<span class="n">weather_id</span> <span class="o">=</span> <span class="p">(</span><span class="mf">24.7136</span><span class="p">,</span> <span class="mf">46.6753</span><span class="p">)</span>  <span class="c1"># Riyadh, Saudi Arabia</span>
-<span class="c1"># weather_arg = {&#39;map_variables&#39;: True}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather_db</span> <span class="o">=</span> <span class="s2">"PVGIS"</span>
+<span class="n">weather_id</span> <span class="o">=</span> <span class="p">(</span><span class="mf">39.73</span><span class="p">,</span> <span class="o">-</span><span class="mf">105.18</span><span class="p">)</span>  <span class="c1"># Golden, CO</span>
+<span class="c1"># weather_arg = {'map_variables': True}</span>
 
-<span class="c1"># TMY</span>
-<span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">weather_db</span><span class="p">,</span> <span class="n">weather_id</span><span class="p">)</span>
+<span class="c1"># For reproducible notebook testing, default to cached local weather/meta.</span>
+<span class="c1"># Set USE_LIVE_PVGIS = True to fetch live PVGIS data for the same location.</span>
+<span class="n">USE_LIVE_PVGIS</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="n">USE_LIVE_PVGIS</span><span class="p">:</span>
+    <span class="c1"># TMY from live PVGIS API</span>
+    <span class="n">weather_df</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">weather_db</span><span class="p">,</span> <span class="n">weather_id</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Cached NSRDB TMY for Golden, CO -- avoids SSL/network flakiness in CI</span>
+    <span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"psm4_golden.csv"</span><span class="p">),</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"meta_golden.json"</span><span class="p">),</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">meta</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
 <span class="c1"># Perform calculation</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">(</span>
@@ -755,30 +802,33 @@ Level 2 certification is never required for this temperature                    
     <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
     <span class="n">tilt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">azimuth</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span>
-    <span class="n">sky_model</span><span class="o">=</span><span class="s2">&quot;isotropic&quot;</span><span class="p">,</span>
-    <span class="n">temp_model</span><span class="o">=</span><span class="s2">&quot;sapm&quot;</span><span class="p">,</span>
-    <span class="n">conf_0</span><span class="o">=</span><span class="s2">&quot;insulated_back_glass_polymer&quot;</span><span class="p">,</span>
-    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">&quot;open_rack_glass_polymer&quot;</span><span class="p">,</span>
+    <span class="n">sky_model</span><span class="o">=</span><span class="s2">"isotropic"</span><span class="p">,</span>
+    <span class="n">temp_model</span><span class="o">=</span><span class="s2">"sapm"</span><span class="p">,</span>
+    <span class="n">conf_0</span><span class="o">=</span><span class="s2">"insulated_back_glass_polymer"</span><span class="p">,</span>
+    <span class="n">conf_inf</span><span class="o">=</span><span class="s2">"open_rack_glass_polymer"</span><span class="p">,</span>
     <span class="n">T98</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span>
     <span class="n">x_0</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
     <span class="n">wind_factor</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">interpret_standoff</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+
+<span class="c1"># Print rounded numeric outputs for testing</span>
+<span class="n">res_clean</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"x_cm"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">"x"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s2">"T98_0_C"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">"T98_0"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s2">"T98_inf_C"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">"T98_inf"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res_clean</span><span class="p">)</span>
 
 <span class="c1"># Clean metadata for consistent output (remove variable fields)</span>
-<span class="n">meta_clean</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">meta</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;irradiance_time_offset&quot;</span><span class="p">]}</span>
+<span class="n">meta_clean</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">meta</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"irradiance_time_offset"</span><span class="p">]}</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">meta_clean</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  24.7 was used.
-The estimated T₉₈ of an insulated-back module is 89.6°C. 
-The estimated T₉₈ of an open-rack module is 63.8°C. 
-Level 0 certification is valid for a standoff greather than 9.3 cm. 
-Level 1 certification is required for a standoff between 9.3 cm, and 3.0 cm. 
-Level 2 certification is required for a standoff less than 3.0 cm.
-{&#39;latitude&#39;: 24.7136, &#39;longitude&#39;: 46.6753, &#39;altitude&#39;: 646.0, &#39;wind_height&#39;: 10, &#39;Source&#39;: &#39;PVGIS&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  39.7 was used.
+{'x_cm': 1.8, 'T98_0_C': 75.9, 'T98_inf_C': 51.6}
+{'Source': 'NSRDB', 'Location ID': '479494', 'City': '-', 'State': '-', 'Country': '-', 'Clearsky DHI Units': 'w/m2', 'Clearsky DNI Units': 'w/m2', 'Clearsky GHI Units': 'w/m2', 'Dew Point Units': 'c', 'DHI Units': 'w/m2', 'DNI Units': 'w/m2', 'GHI Units': 'w/m2', 'Solar Zenith Angle Units': 'Degree', 'Temperature Units': 'c', 'Pressure Units': 'mbar', 'Relative Humidity Units': '%', 'Precipitable Water Units': 'cm', 'Wind Direction Units': 'Degrees', 'Wind Speed Units': 'm/s', 'Cloud Type -15': 'N/A', 'Cloud Type 0': 'Clear', 'Cloud Type 1': 'Probably Clear', 'Cloud Type 2': 'Fog', 'Cloud Type 3': 'Water', 'Cloud Type 4': 'Super-Cooled Water', 'Cloud Type 5': 'Mixed', 'Cloud Type 6': 'Opaque Ice', 'Cloud Type 7': 'Cirrus', 'Cloud Type 8': 'Overlapping', 'Cloud Type 9': 'Overshooting', 'Cloud Type 10': 'Unknown', 'Cloud Type 11': 'Dust', 'Cloud Type 12': 'Smoke', 'Fill Flag 0': 'N/A', 'Fill Flag 1': 'Missing Image', 'Fill Flag 2': 'Low Irradiance', 'Fill Flag 3': 'Exceeds Clearsky', 'Fill Flag 4': 'Missing CLoud Properties', 'Fill Flag 5': 'Rayleigh Violation', 'Surface Albedo Units': 'N/A', 'Version': '4.1.2.dev4+g3b38bc8.d20250228', 'latitude': 39.73, 'longitude': -105.18, 'altitude': 1876, 'tz': -7, 'wind_height': 2}
 </pre></div>
 </div>
 </div>
@@ -840,15 +890,17 @@ Level 2 certification is required for a standoff less than 3.0 cm.
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Weather Database Access</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-location-example">Single location example</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nsrdb-hsds-on-kestrel">1. NSRDB - HSDS on Kestrel</a></li>
@@ -903,8 +955,8 @@ By Martin Springer, Matthew Brown, Silvana Ovaitt, Tobin Ford, Joseph Karas, Mic
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
 
   <footer class="bd-footer">
   </footer>

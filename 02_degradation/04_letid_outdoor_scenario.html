@@ -16,41 +16,44 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -60,40 +63,37 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '02_degradation/04_letid_outdoor_scenario';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="LETID Passivated Wafer" href="05_letid_passivated_wafer.html" />
     <link rel="prev" title="LETID Outdoor" href="03_letid_outdoor.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -101,7 +101,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -109,15 +108,59 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
     </header>
   
 
@@ -126,7 +169,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -156,21 +200,17 @@
     
     
     <img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-light" alt="PVDEG Tutorials - Home"/>
-    <script>document.write(`<img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-dark" alt="PVDEG Tutorials - Home"/>`);</script>
+    <img src="../_static/PVdeg-Logo-Horiz-Color.svg" class="logo__image only-dark pst-js-only" alt="PVDEG Tutorials - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">01 - Basics</span></p>
@@ -351,13 +391,8 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../06_advanced/03_pysam_api.html">PySAM with API (API Key Required)</a></li>
-
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../06_advanced/02_pysam_single_location.html">PySAM for a Single Location</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_advanced/03_pysam_api.html">PySAM: Single Location &amp; Geospatial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06_advanced/04_nsrdb_distributed_api.html">NSRDB Distributed (API Key Required)</a></li>
 
 
@@ -402,9 +437,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -487,7 +527,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -501,25 +541,17 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
 </div></div>
@@ -541,7 +573,7 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">LETID Outdoor Scenario</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-pvlib-model">Set up PVlib model</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-timeseries">Set up timeseries</a></li>
@@ -582,7 +614,7 @@ document.write(`
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent &quot;ModuleNotFoundError&quot; in later cells:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if running on google colab, uncomment the next line and execute this cell to install the dependencies and prevent "ModuleNotFoundError" in later cells:</span>
 <span class="c1"># !pip install pvdeg</span>
 </pre></div>
 </div>
@@ -609,18 +641,18 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Working on a &quot;</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas version &quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pvdeg version &quot;</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Working on a "</span><span class="p">,</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Python version "</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pandas version "</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"pvdeg version "</span><span class="p">,</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.14.0-1017-azure
-Python version  3.11.14 (main, Oct 10 2025, 01:03:14) [GCC 13.3.0]
-Pandas version  3.0.1
-pvdeg version  0.1.dev1+g321beb370
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 6.17.0-1022-azure
+Python version  3.11.16 (main, Aug 13 2026, 02:46:14) [GCC 13.3.0]
+Pandas version  3.0.5
+pvdeg version  0.1.dev1+g4c40f950e
 </pre></div>
 </div>
 </div>
@@ -635,10 +667,10 @@ pvdeg version  0.1.dev1+g321beb370
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;module test data.csv&quot;</span><span class="p">))</span>
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;cell Voc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Voc&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">48</span>
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Jsc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Isc&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">cell_area</span> <span class="o">*</span> <span class="mi">1000</span>
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;</span><span class="si">% d</span><span class="s2">egradation&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Pmp&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Pmp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Pmp&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"module test data.csv"</span><span class="p">))</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"cell Voc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Voc"</span><span class="p">]</span> <span class="o">/</span> <span class="mi">48</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"Jsc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Isc"</span><span class="p">]</span> <span class="o">/</span> <span class="n">cell_area</span> <span class="o">*</span> <span class="mi">1000</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"</span><span class="si">% d</span><span class="s2">egradation"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"Pmp"</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Pmp"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Pmp"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
 <span class="n">df</span>
 </pre></div>
 </div>
@@ -753,11 +785,11 @@ pvdeg version  0.1.dev1+g321beb370
 <span class="n">srv_rear</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># [cm/s] a reasonable value for rear surface recombination velocity for passivated emitter and rear cell (PERC) solar cells.</span>
 <span class="c1"># Typical PERC cells might have a rear SRV anywhere from 50 to 100 cm/s. Higher values for early PERC, lower values for more modern, higher efficiency PERC.</span>
 <span class="c1"># Other device structures will have different SRV values. E.g., aluminum back surface field (Al-BSF) cells could be ~500 cm/s. TopCON or other high efficiency cell structures will be lower, e.g. 10 cm/s.</span>
-<span class="c1"># Note that all of these values are intepreted as &quot;lumped&quot; values for the entire rear surface.</span>
+<span class="c1"># Note that all of these values are intepreted as "lumped" values for the entire rear surface.</span>
 
-<span class="n">isc_0</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Week == 0&quot;</span><span class="p">)[</span>
-    <span class="s2">&quot;Isc&quot;</span>
-<span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>  <span class="c1"># [A] we&#39;ll use the short circuit current from the Week 0 test data, instead of trying to calculate it</span>
+<span class="n">isc_0</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"Week == 0"</span><span class="p">)[</span>
+    <span class="s2">"Isc"</span>
+<span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>  <span class="c1"># [A] we'll use the short circuit current from the Week 0 test data, instead of trying to calculate it</span>
 <span class="n">cell_area</span> <span class="o">=</span> <span class="mf">240.8</span>  <span class="c1"># [cm^2] typical cell size for 6-inch pseudosquare monocrystalline silicon  wafers</span>
 <span class="n">jsc_0</span> <span class="o">=</span> <span class="n">isc_0</span> <span class="o">/</span> <span class="n">cell_area</span> <span class="o">*</span> <span class="mi">1000</span>  <span class="c1"># [mA/cm^2] short circuit current density</span>
 
@@ -777,10 +809,10 @@ pvdeg version  0.1.dev1+g321beb370
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generation_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;PVL_GenProfile.xlsx&quot;</span><span class="p">),</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span>
-<span class="p">)</span>  <span class="c1"># this is an optical generation profile generated by PVLighthouse&#39;s OPAL2 default model for 1-sun, normal incident AM1.5 sunlight on a 180-um thick SiNx-coated, pyramid-textured wafer.</span>
-<span class="n">generation</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span><span class="s2">&quot;Generation (cm-3s-1)&quot;</span><span class="p">]</span>
-<span class="n">depth</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span><span class="s2">&quot;Depth (um)&quot;</span><span class="p">]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"PVL_GenProfile.xlsx"</span><span class="p">),</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>  <span class="c1"># this is an optical generation profile generated by PVLighthouse's OPAL2 default model for 1-sun, normal incident AM1.5 sunlight on a 180-um thick SiNx-coated, pyramid-textured wafer.</span>
+<span class="n">generation</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span><span class="s2">"Generation (cm-3s-1)"</span><span class="p">]</span>
+<span class="n">depth</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span><span class="s2">"Depth (um)"</span><span class="p">]</span>
 
 <span class="n">d_base</span> <span class="o">=</span> <span class="mi">27</span>  <span class="c1"># cm^2/s electron diffusivity. See https://www2.pvlighthouse.com.au/calculators/mobility%20calculator/mobility%20calculator.aspx for details</span>
 </pre></div>
@@ -792,10 +824,10 @@ pvdeg version  0.1.dev1+g321beb370
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check to make sure power is close to the measured Week 0 power</span>
 
-<span class="n">ff_0</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Week == 0&quot;</span><span class="p">)[</span><span class="s2">&quot;FF&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>  <span class="c1"># [%] fill factor</span>
+<span class="n">ff_0</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"Week == 0"</span><span class="p">)[</span><span class="s2">"FF"</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>  <span class="c1"># [%] fill factor</span>
 
 <span class="n">pmp_0</span> <span class="o">=</span> <span class="p">(</span><span class="n">voc_0</span> <span class="o">*</span> <span class="mi">48</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">jsc_0</span> <span class="o">*</span> <span class="n">cell_area</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">*</span> <span class="n">ff_0</span> <span class="o">/</span> <span class="mi">100</span>  <span class="c1"># [W] maximum power</span>
-<span class="n">pmp_0</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Week == 0&quot;</span><span class="p">)[</span><span class="s2">&quot;Pmp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="n">pmp_0</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"Week == 0"</span><span class="p">)[</span><span class="s2">"Pmp"</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -810,9 +842,9 @@ pvdeg version  0.1.dev1+g321beb370
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tau_deg</span> <span class="o">=</span> <span class="mi">80</span>  <span class="c1"># [us] degraded bulk lifetime</span>
 
-<span class="n">isc_deg</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Week == 4&quot;</span><span class="p">)[</span>
-    <span class="s2">&quot;Isc&quot;</span>
-<span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>  <span class="c1"># [A] we&#39;ll use the short circuit current from the Week 4 test data, instead of trying to calculate it</span>
+<span class="n">isc_deg</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"Week == 4"</span><span class="p">)[</span>
+    <span class="s2">"Isc"</span>
+<span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>  <span class="c1"># [A] we'll use the short circuit current from the Week 4 test data, instead of trying to calculate it</span>
 <span class="n">jsc_deg</span> <span class="o">=</span> <span class="n">isc_deg</span> <span class="o">/</span> <span class="n">cell_area</span> <span class="o">*</span> <span class="mi">1000</span>  <span class="c1"># [mA/cm^2] short circuit current density</span>
 
 <span class="n">voc_deg</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span>
@@ -832,12 +864,12 @@ pvdeg version  0.1.dev1+g321beb370
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check to make sure power is close to the measured Week 4 power</span>
 
-<span class="n">ff_deg</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Week == 4&quot;</span><span class="p">)[</span><span class="s2">&quot;FF&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>  <span class="c1"># [%] fill factor</span>
+<span class="n">ff_deg</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"Week == 4"</span><span class="p">)[</span><span class="s2">"FF"</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>  <span class="c1"># [%] fill factor</span>
 
 <span class="n">pmp_deg</span> <span class="o">=</span> <span class="p">(</span>
     <span class="p">(</span><span class="n">voc_deg</span> <span class="o">*</span> <span class="mi">48</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">jsc_deg</span> <span class="o">*</span> <span class="n">cell_area</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">*</span> <span class="n">ff_deg</span> <span class="o">/</span> <span class="mi">100</span>
 <span class="p">)</span>  <span class="c1"># [W] maximum power</span>
-<span class="n">pmp_deg</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Week == 4&quot;</span><span class="p">)[</span><span class="s2">&quot;Pmp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="n">pmp_deg</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"Week == 4"</span><span class="p">)[</span><span class="s2">"Pmp"</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -861,14 +893,14 @@ pvdeg version  0.1.dev1+g321beb370
 </div>
 <p>So for modeling this module, we will use <code class="docutils literal notranslate"><span class="pre">tau_0</span></code> = 120 <span class="math notranslate nohighlight">\(\mu s\)</span>, <code class="docutils literal notranslate"><span class="pre">tau_deg</span></code> = 80 <span class="math notranslate nohighlight">\(\mu s\)</span>, with <code class="docutils literal notranslate"><span class="pre">wafer_thickness</span></code> = 180 <span class="math notranslate nohighlight">\(\mu m\)</span> and <code class="docutils literal notranslate"><span class="pre">srv_rear</span></code> = 100 cm/s.</p>
 <p>Great!</p>
-<p>The example proceeds below in similar fashion to the outdoor example, using a fixed latitude tilt system at NREL, in Golden, CO, USA, using <a class="reference external" href="https://nsrdb.nrel.gov/">NSRDB</a> hourly PSM weather data, SAPM temperature models, and module and inverter models from the CEC database.</p>
+<p>The example proceeds below in similar fashion to the outdoor example, using a fixed latitude tilt system at NREL, in Golden, CO, USA, using <a class="reference external" href="https://nsrdb.nlr.gov/">NSRDB</a> hourly PSM weather data, SAPM temperature models, and module and inverter models from the CEC database.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load weather and location data, use pvlib read_psm3 function</span>
 
-<span class="n">sam_file</span> <span class="o">=</span> <span class="s2">&quot;psm3.csv&quot;</span>
+<span class="n">sam_file</span> <span class="o">=</span> <span class="s2">"psm3.csv"</span>
 <span class="n">weather</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">pvdeg</span><span class="o">.</span><span class="n">weather</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="n">sam_file</span><span class="p">),</span> <span class="n">file_type</span><span class="o">=</span><span class="s2">&quot;PSM3&quot;</span><span class="p">,</span> <span class="n">map_variables</span><span class="o">=</span><span class="kc">True</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="n">sam_file</span><span class="p">),</span> <span class="n">file_type</span><span class="o">=</span><span class="s2">"PSM3"</span><span class="p">,</span> <span class="n">map_variables</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1122,10 +1154,10 @@ pvdeg version  0.1.dev1+g321beb370
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if our weather file doesn&#39;t have precipitable water, calculate it with pvlib</span>
-<span class="k">if</span> <span class="s2">&quot;precipitable_water&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">weather</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-    <span class="n">weather</span><span class="p">[</span><span class="s2">&quot;precipitable_water&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">atmosphere</span><span class="o">.</span><span class="n">gueymard94_pw</span><span class="p">(</span>
-        <span class="n">weather</span><span class="p">[</span><span class="s2">&quot;temp_air&quot;</span><span class="p">],</span> <span class="n">weather</span><span class="p">[</span><span class="s2">&quot;relative_humidity&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># if our weather file doesn't have precipitable water, calculate it with pvlib</span>
+<span class="k">if</span> <span class="s2">"precipitable_water"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">weather</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">weather</span><span class="p">[</span><span class="s2">"precipitable_water"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">atmosphere</span><span class="o">.</span><span class="n">gueymard94_pw</span><span class="p">(</span>
+        <span class="n">weather</span><span class="p">[</span><span class="s2">"temp_air"</span><span class="p">],</span> <span class="n">weather</span><span class="p">[</span><span class="s2">"relative_humidity"</span><span class="p">]</span>
     <span class="p">)</span>
 </pre></div>
 </div>
@@ -1136,13 +1168,13 @@ pvdeg version  0.1.dev1+g321beb370
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># drop unneeded columns</span>
 <span class="n">weather</span> <span class="o">=</span> <span class="n">weather</span><span class="p">[</span>
     <span class="p">[</span>
-        <span class="s2">&quot;ghi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dni&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dhi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;temp_air&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;wind_speed&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;relative_humidity&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;precipitable_water&quot;</span><span class="p">,</span>
+        <span class="s2">"ghi"</span><span class="p">,</span>
+        <span class="s2">"dni"</span><span class="p">,</span>
+        <span class="s2">"dhi"</span><span class="p">,</span>
+        <span class="s2">"temp_air"</span><span class="p">,</span>
+        <span class="s2">"wind_speed"</span><span class="p">,</span>
+        <span class="s2">"relative_humidity"</span><span class="p">,</span>
+        <span class="s2">"precipitable_water"</span><span class="p">,</span>
     <span class="p">]</span>
 <span class="p">]</span>
 </pre></div>
@@ -1305,8 +1337,8 @@ pvdeg version  0.1.dev1+g321beb370
 <p>Note that the module we select here is NOT the same “Type S” module that was tested for LETID. I’m simply trying to find a module in the CEC database with I-V characteristics that are reasonably close to the tested module, so the pvlib calculated DC results are close to how our Type S module might behave in the field.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cec_modules</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">pvsystem</span><span class="o">.</span><span class="n">retrieve_sam</span><span class="p">(</span><span class="s2">&quot;CECMod&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-<span class="n">cec_modules</span><span class="p">[</span><span class="n">cec_modules</span><span class="p">[</span><span class="s2">&quot;STC&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">cec_modules</span><span class="p">[</span><span class="s2">&quot;N_s&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">48</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cec_modules</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">pvsystem</span><span class="o">.</span><span class="n">retrieve_sam</span><span class="p">(</span><span class="s2">"CECMod"</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">cec_modules</span><span class="p">[</span><span class="n">cec_modules</span><span class="p">[</span><span class="s2">"STC"</span><span class="p">]</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">cec_modules</span><span class="p">[</span><span class="s2">"N_s"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">48</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -1578,7 +1610,7 @@ pvdeg version  0.1.dev1+g321beb370
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cec_modules</span> <span class="o">=</span> <span class="n">cec_modules</span><span class="o">.</span><span class="n">T</span>
-<span class="n">cec_module</span> <span class="o">=</span> <span class="n">cec_modules</span><span class="p">[</span><span class="s2">&quot;LG_Electronics_Inc__LG235N8K_G4&quot;</span><span class="p">]</span>
+<span class="n">cec_module</span> <span class="o">=</span> <span class="n">cec_modules</span><span class="p">[</span><span class="s2">"LG_Electronics_Inc__LG235N8K_G4"</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1586,18 +1618,18 @@ pvdeg version  0.1.dev1+g321beb370
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import the rest of the pvlib stuff</span>
-<span class="c1"># we&#39;ll use the SAPM temperature model open-rack glass/polymer coeffecients.</span>
+<span class="c1"># we'll use the SAPM temperature model open-rack glass/polymer coeffecients.</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pvlib.temperature</span><span class="w"> </span><span class="kn">import</span> <span class="n">TEMPERATURE_MODEL_PARAMETERS</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pvlib.location</span><span class="w"> </span><span class="kn">import</span> <span class="n">Location</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pvlib.pvsystem</span><span class="w"> </span><span class="kn">import</span> <span class="n">PVSystem</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pvlib.modelchain</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelChain</span>
 
-<span class="n">cec_inverters</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">pvsystem</span><span class="o">.</span><span class="n">retrieve_sam</span><span class="p">(</span><span class="s2">&quot;cecinverter&quot;</span><span class="p">)</span>
-<span class="n">cec_inverter</span> <span class="o">=</span> <span class="n">cec_inverters</span><span class="p">[</span><span class="s2">&quot;ABB__ULTRA_750_TL_OUTD_1_US_690_x_y_z__690V_&quot;</span><span class="p">]</span>
+<span class="n">cec_inverters</span> <span class="o">=</span> <span class="n">pvlib</span><span class="o">.</span><span class="n">pvsystem</span><span class="o">.</span><span class="n">retrieve_sam</span><span class="p">(</span><span class="s2">"cecinverter"</span><span class="p">)</span>
+<span class="n">cec_inverter</span> <span class="o">=</span> <span class="n">cec_inverters</span><span class="p">[</span><span class="s2">"ABB__ULTRA_750_TL_OUTD_1_US_690_x_y_z__690V_"</span><span class="p">]</span>
 
-<span class="n">temperature_model_parameters</span> <span class="o">=</span> <span class="n">TEMPERATURE_MODEL_PARAMETERS</span><span class="p">[</span><span class="s2">&quot;sapm&quot;</span><span class="p">][</span>
-    <span class="s2">&quot;open_rack_glass_polymer&quot;</span>
+<span class="n">temperature_model_parameters</span> <span class="o">=</span> <span class="n">TEMPERATURE_MODEL_PARAMETERS</span><span class="p">[</span><span class="s2">"sapm"</span><span class="p">][</span>
+    <span class="s2">"open_rack_glass_polymer"</span>
 <span class="p">]</span>
 </pre></div>
 </div>
@@ -1606,14 +1638,14 @@ pvdeg version  0.1.dev1+g321beb370
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set up system in pvlib</span>
-<span class="n">lat</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">]</span>
-<span class="n">lon</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]</span>
-<span class="n">tz</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;tz&quot;</span><span class="p">]</span>
-<span class="n">elevation</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">&quot;altitude&quot;</span><span class="p">]</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">"latitude"</span><span class="p">]</span>
+<span class="n">lon</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">"longitude"</span><span class="p">]</span>
+<span class="n">tz</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">"tz"</span><span class="p">]</span>
+<span class="n">elevation</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">"altitude"</span><span class="p">]</span>
 <span class="n">surface_tilt</span> <span class="o">=</span> <span class="n">lat</span>  <span class="c1"># fixed, latitude tilt</span>
 <span class="n">surface_azimuth</span> <span class="o">=</span> <span class="mi">180</span>  <span class="c1"># south-facing</span>
 
-<span class="n">location</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">tz</span><span class="p">,</span> <span class="n">elevation</span><span class="p">,</span> <span class="s2">&quot;Golden, CO, USA&quot;</span><span class="p">)</span>
+<span class="n">location</span> <span class="o">=</span> <span class="n">Location</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">tz</span><span class="p">,</span> <span class="n">elevation</span><span class="p">,</span> <span class="s2">"Golden, CO, USA"</span><span class="p">)</span>
 
 <span class="n">system</span> <span class="o">=</span> <span class="n">PVSystem</span><span class="p">(</span>
     <span class="n">surface_tilt</span><span class="o">=</span><span class="n">surface_tilt</span><span class="p">,</span>
@@ -1629,13 +1661,13 @@ pvdeg version  0.1.dev1+g321beb370
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create and run pvlib modelchain</span>
-<span class="n">mc</span> <span class="o">=</span> <span class="n">ModelChain</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">aoi_model</span><span class="o">=</span><span class="s2">&quot;physical&quot;</span><span class="p">)</span>
+<span class="n">mc</span> <span class="o">=</span> <span class="n">ModelChain</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">aoi_model</span><span class="o">=</span><span class="s2">"physical"</span><span class="p">)</span>
 <span class="n">mc</span><span class="o">.</span><span class="n">run_model</span><span class="p">(</span><span class="n">weather</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/scipy/optimize/_chandrupatla.py:437: RuntimeWarning: invalid value encountered in divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/scipy/optimize/_chandrupatla.py:437: RuntimeWarning: invalid value encountered in divide
   C = A / (A + B)
 </pre></div>
 </div>
@@ -1663,17 +1695,17 @@ pvdeg version  0.1.dev1+g321beb370
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ee</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">effective_irradiance</span>
-<span class="c1"># injection = (mc.results.dc[&#39;i_sc&#39;]-mc.results.dc[&#39;i_mp&#39;])/(mc.results.dc[&#39;i_sc&#39;])*(ee/1000)</span>
+<span class="c1"># injection = (mc.results.dc['i_sc']-mc.results.dc['i_mp'])/(mc.results.dc['i_sc'])*(ee/1000)</span>
 <span class="n">injection</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_injection_outdoors</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">results</span><span class="p">)</span>
 <span class="n">temperature</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">cell_temperature</span>
 
 <span class="n">timesteps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;Temperature&quot;</span><span class="p">:</span> <span class="n">temperature</span><span class="p">,</span> <span class="s2">&quot;Injection&quot;</span><span class="p">:</span> <span class="n">injection</span><span class="p">}</span>
+    <span class="p">{</span><span class="s2">"Temperature"</span><span class="p">:</span> <span class="n">temperature</span><span class="p">,</span> <span class="s2">"Injection"</span><span class="p">:</span> <span class="n">injection</span><span class="p">}</span>
 <span class="p">)</span>  <span class="c1"># create a DataFrame with cell temperature and injection</span>
 <span class="n">timesteps</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span>
     <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>  <span class="c1"># reset the index so datetime is a column. I prefer integer indexing.</span>
-<span class="n">timesteps</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;Datetime&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">timesteps</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"index"</span><span class="p">:</span> <span class="s2">"Datetime"</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1687,10 +1719,10 @@ pvdeg version  0.1.dev1+g321beb370
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">generation_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">&quot;PVL_GenProfile.xlsx&quot;</span><span class="p">),</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span>
-<span class="p">)</span>  <span class="c1"># this is an optical generation profile generated by PVLighthouse&#39;s OPAL2 default model for 1-sun, normal incident AM1.5 sunlight on a 180-um thick SiNx-coated, pyramid-textured wafer.</span>
-<span class="n">generation</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span><span class="s2">&quot;Generation (cm-3s-1)&quot;</span><span class="p">]</span>
-<span class="n">depth</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span><span class="s2">&quot;Depth (um)&quot;</span><span class="p">]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s2">"PVL_GenProfile.xlsx"</span><span class="p">),</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>  <span class="c1"># this is an optical generation profile generated by PVLighthouse's OPAL2 default model for 1-sun, normal incident AM1.5 sunlight on a 180-um thick SiNx-coated, pyramid-textured wafer.</span>
+<span class="n">generation</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span><span class="s2">"Generation (cm-3s-1)"</span><span class="p">]</span>
+<span class="n">depth</span> <span class="o">=</span> <span class="n">generation_df</span><span class="p">[</span><span class="s2">"Depth (um)"</span><span class="p">]</span>
 
 <span class="n">d_base</span> <span class="o">=</span> <span class="mi">27</span>  <span class="c1"># cm^2/s electron diffusivity. See https://www2.pvlighthouse.com.au/calculators/mobility%20calculator/mobility%20calculator.aspx for details</span>
 </pre></div>
@@ -1704,18 +1736,18 @@ pvdeg version  0.1.dev1+g321beb370
 <span class="n">nB_0</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">nC_0</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="n">mechanism_params</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_kinetics</span><span class="p">(</span><span class="s2">&quot;D037&quot;</span><span class="p">)</span>
+<span class="n">mechanism_params</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_kinetics</span><span class="p">(</span><span class="s2">"D037"</span><span class="p">)</span>
 
-<span class="n">timesteps</span><span class="p">[[</span><span class="s2">&quot;NA&quot;</span><span class="p">,</span> <span class="s2">&quot;NB&quot;</span><span class="p">,</span> <span class="s2">&quot;NC&quot;</span><span class="p">,</span> <span class="s2">&quot;tau&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
+<span class="n">timesteps</span><span class="p">[[</span><span class="s2">"NA"</span><span class="p">,</span> <span class="s2">"NB"</span><span class="p">,</span> <span class="s2">"NC"</span><span class="p">,</span> <span class="s2">"tau"</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 <span class="p">)</span>  <span class="c1"># create columns for defect state percentages and lifetime, fill with NaNs for now, to fill iteratively below</span>
 
-<span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;NA&quot;</span><span class="p">,</span> <span class="s2">&quot;NB&quot;</span><span class="p">,</span> <span class="s2">&quot;NC&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
+<span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="s2">"NA"</span><span class="p">,</span> <span class="s2">"NB"</span><span class="p">,</span> <span class="s2">"NC"</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">nA_0</span><span class="p">,</span>
     <span class="n">nB_0</span><span class="p">,</span>
     <span class="n">nC_0</span><span class="p">,</span>
 <span class="p">)</span>  <span class="c1"># assign first timestep defect state percentages</span>
-<span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;tau&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">tau_now</span><span class="p">(</span>
+<span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"tau"</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">tau_now</span><span class="p">(</span>
     <span class="n">tau_0</span><span class="p">,</span> <span class="n">tau_deg</span><span class="p">,</span> <span class="n">nB_0</span>
 <span class="p">)</span>  <span class="c1"># calculate tau for the first timestep</span>
 </pre></div>
@@ -1885,35 +1917,35 @@ pvdeg version  0.1.dev1+g321beb370
 
     <span class="c1"># loop through rows, new tau calculated based on previous NB. Reaction proceeds based on new tau.</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">n_A</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;NA&quot;</span><span class="p">]</span>
-        <span class="n">n_B</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;NB&quot;</span><span class="p">]</span>
-        <span class="n">n_C</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;NC&quot;</span><span class="p">]</span>
+        <span class="n">n_A</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"NA"</span><span class="p">]</span>
+        <span class="n">n_B</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"NB"</span><span class="p">]</span>
+        <span class="n">n_C</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"NC"</span><span class="p">]</span>
 
         <span class="n">tau</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">tau_now</span><span class="p">(</span><span class="n">tau_0</span><span class="p">,</span> <span class="n">tau_deg</span><span class="p">,</span> <span class="n">n_B</span><span class="p">)</span>
         <span class="n">jsc</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">calculate_jsc_from_tau_cp</span><span class="p">(</span>
             <span class="n">tau</span><span class="p">,</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">d_base</span><span class="p">,</span> <span class="n">srv_rear</span><span class="p">,</span> <span class="n">generation</span><span class="p">,</span> <span class="n">depth</span>
         <span class="p">)</span>
 
-        <span class="n">temperature</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Temperature&quot;</span><span class="p">]</span>
-        <span class="n">injection</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Injection&quot;</span><span class="p">]</span>
+        <span class="n">temperature</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Temperature"</span><span class="p">]</span>
+        <span class="n">injection</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Injection"</span><span class="p">]</span>
 
         <span class="c1"># calculate defect reaction kinetics: reaction constant and carrier concentration factor.</span>
         <span class="n">k_AB</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">k_ij</span><span class="p">(</span>
-            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;v_ab&quot;</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;ea_ab&quot;</span><span class="p">],</span> <span class="n">temperature</span>
+            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"v_ab"</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"ea_ab"</span><span class="p">],</span> <span class="n">temperature</span>
         <span class="p">)</span>
         <span class="n">k_BA</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">k_ij</span><span class="p">(</span>
-            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;v_ba&quot;</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;ea_ba&quot;</span><span class="p">],</span> <span class="n">temperature</span>
+            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"v_ba"</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"ea_ba"</span><span class="p">],</span> <span class="n">temperature</span>
         <span class="p">)</span>
         <span class="n">k_BC</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">k_ij</span><span class="p">(</span>
-            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;v_bc&quot;</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;ea_bc&quot;</span><span class="p">],</span> <span class="n">temperature</span>
+            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"v_bc"</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"ea_bc"</span><span class="p">],</span> <span class="n">temperature</span>
         <span class="p">)</span>
         <span class="n">k_CB</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">k_ij</span><span class="p">(</span>
-            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;v_cb&quot;</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">&quot;ea_cb&quot;</span><span class="p">],</span> <span class="n">temperature</span>
+            <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"v_cb"</span><span class="p">],</span> <span class="n">mechanism_params</span><span class="p">[</span><span class="s2">"ea_cb"</span><span class="p">],</span> <span class="n">temperature</span>
         <span class="p">)</span>
 
         <span class="n">x_ab</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">carrier_factor</span><span class="p">(</span>
             <span class="n">tau</span><span class="p">,</span>
-            <span class="s2">&quot;ab&quot;</span><span class="p">,</span>
+            <span class="s2">"ab"</span><span class="p">,</span>
             <span class="n">temperature</span><span class="p">,</span>
             <span class="n">injection</span><span class="p">,</span>
             <span class="n">jsc</span><span class="p">,</span>
@@ -1923,7 +1955,7 @@ pvdeg version  0.1.dev1+g321beb370
         <span class="p">)</span>
         <span class="n">x_ba</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">carrier_factor</span><span class="p">(</span>
             <span class="n">tau</span><span class="p">,</span>
-            <span class="s2">&quot;ba&quot;</span><span class="p">,</span>
+            <span class="s2">"ba"</span><span class="p">,</span>
             <span class="n">temperature</span><span class="p">,</span>
             <span class="n">injection</span><span class="p">,</span>
             <span class="n">jsc</span><span class="p">,</span>
@@ -1933,7 +1965,7 @@ pvdeg version  0.1.dev1+g321beb370
         <span class="p">)</span>
         <span class="n">x_bc</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">carrier_factor</span><span class="p">(</span>
             <span class="n">tau</span><span class="p">,</span>
-            <span class="s2">&quot;bc&quot;</span><span class="p">,</span>
+            <span class="s2">"bc"</span><span class="p">,</span>
             <span class="n">temperature</span><span class="p">,</span>
             <span class="n">injection</span><span class="p">,</span>
             <span class="n">jsc</span><span class="p">,</span>
@@ -1950,29 +1982,29 @@ pvdeg version  0.1.dev1+g321beb370
         <span class="n">dN_Cdt</span> <span class="o">=</span> <span class="p">(</span><span class="n">k_BC</span> <span class="o">*</span> <span class="n">n_B</span> <span class="o">*</span> <span class="n">x_bc</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">k_CB</span> <span class="o">*</span> <span class="n">n_C</span><span class="p">)</span>
 
         <span class="n">t_step</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Datetime&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Datetime&quot;</span><span class="p">]</span>
+            <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Datetime"</span><span class="p">]</span> <span class="o">-</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"Datetime"</span><span class="p">]</span>
         <span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
 
         <span class="c1"># assign new defect state percentages</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;NA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_A</span> <span class="o">+</span> <span class="n">dN_Adt</span> <span class="o">*</span> <span class="n">t_step</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;NB&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_B</span> <span class="o">+</span> <span class="n">dN_Bdt</span> <span class="o">*</span> <span class="n">t_step</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;NC&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_C</span> <span class="o">+</span> <span class="n">dN_Cdt</span> <span class="o">*</span> <span class="n">t_step</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"NA"</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_A</span> <span class="o">+</span> <span class="n">dN_Adt</span> <span class="o">*</span> <span class="n">t_step</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"NB"</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_B</span> <span class="o">+</span> <span class="n">dN_Bdt</span> <span class="o">*</span> <span class="n">t_step</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"NC"</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_C</span> <span class="o">+</span> <span class="n">dN_Cdt</span> <span class="o">*</span> <span class="n">t_step</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;tau&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">tau_now</span><span class="p">(</span><span class="n">tau_0</span><span class="p">,</span> <span class="n">tau_deg</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;NB&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"tau"</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">tau_now</span><span class="p">(</span><span class="n">tau_0</span><span class="p">,</span> <span class="n">tau_deg</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"NB"</span><span class="p">])</span>
 
 <span class="c1"># calculate device Jsc for every timestep. Unfortunately this requires an integration so I think we have to run through a loop. Device Jsc allows calculation of device Voc.</span>
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">timestep</span> <span class="ow">in</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
     <span class="n">jsc_now</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">calculate_jsc_from_tau_cp</span><span class="p">(</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;tau&quot;</span><span class="p">],</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">d_base</span><span class="p">,</span> <span class="n">srv_rear</span><span class="p">,</span> <span class="n">generation</span><span class="p">,</span> <span class="n">depth</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"tau"</span><span class="p">],</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">d_base</span><span class="p">,</span> <span class="n">srv_rear</span><span class="p">,</span> <span class="n">generation</span><span class="p">,</span> <span class="n">depth</span>
     <span class="p">)</span>
-    <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Jsc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsc_now</span>
-    <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Voc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;tau&quot;</span><span class="p">],</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">srv_rear</span><span class="p">,</span> <span class="n">jsc_now</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">25</span>
+    <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Jsc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsc_now</span>
+    <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Voc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"tau"</span><span class="p">],</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">srv_rear</span><span class="p">,</span> <span class="n">jsc_now</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">25</span>
     <span class="p">)</span>
 </pre></div>
 </div>
@@ -2207,13 +2239,13 @@ pvdeg version  0.1.dev1+g321beb370
 <p>Note of course that all these calculated device parameters are modeled STC device parameters, not the instantaneous, weather-dependent values. We’ll merge back in the pvlib results for convenience, but these don’t reflect the device degradation. We’ll calculate energy loss next</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">dc</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;Datetime&quot;</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">dc</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">"Datetime"</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
-    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">effective_irradiance</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Effective irradiance&quot;</span><span class="p">]),</span>
-    <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;Datetime&quot;</span><span class="p">,</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">effective_irradiance</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Effective irradiance"</span><span class="p">]),</span>
+    <span class="n">left_on</span><span class="o">=</span><span class="s2">"Datetime"</span><span class="p">,</span>
     <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">weather</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;Datetime&quot;</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">weather</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">"Datetime"</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">timesteps</span>
 </pre></div>
@@ -2538,33 +2570,33 @@ pvdeg version  0.1.dev1+g321beb370
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cycler</span><span class="w"> </span><span class="kn">import</span> <span class="n">cycler</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">"default"</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span>
-    <span class="n">cycler</span><span class="p">(</span><span class="s2">&quot;color&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;tab:blue&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:orange&quot;</span><span class="p">,</span> <span class="s2">&quot;tab:green&quot;</span><span class="p">])</span>
-    <span class="o">+</span> <span class="n">cycler</span><span class="p">(</span><span class="s2">&quot;linestyle&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="s2">&quot;-.&quot;</span><span class="p">])</span>
+    <span class="n">cycler</span><span class="p">(</span><span class="s2">"color"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"tab:blue"</span><span class="p">,</span> <span class="s2">"tab:orange"</span><span class="p">,</span> <span class="s2">"tab:green"</span><span class="p">])</span>
+    <span class="o">+</span> <span class="n">cycler</span><span class="p">(</span><span class="s2">"linestyle"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"-"</span><span class="p">,</span> <span class="s2">"--"</span><span class="p">,</span> <span class="s2">"-."</span><span class="p">])</span>
 <span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[[</span><span class="s2">&quot;NA&quot;</span><span class="p">,</span> <span class="s2">&quot;NB&quot;</span><span class="p">,</span> <span class="s2">&quot;NC&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;$N_A$&quot;</span><span class="p">,</span> <span class="s2">&quot;$N_B$&quot;</span><span class="p">,</span> <span class="s2">&quot;$N_C$&quot;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Defect state percentages [%]&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Datetime&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[[</span><span class="s2">"NA"</span><span class="p">,</span> <span class="s2">"NB"</span><span class="p">,</span> <span class="s2">"NC"</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"$N_A$"</span><span class="p">,</span> <span class="s2">"$N_B$"</span><span class="p">,</span> <span class="s2">"$N_C$"</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"upper left"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Defect state percentages [%]"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Datetime"</span><span class="p">)</span>
 
 <span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">],</span>
-    <span class="n">c</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Normalized STC $P_</span><span class="si">{MP}</span><span class="s2">$&quot;</span><span class="p">,</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">],</span>
+    <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">"Normalized STC $P_</span><span class="si">{MP}</span><span class="s2">$"</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Normalized STC $P_</span><span class="si">{MP}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">"upper right"</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Normalized STC $P_</span><span class="si">{MP}</span><span class="s2">$"</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
-    <span class="s2">&quot;Simulated Outdoor LETID progression based on accelerated test results </span><span class="se">\n</span><span class="s2">&quot;</span>
-    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">location</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="s2">"Simulated Outdoor LETID progression based on accelerated test results </span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">location</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span>
 <span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -2572,54 +2604,54 @@ pvdeg version  0.1.dev1+g321beb370
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/50f133a78e97d769ede2b78a9f8a1d1e8f19260d3b8746d8298a5f2ad3782ad5.png" src="../_images/50f133a78e97d769ede2b78a9f8a1d1e8f19260d3b8746d8298a5f2ad3782ad5.png" />
+<img alt="../_images/d16de031bcced65cbc2549d7b243b78ad64e8af07fb01ad23739eed3b9d4df78.png" src="../_images/d16de031bcced65cbc2549d7b243b78ad64e8af07fb01ad23739eed3b9d4df78.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.dates</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mdates</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">"default"</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">],</span>
-    <span class="n">c</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Normalized STC $P_</span><span class="si">{MP}</span><span class="s2">$&quot;</span><span class="p">,</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">],</span>
+    <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">"Normalized STC $P_</span><span class="si">{MP}</span><span class="s2">$"</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)),</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)),</span> <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span>
     <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)),</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">],</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">],</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">"grey"</span><span class="p">,</span>
     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
 <span class="p">)</span>
 
 
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Normalized STC $P_</span><span class="si">{MP}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Normalized STC $P_</span><span class="si">{MP}</span><span class="s2">$"</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Energy Loss&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Energy Loss"</span><span class="p">)</span>
 
 <span class="n">loss</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_energy_loss</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">datestr2num</span><span class="p">(</span><span class="s2">&quot;1999-08-02&quot;</span><span class="p">),</span> <span class="mf">0.994</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Energy loss = </span><span class="si">{</span><span class="n">loss</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">datestr2num</span><span class="p">(</span><span class="s2">"1999-08-02"</span><span class="p">),</span> <span class="mf">0.994</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Energy loss = </span><span class="si">{</span><span class="n">loss</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Datetime&#39;, &#39;Temperature&#39;, &#39;Injection&#39;, &#39;NA&#39;, &#39;NB&#39;, &#39;NC&#39;, &#39;tau&#39;, &#39;Jsc&#39;,
-       &#39;Voc&#39;, &#39;Isc&#39;, &#39;FF&#39;, &#39;Pmp&#39;, &#39;Pmp_norm&#39;, &#39;i_sc&#39;, &#39;v_oc&#39;, &#39;i_mp&#39;, &#39;v_mp&#39;,
-       &#39;p_mp&#39;, &#39;i_x&#39;, &#39;i_xx&#39;, &#39;Effective irradiance&#39;, &#39;ghi&#39;, &#39;dhi&#39;, &#39;dni&#39;,
-       &#39;wind_speed&#39;, &#39;temp_air&#39;, &#39;precipitable_water&#39;],
-      dtype=&#39;str&#39;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index(['Datetime', 'Temperature', 'Injection', 'NA', 'NB', 'NC', 'tau', 'Jsc',
+       'Voc', 'Isc', 'FF', 'Pmp', 'Pmp_norm', 'i_sc', 'v_oc', 'i_mp', 'v_mp',
+       'p_mp', 'i_x', 'i_xx', 'Effective irradiance', 'ghi', 'dhi', 'dni',
+       'wind_speed', 'temp_air', 'precipitable_water'],
+      dtype='str')
 </pre></div>
 </div>
-<img alt="../_images/8b2336fe2f7fc38298d196dd116924621ccf70cf210e28bb3738b556d6086afc.png" src="../_images/8b2336fe2f7fc38298d196dd116924621ccf70cf210e28bb3738b556d6086afc.png" />
+<img alt="../_images/0a3f1e9a6f18502cfec62624d76caf0852c75f3a73ed826e5f1b3d83f497acd7.png" src="../_images/0a3f1e9a6f18502cfec62624d76caf0852c75f3a73ed826e5f1b3d83f497acd7.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2631,131 +2663,131 @@ pvdeg version  0.1.dev1+g321beb370
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span> <span class="o">=</span> <span class="n">axs</span>
 
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Base $P_</span><span class="si">{MP}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Base $P_</span><span class="si">{MP}</span><span class="s2">$"</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">],</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Degraded $P_</span><span class="si">{MP}</span><span class="s2">$&quot;</span><span class="p">,</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">]</span> <span class="o">*</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">],</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">"Degraded $P_</span><span class="si">{MP}</span><span class="s2">$"</span><span class="p">,</span>
     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower left&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">"lower left"</span><span class="p">)</span>
 
 <span class="n">axin1</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">inset_axes</span><span class="p">([</span><span class="mf">0.55</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">])</span>
-<span class="n">axin1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">])</span>
-<span class="n">axin1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">axin1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">])</span>
+<span class="n">axin1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">]</span> <span class="o">*</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 
 
-<span class="n">axin1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">datestr2num</span><span class="p">(</span><span class="s2">&quot;1999-12-04&quot;</span><span class="p">),</span> <span class="n">mdates</span><span class="o">.</span><span class="n">datestr2num</span><span class="p">(</span><span class="s2">&quot;1999-12-11&quot;</span><span class="p">))</span>
+<span class="n">axin1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">datestr2num</span><span class="p">(</span><span class="s2">"1999-12-04"</span><span class="p">),</span> <span class="n">mdates</span><span class="o">.</span><span class="n">datestr2num</span><span class="p">(</span><span class="s2">"1999-12-11"</span><span class="p">))</span>
 <span class="n">axin1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">240</span><span class="p">)</span>
-<span class="n">axin1</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">labelrotation</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">axin1</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">labelrotation</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">indicate_inset_zoom</span><span class="p">(</span><span class="n">axin1</span><span class="p">)</span>
 
-<span class="n">start</span> <span class="o">=</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Timedelta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">3600</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">]</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">timesteps</span><span class="p">[</span><span class="s2">"Timedelta"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">3600</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">]</span>
 <span class="p">]</span>
 
 <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span>
-    <span class="n">cumulative_trapezoid</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Timedelta&quot;</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cumulative energy, base&quot;</span><span class="p">,</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span>
+    <span class="n">cumulative_trapezoid</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Timedelta"</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">"Cumulative energy, base"</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span>
     <span class="n">cumulative_trapezoid</span><span class="p">(</span>
-        <span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span>
-        <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Timedelta&quot;</span><span class="p">],</span>
+        <span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">]</span> <span class="o">*</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">])</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Timedelta"</span><span class="p">],</span>
         <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cumulative energy, degraded&quot;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">"Cumulative energy, degraded"</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span>
-    <span class="p">(</span><span class="n">cumulative_trapezoid</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Timedelta&quot;</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span>
+    <span class="p">(</span><span class="n">cumulative_trapezoid</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Timedelta"</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span>
     <span class="p">(</span>
         <span class="n">cumulative_trapezoid</span><span class="p">(</span>
-            <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Timedelta&quot;</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span>
+            <span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">]</span> <span class="o">*</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Timedelta"</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span>
         <span class="p">)</span>
         <span class="o">/</span> <span class="mi">1000</span>
     <span class="p">),</span>
     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Energy loss&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">"C1"</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">"Energy loss"</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="n">axin2</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">inset_axes</span><span class="p">([</span><span class="mf">0.55</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">])</span>
 <span class="n">axin2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span>
-    <span class="n">cumulative_trapezoid</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Timedelta&quot;</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span>
+    <span class="n">cumulative_trapezoid</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Timedelta"</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
 <span class="p">)</span>
 <span class="n">axin2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span>
     <span class="n">cumulative_trapezoid</span><span class="p">(</span>
-        <span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span>
-        <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Timedelta&quot;</span><span class="p">],</span>
+        <span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">]</span> <span class="o">*</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">])</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Timedelta"</span><span class="p">],</span>
         <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="p">),</span>
 <span class="p">)</span>
 <span class="n">axin2</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span>
-    <span class="p">(</span><span class="n">cumulative_trapezoid</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Timedelta&quot;</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span>
+    <span class="p">(</span><span class="n">cumulative_trapezoid</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Timedelta"</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">),</span>
     <span class="p">(</span>
         <span class="n">cumulative_trapezoid</span><span class="p">(</span>
-            <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Timedelta&quot;</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span>
+            <span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">]</span> <span class="o">*</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Timedelta"</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span>
         <span class="p">)</span>
         <span class="o">/</span> <span class="mi">1000</span>
     <span class="p">),</span>
     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">"C1"</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">axin2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">datestr2num</span><span class="p">(</span><span class="s2">&quot;1999-12-04&quot;</span><span class="p">),</span> <span class="n">mdates</span><span class="o">.</span><span class="n">datestr2num</span><span class="p">(</span><span class="s2">&quot;1999-12-11&quot;</span><span class="p">))</span>
+<span class="n">axin2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">datestr2num</span><span class="p">(</span><span class="s2">"1999-12-04"</span><span class="p">),</span> <span class="n">mdates</span><span class="o">.</span><span class="n">datestr2num</span><span class="p">(</span><span class="s2">"1999-12-11"</span><span class="p">))</span>
 <span class="n">axin2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">412</span><span class="p">,</span> <span class="mi">427</span><span class="p">)</span>
-<span class="n">axin2</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">labelrotation</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">axin2</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">labelrotation</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">indicate_inset_zoom</span><span class="p">(</span><span class="n">axin2</span><span class="p">)</span>
 
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Datetime&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Datetime"</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Datetime&quot;</span><span class="p">],</span>
-    <span class="p">(</span><span class="n">cumulative_trapezoid</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Timedelta&quot;</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Datetime"</span><span class="p">],</span>
+    <span class="p">(</span><span class="n">cumulative_trapezoid</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Timedelta"</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span>
     <span class="o">-</span> <span class="p">(</span>
         <span class="n">cumulative_trapezoid</span><span class="p">(</span>
-            <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Pmp_norm&quot;</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Timedelta&quot;</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span>
+            <span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">]</span> <span class="o">*</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Pmp_norm"</span><span class="p">],</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Timedelta"</span><span class="p">],</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span>
         <span class="p">)</span>
         <span class="o">/</span> <span class="mi">1000</span>
     <span class="p">),</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cumulative energy loss&quot;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">"Cumulative energy loss"</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="n">loss</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_energy_loss</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)</span>
-<span class="n">energy</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;p_mp&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">&quot;Timedelta&quot;</span><span class="p">])</span>
+<span class="n">energy</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"p_mp"</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">[</span><span class="s2">"Timedelta"</span><span class="p">])</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
-    <span class="n">mdates</span><span class="o">.</span><span class="n">datestr2num</span><span class="p">(</span><span class="s2">&quot;1999-03-02&quot;</span><span class="p">),</span>
+    <span class="n">mdates</span><span class="o">.</span><span class="n">datestr2num</span><span class="p">(</span><span class="s2">"1999-03-02"</span><span class="p">),</span>
     <span class="mi">2</span><span class="p">,</span>
-    <span class="n">s</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Energy loss = </span><span class="si">{</span><span class="n">loss</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">energy</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> kWh (</span><span class="si">{</span><span class="n">loss</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Energy loss = </span><span class="si">{</span><span class="n">loss</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">energy</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> kWh (</span><span class="si">{</span><span class="n">loss</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Module $P_</span><span class="si">{MP}</span><span class="s2">$ [W]&quot;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Energy [kWh]&quot;</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Energy losses [kWh]&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Module $P_</span><span class="si">{MP}</span><span class="s2">$ [W]"</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Cumulative Energy [kWh]"</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Cumulative Energy losses [kWh]"</span><span class="p">)</span>
 
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Module power, cumulative energy, and loss due to LETID&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Module power, cumulative energy, and loss due to LETID"</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Datetime&#39;, &#39;Temperature&#39;, &#39;Injection&#39;, &#39;NA&#39;, &#39;NB&#39;, &#39;NC&#39;, &#39;tau&#39;, &#39;Jsc&#39;,
-       &#39;Voc&#39;, &#39;Isc&#39;, &#39;FF&#39;, &#39;Pmp&#39;, &#39;Pmp_norm&#39;, &#39;i_sc&#39;, &#39;v_oc&#39;, &#39;i_mp&#39;, &#39;v_mp&#39;,
-       &#39;p_mp&#39;, &#39;i_x&#39;, &#39;i_xx&#39;, &#39;Effective irradiance&#39;, &#39;ghi&#39;, &#39;dhi&#39;, &#39;dni&#39;,
-       &#39;wind_speed&#39;, &#39;temp_air&#39;, &#39;precipitable_water&#39;, &#39;Timedelta&#39;],
-      dtype=&#39;str&#39;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index(['Datetime', 'Temperature', 'Injection', 'NA', 'NB', 'NC', 'tau', 'Jsc',
+       'Voc', 'Isc', 'FF', 'Pmp', 'Pmp_norm', 'i_sc', 'v_oc', 'i_mp', 'v_mp',
+       'p_mp', 'i_x', 'i_xx', 'Effective irradiance', 'ghi', 'dhi', 'dni',
+       'wind_speed', 'temp_air', 'precipitable_water', 'Timedelta'],
+      dtype='str')
 </pre></div>
 </div>
-<img alt="../_images/e0da22399f6ef99adadd20ed65af440a907684c5e28e7f557d34bd47029df7b4.png" src="../_images/e0da22399f6ef99adadd20ed65af440a907684c5e28e7f557d34bd47029df7b4.png" />
+<img alt="../_images/346f3edddca121e1d1c5fea6684a11ed1d0f4674176d7d9a67eff313e00af291.png" src="../_images/346f3edddca121e1d1c5fea6684a11ed1d0f4674176d7d9a67eff313e00af291.png" />
 </div>
 </div>
 </section>
@@ -2763,7 +2795,7 @@ pvdeg version  0.1.dev1+g321beb370
 <h1>The function <code class="docutils literal notranslate"><span class="pre">calc_letid_outdoors</span></code> wraps all of the steps above into a single function:<a class="headerlink" href="#the-function-calc-letid-outdoors-wraps-all-of-the-steps-above-into-a-single-function" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mechanism_params</span> <span class="o">=</span> <span class="s2">&quot;D037&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mechanism_params</span> <span class="o">=</span> <span class="s2">"D037"</span>
 
 <span class="n">letid</span><span class="o">.</span><span class="n">calc_letid_outdoors</span><span class="p">(</span>
     <span class="n">tau_0</span><span class="p">,</span>
@@ -2783,7 +2815,7 @@ pvdeg version  0.1.dev1+g321beb370
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/scipy/optimize/_chandrupatla.py:437: RuntimeWarning: invalid value encountered in divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages/scipy/optimize/_chandrupatla.py:437: RuntimeWarning: invalid value encountered in divide
   C = A / (A + B)
 </pre></div>
 </div>
@@ -3380,15 +3412,17 @@ pvdeg version  0.1.dev1+g321beb370
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">LETID Outdoor Scenario</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-pvlib-model">Set up PVlib model</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-timeseries">Set up timeseries</a></li>
@@ -3445,8 +3479,8 @@ By Martin Springer, Matthew Brown, Silvana Ovaitt, Tobin Ford, Joseph Karas, Mic
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
 
   <footer class="bd-footer">
   </footer>

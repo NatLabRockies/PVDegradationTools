@@ -1,5 +1,7 @@
 """Collection of classes and functions for geospatial analysis."""
 
+import warnings
+
 from pvdeg import (
     utilities,
 )
@@ -95,7 +97,17 @@ def _df_from_arbitrary(res, func):
     if isinstance(res, pd.DataFrame):
         return res
     elif isinstance(res, pd.Series):
-        return pd.DataFrame(res, columns=[func.__name__])
+        # Name the single output column after the function's declared geospatial
+        # shape (from @geospatial_quick_shape) so it matches the auto-generated
+        # template's data variable; fall back to the function name when the
+        # function was not decorated. Use rename().to_frame() rather than
+        # pd.DataFrame(res, columns=[name]): the latter reindexes by label and
+        # silently yields an all-NaN column when the Series name differs.
+        shape_names = getattr(func, "shape_names", None)
+        name = (
+            shape_names[0] if shape_names and len(shape_names) == 1 else func.__name__
+        )
+        return res.rename(name).to_frame()
     elif isinstance(res, (int, float)):
         return pd.DataFrame([res], columns=[func.__name__])
     elif isinstance(res, tuple) and all(isinstance(item, numerics) for item in res):
@@ -147,7 +159,15 @@ def calc_gid(ds_gid, meta_gid, func, **kwargs):
     #     {col: np.asarray(df_weather[col]).dtype for col in df_weather.columns},
     #     copy=False
     # )
-    df_weather.index = np.asarray(df_weather.index.values, dtype="datetime64[ns]")
+    # Keep the index name ("time") when forcing the dtype: a bare np.asarray drops
+    # it, and timeseries funcs (e.g. temperature.cell) inherit that unnamed index,
+    # so from_dataframe below would label the dim "index" instead of "time" and the
+    # `if not df.index.name` branch would then collapse the whole series to a
+    # scalar -- dropping "time" and breaking geospatial.analysis map_blocks.
+    df_weather.index = pd.DatetimeIndex(
+        np.asarray(df_weather.index.values, dtype="datetime64[ns]"),
+        name=df_weather.index.name,
+    )
 
     res = func(weather_df=df_weather, meta=meta_gid, **kwargs)
     # res is of function return type, can be float, tuple, list, dataframe, dataset, etc
@@ -172,8 +192,10 @@ def calc_block(weather_ds_block, future_meta_df, func, func_kwargs):
     ----------
     weather_ds_block : xarray.Dataset
         Dataset containing weather data for a block of gids.
-    future_meta_df : pandas.DataFrame
-        DataFrame containing meta data for a block of gids.
+    future_meta_df : pandas.DataFrame or distributed.Future
+        DataFrame containing meta data for a block of gids. May also be a
+        scattered ``distributed.Future`` wrapping that DataFrame (see
+        ``analysis``); it is materialized before use.
     func : function
         Function to apply to weather data.
     func_kwargs : dict
@@ -184,6 +206,18 @@ def calc_block(weather_ds_block, future_meta_df, func, func_kwargs):
     ds_res : xarray.Dataset
         Dataset with results for a block of gids.
     """
+    # ``analysis`` scatters ``meta_df`` to a broadcast Future to keep the task
+    # graph small. xarray's ``map_blocks`` does not auto-resolve Futures nested
+    # in kwargs, so materialize it here. A scattered/broadcast Future already
+    # holds concrete data, so ``result()`` returns the local copy immediately.
+    try:
+        from distributed import Future
+
+        if isinstance(future_meta_df, Future):
+            future_meta_df = future_meta_df.result()
+    except ImportError:
+        pass
+
     res = weather_ds_block.groupby("gid", squeeze=False).map(
         lambda ds_gid: calc_gid(
             ds_gid=ds_gid.squeeze(),
@@ -202,6 +236,7 @@ def analysis(
     template: xr.Dataset = None,
     preserve_gid_dim: bool = False,
     compute: bool = True,
+    gid_chunk: int = None,
     **func_kwargs,
 ) -> Union[xr.Dataset, Delayed]:
     """
@@ -236,6 +271,16 @@ def analysis(
         Expert setting. If False, builds lazy computation graph without execution.
         This is useful for building into larger dask pipelines.
         Default is True: Values will be computed when this function is called.
+    gid_chunk : int, optional
+        Number of gids per dask chunk used to parallelize the analysis. The
+        analysis runs one task per chunk along the 'gid' dimension, so a
+        single-chunk ``weather_ds`` would otherwise execute serially on one
+        worker. If provided, ``weather_ds`` is rechunked to
+        ``{"time": -1, "gid": gid_chunk}`` ('time' is kept whole because each
+        location needs its full timeseries). If None (default) and
+        ``weather_ds`` has a single 'gid' chunk, it is auto-chunked to one gid
+        per task. Ignored, with a warning, when a custom ``template`` is
+        supplied, since rechunking would misalign it.
     func_kwargs : dict
         Keyword arguments to pass to func.
 
@@ -244,10 +289,61 @@ def analysis(
     ds_res : xarray.Dataset | dask.delayed.Delayed
         Dataset with results for a block of gids.
     """
+    # geospatial.analysis parallelizes by mapping calc_block over each dask
+    # chunk along 'gid'; a single 'gid' chunk runs every location serially on
+    # one worker. Ensure the dataset is chunked along 'gid' for parallelism.
+    gid_chunks = (weather_ds.chunks or {}).get("gid")
+    single_gid_chunk = gid_chunks is None or len(gid_chunks) <= 1
+
+    if template is not None:
+        if gid_chunk is not None:
+            warnings.warn(
+                "gid_chunk is ignored because a custom template was provided; "
+                "chunk weather_ds and template yourself to parallelize.",
+                stacklevel=2,
+            )
+        elif single_gid_chunk:
+            warnings.warn(
+                "weather_ds has a single 'gid' chunk, so analysis will run "
+                "serially on one worker. Chunk weather_ds (and template) along "
+                "'gid' to parallelize.",
+                stacklevel=2,
+            )
+    elif gid_chunk is not None or single_gid_chunk:
+        # Auto-chunking here is the documented default and produces a correct,
+        # parallel result, so it is deliberately silent -- warning on the success
+        # path would fire for every single-chunk caller with nothing to act on.
+        target = gid_chunk if gid_chunk is not None else 1
+        chunk_spec = {"gid": target}
+        if "time" in weather_ds.sizes:
+            chunk_spec["time"] = -1
+        weather_ds = weather_ds.chunk(chunk_spec)
+
     if template is None:
         template = auto_template(func=func, ds_gids=weather_ds)
 
-    kwargs = {"func": func, "future_meta_df": meta_df, "func_kwargs": func_kwargs}
+    # calc_block only reads one row per gid (future_meta_df.loc[gid]), but
+    # map_blocks embeds whatever we pass here into EVERY per-gid task. Passing
+    # the raw meta_df therefore copies the whole frame into all N tasks and
+    # inflates the task graph to GiBs (e.g. ~470 KB x ~14k gids ~= 6.6 GiB),
+    # which stalls the distributed scheduler (unresponsive event loop, no
+    # progress). Scatter it once instead -- broadcast a single copy to every
+    # worker -- and embed the resulting Future so each task references it by key.
+    # Fall back to the raw frame when no distributed client is running (e.g. the
+    # synchronous/local scheduler used in tests).
+    meta_for_calc = meta_df
+    try:
+        from distributed import get_client
+
+        meta_for_calc = get_client().scatter(meta_df, broadcast=True)
+    except (ValueError, ImportError):
+        pass
+
+    kwargs = {
+        "func": func,
+        "future_meta_df": meta_for_calc,
+        "func_kwargs": func_kwargs,
+    }
 
     stacked = weather_ds.map_blocks(calc_block, kwargs=kwargs, template=template)
 
@@ -286,6 +382,7 @@ def output_template(
     value is "gid", a geospatial ID number.
 
     .. code-block:: python
+
         shapes = {
             "x": ("gid",),
             "T98_inf": ("gid",),
@@ -301,6 +398,7 @@ def output_template(
     result for each location. This means we need dimensions of "gid" and "time".
 
     .. code-block:: python
+
         shapes = {
             "RH_surface_outside": ("gid", "time"),
             "RH_front_encap": ("gid", "time"),
@@ -392,7 +490,7 @@ def zero_template(
 
 
 def can_auto_template(func) -> None:
-    """Check if we can use `geospatial.auto_template on a given function.
+    """Check if we can use `geospatial.auto_template` on a given function.
 
     Raise an error if the function was not declared with the `@geospatial_quick_shape`
     decorator. No error raised if we can run `geospatial.auto_template` on
@@ -428,9 +526,11 @@ def auto_template(func: Callable, ds_gids: xr.Dataset) -> xr.Dataset:
     Examples
     --------
     The function returns a numeric value
+
     >>> pvdeg.design.edge_seal_width
 
     the function returns a timeseries result
+
     >>> pvdeg.module.humidity
 
     Counter example
@@ -445,8 +545,8 @@ def auto_template(func: Callable, ds_gids: xr.Dataset) -> xr.Dataset:
         function to create template from. This will raise an error if the function was
         not declared with the `@geospatial_quick_shape` decorator.
     ds_gids : xarray.Dataset
-        Dataset containing the gids and their associated dimensions. (geospatial weather
-                                                                      dataset)
+        Dataset containing the gids and their associated dimensions.
+        (geospatial weather dataset)
         Dataset should already be chunked.
 
     Returns
@@ -475,7 +575,11 @@ def plot_USA(
     xr_res, cmap="viridis", vmin=None, vmax=None, title=None, cb_title=None, fp=None
 ):
     fig = plt.figure()
-    ax = fig.add_axes([0, 0, 1, 1], projection=ccrs.LambertConformal(), frameon=False)
+    ax = fig.add_axes(
+        [0, 0, 1, 1],
+        projection=ccrs.LambertConformal(central_longitude=-95, central_latitude=45),
+        frameon=False,
+    )
     ax.patch.set_visible(False)
     ax.set_extent([-120, -74, 22, 50], ccrs.Geodetic())
 
@@ -491,25 +595,21 @@ def plot_USA(
     )
 
     cm = xr_res.plot(
+        ax=ax,
         transform=ccrs.PlateCarree(),
         zorder=1,
         add_colorbar=False,
         cmap=cmap,
         vmin=vmin,
         vmax=vmax,
-        subplot_kws={
-            "projection": ccrs.LambertConformal(
-                central_longitude=-95, central_latitude=45
-            )
-        },
     )
 
-    cb = plt.colorbar(cm, shrink=0.5)
+    cb = plt.colorbar(cm, ax=ax, shrink=0.5)
     cb.set_label(cb_title)
     ax.set_title(title)
 
     if fp is not None:
-        plt.savefig(fp, dpi=1200)
+        fig.savefig(fp, dpi=1200)
 
     return fig, ax
 
@@ -534,6 +634,7 @@ def plot_Europe(
     )
 
     cm = xr_res.plot(
+        ax=ax,
         transform=ccrs.PlateCarree(),
         zorder=1,
         add_colorbar=False,
@@ -544,7 +645,7 @@ def plot_Europe(
         infer_intervals=False,
     )
 
-    cb = plt.colorbar(cm, shrink=0.5)
+    cb = plt.colorbar(cm, ax=ax, shrink=0.5)
     cb.set_label(cb_title)
     ax.set_title(title)
 
@@ -555,7 +656,7 @@ def plot_Europe(
     ax.set_ylabel("Latitude")
 
     if fp is not None:
-        plt.savefig(fp, dpi=1200)
+        fig.savefig(fp, dpi=1200)
 
     return fig, ax
 
@@ -670,6 +771,7 @@ def identify_mountains_radii(
     elevation_floor : int
         minimum inclusive elevation in meters. If a point has smaller location
         it will be clipped from result.
+
     Returns:
     --------
     gids : np.array
@@ -865,6 +967,7 @@ def apply_bounding_box(
         bottom right box corners. Could be used to select amongst a subset of
         data points. ex) Given all points for the planet, downselect based on
         the most extreme coordinates for the United States coastline information.
+
     Returns:
     --------
     gids : np.array
