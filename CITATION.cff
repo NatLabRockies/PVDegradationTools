@@ -46,5 +46,5 @@ license: BSD-3-Clause
 repository-code: "https://github.com/NatLabRockies/PVDegradationTools"
 url: "https://pvdegradationtools.readthedocs.io"
 type: software
-version: 0.7.1
-date-released: 2026-02-06
+version: 0.7.2
+date-released: 2026-08-21
