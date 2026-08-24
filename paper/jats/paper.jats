@@ -110,7 +110,7 @@ a Creative Commons Attribution 4.0 International License (CC BY
   enables field-relevant predictions and uncertainty quantification of
   module reliability and lifetime.</p>
   <p>PVDeg is developed openly on GitHub and releases are distributed
-  via the Python Package Index (PyPi). The source code is freely
+  via the Python Package Index (PyPI). The source code is freely
   available under the BSD 3-Clause license, and copyrighted by the
   Alliance for Sustainable Energy allowing permissive use with
   attribution. PVDeg follows best practices for open-source python
@@ -135,14 +135,14 @@ a Creative Commons Attribution 4.0 International License (CC BY
   open-source software combines physics-based degradation mechanism
   modeling with uncertainty quantification and geospatial scaling. This
   repository offers a powerful set of tools for PV reliability
-  researchers, materials scientists, and engineers in both
-  laboratories.</p>
+  researchers, materials scientists, and engineers in both industry and
+  research laboratories.</p>
 </sec>
 <sec id="state-of-the-field">
   <title>State of the Field</title>
   <p>Existing PV modeling tools such as pvlib-python
-  (<xref alt="William F. Holmgren et al., 2018a" rid="ref-pvlib" ref-type="bibr">William
-  F. Holmgren et al., 2018a</xref>)
+  (<xref alt="Holmgren, Hansen, &amp; Mikofski, 2018" rid="ref-pvlib" ref-type="bibr">Holmgren,
+  Hansen, &amp; Mikofski, 2018</xref>)
   (<xref alt="Anderson et al., 2023" rid="ref-anderson2023pvlib" ref-type="bibr">Anderson
   et al., 2023</xref>) and SAM
   (<xref alt="Blair et al., 2018" rid="ref-SAM" ref-type="bibr">Blair et
@@ -174,10 +174,10 @@ a Creative Commons Attribution 4.0 International License (CC BY
   relevance of PVDeg for both research and industry renders it an
   important component of a growing ecosystem of open-source tools for
   solar energy, several of which are reviewed in Ref.
-  (<xref alt="William F. Holmgren et al., 2018b" rid="ref-Holmgren2018" ref-type="bibr">William
-  F. Holmgren et al., 2018b</xref>).</p>
+  (<xref alt="Holmgren, Hansen, Stein, et al., 2018" rid="ref-Holmgren2018" ref-type="bibr">Holmgren,
+  Hansen, Stein, et al., 2018</xref>).</p>
   <fig>
-    <caption><p>Example of geospatial degradation modeling in PVDeg: (a)
+    <caption><p>Example of geospatial degradation modeling in PVDeg:
     calculated standoff distances for IEC TS 63126 across the
     continental
     U.S.<styled-content id="figU003Avisualization"></styled-content></p></caption>
@@ -251,7 +251,7 @@ a Creative Commons Attribution 4.0 International License (CC BY
     includes visualization functions for mapping results and supports
     both uniform and stochastic spatial sampling strategies to balance
     computational efficiency with geographic coverage. Parallelization
-    routines are compatible with NREL’s open-source
+    routines are compatible with NLR’s open-source
     <italic>GeoGridFusion</italic> framework
     (<xref alt="Ford et al., 2025" rid="ref-Tobin2025geogridfusion" ref-type="bibr">Ford
     et al., 2025</xref>;
@@ -459,10 +459,10 @@ a Creative Commons Attribution 4.0 International License (CC BY
   <ref id="ref-Holmgren2018">
     <element-citation publication-type="paper-conference">
       <person-group person-group-type="author">
-        <name><surname>Holmgren</surname><given-names>William F</given-names></name>
+        <name><surname>Holmgren</surname><given-names>William F.</given-names></name>
         <name><surname>Hansen</surname><given-names>Clifford W</given-names></name>
         <name><surname>Stein</surname><given-names>Joshua S</given-names></name>
-        <name><surname>Mikofski</surname><given-names>Mark A</given-names></name>
+        <name><surname>Mikofski</surname><given-names>Mark A.</given-names></name>
       </person-group>
       <article-title>Review of open source tools for PV modeling</article-title>
       <source>2018 IEEE 45th Photovoltaic Specialists Conference</source>
@@ -475,7 +475,7 @@ a Creative Commons Attribution 4.0 International License (CC BY
       <person-group person-group-type="author">
         <name><surname>Holmgren</surname><given-names>William F.</given-names></name>
         <name><surname>Hansen</surname><given-names>Clifford W.</given-names></name>
-        <name><surname>Mikofski</surname><given-names>Mark M.</given-names></name>
+        <name><surname>Mikofski</surname><given-names>Mark A.</given-names></name>
       </person-group>
       <article-title>pvlib python: a python package for modeling solar energy systems</article-title>
       <source>Journal of Open Source Software</source>
@@ -706,7 +706,7 @@ a Creative Commons Attribution 4.0 International License (CC BY
         <name><surname>Anderson</surname><given-names>Kevin S.</given-names></name>
         <name><surname>Shinn</surname><given-names>Adam</given-names></name>
         <name><surname>Nag</surname><given-names>Ambarish</given-names></name>
-        <name><surname>Mikofski</surname><given-names>Mark M.</given-names></name>
+        <name><surname>Mikofski</surname><given-names>Mark A.</given-names></name>
         <name><surname>Springer</surname><given-names>Martin</given-names></name>
         <name><surname>Yan</surname><given-names>Jiyang</given-names></name>
         <name><surname>Perry</surname><given-names>Kirsten</given-names></name>
