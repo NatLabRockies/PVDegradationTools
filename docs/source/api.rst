@@ -5,7 +5,7 @@ PVDeg is organized as a layered architecture built around a common data conventi
 its foundation is a library of modular *core functions*, each modeling a single
 environmental stressor (e.g., temperature, irradiance, relative humidity) or degradation
 mechanism for one location from a standardized weather DataFrame and location metadata.
-he core functions share this input convention and return either a timeseries or a
+The core functions share this input convention and return either a timeseries or a
 summary numeric, therefore a user may call one in isolation or chain the output of one
 (e.g., module temperature) into another (e.g., a moisture-ingress or LeTID model) to
 assemble a bottom-up lifetime prediction. Three higher-level layers then orchestrate

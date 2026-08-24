@@ -128,7 +128,7 @@ def get(
     -------
     Collecting a single site of PSM4 NSRDB data. *Api key and email must be replaced
     with your personal api key and email*.
-    [Request a key!](https://developer.nrel.gov/signup/)
+    [Request a key!](https://developer.nlr.gov/signup/)
 
     .. code-block:: python
 
@@ -535,14 +535,20 @@ def _nsrdb_coords(fp):
 
 
 def _nsrdb_meta_rows(fp, gids):
-    """Read the full ``meta`` table for only a subset of site gids."""
+    """Read the full ``meta`` table for only a subset of site gids.
+
+    ``gids`` is normalized with ``np.unique`` first: h5py fancy indexing requires a
+    strictly increasing selection, so unsorted or duplicated gids would otherwise
+    fail with an opaque ``TypeError`` from the h5py selection layer.
+    """
+    gids = np.unique(np.asarray(gids).astype(int))
     with h5py.File(fp, "r") as hf:
-        rec = hf["meta"][np.asarray(gids)]
+        rec = hf["meta"][gids]
     meta_df = pd.DataFrame.from_records(rec)
     for col in meta_df.columns:
         if meta_df[col].dtype == object:
             meta_df[col] = meta_df[col].str.decode("utf-8", errors="ignore")
-    meta_df.index = pd.Index(np.asarray(gids), name="gid")
+    meta_df.index = pd.Index(gids, name="gid")
     return meta_df
 
 
@@ -584,7 +590,15 @@ def nsrdb_gids(fps, bbox=None, downsample=0, land_only=False):
         ]
     if downsample:
         coords, _ = gid_downsampling(coords, downsample)
-    return np.sort(coords.index.values.astype(int))
+    gids = np.unique(coords.index.values.astype(int))
+    if gids.size == 0:
+        raise ValueError(
+            "No NSRDB sites matched the requested selection "
+            f"(bbox={bbox}, downsample={downsample}, land_only={land_only}). "
+            "Check that bbox entries are ordered (min, max) and that the box "
+            "overlaps the chosen satellite's grid."
+        )
+    return gids
 
 
 def ini_h5_geospatial(fps, gids=None):
@@ -609,7 +623,15 @@ def ini_h5_geospatial(fps, gids=None):
         Metadata indexed by gid.
     """
     if gids is not None:
-        gids = np.sort(np.asarray(gids).astype(int))
+        # np.unique sorts *and* de-duplicates. Both matter downstream: h5py fancy
+        # indexing in _nsrdb_meta_rows requires strictly increasing indices, and the
+        # native-chunk grouping below assumes sorted gids.
+        gids = np.unique(np.asarray(gids).astype(int))
+        if gids.size == 0:
+            raise ValueError(
+                "`gids` is empty, so there are no sites to load. Check the selection "
+                "that produced it (see `nsrdb_gids`)."
+            )
 
     dss = []
     drop_variables = ["meta", "time_index", "tmy_year", "tmy_year_short", "coordinates"]
@@ -617,18 +639,27 @@ def ini_h5_geospatial(fps, gids=None):
     for i, fp in enumerate(fps):
         with h5py.File(fp, "r") as hf:
             attr_to_read = [k for k in hf if k not in drop_variables]
-            chunks = min(
-                {
-                    hf[v].chunks if hf[v].chunks is not None else (np.nan, np.nan)
-                    for v in attr_to_read
-                }
-            )
+            # Dask chunk spec for the (time, site) axes: the smallest native chunk
+            # width on each axis, taken per-axis across the 2-D variables only. The
+            # previous form, ``min(set_of_chunk_tuples)``, was unsafe -- set
+            # iteration order is unspecified and NaN comparisons are always False,
+            # so an unchunked variable made the winner arbitrary, and indexing [1]
+            # on the result raised IndexError for any 1-D variable.
+            native = [
+                dset.chunks
+                for dset in (hf[v] for v in attr_to_read)
+                if getattr(dset, "ndim", 0) == 2 and dset.chunks is not None
+            ]
+            if native:
+                chunks = (min(c[0] for c in native), min(c[1] for c in native))
+            else:
+                chunks = ("auto", "auto")
             if i == 0:
                 time_index = pd.to_datetime(hf["time_index"][...].astype(str)).values
                 n_sites = hf["meta"].shape[0]
-                # native h5 site-chunk width (shared by all split files); used
-                # below to chunk a gid subset on native block boundaries.
-                site_chunk = int(chunks[1]) if np.isfinite(chunks[1]) else 500
+                # native h5 site-chunk width (shared by all split files); used below
+                # to chunk a gid subset on native block boundaries
+                site_chunk = chunks[1] if isinstance(chunks[1], int) else 500
 
         if i == 0:
             if gids is None:
@@ -1528,7 +1559,7 @@ def weather_distributed(
 
     NSRDB (including `database="PSM4"`) is rate limited and your key will face
     restrictions after making too many requests.
-    See rates [here](https://developer.nrel.gov/docs/solar/nsrdb/guide/).
+    See rates [here](https://developer.nlr.gov/docs/solar/nsrdb/guide/).
 
     Parameters
     ----------
@@ -1548,12 +1579,12 @@ def weather_distributed(
 
     api_key: str
         Only required when making NSRDB requests using "PSM4".
-        [NSRDB developer API key](https://developer.nrel.gov/signup/)
+        [NSRDB developer API key](https://developer.nlr.gov/signup/)
 
     email: str
         Only required when making NSRDB requests using "PSM4".
         [NSRDB developer account email associated with
-        `api_key`](https://developer.nrel.gov/signup/)
+        `api_key`](https://developer.nlr.gov/signup/)
 
     Returns
     -------

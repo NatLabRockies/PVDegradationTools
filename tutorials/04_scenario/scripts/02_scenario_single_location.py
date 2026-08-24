@@ -32,7 +32,7 @@ print("pvdeg version ", pvdeg.__version__)
 # A way around this is to provide the weather and metadata in the pipeline job arguments or you can load data from somewhere else and provide it in the same fashion.
 #
 # <div class="alert alert-block alert-info">
-# <b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a> so register now.)
+# <b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a> so register now.)
 # </div>
 
 # %%
