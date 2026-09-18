@@ -1,5 +1,5 @@
 ---
-title: 'PVDeg: a python package for modeling degradation on solar photovoltaic systems'
+title: 'PVDeg: a Python package for modeling degradation of solar photovoltaic systems'
 tags:
   - Python
   - solar energy
