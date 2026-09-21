@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import xarray as xr
 import os
+import warnings
 
 import pytest
 
@@ -127,6 +128,30 @@ def test_output_template_chunked():
     assert pvdeg.utilities.compare_templates(
         chunked_template, HUMIDITY_TEMPLATE.chunk({"gid": 3})
     )
+
+
+def test_zero_template():
+    lat_grid = np.array([40.0, 40.0, 41.0, 41.0])
+    lon_grid = np.array([-105.0, -104.0, -105.0, -104.0])
+    shapes = {"x": ("gid",)}
+
+    with warnings.catch_warnings(record=True) as recorded:
+        warnings.simplefilter("always")
+        res = pvdeg.geospatial.zero_template(lat_grid, lon_grid, shapes)
+
+    drop_warnings = [
+        w
+        for w in recorded
+        if issubclass(w.category, FutureWarning) and "drop" in str(w.message).lower()
+    ]
+    assert not drop_warnings
+
+    assert isinstance(res, xr.Dataset)
+    assert "gid" not in res.dims
+    assert set(res["x"].dims) == {"latitude", "longitude"}
+    np.testing.assert_array_equal(res["latitude"].values, [40.0, 41.0])
+    np.testing.assert_array_equal(res["longitude"].values, [-105.0, -104.0])
+    assert np.all(res["x"].values == 0)
 
 
 def mixed_res_dict(weather_df, meta):
