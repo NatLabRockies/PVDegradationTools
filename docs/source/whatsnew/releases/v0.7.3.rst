@@ -1,24 +1,10 @@
-v0.7.3 (2026-09-30)
+v0.7.3 (2026-09-21)
 ===================
-
-Enhancements
-------------
-
-
 
 Documentation
 -------------
 - Fix README.md to align with JOSS paper title (python to Python, in/on to of), update JOSS reference (:pull:`369`)
 - Fix various typos in the documentation. (:pull:`368`)
-
-
-Notebooks
----------
-
-
-Deprecations
-------------
-
 
 Bug Fixes
 ---------
@@ -26,9 +12,6 @@ Bug Fixes
   :py:func:`pvdeg.geospatial.zero_template` and
   :py:func:`pvdeg.utilities.gids_dataset_to_coords_dataset`. (:pull:`370`)
 
-
-Dependencies
-------------
 
 Testing
 -------
@@ -39,4 +22,5 @@ Testing
 Contributors
 ------------
 - Rajiv Daxini (:ghuser:`rdaxini`)
-
+- Martin Springer (:ghuser:`martin-springer`)
+- Akash Goel (:ghuser:`goelakash`)
