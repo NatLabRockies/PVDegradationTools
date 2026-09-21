@@ -8,7 +8,8 @@ Enhancements
 
 Documentation
 -------------
-- Fix typos in README.md (python to Python, in/on to of), update JOSS reference (:pull:`369`)
+- Fix README.md to align with JOSS paper title (python to Python, in/on to of), update JOSS reference (:pull:`369`)
+- Fix various typos in the documentation. (:pull:`368`)
 
 
 Notebooks
@@ -21,12 +22,21 @@ Deprecations
 
 Bug Fixes
 ---------
+- Update deprecated ``xarray.Dataset.drop()`` syntax to use ``drop_vars()`` in
+  :py:func:`pvdeg.geospatial.zero_template` and
+  :py:func:`pvdeg.utilities.gids_dataset_to_coords_dataset`. (:pull:`370`)
 
 
 Dependencies
 ------------
 
+Testing
+-------
+- Add a regression test for :py:func:`pvdeg.geospatial.zero_template` to confirm
+  the deprecated ``drop`` warning is no longer emitted. (:pull:`370`)
+
 
 Contributors
 ------------
 - Rajiv Daxini (:ghuser:`rdaxini`)
+
