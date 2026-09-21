@@ -156,3 +156,4 @@ Contributors
 - Martin Springer (:ghuser:`martin-springer`)
 - Kevin Anderson (:ghuser:`kandersolar`)
 - Florian Kotthoff (:ghuser:`FlorianK13`)
+- Adam Jensen (:ghuser:`AdamRJensen`)
