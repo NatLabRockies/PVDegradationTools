@@ -1568,7 +1568,7 @@ def gids_dataset_to_coords_dataset(ds_gids: xr.Dataset, meta_df: pd.DataFrame):
 
     meta_df = meta_df.loc[ds_gids.gid]
 
-    stacked = ds_gids.drop(["gid"])
+    stacked = ds_gids.drop_vars(["gid"])
 
     mindex_obj = pd.MultiIndex.from_arrays(
         [meta_df["latitude"], meta_df["longitude"]], names=["latitude", "longitude"]
