@@ -1,0 +1,23 @@
+v0.7.4 (2026-09-28)
+===================
+
+Metadata-only release to archive the version of PVDeg reviewed for the
+Journal of Open Source Software (JOSS). No changes to the code.
+
+Documentation
+-------------
+- Align the software title in ``.zenodo.json`` and ``CITATION.cff`` with the
+  JOSS paper title.
+- Move Matthew Brown and Derek Holsapple from Zenodo creators to contributors,
+  and add Joseph Karas, Matthew Prilliman, Aidan Wesley and Maxx Millstein as
+  contributors.
+- Add the concept DOI to ``CITATION.cff``.
+- Fix the DOI badge in ``README.md``, which pointed to the v0.1.2 version DOI
+  instead of the concept DOI.
+- Add the software citation (text and BibTeX) to ``README.md`` and the
+  documentation landing page.
+
+
+Contributors
+------------
+- Martin Springer (:ghuser:`martin-springer`)

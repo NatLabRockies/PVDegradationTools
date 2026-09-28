@@ -1,16 +1,11 @@
 {
-  "title": "PVDeg: Photovoltaic Degradation Tools",
+  "title": "PVDeg: a Python package for modeling degradation of solar photovoltaic systems",
   "description": "PVDeg is an open-source Python package for modeling photovoltaic (PV) degradation, developed at the National Laboratory of the Rockies (NLR) and supported by the Durable Module Materials (DuraMAT) consortium. It provides modular functions, materials databases, and calculation workflows for simulating degradation mechanisms (e.g., LeTID, hydrolysis, UV exposure) using weather data from the National Solar Radiation Database (NSRDB) and the Photovoltaic Geographical Information System (PVGIS). By integrating Monte Carlo uncertainty propagation and geospatial processing, PVDeg enables field-relevant predictions and uncertainty quantification of module reliability and lifetime.",
   "creators": [
     {
       "name": "Springer, Martin",
       "affiliation": "National Laboratory of the Rockies",
       "orcid": "0000-0001-6803-108X"
-    },
-    {
-      "name": "Brown, Matthew",
-      "affiliation": "National Laboratory of the Rockies",
-      "orcid": "0000-0002-0988-3431"
     },
     {
       "name": "Ovaitt, Silvana",
@@ -28,16 +23,23 @@
       "orcid": "0000-0003-1993-9408"
     },
     {
-      "name": "Holsapple, Derek",
-      "affiliation": "National Laboratory of the Rockies"
-    },
-    {
       "name": "Kempe, Michael",
       "affiliation": "National Laboratory of the Rockies",
       "orcid": "0000-0003-3312-0482"
     }
   ],
   "contributors": [
+    {
+      "name": "Brown, Matthew",
+      "affiliation": "National Laboratory of the Rockies",
+      "orcid": "0000-0002-0988-3431",
+      "type": "Other"
+    },
+    {
+      "name": "Holsapple, Derek",
+      "affiliation": "National Laboratory of the Rockies",
+      "type": "Other"
+    },
     {
       "name": "Campanelli, Mark",
       "affiliation": "Intelligent Measurement Systems LLC",
@@ -52,6 +54,26 @@
       "name": "Anderson, Kevin",
       "affiliation": "Sandia National Laboratories",
       "orcid": "0000-0002-1166-7957",
+      "type": "Other"
+    },
+    {
+      "name": "Karas, Joseph",
+      "affiliation": "Electric Power Research Institute",
+      "type": "Other"
+    },
+    {
+      "name": "Prilliman, Matthew",
+      "affiliation": "National Laboratory of the Rockies",
+      "type": "Other"
+    },
+    {
+      "name": "Wesley, Aidan",
+      "affiliation": "National Laboratory of the Rockies",
+      "type": "Other"
+    },
+    {
+      "name": "Millstein, Maxx",
+      "affiliation": "National Laboratory of the Rockies",
       "type": "Other"
     }
   ],
