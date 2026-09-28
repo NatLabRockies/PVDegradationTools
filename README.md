@@ -39,7 +39,7 @@
 
 
 
-# PVDeg: Python Package for Modeling Degradation in Photovoltaic Systems
+# PVDeg: Python Package for Modeling Degradation of Photovoltaic Systems
 
 PVDeg is an open-source Python package for modeling photovoltaic (PV)
 degradation, developed at the National Laboratory of the Rockies
@@ -203,7 +203,7 @@ On the Zenodo page, use the "Cite as" section in the right sidebar to copy the c
 
 **JOSS Paper (In Review):**
 
-	Daxini, R., Ovaitt, S., Springer, M., Ford, T., & Kempe, M. (2025). PVDeg: a python package for modeling degradation on solar photovoltaic systems. Journal of Open Source Software (In Review).
+	Daxini, R., Ovaitt, S., Springer, M., Ford, T., & Kempe, M. (2025). PVDeg: a Python package for modeling degradation of solar photovoltaic systems. Journal of Open Source Software (In Review).
 
 
 Acknowledgements

@@ -477,7 +477,7 @@ def zero_template(
         attrs=global_attrs,
     )  # .chunk({dim: ds_gids.chunks[dim] for dim in dims})
 
-    stacked = stacked.drop(["gid"])
+    stacked = stacked.drop_vars(["gid"])
     mindex_obj = pd.MultiIndex.from_arrays(
         [lat_grid, lon_grid], names=["latitude", "longitude"]
     )
