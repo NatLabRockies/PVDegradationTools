@@ -54,13 +54,14 @@ If you use PVDeg in a published work, please cite both the software and the pape
 
 .. code-block::
 
-   Springer, M., Ovaitt, S., Ford, T., Daxini, R., & Kempe, M. (2026). PVDeg: a Python package for modeling degradation of solar photovoltaic systems [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.8088382
+   Springer, M., Ovaitt, S., Daxini, R., Ford, T., Brown, M., Karas, J., Holsapple, D., & Kempe, M. (2026). PVDeg: a Python package for modeling degradation of solar photovoltaic systems [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.8088382
 
 .. code-block:: bibtex
 
    @software{pvdeg,
-     author    = {Springer, Martin and Ovaitt, Silvana and Ford, Tobin and
-                  Daxini, Rajiv and Kempe, Michael},
+     author    = {Springer, Martin and Ovaitt, Silvana and Daxini, Rajiv and
+                  Ford, Tobin and Brown, Matthew and Karas, Joseph and
+                  Holsapple, Derek and Kempe, Michael},
      title     = {{PVDeg: a Python package for modeling degradation of solar
                   photovoltaic systems}},
      publisher = {Zenodo},

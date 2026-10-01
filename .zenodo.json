@@ -13,14 +13,27 @@
       "orcid": "0000-0003-0180-728X"
     },
     {
+      "name": "Daxini, Rajiv",
+      "affiliation": "National Laboratory of the Rockies",
+      "orcid": "0000-0003-1993-9408"
+    },
+    {
       "name": "Ford, Tobin",
       "affiliation": "National Laboratory of the Rockies",
       "orcid": "0009-0000-7428-5625"
     },
     {
-      "name": "Daxini, Rajiv",
+      "name": "Brown, Matthew",
       "affiliation": "National Laboratory of the Rockies",
-      "orcid": "0000-0003-1993-9408"
+      "orcid": "0000-0002-0988-3431"
+    },
+    {
+      "name": "Karas, Joseph",
+      "affiliation": "Electric Power Research Institute"
+    },
+    {
+      "name": "Holsapple, Derek",
+      "affiliation": "National Laboratory of the Rockies"
     },
     {
       "name": "Kempe, Michael",
@@ -30,50 +43,28 @@
   ],
   "contributors": [
     {
-      "name": "Brown, Matthew",
-      "affiliation": "National Laboratory of the Rockies",
-      "orcid": "0000-0002-0988-3431",
-      "type": "Other"
-    },
-    {
-      "name": "Holsapple, Derek",
-      "affiliation": "National Laboratory of the Rockies",
-      "type": "Other"
-    },
-    {
       "name": "Campanelli, Mark",
-      "affiliation": "Intelligent Measurement Systems LLC",
       "type": "Other"
     },
     {
       "name": "Wells, Trenton",
-      "affiliation": "National Laboratory of the Rockies",
       "type": "Other"
     },
     {
       "name": "Anderson, Kevin",
-      "affiliation": "Sandia National Laboratories",
       "orcid": "0000-0002-1166-7957",
       "type": "Other"
     },
     {
-      "name": "Karas, Joseph",
-      "affiliation": "Electric Power Research Institute",
-      "type": "Other"
-    },
-    {
       "name": "Prilliman, Matthew",
-      "affiliation": "National Laboratory of the Rockies",
       "type": "Other"
     },
     {
       "name": "Wesley, Aidan",
-      "affiliation": "National Laboratory of the Rockies",
       "type": "Other"
     },
     {
       "name": "Millstein, Maxx",
-      "affiliation": "National Laboratory of the Rockies",
       "type": "Other"
     }
   ],
