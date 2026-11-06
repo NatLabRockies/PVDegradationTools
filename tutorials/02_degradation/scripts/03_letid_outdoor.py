@@ -67,7 +67,7 @@ if "precipitable_water" not in weather.columns:
 
 # %%
 # rename some columns for pvlib if they haven't been already
-weather.rename(
+weather = weather.rename(
     columns={
         "GHI": "ghi",
         "DNI": "dni",
@@ -76,8 +76,7 @@ weather.rename(
         "Wind Speed": "wind_speed",
         "Relative Humidity": "relative_humidity",
         "Precipitable Water": "precipitable_water",
-    },
-    inplace=True,
+    }
 )
 weather = weather[
     [
@@ -152,15 +151,15 @@ temperature = mc.results.cell_temperature
 timesteps = pd.DataFrame(
     {"Temperature": temperature, "Injection": injection}
 )  # create a DataFrame with cell temperature and injection
-timesteps.reset_index(
-    inplace=True
+timesteps = (
+    timesteps.reset_index()
 )  # reset the index so datetime is a column. I prefer integer indexing.
-timesteps.rename(columns={"index": "Datetime"}, inplace=True)
+timesteps = timesteps.rename(columns={"index": "Datetime"})
 
 # %%
 # filter out times when injection is NaN, these won't progress LETID, and it'll make the calculations below run faster
 timesteps = timesteps[timesteps["Injection"].notnull()]
-timesteps.reset_index(inplace=True, drop=True)
+timesteps = timesteps.reset_index(drop=True)
 
 # %%
 timesteps
@@ -237,8 +236,8 @@ for index, timestep in timesteps.iterrows():
             tau, wafer_thickness, d_base, s_rear, generation, depth
         )
         voc = letid.calc_voc_from_tau(tau, wafer_thickness, s_rear, jsc, temperature=25)
-        timesteps.at[index, "Jsc"] = jsc
-        timesteps.at[index, "Voc"] = voc
+        timesteps.loc[index, "Jsc"] = jsc
+        timesteps.loc[index, "Voc"] = voc
 
     # loop through rows, new tau calculated based on previous NB. Reaction proceeds based on new tau.
     else:
@@ -317,8 +316,8 @@ for index, timestep in timesteps.iterrows():
 
         # calculate device parameters
         timesteps.at[index, "tau"] = tau
-        timesteps.at[index, "Jsc"] = jsc
-        timesteps.at[index, "Voc"] = letid.calc_voc_from_tau(
+        timesteps.loc[index, "Jsc"] = jsc
+        timesteps.loc[index, "Voc"] = letid.calc_voc_from_tau(
             tau, wafer_thickness, s_rear, jsc, temperature=25
         )
 

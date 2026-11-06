@@ -245,10 +245,10 @@ temperature = mc.results.cell_temperature
 timesteps = pd.DataFrame(
     {"Temperature": temperature, "Injection": injection}
 )  # create a DataFrame with cell temperature and injection
-timesteps.reset_index(
-    inplace=True
+timesteps = (
+    timesteps.reset_index()
 )  # reset the index so datetime is a column. I prefer integer indexing.
-timesteps.rename(columns={"index": "Datetime"}, inplace=True)
+timesteps = timesteps.rename(columns={"index": "Datetime"})
 
 # %% [markdown]
 #
@@ -385,8 +385,8 @@ for index, timestep in timesteps.iterrows():
     jsc_now = collection.calculate_jsc_from_tau_cp(
         timesteps.at[index, "tau"], wafer_thickness, d_base, srv_rear, generation, depth
     )
-    timesteps.at[index, "Jsc"] = jsc_now
-    timesteps.at[index, "Voc"] = letid.calc_voc_from_tau(
+    timesteps.loc[index, "Jsc"] = jsc_now
+    timesteps.loc[index, "Voc"] = letid.calc_voc_from_tau(
         timesteps.at[index, "tau"], wafer_thickness, srv_rear, jsc_now, temperature=25
     )
 
