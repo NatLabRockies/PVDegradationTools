@@ -6,14 +6,15 @@
   <td>License</td>
   <td>
     <a href="https://github.com/NatLabRockies/PVDegradationTools/blob/main/LICENSE.md">
-    <img src="https://img.shields.io/pypi/l/pvlib.svg" alt="license" />
+    <img src="https://img.shields.io/pypi/l/pvdeg.svg" alt="license" />
     </a>
 </td>
 </tr>
 <tr>
   <td>Publications</td>
   <td>
-     <a href="https://doi.org/10.5281/zenodo.8088382"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8088382.svg" alt="DOI"></a>
+     <a href="https://doi.org/10.21105/joss.10617"><img src="https://joss.theoj.org/papers/10.21105/joss.10617/status.svg" alt="JOSS paper DOI"></a>
+     <a href="https://doi.org/10.5281/zenodo.8088382"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8088382.svg" alt="Zenodo software DOI"></a>
   </td>
 </tr>
 <tr>
@@ -61,6 +62,7 @@ and lifetime.
 - **Material Databases**: Curated degradation parameters, kinetic coefficients, and material properties
 - **Weather Data Integration**: Seamless access to NSRDB and PVGIS meteorological data
 - **Standards Support**: Contributions to IEC TS 63126 and other standardization efforts
+
 ## Example Applications
 
 PVDeg has been adopted in multiple studies across the PV reliability community:
@@ -191,11 +193,47 @@ change something about PVDeg, then please make an issue on our
 Citing
 ======
 
-If you use PVDeg in a published work, please cite both the software and the paper.
+If you use PVDeg in published work, please cite both the paper and the
+software.
 
-**Software Citation:**
+### Recommended citation for PVDeg:
 
-	Springer, M., Ovaitt, S., Daxini, R., Ford, T., Brown, M., Karas, J., Holsapple, D., & Kempe, M. (2026). PVDeg: a Python package for modeling degradation of solar photovoltaic systems [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.8088382
+> Daxini, R., Ovaitt, S., Springer, M., Ford, T., & Kempe, M. (2026).\
+> "PVDeg: a Python package for modeling degradation of solar photovoltaic systems."\
+> *Journal of Open Source Software*, 11(127), 10617.\
+> https://doi.org/10.21105/joss.10617
+
+<details>
+<summary>BibTeX</summary>
+
+```bibtex
+@article{pvdeg_joss,
+  author    = {Daxini, Rajiv and Ovaitt, Silvana and Springer, Martin and
+               Ford, Tobin and Kempe, Michael},
+  title     = {{PVDeg: a Python package for modeling degradation of solar
+               photovoltaic systems}},
+  journal   = {Journal of Open Source Software},
+  publisher = {The Open Journal},
+  year      = {2026},
+  volume    = {11},
+  number    = {127},
+  pages     = {10617},
+  doi       = {10.21105/joss.10617},
+  url       = {https://doi.org/10.21105/joss.10617}
+}
+```
+
+</details>
+
+### Citation for the latest PVDeg software version:
+
+> Springer, M., Ovaitt, S., Daxini, R., Ford, T., Brown, M., Karas, J., Holsapple, D., & Kempe, M. (2026).\
+> "PVDeg: a Python package for modeling degradation of solar photovoltaic systems" [Computer software].\
+> *Zenodo*.\
+> https://doi.org/10.5281/zenodo.8088382
+
+<details>
+<summary>BibTeX</summary>
 
 ```bibtex
 @software{pvdeg,
@@ -211,13 +249,20 @@ If you use PVDeg in a published work, please cite both the software and the pape
 }
 ```
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8088382.svg)](https://doi.org/10.5281/zenodo.8088382)
+</details>
 
-The DOI above always resolves to the latest release. To cite the exact version you used, pick it from the version list on the Zenodo page, or use the **"Cite this repository"** button in the right sidebar.
+The Zenodo DOI above always resolves to the latest release. To cite the exact
+version you used, pick it from the version list on the
+[Zenodo page](https://doi.org/10.5281/zenodo.8088382), or use the
+**"Cite this repository"** button in the right sidebar.
 
-**JOSS Paper (In Review):**
+If you use PVDeg in a commercial or publicly-available application, please
+consider displaying the PVDeg logo:
 
-	Daxini, R., Ovaitt, S., Springer, M., Ford, T., & Kempe, M. (2026). PVDeg: a Python package for modeling degradation of solar photovoltaic systems. Journal of Open Source Software (In Review).
+<img src="https://raw.githubusercontent.com/NatLabRockies/PVDegradationTools/refs/heads/main/docs/source/_static/logo-vectors/PVdeg-Logo-Color.svg" height="150" alt="PVDeg logo (stacked)">&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/NatLabRockies/PVDegradationTools/refs/heads/main/docs/source/_static/logo-vectors/PVdeg-Logo-Horiz-Color.svg" width="300" alt="PVDeg logo (horizontal)">
+
+Black, white, and color versions (SVG) are available in
+[`docs/source/_static/logo-vectors`](https://github.com/NatLabRockies/PVDegradationTools/tree/main/docs/source/_static/logo-vectors).
 
 
 Acknowledgements
@@ -226,16 +271,16 @@ Acknowledgements
 This work was authored in part by the National Laboratory of the Rockies
 for the U.S. Department of Energy (DOE), operated under Contract No.
 DE-AC36-08GO28308. Funding provided as part of the Durable Module Materials
-Consortium 2 (DuraMAT 2) funded by the by U.S. DOE Office of Critical Minerals
+Consortium 2 (DuraMAT 2) funded by the U.S. DOE Office of Critical Minerals
 and Energy Innovation (CMEI) Solar Energy Technologies Office (SETO), Agreement
 38259. The views expressed in the article do not necessarily represent the
 views of the DOE or the U.S. Government. The U.S. Government retains and the
 publisher, by accepting the article for publication, acknowledges that the U.S.
 Government retains a nonexclusive, paid-up, irrevocable, worldwide license to
 publish or reproduce the published form of this work, or allow others to do so,
-for U.S. Government purposes
+for U.S. Government purposes.
 
-HPC disclaimer: A portion of This research was performed using computational
+HPC disclaimer: A portion of this research was performed using computational
 resources sponsored by the U.S. Department of Energy's Office of Critical
 Minerals and Energy Innovation and located at the National Laboratory of the
 Rockies.
