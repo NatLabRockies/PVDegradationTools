@@ -652,7 +652,7 @@
 Python version  3.11.18 (main, Oct 26 2026, 02:48:29) [GCC 15.2.0]
 Pandas version  3.1.1
 pvlib version  0.16.1
-pvdeg version  0.1.dev1+g0b57e3482
+pvdeg version  0.1.dev1+gd47d0d33f
 </pre></div>
 </div>
 </div>
@@ -931,7 +931,7 @@ For this example, we’ll model a fixed latitude tilt system at NREL, in Golden,
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># rename some columns for pvlib if they haven't been already</span>
-<span class="n">weather</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+<span class="n">weather</span> <span class="o">=</span> <span class="n">weather</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
     <span class="n">columns</span><span class="o">=</span><span class="p">{</span>
         <span class="s2">"GHI"</span><span class="p">:</span> <span class="s2">"ghi"</span><span class="p">,</span>
         <span class="s2">"DNI"</span><span class="p">:</span> <span class="s2">"dni"</span><span class="p">,</span>
@@ -940,8 +940,7 @@ For this example, we’ll model a fixed latitude tilt system at NREL, in Golden,
         <span class="s2">"Wind Speed"</span><span class="p">:</span> <span class="s2">"wind_speed"</span><span class="p">,</span>
         <span class="s2">"Relative Humidity"</span><span class="p">:</span> <span class="s2">"relative_humidity"</span><span class="p">,</span>
         <span class="s2">"Precipitable Water"</span><span class="p">:</span> <span class="s2">"precipitable_water"</span><span class="p">,</span>
-    <span class="p">},</span>
-    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">}</span>
 <span class="p">)</span>
 <span class="n">weather</span> <span class="o">=</span> <span class="n">weather</span><span class="p">[</span>
     <span class="p">[</span>
@@ -954,13 +953,6 @@ For this example, we’ll model a fixed latitude tilt system at NREL, in Golden,
         <span class="s2">"precipitable_water"</span><span class="p">,</span>
     <span class="p">]</span>
 <span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2515/44907612.py:2: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
-See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
-  weather.rename(
 </pre></div>
 </div>
 </div>
@@ -1205,20 +1197,10 @@ See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace 
 <span class="n">timesteps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="p">{</span><span class="s2">"Temperature"</span><span class="p">:</span> <span class="n">temperature</span><span class="p">,</span> <span class="s2">"Injection"</span><span class="p">:</span> <span class="n">injection</span><span class="p">}</span>
 <span class="p">)</span>  <span class="c1"># create a DataFrame with cell temperature and injection</span>
-<span class="n">timesteps</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span>
-    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">timesteps</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">timesteps</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="p">)</span>  <span class="c1"># reset the index so datetime is a column. I prefer integer indexing.</span>
-<span class="n">timesteps</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"index"</span><span class="p">:</span> <span class="s2">"Datetime"</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2515/1345386009.py:9: Pandas4Warning: The inplace keyword in DataFrame.reset_index is deprecated and will be removed in a future version (PDEP-8).
-See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
-  timesteps.reset_index(
-/tmp/ipykernel_2515/1345386009.py:12: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
-See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
-  timesteps.rename(columns={"index": "Datetime"}, inplace=True)
+<span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"index"</span><span class="p">:</span> <span class="s2">"Datetime"</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -1227,14 +1209,7 @@ See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace 
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># filter out times when injection is NaN, these won't progress LETID, and it'll make the calculations below run faster</span>
 <span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="p">[</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"Injection"</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span>
-<span class="n">timesteps</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2515/2923317850.py:3: Pandas4Warning: The inplace keyword in DataFrame.reset_index is deprecated and will be removed in a future version (PDEP-8).
-See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
-  timesteps.reset_index(inplace=True, drop=True)
+<span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1424,8 +1399,8 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
             <span class="n">tau</span><span class="p">,</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">d_base</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">generation</span><span class="p">,</span> <span class="n">depth</span>
         <span class="p">)</span>
         <span class="n">voc</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">jsc</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Jsc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsc</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Voc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">voc</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Jsc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsc</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Voc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">voc</span>
 
     <span class="c1"># loop through rows, new tau calculated based on previous NB. Reaction proceeds based on new tau.</span>
     <span class="k">else</span><span class="p">:</span>
@@ -1504,18 +1479,10 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 
         <span class="c1"># calculate device parameters</span>
         <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"tau"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tau</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Jsc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsc</span>
-        <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Voc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Jsc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsc</span>
+        <span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Voc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span>
             <span class="n">tau</span><span class="p">,</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">jsc</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">25</span>
         <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2515/2278194405.py:10: Pandas4Warning: Setting a value on a DataFrame via .at with a key that does not exist in the index is deprecated and will raise a KeyError in a future version. Use .loc instead.
-  timesteps.at[index, "Jsc"] = jsc
-/tmp/ipykernel_2515/2278194405.py:11: Pandas4Warning: Setting a value on a DataFrame via .at with a key that does not exist in the index is deprecated and will raise a KeyError in a future version. Use .loc instead.
-  timesteps.at[index, "Voc"] = voc
 </pre></div>
 </div>
 </div>
@@ -1806,7 +1773,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ac428450e0034ff86fb48cce41c68c6bb483f281be8a40f161a687f87e832522.png" src="../_images/ac428450e0034ff86fb48cce41c68c6bb483f281be8a40f161a687f87e832522.png" />
+<img alt="../_images/240804b762e03b996e992b0d98717e1df3b9c993a99684e450f8f38dc0811872.png" src="../_images/240804b762e03b996e992b0d98717e1df3b9c993a99684e450f8f38dc0811872.png" />
 </div>
 </div>
 <p>The example data provided for Golden, CO, shows how <span class="math notranslate nohighlight">\(N_A\)</span> increases in cold weather, and power temporarily recovers, due to temporary recovery of LETID (B-&gt;A).</p>

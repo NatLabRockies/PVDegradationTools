@@ -650,7 +650,7 @@
 Python version  3.11.18 (main, Oct 26 2026, 02:48:29) [GCC 15.2.0]
 Pandas version  3.1.1
 pvlib version  0.16.1
-pvdeg version  0.1.dev1+g0b57e3482
+pvdeg version  0.1.dev1+gd47d0d33f
 </pre></div>
 </div>
 </div>
@@ -706,8 +706,8 @@ pvdeg version  0.1.dev1+g0b57e3482
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.03495240755084543),
- np.float64(5.663466529792824),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.03495240755084558),
+ np.float64(5.663466529792825),
  np.float64(5.465514739492933))
 </pre></div>
 </div>
@@ -817,7 +817,7 @@ pvdeg version  0.1.dev1+g0b57e3482
 
 <span class="n">timesteps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">timesteps_initial</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">])</span>  <span class="c1"># concatenate the two time series</span>
 <span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">"Datetime"</span><span class="p">)</span>
-<span class="n">timesteps</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">temps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">timesteps</span><span class="p">),</span> <span class="n">temperature</span><span class="p">)</span>
 <span class="n">injection</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">timesteps</span><span class="p">),</span> <span class="n">suns</span><span class="p">)</span>
@@ -837,13 +837,6 @@ pvdeg version  0.1.dev1+g0b57e3482
 <span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"tau"</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">tau_now</span><span class="p">(</span>
     <span class="n">tau_0</span><span class="p">,</span> <span class="n">tau_deg</span><span class="p">,</span> <span class="n">nB_0</span>
 <span class="p">)</span>  <span class="c1"># calculate tau for the first timestep</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2483/2199109704.py:15: Pandas4Warning: The inplace keyword in DataFrame.reset_index is deprecated and will be removed in a future version (PDEP-8).
-See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
-  timesteps.reset_index(inplace=True, drop=True)
 </pre></div>
 </div>
 </div>
@@ -946,18 +939,10 @@ See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace 
     <span class="n">jsc_now</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">calculate_jsc_from_tau_cp</span><span class="p">(</span>
         <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"tau"</span><span class="p">],</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">d_base</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">generation</span><span class="p">,</span> <span class="n">depth</span>
     <span class="p">)</span>
-    <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Jsc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsc_now</span>
-    <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Voc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span>
+    <span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Jsc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">jsc_now</span>
+    <span class="n">timesteps</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Voc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span>
         <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"tau"</span><span class="p">],</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">jsc_now</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">25</span>
     <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2483/2622252811.py:8: Pandas4Warning: Setting a value on a DataFrame via .at with a key that does not exist in the index is deprecated and will raise a KeyError in a future version. Use .loc instead.
-  timesteps.at[index, "Jsc"] = jsc_now
-/tmp/ipykernel_2483/2622252811.py:9: Pandas4Warning: Setting a value on a DataFrame via .at with a key that does not exist in the index is deprecated and will raise a KeyError in a future version. Use .loc instead.
-  timesteps.at[index, "Voc"] = letid.calc_voc_from_tau(
 </pre></div>
 </div>
 </div>
