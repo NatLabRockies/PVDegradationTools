@@ -3,7 +3,6 @@ import pandas as pd
 import pvdeg
 from pvdeg import TEST_DATA_DIR
 import json
-from copy import copy
 
 
 WEATHER = pd.read_csv(
@@ -44,7 +43,9 @@ def test_diffusion_1d():
     )
 
     # CSV has an extra row because it was saved weird
-    col_list = copy(RESULT_1D.columns).values
+    # ``Index.to_numpy(copy=True)`` gives a writable array; ``Index.values`` is
+    # read-only for the Arrow-backed string columns used by pandas >= 3
+    col_list = RESULT_1D.columns.to_numpy(copy=True)
     col_list[21] = "1.5"
     RESULT_1D.columns = col_list.astype(float)
 
