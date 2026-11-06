@@ -127,7 +127,7 @@ timesteps_initial = pd.DataFrame(timesteps_initial, columns=["Datetime"])
 
 timesteps = pd.concat([timesteps_initial, timesteps])  # concatenate the two time series
 timesteps = timesteps.sort_values(by="Datetime")
-timesteps.reset_index(inplace=True, drop=True)
+timesteps = timesteps.reset_index(drop=True)
 
 temps = np.full(len(timesteps), temperature)
 injection = np.full(len(timesteps), suns)
@@ -241,8 +241,8 @@ for index, timestep in timesteps.iterrows():
     jsc_now = collection.calculate_jsc_from_tau_cp(
         timesteps.at[index, "tau"], wafer_thickness, d_base, s_rear, generation, depth
     )
-    timesteps.at[index, "Jsc"] = jsc_now
-    timesteps.at[index, "Voc"] = letid.calc_voc_from_tau(
+    timesteps.loc[index, "Jsc"] = jsc_now
+    timesteps.loc[index, "Voc"] = letid.calc_voc_from_tau(
         timesteps.at[index, "tau"], wafer_thickness, s_rear, jsc_now, temperature=25
     )
 
