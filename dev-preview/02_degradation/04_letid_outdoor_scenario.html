@@ -652,7 +652,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 7.0.0-1019-azure
 Python version  3.11.18 (main, Oct 26 2026, 02:48:29) [GCC 15.2.0]
 Pandas version  3.1.1
-pvdeg version  0.1.dev1+g682194347
+pvdeg version  0.1.dev1+g0b57e3482
 </pre></div>
 </div>
 </div>
@@ -1710,10 +1710,10 @@ pvdeg version  0.1.dev1+g682194347
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2637/1345386009.py:9: Pandas4Warning: The inplace keyword in DataFrame.reset_index is deprecated and will be removed in a future version (PDEP-8).
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2551/1345386009.py:9: Pandas4Warning: The inplace keyword in DataFrame.reset_index is deprecated and will be removed in a future version (PDEP-8).
 See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
   timesteps.reset_index(
-/tmp/ipykernel_2637/1345386009.py:12: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+/tmp/ipykernel_2551/1345386009.py:12: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
 See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
   timesteps.rename(columns={"index": "Datetime"}, inplace=True)
 </pre></div>
@@ -2020,9 +2020,9 @@ See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2637/1787578508.py:8: Pandas4Warning: Setting a value on a DataFrame via .at with a key that does not exist in the index is deprecated and will raise a KeyError in a future version. Use .loc instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2551/1787578508.py:8: Pandas4Warning: Setting a value on a DataFrame via .at with a key that does not exist in the index is deprecated and will raise a KeyError in a future version. Use .loc instead.
   timesteps.at[index, "Jsc"] = jsc_now
-/tmp/ipykernel_2637/1787578508.py:9: Pandas4Warning: Setting a value on a DataFrame via .at with a key that does not exist in the index is deprecated and will raise a KeyError in a future version. Use .loc instead.
+/tmp/ipykernel_2551/1787578508.py:9: Pandas4Warning: Setting a value on a DataFrame via .at with a key that does not exist in the index is deprecated and will raise a KeyError in a future version. Use .loc instead.
   timesteps.at[index, "Voc"] = letid.calc_voc_from_tau(
 </pre></div>
 </div>
