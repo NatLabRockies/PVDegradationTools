@@ -64,8 +64,10 @@ parts:
   chapters:
   - file: 06_advanced/01_custom_functions_nopython
     title: Custom Functions with Numba
+  - file: 06_advanced/02_pysam_single_location
+    title: PySAM for a Single Location
   - file: 06_advanced/03_pysam_api
-    title: PySAM with API (API Key Required)
+    title: 'PySAM: Single Location & Geospatial'
   - file: 06_advanced/04_nsrdb_distributed_api
     title: NSRDB Distributed (API Key Required)
   - file: 06_advanced/05_pvgis_distributed

@@ -16,7 +16,7 @@ def calc_kwarg_floats(
     """Calculate a symbolic sympy expression using a dictionary of values.
 
     Parameters:
-    ----------
+    -----------
     expr: sp.core.mul.Mul
         symbolic sympy expression to calculate values on.
     kwarg: dict
@@ -39,7 +39,7 @@ def calc_df_symbolic(
     """Calculate the expression over the entire dataframe.
 
     Parameters:
-    ----------
+    -----------
     expr: sp.core.mul.Mul
         symbolic sympy expression to calculate values on.
     df: pd.DataFrame

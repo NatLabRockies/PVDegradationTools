@@ -19,7 +19,7 @@ First official release.
 * pytests implemented for most functions
 
 Contributors
-~~~~~~~~~~~~
+------------
 * Silvana Ovaitt (:ghuser:`shirubana`)
 * Derek Holsapple (:ghuser:`holsappled`)
 * Matthew Brown (:ghuser:`mcbrown042`)

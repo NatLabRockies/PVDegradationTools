@@ -117,11 +117,11 @@ def module(
         from pvlib by default.
     conf : str, optional
         The configuration of the PV module architecture and mounting
-        configuration.
-        Options:
-            'sapm': 'open_rack_glass_polymer' (default),
-            'open_rack_glass_glass', 'close_mount_glass_glass',
-            'insulated_back_glass_polymer'
+        configuration. Options:
+
+        - 'sapm': 'open_rack_glass_polymer' (default),
+          'open_rack_glass_glass', 'close_mount_glass_glass',
+          'insulated_back_glass_polymer'
 
     Returns
     -------
@@ -211,9 +211,9 @@ def cell(
         'sapm'
     conf : (str)
         The configuration of the PV module architecture and mounting
-        configuration.
-        Options: 'open_rack_glass_polymer' (default), 'open_rack_glass_glass',
-                 'close_mount_glass_glass', 'insulated_back_glass_polymer'
+        configuration. Options: 'open_rack_glass_polymer' (default),
+        'open_rack_glass_glass', 'close_mount_glass_glass',
+        'insulated_back_glass_polymer'
     wind_factor : float, optional
         Wind speed correction exponent to account for different wind speed measurement
         heights between weather database (e.g. NSRDB) and the tempeature model

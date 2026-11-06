@@ -8,6 +8,7 @@ jobs:
     env:
       NOTEBOOK_DIR: "tutorials"
       TESTBOOK_NOTEBOOK_LIST: |
+        "06_advanced/02_pysam_single_location.ipynb"
         "06_advanced/03_pysam_api.ipynb"
         "06_advanced/04_nsrdb_distributed_api.ipynb"
         "04_scenario/01_scenario_temperature.ipynb"

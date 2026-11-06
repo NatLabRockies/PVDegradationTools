@@ -8,5 +8,5 @@ Integrated geospatial analysis via dask and xarray.
 * xarray for geospatial data handling
 
 Contributors
-~~~~~~~~~~~~
+------------
 * Martin Springer (:ghuser:`martin-springer`)

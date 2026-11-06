@@ -135,9 +135,10 @@ def carrier_factor(
     References
     ----------
     .. [1] A. N. McPherson, J. F. Karas, D. L. Young, and I. L. Repins,
-    “Excess carrier concentration in silicon devices and wafers: How bulk properties are
-    expected to accelerate light and elevated temperature degradation,”
-    MRS Advances, vol. 7, pp. 438–443, 2022, doi: 10.1557/s43580-022-00222-5.
+       "Excess carrier concentration in silicon devices and wafers: How bulk
+       properties are expected to accelerate light and elevated temperature
+       degradation," MRS Advances, vol. 7, pp. 438-443, 2022,
+       doi: 10.1557/s43580-022-00222-5.
     """
     q = elementary_charge
 
@@ -274,9 +275,10 @@ def carrier_factor_wafer(
     References
     ----------
     .. [1] A. N. McPherson, J. F. Karas, D. L. Young, and I. L. Repins,
-    “Excess carrier concentration in silicon devices and wafers: How bulk properties are
-    expected to accelerate light and elevated temperature degradation,”
-    MRS Advances, vol. 7, pp. 438–443, 2022, doi: 10.1557/s43580-022-00222-5.
+       "Excess carrier concentration in silicon devices and wafers: How bulk
+       properties are expected to accelerate light and elevated temperature
+       degradation," MRS Advances, vol. 7, pp. 438-443, 2022,
+       doi: 10.1557/s43580-022-00222-5.
     """
     q = elementary_charge
 
@@ -569,10 +571,10 @@ def j0_gray(ni2, diffusivity, na, diffusion_length, arg, srv):
 
     References
     ----------
-    .. [1] J. L. Gray, “The Physics of the Solar Cell,”
-    in Handbook of Photovoltaic Science and Engineering,
-    A. Luque and S. Hegedus, Eds. Chichester, UK: John Wiley & Sons, Ltd,
-    2011, pp. 82–129. doi: 10.1002/9780470974704.ch3.
+    .. [1] J. L. Gray, "The Physics of the Solar Cell,"
+       in Handbook of Photovoltaic Science and Engineering,
+       A. Luque and S. Hegedus, Eds. Chichester, UK: John Wiley & Sons, Ltd,
+       2011, pp. 82-129. doi: 10.1002/9780470974704.ch3.
     """
     q = elementary_charge
 
@@ -665,7 +667,7 @@ def calc_energy_loss(timesteps):
 
         Column names must include:
             - ``'Pmp_norm'``, a column of normalized (0-1) maximum power such as
-            returned by letid.calc_device_params
+              returned by letid.calc_device_params
 
     Returns
     -------
@@ -696,6 +698,7 @@ def calc_regeneration_time(timesteps, x=80, rtol=1e-05):
     timesteps : Dataframe
         timesteps.index must be DatetimeIndex OR timesteps must include ``'Datetime'``
         column with dtype datetime
+
         Column names must include:
             - ``'NC'``, the percentage of defects in state C
 
@@ -836,9 +839,9 @@ def ff_green(voltage, temperature=298.15):
 
     References
     ----------
-    .. [1] M. A. Green, “Solar cell fill factors: General graph and empirical
-    expressions”, Solid-State Electronics, vol. 24, pp. 788 - 789, 1981.
-    https://doi.org/10.1016/0038-1101(81)90062-9
+    .. [1] M. A. Green, "Solar cell fill factors: General graph and empirical
+       expressions", Solid-State Electronics, vol. 24, pp. 788 - 789, 1981.
+       https://doi.org/10.1016/0038-1101(81)90062-9
     """
     k = Boltzmann
     q = elementary_charge
@@ -1179,10 +1182,20 @@ def calc_letid_outdoors(
                 timesteps.at[index, "time"] - timesteps.at[index - 1, "time"]
             ).total_seconds()
 
-            # assign new defect state percentages
-            timesteps.at[index, "NA"] = n_A + dN_Adt * t_step
-            timesteps.at[index, "NB"] = n_B + dN_Bdt * t_step
-            timesteps.at[index, "NC"] = n_C + dN_Cdt * t_step
+            # assign new defect state percentages, clamped to the physical
+            # [0, 100] range. NA/NB/NC are percentages of the defect population
+            # and conserve NA + NB + NC = 100, so each must stay in [0, 100].
+            # The explicit forward-Euler step above can overshoot for this stiff
+            # system under extreme conditions (e.g. polar cold, where the
+            # tau/carrier-density feedback makes dN/dt large relative to the
+            # fixed 1-hour t_step), driving the populations far outside [0, 100]
+            # (NA/NB -> +/-1e5) and collapsing tau -- an unphysical numerical
+            # blow-up that crashes Pmp_norm. Clamping projects each step back
+            # onto the physical range; well-resolved (in-range) steps are
+            # unchanged.
+            timesteps.at[index, "NA"] = min(max(n_A + dN_Adt * t_step, 0.0), 100.0)
+            timesteps.at[index, "NB"] = min(max(n_B + dN_Bdt * t_step, 0.0), 100.0)
+            timesteps.at[index, "NC"] = min(max(n_C + dN_Cdt * t_step, 0.0), 100.0)
 
             # calculate device parameters
             timesteps.at[index, "Jsc"] = jsc
@@ -1438,10 +1451,18 @@ def calc_letid_lab(
                 timesteps.at[index, "Datetime"] - timesteps.at[index - 1, "Datetime"]
             ).total_seconds()
 
-            # assign new defect state percentages
-            timesteps.at[index, "NA"] = n_A + dN_Adt * t_step
-            timesteps.at[index, "NB"] = n_B + dN_Bdt * t_step
-            timesteps.at[index, "NC"] = n_C + dN_Cdt * t_step
+            # assign new defect state percentages, clamped to the physical
+            # [0, 100] range. NA/NB/NC are percentages that conserve
+            # NA + NB + NC = 100, so each must stay in [0, 100]. The explicit
+            # forward-Euler step can overshoot for this stiff system (e.g. large
+            # dN/dt relative to t_step), driving the populations far outside
+            # [0, 100] and collapsing tau -- an unphysical numerical blow-up.
+            # Clamping projects each step back onto the physical range and is a
+            # no-op for well-resolved (in-range) steps. Mirrors the same guard in
+            # calc_letid_outdoors.
+            timesteps.at[index, "NA"] = min(max(n_A + dN_Adt * t_step, 0.0), 100.0)
+            timesteps.at[index, "NB"] = min(max(n_B + dN_Bdt * t_step, 0.0), 100.0)
+            timesteps.at[index, "NC"] = min(max(n_C + dN_Cdt * t_step, 0.0), 100.0)
 
             # calculate device parameters
             timesteps.at[index, "Jsc"] = jsc

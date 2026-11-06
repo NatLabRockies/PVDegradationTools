@@ -39,7 +39,7 @@ def collection_probability(x, thickness, s, diffusion_length, d):
     References
     ----------
     .. [1] Solar cell operation
-    https://www.pveducation.org/pvcdrom/solar-cell-operation/collection-probability
+       https://www.pveducation.org/pvcdrom/solar-cell-operation/collection-probability
     """
     cosh_xl = np.cosh(x / diffusion_length)
     cosh_wl = np.cosh(thickness / diffusion_length)
@@ -132,18 +132,18 @@ def calculate_jsc_from_tau_cp(
 
     References
     ----------
-    .. [1] K. R. McIntosh and S. C. Baker-Finch, “OPAL 2: Rapid optical simulation of
-    silicon solar cells,” in 2012 38th IEEE Photovoltaic Specialists Conference, IEEE,
-    2012, pp. 000265–000271.
-    doi: 10.1109/PVSC.2012.6317616.
+    .. [1] K. R. McIntosh and S. C. Baker-Finch, “OPAL 2: Rapid optical
+       simulation of silicon solar cells,” in 2012 38th IEEE Photovoltaic
+       Specialists Conference, IEEE, 2012, pp. 000265–000271.
+       doi: 10.1109/PVSC.2012.6317616.
 
     .. [2] A. Fell et al., “Input Parameters for the Simulation of Silicon Solar Cells
-    in 2014,” IEEE Journal of Photovoltaics, vol. 5, no. 4, pp. 1250–1263, Jul. 2015,
-    doi: 10.1109/JPHOTOV.2015.2430016.
+       in 2014,” IEEE Journal of Photovoltaics, vol. 5, no. 4, pp. 1250–1263, Jul. 2015,
+       doi: 10.1109/JPHOTOV.2015.2430016.
 
     .. [3] W. J. Yang, Z. Q. Ma, X. Tang, C. B. Feng, W. G. Zhao, and P. P. Shi,
-    “Internal quantum efficiency for solar cells,” Solar Energy, vol. 82, no. 2, pp.
-    106–110, Feb. 2008, doi: 10.1016/j.solener.2007.07.010.
+       “Internal quantum efficiency for solar cells,” Solar Energy, vol. 82, no. 2, pp.
+       106–110, Feb. 2008, doi: 10.1016/j.solener.2007.07.010.
     """
     q = elementary_charge
 
@@ -286,12 +286,12 @@ def calculate_jsc_from_tau_iqe(
     .. [1] “photovoltaic.” https://github.com/pvedu/photovoltaic
 
     .. [2] A. Fell et al., “Input Parameters for the Simulation of Silicon Solar Cells
-    in 2014,” IEEE Journal of Photovoltaics, vol. 5, no. 4, pp. 1250–1263, Jul. 2015
-    doi: 10.1109/JPHOTOV.2015.2430016.
+       in 2014,” IEEE Journal of Photovoltaics, vol. 5, no. 4, pp. 1250–1263, Jul. 2015
+       doi: 10.1109/JPHOTOV.2015.2430016.
 
     .. [3] W. J. Yang, Z. Q. Ma, X. Tang, C. B. Feng, W. G. Zhao, and P. P. Shi,
-    “Internal quantum efficiency for solar cells,” Solar Energy, vol. 82, no. 2,
-    pp. 106–110, Feb. 2008, doi: 10.1016/j.solener.2007.07.010.
+       “Internal quantum efficiency for solar cells,” Solar Energy, vol. 82, no. 2,
+       pp. 106–110, Feb. 2008, doi: 10.1016/j.solener.2007.07.010.
     """
     # Unit conversions:
     w_depletion = xp * 100  # depletion region width, m to cm
@@ -340,6 +340,13 @@ def generation_current(generation, depth):
     -------
     j_gen : numeric
         generation current [mA/cm²]
+
+    References
+    ----------
+    .. [1] K. R. McIntosh and S. C. Baker-Finch, "OPAL 2: Rapid optical
+       simulation of silicon solar cells," in 2012 38th IEEE Photovoltaic
+       Specialists Conference, IEEE, 2012, pp. 000265-000271.
+       doi: 10.1109/PVSC.2012.6317616.
     """
     q = elementary_charge
 

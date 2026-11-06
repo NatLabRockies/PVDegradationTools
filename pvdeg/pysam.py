@@ -84,17 +84,19 @@ def pysam(
             options: ``pvwatts8``, ``pvsamv1``
 
         Documentation Links
-        - [pvwatts8](https://nrel-pysam.readthedocs.io/en/main/modules/Pvwattsv8.html)
-        - [pvsamv1](https://nrel-pysam.readthedocs.io/en/main/modules/Pvsamv1.html)
+
+        - `pvwatts8 <https://nrel-pysam.readthedocs.io/en/main/modules/Pvwattsv8.html>`_
+        - `pvsamv1 <https://nrel-pysam.readthedocs.io/en/main/modules/Pvsamv1.html>`_
 
     pv_model_default: str
         pysam config for pv model.
-        [Pysam Modules](https://nrel-pysam.readthedocs.io/en/main/ssc-modules.html)
+        `Pysam Modules <https://nrel-pysam.readthedocs.io/en/main/ssc-modules.html>`_
 
         On the docs some modules have availabile defaults listed.
 
         For example:
-        [Pvwattsv8](https://nrel-pysam.readthedocs.io/en/main/modules/Pvwattsv8.html)
+        `Pvwattsv8 <https://nrel-pysam.readthedocs.io/en/main/modules/Pvwattsv8.html>`_
+
         - "FuelCellCommercial"
         - "FuelCellSingleOwner"
         - "GenericPVWattsWindFuelCellBatteryHybridHostDeveloper"
@@ -120,7 +122,8 @@ def pysam(
         - "PVWattsSingleOwner"
         - "PVWattsThirdParty"
 
-        [Pvsamv1](https://nrel-pysam.readthedocs.io/en/main/modules/Pvsamv1.html)
+        `Pvsamv1 <https://nrel-pysam.readthedocs.io/en/main/modules/Pvsamv1.html>`_
+
         - "FlatPlatePVAllEquityPartnershipFlip"
         - "FlatPlatePVCommercial"
         - "FlatPlatePVHostDeveloper"
@@ -147,12 +150,14 @@ def pysam(
     grid_default: str
 
         pysam default config for grid model.
-        [Grid Defaults](https://nrel-pysam.readthedocs.io/en/main/modules/Grid.html)
+        `Grid Defaults <https://nrel-pysam.readthedocs.io/en/main/modules/Grid.html>`_
 
     cashloan_default: str
 
         pysam default config for cashloan model.
-        [Cashloan Defaults](https://nrel-pysam.readthedocs.io/en/main/modules/Cashloan.html)  # noqa
+        `Cashloan Defaults
+        <https://nrel-pysam.readthedocs.io/en/main/modules/Cashloan.html>`_
+
         - "FlatPlatePVCommercial"
         - "FlatPlatePVResidential"
         - "PVBatteryCommercial"
@@ -165,7 +170,8 @@ def pysam(
     utiltityrate_default: str
 
         pysam default config for utilityrate5 model.
-        [Utilityrate5 Defaults](https://nrel-pysam.readthedocs.io/en/main/modules/Utilityrate5.html())  # noqa
+        `Utilityrate5 Defaults
+        <https://nrel-pysam.readthedocs.io/en/main/modules/Utilityrate5.html>`_
 
     config_files: dict
         SAM configuration files. A dictionary containing a mapping to filepaths.
@@ -174,14 +180,14 @@ def pysam(
         Each key should contain a value as a string representing the file path to a SAM
         config file. Cannot deal with the entire SAM config json.
 
-        ```
-        files = {
-            'pv' : 'example/path/1/pv-file.json'
-            'grid' : 'example/path/1/grid-file.json'
-            'utilityrate' : 'example/path/1/utilityrate-file.json'
-            'cashloan' : 'example/path/1/cashloan-file.json'
-        }
-        ```
+        .. code-block:: python
+
+            files = {
+                'pv' : 'example/path/1/pv-file.json'
+                'grid' : 'example/path/1/grid-file.json'
+                'utilityrate' : 'example/path/1/utilityrate-file.json'
+                'cashloan' : 'example/path/1/cashloan-file.json'
+            }
 
     results: list[str]
         list of strings corresponding to pysam outputs to return.
@@ -197,9 +203,11 @@ def pysam(
         lengths of the results within the list are different.
 
     practical_pitch_tilt_considerations: bool
-        Use inspire practical considerations to limit/override defined pitch and tilt from SAM configs.
+        Use inspire practical considerations to limit/override defined pitch
+        and tilt from SAM configs.
 
-        Calculates optimal GCR using `pvdeg.utilities.optimal_gcr_pitch` for fixed tilt bifacial systems.
+        Calculates optimal GCR using `pvdeg.utilities.optimal_gcr_pitch` for
+        fixed tilt bifacial systems.
         Imposes a minimum pitch of 3.8m and maximum pitch of 12m.
 
     Returns
@@ -494,7 +502,8 @@ def solar_resource_dict(weather_df, meta):
     times = pd.date_range(start="2001-01-01", periods=8760, freq="1h")
 
     # all solar resource dict options
-    # lat,lon,tz,elev,year,month,hour,minute,gh,dn,df,poa,tdry,twet,tdew,rhum,pres,snow,alb,aod,wspd,wdir
+    # lat,lon,tz,elev,year,month,hour,minute,gh,dn,df,poa,tdry,twet,tdew,rhum,
+    # pres,snow,alb,aod,wspd,wdir
     sr = {
         "lat": meta["latitude"],
         "lon": meta["longitude"],

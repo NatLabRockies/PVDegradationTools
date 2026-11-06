@@ -5,7 +5,7 @@ Installation
 
 PVDeg releases may be installed using pip. Compatible with Python 3.10 and above.
 
-For a quick start, see the **Installation** section in our `README.md <https://github.com/NREL/PVDegradationTools/blob/main/README.md#installation>`_.
+For a quick start, see the **Installation** section in our `README.md <https://github.com/NatLabRockies/PVDegradationTools/blob/main/README.md#installation>`_.
 
 Base Install
 ------------

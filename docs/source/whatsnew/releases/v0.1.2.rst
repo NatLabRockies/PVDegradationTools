@@ -6,5 +6,5 @@ ASTM Conference Release.
 * Tutorial examples for live workshop demo.
 
 Contributors
-~~~~~~~~~~~~
+------------
 * Silvana Ovaitt (:ghuser:`shirubana`)

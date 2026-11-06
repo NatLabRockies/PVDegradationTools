@@ -81,7 +81,7 @@ def poa_irradiance(
 
     Calculate plane-of-array (POA) irradiance using
     `pvlib.irradiance.get_total_irradiance` for different module mounts
-     as fixed tilt systems or tracked systems.
+    as fixed tilt systems or tracked systems.
 
     Parameters
     ----------

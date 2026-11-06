@@ -17,7 +17,9 @@
 import pvlib
 import numpy as np
 import pandas as pd
+import os
 import pvdeg
+from pvdeg import DATA_DIR
 import matplotlib.pyplot as plt
 
 # %%
@@ -115,7 +117,7 @@ print("X_lnR0", round(np.corrcoef(mc_inputs["X"], mc_inputs["LnR0"])[0][1], 3))
 # Based on the function chosen to run in the monte carlo simulation, various other data will be required. In this case we will need cell temperature and total plane of array irradiance.
 #
 # <div class="alert alert-block alert-info">
-# <b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data and then calculate cell temperature and global poa irradiance. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a> so register now.)
+# <b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data and then calculate cell temperature and global poa irradiance. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a> so register now.)
 # </div>
 
 # %%
@@ -123,15 +125,17 @@ print("X_lnR0", round(np.corrcoef(mc_inputs["X"], mc_inputs["LnR0"])[0][1], 3))
 # This avoids API rate limits during testing and builds
 import json
 
-weather_df = pd.read_csv("../data/psm4_miami.csv", index_col=0, parse_dates=True)
-with open("../data/meta_miami.json", "r") as f:
+weather_df = pd.read_csv(
+    os.path.join(DATA_DIR, "psm4_miami.csv"), index_col=0, parse_dates=True
+)
+with open(os.path.join(DATA_DIR, "meta_miami.json"), "r") as f:
     meta = json.load(f)
 
 # Uncomment below to fetch fresh data with your own API key:
 # weather_db = "PSM4"
 # weather_id = (25.783388, -80.189029)
 # weather_arg = {
-#     "api_key": "YOUR_API_KEY",  # Get your key at https://developer.nrel.gov/signup/
+#     "api_key": "YOUR_API_KEY",  # Get your key at https://developer.nlr.gov/signup/
 #     "email": "your.email@example.com",
 #     "map_variables": True,
 # }

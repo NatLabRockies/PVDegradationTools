@@ -1,36 +1,54 @@
 # %% [markdown]
-# # PySAM with API (API Key Required)
+# # PySAM: Single Location & Geospatial
 #
+# Run NREL's System Advisor Model (via [PySAM](https://nrel-pysam.readthedocs.io/))
+# through `pvdeg` for a single site and across a grid of locations.
+#
+# Every example here uses weather data bundled with the repository, so the notebook
+# runs fully offline with no API key or network access required.
 
 # %%
-import pvdeg
-from pvdeg import TEST_DATA_DIR
-import pandas as pd
 import os
-import pickle
+import json
+
+import pandas as pd
 import xarray as xr
+import matplotlib.pyplot as plt
+
+import pvdeg
+from pvdeg import DATA_DIR, TEST_DATA_DIR
 
 # %% [markdown]
-# # Pysam
+# ## About PySAM
 #
-# rundown on pysam...
+# `pvdeg.pysam.pysam` wraps a PySAM performance model (here `pvsamv1`) and returns its
+# full output dictionary. You supply a weather `DataFrame` and a `meta` dict — exactly
+# what `pvdeg.weather` produces — plus a model and a named default configuration.
 #
-# https://nrel-pysam.readthedocs.io/en/main/inputs-from-sam.html
+# See the [SAM inputs reference](https://nrel-pysam.readthedocs.io/en/main/inputs-from-sam.html)
+# for the available configurations.
 
 # %% [markdown]
-# # PVGIS
+# ## Single location
 #
-# Only works with PVGIS
+# Load a cached NSRDB weather file for Miami, FL that ships with the repo and run the
+# model for that one site.
 
 # %%
-weather_pvgis, meta_pvgis = pvdeg.weather.get(
-    database="PVGIS", id=(25.783388, -81.189029)
+# Cached NSRDB weather for Miami, FL, shipped with the pvdeg package -- fully
+# offline, and resolves from a pip install as well as a repo clone.
+data_dir = DATA_DIR
+
+weather_miami = pd.read_csv(
+    os.path.join(data_dir, "psm4_miami.csv"), index_col=0, parse_dates=True
 )
+with open(os.path.join(data_dir, "meta_miami.json")) as f:
+    meta_miami = json.load(f)
 
 # %%
 results = pvdeg.pysam.pysam(
-    weather_df=weather_pvgis,
-    meta=meta_pvgis,
+    weather_df=weather_miami,
+    meta=meta_miami,
     pv_model="pvsamv1",
     pv_model_default="FlatPlatePVCommercial",
 )
@@ -39,9 +57,11 @@ results = pvdeg.pysam.pysam(
 results["annual_energy"]
 
 # %% [markdown]
-# # Local Geospatial
+# ## Geospatial
 #
-# Using PySAM with geospatial data requires proper formatting of the weather DataFrame to match PySAM's expectations.
+# `pvdeg` can map a function across many locations at once. Here we run PySAM over a
+# small grid of sites in Summit County, Colorado, using weather and metadata bundled
+# with the repo (`tests/data`).
 
 # %%
 GEO_META = pd.read_csv(os.path.join(TEST_DATA_DIR, "summit-meta.csv"), index_col=0)
@@ -49,9 +69,12 @@ GEO_WEATHER = xr.open_dataset(os.path.join(TEST_DATA_DIR, "summit-weather.nc"))
 
 
 # %% [markdown]
-# # Local Geospatial - PySAM Integration
+# ### A PySAM wrapper for geospatial data
 #
-# The geospatial weather data is in half-hourly format (17520 timesteps) but PySAM expects hourly data (8760 timesteps). The wrapper function below handles this conversion automatically.
+# `pvdeg.geospatial.analysis` calls a function once per location. The bundled weather
+# is half-hourly (17520 steps) but PySAM expects hourly data (8760 steps), so the
+# wrapper below resamples to hourly, drops the helper `gid` column, and returns just
+# the scalar we want to map — `annual_energy`.
 
 
 # %%
@@ -76,16 +99,22 @@ def pysam_annual_energy(
 
 
 # %%
-# Select a small subset (2 gids) for demonstration to avoid timeouts
-# PySAM calculations are computationally expensive
-subset_gids = GEO_META.index[:2]
+# PySAM runs one full pvsamv1 simulation per location (~10 s each), so use a small
+# subset. Keep this well under the 60 s per-cell timeout enforced by the testbook CI
+# (tutorials/../scripts/run_all_testbook.py) — a handful of sites is plenty to demo.
+subset_gids = GEO_META.index[:3]
 GEO_META_SUB = GEO_META.loc[subset_gids]
-GEO_WEATHER_SUB = GEO_WEATHER.sel(gid=subset_gids)
 
+# Chunk along 'gid' (one location per task) so the sites run in parallel instead of
+# serially. 'time' is kept whole because each location needs its full timeseries.
+GEO_WEATHER_SUB = GEO_WEATHER.sel(gid=subset_gids).chunk({"gid": 1, "time": -1})
+
+# A scalar result is stored under the wrapper function's name, so the output template
+# (which inherits the 'gid' chunking from the weather) must use that same key.
 template = pvdeg.geospatial.output_template(
     ds_gids=GEO_WEATHER_SUB,
     shapes={
-        "Annual Energy": ("gid",),
+        "pysam_annual_energy": ("gid",),
     },
 )
 
@@ -100,66 +129,26 @@ geo_res = pvdeg.geospatial.analysis(
 geo_res
 
 # %% [markdown]
-# # NSRDB API
+# ### Map the results
+#
+# Each site's modeled annual energy, plotted at its location.
 
 # %%
-weather_db = "PSM4"
-weather_id = (25.783388, -80.189029)
-weather_arg = {"api_key": "DEMO_KEY", "email": "user@mail.com", "map_variables": True}
+# analysis expands the results onto a (latitude, longitude) grid; keep the sites we ran.
+sites = geo_res["pysam_annual_energy"].to_dataframe().dropna().reset_index()
 
-weather_df, meta = pvdeg.weather.get(weather_db, weather_id, **weather_arg)
-
-# %% [markdown]
-# # Geospatial Scenario
-
-# %%
-location_grabber = pvdeg.GeospatialScenario()
-
-location_grabber.addLocation(country="United States", downsample_factor=80)
-
-# %%
-location_grabber.plot_coords()
-
-# %%
-geo_weather, geo_meta = location_grabber.geospatial_data
-
-# Select a small subset (2 gids) for demonstration to avoid timeouts
-# PySAM calculations are computationally expensive
-subset_gids = geo_meta.index[:2]
-geo_meta_sub = geo_meta.loc[subset_gids]
-geo_weather_sub = geo_weather.sel(gid=subset_gids)
-
-template = pvdeg.geospatial.output_template(
-    ds_gids=geo_weather_sub,
-    shapes={
-        "pysam_annual_energy": ("gid",),
-    },
+fig, ax = plt.subplots(figsize=(7, 5))
+sc = ax.scatter(
+    sites["longitude"],
+    sites["latitude"],
+    c=sites["pysam_annual_energy"] / 1e3,
+    s=220,
+    cmap="viridis",
+    edgecolor="k",
 )
-
-geo_res = pvdeg.geospatial.analysis(
-    weather_ds=geo_weather_sub,
-    meta_df=geo_meta_sub,
-    func=pysam_annual_energy,  # using wrapper from before
-    template=template,
-)
-
-# %%
-pvdeg.geospatial.plot_sparse_analysis(geo_res, data_var="pysam_annual_energy")
-
-# %%
-# Check weather data time dimension compatibility
-if "time" in GEO_WEATHER.dims:
-    times = pd.to_datetime(GEO_WEATHER["time"].values)
-    years = times.year
-    unique_years = set(years)
-    if len(unique_years) != 1:
-        print(
-            f"Warning: Weather data contains multiple years: {unique_years}. Pysam expects a single year."
-        )
-    hours_per_year = times.size / len(unique_years)
-    if hours_per_year not in [8760, 8784]:
-        print(
-            f"Warning: Unexpected number of timesteps per year: {hours_per_year}. Expected 8760 or 8784."
-        )
-else:
-    print("Warning: No 'time' dimension found in weather data. Pysam may fail.")
+ax.set_xlabel("Longitude [\u00b0]")
+ax.set_ylabel("Latitude [\u00b0]")
+ax.set_title("Modeled annual energy across Summit County, CO")
+fig.colorbar(sc, ax=ax, label="Annual energy [MWh]")
+fig.tight_layout()
+plt.show()

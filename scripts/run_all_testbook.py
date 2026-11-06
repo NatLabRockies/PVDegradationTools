@@ -32,22 +32,22 @@ pvdeg.GeospatialScenario.addLocation = monkeypatch_addLocation
 """
 
 
-def monkeypatch_nrel_kestrel_check():
-    """String to monkeypatch pvdeg.utilities.nrel_kestrel_check to a no-op function"""
+def monkeypatch_nlr_kestrel_check():
+    """String to monkeypatch pvdeg.utilities.nlr_kestrel_check to a no-op function"""
     return """
 import pvdeg.utilities
 import pvdeg.weather
-def mock_nrel_kestrel_check(*args, **kwargs):
+def mock_nlr_kestrel_check(*args, **kwargs):
     pass
-pvdeg.utilities.nrel_kestrel_check = mock_nrel_kestrel_check
+pvdeg.utilities.nlr_kestrel_check = mock_nlr_kestrel_check
 # Also patch it in the weather module since it imports the function directly
-pvdeg.weather.nrel_kestrel_check = mock_nrel_kestrel_check
+pvdeg.weather.nlr_kestrel_check = mock_nlr_kestrel_check
 """
 
 
 def monkeypatch_cells(tb):
     # Inject both monkeypatches as the very first cell
-    tb.inject(monkeypatch_addLocation() + monkeypatch_nrel_kestrel_check(), 0)
+    tb.inject(monkeypatch_addLocation() + monkeypatch_nlr_kestrel_check(), 0)
 
 
 def main(notebook_path):

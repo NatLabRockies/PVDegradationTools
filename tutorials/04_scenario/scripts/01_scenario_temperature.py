@@ -121,38 +121,36 @@ import datetime
 t0 = datetime.datetime(1970, 1, 1, 0, 0)
 tf = datetime.datetime(1970, 1, 1, 23, 59)
 
-# Get the first function result dynamically
-function_ids = [key[1] for key in scene_temp.results.keys() if key[0] == "function"]
-if function_ids:
-    temp_df = scene_temp.extract(
-        ("function", function_ids[0]), tmy=True, start_time=t0, end_time=tf
-    )
-    display(temp_df)
-else:
-    print("No function results found")
+# scene_temp.results is keyed by module_name, whose values are dicts keyed by
+# job_id. Grab the first job_id from any module to use as the ('function', ...)
+# target for extract/plot.
+first_module_results = next(iter(scene_temp.results.values()))
+first_job_id = next(iter(first_module_results.keys()))
+
+temp_df = scene_temp.extract(
+    ("function", first_job_id), tmy=True, start_time=t0, end_time=tf
+)
+display(temp_df)
+
 
 # %%
-# Get the first function result dynamically for plotting
-function_ids = [key[1] for key in scene_temp.results.keys() if key[0] == "function"]
-if function_ids:
-    scene_temp.plot(
-        ("function", function_ids[0]),
-        tmy=True,
-        start_time=t0,
-        end_time=tf,
-        title="single day cell temperature",
-    )
-else:
-    print("No function results found")
+scene_temp.plot(
+    ("function", first_job_id),
+    tmy=True,
+    start_time=t0,
+    end_time=tf,
+    title="single day cell temperature",
+)
+
 
 # %% [markdown]
 # # Create a Copy of a Scenario
 
 # %%
-from pathlib import Path
 
-parent_dir = Path(pvdeg.PVDEG_DIR).parent
-new_path = parent_dir / "tutorials" / "data" / "temperature_and_degradation.json"
+# the scenario fixture ships inside the pvdeg package, so this resolves from a pip
+# install as well as a repo clone
+new_path = pvdeg.DATA_DIR / "temperature_and_degradation.json"
 
 copy = pvdeg.scenario.Scenario.load_json(
     file_path=str(new_path),

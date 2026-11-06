@@ -13,7 +13,9 @@ import pvlib
 import numpy as np
 import pandas as pd
 import json
+import os
 import pvdeg
+from pvdeg import DATA_DIR
 import matplotlib.pyplot as plt
 
 # %%
@@ -33,17 +35,19 @@ print("Pvdeg version ", pvdeg.__version__)
 # This is copied from another tutorial called `4 - Standards.ipynb`, please visit this page for a more in depth explanation of the process for a single standoff calculation.
 #
 # <div class="alert alert-block alert-info">
-# <b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a> so register now.)
+# <b>Please use your own API key: The block below makes an NSRDB API to get weather and meta data. This tutorial will work with the DEMO Key provided, but it will take you less than 3 minutes to obtain your own at <a ref="https://developer.nlr.gov/signup/">https://developer.nlr.gov/signup/</a> so register now.)
 # </div>
 
 # %%
 # Load weather data from locally saved files to avoid API rate limits
-WEATHER = pd.read_csv("../data/psm4_nyc.csv", index_col=0, parse_dates=True)
-with open("../data/meta_nyc.json", "r") as f:
+WEATHER = pd.read_csv(
+    os.path.join(DATA_DIR, "psm4_nyc.csv"), index_col=0, parse_dates=True
+)
+with open(os.path.join(DATA_DIR, "meta_nyc.json"), "r") as f:
     META = json.load(f)
 
 # To use the NSRDB API instead, uncomment the lines below and add your API key
-# Get your API key at: https://developer.nrel.gov/signup/
+# Get your API key at: https://developer.nlr.gov/signup/
 # weather_db = "PSM4"
 # weather_id = (40.633365593159226, -73.9945801019899)  # Manhattan, NYC
 # weather_arg = {

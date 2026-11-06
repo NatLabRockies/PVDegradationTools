@@ -147,7 +147,7 @@ class Scenario:
         None
 
         See Also:
-        --------
+        ---------
         `pvdeg.utilties.remove_scenario_filetree`
         to remove all pvd_job_* directories and children from a directory
         """
@@ -259,33 +259,39 @@ class Scenario:
             'close_mount_glass_glass', 'insulated_back_glass_polymer'
         materials : Union[str, dict]
             Materials specification. Can be either:
+
             - str: Single material key e.g., "OX003"
             - dict: Nested dictionary with structure PV layer, materials file, material
-            key, and parameters if custom material is specifed. For example:
-        {
-            "encapsulant": {
-                "material_file": "O2permeation",
-                "material_name": "OX003"
-            },
-            "backsheet": {
-                "material_file": "H20permeation",
-                "material_name": "W024"
-            },
-            "custom_layer": {
-                "parameters": {
-                    "Ead": 95,
-                    "Do": 40e5,
-                    "Eas": -10,
-                    "So": 20e-6,
-                    "Eap": 84,
-                    "Po": 99e9
-                }
-            }
-        }
+              key, and parameters if custom material is specifed. For example:
+
+              .. code-block:: python
+
+                  {
+                      "encapsulant": {
+                          "material_file": "O2permeation",
+                          "material_name": "OX003"
+                      },
+                      "backsheet": {
+                          "material_file": "H20permeation",
+                          "material_name": "W024"
+                      },
+                      "custom_layer": {
+                          "parameters": {
+                              "Ead": 95,
+                              "Do": 40e5,
+                              "Eas": -10,
+                              "So": 20e-6,
+                              "Eap": 84,
+                              "Po": 99e9
+                          }
+                      }
+                  }
+
         material_file : str
             Material file used to access parameters if ``material_name`` exists in one
             of the local material json databases. Options:
-            >>> "AApermeation", "H2Opermeation", "O2permeation"
+
+            - ``"AApermeation"``, ``"H2Opermeation"``, ``"O2permeation"``
         parameters : list
             List of parameter names to retrieve from the material database. If None, all
             parameters are retrieved. This argument is passed to the ``parameters``
@@ -387,35 +393,37 @@ class Scenario:
         -----------
         materials : dict
             Dictionary with layer names as keys, and material info including:
+
             - material_file: str - Name of the material file (e.g., "O2permeation")
-              - required only for existing materials
+              (required only for existing materials)
             - material_name: str - Name of the material to add
             - parameters: dict - Custom material parameters (for custom materials)
 
-
         Example:
         --------
-        scenario.add_material({
-            "encapsulant": {
-                "material_file": "O2permeation",
-                "material_name": "EVA_001"
-            },
-            "backsheet": {
-                "material_file": "H2Opermeation",
-                "material_name": "PET_001"
-            },
-            "custom_layer": {
-                "material_name": "CUSTOM_001",
-                "parameters": {
-                    "Ead": 95,
-                    "Do": 40e5,
-                    "Eas": -10,
-                    "So": 20e-6,
-                    "Eap": 84,
-                    "Po": 99e9
+        .. code-block:: python
+
+            scenario.add_material({
+                "encapsulant": {
+                    "material_file": "O2permeation",
+                    "material_name": "EVA_001"
+                },
+                "backsheet": {
+                    "material_file": "H2Opermeation",
+                    "material_name": "PET_001"
+                },
+                "custom_layer": {
+                    "material_name": "CUSTOM_001",
+                    "parameters": {
+                        "Ead": 95,
+                        "Do": 40e5,
+                        "Eas": -10,
+                        "So": 20e-6,
+                        "Eap": 84,
+                        "Po": 99e9
+                    }
                 }
-            }
-        })
+            })
         """
         if not isinstance(materials, dict):
             raise ValueError(
@@ -1018,7 +1026,7 @@ class Scenario:
             Name of the matplotlib plot
 
         Returns:
-        -------
+        --------
         fig, ax: tuple
             matplotlib figure and axis objects
 

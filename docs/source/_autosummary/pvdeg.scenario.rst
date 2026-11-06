@@ -6,32 +6,17 @@ pvdeg.scenario
 
 .. automodule:: pvdeg.scenario
 
-   .. this is crazy  
-
-   
-   
-   
-   
-   .. this is crazy  
-
    
    
    
 
    
    
-
-   Classes
-   -------
-
+   .. rubric:: Classes
    
    .. autoclass:: Scenario
       :members:
-
-   .. _sphx_glr_backref_pvdeg.scenario.Scenario:
-
-   .. minigallery:: pvdeg.scenario.Scenario
-       :add-heading:
+   
    
    
 
