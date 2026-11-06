@@ -648,11 +648,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 7.0.0-1017-azure
-Python version  3.11.17 (main, Oct  1 2026, 14:32:31) [GCC 13.3.0]
-Pandas version  3.0.6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Linux 7.0.0-1019-azure
+Python version  3.11.18 (main, Oct 26 2026, 02:48:29) [GCC 15.2.0]
+Pandas version  3.1.1
 pvlib version  0.16.1
-pvdeg version  0.1.dev1+g22559f49d
+pvdeg version  0.1.dev1+g682194347
 </pre></div>
 </div>
 </div>
@@ -957,6 +957,13 @@ For this example, we’ll model a fixed latitude tilt system at NREL, in Golden,
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2603/44907612.py:2: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  weather.rename(
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1163,7 +1170,7 @@ For this example, we’ll model a fixed latitude tilt system at NREL, in Golden,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/scipy/optimize/_chandrupatla.py:437: RuntimeWarning: invalid value encountered in divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/scipy/optimize/_chandrupatla.py:437: RuntimeWarning: invalid value encountered in divide
   C = A / (A + B)
 </pre></div>
 </div>
@@ -1205,12 +1212,29 @@ For this example, we’ll model a fixed latitude tilt system at NREL, in Golden,
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2603/1345386009.py:9: Pandas4Warning: The inplace keyword in DataFrame.reset_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  timesteps.reset_index(
+/tmp/ipykernel_2603/1345386009.py:12: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  timesteps.rename(columns={"index": "Datetime"}, inplace=True)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># filter out times when injection is NaN, these won't progress LETID, and it'll make the calculations below run faster</span>
 <span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="p">[</span><span class="n">timesteps</span><span class="p">[</span><span class="s2">"Injection"</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span>
 <span class="n">timesteps</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2603/2923317850.py:3: Pandas4Warning: The inplace keyword in DataFrame.reset_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  timesteps.reset_index(inplace=True, drop=True)
 </pre></div>
 </div>
 </div>
@@ -1484,6 +1508,14 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
         <span class="n">timesteps</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">"Voc"</span><span class="p">]</span> <span class="o">=</span> <span class="n">letid</span><span class="o">.</span><span class="n">calc_voc_from_tau</span><span class="p">(</span>
             <span class="n">tau</span><span class="p">,</span> <span class="n">wafer_thickness</span><span class="p">,</span> <span class="n">s_rear</span><span class="p">,</span> <span class="n">jsc</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">25</span>
         <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2603/2278194405.py:10: Pandas4Warning: Setting a value on a DataFrame via .at with a key that does not exist in the index is deprecated and will raise a KeyError in a future version. Use .loc instead.
+  timesteps.at[index, "Jsc"] = jsc
+/tmp/ipykernel_2603/2278194405.py:11: Pandas4Warning: Setting a value on a DataFrame via .at with a key that does not exist in the index is deprecated and will raise a KeyError in a future version. Use .loc instead.
+  timesteps.at[index, "Voc"] = voc
 </pre></div>
 </div>
 </div>
@@ -1806,7 +1838,7 @@ Other required device parameters: base diffusivity (in cm<sup>2</sup>/s), and op
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/scipy/optimize/_chandrupatla.py:437: RuntimeWarning: invalid value encountered in divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/scipy/optimize/_chandrupatla.py:437: RuntimeWarning: invalid value encountered in divide
   C = A / (A + B)
 </pre></div>
 </div>
