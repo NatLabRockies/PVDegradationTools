@@ -248,8 +248,8 @@ for index, timestep in timesteps.iterrows():
     jsc_now = collection.calculate_jsc_from_tau_cp(
         timesteps.at[index, "tau"], wafer_thickness, d_base, s_rear, generation, depth
     )
-    timesteps.loc[index, "Jsc"] = jsc_now
-    timesteps.loc[index, "Voc"] = letid.calc_voc_from_tau(
+    timesteps.at[index, "Jsc"] = jsc_now
+    timesteps.at[index, "Voc"] = letid.calc_voc_from_tau(
         timesteps.at[index, "tau"], wafer_thickness, s_rear, jsc_now, temperature=25
     )
 
