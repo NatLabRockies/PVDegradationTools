@@ -1,6 +1,5 @@
-v0.7.5 (XXXX-XX-XX)
+v0.7.5 (2026-11-06)
 ===================
-
 
 Bug fixes
 ----------
@@ -16,15 +15,8 @@ Bug fixes
 
 
 Documentation
--------------
-- Update the citation guidance in ``README.md`` and on the documentation
-  landing page following publication of the PVDeg paper in the Journal of Open
-  Source Software. (:pull:`377`)
-- Add logo usage guidance to ``README.md`` and the documentation landing page,
-  pointing to the SVG logo variants in
-  ``docs/source/_static/logo-vectors``. (:pull:`377`)
-- Fix the ``README.md`` license badge, which reported the ``pvlib`` license
-  instead of the ``pvdeg`` one, and fix typos in the acknowledgements and HPC disclaimer. (:pull:`377`)
+-----------------
+
 
 
 Contributors
