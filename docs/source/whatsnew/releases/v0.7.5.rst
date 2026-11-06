@@ -2,6 +2,19 @@ v0.7.5 (XXXX-XX-XX)
 ===================
 
 
+Bug fixes
+----------
+- Fix ``tests/test_diffusion.py::test_diffusion_1d`` failing with
+  ``ValueError: Cannot modify read-only array`` on pandas >= 3.1, where
+  ``Index.values`` returns a read-only array. The test now patches the
+  expected column labels through ``Index.to_numpy(copy=True)``. (:pull:`379`)
+- Replace deprecated pandas calls in the LeTID and BO-LID tutorials, which
+  emitted ``Pandas4Warning`` messages on pandas >= 3.1 and broke the ``nbval``
+  notebook checks. The ``inplace`` keyword is dropped from ``reset_index`` and
+  ``rename`` in favour of reassignment, and assignments that create the ``Jsc``
+  and ``Voc`` columns use ``.loc`` instead of ``.at``. (:pull:`379`)
+
+
 Documentation
 -------------
 - Update the citation guidance in ``README.md`` and on the documentation
@@ -17,3 +30,4 @@ Documentation
 Contributors
 ------------
 - Rajiv Daxini (:ghuser:`RDaxini`)
+
