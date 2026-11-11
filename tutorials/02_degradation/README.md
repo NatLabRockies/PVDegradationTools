@@ -10,6 +10,7 @@ Advanced tutorials focused on specific degradation mechanisms including LID and 
 4. **04_letid_outdoor_scenario.ipynb** - LETID outdoor scenarios based on accelerated test results
 5. **05_letid_passivated_wafer.ipynb** - LETID analysis for passivated wafer technologies
 6. **06_vant_hoff_degradation_model.ipynb** - Van't Hoff degradation modeling approach
+7. **07_acetic_acid.ipynb** - Acetic acid generation in EVA and the power loss it causes
 
 ## Topics Covered
 

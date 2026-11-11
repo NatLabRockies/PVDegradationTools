@@ -30,6 +30,8 @@ parts:
     title: LETID Passivated Wafer
   - file: 02_degradation/06_vant_hoff_degradation_model
     title: Van't Hoff Degradation Model
+  - file: 02_degradation/07_acetic_acid
+    title: Acetic Acid in EVA
 - caption: 03 - Monte Carlo Simulations
   titlesonly: true
   chapters:

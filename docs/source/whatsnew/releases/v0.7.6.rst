@@ -1,0 +1,20 @@
+v0.7.6 (unreleased)
+===================
+
+Enhancements
+------------
+- Add ``pvdeg.acetic``, the acetic acid model of Irikawa et al. (2025): moisture
+  in EVA, the rate of acid generation, power loss against acid content, and the
+  field power curves.
+
+Documentation
+-------------
+- Add the tutorial ``tutorials/02_degradation/07_acetic_acid.ipynb``.
+
+Testing
+-------
+- Add ``tests/test_acetic.py``.
+
+Contributors
+------------
+- Md Habibur Rahman (:ghuser:`msehabibur`)

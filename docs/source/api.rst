@@ -24,6 +24,7 @@ turn, together with the tutorials and open datasets that support them.
     :toctree: _autosummary/
     :template: module.rst
 
+    acetic
     collection
     degradation
     design
