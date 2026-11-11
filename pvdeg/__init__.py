@@ -6,6 +6,7 @@ import logging
 from .config import *  # noqa: F403
 
 # from . import cli
+from . import acetic
 from . import collection
 from . import decorators
 from . import degradation
