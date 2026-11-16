@@ -635,7 +635,7 @@ This journal applies a Monte Carlo to the Standoff Calculation</p>
 Python version  3.11.18 (main, Oct 26 2026, 02:48:29) [GCC 15.2.0]
 Pandas version  3.1.1
 Pvlib version  0.16.1
-Pvdeg version  0.1.dev1+gfa127b0a3
+Pvdeg version  0.1.dev1+g4c9b7a3b4
 </pre></div>
 </div>
 </div>
@@ -727,18 +727,18 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           X_0  wind_factor
-0     6.170974     0.053570
-1     0.013018    -0.030139
-2    -0.092412     0.555639
-3     1.970680    -0.574487
-4    12.213112     1.128966
-..         ...          ...
-495   6.833468    -0.430705
-496   4.354478     0.029667
-497   4.980732     0.332289
-498   5.372933     0.127121
-499   0.091300     0.198458
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          X_0  wind_factor
+0    3.289428    -0.034895
+1    5.997821     0.097790
+2    5.601159    -0.173025
+3    0.611537     0.259488
+4    4.309554    -0.428672
+..        ...          ...
+495  5.631782     0.741726
+496  2.813392     0.114072
+497  9.438026    -0.832999
+498  4.624311     0.179526
+499  8.794092     0.324857
 
 [500 rows x 2 columns]
 </pre></div>
@@ -751,7 +751,8 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 <p>When using the pvdeg.montecarlo.simulate() function on a target function all of the target function’s required arguments must still be given. Our non-changing arguments will be stored in a dictionary. The randomized monte carlo input data will also be passed to the target function via the simulate function. All required target function arguments should be contained between the column names of the randomized input data and fixed argument dictionary,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NBVAL-IGNORE-OUTPUT</span>
+<span class="c1"># defining arguments to pass to the target function, standoff() in this case</span>
 <span class="n">function_kwargs</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"weather_df"</span><span class="p">:</span> <span class="n">WEATHER</span><span class="p">,</span>
     <span class="s2">"meta"</span><span class="p">:</span> <span class="n">META</span><span class="p">,</span>
@@ -807,17 +808,17 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            x      T98_0    T98_inf
-0    0.643204  72.219432  49.796949
-1    0.001797  72.939141  50.146072
-2    0.011827  67.125644  46.073447
-3    0.533604  75.608895  51.963564
-4    0.000000  57.074420  40.111040
+0    0.460585  72.982018  50.159092
+1    0.535787  71.914069  49.515908
+2    1.044239  73.951973  50.716776
+3    0.012105  70.429810  48.500017
+4    1.063007  75.153140  51.579319
 ..        ...        ...        ...
-495  1.687731  75.159187  51.584443
-496  0.490461  72.392207  49.934851
-497  0.000000  69.651838  47.925745
-498  0.418715  71.677690  49.299885
-499  0.004460  71.059309  48.840093
+495  0.000000  64.703128  44.330617
+496  0.234189  71.787489  49.407593
+497  2.877073  76.231170  52.516646
+498  0.262612  71.226642  49.007646
+499  0.000000  69.733478  47.988782
 
 [500 rows x 3 columns]
 </pre></div>
@@ -852,7 +853,7 @@ The array surface_tilt angle was not provided, therefore the latitude of  40.6 w
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/055565fa28a1cb43b1f2ea3118ba380b8d8c50ee10c1bbb939ad147fe59d4e81.png" src="../_images/055565fa28a1cb43b1f2ea3118ba380b8d8c50ee10c1bbb939ad147fe59d4e81.png" />
+<img alt="../_images/e6fd7b9dba6ffc3d7c3fbd4d259f410ec7163cf43dfa3a9e5e597d56e355cc49.png" src="../_images/e6fd7b9dba6ffc3d7c3fbd4d259f410ec7163cf43dfa3a9e5e597d56e355cc49.png" />
 </div>
 </div>
 </section>
