@@ -538,9 +538,23 @@ def test_resolve_material_params_missing_layer_warns():
     assert result == {}
 
 
-def test_resolve_material_params_flat_with_layer_warns():
-    """Warning + empty dict when material_params is flat but a layer is requested."""
+def test_resolve_material_params_flat_always_injected():
+    """Single-material params are injected with or without a layer name."""
     flat = {"Ead": 29.4, "Do": 0.13}
-    with pytest.warns(UserWarning, match="not structured as named layers"):
-        result = _resolve_material_params(flat, "encapsulant")
-    assert result == {}
+    assert _resolve_material_params(flat, None) == flat
+    assert _resolve_material_params(flat, "encapsulant") == flat
+
+
+def _needs_ead(weather_df, Ead):
+    return Ead
+
+
+@pytest.mark.parametrize("job", [_needs_ead, (_needs_ead, "encapsulant")])
+def test_run_single_material_injects_params(tmp_path, job):
+    s = Scenario(name="single-material-run", path=tmp_path)
+    s.addModule(module_name="single", materials="OX003")
+    s.addJob(func=job)
+    s.run()
+
+    expected = s.modules[0]["material_params"]["Ead"]
+    assert list(s.results["single"].values()) == [expected]

@@ -31,8 +31,9 @@ def _resolve_material_params(material_params, material_layer):
         or a nested dict of dicts (multi-layer, from
         ``addModule(materials={"encapsulant": {...}, ...})``).
     material_layer : str or None
-        The layer name bound to the job via ``addJob``. If ``None``,
-        no material parameters are injected.
+        The layer name bound to the job via ``addJob``. Only used for
+        multi-layer modules, where ``None`` means no material parameters are
+        injected. Single-material modules always inject their parameters.
 
     Returns:
     --------
@@ -40,34 +41,27 @@ def _resolve_material_params(material_params, material_layer):
         Flat dict of material parameters to inject into the function, or
         an empty dict if no injection is needed.
     """
-    if material_layer is None:
-        return {}
-
     # Detect nested (multi-layer) vs flat (single-material) structure.
     # Nested: all values are dicts, e.g. {"encapsulant": {"Ead": ...}}
     # Flat:   values are scalars,   e.g. {"Ead": 29.4, "Do": 0.13, ...}
-    is_nested = material_params and all(
+    is_nested = bool(material_params) and all(
         isinstance(v, dict) for v in material_params.values()
     )
 
-    if is_nested:
-        if material_layer not in material_params:
-            warnings.warn(
-                f"Layer '{material_layer}' is missing from material_params. "
-                "No material parameters will be injected for this job. "
-                f"Available layers: {list(material_params.keys())}"
-            )
-            return {}
-        return material_params[material_layer]
-    else:
-        # material_params is flat (single material) but a layer name was
-        # requested — layer selection requires a nested material dict.
+    if not is_nested:
+        return material_params or {}
+
+    if material_layer is None:
+        return {}
+
+    if material_layer not in material_params:
         warnings.warn(
-            f"Layer '{material_layer}' was specified but material_params is not "
-            "structured as named layers. No material parameters will be injected. "
-            "Use a dict-of-dicts when calling addModule to enable layer selection."
+            f"Layer '{material_layer}' is missing from material_params. "
+            "No material parameters will be injected for this job. "
+            f"Available layers: {list(material_params.keys())}"
         )
         return {}
+    return material_params[material_layer]
 
 
 class Scenario:
@@ -595,11 +589,12 @@ class Scenario:
     ):
         """Add pvdeg function(s) to the scenario pipeline.
 
-        A material layer is optional. When specified, ``run()`` will inject
-        the matching layer's material parameters into the function automatically.
-        Functions that do not require material parameters (e.g. ``standoff``,
-        ``solder_fatigue``) can be added as a bare callable or a
-        ``(function, kwargs)`` 2-tuple without a layer name.
+        A material layer is optional. For modules with a single material,
+        ``run()`` injects that material's parameters into every job and no
+        layer name is needed. For multi-layer modules, ``run()`` injects only
+        the bound layer's material parameters. Functions that do not require
+        material parameters (e.g. ``standoff``, ``solder_fatigue``) can be
+        added as a bare callable or a ``(function, kwargs)`` 2-tuple.
 
         Parameters:
         -----------
@@ -607,21 +602,20 @@ class Scenario:
             Specify job(s) to add. Each job must be one of:
 
             - A bare ``callable`` — add a function with no material layer
-              binding (no material parameters are injected).
+              binding (multi-layer modules inject no material parameters).
             - A 2-tuple ``(function, layer_name)`` — bind a function to a
               material layer. Material parameter values are injected
               automatically by ``run()``.
             - A 2-tuple ``(function, extra_kwargs)`` — add a function with
-              extra kwargs but no material layer binding (backward compatible
-              for functions that do not use material parameters).
+              extra kwargs but no material layer binding.
             - A 3-tuple ``(function, extra_kwargs, layer_name)`` — as above
               but also supply extra non-material arguments (e.g. experimental
               conditions such as ``I_chamber``) *and* bind to a material layer.
             - A list of any of the above for adding multiple jobs at once.
 
-            ``layer_name`` (str) must match a key in the module's
-            ``material_params`` dict (e.g. ``"encapsulant"``,
-            ``"backsheet"``).
+            For multi-layer modules, ``layer_name`` (str) must match a key in
+            the module's ``material_params`` dict (e.g. ``"encapsulant"``,
+            ``"backsheet"``). It is ignored for single-material modules.
 
         name : str or None
             Optional unique name for this job. Used for sequential analysis in the
@@ -756,9 +750,10 @@ class Scenario:
         """
         Run all jobs in pipeline on scenario object for each module in the scenario.
 
-        For jobs bound to a material layer (via ``addJob``), only the
-        parameters for that layer are injected. For jobs with no layer
-        binding, no material parameters are injected.
+        For single-material modules, the material parameters are injected
+        into every job. For multi-layer modules, jobs bound to a material
+        layer (via ``addJob``) receive only that layer's parameters, and jobs
+        with no layer binding receive no material parameters.
 
         Note: if a pipeline job contains a function not adhering to the
         package-wide pv parameter naming scheme, the job will raise a
