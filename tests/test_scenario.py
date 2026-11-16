@@ -515,6 +515,21 @@ def test_addJob_list_valid():
     assert jobs[1]["params"] == {"wind_factor": 0.5}
 
 
+def test_addJob_duplicate_name_raises(tmp_path):
+    s = Scenario(name="duplicate-name", path=tmp_path)
+    s.addJob(func=standoff, name="first")
+    with pytest.raises(ValueError, match="A job named 'first' already exists"):
+        s.addJob(func=standoff, name="first")
+    assert len(s.pipeline) == 1
+
+
+def test_addJob_unknown_depends_on_raises(tmp_path):
+    s = Scenario(name="unknown-depends-on", path=tmp_path)
+    with pytest.raises(ValueError, match="depends_on references unknown job 'missing'"):
+        s.addJob(func=standoff, depends_on={"weather_df": "missing"})
+    assert len(s.pipeline) == 0
+
+
 def test_resolve_material_params_missing_layer_warns():
     """Warning + empty dict when requested layer is absent from nested params."""
     nested = {"encapsulant": {"Ead": 30.0}, "backsheet": {"Ead": 25.0}}

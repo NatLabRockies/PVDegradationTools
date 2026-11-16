@@ -725,26 +725,21 @@ class Scenario:
                 f"got {type(job_spec)}"
             )
 
-        # Validate and insert into pipeline
+        # Validate job name and dependencies
+        existing_names = {
+            j.get("name") for j in self.pipeline.values() if j.get("name")
+        }
+        if name is not None and name in existing_names:
+            raise ValueError(f"A job named '{name}' already exists in the pipeline.")
+        for source in (depends_on or {}).values():
+            if source not in existing_names:
+                raise ValueError(
+                    f"depends_on references unknown job '{source}'. "
+                    "Add the source job before the dependent job."
+                )
+
+        # Insert into pipeline
         try:
-            if name is not None:
-                existing_names = {
-                    j.get("name") for j in self.pipeline.values() if j.get("name")
-                }
-                if name in existing_names:
-                    raise ValueError(
-                        f"A job named '{name}' already exists in the pipeline."
-                    )
-            if depends_on:
-                existing_names = {
-                    j.get("name") for j in self.pipeline.values() if j.get("name")
-                }
-                for kwarg, source in depends_on.items():
-                    if source not in existing_names:
-                        raise ValueError(
-                            f"depends_on references unknown job '{source}'. "
-                            "Add the source job before the dependent job."
-                        )
             job_id = utilities.new_id(self.pipeline)
             self.pipeline[job_id] = {
                 "job": func,
