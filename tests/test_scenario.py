@@ -1,6 +1,7 @@
 from pvdeg.scenario import Scenario, _resolve_material_params
 from pvdeg.standards import standoff
 from pvdeg import TEST_DATA_DIR
+from pvdeg import utilities
 from pvdeg import weather
 import pandas as pd
 import pytest
@@ -528,6 +529,70 @@ def test_addJob_unknown_depends_on_raises(tmp_path):
     with pytest.raises(ValueError, match="depends_on references unknown job 'missing'"):
         s.addJob(func=standoff, depends_on={"weather_df": "missing"})
     assert len(s.pipeline) == 0
+
+
+def test_addJob_name_matching_job_id_raises(tmp_path):
+    s = Scenario(name="name-id-collision", path=tmp_path)
+    job_id = s.addJob(func=standoff)
+    with pytest.raises(ValueError, match="already used as a job ID"):
+        s.addJob(func=standoff, name=job_id)
+    assert len(s.pipeline) == 1
+
+
+def test_addJob_new_id_avoids_job_names(monkeypatch, tmp_path):
+    ids = iter(["AAAAA", "BBBBB"])
+    monkeypatch.setattr(utilities, "choices", lambda *args, **kwargs: next(ids))
+    s = Scenario(name="id-avoids-names", path=tmp_path)
+    assert s.addJob(func=standoff, name="AAAAA") == "BBBBB"
+
+
+def _passthrough(x, weather_df=None):
+    return x
+
+
+def test_addJob_invalid_depends_on_key_raises(tmp_path):
+    s = Scenario(name="bad-depends-on-key", path=tmp_path)
+    s.addJob(func=standoff, name="first")
+    with pytest.raises(ValueError, match="'typo' is not a keyword parameter"):
+        s.addJob(func=_passthrough, depends_on={"typo": "first"})
+    with pytest.raises(ValueError, match="'x' is set in both"):
+        s.addJob(func=(_passthrough, {"x": 1}), depends_on={"x": "first"})
+    assert len(s.pipeline) == 1
+
+
+def _series_job(weather_df):
+    return pd.Series([1.0, 2.0])
+
+
+def test_run_named_jobs_stored_once(tmp_path):
+    s = Scenario(name="named-jobs", path=tmp_path)
+    s.addModule(module_name="m", materials="OX003")
+    up_id = s.addJob(func=_series_job, name="up")
+    down_id = s.addJob(func=_passthrough, name="down", depends_on={"x": "up"})
+    s.run()
+
+    assert list(s.results["m"]) == [up_id, down_id]
+    module_dir = os.path.join(tmp_path, "pipeline_results", "m_pipeline_results")
+    assert sorted(os.listdir(module_dir)) == sorted([f"{up_id}.csv", f"{down_id}.csv"])
+    pd.testing.assert_series_equal(
+        s.extract(("function", "down"))["m"], s.results["m"][down_id], check_names=False
+    )
+
+    s.modules = []
+    s.run()
+    assert list(s.results.index) == [up_id, down_id]
+
+
+def test_load_json_uses_current_output_path(monkeypatch, tmp_path):
+    monkeypatch.setattr(Scenario, "addLocation", monkeypatch_addLocation)
+    monkeypatch.setenv("PVDEG_JOB_PATH", str(tmp_path))
+    file_path = os.path.join(TEST_DATA_DIR, "test-scenario.json")
+
+    restored = Scenario.load_json(file_path=file_path)
+    assert restored.path == os.path.join(str(tmp_path), "pvd_job_test")
+
+    explicit = os.path.join(str(tmp_path), "explicit")
+    assert Scenario.load_json(file_path=file_path, path=explicit).path == explicit
 
 
 def test_resolve_material_params_missing_layer_warns():

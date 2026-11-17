@@ -8,7 +8,7 @@ from datetime import datetime as dt
 import os
 from shutil import rmtree
 import json
-from inspect import signature
+from inspect import Parameter, signature
 import warnings
 import pandas as pd
 import xarray as xr
@@ -621,12 +621,15 @@ class Scenario:
             Optional unique name for this job. Used for sequential analysis in the
             Scenario pipeline. Pass this name to a later job's ``depends_on`` variable
             to forward the output of this job as an input to the later job at run time.
+            Results are stored under the job ID; ``extract`` and ``plot`` also accept
+            the name.
         depends_on : dict or None
             ``{kwarg_name: source_job_name}`` mapping. The job from which to take the
             output as an input for this job. At run time, ``run()`` resolves each source
             (depends on) job's result and passes it as the named kwarg to this function.
             The source job must already exist in the pipeline (i.e. have been added with
-            a matching ``name``).
+            a matching ``name``). Each ``kwarg_name`` must be a keyword parameter of
+            the function and must not also be set in the job's extra kwargs.
         """
         # name/depends_on cannot be used with list form
         if isinstance(func, list) and (name is not None or depends_on is not None):
@@ -718,16 +721,33 @@ class Scenario:
         }
         if name is not None and name in existing_names:
             raise ValueError(f"A job named '{name}' already exists in the pipeline.")
-        for source in (depends_on or {}).values():
+        if name is not None and name in self.pipeline:
+            raise ValueError(f"Job name '{name}' is already used as a job ID.")
+
+        func_params = signature(func).parameters
+        keyword_kinds = (Parameter.POSITIONAL_OR_KEYWORD, Parameter.KEYWORD_ONLY)
+        for kwarg, source in (depends_on or {}).items():
             if source not in existing_names:
                 raise ValueError(
                     f"depends_on references unknown job '{source}'. "
                     "Add the source job before the dependent job."
                 )
+            param = func_params.get(kwarg)
+            if param is None or param.kind not in keyword_kinds:
+                raise ValueError(
+                    f"depends_on key '{kwarg}' is not a keyword parameter of "
+                    f"{getattr(func, '__name__', func)}."
+                )
+            if kwarg in func_kwarg:
+                raise ValueError(
+                    f"'{kwarg}' is set in both the job kwargs and depends_on."
+                )
 
         # Insert into pipeline
         try:
-            job_id = utilities.new_id(self.pipeline)
+            # IDs must not collide with job names, including this job's name
+            reserved = dict.fromkeys([*self.pipeline, *existing_names, name])
+            job_id = utilities.new_id(reserved)
             self.pipeline[job_id] = {
                 "job": func,
                 "params": func_kwarg,
@@ -813,7 +833,6 @@ class Scenario:
                     module_result[id] = res
                     if job_name:
                         completed[job_name] = res
-                        module_result[job_name] = res
 
                 results_dict[module["module_name"]] = module_result
 
@@ -866,7 +885,6 @@ class Scenario:
 
                 results_dict[id] = result
                 if job_name:
-                    results_dict[job_name] = result
                     completed[job_name] = result
                 pipeline_results = results_dict
 
@@ -892,12 +910,28 @@ class Scenario:
         file_path: str = None,
         email: Optional[str] = None,
         api_key: Optional[str] = None,
+        path: Optional[str] = None,
     ):
-        """Import scenario dictionaries from existing 'scenario.json' file."""
+        """Import scenario dictionaries from existing 'scenario.json' file.
+
+        Parameters:
+        -----------
+        file_path : str
+            Path to the scenario json file.
+        email : str, optional
+            NSRDB email, used if the file has no saved credentials.
+        api_key : str, optional
+            NSRDB api key, used if the file has no saved credentials.
+        path : str, optional
+            Output directory for the restored scenario. If None, the same
+            default as ``Scenario()`` is used (``PVDEG_JOB_PATH``, then
+            ``pvdeg.config.SCENARIO_OUTPUT_PATH``, then the current working
+            directory). The path saved in the json file is not reused because
+            it may point to a directory on another machine.
+        """
         with open(file_path, "r") as f:
             data = json.load(f)
         name = data["name"]
-        path = data["path"]
         modules = data["modules"]
         gids = data["gids"]
         process_pipeline = OrderedDict(data["pipeline"])
@@ -923,9 +957,7 @@ class Scenario:
                         for k, v in mod["material_params"].items()
                     }
 
-        instance = cls()
-        instance.name = name
-        instance.path = path
+        instance = cls(name=name, path=path)
         instance.modules = modules
         instance.gids = gids
         instance.pipeline = process_pipeline
@@ -1079,6 +1111,13 @@ class Scenario:
             self.email = email
             self.api_key = api_key
 
+    def _resolve_job_id(self, job: str) -> str:
+        """Return the pipeline ID of the job named ``job``, else ``job`` unchanged."""
+        for job_id, spec in self.pipeline.items():
+            if spec.get("name") == job:
+                return job_id
+        return job
+
     def extract(
         self,
         dim_target: Tuple[str, str],
@@ -1104,7 +1143,8 @@ class Scenario:
             The dimension is either 'function' or 'module', and the name
             is the name of the function or module to grab results from.
 
-            Note: Receives job ID, not function name in `dim_target`.
+            Note: Receives a job ID or a job name (set with ``addJob(name=...)``)
+            in `dim_target`, not a function name.
 
             Dimension options: `'function'`, `'module'`
 
@@ -1156,9 +1196,10 @@ class Scenario:
                         )
 
         elif dim_target[0] == "function":
+            target = self._resolve_job_id(dim_target[1])
             for module, sub_dict in self.results.items():
                 for function, function_result in sub_dict.items():
-                    if dim_target[1] == function:
+                    if target == function:
                         if isinstance(function_result, pd.Series):
                             results[module] = function_result
                         elif isinstance(function_result, pd.DataFrame):
@@ -1216,7 +1257,8 @@ class Scenario:
             The dimension is either 'function' or 'module', and the name
             is the name of the function or module to grab results from.
 
-            Note: Receives job ID, not function name in `dim_target`.
+            Note: Receives a job ID or a job name (set with ``addJob(name=...)``)
+            in `dim_target`, not a function name.
 
             Dimension options: `'function'`, `'module'`
 
