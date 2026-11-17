@@ -635,17 +635,10 @@ class Scenario:
                 "Call addJob separately for each job you want to name."
             )
 
-        # Normalize input to list of jobs
+        # List input always returns a list of job IDs.
         if isinstance(func, list):
-            jobs_to_add = func
-        else:
-            jobs_to_add = [func]
-
-        # Process each job
-        if len(jobs_to_add) == 1:
-            return self._add_single_job(jobs_to_add[0], name, depends_on)
-        else:
-            return [self._add_single_job(job) for job in jobs_to_add]
+            return [self._add_single_job(job) for job in func]
+        return self._add_single_job(func, name, depends_on)
 
     def _add_single_job(
         self,
@@ -816,7 +809,7 @@ class Scenario:
                     func_params = signature(func).parameters
                     func_args = {k: v for k, v in combined.items() if k in func_params}
 
-                    res = func(**params, **func_args)
+                    res = func(**(func_args | params))
                     module_result[id] = res
                     if job_name:
                         completed[job_name] = res
@@ -831,7 +824,8 @@ class Scenario:
                     self.path, "pipeline_results", f"{module}_pipeline_results"
                 )
                 os.makedirs(module_dir, exist_ok=True)
-                for function, result in pipeline_result.items():
+                for function in self.pipeline:
+                    result = pipeline_result[function]
                     if isinstance(result, (pd.Series, pd.DataFrame)):
                         result.to_csv(os.path.join(module_dir, f"{function}.csv"))
                     elif isinstance(result, (int, float)):
