@@ -12,6 +12,7 @@ Release Notes
 -------------
 
 .. include:: releases/v0.8.0.rst
+.. include:: releases/v0.7.6.rst
 .. include:: releases/v0.7.5.rst
 .. include:: releases/v0.7.4.rst
 .. include:: releases/v0.7.3.rst
