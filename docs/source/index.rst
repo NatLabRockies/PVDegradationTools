@@ -48,13 +48,38 @@ PVDeg's Monte Carlo engine samples parameter distributions and their correlation
 Citing PVDeg
 ============
 
-If you use PVDeg in a published work, please cite both the software and the paper.
+If you use PVDeg in published work, please cite both the paper and the software.
 
-**Software Citation:**
+**Recommended citation for PVDeg:**
 
-.. code-block::
+   | Daxini, R., Ovaitt, S., Springer, M., Ford, T., & Kempe, M. (2026).
+   | "PVDeg: a Python package for modeling degradation of solar photovoltaic systems."
+   | *Journal of Open Source Software*, 11(127), 10617.
+   | https://doi.org/10.21105/joss.10617
 
-   Springer, M., Ovaitt, S., Daxini, R., Ford, T., Brown, M., Karas, J., Holsapple, D., & Kempe, M. (2026). PVDeg: a Python package for modeling degradation of solar photovoltaic systems [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.8088382
+.. code-block:: bibtex
+
+   @article{pvdeg_joss,
+     author    = {Daxini, Rajiv and Ovaitt, Silvana and Springer, Martin and
+                  Ford, Tobin and Kempe, Michael},
+     title     = {{PVDeg: a Python package for modeling degradation of solar
+                  photovoltaic systems}},
+     journal   = {Journal of Open Source Software},
+     publisher = {The Open Journal},
+     year      = {2026},
+     volume    = {11},
+     number    = {127},
+     pages     = {10617},
+     doi       = {10.21105/joss.10617},
+     url       = {https://doi.org/10.21105/joss.10617}
+   }
+
+**Citation for the latest PVDeg software version:**
+
+   | Springer, M., Ovaitt, S., Daxini, R., Ford, T., Brown, M., Karas, J., Holsapple, D., & Kempe, M. (2026).
+   | "PVDeg: a Python package for modeling degradation of solar photovoltaic systems" [Computer software].
+   | *Zenodo*.
+   | https://doi.org/10.5281/zenodo.8088382
 
 .. code-block:: bibtex
 
@@ -70,13 +95,20 @@ If you use PVDeg in a published work, please cite both the software and the pape
      url       = {https://doi.org/10.5281/zenodo.8088382}
    }
 
-The DOI `10.5281/zenodo.8088382 <https://doi.org/10.5281/zenodo.8088382>`_ always resolves to the latest release. To cite the exact version you used, pick it from the version list on the Zenodo page, or use the "Cite this repository" button on the `GitHub repository <https://github.com/NatLabRockies/PVDegradationTools>`_.
+The Zenodo DOI above always resolves to the latest release. To cite the exact version you used, pick it from the version list on the `Zenodo page <https://doi.org/10.5281/zenodo.8088382>`_, or use the **"Cite this repository"** button on the `GitHub repository <https://github.com/NatLabRockies/PVDegradationTools>`_.
 
-**JOSS Paper (In Review):**
+If you use PVDeg in a commercial or publicly-available application, please consider displaying the PVDeg logo:
 
-.. code-block::
+.. image:: ./_static/logo-vectors/PVdeg-Logo-Color.svg
+   :height: 150
+   :alt: PVDeg logo (stacked)
 
-   Daxini, R., Ovaitt, S., Springer, M., Ford, T., & Kempe, M. (2026). PVDeg: a Python package for modeling degradation of solar photovoltaic systems. Journal of Open Source Software (In Review).
+.. image:: ./_static/logo-vectors/PVdeg-Logo-Horiz-Color.svg
+   :width: 300
+   :alt: PVDeg logo (horizontal)
+
+Black, white, and color versions (SVG) are available in
+`docs/source/_static/logo-vectors <https://github.com/NatLabRockies/PVDegradationTools/tree/main/docs/source/_static/logo-vectors>`_.
 
 
 .. toctree::
