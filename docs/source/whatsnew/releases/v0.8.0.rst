@@ -20,9 +20,10 @@ Enhancements
 
 Bug Fixes
 ---------
-- Fix ``Scenario`` instances sharing one default pipeline, ``Scenario.run()`` dropping
-  ``pd.Series`` results or failing when job kwargs overlap automatically supplied
-  arguments, and the deprecated pandas ``"H"`` frequency alias in
+- Fix ``Scenario`` and ``GeospatialScenario`` instances sharing default modules or
+  pipelines, ``Scenario.run()`` dropping ``pd.Series`` results or failing when job
+  kwargs overlap automatically supplied arguments, notebook display of results for
+  scenarios without modules, and the deprecated pandas ``"H"`` frequency alias in
   ``pvdeg.weather.repeat_annual_time_series()``. (:pull:`382`)
 
 
