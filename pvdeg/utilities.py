@@ -563,13 +563,14 @@ def _add_material(
         "Po": Po,
     }
 
-    with open(fpath) as f:
+    with open(fpath, encoding="utf-8") as f:
         data = json.load(f)
     data.update({name: material_dict})
 
-    with open(fpath, "w") as f:
-        # Match the repo's data-file convention (raw UTF-8, trailing newline) so
-        # re-serializing an existing database file produces no spurious diff.
+    with open(fpath, "w", encoding="utf-8", newline="\n") as f:
+        # Match the repo's data-file convention (raw UTF-8, LF line endings, trailing
+        # newline) so re-serializing an existing database file produces no spurious
+        # diff, including on Windows.
         json.dump(data, f, indent=4, ensure_ascii=False)
         f.write("\n")
 
