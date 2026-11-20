@@ -64,6 +64,23 @@ def _resolve_material_params(material_params, material_layer):
     return material_params[material_layer]
 
 
+def _resolve_upstream_kwargs(job_id, job, completed):
+    """Map a job's ``depends_on`` kwargs to the results of named jobs in ``completed``.
+
+    Raises a ``ValueError`` if a source job has not run before this job, e.g.
+    because it was removed from the pipeline.
+    """
+    depends_on = job.get("depends_on") or {}
+    missing = [source for source in depends_on.values() if source not in completed]
+    if missing:
+        raise ValueError(
+            f"Job '{job.get('name') or job_id}' depends on {missing}, which did not "
+            "run before it. Each depends_on source must be a named job earlier in "
+            "the pipeline."
+        )
+    return {kwarg: completed[source] for kwarg, source in depends_on.items()}
+
+
 class Scenario:
     """Scenario object, contains all parameters and criteria for a given scenario.
 
@@ -618,18 +635,19 @@ class Scenario:
             ``"backsheet"``). It is ignored for single-material modules.
 
         name : str or None
-            Optional unique name for this job. Used for sequential analysis in the
-            Scenario pipeline. Pass this name to a later job's ``depends_on`` variable
-            to forward the output of this job as an input to the later job at run time.
-            Results are stored under the job ID; ``extract`` and ``plot`` also accept
-            the name.
+            Optional unique, non-empty name for this job. Used for sequential
+            analysis in the Scenario pipeline. Pass this name to a later job's
+            ``depends_on`` variable to forward the output of this job as an input to
+            the later job at run time. Results are stored under the job ID;
+            ``extract`` and ``plot`` also accept the name.
         depends_on : dict or None
             ``{kwarg_name: source_job_name}`` mapping. The job from which to take the
             output as an input for this job. At run time, ``run()`` resolves each source
             (depends on) job's result and passes it as the named kwarg to this function.
             The source job must already exist in the pipeline (i.e. have been added with
             a matching ``name``). Each ``kwarg_name`` must be a keyword parameter of
-            the function and must not also be set in the job's extra kwargs.
+            the function (any name is accepted if the function takes ``**kwargs``)
+            and must not also be set in the job's extra kwargs.
         """
         # name/depends_on cannot be used with list form
         if isinstance(func, list) and (name is not None or depends_on is not None):
@@ -716,6 +734,11 @@ class Scenario:
             )
 
         # Validate job name and dependencies
+        if name is not None and not (isinstance(name, str) and name):
+            raise ValueError(
+                f"Job name must be a non-empty string, got {name!r}. To pass extra "
+                "kwargs, use the tuple form addJob(func=(function, kwargs))."
+            )
         existing_names = {
             j.get("name") for j in self.pipeline.values() if j.get("name")
         }
@@ -726,6 +749,9 @@ class Scenario:
 
         func_params = signature(func).parameters
         keyword_kinds = (Parameter.POSITIONAL_OR_KEYWORD, Parameter.KEYWORD_ONLY)
+        takes_var_kwargs = any(
+            p.kind is Parameter.VAR_KEYWORD for p in func_params.values()
+        )
         for kwarg, source in (depends_on or {}).items():
             if source not in existing_names:
                 raise ValueError(
@@ -733,7 +759,10 @@ class Scenario:
                     "Add the source job before the dependent job."
                 )
             param = func_params.get(kwarg)
-            if param is None or param.kind not in keyword_kinds:
+            accepted = (
+                param.kind in keyword_kinds if param is not None else takes_var_kwargs
+            )
+            if not accepted:
                 raise ValueError(
                     f"depends_on key '{kwarg}' is not a keyword parameter of "
                     f"{getattr(func, '__name__', func)}."
@@ -806,30 +835,21 @@ class Scenario:
                     params = job["params"]
                     material_layer = job.get("material_layer", None)
                     job_name = job.get("name")
-                    job_depends_on = job.get("depends_on", {})
-
-                    # Resolve upstream job outputs into kwargs
-                    upstream_kwargs = {}
-                    for kwarg, source_name in job_depends_on.items():
-                        if source_name in completed:
-                            upstream_kwargs[kwarg] = completed[source_name]
+                    upstream_kwargs = _resolve_upstream_kwargs(id, job, completed)
 
                     # Resolve material params for this specific job's layer
                     job_material_params = _resolve_material_params(
                         module["material_params"], material_layer
                     )
 
-                    combined = (
-                        weather_dict
-                        | temperature_args
-                        | job_material_params
-                        | upstream_kwargs
-                    )
+                    combined = weather_dict | temperature_args | job_material_params
 
                     func_params = signature(func).parameters
                     func_args = {k: v for k, v in combined.items() if k in func_params}
 
-                    res = func(**(func_args | params))
+                    # depends_on keys are validated by addJob, so they are passed
+                    # unfiltered and also reach functions that take **kwargs
+                    res = func(**(func_args | upstream_kwargs | params))
                     module_result[id] = res
                     if job_name:
                         completed[job_name] = res
@@ -859,27 +879,22 @@ class Scenario:
             for id, job in self.pipeline.items():
                 func, params = job["job"], job["params"]
                 job_name = job.get("name")
-                job_depends_on = job.get("depends_on", {})
-
-                # Resolve upstream job outputs into kwargs
-                upstream_kwargs = {}
-                for kwarg, source_name in job_depends_on.items():
-                    if source_name in completed:
-                        upstream_kwargs[kwarg] = completed[source_name]
+                upstream_kwargs = _resolve_upstream_kwargs(id, job, completed)
 
                 # Arguments to pass to the function
                 func_args = {
                     "weather_df": self.weather_data,
                     "meta": self.meta_data,
                 }
-                # Merge upstream results, then user-defined parameters
-                func_args.update(upstream_kwargs)
+                # Merge user-defined parameters, which can override weather/meta
                 if params:
                     func_args.update(params)
 
                 # Filter arguments to only those accepted by the function
                 sig_params = signature(func).parameters
                 final_args = {k: v for k, v in func_args.items() if k in sig_params}
+                # depends_on keys are validated by addJob, so pass them unfiltered
+                final_args.update(upstream_kwargs)
 
                 result = func(**final_args)
 
@@ -1407,8 +1422,12 @@ class Scenario:
         return modules_html
 
     def format_results(self):
+        results = self.results
+        if isinstance(results, pd.Series):
+            # Scenarios without modules store results by job ID, with no module level
+            results = {"no_module": results}
         results_html = "<div>"
-        for module_name, functions in sorted(self.results.items()):
+        for module_name, functions in sorted(results.items()):
             module_id = f"result_module_{module_name}"
             module_content = f"""
             <div onclick="toggleVisibility('{module_id}')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa

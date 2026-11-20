@@ -564,6 +564,56 @@ def _series_job(weather_df):
     return pd.Series([1.0, 2.0])
 
 
+def _kwargs_wrapper(weather_df=None, **kwargs):
+    return kwargs
+
+
+def test_addJob_invalid_name_raises(tmp_path):
+    s = Scenario(name="bad-name", path=tmp_path)
+    for bad_name in [{"wind_factor": 0.35}, ""]:
+        with pytest.raises(ValueError, match="non-empty string"):
+            s.addJob(standoff, bad_name)
+    assert len(s.pipeline) == 0
+
+
+@pytest.mark.parametrize("with_module", [True, False])
+def test_depends_on_forwards_to_var_kwargs(tmp_path, with_module):
+    s = Scenario(name="var-kwargs", path=tmp_path)
+    if with_module:
+        s.addModule(module_name="m", materials="OX003")
+    up_id = s.addJob(func=_series_job, name="up")
+    down_id = s.addJob(func=_kwargs_wrapper, depends_on={"x": "up"})
+    s.run()
+
+    results = s.results["m"] if with_module else s.results
+    # only the depends_on kwarg reaches **kwargs, not auto-filled arguments
+    assert list(results[down_id]) == ["x"]
+    pd.testing.assert_series_equal(results[down_id]["x"], results[up_id])
+
+
+@pytest.mark.parametrize("with_module", [True, False])
+def test_run_missing_depends_on_source_raises(tmp_path, with_module):
+    s = Scenario(name="missing-source", path=tmp_path)
+    if with_module:
+        s.addModule(module_name="m", materials="OX003")
+    up_id = s.addJob(func=_series_job, name="up")
+    s.addJob(func=_passthrough, name="down", depends_on={"x": "up"})
+    del s.pipeline[up_id]
+    with pytest.raises(ValueError, match=r"Job 'down' depends on \['up'\]"):
+        s.run()
+
+
+def test_format_results_without_modules(tmp_path):
+    s = Scenario(name="no-modules-display", path=tmp_path)
+    jobs = [lambda: np.int64(3), lambda: None, lambda: (1, 2), _series_job]
+    job_ids = [s.addJob(func=job) for job in jobs]
+    s.run()
+
+    html = s.format_results()
+    assert html.count("<h5") == len(job_ids)
+    assert all(job_id in html for job_id in job_ids)
+
+
 def test_run_named_jobs_stored_once(tmp_path):
     s = Scenario(name="named-jobs", path=tmp_path)
     s.addModule(module_name="m", materials="OX003")
