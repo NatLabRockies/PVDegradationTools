@@ -635,8 +635,8 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Working on a  Windows 11
-Python version  3.13.13 | packaged by conda-forge | (main, Apr  8 2026, 01:56:49) [MSC v.1944 64 bit (AMD64)]
-pvdeg version  0.7.2.dev86+gbddb1bdbc.d20260519
+Python version  3.12.9 | packaged by Anaconda, Inc. | (main, Feb  6 2025, 18:49:16) [MSC v.1929 64 bit (AMD64)]
+pvdeg version  0.5.1.dev623+g51cc68b8e.d20250905
 </pre></div>
 </div>
 </div>
@@ -938,11 +938,6 @@ pvdeg version  0.7.2.dev86+gbddb1bdbc.d20260519
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'NWURI'
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="adding-a-job-with-function-arguments">
@@ -952,12 +947,7 @@ pvdeg version  0.7.2.dev86+gbddb1bdbc.d20260519
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"wind_factor"</span><span class="p">:</span> <span class="mf">0.33</span><span class="p">}</span>
 
-<span class="n">simple_scenario</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">fatigue</span><span class="o">.</span><span class="n">solder_fatigue</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'BUZCX'
+<span class="n">simple_scenario</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">fatigue</span><span class="o">.</span><span class="n">solder_fatigue</span><span class="p">,</span> <span class="n">func_kwarg</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -976,15 +966,10 @@ pvdeg version  0.7.2.dev86+gbddb1bdbc.d20260519
 
 <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"weather_df"</span><span class="p">:</span> <span class="n">weather</span><span class="p">,</span> <span class="s2">"meta"</span><span class="p">:</span> <span class="n">meta</span><span class="p">}</span>
 
-<span class="n">simple_scenario</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="p">(</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span>
+<span class="n">simple_scenario</span><span class="o">.</span><span class="n">addJob</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">pvdeg</span><span class="o">.</span><span class="n">standards</span><span class="o">.</span><span class="n">standoff</span><span class="p">,</span> <span class="n">func_kwarg</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="c1"># FIX THIS CASE IN SCENARIO CLASS</span>
 <span class="c1"># (simple_scenario.pipeline[1]['job'])(**simple_scenario.pipeline[1]['params'])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'IFOPT'
 </pre></div>
 </div>
 </div>
@@ -1003,8 +988,8 @@ pvdeg version  0.7.2.dev86+gbddb1bdbc.d20260519
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Name : Point Minimum Standoff
 Pipeline : 
-                                   NWURI.job NWURI.material_layer NWURI.name                                        BUZCX.job  BUZCX.params.wind_factor BUZCX.material_layer BUZCX.name                                  IFOPT.job                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     IFOPT.params.weather_df IFOPT.params.meta.Source  IFOPT.params.meta.Location ID IFOPT.params.meta.City IFOPT.params.meta.State IFOPT.params.meta.Country IFOPT.params.meta.Clearsky DHI Units IFOPT.params.meta.Clearsky DNI Units IFOPT.params.meta.Clearsky GHI Units IFOPT.params.meta.Dew Point Units IFOPT.params.meta.DHI Units IFOPT.params.meta.DNI Units IFOPT.params.meta.GHI Units IFOPT.params.meta.Solar Zenith Angle Units IFOPT.params.meta.Temperature Units IFOPT.params.meta.Pressure Units IFOPT.params.meta.Relative Humidity Units IFOPT.params.meta.Precipitable Water Units IFOPT.params.meta.Wind Direction Units IFOPT.params.meta.Wind Speed Units IFOPT.params.meta.Cloud Type -15 IFOPT.params.meta.Cloud Type 0 IFOPT.params.meta.Cloud Type 1 IFOPT.params.meta.Cloud Type 2 IFOPT.params.meta.Cloud Type 3 IFOPT.params.meta.Cloud Type 4 IFOPT.params.meta.Cloud Type 5 IFOPT.params.meta.Cloud Type 6 IFOPT.params.meta.Cloud Type 7 IFOPT.params.meta.Cloud Type 8 IFOPT.params.meta.Cloud Type 9 IFOPT.params.meta.Cloud Type 10 IFOPT.params.meta.Cloud Type 11 IFOPT.params.meta.Cloud Type 12 IFOPT.params.meta.Fill Flag 0 IFOPT.params.meta.Fill Flag 1 IFOPT.params.meta.Fill Flag 2 IFOPT.params.meta.Fill Flag 3 IFOPT.params.meta.Fill Flag 4 IFOPT.params.meta.Fill Flag 5 IFOPT.params.meta.Surface Albedo Units IFOPT.params.meta.Version  IFOPT.params.meta.latitude  IFOPT.params.meta.longitude  IFOPT.params.meta.tz  IFOPT.params.meta.altitude IFOPT.material_layer IFOPT.name
-0  &lt;function standoff at 0x00000110FD059260&gt;                 None       None  &lt;function solder_fatigue at 0x00000110F96D6A20&gt;                      0.33                 None       None  &lt;function standoff at 0x00000110FD059260&gt;                             Year  Month  Day  Hour  Minute  dni  dhi  ghi  \
+                                   OMWGH.job                                        IRORP.job  IRORP.params.wind_factor                                  GIOFQ.job                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     GIOFQ.params.weather_df GIOFQ.params.meta.Source  GIOFQ.params.meta.Location ID GIOFQ.params.meta.City GIOFQ.params.meta.State GIOFQ.params.meta.Country GIOFQ.params.meta.Clearsky DHI Units GIOFQ.params.meta.Clearsky DNI Units GIOFQ.params.meta.Clearsky GHI Units GIOFQ.params.meta.Dew Point Units GIOFQ.params.meta.DHI Units GIOFQ.params.meta.DNI Units GIOFQ.params.meta.GHI Units GIOFQ.params.meta.Solar Zenith Angle Units GIOFQ.params.meta.Temperature Units GIOFQ.params.meta.Pressure Units GIOFQ.params.meta.Relative Humidity Units GIOFQ.params.meta.Precipitable Water Units GIOFQ.params.meta.Wind Direction Units GIOFQ.params.meta.Wind Speed Units GIOFQ.params.meta.Cloud Type -15 GIOFQ.params.meta.Cloud Type 0 GIOFQ.params.meta.Cloud Type 1 GIOFQ.params.meta.Cloud Type 2 GIOFQ.params.meta.Cloud Type 3 GIOFQ.params.meta.Cloud Type 4 GIOFQ.params.meta.Cloud Type 5 GIOFQ.params.meta.Cloud Type 6 GIOFQ.params.meta.Cloud Type 7 GIOFQ.params.meta.Cloud Type 8 GIOFQ.params.meta.Cloud Type 9 GIOFQ.params.meta.Cloud Type 10 GIOFQ.params.meta.Cloud Type 11 GIOFQ.params.meta.Cloud Type 12 GIOFQ.params.meta.Fill Flag 0 GIOFQ.params.meta.Fill Flag 1 GIOFQ.params.meta.Fill Flag 2 GIOFQ.params.meta.Fill Flag 3 GIOFQ.params.meta.Fill Flag 4 GIOFQ.params.meta.Fill Flag 5 GIOFQ.params.meta.Surface Albedo Units GIOFQ.params.meta.Version  GIOFQ.params.meta.latitude  GIOFQ.params.meta.longitude  GIOFQ.params.meta.tz  GIOFQ.params.meta.altitude
+0  &lt;function standoff at 0x0000029EDD93F1A0&gt;  &lt;function solder_fatigue at 0x0000029ED8C9F6A0&gt;                      0.33  &lt;function standoff at 0x0000029EDD93F1A0&gt;                             Year  Month  Day  Hour  Minute  dni  dhi  ghi  \
 1999-01-01 00:30:00-07:00  1999      1    1     0      30  0.0  0.0  0.0   
 1999-01-01 01:30:00-07:00  1999      1    1     1      30  0.0  0.0  0.0   
 1999-01-01 02:30:00-07:00  1999      1    1     2      30  0.0  0.0  0.0   
@@ -1030,7 +1015,7 @@ Pipeline :
 1999-12-31 22:30:00-07:00       0.0       -4.0         1.7              81.22  
 1999-12-31 23:30:00-07:00       0.0       -5.0         1.8              79.43  
 
-[8760 rows x 12 columns]                    NSRDB                       145809.0                      -                       -                         -                                 w/m2                                 w/m2                                 w/m2                                 c                        w/m2                        w/m2                        w/m2                                     Degree                                   c                             mbar                                         %                                         cm                                Degrees                                m/s                              N/A                          Clear                 Probably Clear                            Fog                          Water             Super-Cooled Water                          Mixed                     Opaque Ice                         Cirrus                    Overlapping                   Overshooting                         Unknown                            Dust                           Smoke                           N/A                 Missing Image                Low Irradiance              Exceeds Clearsky      Missing CLoud Properties            Rayleigh Violation                                    N/A                     3.0.6                       39.73                      -105.18                  -7.0                      1820.0                 None       None
+[8760 rows x 12 columns]                    NSRDB                       145809.0                      -                       -                         -                                 w/m2                                 w/m2                                 w/m2                                 c                        w/m2                        w/m2                        w/m2                                     Degree                                   c                             mbar                                         %                                         cm                                Degrees                                m/s                              N/A                          Clear                 Probably Clear                            Fog                          Water             Super-Cooled Water                          Mixed                     Opaque Ice                         Cirrus                    Overlapping                   Overshooting                         Unknown                            Dust                           Smoke                           N/A                 Missing Image                Low Irradiance              Exceeds Clearsky      Missing CLoud Properties            Rayleigh Violation                                    N/A                     3.0.6                       39.73                      -105.18                  -7.0                      1820.0
 Results : Pipeline results : 
 Pipeline has not been run
 'gids : [1060499]'
@@ -1108,13 +1093,13 @@ scenario weather :                            Year  Month  Day  Hour  Minute  te
             <div>
                 <h3>self.pipeline</h3>
                 <div>
-            <div id="NWURI" onclick="toggleVisibility('pipeline_NWURI')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+            <div id="OMWGH" onclick="toggleVisibility('pipeline_OMWGH')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                 <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_pipeline_NWURI" style="color: #b676c2;">►</span>  # noqa
-                    standoff, <span style="color: #b676c2;">#NWURI</span>  # noqa
+                    <span id="arrow_pipeline_OMWGH" style="color: #b676c2;">►</span>  # noqa
+                    standoff, <span style="color: #b676c2;">#OMWGH</span>  # noqa
                 </h4>
             </div>
-            <div id="pipeline_NWURI" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+            <div id="pipeline_OMWGH" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                 <p>Job: standoff</p>
                 <p>Parameters:</p>
                 <div style="margin-left: 20px;">
@@ -1122,13 +1107,13 @@ scenario weather :                            Year  Month  Day  Hour  Minute  te
                 </div>
             </div>
             
-            <div id="BUZCX" onclick="toggleVisibility('pipeline_BUZCX')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+            <div id="IRORP" onclick="toggleVisibility('pipeline_IRORP')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                 <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_pipeline_BUZCX" style="color: #b676c2;">►</span>  # noqa
-                    solder_fatigue, <span style="color: #b676c2;">#BUZCX</span>  # noqa
+                    <span id="arrow_pipeline_IRORP" style="color: #b676c2;">►</span>  # noqa
+                    solder_fatigue, <span style="color: #b676c2;">#IRORP</span>  # noqa
                 </h4>
             </div>
-            <div id="pipeline_BUZCX" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+            <div id="pipeline_IRORP" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                 <p>Job: solder_fatigue</p>
                 <p>Parameters:</p>
                 <div style="margin-left: 20px;">
@@ -1138,13 +1123,13 @@ scenario weather :                            Year  Month  Day  Hour  Minute  te
                 </div>
             </div>
             
-            <div id="IFOPT" onclick="toggleVisibility('pipeline_IFOPT')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
+            <div id="GIOFQ" onclick="toggleVisibility('pipeline_GIOFQ')" style="cursor: pointer; background-color: #000000; color: #FFFFFF; padding: 5px; border-radius: 3px; margin-bottom: 1px;">  # noqa
                 <h4 style="font-family: monospace; margin: 0;">
-                    <span id="arrow_pipeline_IFOPT" style="color: #b676c2;">►</span>  # noqa
-                    standoff, <span style="color: #b676c2;">#IFOPT</span>  # noqa
+                    <span id="arrow_pipeline_GIOFQ" style="color: #b676c2;">►</span>  # noqa
+                    standoff, <span style="color: #b676c2;">#GIOFQ</span>  # noqa
                 </h4>
             </div>
-            <div id="pipeline_IFOPT" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
+            <div id="pipeline_GIOFQ" style="display: none; margin-left: 20px; padding: 5px; background-color: #f0f0f0; color: #000;">  # noqa
                 <p>Job: standoff</p>
                 <p>Parameters:</p>
                 <div style="margin-left: 20px;">
@@ -1394,7 +1379,7 @@ scenario weather :                            Year  Month  Day  Hour  Minute  te
             </div>
             <div>
                 <h3>self.meta_data</h3>
-                {'Source': 'NSRDB', 'Location ID': '1060499', 'City': '-', 'State': '-', 'Country': '-', 'Clearsky DHI Units': 'w/m2', 'Clearsky DNI Units': 'w/m2', 'Clearsky GHI Units': 'w/m2', 'Dew Point Units': 'c', 'DHI Units': 'w/m2', 'DNI Units': 'w/m2', 'GHI Units': 'w/m2', 'Solar Zenith Angle Units': 'Degree', 'Temperature Units': 'c', 'Pressure Units': 'mbar', 'Relative Humidity Units': '%', 'Precipitable Water Units': 'cm', 'Wind Direction Units': 'Degrees', 'Wind Speed Units': 'm/s', 'Cloud Type -15': 'N/A', 'Cloud Type 0': 'Clear', 'Cloud Type 1': 'Probably Clear', 'Cloud Type 2': 'Fog', 'Cloud Type 3': 'Water', 'Cloud Type 4': 'Super-Cooled Water', 'Cloud Type 5': 'Mixed', 'Cloud Type 6': 'Opaque Ice', 'Cloud Type 7': 'Cirrus', 'Cloud Type 8': 'Overlapping', 'Cloud Type 9': 'Overshooting', 'Cloud Type 10': 'Unknown', 'Cloud Type 11': 'Dust', 'Cloud Type 12': 'Smoke', 'Fill Flag 0': 'N/A', 'Fill Flag 1': 'Missing Image', 'Fill Flag 2': 'Low Irradiance', 'Fill Flag 3': 'Exceeds Clearsky', 'Fill Flag 4': 'Missing CLoud Properties', 'Fill Flag 5': 'Rayleigh Violation', 'Surface Albedo Units': 'N/A', 'Version': '4.1.4.dev4+g4fed29ccf.d20260425', 'latitude': 25.77, 'longitude': -80.18, 'altitude': 7, 'tz': -5, 'wind_height': 2}
+                {'Source': 'NSRDB', 'Location ID': '1060499', 'City': '-', 'State': '-', 'Country': '-', 'Clearsky DHI Units': 'w/m2', 'Clearsky DNI Units': 'w/m2', 'Clearsky GHI Units': 'w/m2', 'Dew Point Units': 'c', 'DHI Units': 'w/m2', 'DNI Units': 'w/m2', 'GHI Units': 'w/m2', 'Solar Zenith Angle Units': 'Degree', 'Temperature Units': 'c', 'Pressure Units': 'mbar', 'Relative Humidity Units': '%', 'Precipitable Water Units': 'cm', 'Wind Direction Units': 'Degrees', 'Wind Speed Units': 'm/s', 'Cloud Type -15': 'N/A', 'Cloud Type 0': 'Clear', 'Cloud Type 1': 'Probably Clear', 'Cloud Type 2': 'Fog', 'Cloud Type 3': 'Water', 'Cloud Type 4': 'Super-Cooled Water', 'Cloud Type 5': 'Mixed', 'Cloud Type 6': 'Opaque Ice', 'Cloud Type 7': 'Cirrus', 'Cloud Type 8': 'Overlapping', 'Cloud Type 9': 'Overshooting', 'Cloud Type 10': 'Unknown', 'Cloud Type 11': 'Dust', 'Cloud Type 12': 'Smoke', 'Fill Flag 0': 'N/A', 'Fill Flag 1': 'Missing Image', 'Fill Flag 2': 'Low Irradiance', 'Fill Flag 3': 'Exceeds Clearsky', 'Fill Flag 4': 'Missing CLoud Properties', 'Fill Flag 5': 'Rayleigh Violation', 'Surface Albedo Units': 'N/A', 'Version': '4.1.2.dev4+g3b38bc8.d20250228', 'latitude': 25.77, 'longitude': -80.18, 'altitude': 7, 'tz': -5, 'wind_height': 2}
             </div>
         </div>
         <p><i>All attributes can be accessed by the names shown above.</i></p>
@@ -1428,9 +1413,7 @@ scenario weather :                            Year  Month  Day  Hour  Minute  te
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 The array surface_tilt angle was not provided, therefore the latitude of  25.8 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The array surface_tilt angle was not provided, therefore the latitude of  39.7 was used.
+The array surface_tilt angle was not provided, therefore the latitude of  39.7 was used.
 The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </pre></div>
 </div>
@@ -1458,18 +1441,18 @@ The array azimuth was not provided, therefore an azimuth of  180.0 was used.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NWURI              x      T98_0    T98_inf
-0  1.177376 ...
-BUZCX                                    BUZCX
-0  4.604855
-IFOPT              x      T98_0    T98_inf
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OMWGH              x      T98_0    T98_inf
+0  0.951119 ...
+IRORP                                    IRORP
+0  3.872319
+GIOFQ              x      T98_0    T98_inf
 0  2.008636 ...
 dtype: object
 We can't see out data in here so we need to do another step
 
-this is the list of all available frames in results : Index(['NWURI', 'BUZCX', 'IFOPT'], dtype='str')
+this is the list of all available frames in results : Index(['OMWGH', 'IRORP', 'GIOFQ'], dtype='object')
 
-NWURI
+OMWGH
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1498,13 +1481,13 @@ NWURI
   <tbody>
     <tr>
       <th>0</th>
-      <td>1.177376</td>
-      <td>73.930266</td>
-      <td>50.207818</td>
+      <td>0.951119</td>
+      <td>73.149158</td>
+      <td>50.014684</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BUZCX
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IRORP
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1525,17 +1508,17 @@ NWURI
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>BUZCX</th>
+      <th>IRORP</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>4.604855</td>
+      <td>3.872319</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IFOPT
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GIOFQ
 </pre></div>
 </div>
 <div class="output text_html"><div>
