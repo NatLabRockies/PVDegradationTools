@@ -107,6 +107,35 @@ def test_read():
             # assert all(item in weather_df.columns for item in DSETS)
 
 
+def test_read_nsrdb_utc_timestamps(tmp_path):
+    """An NSRDB file downloaded in UTC gives the same instants as one in local time."""
+    with open(FILES["psm3"]) as f:
+        fields = f.readline().rstrip("\n").split(",")
+        values = f.readline().rstrip("\n").split(",")
+        data = pd.read_csv(f)
+    # NSRDB in UTC: timestamps 7 h later, "Time Zone" 0, "Local Time Zone" -7
+    values[fields.index("Time Zone")] = "0"
+    date_columns = ["Year", "Month", "Day", "Hour", "Minute"]
+    utc = pd.to_datetime(data[date_columns]) + pd.Timedelta(hours=7)
+    for column in date_columns:
+        data[column] = getattr(utc.dt, column.lower())
+    utc_file = tmp_path / "psm3_utc.csv"
+    with open(utc_file, "w", newline="\n") as f:
+        f.write(",".join(fields) + "\n" + ",".join(values) + "\n")
+        data.to_csv(f, index=False, lineterminator="\n")
+
+    local_df, local_meta = pvdeg.weather.read(FILES["psm3"], "psm3")
+    for file_type in ["psm3", "csv"]:
+        utc_df, utc_meta = pvdeg.weather.read(utc_file, file_type)
+        assert utc_df.index[0].utcoffset() == pd.Timedelta(0)
+        assert (utc_df.index == local_df.index).all()  # same instants
+        assert utc_meta["tz"] == local_meta["tz"] == -7
+
+    raw_df, raw_meta = pvdeg.weather.read(utc_file, "csv", map_variables=False)
+    assert (raw_df.index == local_df.index).all()
+    assert raw_meta["Time Zone"] == 0
+
+
 def test_read_h5():
     pass
 

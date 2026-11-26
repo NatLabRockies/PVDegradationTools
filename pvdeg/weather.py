@@ -276,6 +276,11 @@ def read(file_in, file_type, map_variables=True, find_meta=False, **kwargs):
 
     #TODO: add error handling
 
+    Timestamps read without a time zone are localized with the file's
+    ``Time Zone`` metadata if it has one, otherwise with ``tz``. In NSRDB
+    files, ``Time Zone`` is the UTC offset of the timestamps (0 for a file
+    downloaded in UTC) and ``Local Time Zone`` that of the site.
+
     Parameters
     ----------
     file_in : (path)
@@ -304,6 +309,10 @@ def read(file_in, file_type, map_variables=True, find_meta=False, **kwargs):
     if not isinstance(meta, dict):
         meta = meta.to_dict()
 
+    # "Time Zone" is the UTC offset of the timestamps. map_meta renames it and
+    # the site's "Local Time Zone" both to "tz", so keep it before mapping.
+    index_tz = meta.get("Time Zone")
+
     # map meta-names as needed
     if map_variables is True:
         map_weather(weather_df)
@@ -312,7 +321,9 @@ def read(file_in, file_type, map_variables=True, find_meta=False, **kwargs):
         meta = find_metadata(meta)
 
     if weather_df.index.tzinfo is None:
-        tz = "Etc/GMT%+d" % -meta["tz"]
+        if index_tz is None:
+            index_tz = meta["tz"]
+        tz = "Etc/GMT%+d" % -index_tz
         weather_df = weather_df.tz_localize(tz)
 
     return weather_df, meta

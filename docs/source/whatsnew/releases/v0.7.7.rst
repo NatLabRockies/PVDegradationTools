@@ -1,0 +1,20 @@
+v0.7.7 (unreleased)
+===================
+
+Bug fixes
+---------
+- Fix :py:func:`pvdeg.weather.read` reading an NSRDB file downloaded in UTC as if
+  its timestamps were in the site's local time, which put solar noon hours late.
+  Timestamps without a time zone are now localized with the file's
+  ``Time Zone``, the UTC offset of its timestamps, instead of ``tz``, to which
+  the site's ``Local Time Zone`` is also mapped. Reading such a file with
+  ``map_variables=False`` no longer raises ``KeyError: 'tz'``. (:issue:`162`)
+
+Testing
+-------
+- Test that an NSRDB file downloaded in UTC is read at the same instants as the
+  same data downloaded in local time. (:issue:`162`)
+
+Contributors
+------------
+- maoji-y (:ghuser:`maoji-y`)
